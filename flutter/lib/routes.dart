@@ -6,5 +6,5 @@ import 'package:vtys_kalite/screens/loginpage/login_page.dart';
 final Map<String, WidgetBuilder> routes = {
   LoginPage.routeName: (context) => const LoginPage(),
   SignUpPage.routeName: (context) => const SignUpPage(),
-  ActivityFormPage.routeName: (context) => const ActivityFormPage(),
+  ActivityFormPage.routeName: (context) =>  ActivityFormPage(),
 };
