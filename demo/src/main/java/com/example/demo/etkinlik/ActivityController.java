@@ -20,7 +20,7 @@ public class ActivityController {
     }
 
     @GetMapping("activities/{id}")
-    public Optional<Activity> getActivityById(@PathVariable Integer id) {
+    public Optional<Activity> getActivityById(@PathVariable Long id) {
         return activityRepository.findById(id);
     }
 
@@ -31,13 +31,13 @@ public class ActivityController {
     }
 
     @PutMapping("put/{id}")
-    public String updateActivity(@PathVariable Integer id, @RequestBody Activity activity) {
+    public String updateActivity(@PathVariable Long id, @RequestBody Activity activity) {
         activityRepository.save(activity);
         return activity.getName() + " updated!";
     }
 
     @DeleteMapping("delete/{id}")
-    public String deleteActivity(@PathVariable() Integer id) {
+    public String deleteActivity(@PathVariable() Long id) {
         activityRepository.deleteById(id);
         return id + "th Activity deleted!";
     }

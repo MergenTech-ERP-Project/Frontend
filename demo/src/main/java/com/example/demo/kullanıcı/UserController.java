@@ -19,7 +19,7 @@ public class UserController {
     }
 
     @GetMapping("users/{id}")
-    public Optional<User> getUserById(@PathVariable Integer id){
+    public Optional<User> getUserById(@PathVariable Long id){
         return userRepository.findById(id);
     }
 
@@ -30,13 +30,13 @@ public class UserController {
     }
 
     @PutMapping("put/{id}")
-    public String updateUser(@PathVariable Integer id, @RequestBody User user){
+    public String updateUser(@PathVariable Long id, @RequestBody User user){
         userRepository.save(user);
         return user.getName() + " updated!";
     }
 
     @DeleteMapping("delete/{id}")
-    public String deleteUser(@PathVariable() Integer id){
+    public String deleteUser(@PathVariable() Long id){
         userRepository.deleteById(id);
         return id + "th User deleted!";
     }
