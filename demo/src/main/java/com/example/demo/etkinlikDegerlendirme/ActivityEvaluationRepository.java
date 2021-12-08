@@ -4,5 +4,5 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ActivityEvaluationRepository extends CrudRepository<ActivityEvaluation, Integer> {
+public interface ActivityEvaluationRepository extends CrudRepository<ActivityEvaluation, Long> {
 }

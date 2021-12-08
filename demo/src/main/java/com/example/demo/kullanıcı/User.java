@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Table(name="user", schema = "public")
 public class User {
     @Id
-    @Column
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column
     private String name;
@@ -15,19 +15,31 @@ public class User {
     @Column
     private String title;
 
+    @Column
+    private String password;
+
     public User() {
     }
 
-    public User(String name, String title) {
+    public User(String name, String title, String password) {
         this.name = name;
         this.title = title;
+        this.password = password;
     }
 
-    public Integer getId() {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

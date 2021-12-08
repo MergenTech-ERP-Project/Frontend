@@ -1,23 +1,20 @@
 package com.example.demo.etkinlikDegerlendirme;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="activityevaluation", schema="public")
 public class ActivityEvaluation {
     @Id
-    @Column
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column
-    private Integer activityId;
+    private Long activityId;
 
     @Column
-    private Integer userId;
+    private Long userId;
 
     @Column
     private String evaluation;
@@ -26,25 +23,25 @@ public class ActivityEvaluation {
 
     }
 
-    public ActivityEvaluation(Integer activityId, Integer userId, String evaluation) {
+    public ActivityEvaluation(Long activityId, Long userId, String evaluation) {
         this.activityId = activityId;
         this.userId = userId;
         this.evaluation = evaluation;
     }
 
-    public Integer getActivityId() {
+    public Long getActivityId() {
         return activityId;
     }
 
-    public void setActivityId(Integer activityId) {
+    public void setActivityId(Long activityId) {
         this.activityId = activityId;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

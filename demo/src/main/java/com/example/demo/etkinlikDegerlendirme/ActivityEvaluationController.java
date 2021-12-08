@@ -23,7 +23,7 @@ public class ActivityEvaluationController {
     }
 
     @GetMapping("aes/{id}")
-    public Optional<ActivityEvaluation> getActivityEvaluationById(@PathVariable Integer id){
+    public Optional<ActivityEvaluation> getActivityEvaluationById(@PathVariable Long id){
 
         return activityEvaluationRepository.findById(id);
     }
@@ -35,13 +35,13 @@ public class ActivityEvaluationController {
     }
 
     @PutMapping("put/{id}")
-    public String updateActivityEvaluation(@PathVariable Integer id, @RequestBody ActivityEvaluation activityEvaluation){
+    public String updateActivityEvaluation(@PathVariable Long id, @RequestBody ActivityEvaluation activityEvaluation){
         activityEvaluationRepository.save(activityEvaluation);
         return activityEvaluation.getEvaluation() + " updated!";
     }
 
     @DeleteMapping("delete/{id}")
-    public String deleteActivityEvaluation(@PathVariable() Integer id){
+    public String deleteActivityEvaluation(@PathVariable() Long id){
         activityEvaluationRepository.deleteById(id);
         return id + "th Activity Evaluation deleted!";
     }

@@ -1,16 +1,13 @@
 package com.example.demo.etkinlik;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name= "activity", schema="public")
 public class Activity {
     @Id
-    @Column
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column
     private String name;
