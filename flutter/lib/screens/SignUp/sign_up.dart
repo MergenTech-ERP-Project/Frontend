@@ -20,16 +20,18 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
+    var ratio = MediaQuery.of(context).devicePixelRatio;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Sign Up Page"),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(
-              top: 100.0, bottom: 100.0, right: 250.0, left: 250.0),
+        child: Center(
           child: Container(
-            height: double.infinity,
+            width: screenSize.width < 600/ratio ? screenSize.width * 0.5 : 500/ratio,
+            height: screenSize.height < 800/ratio ? screenSize.height * 0.5 : 700/ratio,
             child: SingleChildScrollView(
               physics: AlwaysScrollableScrollPhysics(),
               child: Form(
@@ -86,7 +88,7 @@ class _SignUpPageState extends State<SignUpPage> {
       validator: (val) {
         if (val!.isEmpty) {
           return "Cannot Be Blank";
-        } else if (val.length <= 6) {
+        } else if (val.length < 6) {
           return "Minimum 6 Character";
         } else if (_passCntrl != _confirmPassCntrl) {
           return "Password Do Not Match";
@@ -112,7 +114,7 @@ class _SignUpPageState extends State<SignUpPage> {
       validator: (val) {
         if (val!.isEmpty) {
           return "Cannot Be Blank";
-        } else if (val.length <= 6) {
+        } else if (val.length < 6) {
           return "Minimum 6 Character";
         } else {
           return null;
