@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:vtys_kalite/controller/user_controller.dart';
 import 'package:vtys_kalite/screens/ActivityForm/activity_form.dart';
 import 'package:vtys_kalite/screens/SignUp/sign_up.dart';
 import 'package:vtys_kalite/utilities/constans.dart';
@@ -6,7 +9,7 @@ import 'package:vtys_kalite/utilities/constans.dart';
 class LoginPage extends StatefulWidget {
   static String routeName = '/LoginPage';
 
-  const LoginPage({Key? key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -16,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   final _loginKey = GlobalKey<FormState>();
   final TextEditingController _usernameCntrl = TextEditingController();
   final TextEditingController _passCntrl = TextEditingController();
+  final UserController userController = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
@@ -86,10 +90,13 @@ class _LoginPageState extends State<LoginPage> {
                         height: 40,
                         child: ElevatedButton(
                           onPressed: () {
-                            if (_loginKey.currentState!.validate()) {
-                              Navigator.pushNamed(
-                                  context, ActivityFormPage.routeName);
-                            }
+                            setState(() async {
+                              int id = await userController.fetchUser(_usernameCntrl.text, _passCntrl.text);
+                              if (_loginKey.currentState!.validate()) {
+                                Navigator.pushNamed(
+                                    context, ActivityFormPage.routeName, arguments: { id });
+                              }
+                            });
                           },
                           style: ButtonStyle(
                             shape: MaterialStateProperty.all<

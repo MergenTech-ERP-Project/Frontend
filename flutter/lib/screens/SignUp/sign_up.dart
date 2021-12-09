@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:vtys_kalite/controller/user_controller.dart';
 import 'package:vtys_kalite/screens/LoginPage/login_page.dart';
 import 'package:vtys_kalite/utilities/constans.dart';
 
 class SignUpPage extends StatefulWidget {
   static String routeName = '/SignUpPage';
 
-  const SignUpPage({Key? key}) : super(key: key);
+  SignUpPage({Key? key}) : super(key: key);
 
   @override
   _SignUpPageState createState() => _SignUpPageState();
@@ -17,6 +20,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _passCntrl = TextEditingController();
   final TextEditingController _confirmPassCntrl = TextEditingController();
   final TextEditingController _usernameCntrl = TextEditingController();
+  final UserController userController = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +72,13 @@ class _SignUpPageState extends State<SignUpPage> {
       height: 40,
       child: ElevatedButton(
         onPressed: () {
-          if (_signUpKey.currentState!.validate()) {
-            Navigator.pushNamed(context, LoginPage.routeName);
-          }
+          setState(() {
+            var response = userController.postUser(_usernameCntrl.text, _passCntrl.text);
+            print(response);
+            if (_signUpKey.currentState!.validate()) {
+              Navigator.pushNamed(context, LoginPage.routeName);
+            }
+          });
         },
         style: ButtonStyle(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(

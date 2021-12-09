@@ -4,7 +4,7 @@ List<User> userFromJson(String str) =>
     List<User>.from(json.decode(str).map((x) => User.fromMap(x)));
 
 String userToJson(List<User> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+    json.encode(List<dynamic>.from(data.map((x) => x.toJsonWithId())));
 
 class User {
   final int id;
@@ -29,9 +29,15 @@ class User {
   }
 
   Map toJson() => {
-        "id": id,
         "name": name,
         "title": title,
         "password": password,
       };
+
+  Map toJsonWithId() => {
+    "id": id,
+    "name": name,
+    "title": title,
+    "password": password,
+  };
 }
