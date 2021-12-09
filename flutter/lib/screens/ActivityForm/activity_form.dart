@@ -12,14 +12,15 @@ class ActivityFormPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int id = ModalRoute.of(context)!.settings.arguments as int;
     return Scaffold(
       body: SafeArea(
-        child: Expanded(
+        child: Center(
           child: Obx(() {
             if (userController.isLoading.value) {
               return Center(child: CircularProgressIndicator());
             } else {
-              return Text(userController.userList.length.toString());
+              return Text(userController.userList[id].name);
             }
           }),
         ),
