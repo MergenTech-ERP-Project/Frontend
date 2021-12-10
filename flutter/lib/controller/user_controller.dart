@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/services/remote_services.dart';
@@ -27,6 +29,7 @@ class UserController extends GetxController {
   Future<int> fetchUser(String name, String password) async {
     try {
       var user = await RemoteServices.fetchUser(name, password);
+      print("fetch User: " + user.toString());
       return user;
     } finally {
     }
@@ -34,7 +37,8 @@ class UserController extends GetxController {
 
   Future<String?> postUser(String name, String password) async {
     try {
-      var response = await RemoteServices.postUser(User(id: 0,name: name, password: password, title: "Worker").toJson().toString());
+      var response = await RemoteServices.postUser(json.encode(User(id: 0,name: name, password: password, title: "Worker").toJson()).toString());
+      print("post User: " + response);
       return response;
     } finally {
     }

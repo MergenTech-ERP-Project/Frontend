@@ -21,6 +21,8 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passCntrl = TextEditingController();
   final UserController userController = Get.put(UserController());
 
+  bool passwordObscured = true;
+
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
@@ -92,9 +94,13 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: () {
                             setState(() async {
                               int id = await userController.fetchUser(_usernameCntrl.text, _passCntrl.text);
-                              if (_loginKey.currentState!.validate()) {
-                                Navigator.pushNamed(
-                                    context, ActivityFormPage.routeName, arguments: { id });
+                              if(id == -1) {
+                                return;
+                              } else {
+                                if (_loginKey.currentState!.validate()) {
+                                  Navigator.pushNamed(
+                                      context, ActivityFormPage.routeName, arguments: id-1);
+                                }
                               }
                             });
                           },
@@ -130,7 +136,16 @@ class _LoginPageState extends State<LoginPage> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                passwordObscured =! passwordObscured;
+                              });
+                            },
+                            icon: passwordObscured ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
+                          ),
                         ),
+
                       );
   }
 
