@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:vtys_kalite/models/user.dart';
 
 class RemoteServices {
+  static Encoding? encoding = Encoding.getByName('utf-8');
+
   static Future<List<User>?> fetchUsers() async {
-    var response = await http.get(Uri.parse('http://127.0.0.1:8080/user/users'));
+    var response =
+        await http.get(Uri.parse('http://127.0.0.1:8080/user/users'));
     if (response.statusCode == 200) {
       var jsonString = response.body;
       return userFromJson(jsonString);
@@ -13,18 +18,41 @@ class RemoteServices {
   }
 
   static Future<int> fetchUser(String name, String password) async {
-    var response = await http.get(Uri.parse('http://127.0.0.1:8080/user/users'));
-    int user = -1;
+    var response =
+        await http.get(Uri.parse('http://127.0.0.1:8080/user/users'));
+    int userID = -1;
     if (response.statusCode == 200) {
       var jsonString = response.body;
-      userFromJson(jsonString).map((e) => { if(e.name == name && e.password == password) user = e.id });
+      List<User> users = userFromJson(jsonString);
+      for(User user in users) {
+        if (user.name == name && user.password == password) {
+          userID = user.id;
+          print(user.id);
+          break;
+        }
+      }
+      //print(userFromJson(jsonString)[userID].name);
+      print(userID);
     }
-    print(user.toString());
-    return user;
+    return userID;
   }
 
   static Future<String> postUser(String json) async {
-    var response = await http.post(Uri.parse('http://127.0.0.1:8080/user/post'), body: json);
-    return response.statusCode == 200 ? "Success: User" : "Error: User";
+    print("Json: $json");
+    var response = await http
+        .post(Uri.parse('http://127.0.0.1:8080/user/post'),
+            headers: <String, String>{
+              'Content-type': 'application/json',
+              'Accept': 'application/json',
+              //'Authorization': '<Your token>'
+            },
+            body: json,
+            encoding: encoding)
+        .timeout(
+          const Duration(seconds: 10),
+        );
+    return response.statusCode == 200
+        ? "Success: User"
+        : "Error: User ${response.statusCode}";
   }
 }

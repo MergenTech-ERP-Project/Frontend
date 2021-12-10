@@ -1,5 +1,6 @@
 create Table "user"(
 	id int not null,
 	name varchar(50),
-	title varchar(50)
+	title varchar(50),
+	password varchar(50)
 );

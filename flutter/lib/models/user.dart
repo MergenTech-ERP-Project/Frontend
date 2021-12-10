@@ -29,9 +29,9 @@ class User {
   }
 
   Map toJson() => {
-        "name": name,
-        "title": title,
-        "password": password,
+        'name': name,
+        'title': title,
+        'password': password,
       };
 
   Map toJsonWithId() => {

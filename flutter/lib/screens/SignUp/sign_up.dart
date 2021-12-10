@@ -22,6 +22,9 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _usernameCntrl = TextEditingController();
   final UserController userController = Get.put(UserController());
 
+  bool passwordObscured = true;
+  bool confirmPasswordObscured = true;
+
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
@@ -41,7 +44,8 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Form(
                 key: _signUpKey,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text("Username", style: kLabelStyle),
                     const SizedBox(height: 10),
@@ -98,19 +102,27 @@ class _SignUpPageState extends State<SignUpPage> {
           return "Cannot Be Blank";
         } else if (val.length < 6) {
           return "Minimum 6 Character";
-        } else if (_passCntrl != _confirmPassCntrl) {
+        } else if (_passCntrl.text != _confirmPassCntrl.text) {
           return "Password Do Not Match";
         } else {
           return null;
         }
       },
-      obscureText: true,
+      obscureText: confirmPasswordObscured,
       decoration: InputDecoration(
         prefixIcon: Icon(Icons.lock),
         hintText: "Password",
         border: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.purple),
           borderRadius: BorderRadius.circular(20),
+        ),
+        suffixIcon: IconButton(
+          onPressed: () {
+            setState(() {
+              confirmPasswordObscured =! confirmPasswordObscured;
+            });
+          },
+          icon: confirmPasswordObscured ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
         ),
       ),
     );
@@ -128,12 +140,20 @@ class _SignUpPageState extends State<SignUpPage> {
           return null;
         }
       },
-      obscureText: true,
+      obscureText: passwordObscured,
       decoration: InputDecoration(
         prefixIcon: Icon(Icons.lock),
         hintText: "Password",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
+        ),
+        suffixIcon: IconButton(
+          onPressed: () {
+            setState(() {
+              passwordObscured =! passwordObscured;
+            });
+          },
+          icon: passwordObscured ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
         ),
       ),
     );
