@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
 
 const kHintTextStyle = TextStyle(
   color: Colors.white54,
@@ -10,6 +13,13 @@ const kLabelStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontFamily: 'Comfortaa',
   fontSize: 20
+);
+
+const kLabelHeaderStyle = TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Comfortaa',
+    fontSize: 36
 );
 
 final kBoxDecorationStyle = BoxDecoration(

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:vtys_kalite/models/activity.dart';
-import 'package:vtys_kalite/models/user.dart';
 
 class ActivityRemoteServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
@@ -12,13 +11,14 @@ class ActivityRemoteServices {
     await http.get(Uri.parse('http://127.0.0.1:8080/activity/activities'));
     if (response.statusCode == 200) {
       var jsonString = response.body;
+      print("Aktiviteler yolda \n Json : $jsonString");
       return activityFromJson(jsonString);
     } else {
       return null;
     }
   }
 
-  static Future<int> fetchActivity(String name, String password) async {
+  static Future<int> fetchActivity(String name, String organizator) async {
     var response =
     await http.get(Uri.parse('http://127.0.0.1:8080/activity/activities'));
     int activityID = -1;
@@ -26,14 +26,12 @@ class ActivityRemoteServices {
       var jsonString = response.body;
       List<Activity> activities = activityFromJson(jsonString);
       for(Activity activity in activities) {
-        if (activity.name == name) {
+        if (activity.name == name && activity.organizator == organizator) {
           activityID = activities.indexOf(activity);
           print(activityID);
           break;
         }
       }
-      //print(userFromJson(jsonString)[userID].name);
-      print(activityID);
     }
     return activityID;
   }
@@ -41,7 +39,7 @@ class ActivityRemoteServices {
   static Future<String> postActivity(String json) async {
     print("Json: $json");
     var response = await http
-        .post(Uri.parse('http://127.0.0.1:8080/activity/activities'),
+        .post(Uri.parse('http://127.0.0.1:8080/activity/post'),
         headers: <String, String>{
           'Content-type': 'application/json',
           'Accept': 'application/json',

@@ -10,14 +10,14 @@ class Activity {
   final int id;
   final String name;
   final String place;
-  final DateTime dateTime;
+  final String datetime;
   final String organizator;
 
   Activity({
     required this.id,
     required this.name,
     required this.place,
-    required this.dateTime,
+    required this.datetime,
     required this.organizator,
   });
 
@@ -26,7 +26,7 @@ class Activity {
       id: activityMap['id'],
       name: activityMap['name'],
       place: activityMap['place'],
-      dateTime: activityMap['dateTime'],
+      datetime: activityMap['datetime'],
       organizator: activityMap['organizator'],
     );
   }
@@ -34,7 +34,7 @@ class Activity {
   Map toJson() => {
         'name': name,
         'place': place,
-        'dateTime': dateTime,
+        'datetime': datetime,
         'organizator': organizator,
       };
 
@@ -42,7 +42,7 @@ class Activity {
         "id": id,
         'name': name,
         'place': place,
-        'dateTime': dateTime,
+        'datetime': datetime,
         'organizator': organizator,
       };
 }

@@ -32,7 +32,7 @@
             <column name="place" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="datetime" type="datetime">
+            <column name="datetime" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
             <column name="organizator" type="varchar(50)">

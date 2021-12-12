@@ -20,27 +20,28 @@ class ActivityController extends GetxController {
       var activities = await ActivityRemoteServices.fetchActivities();
       if (activities != null) {
         activityList.assignAll(activities);
+        print("Fetch Activities was success!!!!!!!!!!!!!!!");
       }
     } finally {
       isLoading(false);
     }
   }
 
-  Future<int> fetchActivity(String name, String password) async {
+  Future<int> fetchActivity(String name, String organizator) async {
     try {
-      var activity = await ActivityRemoteServices.fetchActivity(name, password);
+      var activity = await ActivityRemoteServices.fetchActivity(name, organizator);
       print("fetch Activity: " + activity.toString());
       return activity;
     } finally {
     }
   }
 
-  Future<String?> postActivity(String name, String password, String place, DateTime dateTime, String organizator) async {
+  Future<String?> postActivity(String name, String place, String datetime, String organizator) async {
     try {
       var response = await ActivityRemoteServices.postActivity(json.encode(Activity(
           id: 0,
           name: name,
-          dateTime: dateTime,
+          datetime: datetime,
           place: place,
           organizator: organizator,
       ).toJson()).toString());
