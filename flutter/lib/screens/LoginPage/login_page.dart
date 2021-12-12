@@ -129,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                             return null;
                           }
                         },
-                        obscureText: true,
+                        obscureText: passwordObscured,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.lock),
                           hintText: "Password",

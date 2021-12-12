@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:vtys_kalite/models/user.dart';
 
-class RemoteServices {
+class UserRemoteServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
   static Future<List<User>?> fetchUsers() async {
