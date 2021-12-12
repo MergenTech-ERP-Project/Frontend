@@ -6,6 +6,22 @@
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 
     <changeSet id="1" author="fatih">
+
+        <createTable tableName="user">
+            <column name="id" type="tinyint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
         <createTable tableName="activity">
             <column name="id" type="tinyint">
                 <constraints primaryKey="true"/>
@@ -16,41 +32,29 @@
             <column name="place" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="time" type="datetime">
+            <column name="datetime" type="datetime">
                 <constraints nullable="false"/>
             </column>
-            <column name="date" type="date">
+            <column name="organizator" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
+
         <createTable tableName="activityevaluation">
-            <column name="id" type="int">
+            <column name="id" type="tinyint">
                 <constraints primaryKey="true"/>
             </column>
             <column name="ActivityId" type="tinyint">
-                <constraints nullable="false"/>
+                <constraints nullable="false" foreignKeyName="fk_activity_id" references="activity(id)"/>
             </column>
             <column name="UserId" type="tinyint">
-                <constraints nullable="false"/>
+                <constraints nullable="false" foreignKeyName="fk_user_id" references="user(id)"/>
             </column>
             <column name="evaluation" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <createTable tableName="user">
-            <column name="id" type="tinyint">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="name" type="varchar(30)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="title" type="varchar(30)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="password" type="varchar(30)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
+
     </changeSet>
 
 </databaseChangeLog>

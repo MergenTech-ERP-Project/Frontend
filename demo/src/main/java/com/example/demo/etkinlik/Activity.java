@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name= "activity", schema="public")
 public class Activity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -16,24 +16,20 @@ public class Activity {
     private String place;
 
     @Column
-    private String time;
+    private String datetime;
 
     @Column
-    private String date;
-
-    @Column
-    private String personOrganization;
+    private String organizator;
 
     public Activity() {
 
     }
 
-    public Activity(String name, String place, String time, String date, String personOrganization) {
+    public Activity(String name, String place, String datetime, String organizator) {
         this.name = name;
         this.place = place;
-        this.time = time;
-        this.date = date;
-        this.personOrganization = personOrganization;
+        this.datetime = datetime;
+        this.organizator = organizator;
     }
 
     public String getName() {
@@ -52,27 +48,19 @@ public class Activity {
         this.place = place;
     }
 
-    public String getTime() {
-        return time;
+    public String getDatetime() {
+        return datetime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
     }
 
-    public String getDate() {
-        return date;
+    public String getOrganizator() {
+        return organizator;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getPersonOrganization() {
-        return personOrganization;
-    }
-
-    public void setPersonOrganization(String personOrganization) {
-        this.personOrganization = personOrganization;
+    public void setOrganizator(String organizator) {
+        this.organizator = organizator;
     }
 }

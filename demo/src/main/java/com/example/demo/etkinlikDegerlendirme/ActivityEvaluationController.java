@@ -8,21 +8,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-
-//ae -> activity evaluation
+@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("ae")
+@RequestMapping("activityevaluation")
 public class ActivityEvaluationController {
 
     @Autowired
     private ActivityEvaluationRepository activityEvaluationRepository;
 
-    @GetMapping("aes")
+    @GetMapping("evaluations")
     public List<ActivityEvaluation> getActivityEvaluationList(){
         return (List<ActivityEvaluation>) activityEvaluationRepository.findAll();
     }
 
-    @GetMapping("aes/{id}")
+    @GetMapping("evaluations/{id}")
     public Optional<ActivityEvaluation> getActivityEvaluationById(@PathVariable Long id){
 
         return activityEvaluationRepository.findById(id);
