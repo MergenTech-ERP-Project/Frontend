@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      child: Text("Sign Up"),
+                      child: const Text("Sign Up"),
                     ),
                   ),
                 ],
@@ -132,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                         obscureText: passwordObscured,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.lock),
-                          hintText: "Password",
+                          labelText: "Password",
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -159,7 +159,7 @@ class _LoginPageState extends State<LoginPage> {
                         },
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.person),
-                          hintText: "Username",
+                          labelText: "Username",
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),

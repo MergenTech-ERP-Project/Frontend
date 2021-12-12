@@ -111,7 +111,7 @@ class _SignUpPageState extends State<SignUpPage> {
       obscureText: confirmPasswordObscured,
       decoration: InputDecoration(
         prefixIcon: Icon(Icons.lock),
-        hintText: "Password",
+        labelText: "Password",
         border: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.purple),
           borderRadius: BorderRadius.circular(20),
@@ -143,7 +143,7 @@ class _SignUpPageState extends State<SignUpPage> {
       obscureText: passwordObscured,
       decoration: InputDecoration(
         prefixIcon: Icon(Icons.lock),
-        hintText: "Password",
+        labelText: "Password",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
         ),
@@ -169,7 +169,7 @@ class _SignUpPageState extends State<SignUpPage> {
       },
       decoration: InputDecoration(
         prefixIcon: Icon(Icons.person),
-        hintText: "Username",
+        labelText: "Username",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
         ),

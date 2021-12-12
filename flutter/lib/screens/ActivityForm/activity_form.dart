@@ -60,7 +60,7 @@ class _ActivityFormPageState extends State<ActivityFormPage> {
         onPressed: () {
           Navigator.pushNamed(context, NewActivityPage.routeName, arguments: universal);
         },
-        child: const Icon(Icons.plus_one),
+        child: const Icon(Icons.add),
       ),
     );
   }
