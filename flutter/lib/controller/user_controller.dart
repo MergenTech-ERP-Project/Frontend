@@ -6,7 +6,7 @@ import 'package:vtys_kalite/services/remote_services.dart';
 
 class UserController extends GetxController {
   var isLoading = true.obs;
-  List<User> userList = List.empty(growable: true); //List<User>
+  List<User> userList = <User>[].obs; //List<User>
 
   @override
   void onInit() {
@@ -19,7 +19,7 @@ class UserController extends GetxController {
       isLoading(true);
       var users = await RemoteServices.fetchUsers();
       if (users != null) {
-        userList = users;
+        userList.assignAll(users);
       }
     } finally {
       isLoading(false);
