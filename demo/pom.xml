@@ -79,7 +79,7 @@
 					<changeLogFile>db/changelog/changelog-master.xml</changeLogFile>
 					<url>jdbc:postgresql://localhost:5432/test</url>
 					<username>postgres</username>
-					<password>admin</password>
+					<password>ykcw6</password>
 				</configuration>
 			</plugin>
 		</plugins>

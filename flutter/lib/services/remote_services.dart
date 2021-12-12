@@ -26,8 +26,8 @@ class RemoteServices {
       List<User> users = userFromJson(jsonString);
       for(User user in users) {
         if (user.name == name && user.password == password) {
-          userID = user.id;
-          print(user.id);
+          userID = users.indexOf(user);
+          print(userID);
           break;
         }
       }

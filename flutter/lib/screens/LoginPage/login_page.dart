@@ -99,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                               } else {
                                 if (_loginKey.currentState!.validate()) {
                                   Navigator.pushNamed(
-                                      context, ActivityFormPage.routeName, arguments: id-1);
+                                      context, ActivityFormPage.routeName, arguments: id);
                                 }
                               }
                             });
