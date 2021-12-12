@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:vtys_kalite/models/user.dart';
-import 'package:vtys_kalite/services/remote_services.dart';
+import 'package:vtys_kalite/services/user_remote_services.dart';
 
 class UserController extends GetxController {
   var isLoading = true.obs;
@@ -17,8 +17,9 @@ class UserController extends GetxController {
   void fetchUsers() async {
     try {
       isLoading(true);
-      var users = await RemoteServices.fetchUsers();
+      var users = await UserRemoteServices.fetchUsers();
       if (users != null) {
+        userList.removeRange(0, userList.length); //-1 belki
         userList.assignAll(users);
       }
     } finally {
@@ -28,7 +29,7 @@ class UserController extends GetxController {
 
   Future<int> fetchUser(String name, String password) async {
     try {
-      var user = await RemoteServices.fetchUser(name, password);
+      var user = await UserRemoteServices.fetchUser(name, password);
       print("fetch User: " + user.toString());
       return user;
     } finally {
@@ -37,7 +38,10 @@ class UserController extends GetxController {
 
   Future<String?> postUser(String name, String password) async {
     try {
-      var response = await RemoteServices.postUser(json.encode(User(id: 0,name: name, password: password, title: "Worker").toJson()).toString());
+
+      User newUser = User(id: 0,name: name, password: password, title: "Worker");
+      var response = await UserRemoteServices.postUser(json.encode(newUser.toJson()).toString());
+      fetchUsers(); //userList.add(newUser);
       print("post User: " + response);
       return response;
     } finally {
