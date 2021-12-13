@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+const Color kColorGreen = Color.fromARGB(255, 20, 200, 20);
+const Color kColorRed = Color.fromARGB(255, 200, 20, 20);
+
 
 const kHintTextStyle = TextStyle(
   color: Colors.white54,

@@ -37,6 +37,17 @@ class ActivityController extends GetxController {
     }
   }
 
+  Future<Activity?> fetchActivitybyId(int id) async {
+    try {
+      isLoading(true);
+      var activity = await ActivityRemoteServices.fetchActivitybyId(id);
+      print("fetch Activity: " + activity.toString());
+      return activity;
+    } finally {
+      isLoading(false);
+    }
+  }
+
   Future<String?> postActivity(String name, String place, String datetime, String organizator) async {
     try {
       isLoading(true);

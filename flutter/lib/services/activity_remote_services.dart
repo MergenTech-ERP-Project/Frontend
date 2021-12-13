@@ -50,6 +50,22 @@ class ActivityRemoteServices {
     }
     return activityID;
   }
+  static Future<Activity?> fetchActivitybyId(int id) async {
+    var response = await http.get(
+      Uri.parse('http://127.0.0.1:8080/activity/activities/$id'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
+        //'Authorization': '<Your token>'
+      },
+    );
+    print("fetchActivity response ${response.statusCode}");
+    if(response.statusCode == 200){
+      var jsonString = response.body;
+      return activityFromJson(jsonString)[0];
+    }
+    return null;
+  }
 
   static Future<String> postActivity(String json) async {
     print("Json: $json");
