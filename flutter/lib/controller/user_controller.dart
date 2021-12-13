@@ -29,22 +29,25 @@ class UserController extends GetxController {
 
   Future<int> fetchUser(String name, String password) async {
     try {
+      isLoading(true);
       var user = await UserRemoteServices.fetchUser(name, password);
       print("fetch User: " + user.toString());
       return user;
     } finally {
+      isLoading(false);
     }
   }
 
   Future<String?> postUser(String name, String password) async {
     try {
-
+      isLoading(true);
       User newUser = User(id: 0,name: name, password: password, title: "Worker");
       var response = await UserRemoteServices.postUser(json.encode(newUser.toJson()).toString());
       fetchUsers(); //userList.add(newUser);
       print("post User: " + response);
       return response;
     } finally {
+      isLoading(false);
     }
   }
 }

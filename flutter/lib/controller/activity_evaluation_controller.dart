@@ -28,15 +28,18 @@ class ActivityEvaluationController extends GetxController {
 
   Future<int> fetchActivityEvaluation(int activityId, int userId) async {
     try {
+      isLoading(true);
       var activityEvaluation = await ActivityEvaluationRemoteServices.fetchActivityEvaluation(activityId, userId);
       print("fetch Activity: " + activityEvaluation.toString());
       return activityEvaluation;
     } finally {
+      isLoading(false);
     }
   }
 
   Future<String?> postActivityEvaluation(int activityId, int userId, String evaluation) async {
     try {
+      isLoading(true);
       var response = await ActivityEvaluationRemoteServices.postActivityEvaluation(json.encode(ActivityEvaluation(
         id: 0,
         activityId: activityId,
@@ -46,6 +49,7 @@ class ActivityEvaluationController extends GetxController {
       print("post Activity: " + response);
       return response;
     } finally {
+      isLoading(false);
     }
   }
 }

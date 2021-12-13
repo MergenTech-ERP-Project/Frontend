@@ -5,7 +5,7 @@ import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/services/activity_remote_services.dart';
 
 class ActivityController extends GetxController {
-  var isLoading = true.obs;
+  RxBool isLoading = true.obs;
   List<Activity> activityList = <Activity>[].obs; //List<Activity>
 
   @override
@@ -20,7 +20,6 @@ class ActivityController extends GetxController {
       var activities = await ActivityRemoteServices.fetchActivities();
       if (activities != null) {
         activityList.assignAll(activities);
-        print("Fetch Activities was success!!!!!!!!!!!!!!!");
       }
     } finally {
       isLoading(false);
@@ -29,15 +28,18 @@ class ActivityController extends GetxController {
 
   Future<int> fetchActivity(String name, String organizator) async {
     try {
+      isLoading(true);
       var activity = await ActivityRemoteServices.fetchActivity(name, organizator);
       print("fetch Activity: " + activity.toString());
       return activity;
     } finally {
+      isLoading(false);
     }
   }
 
   Future<String?> postActivity(String name, String place, String datetime, String organizator) async {
     try {
+      isLoading(true);
       var response = await ActivityRemoteServices.postActivity(json.encode(Activity(
           id: 0,
           name: name,
@@ -46,8 +48,10 @@ class ActivityController extends GetxController {
           organizator: organizator,
       ).toJson()).toString());
       print("post Activity: " + response);
+      fetchActivities();
       return response;
     } finally {
+      isLoading(false);
     }
   }
 }

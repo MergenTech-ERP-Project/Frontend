@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:vtys_kalite/controller/activity_controller.dart';
 import 'package:vtys_kalite/controller/user_controller.dart';
@@ -22,15 +20,14 @@ class ActivityFormPage extends StatefulWidget {
 class _ActivityFormPageState extends State<ActivityFormPage> {
   static int universal = 0;
 
-  final UserController userController = Get.put(UserController());
-  final ActivityController activityController = Get.put(ActivityController());
-
   //List<String> activityString = ["asd", "qwe", "tyu", "bnm"];
 
   @override
   Widget build(BuildContext context) {
+    final UserController userController = Get.put(UserController());
+    final ActivityController activityController = Get.put(ActivityController());
     universal = ModalRoute.of(context)!.settings.arguments as int;
-
+    print("activityList Size ${activityController.activityList.length}");
     return Scaffold(
       appBar: AppBar(
         title: Obx(() => Text(userController.userList[universal].name)),
@@ -38,27 +35,32 @@ class _ActivityFormPageState extends State<ActivityFormPage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.person),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
         ],
       ),
       body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 200),
-            child: ListView.builder(
-              itemCount: activityController.activityList.length,
-              itemBuilder: (context, index) {
-                return buildActivityCard(
-                    activityController.activityList[index]);
-              },
-            ),
-          ),
-        ),
+        child: Center(child: Obx(() {
+          return (activityController.isLoading.value
+              ? const CircularProgressIndicator()
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 200),
+                  child: ListView.builder(
+                    itemCount: activityController.activityList.length,
+                    itemBuilder: (context, index) {
+                      return buildActivityCard(
+                          activityController.activityList[index]);
+                    },
+                  ),
+                ));
+        })),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, NewActivityPage.routeName, arguments: universal);
+          Navigator.pushNamed(context, NewActivityPage.routeName,
+              arguments: universal);
         },
         child: const Icon(Icons.add),
       ),
