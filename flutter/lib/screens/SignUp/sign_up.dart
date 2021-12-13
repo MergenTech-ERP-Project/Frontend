@@ -80,7 +80,8 @@ class _SignUpPageState extends State<SignUpPage> {
             var response = userController.postUser(_usernameCntrl.text, _passCntrl.text);
             print(response);
             if (_signUpKey.currentState!.validate()) {
-              Navigator.pushNamed(context, LoginPage.routeName);
+              Navigator.pop(context);
+              //Navigator.pushNamed(context, LoginPage.routeName);
             }
           });
         },

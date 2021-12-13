@@ -93,12 +93,12 @@ class _NewActivityPageState extends State<NewActivityPage> {
                       var response = activityController.postActivity(
                         _activityNameController.text,
                         _activityPlaceController.text,
-                          dateFormat.format(_date),
+                        dateFormat.format(_date).toString(),
                         _activityOrganizatorController.text
                       );
                       print(response);
                       if (_newActivityKey.currentState!.validate()) {
-                        Navigator.pushNamed(context, ActivityFormPage.routeName, arguments: universal);
+                        Navigator.pop(context);
                       }
                     });
                   },
