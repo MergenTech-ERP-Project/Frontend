@@ -54,4 +54,23 @@ class ActivityController extends GetxController {
       isLoading(false);
     }
   }
+
+  Future<String?> deleteActivity(String name, String organizator) async {
+    try {
+      isLoading(true);
+      var response = "Failed!";
+
+      for(Activity activity in activityList) {
+        if(activity.name == name && activity.organizator == organizator) {
+          response =  await ActivityRemoteServices.deleteActivity(activity.id);
+          break;
+        }
+      }
+      print("delete Activity: " + response);
+      fetchActivities();
+      return response;
+    } finally {
+      isLoading(false);
+    }
+  }
 }

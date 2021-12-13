@@ -6,6 +6,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:vtys_kalite/controller/activity_controller.dart';
 import 'package:vtys_kalite/controller/user_controller.dart';
 import 'package:vtys_kalite/models/activity.dart';
+import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation.dart';
 import 'package:vtys_kalite/screens/ActivityForm/new_activity.dart';
 
 class ActivityFormPage extends StatefulWidget {
@@ -22,10 +23,13 @@ class _ActivityFormPageState extends State<ActivityFormPage> {
 
   //List<String> activityString = ["asd", "qwe", "tyu", "bnm"];
 
+  late UserController userController;
+  late ActivityController activityController;
+
   @override
   Widget build(BuildContext context) {
-    final UserController userController = Get.put(UserController());
-    final ActivityController activityController = Get.put(ActivityController());
+    userController = Get.put(UserController());
+    activityController = Get.put(ActivityController());
     universal = ModalRoute.of(context)!.settings.arguments as int;
     print("activityList Size ${activityController.activityList.length}");
     return Scaffold(
@@ -70,12 +74,23 @@ class _ActivityFormPageState extends State<ActivityFormPage> {
   Card buildActivityCard(Activity activity) {
     return Card(
       child: ListTile(
-          onTap: () {
-            setState(() {});
+        onTap: () {
+          setState(() {
+            Navigator.pushNamed(context, ActivityEvaluationPage.routeName, arguments: activity.id);
+          });
+        },
+        title: Text(activity.name),
+        subtitle: Text(activity.organizator),
+        trailing: IconButton(
+          onPressed: () {
+            setState(() {
+              activityController.deleteActivity(
+                  activity.name, activity.organizator);
+            });
           },
-          title: Text(activity.name),
-          subtitle: Text(activity.organizator),
-          trailing: const Icon(Icons.delete)),
+          icon: const Icon(Icons.delete),
+        ),
+      ),
     );
   }
 }
