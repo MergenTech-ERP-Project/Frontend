@@ -64,85 +64,83 @@ class _SignUpPageState extends State<SignUpPage> {
 
   CustomButton signUpButton(BuildContext context) {
     return CustomButton(
-                    title: "Sign Up",
-                    pressAction: () {
-                      setState(() {
-                        for (User user in Statics.instance.userController.userList) {
-                          if (user.name == _usernameController.text) {
-                            showDialog(
-                                context: context,
-                                builder: (_) => const SimpleDialog(
-                                    title: Text("Same Username exists!"))
-                            );
-                            return;
-                          }
-                        }
-                        var response = Statics.instance.userController
-                            .postUser(_usernameController.text,
-                                _passwordController.text);
-                        print(response);
-                        if (_signUpKey.currentState!.validate()) {
-                          Navigator.pop(context);
-                        }
-                      });
-                    },
-                  );
+      title: "Sign Up",
+      pressAction: () {
+        setState(() {
+          for (User user in Statics.instance.userController.userList) {
+            if (user.name == _usernameController.text) {
+              showDialog(
+                  context: context,
+                  builder: (_) =>
+                      const SimpleDialog(title: Text("Same Username exists!")));
+              return;
+            }
+          }
+          var response = Statics.instance.userController
+              .postUser(_usernameController.text, _passwordController.text);
+          print(response);
+          if (_signUpKey.currentState!.validate()) {
+            Navigator.pop(context);
+          }
+        });
+      },
+    );
   }
 
   CustomTextBox confirmPasswordTextBox() {
     return CustomTextBox(
-                    controller: _confirmPasswordController,
-                    title: "Confirm Password",
-                    label: "Confirm Password",
-                    validator: (val) {
-                      if (val!.isEmpty) {
-                        return "Cannot Be Blank";
-                      } else if (val.length < 6) {
-                        return "Minimum 6 Character";
-                      } else if (_passwordController.text !=
-                          _confirmPasswordController.text) {
-                        return "Password Do Not Match";
-                      } else {
-                        return null;
-                      }
-                    },
-                    obscureText: true,
-                    decorationIcon: const Icon(Icons.lock),
-                  );
+      controller: _confirmPasswordController,
+      title: "Confirm Password",
+      label: "Confirm Password",
+      validator: (val) {
+        if (val!.isEmpty) {
+          return "Cannot Be Blank";
+        } else if (val.length < 6) {
+          return "Minimum 6 Character";
+        } else if (_passwordController.text !=
+            _confirmPasswordController.text) {
+          return "Password Do Not Match";
+        } else {
+          return null;
+        }
+      },
+      obscureText: true,
+      decorationIcon: const Icon(Icons.lock),
+    );
   }
 
   CustomTextBox passwordTextBox() {
     return CustomTextBox(
-                    controller: _passwordController,
-                    title: "Password",
-                    label: "Password",
-                    validator: (val) {
-                      if (val!.isEmpty) {
-                        return "Cannot Be Blank";
-                      } else if (val.length < 6) {
-                        return "Minimum 6 Character";
-                      } else {
-                        return null;
-                      }
-                    },
-                    obscureText: true,
-                    decorationIcon: const Icon(Icons.lock),
-                  );
+      controller: _passwordController,
+      title: "Password",
+      label: "Password",
+      validator: (val) {
+        if (val!.isEmpty) {
+          return "Cannot Be Blank";
+        } else if (val.length < 6) {
+          return "Minimum 6 Character";
+        } else {
+          return null;
+        }
+      },
+      obscureText: true,
+      decorationIcon: const Icon(Icons.lock),
+    );
   }
 
   CustomTextBox usernameTextBox() {
     return CustomTextBox(
-                    controller: _usernameController,
-                    title: "Username",
-                    label: "Username",
-                    validator: (val) {
-                      if (val!.isEmpty) {
-                        return "Cannot Be Blank";
-                      } else {
-                        return null;
-                      }
-                    },
-                    decorationIcon: const Icon(Icons.person),
-                  );
+      controller: _usernameController,
+      title: "Username",
+      label: "Username",
+      validator: (val) {
+        if (val!.isEmpty) {
+          return "Cannot Be Blank";
+        } else {
+          return null;
+        }
+      },
+      decorationIcon: const Icon(Icons.person),
+    );
   }
 }

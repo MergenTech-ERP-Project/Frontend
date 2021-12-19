@@ -21,6 +21,12 @@ const kLabelStyle = TextStyle(
   fontSize: 20
 );
 
+const kLabelThinStyle = TextStyle(
+    color: Colors.black,
+    fontFamily: 'Comfortaa',
+    fontSize: 16
+);
+
 const kLabelHeaderStyle = TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.bold,
