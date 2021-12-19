@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/utilities/constans.dart';
 
 class CustomButton extends StatefulWidget {
   final String title;
@@ -11,6 +12,7 @@ class CustomButton extends StatefulWidget {
     this.height = 40,
     required this.title,
   }) : super(key: key);
+
   @override
   State<CustomButton> createState() => _CustomButtonState();
 }
@@ -24,10 +26,15 @@ class _CustomButtonState extends State<CustomButton> {
       child: ElevatedButton(
         onPressed: widget.pressAction,
         style: ButtonStyle(
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(widget.height! / 2),
-                ))),
+          backgroundColor: MaterialStateProperty.all<Color>(kPrimaryColor),
+          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(widget.height! / 2),
+            ),
+
+          ),
+        ),
         child: Text(widget.title),
       ),
     );

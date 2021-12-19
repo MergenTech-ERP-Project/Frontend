@@ -4,8 +4,8 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/models/activity_evaluation.dart';
-import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation.dart';
-import 'package:vtys_kalite/screens/ActivityForm/new_activity.dart';
+import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation_page.dart';
+import 'package:vtys_kalite/screens/ActivityForm/new_activity_page.dart';
 import 'package:vtys_kalite/screens/LoginPage/login_page.dart';
 import 'package:vtys_kalite/utilities/constans.dart';
 

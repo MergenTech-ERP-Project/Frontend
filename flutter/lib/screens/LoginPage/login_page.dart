@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
-import 'package:vtys_kalite/screens/ActivityForm/activity_form.dart';
+import 'package:vtys_kalite/screens/ActivityForm/activity_form_page.dart';
+import 'package:vtys_kalite/screens/SignUp/sign_up.dart';
 import 'package:vtys_kalite/utilities/constans.dart';
 
 class LoginPage extends StatefulWidget {
@@ -49,6 +51,8 @@ class _LoginPageState extends State<LoginPage> {
                     usernameTextBox(),
                     passwordTextBox(),
                     loginButton(context),
+                    CustomTextDivider(text: "OR", thickness: 2),
+                    signUpButton(context),
                   ],
                 ),
               ),
@@ -77,6 +81,14 @@ class _LoginPageState extends State<LoginPage> {
         });
       },
     );
+  }
+
+  CustomButton signUpButton(BuildContext context) {
+    return CustomButton(
+        title: "Sign Up",
+        pressAction: () {
+          Navigator.pushNamed(context, SignUpPage.routeName);
+        });
   }
 
   CustomTextBox passwordTextBox() {
