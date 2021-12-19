@@ -1,14 +1,10 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:intl/intl.dart';
-import 'package:vtys_kalite/controller/activity_controller.dart';
-import 'package:vtys_kalite/controller/activity_evaluation_controller.dart';
-import 'package:vtys_kalite/controller/user_controller.dart';
-import 'package:vtys_kalite/screens/ActivityForm/activity_form.dart';
+import 'package:vtys_kalite/componenets/custom_button.dart';
+import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/utilities/constans.dart';
 
 class NewActivityPage extends StatefulWidget {
@@ -22,12 +18,6 @@ class NewActivityPage extends StatefulWidget {
 
 class _NewActivityPageState extends State<NewActivityPage> {
   final _newActivityKey = GlobalKey<FormState>();
-  static int universal = 0;
-
-  final UserController userController = Get.put(UserController());
-  final ActivityController activityController = Get.put(ActivityController());
-  final ActivityEvaluationController activityEvaluationController =
-      Get.put(ActivityEvaluationController());
 
   final TextEditingController _activityNameController = TextEditingController();
   final TextEditingController _activityPlaceController = TextEditingController();
@@ -38,13 +28,14 @@ class _NewActivityPageState extends State<NewActivityPage> {
 
   @override
   Widget build(BuildContext context) {
-    universal = ModalRoute.of(context)!.settings.arguments as int;
     var screenSize = MediaQuery.of(context).size;
     var ratio = MediaQuery.of(context).devicePixelRatio;
     return Scaffold(
       appBar: AppBar(
-        title: Obx(() => Text(userController.userList[universal].name)),
+        title: Obx(() => Text(Statics.instance.userController.userList[Statics.instance.userId].name)),
         centerTitle: true,
+        backgroundColor: kPrimaryColor,
+        foregroundColor: kSecondaryColor,
         actions: [
           IconButton(
             icon: const Icon(Icons.person),
@@ -65,15 +56,15 @@ class _NewActivityPageState extends State<NewActivityPage> {
                 children: [
                   const Text("Activity", style: kLabelHeaderStyle),
                   const SizedBox(height: 20),
-                  buildTextFormField(_activityNameController, 'Name'),
+                  buildTextBox(_activityNameController, 'Name', "Name"),
                   const SizedBox(height: 20),
-                  buildTextFormField(_activityPlaceController, 'Place'),
+                  buildTextBox(_activityPlaceController, 'Place', 'Place'),
                   const SizedBox(height: 20),
                   buildDatePicker(_activityDateTimeController),
                   const SizedBox(height: 20),
-                  buildTextFormField(_activityOrganizatorController, 'Organizer'),
+                  buildTextBox(_activityOrganizatorController, 'Organizer', 'Organizer'),
                   const SizedBox(height: 20),
-                  buildCreateButton(),
+                  createButton(context),
                 ],
               ),
             ),
@@ -82,55 +73,41 @@ class _NewActivityPageState extends State<NewActivityPage> {
       ),
     );
   }
-
-  Container buildCreateButton() {
-    return Container(
-                width: double.infinity,
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      var response = activityController.postActivity(
-                        _activityNameController.text,
-                        _activityPlaceController.text,
-                        dateFormat.format(_date).toString(),
-                        _activityOrganizatorController.text
-                      );
-                      print(response);
-                      if (_newActivityKey.currentState!.validate()) {
-                        Navigator.pop(context);
-                      }
-                    });
-                  },
-                  style: ButtonStyle(
-                    shape:
-                    MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                  ),
-                  child: const Text("Create"),
-                ),
-              );
+  CustomButton createButton(BuildContext context) {
+    return CustomButton(
+      title: "Create",
+      pressAction: () {
+        setState(() {
+          var response = Statics.instance.activityController.postActivity(
+              _activityNameController.text,
+              _activityPlaceController.text,
+              dateFormat.format(_date).toString(),
+              _activityOrganizatorController.text
+          );
+          print(response);
+          if (_newActivityKey.currentState!.validate()) {
+            Navigator.pop(context);
+          }
+        });
+      },
+    );
   }
 
-  TextFormField buildTextFormField(TextEditingController controller, String labelText) {
-    return TextFormField(
-                controller: controller,
-                validator: (val) {
-                  if (val!.isEmpty) {
-                    return "Cannot Be Blank";
-                  }
-                },
-                decoration: InputDecoration(
-                  labelText: labelText,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-              );
+  CustomTextBox buildTextBox(TextEditingController controller, String title, String label) {
+    return CustomTextBox(
+      controller: controller,
+      title: title,
+      label: label,
+      validator: (val) {
+        if (val!.isEmpty) {
+          return "Cannot Be Blank";
+        } else {
+          return null;
+        }
+      },
+    );
   }
+
   DateTimePicker buildDatePicker(TextEditingController controller) {
     return DateTimePicker(
       type: DateTimePickerType.dateTime,

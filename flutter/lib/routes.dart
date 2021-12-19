@@ -3,6 +3,7 @@ import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation.dart';
 import 'package:vtys_kalite/screens/ActivityForm/activity_form.dart';
 import 'package:vtys_kalite/screens/ActivityForm/new_activity.dart';
 import 'package:vtys_kalite/screens/SignUp/sign_up.dart';
+import 'package:vtys_kalite/screens/ListUsers/list_users.dart';
 import 'package:vtys_kalite/screens/loginpage/login_page.dart';
 
 final Map<String, WidgetBuilder> routes = {
@@ -11,4 +12,5 @@ final Map<String, WidgetBuilder> routes = {
   ActivityFormPage.routeName: (context) =>  ActivityFormPage(),
   NewActivityPage.routeName: (context) =>  NewActivityPage(),
   ActivityEvaluationPage.routeName: (context) =>  ActivityEvaluationPage(),
+  ListUsers.routeName: (context) => ListUsers(),
 };

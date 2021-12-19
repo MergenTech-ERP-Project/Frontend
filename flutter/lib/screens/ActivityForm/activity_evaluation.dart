@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:vtys_kalite/controller/activity_controller.dart';
-import 'package:vtys_kalite/controller/activity_evaluation_controller.dart';
-import 'package:vtys_kalite/controller/user_controller.dart';
+import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/utilities/constans.dart';
@@ -20,32 +16,28 @@ class ActivityEvaluationPage extends StatefulWidget {
 }
 
 class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
-  late int userId, activityId;
-  final UserController userController = Get.put(UserController());
-  final ActivityController activityController = Get.put(ActivityController());
-  final ActivityEvaluationController activityEvaluationController = Get.put(ActivityEvaluationController());
+  late int activityId;
   late Activity activity;
   late User user;
 
   @override
   Widget build(BuildContext context) {
     var arguments = ModalRoute.of(context)!.settings.arguments as Map;
-    userId = arguments['userId'];
     activityId = arguments['activityId'];
     print("Activity ID : $activityId");
-    activity = activityController.activityList[activityId];
-    user = userController.userList[userId];
+    activity = Statics.instance.activityController.activityList[activityId];
+    user = Statics.instance.userController.userList[Statics.instance.userId];
     return Scaffold(
         appBar: AppBar(
           title: Obx(() {
-            return Text(activityController.isLoading.value
+            return Text(Statics.instance.activityController.isLoading.value
                 ? "Activity's Name"
                 : activity.name);
           }),
           centerTitle: true,
         ),
         body: Obx(() {
-          return (activityController.isLoading.value
+          return (Statics.instance.activityController.isLoading.value
               ? const CircularProgressIndicator()
               : SafeArea(
                   child: SingleChildScrollView(
@@ -86,7 +78,7 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
       child: ElevatedButton(
         onPressed: () {
           setState(() {
-            activityEvaluationController.postActivityEvaluation(activity.id, user.id, widget._evaluationController.text);
+            Statics.instance.activityEvaluationController.postActivityEvaluation(activity.id, user.id, widget._evaluationController.text);
             Navigator.pop(context);
           });
         },
@@ -136,7 +128,7 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
       width: 250,
       child: Column(
         children: [
-          Text("Name : ${userController.userList[userId].name}",
+          Text("Name : ${Statics.instance.userController.userList[Statics.instance.userId].name}",
               style: kLabelStyle),
         ],
       ),
