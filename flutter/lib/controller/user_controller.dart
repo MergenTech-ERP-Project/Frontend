@@ -41,7 +41,7 @@ class UserController extends GetxController {
   Future<String?> postUser(String name, String password) async {
     try {
       isLoading(true);
-      User newUser = User(id: 0,name: name, password: password, title: "Worker");
+      User newUser = User(id: 0,name: name, password: password, title: Departmans.none);
       var response = await UserRemoteServices.postUser(json.encode(newUser.toJson()).toString());
       fetchUsers(); //userList.add(newUser);
       print("post User: " + response);

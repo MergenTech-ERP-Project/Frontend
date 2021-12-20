@@ -196,7 +196,7 @@ class _NewActivityPageState extends State<NewActivityPage> {
           var response = Statics.instance.activityController.postActivity(
               _activityNameController.text,
               _activityPlaceController.text,
-              dateFormat.format(_date).toString(),
+              dateTimeFormat.format(_date).toString(),
               _activityOrganizatorController.text);
           print(response);
           Navigator.pop(context);
