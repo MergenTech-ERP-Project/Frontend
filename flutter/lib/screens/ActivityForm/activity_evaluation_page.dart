@@ -31,6 +31,8 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
     activity = Statics.instance.activityController.activityList[activityId];
     user = Statics.instance.userController.userList[Statics.instance.userId];
 
+    DateTime date = dateTimeFormat.parse(activity.datetime);
+
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -38,15 +40,12 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
         backgroundColor: kPrimaryColor,
         foregroundColor: Colors.white,
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: Center(
-              child: Container(
-                width: 250,
-                child: Text(
-                  "Date : ${dateFormat.parse(activity.datetime).toString()}",
-                  style: kTextThinStyle,
-                ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Text(
+                "Date : ${date.year}.${date.month}.${date.day}",
+                style: kLabelAppBarThinStyle,
               ),
             ),
           )

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+DateFormat dateTimeFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+
 const Color kColorGreen = Color(0xFF20E692);
 const Color kColorRed = Color(0xFFE65B43);
 
@@ -25,6 +26,12 @@ const kLabelStyle = TextStyle(
 
 const kLabelThinStyle = TextStyle(
     color: kTextFontColor,
+    fontFamily: 'Comfortaa',
+    fontSize: 16
+);
+
+const kLabelAppBarThinStyle = TextStyle(
+    color: Colors.white,
     fontFamily: 'Comfortaa',
     fontSize: 16
 );

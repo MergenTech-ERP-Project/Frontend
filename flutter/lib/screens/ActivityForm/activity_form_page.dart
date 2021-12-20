@@ -32,21 +32,13 @@ class _ActivityFormPageState extends State<ActivityFormPage> {
           return (Statics.instance.activityController.isLoading.value
               ? const CircularProgressIndicator()
               : Text(Statics.instance.userController
-                  .userList[Statics.instance.userId].name));
+                      .userList[Statics.instance.userId].name + "  " +
+                  Statics.instance.userController
+                      .userList[Statics.instance.userId].getDepartmant()));
         }),
         backgroundColor: kPrimaryColor,
         foregroundColor: Colors.white,
         centerTitle: true,
-        /*leading: Container(
-          color: kPrimaryColor,
-          child: InkWell(
-            child: Icon(Icons.menu, color: Colors.white),
-            onTap: () {
-              widget.hamburgerMenu = !widget.hamburgerMenu;
-            },
-          ),
-        ),*/
-        //hamburger menu
         actions: [
           IconButton(
             icon: const Icon(Icons.person),
@@ -56,20 +48,28 @@ class _ActivityFormPageState extends State<ActivityFormPage> {
           ),
         ],
       ),
-      drawer: Drawer(),
-      /*if(widget.hamburgerMenu) {
-                Drawer(
-                      child: Column(
-                        children: [
-                          Text("Well Hello"),
-                          Text("Well Hello"),
-                          Text("Well Hello"),
-                          Text("Well Hello"),
-                          Text("Well Hello"),
-                        ],
-                      ),
-                    );
-              }*/
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            buildListTile(
+              Icon(Icons.event_available_sharp),
+              "My Activities",
+            ),
+            buildListTile(
+              Icon(Icons.event_available_sharp),
+              "Seyahat Görevlendirme / Bildirim Formu",
+            ),
+            buildListTile(
+              Icon(Icons.event_available_sharp),
+              "İzin Talep Formu",
+            ),
+            buildListTile(
+              Icon(Icons.event_available_sharp),
+              "Mesai Dışı Faaliyet Günlük İzlem Formu",
+            ),
+          ],
+        ),
+      ),
       body: SafeArea(
         child: Center(child: Obx(() {
           return (Statics.instance.activityController.isLoading.value
@@ -97,6 +97,17 @@ class _ActivityFormPageState extends State<ActivityFormPage> {
         backgroundColor: kPrimaryColor,
         child: const Icon(Icons.add, color: Colors.white),
       ),
+    );
+  }
+
+  ListTile buildListTile(Icon icon, String text) {
+    return ListTile(
+      leading: icon,
+      title: Text(
+        text,
+        style: kLabelThinStyle,
+      ),
+      onTap: () {},
     );
   }
 
