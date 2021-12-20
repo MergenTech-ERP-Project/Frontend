@@ -8,7 +8,7 @@ class UserRemoteServices {
 
   static Future<List<User>?> fetchUsers() async {
     var response =
-        await http.get(Uri.parse('http://127.0.0.1:8080/user/users'));
+        await http.get(Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/user/users'));
     if (response.statusCode == 200) {
       var jsonString = response.body;
       return userFromJson(jsonString);
@@ -19,7 +19,7 @@ class UserRemoteServices {
 
   static Future<int> fetchUser(String name, String password) async {
     var response =
-        await http.get(Uri.parse('http://127.0.0.1:8080/user/users'));
+        await http.get(Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/user/users'));
     int userID = -1;
     if (response.statusCode == 200) {
       var jsonString = response.body;
@@ -40,7 +40,7 @@ class UserRemoteServices {
   static Future<String> postUser(String json) async {
     print("Json: $json");
     var response = await http
-        .post(Uri.parse('http://127.0.0.1:8080/user/post'),
+        .post(Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/user/post'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
