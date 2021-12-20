@@ -26,9 +26,9 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
 
   @override
   Widget build(BuildContext context) {
-    /*var arguments = ModalRoute.of(context)!.settings.arguments as Map;
-    activityId = arguments['activityId'];*/
-    activityId = 1;
+    var arguments = ModalRoute.of(context)!.settings.arguments as Map;
+    activityId = arguments['activityId'];
+    //activityId = 1;
     print("Activity ID : $activityId");
     activity = Statics.instance.activityController.activityList[activityId];
     user = Statics.instance.userController.userList[Statics.instance.userId];
