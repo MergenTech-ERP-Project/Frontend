@@ -25,7 +25,6 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    var ratio = MediaQuery.of(context).devicePixelRatio;
 
     return Scaffold(
       appBar: AppBar(
@@ -35,13 +34,8 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
       body: SafeArea(
         child: Center(
-          child: Container(
-            width: screenSize.width < 600 / ratio
-                ? screenSize.width * 0.5
-                : 500 / ratio,
-            height: screenSize.height < 800 / ratio
-                ? screenSize.height * 0.5
-                : 700 / ratio,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: screenSize.width / 4),
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
               child: Form(

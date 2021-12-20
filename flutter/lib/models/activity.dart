@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 List<Activity> activityFromJson(String str) =>
-    List<Activity>.from(json.decode(utf8.decode(utf8.encode(str))).map((x) => Activity.fromMap(x)));
+    List<Activity>.from(json.decode(str).map((x) => Activity.fromMap(x)));
 
 String activityToJson(List<Activity> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJsonWithId())));

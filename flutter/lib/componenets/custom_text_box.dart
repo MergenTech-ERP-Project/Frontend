@@ -2,22 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:vtys_kalite/utilities/constans.dart';
 
 class CustomTextBox extends StatefulWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String? Function(String?)? validator;
-  final String? title, label;
+  final String? title, label, hint;
   final Icon? decorationIcon;
-  final bool? obscureText;
+  final bool? obscureText, readOnly;
   final void Function(String)? onTextChanged;
 
   const CustomTextBox({
     Key? key,
     this.title,
     this.label,
+    this.hint,
     this.decorationIcon,
     this.obscureText = false,
+    this.readOnly = false,
     this.validator,
     this.onTextChanged,
-    required this.controller,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -43,13 +45,15 @@ class _CustomTextBoxState extends State<CustomTextBox> {
         const SizedBox(height: 10),
         TextFormField(
           controller: widget.controller,
+          readOnly: widget.readOnly!,
           validator: widget.validator,
           obscureText: confirmObscured,
           onChanged: widget.onTextChanged,
+          style: kTextThinStyle,
           decoration: InputDecoration(
             prefixIcon: widget.decorationIcon,
             suffixIcon:
-            widget.obscureText! ?
+            (widget.obscureText!) ?
             IconButton(
               onPressed: () {
                 setState(() {
@@ -59,6 +63,7 @@ class _CustomTextBoxState extends State<CustomTextBox> {
               icon: confirmObscured ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
             ) : const SizedBox(),
             labelText: widget.label,
+            hintText: widget.hint,
             border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.purple),
               borderRadius: BorderRadius.circular(20),
