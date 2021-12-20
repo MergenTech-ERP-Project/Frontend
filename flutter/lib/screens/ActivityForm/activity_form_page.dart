@@ -6,7 +6,6 @@ import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/models/activity_evaluation.dart';
 import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation_page.dart';
 import 'package:vtys_kalite/screens/ActivityForm/new_activity_page.dart';
-import 'package:vtys_kalite/screens/LoginPage/login_page.dart';
 import 'package:vtys_kalite/utilities/constans.dart';
 
 class ActivityFormPage extends StatefulWidget {
@@ -26,6 +25,7 @@ class _ActivityFormPageState extends State<ActivityFormPage> {
 
     print(
         "activityList Size ${Statics.instance.activityController.activityList.length}");
+    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Obx(() {
@@ -35,12 +35,17 @@ class _ActivityFormPageState extends State<ActivityFormPage> {
                   .userList[Statics.instance.userId].name));
         }),
         backgroundColor: kPrimaryColor,
-        foregroundColor: kSecondaryColor,
+        foregroundColor: Colors.white,
         centerTitle: true,
-        leading: Container(
-          child: const Icon(Icons.menu, color: kSecondaryColor),
+        /*leading: Container(
           color: kPrimaryColor,
-        ),
+          child: InkWell(
+            child: Icon(Icons.menu, color: Colors.white),
+            onTap: () {
+              widget.hamburgerMenu = !widget.hamburgerMenu;
+            },
+          ),
+        ),*/
         //hamburger menu
         actions: [
           IconButton(
@@ -51,18 +56,35 @@ class _ActivityFormPageState extends State<ActivityFormPage> {
           ),
         ],
       ),
+      drawer: Drawer(),
+      /*if(widget.hamburgerMenu) {
+                Drawer(
+                      child: Column(
+                        children: [
+                          Text("Well Hello"),
+                          Text("Well Hello"),
+                          Text("Well Hello"),
+                          Text("Well Hello"),
+                          Text("Well Hello"),
+                        ],
+                      ),
+                    );
+              }*/
       body: SafeArea(
         child: Center(child: Obx(() {
           return (Statics.instance.activityController.isLoading.value
               ? const CircularProgressIndicator()
               : Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 200),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: screenSize.width / 4),
                   child: ListView.builder(
                     itemCount:
                         Statics.instance.activityController.activityList.length,
                     itemBuilder: (context, index) {
-                      return buildActivityCard(index,
-                          Statics.instance.activityController.activityList[index]);
+                      return buildActivityCard(
+                          index,
+                          Statics
+                              .instance.activityController.activityList[index]);
                     },
                   ),
                 ));
@@ -73,7 +95,7 @@ class _ActivityFormPageState extends State<ActivityFormPage> {
           Navigator.pushNamed(context, NewActivityPage.routeName);
         },
         backgroundColor: kPrimaryColor,
-        child: const Icon(Icons.add, color: kSecondaryColor),
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
@@ -81,8 +103,11 @@ class _ActivityFormPageState extends State<ActivityFormPage> {
   Card buildActivityCard(int index, Activity activity) {
     for (ActivityEvaluation ae in Statics
         .instance.activityEvaluationController.activityEvaluationList) {
-      if (ae.userId == Statics.instance.userController.userList[Statics.instance.userId].id &&
-          ae.activityId == Statics.instance.activityController.activityList[index].id) {
+      if (ae.userId ==
+              Statics.instance.userController.userList[Statics.instance.userId]
+                  .id &&
+          ae.activityId ==
+              Statics.instance.activityController.activityList[index].id) {
         return Card(
           child: ListTile(
             title: Row(

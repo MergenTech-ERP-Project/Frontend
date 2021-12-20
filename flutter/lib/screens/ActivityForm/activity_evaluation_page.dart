@@ -7,10 +7,8 @@ import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/utilities/constans.dart';
 
 class ActivityEvaluationPage extends StatefulWidget {
-
   static String routeName = '/ActivityEvaluationPage';
 
-  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _evaluationController = TextEditingController();
 
   ActivityEvaluationPage({Key? key}) : super(key: key);
@@ -28,7 +26,7 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
   Widget build(BuildContext context) {
     var arguments = ModalRoute.of(context)!.settings.arguments as Map;
     activityId = arguments['activityId'];
-    //activityId = 1;
+
     print("Activity ID : $activityId");
     activity = Statics.instance.activityController.activityList[activityId];
     user = Statics.instance.userController.userList[Statics.instance.userId];
@@ -36,18 +34,18 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("title"),
+        title: Text(activity.name),
+        backgroundColor: kPrimaryColor,
+        foregroundColor: Colors.white,
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 16.0),
+            padding: const EdgeInsets.only(right: 16.0),
             child: Center(
               child: Container(
                 width: 250,
                 child: Text(
                   "Date : ${dateFormat.parse(activity.datetime).toString()}",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+                  style: kTextThinStyle,
                 ),
               ),
             ),
@@ -56,7 +54,7 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenSize.width / 3),
+          padding: EdgeInsets.symmetric(horizontal: screenSize.width / 4),
           child: Center(
             child: SingleChildScrollView(
               child: Column(
@@ -64,12 +62,14 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CustomTextBox(
-                    controller: widget._usernameController,
+                    readOnly: true,
                     title: "Username",
+                    hint: user.name,
                   ),
                   CustomTextBox(
-                    controller: widget._usernameController,
+                    readOnly: true,
                     title: "Organizer",
+                    hint: activity.organizator,
                   ),
                   Container(
                     height: 250,
@@ -88,10 +88,17 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   CustomButton(
                     title: "Save",
-                    pressAction: () {},
+                    pressAction: () {
+                      setState(() {
+                        Statics.instance.activityEvaluationController
+                            .postActivityEvaluation(
+                            activity.id, user.id, widget._evaluationController.text);
+                        Navigator.pop(context);
+                      });
+                    },
                   ),
                 ],
               ),
