@@ -4,7 +4,7 @@ import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
-import 'package:vtys_kalite/screens/ActivityForm/activity_form_page.dart';
+import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
 import 'package:vtys_kalite/screens/SignUp/sign_up.dart';
 import 'package:vtys_kalite/utilities/constans.dart';
 
@@ -60,16 +60,16 @@ class _LoginPageState extends State<LoginPage> {
   CustomButton loginButton(BuildContext context) {
     return CustomButton(
       title: "Login",
-      pressAction: () {
-        setState(() async {
-          int id = await Statics.instance.userController
-              .fetchUser(_usernameController.text, _passwordController.text);
+      pressAction: () async {
+        int id = await Statics.instance.userController
+          .fetchUser(_usernameController.text, _passwordController.text);
+        setState(() {
           if (id == -1) {
             return;
           } else {
             if (_loginKey.currentState!.validate()) {
               Statics.instance.userId = id;
-              Navigator.pushNamed(context, ActivityFormPage.routeName);
+              Navigator.pushNamed(context, MainFormPage.routeName);
             }
           }
         });
