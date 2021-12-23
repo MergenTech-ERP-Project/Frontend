@@ -10,7 +10,7 @@ import 'components/MainForm/main_form_body.dart';
 import 'components/MainForm/main_form_drawer.dart';
 
 class MainFormPage extends StatefulWidget {
-  static String routeName = '/ActivityFormPage';
+  static String routeName = '/MainFormPage';
 
   MainFormPage({Key? key}) : super(key: key);
   User user = Statics.instance.userController.userList[Statics.instance.userId];
@@ -21,12 +21,13 @@ class MainFormPage extends StatefulWidget {
 
 class _MainFormPageState extends State<MainFormPage> {
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     Statics.instance.userController.fetchUsers();
     Statics.instance.activityController.fetchActivities();
-
-    print(
-        "activityList Size ${Statics.instance.activityController.activityList.length}");
+  }
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainFormAppBar(user: widget.user),
       drawer: const MainFormDrawer(),

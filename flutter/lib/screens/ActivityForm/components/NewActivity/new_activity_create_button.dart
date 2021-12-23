@@ -3,13 +3,14 @@ import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/utilities/constans.dart';
 import '../../new_activity_page.dart';
+import 'new_activity_select_users_page.dart';
 
 class NewActivityCreateButton extends StatefulWidget {
-  final bool selectedUsersIsEmpty;
 
+  final NewActivitySelectUsersPage widget;
   const NewActivityCreateButton({
     Key? key,
-    required this.selectedUsersIsEmpty,
+    required this.widget,
   }) : super(key: key);
 
   @override
@@ -23,7 +24,7 @@ class _NewActivityCreateButtonState extends State<NewActivityCreateButton> {
       title: "Create",
       pressAction: () {
         setState(() {
-          if(widget.selectedUsersIsEmpty) {
+          if(widget.widget.selectedUsers.isNotEmpty) {
             var response = Statics.instance.activityController.postActivity(
                 NewActivityPage.nameController.text,
                 NewActivityPage.placeController.text,

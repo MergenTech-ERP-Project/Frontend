@@ -39,40 +39,35 @@ class _ListUsersState extends State<ListUsers> {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
-    return Container(
-      width: screenSize.width,
-      height: screenSize.height / 2,
-      child: Center(
-        child: Column(
-          children: [
-            const SizedBox(height: 10),
-            Row(
-              children: [
-                Expanded(flex: 2, child: searchUser()),
-                const SizedBox(width: 5),
-                Expanded(flex: 1, child: addAllButton()),
-                const SizedBox(width: 5),
-                Expanded(flex: 1, child: removeAllButton()),
-              ],
-            ),
-            widget.selectedUsers!.isEmpty
-                ? const SizedBox()
-                : CustomTextDivider(
-                    height: widget.containerHeight,
-                    text: "Selected User",
-                    thickness: 2,
-                  ),
-            SelectedUsersList(),
-            CustomTextDivider(
-              height: widget.containerHeight,
-              text: "Users",
-              thickness: 4,
-            ),
-            UsersList(),
-            const SizedBox(height: 50),
-          ],
-        ),
+    return Center(
+      child: Column(
+        children: [
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Expanded(flex: 2, child: searchUser()),
+              const SizedBox(width: 5),
+              Expanded(flex: 1, child: addAllButton()),
+              const SizedBox(width: 5),
+              Expanded(flex: 1, child: removeAllButton()),
+            ],
+          ),
+          widget.selectedUsers!.isEmpty
+              ? const SizedBox()
+              : CustomTextDivider(
+                  height: widget.containerHeight,
+                  text: "Selected User",
+                  thickness: 2,
+                ),
+          SelectedUsersList(),
+          CustomTextDivider(
+            height: widget.containerHeight,
+            text: "Users",
+            thickness: 4,
+          ),
+          UsersList(),
+          const SizedBox(height: 50),
+        ],
       ),
     );
   }

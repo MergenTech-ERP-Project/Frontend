@@ -48,7 +48,6 @@ class _NewActivityPageState extends State<NewActivityPage> {
                   controller: controller,
                 ),
                 NewActivitySelectUsersPage(
-                  selectedUsersisEmpty: widget.selectedUsers.isEmpty,
                   widget: widget,
                   controller: controller,
                 ),
