@@ -38,18 +38,15 @@ class _MainFormBodyState extends State<MainFormBody> {
                       future: Statics.instance.activityEvaluationController
                           .fetchActivityEvaluation(
                               Statics.instance.activityController
-                                  .activityList[index].id,
-                              widget.user.id),
+                                  .activityList[index].id, widget.user.id),
                       builder: (context, snap) {
-                        if (snap.hasData) {
-                          return buildActivityCard(
-                              index,
-                              Statics.instance.activityController
-                                  .activityList[index],
-                              snap.data as int);
-                        } else {
-                          return const SizedBox();
+                        Widget card = const SizedBox();
+                        if(snap.hasData) {
+                          card = buildActivityCard(
+                              index, Statics.instance.activityController
+                              .activityList[index], snap.data as int);
                         }
+                        return card;
                       },
                     );
                   },

@@ -60,48 +60,54 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CustomTextBox(
-                    readOnly: true,
-                    title: "Username",
-                    hint: user.name,
-                  ),
-                  CustomTextBox(
-                    readOnly: true,
-                    title: "Organizer",
-                    hint: activity.organizator,
-                  ),
-                  Container(
-                    height: 250,
-                    child: TextFormField(
-                      controller: widget._evaluationController,
-                      textAlign: TextAlign.start,
-                      maxLines: null,
-                      minLines: null,
-                      expands: true,
-                      decoration: InputDecoration(
-                        hintText:
-                            "Please, write your thoughts about the event here...",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                    ),
-                  ),
+                  buildReadOnlyCustomTextBox("Username",user.name,true),
+                  buildReadOnlyCustomTextBox("Organizer",activity.organizator,true),
+                  evaluationContainer(),
                   const SizedBox(height: 20),
-                  CustomButton(
-                    title: "Save",
-                    pressAction: () {
-                      setState(() {
-                        Statics.instance.activityEvaluationController
-                            .postActivityEvaluation(
-                            activity.id, user.id, widget._evaluationController.text);
-                        Navigator.pop(context);
-                      });
-                    },
-                  ),
+                  saveCustomButton(context),
                 ],
               ),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  CustomButton saveCustomButton(BuildContext context) {
+    return CustomButton(
+                  title: "Save",
+                  pressAction: () {
+                    setState(() {
+                      Statics.instance.activityEvaluationController
+                          .postActivityEvaluation(
+                          activity.id, user.id, widget._evaluationController.text);
+                      Navigator.pop(context);
+                    });
+                  },
+                );
+  }
+  CustomTextBox buildReadOnlyCustomTextBox
+      (String? title, String? hint, bool? readOnly) {
+    return CustomTextBox(
+      title: title,
+      hint: hint,
+      readOnly: readOnly,
+    );
+  }
+  Container evaluationContainer() {
+    return Container(
+      height: 200,
+      child: TextFormField(
+        controller: widget._evaluationController,
+        textAlign: TextAlign.start,
+        maxLines: null,
+        minLines: null,
+        expands: true,
+        decoration: InputDecoration(
+          hintText: "Please, write your thoughts about the event here...",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
           ),
         ),
       ),

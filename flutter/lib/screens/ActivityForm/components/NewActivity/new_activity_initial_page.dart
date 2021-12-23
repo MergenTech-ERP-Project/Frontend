@@ -1,6 +1,7 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/utilities/constans.dart';
 
@@ -21,6 +22,7 @@ class NewActivityInitialPage extends StatefulWidget {
 
 class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
   final newActivityKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -30,13 +32,13 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
           flex: 8,
           child: Form(
             key: newActivityKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  buildTextBox(
-                      NewActivityPage.nameController, 'Name', 'Name'),
+                  buildTextBox(NewActivityPage.nameController, 'Name', 'Name'),
                   buildTextBox(
                       NewActivityPage.placeController, 'Place', 'Place'),
                   buildDatePicker(NewActivityPage.dateTimeController),
@@ -55,7 +57,10 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
               const Expanded(flex: 1, child: Text("")),
               Expanded(
                 flex: 1,
-                child: NewActivityNextButton(controller: widget.controller),
+                child: NewActivityNextButton(
+                  controller: widget.controller,
+                  newActivityKey: newActivityKey,
+                ),
               ),
             ],
           ),
@@ -98,10 +103,17 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
               borderRadius: BorderRadius.circular(20),
             ),
           ),
+          validator: (val) {
+            if (!(DateTime.now().difference(dateTimeFormat.parse(val!)).isNegative) || val.isEmpty || val == "") {
+              return "Must Fill To Continue";
+            } else {
+              return null;
+            }
+          },
           onChanged: (value) {
-            if(value.isNotEmpty){
+            if (value.isNotEmpty) {
               setState(() {
-                NewActivityPage.date = value as DateTime;
+                NewActivityPage.date = dateTimeFormat.parse(value);
               });
             }
           },

@@ -8,6 +8,7 @@ class CustomTextBox extends StatefulWidget {
   final Icon? decorationIcon;
   final bool? obscureText, readOnly;
   final void Function(String)? onTextChanged;
+  final void Function(String?)? onSaved;
 
   const CustomTextBox({
     Key? key,
@@ -19,6 +20,7 @@ class CustomTextBox extends StatefulWidget {
     this.readOnly = false,
     this.validator,
     this.onTextChanged,
+    this.onSaved,
     this.controller,
   }) : super(key: key);
 
@@ -49,6 +51,7 @@ class _CustomTextBoxState extends State<CustomTextBox> {
           validator: widget.validator,
           obscureText: confirmObscured,
           onChanged: widget.onTextChanged,
+          onSaved: widget.onSaved,
           style: kTextThinStyle,
           decoration: InputDecoration(
             prefixIcon: widget.decorationIcon,
