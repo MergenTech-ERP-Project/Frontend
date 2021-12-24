@@ -7,8 +7,9 @@ class CustomTextBox extends StatefulWidget {
   final String? title, label, hint;
   final Icon? decorationIcon;
   final bool? obscureText, readOnly;
+  final bool? borderless;
   final void Function(String)? onTextChanged;
-  final void Function(String?)? onSaved;
+  final double customFontSize;
 
   const CustomTextBox({
     Key? key,
@@ -20,8 +21,9 @@ class CustomTextBox extends StatefulWidget {
     this.readOnly = false,
     this.validator,
     this.onTextChanged,
-    this.onSaved,
     this.controller,
+    this.borderless = false,
+    this.customFontSize = 16,
   }) : super(key: key);
 
   @override
@@ -30,20 +32,22 @@ class CustomTextBox extends StatefulWidget {
 
 class _CustomTextBoxState extends State<CustomTextBox> {
   bool confirmObscured = false;
+
   @override
   void initState() {
     confirmObscured = widget.obscureText!;
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        widget.title != null ?
-          Text(widget.title!, style: kLabelStyle)
-          : const SizedBox(height: 1),
+        widget.title != null
+            ? Text(widget.title!, style: kLabelStyle)
+            : const SizedBox(height: 1),
         const SizedBox(height: 10),
         TextFormField(
           controller: widget.controller,
@@ -51,26 +55,31 @@ class _CustomTextBoxState extends State<CustomTextBox> {
           validator: widget.validator,
           obscureText: confirmObscured,
           onChanged: widget.onTextChanged,
-          onSaved: widget.onSaved,
-          style: kTextThinStyle,
+          style: TextStyle(
+              color: kTextFontColor,
+              fontFamily: 'Comfortaa',
+              fontSize: widget.customFontSize,
+          ),
           decoration: InputDecoration(
             prefixIcon: widget.decorationIcon,
-            suffixIcon:
-            (widget.obscureText!) ?
-            IconButton(
+            suffixIcon: (widget.obscureText!)
+                ? IconButton(
               onPressed: () {
                 setState(() {
-                  confirmObscured =! confirmObscured;
+                  confirmObscured = !confirmObscured;
                 });
               },
-              icon: confirmObscured ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
-            ) : const SizedBox(),
+              icon: confirmObscured
+                  ? const Icon(Icons.visibility_off)
+                  : const Icon(Icons.visibility),
+            )
+                : const SizedBox(),
             labelText: widget.label,
             hintText: widget.hint,
-            border: OutlineInputBorder(
+            border: !widget.borderless! ? OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.purple),
               borderRadius: BorderRadius.circular(20),
-            ),
+            ) : null,
           ),
         ),
         const SizedBox(height: 20),
