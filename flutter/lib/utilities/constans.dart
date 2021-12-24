@@ -11,6 +11,8 @@ const Color kSecondaryColor = Color(0xFFC8E2E7);
 const Color kBackColor = Color(0xFF32322C);
 const Color kTextFontColor = Color(0xFF32322C);
 
+const List<String> kDepartmansList = ["Hiçbiri", "Yazılım", "Destek", "Yönetim"];
+
 
 const kHintTextStyle = TextStyle(
   color: Colors.white54,
