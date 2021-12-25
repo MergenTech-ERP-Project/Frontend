@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation_page.dart';
+import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/Forms/NonWorking_Activity_Daily_Inspection_Form/daily_inspection_form.dart';
+import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/Forms/PermissionRequestForm/permission_request_form.dart';
+import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/Forms/Travel_Assignment_Notification_Form/travel_assignment_notification_form.dart';
 import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
 import 'package:vtys_kalite/screens/ActivityForm/new_activity_page.dart';
-import 'package:vtys_kalite/screens/Forms/NonWorking_Activity_Daily_Inspection_Form/daily_inspection_form.dart';
-import 'package:vtys_kalite/screens/Forms/PermissionRequestForm/permission_request_form.dart';
-import 'package:vtys_kalite/screens/Forms/Travel_Assignment_Notification_Form/travel_assignment_notification_form.dart';
 import 'package:vtys_kalite/screens/SignUp/sign_up.dart';
 import 'package:vtys_kalite/screens/loginpage/login_page.dart';
 

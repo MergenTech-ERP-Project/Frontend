@@ -100,7 +100,7 @@ class _ListUsersState extends State<ListUsers> {
               );
   }
 
-  Obx SelectedUsersList() {
+  Widget SelectedUsersList() {
     return Obx(() {
       return widget.selectedUsers!.isEmpty
           ? const SizedBox()
@@ -127,29 +127,29 @@ class _ListUsersState extends State<ListUsers> {
   }
 
   Widget UsersList() {
-    return Obx(
-      () {
-        return (Statics.instance.userController.isLoading.value
-            ? const CircularProgressIndicator()
-            : widget.users.isNotEmpty
-                ? Expanded(
-                    child: ListView(
-                      children: <Widget>[
-                        for (var user in widget.users)
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                widget.selectedUsers!.add(user);
-                                widget.users.remove(user);
-                              });
-                            },
-                            child: TileUsername(user),
-                          )
-                      ],
-                    ),
+    return Expanded(
+      child: Obx(
+        () {
+          return (Statics.instance.userController.isLoading.value
+              ? const CircularProgressIndicator()
+              : widget.users.isNotEmpty
+                  ? ListView(
+                    children: <Widget>[
+                      for (var user in widget.users)
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              widget.selectedUsers!.add(user);
+                              widget.users.remove(user);
+                            });
+                          },
+                          child: TileUsername(user),
+                        )
+                    ],
                   )
-                : const SizedBox(height: 50));
-      },
+                  : const SizedBox(height: 50));
+        },
+      ),
     );
   }
 

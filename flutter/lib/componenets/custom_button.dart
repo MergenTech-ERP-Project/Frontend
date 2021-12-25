@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vtys_kalite/utilities/constans.dart';
+import 'package:vtys_kalite/utilities/constants.dart';
 
 class CustomButton extends StatefulWidget {
   final String title;
@@ -32,7 +32,6 @@ class _CustomButtonState extends State<CustomButton> {
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(widget.height! / 2),
             ),
-
           ),
         ),
         child: Text(widget.title),

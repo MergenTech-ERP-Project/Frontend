@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
+import 'package:vtys_kalite/controller/shared_preferences_controller.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
 import 'package:vtys_kalite/screens/SignUp/sign_up.dart';
-import 'package:vtys_kalite/utilities/constans.dart';
+import 'package:vtys_kalite/utilities/constants.dart';
 
 class LoginPage extends StatefulWidget {
   static String routeName = '/LoginPage';
@@ -30,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: const Text("Login Page"),
         backgroundColor: kPrimaryColor,
-        foregroundColor: kSecondaryColor,
+        foregroundColor: Colors.white,
       ),
       body: SafeArea(
         child: Center(
@@ -44,6 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     usernameTextBox(),
                     passwordTextBox(),
+                    const SizedBox(height: 10),
                     loginButton(context),
                     CustomTextDivider(text: "OR", thickness: 2),
                     signUpButton(context),
@@ -62,17 +64,18 @@ class _LoginPageState extends State<LoginPage> {
       title: "Login",
       pressAction: () async {
         int id = await Statics.instance.userController
-          .fetchUser(_usernameController.text, _passwordController.text);
+            .fetchUser(_usernameController.text, _passwordController.text);
         setState(() {
           if (id == -1) {
             return;
-          } else {
-            if (_loginKey.currentState!.validate()) {
-              Statics.instance.userId = id;
-              Navigator.pushNamed(context, MainFormPage.routeName);
-            }
+          }
+          if (_loginKey.currentState!.validate()) {
+            Statics.instance.userId = id;
+            Navigator.pushNamed(context, MainFormPage.routeName);
           }
         });
+        await SharedPreferencesController.setUserId(id);
+        print("shared preferences id: $id");
       },
     );
   }

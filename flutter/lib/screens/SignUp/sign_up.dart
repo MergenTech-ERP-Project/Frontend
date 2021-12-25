@@ -4,7 +4,7 @@ import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/models/user.dart';
-import 'package:vtys_kalite/utilities/constans.dart';
+import 'package:vtys_kalite/utilities/constants.dart';
 
 class SignUpPage extends StatefulWidget {
   static String routeName = '/SignUpPage';
@@ -30,7 +30,7 @@ class _SignUpPageState extends State<SignUpPage> {
       appBar: AppBar(
         title: const Text("Sign Up Page"),
         backgroundColor: kPrimaryColor,
-        foregroundColor: kSecondaryColor,
+        foregroundColor: Colors.white,
       ),
       body: SafeArea(
         child: Center(

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/activity.dart';
-import 'package:vtys_kalite/models/activity_evaluation.dart';
 import 'package:vtys_kalite/models/user.dart';
-import 'package:vtys_kalite/utilities/constans.dart';
+import 'package:vtys_kalite/utilities/constants.dart';
 
 import '../../activity_evaluation_page.dart';
+import '../../new_activity_page.dart';
 
 class MainFormBody extends StatefulWidget {
   User user;
@@ -28,31 +28,65 @@ class _MainFormBodyState extends State<MainFormBody> {
       child: Center(child: Obx(() {
         return (Statics.instance.activityController.isLoading.value
             ? const CircularProgressIndicator()
-            : Padding(
-                padding: EdgeInsets.symmetric(horizontal: screenSize.width / 4),
-                child: ListView.builder(
-                  itemCount:
-                      Statics.instance.activityController.activityList.length,
-                  itemBuilder: (context, index) {
-                    return FutureBuilder(
-                      future: Statics.instance.activityEvaluationController
-                          .fetchActivityEvaluation(
-                              Statics.instance.activityController
-                                  .activityList[index].id, widget.user.id),
-                      builder: (context, snap) {
-                        Widget card = const SizedBox();
-                        if(snap.hasData) {
-                          card = buildActivityCard(
-                              index, Statics.instance.activityController
-                              .activityList[index], snap.data as int);
-                        }
-                        return card;
-                      },
-                    );
-                  },
-                ),
+            : Flexible(
+                child: buildActivityCardList(screenSize.width / 4),
               ));
       })),
+    );
+  }
+
+  ListView buildActivityCardList(horizontalPadding) {
+    return ListView.builder(
+      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+      itemCount: Statics.instance.activityController.activityList.length + 1,
+      itemBuilder: (context, index) {
+        if (index == 0) {
+          return buildNewActivityButton(context);
+        }
+        return FutureBuilder(
+          future: Statics.instance.activityEvaluationController
+              .fetchActivityEvaluation(
+                  Statics
+                      .instance.activityController.activityList[index - 1].id,
+                  widget.user.id),
+          builder: (context, snap) {
+            Widget card = const SizedBox();
+            if (snap.hasData) {
+              card = buildActivityCard(
+                  index - 1,
+                  Statics.instance.activityController.activityList[index - 1],
+                  snap.data as int);
+            }
+            return card;
+          },
+        );
+      },
+    );
+  }
+
+  Container buildNewActivityButton(BuildContext context) {
+    return Container(
+      height: 150,
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: ElevatedButton(
+          onPressed: () {
+            setState(() {
+              Navigator.pushReplacementNamed(context, NewActivityPage.routeName);
+            });
+          },
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(kSecondaryColor),
+          ),
+          child: Row(
+            children: [
+              Icon(Icons.add, color: Colors.grey.shade700),
+              Text("  Add New Activity",
+                  style: TextStyle(color: Colors.grey.shade700)),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -88,7 +122,7 @@ class _MainFormBodyState extends State<MainFormBody> {
           setState(() {
             print("Main Form activityEvaluationId:$activityEvaluationId");
             if (activityEvaluationId == -1) {
-              Navigator.pushNamed(context, ActivityEvaluationPage.routeName,
+              Navigator.pushReplacementNamed(context, ActivityEvaluationPage.routeName,
                   arguments: {'activityId': index});
             }
           });

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:vtys_kalite/models/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/services/user_remote_services.dart';
 
@@ -41,7 +42,7 @@ class UserController extends GetxController {
   Future<String?> postUser(String name, String password) async {
     try {
       isLoading(true);
-      User newUser = User(id: 0,name: name, password: password, title: Departmans.none);
+      User newUser = User(id: 0,name: name, password: password, title: Departments.none);
       var response = await UserRemoteServices.postUser(json.encode(newUser.toJson()).toString());
       fetchUsers(); //userList.add(newUser);
       print("post User: " + response);
