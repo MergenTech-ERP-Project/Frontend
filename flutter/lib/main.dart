@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:vtys_kalite/controller/shared_preferences_controller.dart';
 import 'package:vtys_kalite/routes.dart';
-import 'package:vtys_kalite/screens/Forms/Travel_Assignment_Notification_Form/travel_assignment_notification_form.dart';
-import 'package:vtys_kalite/utilities/constans.dart';
+import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
+import 'package:vtys_kalite/screens/LoginPage/login_page.dart';
+import 'package:vtys_kalite/utilities/constants.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+import 'core/statics.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'VTYS Kalite',
-      theme: ThemeData(
-        primaryColor: kPrimaryColor,
-        backgroundColor: kBackColor,
-      ),
-      initialRoute: TravelAssignmentNotificationFormPage.routeName,
-      routes: routes,
-    );
+Future<void> main() async {
+  int? uid = await SharedPreferencesController.getUserId();
+  print("shared preferences id: $uid");
+  if (uid != null) {
+    Statics.instance.userId = uid;
   }
+  runApp(GetMaterialApp(
+    debugShowCheckedModeBanner: false,
+    title: 'VTYS Kalite',
+    theme: ThemeData(
+    primaryColor: kPrimaryColor,
+    backgroundColor: kBackColor,
+  ),
+    initialRoute: uid == null ? LoginPage.routeName : MainFormPage.routeName,
+    routes: routes,
+  ));
 }
-

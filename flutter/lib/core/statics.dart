@@ -11,7 +11,7 @@ class Statics {
     instance = this;
   }
 
-  int userId = 0;
+  int? userId = 0;
   UserController userController = Get.put(UserController());
   ActivityController activityController = Get.put(ActivityController());
   ActivityEvaluationController activityEvaluationController = Get.put(ActivityEvaluationController());

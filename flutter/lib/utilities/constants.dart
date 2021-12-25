@@ -7,7 +7,8 @@ const Color kColorGreen = Color(0xFF20E692);
 const Color kColorRed = Color(0xFFE65B43);
 
 const Color kPrimaryColor = Color(0xFF2BCCE6);
-const Color kSecondaryColor = Color(0xFFC8E2E7);
+const Color kSecondaryColor = Color(0xFFEFEFEF);
+const Color kTertiaryColor = Color(0xFF135B66);
 const Color kBackColor = Color(0xFF32322C);
 const Color kTextFontColor = Color(0xFF32322C);
 

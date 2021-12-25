@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/core/statics.dart';
-import 'package:vtys_kalite/utilities/constans.dart';
+import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
+import 'package:vtys_kalite/utilities/constants.dart';
 import '../../new_activity_page.dart';
 import 'new_activity_select_users_page.dart';
 
@@ -31,7 +32,7 @@ class _NewActivityCreateButtonState extends State<NewActivityCreateButton> {
                 dateTimeFormat.format(NewActivityPage.date).toString(),
                 NewActivityPage.organizatorController.text);
             print(response);
-            Navigator.pop(context);
+            Navigator.pushReplacementNamed(context, MainFormPage.routeName);
           }
         });
       },

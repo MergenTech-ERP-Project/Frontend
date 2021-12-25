@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vtys_kalite/utilities/constans.dart';
+import 'package:vtys_kalite/utilities/constants.dart';
 
 class CustomTextBox extends StatefulWidget {
   final TextEditingController? controller;

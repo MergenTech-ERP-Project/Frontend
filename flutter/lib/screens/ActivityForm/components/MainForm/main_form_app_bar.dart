@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/user.dart';
-import 'package:vtys_kalite/utilities/constans.dart';
+import 'package:vtys_kalite/utilities/constants.dart';
 
 class MainFormAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -20,7 +20,7 @@ class MainFormAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Obx(() {
         return (Statics.instance.activityController.isLoading.value
             ? const CircularProgressIndicator()
-            : Text(user.name + "  " + user.getDepartmant()));
+            : Text(user.name + "  " + user.getDepartment()));
       }),
       backgroundColor: kPrimaryColor,
       foregroundColor: Colors.white,

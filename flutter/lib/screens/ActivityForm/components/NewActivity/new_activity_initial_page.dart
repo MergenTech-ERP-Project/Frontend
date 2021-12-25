@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/utilities/constans.dart';
+import 'package:vtys_kalite/utilities/constants.dart';
 
 import '../../new_activity_page.dart';
 import 'new_activity_next_button.dart';
@@ -94,7 +94,9 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
         const SizedBox(height: 10),
         DateTimePicker(
           type: DateTimePickerType.dateTime,
-          initialDate: NewActivityPage.date,
+          initialDate: DateTime.now(),
+          initialValue: dateTimeFormat.format(DateTime.now()),
+          autovalidate: true,
           firstDate: DateTime.now(),
           lastDate: DateTime.now().add(const Duration(days: 365)),
           decoration: InputDecoration(
@@ -104,18 +106,18 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
             ),
           ),
           validator: (val) {
-            if (!(DateTime.now().difference(dateTimeFormat.parse(val!)).isNegative) || val.isEmpty || val == "") {
+            if (val == null || val == "") {
               return "Must Fill To Continue";
             } else {
               return null;
             }
           },
           onChanged: (value) {
-            if (value.isNotEmpty) {
-              setState(() {
+            setState(() {
+              if (value.isNotEmpty && value != "") {
                 NewActivityPage.date = dateTimeFormat.parse(value);
-              });
-            }
+              }
+            });
           },
         ),
       ],
