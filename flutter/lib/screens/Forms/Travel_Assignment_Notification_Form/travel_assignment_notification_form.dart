@@ -7,6 +7,20 @@ class TravelAssignmentNotificationFormPage extends StatefulWidget {
   static String routeName = '/TravelAssignmentNotificationFormPage';
 
   final TextEditingController usernameController = TextEditingController();
+  final TextEditingController destinationCityController = TextEditingController();
+  final TextEditingController travelStartDateController = TextEditingController();
+  final TextEditingController outbondTransportController = TextEditingController();
+  final TextEditingController companyInstitutionFormController = TextEditingController();
+  final TextEditingController companyVehiclePlakeController = TextEditingController();
+  final TextEditingController ApproximatelytravelReturnDateController = TextEditingController();
+  final TextEditingController AboutReturnDayController = TextEditingController();
+  final TextEditingController FirstDateController = TextEditingController();
+  final TextEditingController FirstAmountController = TextEditingController();
+  final TextEditingController SecondDateController = TextEditingController();
+  final TextEditingController SecondAmountController = TextEditingController();
+  final TextEditingController travelReturnDateController = TextEditingController();
+  final TextEditingController returnTransportVehicleController = TextEditingController();
+  final TextEditingController spentDayController = TextEditingController();
 
   TravelAssignmentNotificationFormPage({Key? key}) : super(key: key);
 
@@ -46,7 +60,7 @@ class _TravelAssignmentNotificationFormPageState
                 CustomTextBox(
                   borderless: true,
                   title: "Gidilen Şehir",
-                  controller: widget.usernameController,
+                  controller: widget.destinationCityController,
                   customFontSize: 20,
                 ),
                 const SizedBox(height: 20),
@@ -56,7 +70,7 @@ class _TravelAssignmentNotificationFormPageState
                       child: CustomTextBox(
                         borderless: false,
                         title: "Seyahat Başlangıç Tarihi",
-                        controller: widget.usernameController,
+                        controller: widget.travelStartDateController,
                         customFontSize: 20,
                       ),
                     ),
@@ -65,7 +79,7 @@ class _TravelAssignmentNotificationFormPageState
                       child: CustomTextBox(
                         borderless: true,
                         title: "Gidiş Ulaşım Aracı",
-                        controller: widget.usernameController,
+                        controller: widget.outbondTransportController,
                         customFontSize: 20,
                       ),
                     ),
@@ -79,7 +93,7 @@ class _TravelAssignmentNotificationFormPageState
                 CustomTextBox(
                   borderless: true,
                   title: "Gidilen Firma / Kurum Adı",
-                  controller: widget.usernameController,
+                  controller: widget.companyInstitutionFormController,
                   customFontSize: 20,
                 ),
                 const SizedBox(height: 20),
@@ -89,7 +103,7 @@ class _TravelAssignmentNotificationFormPageState
                       child: CustomTextBox(
                         borderless: false,
                         title: "Şirket Aracı Alınacak İse Aracın Plakası",
-                        controller: widget.usernameController,
+                        controller: widget.companyVehiclePlakeController,
                         customFontSize: 20,
                       ),
                     ),
@@ -98,7 +112,7 @@ class _TravelAssignmentNotificationFormPageState
                       child: CustomTextBox(
                         borderless: true,
                         title: "Muhtemel Seyahat Dönüş Tarihi",
-                        controller: widget.usernameController,
+                        controller: widget.ApproximatelytravelReturnDateController,
                         customFontSize: 20,
                       ),
                     ),
@@ -107,7 +121,7 @@ class _TravelAssignmentNotificationFormPageState
                       child: CustomTextBox(
                         borderless: true,
                         title: "Yaklaşık (Gün Olarak)",
-                        controller: widget.usernameController,
+                        controller: widget.AboutReturnDayController,
                         customFontSize: 20,
                       ),
                     ),
@@ -121,7 +135,7 @@ class _TravelAssignmentNotificationFormPageState
               list: reasonOfGoing,
               groupValue: selectedReasonOfGoing,
             ),
-            //Eğer hiçbiri olursa bir customBox açılmasını istiyorum.
+            //Eğer hiçbiri olursa bir customBox açılmasını istiyorum.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             const Text("Alınan Avanslar",
                 style: kLabelStyle, textAlign: TextAlign.center),
             Row(
@@ -130,7 +144,7 @@ class _TravelAssignmentNotificationFormPageState
                   child: CustomTextBox(
                     borderless: false,
                     title: "Tarih",
-                    controller: widget.usernameController,
+                    controller: widget.FirstDateController,
                     customFontSize: 20,
                   ),
                 ),
@@ -139,7 +153,7 @@ class _TravelAssignmentNotificationFormPageState
                   child: CustomTextBox(
                     borderless: true,
                     title: "Tutar ( TL )",
-                    controller: widget.usernameController,
+                    controller: widget.FirstAmountController,
                     customFontSize: 20,
                   ),
                 ),
@@ -148,7 +162,7 @@ class _TravelAssignmentNotificationFormPageState
                   child: CustomTextBox(
                     borderless: false,
                     title: "Tarih",
-                    controller: widget.usernameController,
+                    controller: widget.SecondDateController,
                     customFontSize: 20,
                   ),
                 ),
@@ -157,7 +171,7 @@ class _TravelAssignmentNotificationFormPageState
                   child: CustomTextBox(
                     borderless: true,
                     title: "Tutar",
-                    controller: widget.usernameController,
+                    controller: widget.SecondAmountController,
                     customFontSize: 20,
                   ),
                 ),
@@ -181,7 +195,7 @@ class _TravelAssignmentNotificationFormPageState
                   child: CustomTextBox(
                     borderless: false,
                     title: "Seyahat Dönüş Tarihi",
-                    controller: widget.usernameController,
+                    controller: widget.travelReturnDateController,
                     customFontSize: 20,
                   ),
                 ),
@@ -190,7 +204,7 @@ class _TravelAssignmentNotificationFormPageState
                   child: CustomTextBox(
                     borderless: true,
                     title: "Dönüş Ulacım Aracı",
-                    controller: widget.usernameController,
+                    controller: widget.returnTransportVehicleController,
                     customFontSize: 20,
                   ),
                 ),
@@ -199,7 +213,7 @@ class _TravelAssignmentNotificationFormPageState
                   child: CustomTextBox(
                     borderless: true,
                     title: "Kalış Süresi (gün)",
-                    controller: widget.usernameController,
+                    controller: widget.spentDayController,
                     customFontSize: 20,
                   ),
                 ),
