@@ -5,19 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="621a9722-6f93-414e-8473-056cbe77f9ae" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flutter/lib/componenets/custom_dropdownitems.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flutter/lib/componenets/custom_radiolisttile.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flutter/lib/screens/Forms/NonWorkingActivityDailyInspectionForm/daily_inspection_form.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flutter/lib/screens/Forms/PermissionRequestForm/permission_request_form.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/VTYS-Kalite.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/VTYS-Kalite.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter/lib/screens/Forms/Travel_Assignment_Notification_Form/travel_assignment_notification_form.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/componenets/custom_text_box.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/componenets/custom_text_box.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flutter/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flutter/lib/routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/routes.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/utilities/constans.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/utilities/constans.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/Forms/NonWorkingActivityDailyInspectionForm/daily_inspection_form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/Forms/NonWorking_Activity_Daily_Inspection_Form/daily_inspection_form.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +39,6 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="show.migrate.to.gradle.popup" value="false" />
