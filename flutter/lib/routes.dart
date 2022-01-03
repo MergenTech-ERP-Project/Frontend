@@ -5,10 +5,12 @@ import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/Forms/Permi
 import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/Forms/Travel_Assignment_Notification_Form/travel_assignment_notification_form.dart';
 import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
 import 'package:vtys_kalite/screens/ActivityForm/new_activity_page.dart';
+import 'package:vtys_kalite/screens/AdminPage/admin_page.dart';
 import 'package:vtys_kalite/screens/SignUp/sign_up.dart';
 import 'package:vtys_kalite/screens/loginpage/login_page.dart';
 
 final Map<String, WidgetBuilder> routes = {
+  AdminPage.routeName: (context) => AdminPage(),
   LoginPage.routeName: (context) => LoginPage(),
   SignUpPage.routeName: (context) => SignUpPage(),
   MainFormPage.routeName: (context) =>  MainFormPage(),
