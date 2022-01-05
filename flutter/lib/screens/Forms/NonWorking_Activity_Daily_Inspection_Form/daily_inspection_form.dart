@@ -37,6 +37,21 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
           vertical: 50,
         ),
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              const Text(""),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text(
+                  "Export PDF",
+                  style: kLabelStyle,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
           CustomTextBox(
             borderless: true,
             title: "Username",

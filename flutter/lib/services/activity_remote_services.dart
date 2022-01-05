@@ -25,6 +25,25 @@ class ActivityRemoteServices {
     }
   }
 
+  static Future<List<Activity>?> fetchActivitiesByUser(int userId) async {
+    var response = await http.get(
+      Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/activity/activities'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
+        //'Authorization': '<Your token>'
+      },
+    );
+    print("fetchActivities response ${response.statusCode}");
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+      print("JSON : $jsonString");
+      return activityFromJson(jsonString);
+    } else {
+      return null;
+    }
+  }
+
   static Future<int> fetchActivity(String name, String organizator) async {
     var response = await http.get(
       Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/activity/activities'),
@@ -87,7 +106,6 @@ class ActivityRemoteServices {
   }
 
   static Future<String> deleteActivity(int id) async {
-    print("Json: $json");
     var response = await http
         .delete(Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/activity/delete/$id'),
             headers: <String, String>{

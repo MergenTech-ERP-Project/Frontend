@@ -27,10 +27,12 @@ class _NewActivityCreateButtonState extends State<NewActivityCreateButton> {
         setState(() {
           if(widget.widget.selectedUsers.isNotEmpty) {
             var response = Statics.instance.activityController.postActivity(
-                NewActivityPage.nameController.text,
-                NewActivityPage.placeController.text,
-                dateTimeFormat.format(NewActivityPage.date).toString(),
-                NewActivityPage.organizatorController.text);
+              NewActivityPage.nameController.text,
+              NewActivityPage.placeController.text,
+              dateTimeFormat.format(NewActivityPage.date).toString(),
+              NewActivityPage.organizatorController.text,
+              widget.widget.selectedUsers
+            );
             print(response);
             Navigator.pushReplacementNamed(context, MainFormPage.routeName);
           }
