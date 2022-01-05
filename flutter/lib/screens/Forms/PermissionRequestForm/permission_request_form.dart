@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
@@ -8,13 +9,12 @@ import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/user.dart';
-import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/main_form_app_bar.dart';
-import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/main_form_drawer.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
 class PermissionRequestFormPage extends StatefulWidget {
   static String routeName = '/PermissionRequestFormPage';
-  User user = Statics.instance.userController.userList[Statics.instance.userId!];
+  User user =
+      Statics.instance.userController.userList[Statics.instance.userId!];
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController departmantController = TextEditingController();
@@ -55,10 +55,23 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
     return Center(
       child: ListView(
         padding: EdgeInsets.symmetric(
-            horizontal: screenSize.width / 4,
-            vertical: 50
-        ),
+            horizontal: screenSize.width / 4, vertical: 50),
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              const Text(""),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text(
+                  "Export PDF",
+                  style: kLabelStyle,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
           CustomTextBox(
             borderless: true,
             title: "Username",
@@ -76,25 +89,38 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
             icon: Icon(Icons.arrow_drop_down),
           ),
           const SizedBox(height: 10),
-          CustomTextDivider(height: 40,thickness: 2,text: "İZİN TÜRÜ",style: kLabelStyle),
+          CustomTextDivider(
+              height: 40, thickness: 2, text: "İZİN TÜRÜ", style: kLabelStyle),
           MultipleChoiceRadioListTile(
             list: permissionType,
             groupValue: selectedPermissionType,
           ),
           const SizedBox(height: 10),
-          CustomTextDivider(height: 40,thickness: 2,text: "İdari İzin Nedeni", style: kLabelStyle),
+          CustomTextDivider(
+              height: 40,
+              thickness: 2,
+              text: "İdari İzin Nedeni",
+              style: kLabelStyle),
           CustomTextBox(
             borderless: true,
             customFontSize: 20,
           ),
           const SizedBox(height: 10),
-          CustomTextDivider(height: 40,thickness: 2,text: "Yıllık izin ise, Hakediş Tarihi", style: kLabelStyle),
+          CustomTextDivider(
+              height: 40,
+              thickness: 2,
+              text: "Yıllık izin ise, Hakediş Tarihi",
+              style: kLabelStyle),
           MultipleChoiceRadioListTile(
             list: vestingDate,
             groupValue: selectedVestingDate,
           ),
           const SizedBox(height: 10),
-          CustomTextDivider(height: 40,thickness: 2,text: "Mevcut İzin Gün Sayısı", style: kLabelStyle),
+          CustomTextDivider(
+              height: 40,
+              thickness: 2,
+              text: "Mevcut İzin Gün Sayısı",
+              style: kLabelStyle),
           MultipleChoiceRadioListTile(
             list: permissionDateTime,
             groupValue: selectedPermissionDateTime,
@@ -102,13 +128,20 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
           const SizedBox(height: 10),
           Row(
             children: const [
-              Expanded(flex: 6,child: CustomTextBox(title: "İzin Başlangıç Tarihi")),
-              Expanded(flex: 1,child: Text("")),
-              Expanded(flex: 6,child: CustomTextBox(title: "İzin Bitiş Tarihi")),
+              Expanded(
+                  flex: 6,
+                  child: CustomTextBox(title: "İzin Başlangıç Tarihi")),
+              Expanded(flex: 1, child: Text("")),
+              Expanded(
+                  flex: 6, child: CustomTextBox(title: "İzin Bitiş Tarihi")),
             ],
           ),
           const SizedBox(height: 10),
-          CustomTextDivider(height: 40,thickness: 2,text: "İzinli Gün Sayısı", style: kLabelStyle),
+          CustomTextDivider(
+              height: 40,
+              thickness: 2,
+              text: "İzinli Gün Sayısı",
+              style: kLabelStyle),
           CustomTextBox(
             customFontSize: 20,
           ),

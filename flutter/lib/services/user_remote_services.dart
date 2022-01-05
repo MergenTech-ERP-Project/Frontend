@@ -31,7 +31,6 @@ class UserRemoteServices {
           break;
         }
       }
-      //print(userFromJson(jsonString)[userID].name);
       print(userID);
     }
     return userID;

@@ -1,7 +1,10 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:vtys_kalite/models/active_to_user.dart';
 import 'package:vtys_kalite/models/activity.dart';
+import 'package:vtys_kalite/models/user.dart';
+import 'package:vtys_kalite/services/active_to_user_remote_services.dart';
 import 'package:vtys_kalite/services/activity_remote_services.dart';
 
 class ActivityController extends GetxController {
@@ -48,7 +51,7 @@ class ActivityController extends GetxController {
     }
   }
 
-  Future<String?> postActivity(String name, String place, String datetime, String organizator) async {
+  Future<String?> postActivity(String name, String place, String datetime, String organizator, List<User> selectedUsers) async {
     try {
       isLoading(true);
       var response = await ActivityRemoteServices.postActivity(json.encode(Activity(
@@ -60,6 +63,14 @@ class ActivityController extends GetxController {
       ).toJson()).toString());
       print("post Activity: " + response);
       fetchActivities();
+      int activityId = await ActivityRemoteServices.fetchActivity(name, organizator);
+      for(User user in selectedUsers){
+        await ActiveToUserRemoteServices.postActiveToUser(json.encode(ActiveToUser(
+          id: 0,
+          activityId: activityId,
+          userId: user.id,
+        ).toJson()).toString());
+      }
       return response;
     } finally {
       isLoading(false);

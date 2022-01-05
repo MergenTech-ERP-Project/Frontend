@@ -24,19 +24,24 @@ class MainFormDrawer extends StatelessWidget {
               () => ToPage(0),
             ),
             buildListTile(
-              const Icon(Icons.event_available_sharp),
-              "Seyahat Görevlendirme / Bildirim Formu",
+              const Icon(Icons.admin_panel_settings_rounded),
+              "Admin Panel",
               () => ToPage(1),
             ),
             buildListTile(
               const Icon(Icons.event_available_sharp),
-              "İzin Talep Formu",
+              "Seyahat Görevlendirme / Bildirim Formu",
               () => ToPage(2),
             ),
             buildListTile(
               const Icon(Icons.event_available_sharp),
-              "Mesai Dışı Faaliyet Günlük İzlem Formu",
+              "İzin Talep Formu",
               () => ToPage(3),
+            ),
+            buildListTile(
+              const Icon(Icons.event_available_sharp),
+              "Mesai Dışı Faaliyet Günlük İzlem Formu",
+              () => ToPage(4),
             ),
           ],
         ),
@@ -53,7 +58,8 @@ class MainFormDrawer extends StatelessWidget {
   }
 
   void ToPage(int index) {
-    controller.animateToPage(index, duration: const Duration(milliseconds: 400), curve: Curves.bounceInOut);
+    controller.animateToPage(index,
+        duration: const Duration(milliseconds: 400), curve: Curves.bounceInOut);
     Future.delayed(const Duration(milliseconds: 100), () {
       scaffoldKey.currentState!.openEndDrawer();
     });

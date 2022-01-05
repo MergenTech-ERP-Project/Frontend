@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
-import 'package:vtys_kalite/controller/shared_preferences_controller.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/user.dart';
-import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/Forms/NonWorking_Activity_Daily_Inspection_Form/daily_inspection_form.dart';
-import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/Forms/PermissionRequestForm/permission_request_form.dart';
-import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/Forms/Travel_Assignment_Notification_Form/travel_assignment_notification_form.dart';
+import 'package:vtys_kalite/screens/AdminPanel/admin_panel.dart';
+import 'package:vtys_kalite/screens/Forms/NonWorking_Activity_Daily_Inspection_Form/daily_inspection_form.dart';
+import 'package:vtys_kalite/screens/Forms/PermissionRequestForm/permission_request_form.dart';
+import 'package:vtys_kalite/screens/Forms/Travel_Assignment_Notification_Form/travel_assignment_notification_form.dart';
 
 import 'components/MainForm/main_form_app_bar.dart';
 import 'components/MainForm/main_form_body.dart';
@@ -52,6 +52,7 @@ class _MainFormPageState extends State<MainFormPage> {
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
                   MainFormBody(user: user),
+                  AdminPanelPage(),
                   TravelAssignmentNotificationFormPage(),
                   PermissionRequestFormPage(),
                   DailyInspectionFormPage(),
