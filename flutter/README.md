@@ -10,4 +10,4 @@ Yahya Bekir Canevi
 
 Fatih Hevesli
 
-İrem Aydoğan
+Ceyhun Ozkan

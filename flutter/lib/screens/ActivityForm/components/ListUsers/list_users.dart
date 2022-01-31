@@ -6,6 +6,7 @@ import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/user.dart';
+import 'package:vtys_kalite/utilities/constants.dart';
 
 class ListUsers extends StatefulWidget {
   static String routeName = '/ListUsersPage';
@@ -19,7 +20,7 @@ class ListUsers extends StatefulWidget {
 
   final TextEditingController _searchController = TextEditingController();
   List<User> users = <User>[].obs;
-  double containerHeight = 50;
+  double containerHeight = 60;
 
   @override
   _ListUsersState createState() => _ListUsersState();
@@ -52,14 +53,20 @@ class _ListUsersState extends State<ListUsers> {
               Expanded(flex: 1, child: removeAllButton()),
             ],
           ),
+          CustomTextDivider(
+            height: widget.containerHeight,
+            text: "Selected User",
+            thickness: 2,
+          ),
           widget.selectedUsers!.isEmpty
-              ? const SizedBox()
-              : CustomTextDivider(
-                  height: widget.containerHeight,
-                  text: "Selected User",
-                  thickness: 2,
-                ),
-          SelectedUsersList(),
+              ? Column(
+                children: const [
+                  SizedBox(height: 10),
+                  Text("No Selected Users", style: kLabelThinStyle),
+                  SizedBox(height: 10),
+                ],
+              )
+              : SelectedUsersList(),
           CustomTextDivider(
             height: widget.containerHeight,
             text: "Users",
@@ -117,7 +124,7 @@ class _ListUsersState extends State<ListUsers> {
                             widget.users.add(user);
                           });
                         },
-                        child: TileUsername(user),
+                        child: TileUsername(user, Icons.remove),
                       )
                   ],
                 ),
@@ -143,7 +150,7 @@ class _ListUsersState extends State<ListUsers> {
                               widget.users.remove(user);
                             });
                           },
-                          child: TileUsername(user),
+                          child: TileUsername(user, Icons.add),
                         )
                     ],
                   )
@@ -153,15 +160,20 @@ class _ListUsersState extends State<ListUsers> {
     );
   }
 
-  Container TileUsername(User user) {
+  Container TileUsername(User user, IconData icon) {
     return Container(
       height: widget.containerHeight,
       child: Padding(
         padding: EdgeInsets.only(
-            top: (widget.containerHeight / 2 - 10),
-            bottom: (widget.containerHeight / 2 - 10),
+            top: (widget.containerHeight / 16),
             left: (widget.containerHeight)),
-        child: Text(user.name),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(user.name, style: kLabelThinStyle2),
+            Icon(icon),
+          ],
+        ),
       ),
     );
   }

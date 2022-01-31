@@ -57,20 +57,6 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
         padding: EdgeInsets.symmetric(
             horizontal: screenSize.width / 4, vertical: 50),
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              const Text(""),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text(
-                  "Export PDF",
-                  style: kLabelStyle,
-                ),
-              ),
-            ],
-          ),
           const SizedBox(height: 20),
           CustomTextBox(
             borderless: true,

@@ -37,20 +37,6 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
           vertical: 50,
         ),
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              const Text(""),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text(
-                  "Export PDF",
-                  style: kLabelStyle,
-                ),
-              ),
-            ],
-          ),
           const SizedBox(height: 20),
           CustomTextBox(
             borderless: true,
@@ -88,10 +74,7 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
             controller: widget.departmantController,
             customFontSize: 20,
           ),
-          SizedBox(height: 10),
-          Text("Buraya bir şeyler eklenebilir bilmiyorum anlamadım\n"
-              "multinet felan yazıyor formda beraber bakalım"),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           CustomButton(
             title: "Kaydet",
             pressAction: () {},

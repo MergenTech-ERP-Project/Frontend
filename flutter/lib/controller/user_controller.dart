@@ -51,4 +51,29 @@ class UserController extends GetxController {
       isLoading(false);
     }
   }
+  Future<String?> putUser(int id, User user) async {
+    try {
+      isLoading(true);
+      print(id);
+      var response = await UserRemoteServices.putUser(id, json.encode(user.toJsonWithId()).toString());
+      fetchUsers(); //userList.add(newUser);
+      print("put User: " + response);
+      return response;
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<String?> deleteUser(int id) async {
+    try {
+      isLoading(true);
+      print(id);
+      var response = await UserRemoteServices.deleteUser(id);
+      fetchUsers(); //userList.add(newUser);
+      print("delete User: " + response);
+      return response;
+    } finally {
+      isLoading(false);
+    }
+  }
 }

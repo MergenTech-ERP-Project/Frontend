@@ -33,6 +33,12 @@ const kLabelThinStyle = TextStyle(
     fontSize: 16
 );
 
+const kLabelThinStyle2 = TextStyle(
+    color: kTextFontColor,
+    fontFamily: 'Comfortaa',
+    fontSize: 20
+);
+
 const kLabelAppBarThinStyle = TextStyle(
     color: Colors.white,
     fontFamily: 'Comfortaa',
@@ -50,6 +56,13 @@ const kLabelHeaderStyle = TextStyle(
     fontWeight: FontWeight.bold,
     fontFamily: 'Comfortaa',
     fontSize: 36
+);
+
+const kLabelHeader2Style = TextStyle(
+    color: kTextFontColor,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Comfortaa',
+    fontSize: 24
 );
 
 final kBoxDecorationStyle = BoxDecoration(
