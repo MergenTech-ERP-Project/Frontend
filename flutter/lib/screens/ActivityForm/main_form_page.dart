@@ -18,20 +18,19 @@ class MainFormPage extends StatefulWidget {
   MainFormPage({Key? key}) : super(key: key);
   final PageController controller = PageController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  User user = User();
 
   @override
   State<MainFormPage> createState() => _MainFormPageState();
 }
 
 class _MainFormPageState extends State<MainFormPage> {
-  User user = User();
-
   @override
   Widget build(BuildContext context) {
     Statics.instance.userController.fetchUsers();
     Statics.instance.activityController.fetchActivities();
     return Obx(() {
-      user = Statics.instance.userController.userList[Statics.instance.userId!];
+      widget.user = Statics.instance.userController.userList[Statics.instance.userId!];
       return Statics.instance.userController.isLoading.value
           ? const Center(
               child: SizedBox(
@@ -42,7 +41,7 @@ class _MainFormPageState extends State<MainFormPage> {
             )
           : Scaffold(
               key: widget._scaffoldKey,
-              appBar: MainFormAppBar(user: user),
+              appBar: MainFormAppBar(user: widget.user),
               drawer: MainFormDrawer(
                   scaffoldKey: widget._scaffoldKey,
                   controller: widget.controller),
@@ -51,7 +50,7 @@ class _MainFormPageState extends State<MainFormPage> {
                 scrollDirection: Axis.vertical,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  MainFormBody(user: user),
+                  MainFormBody(user: widget.user),
                   AdminPanelPage(),
                   TravelAssignmentNotificationFormPage(),
                   PermissionRequestFormPage(),

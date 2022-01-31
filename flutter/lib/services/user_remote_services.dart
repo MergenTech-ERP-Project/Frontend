@@ -54,4 +54,40 @@ class UserRemoteServices {
         ? "Success: User"
         : "Error: User ${response.statusCode}";
   }
+
+  static Future<String> putUser(int id, String json) async {
+    print("Json: $json");
+    var response = await http
+        .put(Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/user/put/$id'),
+            headers: <String, String>{
+              'Content-type': 'application/json',
+              'Accept': 'application/json',
+              //'Authorization': '<Your token>'
+            },
+            body: json,
+            encoding: encoding)
+        .timeout(
+          const Duration(seconds: 10),
+        );
+    return response.statusCode == 200
+        ? "Success: User"
+        : "Error: User ${response.statusCode}";
+  }
+
+  static Future<String> deleteUser(int id) async {
+    var response = await http
+        .delete(Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/user/delete/$id'),
+        headers: <String, String>{
+          'Content-type': 'application/json',
+          'Accept': 'application/json',
+          //'Authorization': '<Your token>'
+        },
+        encoding: encoding)
+        .timeout(
+      const Duration(seconds: 10),
+    );
+    return response.statusCode == 200
+        ? "Success: User"
+        : "Error: User ${response.statusCode}";
+  }
 }

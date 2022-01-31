@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_radiolisttile.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
@@ -42,20 +43,6 @@ class _TravelAssignmentNotificationFormPageState
         padding: EdgeInsets.symmetric(
             horizontal: screenSize.width / 4, vertical: 50),
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              const Text(""),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text(
-                  "Export PDF",
-                  style: kLabelStyle,
-                ),
-              ),
-            ],
-          ),
           const SizedBox(height: 20),
           CustomTextBox(
             borderless: true,
@@ -230,6 +217,11 @@ class _TravelAssignmentNotificationFormPageState
                 ),
               ),
             ],
+          ),
+          const SizedBox(height: 30),
+          CustomButton(
+            title: "Kaydet",
+            pressAction: () {},
           ),
         ],
       ),
