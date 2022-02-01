@@ -56,30 +56,32 @@ class _CustomTextBoxState extends State<CustomTextBox> {
           obscureText: confirmObscured,
           onChanged: widget.onTextChanged,
           style: TextStyle(
-              color: kTextFontColor,
-              fontFamily: 'Comfortaa',
-              fontSize: widget.customFontSize,
+            color: kTextFontColor,
+            fontFamily: 'Comfortaa',
+            fontSize: widget.customFontSize,
           ),
           decoration: InputDecoration(
             prefixIcon: widget.decorationIcon,
             suffixIcon: (widget.obscureText!)
                 ? IconButton(
-              onPressed: () {
-                setState(() {
-                  confirmObscured = !confirmObscured;
-                });
-              },
-              icon: confirmObscured
-                  ? const Icon(Icons.visibility_off)
-                  : const Icon(Icons.visibility),
-            )
+                    onPressed: () {
+                      setState(() {
+                        confirmObscured = !confirmObscured;
+                      });
+                    },
+                    icon: confirmObscured
+                        ? const Icon(Icons.visibility_off)
+                        : const Icon(Icons.visibility),
+                  )
                 : const SizedBox(),
             labelText: widget.label,
             hintText: widget.hint,
-            border: !widget.borderless! ? OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.purple),
-              borderRadius: BorderRadius.circular(20),
-            ) : null,
+            border: !widget.borderless!
+                ? OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.purple),
+                    borderRadius: BorderRadius.circular(20),
+                  )
+                : null,
           ),
         ),
         const SizedBox(height: 20),

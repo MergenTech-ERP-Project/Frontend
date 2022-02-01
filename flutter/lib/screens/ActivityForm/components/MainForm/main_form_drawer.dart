@@ -43,6 +43,14 @@ class MainFormDrawer extends StatelessWidget {
               "Mesai Dışı Faaliyet Günlük İzlem Formu",
               () => ToPage(4),
             ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: buildListTile(
+                const Icon(Icons.settings),
+                "Settings",
+                    () => ToPage(5),
+              ),
+            ),
           ],
         ),
       ),

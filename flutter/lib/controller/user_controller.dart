@@ -16,16 +16,16 @@ class UserController extends GetxController {
   }
 
   void fetchUsers() async {
-    try {
-      isLoading(true);
-      var users = await UserRemoteServices.fetchUsers();
-      if (users != null) {
-        userList.removeRange(0, userList.length); //-1 belki
-        userList.assignAll(users);
+      try {
+        isLoading(true);
+        var users = await UserRemoteServices.fetchUsers();
+        if (users != null) {
+          userList.removeRange(0, userList.length); //-1 belki
+          userList.assignAll(users);
+        }
+      } finally {
+        isLoading(false);
       }
-    } finally {
-      isLoading(false);
-    }
   }
 
   Future<int> fetchUser(String name, String password) async {

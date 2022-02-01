@@ -1,6 +1,7 @@
 import 'dart:html';
 import 'dart:typed_data';
 
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
@@ -8,6 +9,7 @@ import 'package:vtys_kalite/componenets/custom_radiolisttile.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/core/statics.dart';
+import 'package:vtys_kalite/models/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
@@ -25,6 +27,8 @@ class PermissionRequestFormPage extends StatefulWidget {
   _PermissionRequestFormPageState createState() =>
       _PermissionRequestFormPageState();
 }
+
+int userTitleIndex = 0;
 
 class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
   List<String> permissionType = [
@@ -48,10 +52,14 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
   int? selectedVestingDate = 0;
   int? selectedPermissionDateTime = 0;
 
+  List<String> titlesDepartmant = [];
+
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-
+    for (var departmant in Departments.values) {
+      titlesDepartmant.add(EnumToString.convertToString(departmant));
+    }
     return Center(
       child: ListView(
         padding: EdgeInsets.symmetric(
@@ -67,8 +75,8 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
           ),
           const SizedBox(height: 10),
           const Text("Department", style: kLabelStyle),
-          const MultipleChoiceCustomDropDownItems(
-            list: kDepartmansList,
+          MultipleChoiceCustomDropDownItems(
+            list: titlesDepartmant,
             isExpandedYes: true,
             text: 'Select Department',
             iconSize: 20,
@@ -87,7 +95,7 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
               thickness: 2,
               text: "İdari İzin Nedeni",
               style: kLabelStyle),
-          CustomTextBox(
+          const CustomTextBox(
             borderless: true,
             customFontSize: 20,
           ),
@@ -128,7 +136,7 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
               thickness: 2,
               text: "İzinli Gün Sayısı",
               style: kLabelStyle),
-          CustomTextBox(
+          const CustomTextBox(
             customFontSize: 20,
           ),
           const SizedBox(height: 30),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
+import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/departments_enum.dart';
@@ -23,11 +24,11 @@ class AdminPanelPage extends StatefulWidget {
 int userTitleIndex = 0;
 
 class _AdminPanelPageState extends State<AdminPanelPage> {
-  List<String> titles = [];
+  List<String> titlesDepartmant = [];
   @override
   Widget build(BuildContext context) {
     for (var departmant in Departments.values) {
-      titles.add(EnumToString.convertToString(departmant));
+      titlesDepartmant.add(EnumToString.convertToString(departmant));
     }
     var screenSize = MediaQuery.of(context).size;
     return Center(
@@ -80,7 +81,6 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
                 content: Builder(
                   builder: (context) {
                     var width = MediaQuery.of(context).size.width;
-
                     return SizedBox(
                       width: width - 400,
                       height: 200,
@@ -99,7 +99,13 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
                             ),
                           ),
                           const SizedBox(height: 10),
-                          dropdownListBuilder(),
+                          MultipleChoiceCustomDropDownItems(
+                            list: titlesDepartmant,
+                            isExpandedYes: true,
+                            text: 'Select Department',
+                            iconSize: 20,
+                            icon: Icon(Icons.arrow_drop_down),
+                          ),
                           const SizedBox(height: 30),
                           Row(
                             children: [
@@ -164,35 +170,6 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
               password: widget.users[index - 1].password
             ));
       },
-    );
-  }
-
-  Center dropdownListBuilder() {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        child: Expanded(
-          child: DropdownButtonFormField<String>(
-            value: titles[userTitleIndex],
-            items: titles.map((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-            onChanged: (String? newValue) {
-              setState(() {
-                userTitleIndex = titles.indexOf(newValue!);
-              });
-            },
-            onSaved: (String? newValue) {
-              setState(() {
-                userTitleIndex = titles.indexOf(newValue!);
-              });
-            },
-          ),
-        ),
-      ),
     );
   }
 }

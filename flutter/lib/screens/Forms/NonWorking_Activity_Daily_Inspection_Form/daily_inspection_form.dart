@@ -1,8 +1,10 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_radiolisttile.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/models/departments_enum.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
 class DailyInspectionFormPage extends StatefulWidget {
@@ -27,8 +29,15 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
   ];
   int? selectedOutofHoursWorkPlace = 0;
 
+  List<String> titlesDepartmant = [];
+
   @override
   Widget build(BuildContext context) {
+
+    for (var departmant in Departments.values) {
+      titlesDepartmant.add(EnumToString.convertToString(departmant));
+    }
+
     var screenSize = MediaQuery.of(context).size;
     return Center(
       child: ListView(
@@ -45,8 +54,8 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
             customFontSize: 20,
           ),
           SizedBox(height: 10),
-          const MultipleChoiceCustomDropDownItems(
-            list: kDepartmansList,
+          MultipleChoiceCustomDropDownItems(
+            list: titlesDepartmant,
             isExpandedYes: true,
             text: 'Select Departmant',
             iconSize: 20,
