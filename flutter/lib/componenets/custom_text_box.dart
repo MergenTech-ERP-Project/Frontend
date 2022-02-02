@@ -10,6 +10,7 @@ class CustomTextBox extends StatefulWidget {
   final bool? borderless;
   final void Function(String)? onTextChanged;
   final double customFontSize;
+  final Color fillcolor;
 
   const CustomTextBox({
     Key? key,
@@ -24,6 +25,7 @@ class CustomTextBox extends StatefulWidget {
     this.controller,
     this.borderless = false,
     this.customFontSize = 16,
+    this.fillcolor = Colors.white,
   }) : super(key: key);
 
   @override
@@ -61,6 +63,8 @@ class _CustomTextBoxState extends State<CustomTextBox> {
             fontSize: widget.customFontSize,
           ),
           decoration: InputDecoration(
+            filled: true,
+            fillColor: widget.fillcolor,
             prefixIcon: widget.decorationIcon,
             suffixIcon: (widget.obscureText!)
                 ? IconButton(
