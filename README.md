@@ -1,1 +1,3 @@
-# VTYS-Kalite
+# Mergen Yazılım - ERP Projesi
+
+@ozturkomerfaruk
