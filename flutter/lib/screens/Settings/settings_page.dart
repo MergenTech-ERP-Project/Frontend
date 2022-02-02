@@ -26,7 +26,7 @@ class _SettingsPageState extends State<SettingsPage> {
             tabs: [
               Tab(
                 icon: Icon(Icons.home),
-                text: 'Referanslar Özet Ekran Tasarımı',
+                text: 'Seçmeli Şirket Tanımları',
               ),
               Tab(
                 icon: Icon(Icons.directions_bike),
@@ -39,7 +39,7 @@ class _SettingsPageState extends State<SettingsPage> {
           child: TabBarView(
             children: [
               ReferencesPage(),
-              Center(child: Text("Page 2"))
+              const Center(child: Text("Page 2"))
             ],
           )
         ),

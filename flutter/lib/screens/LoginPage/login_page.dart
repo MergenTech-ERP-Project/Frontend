@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
-import 'package:vtys_kalite/controller/shared_preferences_controller.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
+import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
 import 'package:vtys_kalite/screens/SignUp/sign_up.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
@@ -66,17 +67,22 @@ class _LoginPageState extends State<LoginPage> {
       pressAction: () async {
         int id = await Statics.instance.userController
             .fetchUser(_usernameController.text, _passwordController.text);
-        setState(() {
+        setState(() async {
           if (id == -1) {
+            showDialog(
+                context: context,
+                builder: (_) =>
+                const SimpleDialog(title: Text("Wrong Username Or Password!"))
+            );
             return;
           }
           if (_loginKey.currentState!.validate()) {
             Statics.instance.userId = id;
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.setString("username", _usernameController.text);
             Navigator.pushNamed(context, MainFormPage.routeName);
           }
         });
-        await SharedPreferencesController.setUserId(id);
-        print("shared preferences id: $id");
       },
     );
   }

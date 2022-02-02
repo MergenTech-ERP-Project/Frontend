@@ -60,10 +60,10 @@ class _ReferencesPageState extends State<ReferencesPage> {
                         borderless: true,
                         hint: "Birim adı giriniz",
                         decorationIcon: Icon(Icons.search),
-                        fillcolor: Colors.blueGrey,
+                        fillcolor: Colors.white60,
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(4.0),
                         child: Card(
                           elevation: 10,
                           child: Column(
@@ -89,7 +89,6 @@ class _ReferencesPageState extends State<ReferencesPage> {
                     ],
                   ),
                 ),
-
               ],
             ),
           ),

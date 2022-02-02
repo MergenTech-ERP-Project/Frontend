@@ -104,7 +104,10 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
                             isExpandedYes: true,
                             text: 'Select Department',
                             iconSize: 20,
-                            icon: Icon(Icons.arrow_drop_down),
+                            icon: const Icon(Icons.arrow_drop_down),
+                            onChanged: (val) {
+                              userTitleIndex = titlesDepartmant.indexOf(val);
+                            },
                           ),
                           const SizedBox(height: 30),
                           Row(

@@ -60,6 +60,7 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
             text: 'Select Departmant',
             iconSize: 20,
             icon: Icon(Icons.arrow_drop_down),
+            onChanged: (val){},
           ),
           SizedBox(height: 10),
           CustomTextBox(title: "Mesai Dışı Çalışma Tarihi"),

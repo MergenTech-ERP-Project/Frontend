@@ -81,6 +81,7 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
             text: 'Select Department',
             iconSize: 20,
             icon: Icon(Icons.arrow_drop_down),
+            onChanged: (val){},
           ),
           const SizedBox(height: 10),
           CustomTextDivider(

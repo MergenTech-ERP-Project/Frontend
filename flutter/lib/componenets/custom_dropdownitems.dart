@@ -6,8 +6,8 @@ class MultipleChoiceCustomDropDownItems extends StatefulWidget {
   final String text;
   final Icon icon;
   final double iconSize;
-
   final bool isExpandedYes;
+  final ValueChanged<String> onChanged;
 
   MultipleChoiceCustomDropDownItems({
     Key? key,
@@ -16,6 +16,7 @@ class MultipleChoiceCustomDropDownItems extends StatefulWidget {
     required this.text,
     required this.iconSize,
     required this.isExpandedYes,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -38,6 +39,7 @@ class _MultipleChoiceCustomDropDownItemsState
       onChanged: (val) {
         setState(() {
           valueChoose = val.toString();
+          widget.onChanged(val.toString());
         });
       },
       items: widget.list
