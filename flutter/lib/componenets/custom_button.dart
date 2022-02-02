@@ -5,10 +5,12 @@ class CustomButton extends StatefulWidget {
   final String title;
   final Function()? pressAction;
   final double? height;
+  final IconData? icon;
 
   const CustomButton({
     Key? key,
     this.pressAction,
+    this.icon,
     this.height = 40,
     required this.title,
   }) : super(key: key);
@@ -34,7 +36,20 @@ class _CustomButtonState extends State<CustomButton> {
             ),
           ),
         ),
-        child: Text(widget.title),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if(widget.icon != null)
+              Icon(
+                widget.icon,
+                size: 20,
+              ),
+            Text(
+              (widget.icon != null ? "  " : "") + widget.title,
+              style: kLabelAppBarThinStyle,
+            ),
+          ],
+        ),
       ),
     );
   }

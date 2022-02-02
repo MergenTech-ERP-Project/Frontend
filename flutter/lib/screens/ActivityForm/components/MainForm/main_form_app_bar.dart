@@ -24,6 +24,7 @@ class MainFormAppBar extends StatelessWidget implements PreferredSizeWidget {
       }),
       backgroundColor: kPrimaryColor,
       foregroundColor: Colors.white,
+      automaticallyImplyLeading: true,
       centerTitle: true,
       actions: [
         IconButton(

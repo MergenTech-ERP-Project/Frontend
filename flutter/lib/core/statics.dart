@@ -1,8 +1,12 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vtys_kalite/controller/activity_controller.dart';
 import 'package:vtys_kalite/controller/activity_evaluation_controller.dart';
 import 'package:vtys_kalite/controller/user_controller.dart';
+import 'package:vtys_kalite/models/departments_enum.dart';
+import 'package:vtys_kalite/models/user.dart';
 
 class Statics {
   //Singleton
@@ -10,8 +14,27 @@ class Statics {
   Statics._internal(){
     instance = this;
   }
-
-  int? userId = 0;
+  User get getUser {
+    if(_user == null){
+      Statics.instance.userController.userList.forEach((e) {
+        if(e.name == username){
+          _user = e;
+        }
+      });
+    }
+    return _user!;
+  }
+  void setUserName(String name) {
+    _user!.name = name;
+  }
+  void setUserTitle(Departments title) {
+    _user!.title = title;
+  }
+  void setUser(User? user){
+    _user = user;
+  }
+  String? username;
+  User? _user;
   UserController userController = Get.put(UserController());
   ActivityController activityController = Get.put(ActivityController());
   ActivityEvaluationController activityEvaluationController = Get.put(ActivityEvaluationController());

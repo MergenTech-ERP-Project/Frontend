@@ -8,10 +8,10 @@ String activityToJson(List<Activity> data) =>
 
 class Activity {
   final int id;
-  final String name;
-  final String place;
-  final String datetime;
-  final String organizator;
+  String name;
+  String place;
+  String datetime;
+  String organizator;
 
   Activity({
     required this.id,

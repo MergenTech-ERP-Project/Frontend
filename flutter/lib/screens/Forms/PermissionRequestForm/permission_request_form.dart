@@ -15,8 +15,7 @@ import 'package:vtys_kalite/utilities/constants.dart';
 
 class PermissionRequestFormPage extends StatefulWidget {
   static String routeName = '/PermissionRequestFormPage';
-  User user =
-      Statics.instance.userController.userList[Statics.instance.userId!];
+  User user = Statics.instance.getUser;
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController departmantController = TextEditingController();

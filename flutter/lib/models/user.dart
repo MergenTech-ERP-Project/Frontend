@@ -12,9 +12,9 @@ String userToJson(List<User> data) =>
 
 class User {
   final int id;
-  final String name;
-  final Departments title;
-  final String password;
+  String name;
+  Departments title;
+  String password;
 
   User({
     this.id = 0,

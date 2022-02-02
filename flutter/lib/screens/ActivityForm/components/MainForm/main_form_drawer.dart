@@ -24,31 +24,26 @@ class MainFormDrawer extends StatelessWidget {
               () => ToPage(0),
             ),
             buildListTile(
-              const Icon(Icons.admin_panel_settings_rounded),
-              "Admin Panel",
+              const Icon(Icons.event_available_sharp),
+              "Seyahat Görevlendirme / Bildirim Formu",
               () => ToPage(1),
             ),
             buildListTile(
               const Icon(Icons.event_available_sharp),
-              "Seyahat Görevlendirme / Bildirim Formu",
+              "İzin Talep Formu",
               () => ToPage(2),
             ),
             buildListTile(
               const Icon(Icons.event_available_sharp),
-              "İzin Talep Formu",
-              () => ToPage(3),
-            ),
-            buildListTile(
-              const Icon(Icons.event_available_sharp),
               "Mesai Dışı Faaliyet Günlük İzlem Formu",
-              () => ToPage(4),
+              () => ToPage(3),
             ),
             Align(
               alignment: Alignment.bottomLeft,
               child: buildListTile(
                 const Icon(Icons.settings),
                 "Settings",
-                    () => ToPage(5),
+                    () => ToPage(4),
               ),
             ),
           ],
