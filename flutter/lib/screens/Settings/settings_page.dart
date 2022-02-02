@@ -35,7 +35,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ),
         ),
-        body: const SafeArea(
+        body: SafeArea(
           child: TabBarView(
             children: [
               ReferencesPage(),
