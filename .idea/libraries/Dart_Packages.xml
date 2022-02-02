@@ -271,28 +271,28 @@
         <entry key="shared_preferences">
           <value>
             <list>
-              <option value="D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-2.0.11/lib" />
+              <option value="D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-2.0.12/lib" />
             </list>
           </value>
         </entry>
         <entry key="shared_preferences_android">
           <value>
             <list>
-              <option value="D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_android-2.0.9/lib" />
+              <option value="D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_android-2.0.10/lib" />
             </list>
           </value>
         </entry>
         <entry key="shared_preferences_ios">
           <value>
             <list>
-              <option value="D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_ios-2.0.8/lib" />
+              <option value="D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_ios-2.0.9/lib" />
             </list>
           </value>
         </entry>
         <entry key="shared_preferences_linux">
           <value>
             <list>
-              <option value="D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_linux-2.0.3/lib" />
+              <option value="D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_linux-2.0.4/lib" />
             </list>
           </value>
         </entry>
@@ -313,14 +313,14 @@
         <entry key="shared_preferences_web">
           <value>
             <list>
-              <option value="D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_web-2.0.2/lib" />
+              <option value="D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_web-2.0.3/lib" />
             </list>
           </value>
         </entry>
         <entry key="shared_preferences_windows">
           <value>
             <list>
-              <option value="D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_windows-2.0.3/lib" />
+              <option value="D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_windows-2.0.4/lib" />
             </list>
           </value>
         </entry>
@@ -439,14 +439,14 @@
       <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/platform-3.1.0/lib" />
       <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-2.0.2/lib" />
       <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/process-4.2.4/lib" />
-      <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-2.0.11/lib" />
-      <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_android-2.0.9/lib" />
-      <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_ios-2.0.8/lib" />
-      <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_linux-2.0.3/lib" />
+      <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-2.0.12/lib" />
+      <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_android-2.0.10/lib" />
+      <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_ios-2.0.9/lib" />
+      <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_linux-2.0.4/lib" />
       <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_macos-2.0.2/lib" />
       <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_platform_interface-2.0.0/lib" />
-      <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_web-2.0.2/lib" />
-      <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_windows-2.0.3/lib" />
+      <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_web-2.0.3/lib" />
+      <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_windows-2.0.4/lib" />
       <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/source_span-1.8.1/lib" />
       <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/stack_trace-1.10.0/lib" />
       <root url="file://D:/Flutter/src/flutter/.pub-cache/hosted/pub.dartlang.org/stream_channel-2.1.0/lib" />

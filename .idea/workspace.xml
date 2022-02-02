@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="621a9722-6f93-414e-8473-056cbe77f9ae" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/componenets/custom_text_box.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/componenets/custom_text_box.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flutter/lib/screens/Settings/ReferencesPage/references_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/Settings/ReferencesPage/references_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/Settings/settings_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/Settings/settings_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +44,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="dart.settings" />
