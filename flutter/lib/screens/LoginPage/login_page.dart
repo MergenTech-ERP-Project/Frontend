@@ -67,22 +67,21 @@ class _LoginPageState extends State<LoginPage> {
       pressAction: () async {
         int id = await Statics.instance.userController
             .fetchUser(_usernameController.text, _passwordController.text);
-        setState(() async {
-          if (id == -1) {
-            showDialog(
-                context: context,
-                builder: (_) =>
-                const SimpleDialog(title: Text("Wrong Username Or Password!"))
-            );
-            return;
-          }
-          if (_loginKey.currentState!.validate()) {
-            Statics.instance.userId = id;
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-            prefs.setString("username", _usernameController.text);
-            Navigator.pushNamed(context, MainFormPage.routeName);
-          }
-        });
+        if (id == -1) {
+          showDialog(
+              context: context,
+              builder: (_) =>
+              const SimpleDialog(title: Text("Wrong Username Or Password!"))
+          );
+          return;
+        }
+        if (_loginKey.currentState!.validate()) {
+          Statics.instance.setUser(null);
+          Statics.instance.username = _usernameController.text;
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString("username", _usernameController.text);
+          Navigator.pushNamed(context, MainFormPage.routeName);
+        }
       },
     );
   }

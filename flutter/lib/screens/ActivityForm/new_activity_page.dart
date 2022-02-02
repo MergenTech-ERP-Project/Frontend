@@ -14,7 +14,7 @@ class NewActivityPage extends StatefulWidget {
   NewActivityPage({Key? key}) : super(key: key);
 
   List<User> selectedUsers = <User>[].obs;
-  User user = Statics.instance.userController.userList[Statics.instance.userId!];
+  User user = Statics.instance.getUser;
 
   static TextEditingController nameController = TextEditingController();
   static TextEditingController placeController = TextEditingController();

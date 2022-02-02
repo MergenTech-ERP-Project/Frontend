@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
+import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/models/user.dart';
+import 'package:vtys_kalite/screens/AdminPanel/admin_panel.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
 import '../../activity_evaluation_page.dart';
@@ -23,21 +25,45 @@ class MainFormBody extends StatefulWidget {
 class _MainFormBodyState extends State<MainFormBody> {
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
     return SafeArea(
       child: Center(child: Obx(() {
         return (Statics.instance.activityController.isLoading.value
             ? const CircularProgressIndicator()
-            : Flexible(
-                child: buildActivityCardList(screenSize.width / 4),
+            : Row(
+                children: [
+                  const Expanded(
+                    flex: 1,
+                    child: SizedBox(),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: buildActivityCardList(),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: CustomButton(
+                          title: 'Admin Panel',
+                          icon: Icons.admin_panel_settings,
+                          pressAction: () {
+                            Navigator.pushNamed(
+                                context, AdminPanelPage.routeName);
+                          },
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ));
       })),
     );
   }
 
-  ListView buildActivityCardList(horizontalPadding) {
+  ListView buildActivityCardList() {
     return ListView.builder(
-      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
       itemCount: Statics.instance.activityController.activityList.length + 1,
       itemBuilder: (context, index) {
         if (index == 0) {
@@ -66,23 +92,31 @@ class _MainFormBodyState extends State<MainFormBody> {
 
   Container buildNewActivityButton(BuildContext context) {
     return Container(
-      height: 150,
+      height: 120,
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: ElevatedButton(
           onPressed: () {
             setState(() {
-              Navigator.pushReplacementNamed(context, NewActivityPage.routeName);
+              Navigator.pushReplacementNamed(
+                  context, NewActivityPage.routeName);
             });
           },
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(kSecondaryColor),
           ),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.add, color: Colors.grey.shade700),
-              Text("  Add New Activity",
-                  style: TextStyle(color: Colors.grey.shade700)),
+              Icon(
+                Icons.add,
+                color: Colors.grey.shade700,
+                size: 22,
+              ),
+              Text(
+                "  Add New Activity",
+                style: TextStyle(color: Colors.grey.shade700, fontSize: 18),
+              ),
             ],
           ),
         ),
@@ -122,7 +156,8 @@ class _MainFormBodyState extends State<MainFormBody> {
           setState(() {
             print("Main Form activityEvaluationId:$activityEvaluationId");
             if (activityEvaluationId == -1) {
-              Navigator.pushReplacementNamed(context, ActivityEvaluationPage.routeName,
+              Navigator.pushReplacementNamed(
+                  context, ActivityEvaluationPage.routeName,
                   arguments: {'activityId': index});
             }
           });

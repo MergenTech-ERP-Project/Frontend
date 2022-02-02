@@ -33,7 +33,7 @@ class _MainFormPageState extends State<MainFormPage> {
     return Obx(() {
       if(Statics.instance.userController.userList.isNotEmpty)
       {
-        widget.user = Statics.instance.userController.userList[Statics.instance.userId!];
+        widget.user = Statics.instance.getUser;
       }
       return Statics.instance.userController.isLoading.value
           ? const Center(
@@ -55,7 +55,6 @@ class _MainFormPageState extends State<MainFormPage> {
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
                   MainFormBody(user: widget.user),
-                  AdminPanelPage(),
                   TravelAssignmentNotificationFormPage(),
                   PermissionRequestFormPage(),
                   DailyInspectionFormPage(),

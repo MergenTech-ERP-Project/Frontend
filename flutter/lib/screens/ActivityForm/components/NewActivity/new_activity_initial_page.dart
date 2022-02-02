@@ -1,8 +1,8 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
 import '../../new_activity_page.dart';
@@ -53,7 +53,15 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
           flex: 1,
           child: Row(
             children: [
-              const Expanded(flex: 1, child: Text("")),
+              Expanded(
+                flex: 1,
+                child: CustomButton(
+                    title: "Cancel",
+                    pressAction: () {
+                      Navigator.pushReplacementNamed(
+                          context, MainFormPage.routeName);
+                    }),
+              ),
               const Expanded(flex: 1, child: Text("")),
               Expanded(
                 flex: 1,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class MultipleChoiceCustomDropDownItems extends StatefulWidget {
   final List<String> list;
-
   final String text;
   final Icon icon;
   final double iconSize;
