@@ -31,7 +31,10 @@ class _MainFormPageState extends State<MainFormPage> {
     Statics.instance.userController.fetchUsers();
     Statics.instance.activityController.fetchActivities();
     return Obx(() {
-      widget.user = Statics.instance.userController.userList[Statics.instance.userId!];
+      if(Statics.instance.userController.userList.isNotEmpty)
+      {
+        widget.user = Statics.instance.userController.userList[Statics.instance.userId!];
+      }
       return Statics.instance.userController.isLoading.value
           ? const Center(
               child: SizedBox(
