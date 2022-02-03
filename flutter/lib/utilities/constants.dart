@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-DateFormat dateTimeFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+DateFormat dateTimeFormat = DateFormat("yyyy-MM-dd HH:mm");
 
 const Color kColorGreen = Color(0xFF20E692);
 const Color kColorRed = Color(0xFFE65B43);

@@ -18,7 +18,6 @@ class NewActivityPage extends StatefulWidget {
 
   static TextEditingController nameController = TextEditingController();
   static TextEditingController placeController = TextEditingController();
-  static TextEditingController dateTimeController = TextEditingController();
   static TextEditingController organizatorController = TextEditingController();
 
   static DateTime date = DateTime.now();
@@ -56,7 +55,6 @@ class _NewActivityPageState extends State<NewActivityPage> {
           ),
         ),
       ),
-      //floatingActionButton:
     );
   }
 }

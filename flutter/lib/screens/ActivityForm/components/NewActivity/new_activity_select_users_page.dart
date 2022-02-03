@@ -37,12 +37,12 @@ class _NewActivitySelectUsersPageState
           child: Row(
             children: [
               Expanded(
-                  flex: 1,
+                  flex: 2,
                   child: NewActivityPreviousButton(
                       controller: widget.controller)),
               const Expanded(flex: 1, child: Text("")),
               Expanded(
-                flex: 1,
+                flex: 2,
                 child: NewActivityCreateButton(
                   widget: widget,
                 ),
