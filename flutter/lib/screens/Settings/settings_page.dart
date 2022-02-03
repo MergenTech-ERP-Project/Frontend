@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/screens/Settings/AddNewEmployee/add_new_employee.dart';
 
-import 'ReferencesPage/references_page.dart';
+import 'OptionalCompanyDescriptions/optional_company_descriptions.dart';
 
 class SettingsPage extends StatefulWidget {
   static String routeName = '/SettingsPage';
@@ -29,8 +30,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 text: 'Seçmeli Şirket Tanımları',
               ),
               Tab(
-                icon: Icon(Icons.directions_bike),
-                text: 'Test 2',
+                icon: Icon(Icons.person_add),
+                text: 'Yeni Bir Çalışan Ekleyin',
               ),
             ],
           ),
@@ -38,8 +39,8 @@ class _SettingsPageState extends State<SettingsPage> {
         body: SafeArea(
           child: TabBarView(
             children: [
-              ReferencesPage(),
-              const Center(child: Text("Page 2"))
+              OptionalCompanyDescriptions(),
+              AddNewEmployee(),
             ],
           )
         ),
