@@ -66,13 +66,13 @@ class _ListUsersState extends State<ListUsers> {
                   SizedBox(height: 10),
                 ],
               )
-              : SelectedUsersList(),
+              : selectedUsersList(),
           CustomTextDivider(
             height: widget.containerHeight,
             text: "Users",
             thickness: 4,
           ),
-          UsersList(),
+          usersList(),
           const SizedBox(height: 50),
         ],
       ),
@@ -107,7 +107,7 @@ class _ListUsersState extends State<ListUsers> {
               );
   }
 
-  Widget SelectedUsersList() {
+  Widget selectedUsersList() {
     return Obx(() {
       return widget.selectedUsers!.isEmpty
           ? const SizedBox()
@@ -124,7 +124,7 @@ class _ListUsersState extends State<ListUsers> {
                             widget.users.add(user);
                           });
                         },
-                        child: TileUsername(user, Icons.remove),
+                        child: tileUsername(user, Icons.remove),
                       )
                   ],
                 ),
@@ -133,7 +133,7 @@ class _ListUsersState extends State<ListUsers> {
     });
   }
 
-  Widget UsersList() {
+  Widget usersList() {
     return Expanded(
       child: Obx(
         () {
@@ -150,7 +150,7 @@ class _ListUsersState extends State<ListUsers> {
                               widget.users.remove(user);
                             });
                           },
-                          child: TileUsername(user, Icons.add),
+                          child: tileUsername(user, Icons.add),
                         )
                     ],
                   )
@@ -160,7 +160,7 @@ class _ListUsersState extends State<ListUsers> {
     );
   }
 
-  Container TileUsername(User user, IconData icon) {
+  Container tileUsername(User user, IconData icon) {
     return Container(
       height: widget.containerHeight,
       child: Padding(

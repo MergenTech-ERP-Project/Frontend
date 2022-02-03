@@ -3,6 +3,7 @@ import 'package:get/state_manager.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/activity.dart';
+import 'package:vtys_kalite/models/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AdminPanel/admin_panel.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
@@ -41,7 +42,8 @@ class _MainFormBodyState extends State<MainFormBody> {
                   ),
                   Expanded(
                     flex: 1,
-                    child: Align(
+                    child: widget.user.title == Departments.management
+                        ? Align(
                       alignment: Alignment.bottomCenter,
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
@@ -54,7 +56,8 @@ class _MainFormBodyState extends State<MainFormBody> {
                           },
                         ),
                       ),
-                    ),
+                    )
+                        : const SizedBox(),
                   )
                 ],
               ));

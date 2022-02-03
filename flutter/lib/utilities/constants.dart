@@ -8,7 +8,8 @@ const Color kColorRed = Color(0xFFE65B43);
 
 const Color kPrimaryColor = Color(0xFF2BCCE6);
 const Color kSecondaryColor = Color(0xFFEFEFEF);
-const Color kTertiaryColor = Color(0xFF135B66);
+const Color kTertiaryColor = Color(0xFF175e69);
+const Color kFourthColor = Color(0xFF208291);
 const Color kBackColor = Color(0xFF32322C);
 const Color kTextFontColor = Color(0xFF32322C);
 
@@ -41,6 +42,11 @@ const kLabelAppBarThinStyle = TextStyle(
     color: Colors.white,
     fontFamily: 'Comfortaa',
     fontSize: 16
+);
+const kLabelAppBarStyle = TextStyle(
+  color: Colors.white,
+  fontFamily: 'Comfortaa',
+  fontSize: 20,
 );
 
 const kTextThinStyle = TextStyle(
