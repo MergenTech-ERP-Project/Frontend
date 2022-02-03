@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/screens/Settings/ReferencesPage/Components/add_new_company.dart';
+import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Components/add_new_company.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
 import 'Components/add_new_branch.dart';
 
-class ReferencesPage extends StatefulWidget {
+class OptionalCompanyDescriptions extends StatefulWidget {
   bool sirket;
   bool sube;
   bool departman;
   bool unvan;
 
-  ReferencesPage({
+  OptionalCompanyDescriptions({
     Key? key,
     this.sirket = false,
     this.sube = false,
@@ -21,10 +20,10 @@ class ReferencesPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ReferencesPage> createState() => _ReferencesPageState();
+  State<OptionalCompanyDescriptions> createState() => _OptionalCompanyDescriptionsState();
 }
 
-class _ReferencesPageState extends State<ReferencesPage> {
+class _OptionalCompanyDescriptionsState extends State<OptionalCompanyDescriptions> {
   /*Bu listler geçici olarak girildi. Yakında database'den çekilecek*/
   List<String> sirketAdi = ["Mergen Yazılım", "OmerFaruk"];
   List<String> calisanSayisi = ["1 çalışan", "1 çalışan"];
@@ -143,21 +142,17 @@ class _ReferencesPageState extends State<ReferencesPage> {
                   children: [
                     const Text("Şube", style: kLabelStyle),
                     ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          setState(() async {
-                            await showDialog(
-                              context: context,
-                              builder: (_) => AddNewBranch(
-                                controllerBranchName: controllerBranchName,
-                                controllerTheParentUnitToWhichItIsConnected:
-                                    controllerTheParentUnitToWhichItIsConnected,
-                                controllerVacationDays: controllerVacationDays,
-                              ),
-                            );
-                            //Navigator.pop(context);
-                          });
-                        });
+                      onPressed: () async {
+                        await showDialog(
+                          context: context,
+                          builder: (_) => AddNewBranch(
+                            controllerBranchName: controllerBranchName,
+                            controllerTheParentUnitToWhichItIsConnected:
+                                controllerTheParentUnitToWhichItIsConnected,
+                            controllerVacationDays: controllerVacationDays,
+                          ),
+                        );
+                        //Navigator.pop(context);
                       },
                       child: Text("Yeni Ekle"),
                     )
@@ -196,21 +191,18 @@ class _ReferencesPageState extends State<ReferencesPage> {
                   children: [
                     const Text("Şirket", style: kLabelStyle),
                     ElevatedButton(
-                      onPressed: () {
-                        setState(() async {
-                          await showDialog(
-                              context: context,
-                              builder: (_) => AddNewCompany(
-                                    controllerCompanyName:
-                                        controllerCompanyName,
-                                    controllerTelephone: controllerTelephone,
-                                    controllerMail: controllerMail,
-                                    controllerMersisNumber:
-                                        controllerMersisNumber,
-                                    controllerSGK: controllerSGK,
-                                  ));
-                          //Navigator.pop(context);
-                        });
+                      onPressed: () async {
+                        await showDialog(
+                            context: context,
+                            builder: (_) => AddNewCompany(
+                                  controllerCompanyName: controllerCompanyName,
+                                  controllerTelephone: controllerTelephone,
+                                  controllerMail: controllerMail,
+                                  controllerMersisNumber:
+                                      controllerMersisNumber,
+                                  controllerSGK: controllerSGK,
+                                ));
+                        //Navigator.pop(context);
                       },
                       child: Text("Yeni Ekle"),
                     )
