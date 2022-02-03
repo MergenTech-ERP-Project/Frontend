@@ -15,8 +15,8 @@ class NewActivityPreviousButton extends StatelessWidget {
       title: 'Previous',
       pressAction: () {
         controller.previousPage(
-          duration: const Duration(milliseconds: 400),
-          curve: Curves.easeIn,
+          duration: const Duration(milliseconds: 100),
+          curve: Curves.decelerate,
         );
       },
     );

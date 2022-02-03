@@ -1,6 +1,7 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
+import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
@@ -35,13 +36,25 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             child: SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   buildTextBox(NewActivityPage.nameController, 'Name', 'Name'),
                   buildTextBox(
                       NewActivityPage.placeController, 'Place', 'Place'),
-                  buildDatePicker(NewActivityPage.dateTimeController),
+                  CustomDateTimePicker(
+                    text: 'Date',
+                    onChanged: (val) {
+                      if (val != null) {
+                        print("DateTime picker : " + val);
+                        try {
+                          NewActivityPage.date = dateTimeFormat.parse(val);
+                        } catch (e) {
+                          print(e.toString());
+                        }
+                      }
+                    },
+                  ),
                   buildTextBox(NewActivityPage.organizatorController,
                       'Organizer', 'Organizer'),
                 ],
@@ -54,7 +67,7 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
           child: Row(
             children: [
               Expanded(
-                flex: 1,
+                flex: 2,
                 child: CustomButton(
                     title: "Cancel",
                     pressAction: () {
@@ -64,7 +77,7 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
               ),
               const Expanded(flex: 1, child: Text("")),
               Expanded(
-                flex: 1,
+                flex: 2,
                 child: NewActivityNextButton(
                   controller: widget.controller,
                   newActivityKey: newActivityKey,
@@ -90,45 +103,6 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
           return null;
         }
       },
-    );
-  }
-
-  Column buildDatePicker(TextEditingController controller) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text("Date", style: kLabelStyle),
-        const SizedBox(height: 10),
-        DateTimePicker(
-          type: DateTimePickerType.dateTime,
-          initialDate: DateTime.now(),
-          initialValue: dateTimeFormat.format(DateTime.now()),
-          autovalidate: true,
-          firstDate: DateTime.now(),
-          lastDate: DateTime.now().add(const Duration(days: 365)),
-          decoration: InputDecoration(
-            labelText: "Date - Time",
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-          validator: (val) {
-            if (val == null || val == "") {
-              return "Must Fill To Continue";
-            } else {
-              return null;
-            }
-          },
-          onChanged: (value) {
-            setState(() {
-              if (value.isNotEmpty && value != "") {
-                NewActivityPage.date = dateTimeFormat.parse(value);
-              }
-            });
-          },
-        ),
-      ],
     );
   }
 }

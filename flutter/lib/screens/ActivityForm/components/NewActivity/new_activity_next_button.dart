@@ -22,8 +22,8 @@ class NewActivityNextButton extends StatelessWidget {
         }
         newActivityKey.currentState!.save();
         controller.nextPage(
-          duration: const Duration(milliseconds: 400),
-          curve: Curves.easeIn,
+          duration: const Duration(milliseconds: 100),
+          curve: Curves.decelerate,
         );
       },
     );

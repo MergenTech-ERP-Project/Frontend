@@ -40,42 +40,39 @@ class _ListUsersState extends State<ListUsers> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          const SizedBox(height: 10),
-          Row(
-            children: [
-              Expanded(flex: 2, child: searchUser()),
-              const SizedBox(width: 5),
-              Expanded(flex: 1, child: addAllButton()),
-              const SizedBox(width: 5),
-              Expanded(flex: 1, child: removeAllButton()),
-            ],
-          ),
-          CustomTextDivider(
-            height: widget.containerHeight,
-            text: "Selected User",
-            thickness: 2,
-          ),
-          widget.selectedUsers!.isEmpty
-              ? Column(
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(flex: 2, child: searchUser()),
+            const SizedBox(width: 10),
+            Expanded(flex: 1, child: addAllButton()),
+            const SizedBox(width: 10),
+            Expanded(flex: 1, child: removeAllButton()),
+          ],
+        ),
+        CustomTextDivider(
+          height: widget.containerHeight,
+          text: "Selected User",
+          thickness: 2,
+        ),
+        widget.selectedUsers!.isEmpty
+            ? Column(
                 children: const [
                   SizedBox(height: 10),
                   Text("No Selected Users", style: kLabelThinStyle),
                   SizedBox(height: 10),
                 ],
               )
-              : selectedUsersList(),
-          CustomTextDivider(
-            height: widget.containerHeight,
-            text: "Users",
-            thickness: 4,
-          ),
-          usersList(),
-          const SizedBox(height: 50),
-        ],
-      ),
+            : selectedUsersList(),
+        CustomTextDivider(
+          height: widget.containerHeight,
+          text: "Users",
+          thickness: 4,
+        ),
+        usersList(),
+        const SizedBox(height: 50),
+      ],
     );
   }
 
@@ -111,36 +108,33 @@ class _ListUsersState extends State<ListUsers> {
     return Obx(() {
       return widget.selectedUsers!.isEmpty
           ? const SizedBox()
-          : Container(
+          : SizedBox(
               height: widget.selectedUsers!.length * widget.containerHeight,
-              child: Expanded(
-                child: ListView(
-                  children: <Widget>[
-                    for (User user in widget.selectedUsers!)
-                      InkWell(
-                        onTap: () {
-                          setState(() {
-                            widget.selectedUsers!.remove(user);
-                            widget.users.add(user);
-                          });
-                        },
-                        child: tileUsername(user, Icons.remove),
-                      )
-                  ],
-                ),
+              child: ListView(
+                children: <Widget>[
+                  for (User user in widget.selectedUsers!)
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          widget.selectedUsers!.remove(user);
+                          widget.users.add(user);
+                        });
+                      },
+                      child: tileUsername(user, Icons.remove),
+                    )
+                ],
               ),
             );
     });
   }
 
   Widget usersList() {
-    return Expanded(
-      child: Obx(
-        () {
-          return (Statics.instance.userController.isLoading.value
-              ? const CircularProgressIndicator()
-              : widget.users.isNotEmpty
-                  ? ListView(
+    return Obx(
+      () {
+        return (Statics.instance.userController.isLoading.value
+            ? const CircularProgressIndicator()
+            : widget.users.isNotEmpty
+                ? ListView(
                     children: <Widget>[
                       for (var user in widget.users)
                         InkWell(
@@ -154,9 +148,8 @@ class _ListUsersState extends State<ListUsers> {
                         )
                     ],
                   )
-                  : const SizedBox(height: 50));
-        },
-      ),
+                : const SizedBox(height: 50));
+      },
     );
   }
 
