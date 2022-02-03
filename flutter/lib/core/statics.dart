@@ -33,8 +33,9 @@ class Statics {
   void setUser(User? user){
     _user = user;
   }
-  String? username;
   User? _user;
+  String? username;
+  int drawerSelectedIndex = 0;
   UserController userController = Get.put(UserController());
   ActivityController activityController = Get.put(ActivityController());
   ActivityEvaluationController activityEvaluationController = Get.put(ActivityEvaluationController());

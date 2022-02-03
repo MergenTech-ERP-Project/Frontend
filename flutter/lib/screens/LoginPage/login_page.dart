@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
           Statics.instance.username = _usernameController.text;
           SharedPreferences prefs = await SharedPreferences.getInstance();
           prefs.setString("username", _usernameController.text);
-          Navigator.pushNamed(context, MainFormPage.routeName);
+          Navigator.pushReplacementNamed(context, MainFormPage.routeName);
         }
       },
     );
