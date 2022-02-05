@@ -40,9 +40,14 @@ class MainFormDrawer extends StatelessWidget {
               3,
             ),
             buildListTile(
+              Icons.person_add,
+              "Yeni Bir Çalışan Ekleyin",
+              4,
+            ),
+            buildListTile(
               Icons.settings,
               "Settings",
-              4,
+              5,
             ),
           ],
         ),

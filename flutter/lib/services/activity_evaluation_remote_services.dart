@@ -8,7 +8,7 @@ class ActivityEvaluationRemoteServices {
 
   static Future<List<ActivityEvaluation>?> fetchActivityEvaluations() async {
     var response =
-    await http.get(Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/activityevaluation/evaluations'));
+    await http.get(Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/activityevaluation/evaluations'));
     if (response.statusCode == 200) {
       var jsonString = response.body;
       return activityEvaluationFromJson(jsonString);
@@ -19,7 +19,7 @@ class ActivityEvaluationRemoteServices {
 
   static Future<int> fetchActivityEvaluation(int activityId, int userId) async {
     var response =
-    await http.get(Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/activityevaluation/evaluations'));
+    await http.get(Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/activityevaluation/evaluations'));
     int activityEvaluationID = -1;
     if (response.statusCode == 200) {
       var jsonString = response.body;
@@ -37,7 +37,7 @@ class ActivityEvaluationRemoteServices {
   static Future<String> postActivityEvaluation(String json) async {
     print("Json: $json");
     var response = await http
-        .post(Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/activityevaluation/post'),
+        .post(Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/activityevaluation/post'),
         headers: <String, String>{
           'Content-type': 'application/json',
           'Accept': 'application/json',

@@ -8,7 +8,7 @@ class ActivityRemoteServices {
 
   static Future<List<Activity>?> fetchActivities() async {
     var response = await http.get(
-      Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/activity/activities'),
+      Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/activity/activities'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -27,7 +27,7 @@ class ActivityRemoteServices {
 
   static Future<List<Activity>?> fetchActivitiesByUser(int userId) async {
     var response = await http.get(
-      Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/activity/activities'),
+      Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/activity/activities'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -46,7 +46,7 @@ class ActivityRemoteServices {
 
   static Future<int> fetchActivity(String name, String organizator) async {
     var response = await http.get(
-      Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/activity/activities'),
+      Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/activity/activities'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -71,7 +71,7 @@ class ActivityRemoteServices {
   }
   static Future<Activity?> fetchActivitybyId(int id) async {
     var response = await http.get(
-      Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/activity/activities/$id'),
+      Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/activity/activities/$id'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -89,7 +89,7 @@ class ActivityRemoteServices {
   static Future<String> postActivity(String json) async {
     print("Json: $json");
     var response = await http
-        .post(Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/activity/post'),
+        .post(Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/activity/post'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
               'Accept': 'application/json',
@@ -107,7 +107,7 @@ class ActivityRemoteServices {
 
   static Future<String> deleteActivity(int id) async {
     var response = await http
-        .delete(Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/activity/delete/$id'),
+        .delete(Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/activity/delete/$id'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
               'Accept': 'application/json',

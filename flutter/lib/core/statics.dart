@@ -1,9 +1,9 @@
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vtys_kalite/controller/activity_controller.dart';
 import 'package:vtys_kalite/controller/activity_evaluation_controller.dart';
+import 'package:vtys_kalite/controller/branch_controller.dart';
+import 'package:vtys_kalite/controller/company_controller.dart';
 import 'package:vtys_kalite/controller/user_controller.dart';
 import 'package:vtys_kalite/models/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
@@ -39,4 +39,6 @@ class Statics {
   UserController userController = Get.put(UserController());
   ActivityController activityController = Get.put(ActivityController());
   ActivityEvaluationController activityEvaluationController = Get.put(ActivityEvaluationController());
+  CompanyController companyController = Get.put(CompanyController());
+  BranchController branchController = Get.put(BranchController());
 }

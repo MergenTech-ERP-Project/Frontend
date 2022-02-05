@@ -8,7 +8,7 @@ class ActiveToUserRemoteServices {
 
   static Future<List<ActiveToUser>?> fetchActiveToUsers() async {
     var response = await http.get(
-      Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/activetouser/activetousers'),
+      Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/activetouser/activetousers'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -27,7 +27,7 @@ class ActiveToUserRemoteServices {
 
   static Future<int> fetchActiveToUser(int activityId, int userId) async {
     var response = await http.get(
-      Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/activetouser/activetousers'),
+      Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/activetouser/activetousers'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -46,7 +46,7 @@ class ActiveToUserRemoteServices {
 
   static Future<String> postActiveToUser(String json) async {
     var response = await http
-        .post(Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/activetouser/post'),
+        .post(Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/activetouser/post'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Accept': 'application/json',
@@ -65,7 +65,7 @@ class ActiveToUserRemoteServices {
 
   static Future<String> deleteActiveToUser(int id) async {
     var response = await http
-        .delete(Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/activetouser/delete/$id'),
+        .delete(Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/activetouser/delete/$id'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Accept': 'application/json',
