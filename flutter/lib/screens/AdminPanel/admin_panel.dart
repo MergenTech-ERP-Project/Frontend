@@ -18,7 +18,6 @@ class AdminPanelPage extends StatefulWidget {
   List<User> users = Statics.instance.userController.userList;
 
   AdminPanelPage({Key? key}) : super(key: key);
-
   @override
   _AdminPanelPageState createState() => _AdminPanelPageState();
 }

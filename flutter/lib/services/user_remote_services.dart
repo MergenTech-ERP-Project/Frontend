@@ -7,8 +7,8 @@ class UserRemoteServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
   static Future<List<User>?> fetchUsers() async {
-    var response =
-        await http.get(Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/user/users'));
+    var response = await http.get(Uri.parse(
+        'https://kalite-takip-yonetim-sistemi.herokuapp.com/user/users'));
     if (response.statusCode == 200) {
       var jsonString = response.body;
       return userFromJson(jsonString);
@@ -18,13 +18,13 @@ class UserRemoteServices {
   }
 
   static Future<int> fetchUser(String name, String password) async {
-    var response =
-        await http.get(Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/user/users'));
+    var response = await http.get(Uri.parse(
+        'https://kalite-takip-yonetim-sistemi.herokuapp.com/user/users'));
     int userID = -1;
     if (response.statusCode == 200) {
       var jsonString = response.body;
       List<User> users = userFromJson(jsonString);
-      for(User user in users) {
+      for (User user in users) {
         if (user.name == name && user.password == password) {
           userID = users.indexOf(user);
           print(userID);
@@ -39,7 +39,9 @@ class UserRemoteServices {
   static Future<String> postUser(String json) async {
     print("Json: $json");
     var response = await http
-        .post(Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/user/post'),
+        .post(
+            Uri.parse(
+                'https://kalite-takip-yonetim-sistemi.herokuapp.com/user/post'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
@@ -58,7 +60,9 @@ class UserRemoteServices {
   static Future<String> putUser(int id, String json) async {
     print("Json: $json");
     var response = await http
-        .put(Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/user/put/$id'),
+        .put(
+            Uri.parse(
+                'https://kalite-takip-yonetim-sistemi.herokuapp.com/user/put/$id'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
@@ -76,16 +80,18 @@ class UserRemoteServices {
 
   static Future<String> deleteUser(int id) async {
     var response = await http
-        .delete(Uri.parse('https://mergen-kalite-takip-sistemi.herokuapp.com/user/delete/$id'),
-        headers: <String, String>{
-          'Content-type': 'application/json',
-          'Accept': 'application/json',
-          //'Authorization': '<Your token>'
-        },
-        encoding: encoding)
+        .delete(
+            Uri.parse(
+                'https://kalite-takip-yonetim-sistemi.herokuapp.com/user/delete/$id'),
+            headers: <String, String>{
+              'Content-type': 'application/json',
+              'Accept': 'application/json',
+              //'Authorization': '<Your token>'
+            },
+            encoding: encoding)
         .timeout(
-      const Duration(seconds: 10),
-    );
+          const Duration(seconds: 10),
+        );
     return response.statusCode == 200
         ? "Success: User"
         : "Error: User ${response.statusCode}";

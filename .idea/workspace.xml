@@ -5,12 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="621a9722-6f93-414e-8473-056cbe77f9ae" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/flutter/lib/screens/Settings/AddNewEmployee/add_new_employee.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter/lib/controller/branch_controller.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter/lib/controller/company_controller.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter/lib/models/settings/branch.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter/lib/models/settings/company.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter/lib/screens/Settings/OptionalCompanyDescriptions/models/longPressCompany.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter/lib/services/branch_remote_services.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter/lib/services/settings_company_remote_services.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/Settings/ReferencesPage/Components/add_new_branch.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/Settings/OptionalCompanyDescriptions/Components/add_new_branch.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/Settings/ReferencesPage/Components/add_new_company.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/Settings/OptionalCompanyDescriptions/Components/add_new_company.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/Settings/ReferencesPage/references_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/Settings/OptionalCompanyDescriptions/optional_company_descriptions.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter/lib/componenets/custom_datetimepicker.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/componenets/custom_datetimepicker.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter/lib/core/statics.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/core/statics.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/ActivityForm/components/MainForm/main_form_drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/ActivityForm/components/MainForm/main_form_drawer.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/ActivityForm/main_form_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/ActivityForm/main_form_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/AdminPanel/admin_panel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/AdminPanel/admin_panel.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/Settings/AddNewEmployee/add_new_employee.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/ActivityForm/components/AddNewEmployee/add_new_employee.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/Settings/OptionalCompanyDescriptions/Components/add_new_branch.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/Settings/OptionalCompanyDescriptions/Components/add_new_branch.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/Settings/OptionalCompanyDescriptions/Components/add_new_company.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/Settings/OptionalCompanyDescriptions/Components/add_new_company.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/Settings/OptionalCompanyDescriptions/optional_company_descriptions.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/Settings/OptionalCompanyDescriptions/optional_company_descriptions.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flutter/lib/screens/Settings/settings_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/Settings/settings_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter/lib/services/active_to_user_remote_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/services/active_to_user_remote_services.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter/lib/services/activity_evaluation_remote_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/services/activity_evaluation_remote_services.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter/lib/services/activity_remote_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/services/activity_remote_services.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter/lib/services/user_remote_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/services/user_remote_services.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +69,13 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\omerf\Desktop\VTYS-Kalite\flutter\lib\screens\Settings\OptionalCompanyDescriptions" />
+      <recent name="C:\Users\omerf\Desktop\VTYS-Kalite\flutter\lib\screens\ActivityForm\components" />
+      <recent name="C:\Users\omerf\Desktop\VTYS-Kalite\flutter\lib\models\settings" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">

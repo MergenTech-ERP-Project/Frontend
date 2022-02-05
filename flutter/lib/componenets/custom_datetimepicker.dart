@@ -9,7 +9,7 @@ class CustomDateTimePicker extends StatefulWidget {
   CustomDateTimePicker({
     Key? key,
     required this.text,
-    this.onChanged,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
