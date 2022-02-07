@@ -53,14 +53,35 @@ class _EmployeesState extends State<Employees> {
                         ),
                         Align(
                           alignment: Alignment.bottomCenter,
-                          child: Padding(
+                          child: Container(
                             padding: const EdgeInsets.all(20.0),
                             child: CustomButton(
                               title: 'New Employee',
                               icon: Icons.person_add,
                               pressAction: () {
-                                Navigator.pushNamed(
-                                    context, AddNewEmployee.routeName);
+                                showDialog(
+                                    context: context,
+                                    builder: (_) => AlertDialog(
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)),
+                                          ),
+                                          title: const Text('User',
+                                              style: kLabelHeader2Style),
+                                          content: Builder(
+                                            builder: (context) {
+                                              var width = MediaQuery.of(context)
+                                                  .size
+                                                  .width;
+                                              return Container(
+                                                width: width - 20,
+                                                child: AddNewEmployee(),
+                                              );
+                                            },
+                                          ),
+                                        ));
+                                /* Navigator.pushNamed(
+                                    context, AddNewEmployee.routeName); */
                               },
                             ),
                           ),

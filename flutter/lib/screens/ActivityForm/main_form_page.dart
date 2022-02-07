@@ -53,11 +53,11 @@ class _MainFormPageState extends State<MainFormPage> {
                 scrollDirection: Axis.vertical,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
+                  Employees(),
                   MainFormBody(user: widget.user),
                   TravelAssignmentNotificationFormPage(),
                   PermissionRequestFormPage(),
                   DailyInspectionFormPage(),
-                  Employees(),
                   SettingsPage(),
                 ],
               ),
