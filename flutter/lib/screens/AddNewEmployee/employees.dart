@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/core/statics.dart';
+import 'package:vtys_kalite/models/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
+import 'package:vtys_kalite/screens/AdminPanel/admin_panel.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
 class Employees extends StatefulWidget {
   Employees({Key? key}) : super(key: key);
 
   List<User> users = Statics.instance.userController.userList;
+  User user = User();
   @override
   _EmployeesState createState() => _EmployeesState();
 }
@@ -19,6 +22,9 @@ class _EmployeesState extends State<Employees> {
   Widget build(BuildContext context) {
     return Center(
       child: Obx(() {
+        if (Statics.instance.userController.userList.isNotEmpty) {
+          widget.user = Statics.instance.getUser;
+        }
         return (Statics.instance.userController.isLoading.value
             ? const CircularProgressIndicator()
             : Row(
@@ -89,9 +95,24 @@ class _EmployeesState extends State<Employees> {
                       ],
                     ),
                   ),
-                  const Expanded(
+                  Expanded(
                     flex: 1,
-                    child: Text(""),
+                    child: widget.user.title == Departments.management
+                        ? Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: CustomButton(
+                                title: 'Admin Panel',
+                                icon: Icons.admin_panel_settings,
+                                pressAction: () {
+                                  Navigator.pushNamed(
+                                      context, AdminPanelPage.routeName);
+                                },
+                              ),
+                            ),
+                          )
+                        : const SizedBox(),
                   ),
                 ],
               ));
