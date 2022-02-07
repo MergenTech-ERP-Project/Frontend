@@ -36,7 +36,7 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
         body: const SafeArea(
             child: TabBarView(
               children: [
-                Center(child: TabGenel()),
+                TabGenel(),
                 Center(child: Text("2")),
                 Center(child: Text("3")),
                 Center(child: Text("4")),

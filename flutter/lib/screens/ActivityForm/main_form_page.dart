@@ -59,7 +59,6 @@ class _MainFormPageState extends State<MainFormPage> {
                   TravelAssignmentNotificationFormPage(),
                   PermissionRequestFormPage(),
                   DailyInspectionFormPage(),
-                  TabGenel(),
                   SettingsPage(),
                 ],
               ),

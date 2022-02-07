@@ -19,55 +19,83 @@ class TabGenel extends StatefulWidget {
 class _TabGenelState extends State<TabGenel> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("İşe Başlama Tarihi"),
-              Text("2 Aralık 2009"),
-            ],
+    return Row(
+      children: [
+        Expanded(
+          flex: 3,
+          child: Card(
+            child: ListView(
+              children: [
+                Expanded(
+                  child: Card(
+                    child: ListView(
+                    children: [
+                      Text("CE"),
+                      SizedBox(height: 10),
+                      Text("ömer faruk öztürk"),
+                      Container(
+                        color: Colors.green,
+                        child: Text("Aktif Çalışan"),
+                      ),
+                      Divider(),
+                    ],
+                  ),
+                  ),
+                ),
+                Expanded(
+                  child: ListView(
+                    children: [
+                      Row(
+                        children: [
+                          Text("İşe Başlama Tarihi"),
+                          Text("2 Aralık 2009"),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text("Şirket"),
+                          Text("Mergen Yazılım"),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text("Şube"),
+                          Text("Eskişehir Teknopark"),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text("Departman"),
+                          Text("Yazılım Geliştirme"),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text("E-posta (iş)"),
+                          Text("omerfarukozturk026@gmail.com"),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text("İş Telefonu"),
+                          Text("54"),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Şirket"),
-              Text("2 Aralık 2009"),
-            ],
+        ),
+        Expanded(
+          flex: 4,
+          child: Card(
+            color: Colors.red,
+            child: Text("b"),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Şube"),
-              Text("2 Aralık 2009"),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Departman"),
-              Text("2 Aralık 2009"),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("E-Posta (İş)"),
-              Text("2 Aralık 2009"),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("İş Telefonu"),
-              Text("2 Aralık 2009"),
-            ],
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
-
-// ctrl .
