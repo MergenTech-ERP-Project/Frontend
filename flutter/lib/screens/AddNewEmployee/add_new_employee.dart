@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AddNewEmployee extends StatefulWidget {
-  static String routeName = '/AddNewEmployee';
   const AddNewEmployee({Key? key}) : super(key: key);
 
   @override
@@ -36,7 +35,7 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
         body: const SafeArea(
             child: TabBarView(
               children: [
-                Center(child: Text("1")),
+                Center(child: Text("Genel")),
                 Center(child: Text("2")),
                 Center(child: Text("3")),
                 Center(child: Text("4")),

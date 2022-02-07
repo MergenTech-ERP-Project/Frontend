@@ -20,28 +20,28 @@ class MainFormDrawer extends StatelessWidget {
         child: ListView(
           children: [
             buildListTile(
-              Icons.home,
-              "My Activities",
+              Icons.person,
+              "Employees",
               0,
             ),
             buildListTile(
-              Icons.event_available_sharp,
-              "Seyahat Görevlendirme / Bildirim Formu",
+              Icons.event,
+              "My Activities",
               1,
             ),
             buildListTile(
               Icons.event_available_sharp,
-              "İzin Talep Formu",
+              "Seyahat Görevlendirme / Bildirim Formu",
               2,
             ),
             buildListTile(
               Icons.event_available_sharp,
-              "Mesai Dışı Faaliyet Günlük İzlem Formu",
+              "İzin Talep Formu",
               3,
             ),
             buildListTile(
-              Icons.person,
-              "Employees",
+              Icons.event_available_sharp,
+              "Mesai Dışı Faaliyet Günlük İzlem Formu",
               4,
             ),
             buildListTile(
