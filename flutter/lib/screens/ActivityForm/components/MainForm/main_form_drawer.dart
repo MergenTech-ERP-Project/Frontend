@@ -40,8 +40,8 @@ class MainFormDrawer extends StatelessWidget {
               3,
             ),
             buildListTile(
-              Icons.person_add,
-              "Yeni Bir Çalışan Ekleyin",
+              Icons.person,
+              "Employees",
               4,
             ),
             buildListTile(
@@ -91,6 +91,7 @@ class MainFormDrawer extends StatelessWidget {
       ),
     );
   }
+
   void ToPage(int index) {
     controller.animateToPage(index,
         duration: const Duration(milliseconds: 400), curve: Curves.bounceInOut);

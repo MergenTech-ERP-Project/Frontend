@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AddNewEmployee extends StatefulWidget {
+  static String routeName = '/AddNewEmployee';
   const AddNewEmployee({Key? key}) : super(key: key);
 
   @override
