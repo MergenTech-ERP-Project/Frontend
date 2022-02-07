@@ -4,7 +4,6 @@ import 'package:get/state_manager.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/employees.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/tab_genel.dart';
 import 'package:vtys_kalite/screens/Forms/NonWorking_Activity_Daily_Inspection_Form/daily_inspection_form.dart';
 import 'package:vtys_kalite/screens/Forms/PermissionRequestForm/permission_request_form.dart';
 import 'package:vtys_kalite/screens/Forms/Travel_Assignment_Notification_Form/travel_assignment_notification_form.dart';
@@ -59,7 +58,6 @@ class _MainFormPageState extends State<MainFormPage> {
                   TravelAssignmentNotificationFormPage(),
                   PermissionRequestFormPage(),
                   DailyInspectionFormPage(),
-                  TabGenel(),
                   SettingsPage(),
                 ],
               ),

@@ -40,24 +40,9 @@ class _MainFormBodyState extends State<MainFormBody> {
                     flex: 2,
                     child: buildActivityCardList(),
                   ),
-                  Expanded(
+                  const Expanded(
                     flex: 1,
-                    child: widget.user.title == Departments.management
-                        ? Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: CustomButton(
-                          title: 'Admin Panel',
-                          icon: Icons.admin_panel_settings,
-                          pressAction: () {
-                            Navigator.pushNamed(
-                                context, AdminPanelPage.routeName);
-                          },
-                        ),
-                      ),
-                    )
-                        : const SizedBox(),
+                    child: SizedBox(),
                   )
                 ],
               ));
