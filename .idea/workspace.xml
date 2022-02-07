@@ -5,35 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="621a9722-6f93-414e-8473-056cbe77f9ae" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/flutter/lib/controller/branch_controller.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flutter/lib/controller/company_controller.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flutter/lib/models/settings/branch.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flutter/lib/models/settings/company.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flutter/lib/screens/Settings/OptionalCompanyDescriptions/models/longPressCompany.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flutter/lib/services/branch_remote_services.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flutter/lib/services/settings_company_remote_services.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/componenets/custom_datetimepicker.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/componenets/custom_datetimepicker.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/core/statics.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/core/statics.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/ActivityForm/components/MainForm/main_form_drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/ActivityForm/components/MainForm/main_form_drawer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/ActivityForm/main_form_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/ActivityForm/main_form_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/AdminPanel/admin_panel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/AdminPanel/admin_panel.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/Settings/AddNewEmployee/add_new_employee.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/ActivityForm/components/AddNewEmployee/add_new_employee.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/Settings/OptionalCompanyDescriptions/Components/add_new_branch.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/Settings/OptionalCompanyDescriptions/Components/add_new_branch.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/Settings/OptionalCompanyDescriptions/Components/add_new_company.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/Settings/OptionalCompanyDescriptions/Components/add_new_company.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flutter/lib/screens/Settings/OptionalCompanyDescriptions/optional_company_descriptions.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/Settings/OptionalCompanyDescriptions/optional_company_descriptions.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/screens/Settings/settings_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/screens/Settings/settings_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/services/active_to_user_remote_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/services/active_to_user_remote_services.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/services/activity_evaluation_remote_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/services/activity_evaluation_remote_services.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/services/activity_remote_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/services/activity_remote_services.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter/lib/services/user_remote_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter/lib/services/user_remote_services.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\omerf\.android\avd\flutter_emulator.avd]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
