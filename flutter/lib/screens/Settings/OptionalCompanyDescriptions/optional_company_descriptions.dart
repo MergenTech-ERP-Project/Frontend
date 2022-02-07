@@ -310,7 +310,7 @@ class _OptionalCompanyDescriptionsState
                                   onLongPress: index == 0
                                       ? null
                                       : () {
-                                          PopupMenuButton<MenuItemCompany>(
+                                          /*PopupMenuButton<MenuItemCompany>(
                                               onSelected: (item) =>
                                                   onSelected(context, item),
                                               itemBuilder: (context) => [
@@ -319,7 +319,24 @@ class _OptionalCompanyDescriptionsState
                                                         .map(buildItemCompany)
                                                         .toList(),
                                                     //PopupMenuDivider();
-                                                  ]);
+                                                  ]);*/
+
+                                    showMenu(
+                                      context: context,
+                                      position: RelativeRect.fill,
+                                      items: [
+                                        const PopupMenuItem(
+                                          child: Text("Menu 1"),
+                                        ),
+                                        const PopupMenuItem(
+                                          child: Text("Menu 2"),
+                                        ),
+                                        const PopupMenuItem(
+                                          child: Text("Menu 3"),
+                                        ),
+                                      ],
+                                      elevation: 8.0,
+                                    );
                                         },
                                   child: SizedBox(
                                     height: 61,
