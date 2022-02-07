@@ -1,7 +1,10 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation_page.dart';
 import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
 import 'package:vtys_kalite/screens/ActivityForm/new_activity_page.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
 import 'package:vtys_kalite/screens/AdminPanel/admin_panel.dart';
 import 'package:vtys_kalite/screens/Forms/NonWorking_Activity_Daily_Inspection_Form/daily_inspection_form.dart';
 import 'package:vtys_kalite/screens/Forms/PermissionRequestForm/permission_request_form.dart';
@@ -16,6 +19,7 @@ final Map<String, WidgetBuilder> routes = {
   MainFormPage.routeName: (context) =>  MainFormPage(),
   AdminPanelPage.routeName: (context) => AdminPanelPage(),
   NewActivityPage.routeName: (context) =>  NewActivityPage(),
+  AddNewEmployee.routeName: (context) => AddNewEmployee(),
   ActivityEvaluationPage.routeName: (context) =>  ActivityEvaluationPage(),
   PermissionRequestFormPage.routeName: (context) =>  PermissionRequestFormPage(),
   DailyInspectionFormPage.routeName: (context) =>  DailyInspectionFormPage(),
