@@ -6,7 +6,7 @@ import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Components/add_new_company.dart';
-import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/models/longPressCompany.dart';
+import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/models/long_press_company.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
 import 'Components/add_new_branch.dart';
@@ -180,41 +180,49 @@ class _OptionalCompanyDescriptionsState
                   ],
                 ),
               ),
-              Obx(() {
-                print(widget.branchList);
-                return (Statics.instance.branchController.isLoading.value
-                    ? Container(
-                        child: Center(child: const CircularProgressIndicator()))
-                    : ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: widget.companyList.length + 1,
-                        itemBuilder: (_, index) {
-                          return InkWell(
-                            onTap: index == 0
-                                ? null
-                                : () {
-                                    setState(() {
-                                      widget.branch = true;
-                                    });
-                                  },
-                            child: SizedBox(
-                              height: 61,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Center(
-                                        child: Text(index == 0
-                                            ? "Birim Adı"
-                                            : widget.branchList[index - 1]
-                                                .branch_name)),
+              Column(
+                children: [
+                  const CustomTextBox(
+                    borderless: true,
+                    hint: "Birim adı giriniz",
+                    decorationIcon: Icon(Icons.search),
+                    fillcolor: Colors.white60,
+                  ),
+                  Obx(() {
+                    return (Statics.instance.branchController.isLoading.value
+                        ? const Center(child: CircularProgressIndicator())
+                        : ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: widget.branchList.length + 1,
+                            itemBuilder: (_, index) {
+                              return InkWell(
+                                onTap: index == 0
+                                    ? null
+                                    : () {
+                                        setState(() {
+                                          widget.branch = true;
+                                        });
+                                      },
+                                child: SizedBox(
+                                  height: 61,
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: Center(
+                                            child: Text(index == 0
+                                                ? "Birim Adı"
+                                                : widget.branchList[index - 1]
+                                                    .branch_name)),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ));
-              }),
+                                ),
+                              );
+                            },
+                          ));
+                  }),
+                ],
+              ),
             ],
           ),
         ),
@@ -281,34 +289,37 @@ class _OptionalCompanyDescriptionsState
                     Obx(() {
                       print(widget.companyList);
                       return (Statics.instance.companyController.isLoading.value
-                          ? Container(
-                              child: Center(
-                                  child: const CircularProgressIndicator()))
+                          ? Center(
+                              child: Container(
+                              height: 50,
+                              width: 50,
+                              child: const CircularProgressIndicator(),
+                            ))
                           : ListView.builder(
                               shrinkWrap: true,
                               itemCount: widget.companyList.length + 1,
                               itemBuilder: (_, index) {
                                 return InkWell(
-                                  onLongPress: index == 0
-                                      ? null
-                                      : () {
-                                          PopupMenuButton<MenuItemCompany>(
-                                              onSelected: (item) =>
-                                                  onSelected(context, item),
-                                              itemBuilder: (context) {
-                                                return MenuItemsCompany
-                                                    .itemsFirst
-                                                    .map(buildItemCompany)
-                                                    .toList();
-                                                //PopupMenuDivider();
-                                              });
-                                        },
                                   onTap: index == 0
                                       ? null
                                       : () {
                                           setState(() {
                                             widget.branch = true;
                                           });
+                                        },
+                                  onLongPress: index == 0
+                                      ? null
+                                      : () {
+                                          PopupMenuButton<MenuItemCompany>(
+                                              onSelected: (item) =>
+                                                  onSelected(context, item),
+                                              itemBuilder: (context) => [
+                                                    ...MenuItemsCompany
+                                                        .itemsFirst
+                                                        .map(buildItemCompany)
+                                                        .toList(),
+                                                    //PopupMenuDivider();
+                                                  ]);
                                         },
                                   child: SizedBox(
                                     height: 61,
@@ -329,6 +340,15 @@ class _OptionalCompanyDescriptionsState
                                                   ? "Çalışan Sayısı"
                                                   : "0")),
                                         ),
+                                        PopupMenuButton<MenuItemCompany>(
+                                            onSelected: (item) =>
+                                                onSelected(context, item),
+                                            itemBuilder: (context) => [
+                                                  ...MenuItemsCompany.itemsFirst
+                                                      .map(buildItemCompany)
+                                                      .toList(),
+                                                  //PopupMenuDivider();
+                                                ]),
                                       ],
                                     ),
                                   ),
@@ -359,12 +379,15 @@ class _OptionalCompanyDescriptionsState
       );
 
   onSelected(BuildContext context, MenuItemCompany item) {
-    switch (item) {
-      case MenuItemsCompany.itemUpdate:
-        break;
-      case MenuItemsCompany.itemDelete:
-        break;
-    }
+    setState(() {
+      switch (item) {
+        case MenuItemsCompany.itemUpdate:
+          print("update");
+          break;
+        case MenuItemsCompany.itemDelete:
+          print("delete");
+          break;
+      }
+    });
   }
 }
-
