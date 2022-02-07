@@ -307,37 +307,6 @@ class _OptionalCompanyDescriptionsState
                                             widget.branch = true;
                                           });
                                         },
-                                  onLongPress: index == 0
-                                      ? null
-                                      : () {
-                                          /*PopupMenuButton<MenuItemCompany>(
-                                              onSelected: (item) =>
-                                                  onSelected(context, item),
-                                              itemBuilder: (context) => [
-                                                    ...MenuItemsCompany
-                                                        .itemsFirst
-                                                        .map(buildItemCompany)
-                                                        .toList(),
-                                                    //PopupMenuDivider();
-                                                  ]);*/
-
-                                    showMenu(
-                                      context: context,
-                                      position: RelativeRect.fill,
-                                      items: [
-                                        const PopupMenuItem(
-                                          child: Text("Menu 1"),
-                                        ),
-                                        const PopupMenuItem(
-                                          child: Text("Menu 2"),
-                                        ),
-                                        const PopupMenuItem(
-                                          child: Text("Menu 3"),
-                                        ),
-                                      ],
-                                      elevation: 8.0,
-                                    );
-                                        },
                                   child: SizedBox(
                                     height: 61,
                                     child: Row(
@@ -357,15 +326,23 @@ class _OptionalCompanyDescriptionsState
                                                   ? "Çalışan Sayısı"
                                                   : "0")),
                                         ),
-                                        PopupMenuButton<MenuItemCompany>(
-                                            onSelected: (item) =>
-                                                onSelected(context, item),
-                                            itemBuilder: (context) => [
-                                                  ...MenuItemsCompany.itemsFirst
-                                                      .map(buildItemCompany)
-                                                      .toList(),
-                                                  //PopupMenuDivider();
-                                                ]),
+                                        index == 0
+                                            ? Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: SizedBox(
+                                                  child: Icon(Icons.three_k_outlined, color: Colors.white),
+                                                ),
+                                            )
+                                            : PopupMenuButton<MenuItemCompany>(
+                                                onSelected: (item) =>
+                                                    onSelected(context, item),
+                                                itemBuilder: (context) => [
+                                                      ...MenuItemsCompany
+                                                          .itemsFirst
+                                                          .map(buildItemCompany)
+                                                          .toList(),
+                                                      //PopupMenuDivider();
+                                                    ]),
                                       ],
                                     ),
                                   ),
