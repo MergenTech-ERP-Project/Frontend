@@ -72,8 +72,31 @@ class _EmployeesState extends State<Employees> {
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10.0)),
                                           ),
-                                          title: const Text('User',
-                                              style: kLabelHeader2Style),
+                                          title: Expanded(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                const Flexible(
+                                                  flex: 8,
+                                                  child: Text('User',
+                                                      style:
+                                                          kLabelHeader2Style),
+                                                ),
+                                                Flexible(
+                                                  flex: 1,
+                                                  child: CustomButton(
+                                                    title: "Kaydet",
+                                                    height: 30,
+                                                    pressAction: () {
+                                                      Get.back(); ///Kaydetmiyor
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                           content: Builder(
                                             builder: (context) {
                                               var width = MediaQuery.of(context)
