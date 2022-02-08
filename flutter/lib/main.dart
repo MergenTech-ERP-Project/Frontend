@@ -6,6 +6,7 @@ import 'package:vtys_kalite/routes.dart';
 import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
 import 'package:vtys_kalite/screens/LoginPage/login_page.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
+import 'package:vtys_kalite/utilities/custom_scroll_behaviour.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
