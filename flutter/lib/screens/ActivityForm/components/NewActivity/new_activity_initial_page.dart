@@ -44,6 +44,7 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
                       NewActivityPage.placeController, 'Place', 'Place'),
                   CustomDateTimePicker(
                     text: 'Date',
+                
                     onChanged: (val) {
                       if (val != null) {
                         print("DateTime picker : " + val);

@@ -45,17 +45,18 @@ class _OptionalCompanyDescriptionsState
   final TextEditingController controllerBranchUpper = TextEditingController();
   final TextEditingController controllerRules = TextEditingController();
   final TextEditingController controllerVacationDays = TextEditingController();
-
+  var screenSize;
   @override
   Widget build(BuildContext context) {
+    screenSize = MediaQuery.of(context).size;
     return ListView(
       children: [
         cardSirket(),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         cardSube(),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         cardDepartmant(),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         cardUnvan(),
       ],
     );
@@ -230,15 +231,15 @@ class _OptionalCompanyDescriptionsState
     );
   }
 
-  Padding cardSirket() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 250),
-      child: InkWell(
-        onTap: () {
-          setState(() {
-            widget.company = true;
-          });
-        },
+  Widget cardSirket() {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          widget.company = true;
+        });
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.2),
         child: Card(
           elevation: 10,
           child: Column(
@@ -253,7 +254,7 @@ class _OptionalCompanyDescriptionsState
                       child: Text("Şirket", style: kLabelStyle),
                     ),
                     Expanded(
-                      flex: 2,
+                      flex: 3,
                       child: CustomButton(
                           height: 20,
                           title: "Yeni Ekle",
@@ -327,12 +328,14 @@ class _OptionalCompanyDescriptionsState
                                                   : "0")),
                                         ),
                                         index == 0
-                                            ? Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: SizedBox(
-                                                  child: Icon(Icons.three_k_outlined, color: Colors.white),
+                                            ? const Padding(
+                                                padding: EdgeInsets.all(8.0),
+                                                child: SizedBox(
+                                                  child: Icon(
+                                                      Icons.three_k_outlined,
+                                                      color: Colors.white),
                                                 ),
-                                            )
+                                              )
                                             : PopupMenuButton<MenuItemCompany>(
                                                 onSelected: (item) =>
                                                     onSelected(context, item),

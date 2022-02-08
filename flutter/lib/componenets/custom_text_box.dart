@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
 class CustomTextBox extends StatefulWidget {
+  final Widget? leadingWdget;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final String? title, label, hint;
@@ -26,6 +27,7 @@ class CustomTextBox extends StatefulWidget {
     this.borderless = false,
     this.customFontSize = 16,
     this.fillcolor = Colors.white,
+    this.leadingWdget,
   }) : super(key: key);
 
   @override
