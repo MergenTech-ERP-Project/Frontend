@@ -33,18 +33,16 @@ class _TabKariyerState extends State<TabKariyer> {
   );
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: ScrollConfiguration(
-        behavior: MyCustomScrollBehavior(),
-        child: SingleChildScrollView(
-          controller: scrollController,
-          scrollDirection: Axis.horizontal,
-          child: Column(
-            children: [
-              buildHeaders(widget.positionHeaders, Colors.white),
-              buildHeaders(widget.positionChildren1, Colors.white),
-            ],
-          ),
+    return ScrollConfiguration(
+      behavior: MyCustomScrollBehavior(),
+      child: SingleChildScrollView(
+        controller: scrollController,
+        scrollDirection: Axis.horizontal,
+        child: Column(
+          children: [
+            buildHeaders(widget.positionHeaders, Colors.white),
+            buildHeaders(widget.positionChildren1, Colors.white),
+          ],
         ),
       ),
     );
@@ -54,9 +52,8 @@ class _TabKariyerState extends State<TabKariyer> {
     return Container(
       color: color,
       height: 60,
+      width: strings.length * 160,
       child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: strings
             .map<Widget>(
               (e) => Flexible(
