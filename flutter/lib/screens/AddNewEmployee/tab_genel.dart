@@ -5,15 +5,6 @@ import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_genel_second_c
 class TabGenel extends StatefulWidget {
   const TabGenel({Key? key}) : super(key: key);
 
-  /*  final List<String> _cardPicture = [
-    "İşe Başlama Tarihi" ,
-    "Şirket",
-    "Şube",
-    "Departman",
-    "E-Posta (İş)",
-    "İş Telefonu"
-  ];   */
-
   @override
   _TabGenelState createState() => _TabGenelState();
 }

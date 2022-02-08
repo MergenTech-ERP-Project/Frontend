@@ -16,6 +16,7 @@ class TabGenelSecondCard extends StatelessWidget {
   TextEditingController controllerContractEndDate = TextEditingController();
 
   DateTime dateOfStart = DateTime.now();
+  DateTime contractEndDate = DateTime.now();
   var screenSize;
 
   TabGenelSecondCard({
@@ -209,7 +210,7 @@ class TabGenelSecondCard extends StatelessWidget {
                                 print("DateTime picker : " + val);
                               }
                               try {
-                                dateOfStart = dateTimeFormat.parse(val!);
+                                contractEndDate = dateTimeFormat.parse(val!);
                               } catch (e) {
                                 print(e.toString());
                               }
