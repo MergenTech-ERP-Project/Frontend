@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_genel.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer.dart';
 
 class AddNewEmployee extends StatefulWidget {
   const AddNewEmployee({Key? key}) : super(key: key);
@@ -33,11 +34,11 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
             ],
           ),
         ),
-        body: const SafeArea(
+        body: SafeArea(
             child: TabBarView(
               children: [
                 TabGenel(),
-                Center(child: Text("2")),
+                TabKariyer(),
                 Center(child: Text("3")),
                 Center(child: Text("4")),
                 Center(child: Text("5")),
