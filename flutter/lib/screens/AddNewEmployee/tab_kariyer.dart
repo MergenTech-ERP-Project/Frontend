@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/componenets/custom_button.dart';
+import 'package:vtys_kalite/componenets/custom_scrollableColumn.dart';
+import 'package:vtys_kalite/utilities/constants.dart';
 import 'package:vtys_kalite/utilities/custom_scroll_behaviour.dart';
 
 class TabKariyer extends StatefulWidget {
@@ -14,6 +17,13 @@ class TabKariyer extends StatefulWidget {
     'Ünvan',
   ];
 
+  List<String> salaryHeaders = [
+    'Geçerlilik Başlangıç',
+    'Tutar',
+    'Ödeme Düzeni',
+    'Ek Ödemeler',
+  ];
+
   List<String> positionChildren1 = [
     '1 Aralık 2021',
     '-',
@@ -23,6 +33,14 @@ class TabKariyer extends StatefulWidget {
     'yazılım geliştirme',
     '-',
   ];
+
+  List<String> salaryChildren1 = [
+    'Geçerlilik Başlangıç',
+    'Tutar',
+    'Ödeme Düzeni',
+    'Ek Ödemeler',
+  ];
+
   @override
   State<TabKariyer> createState() => _TabKariyerState();
 }
@@ -35,34 +53,89 @@ class _TabKariyerState extends State<TabKariyer> {
   Widget build(BuildContext context) {
     return ScrollConfiguration(
       behavior: MyCustomScrollBehavior(),
-      child: SingleChildScrollView(
-        controller: scrollController,
-        scrollDirection: Axis.horizontal,
-        child: Column(
-          children: [
-            buildHeaders(widget.positionHeaders, Colors.white),
-            buildHeaders(widget.positionChildren1, Colors.white),
-          ],
-        ),
+      child: Column(
+        children: [
+          buildHeaders(
+            Icons.person,
+            "Pozisyon",
+            "Pozisyon Ekle",
+            () {},
+          ),
+          CustomScrollableColumn(
+            scrollController: scrollController,
+            children: [
+              buildRows(widget.positionHeaders, Colors.white, 200),
+              buildRows(widget.positionChildren1, Colors.white, 200),
+            ],
+          ),
+          buildHeaders(
+            Icons.account_balance_wallet,
+            "Maaş",
+            "Maaş Ekle",
+            () {},
+          ),
+          CustomScrollableColumn(
+            scrollController: scrollController,
+            children: [
+              buildRows(widget.salaryHeaders, Colors.white, 320),
+              buildRows(widget.salaryChildren1, Colors.white, 320),
+            ],
+          ),
+        ],
       ),
     );
   }
 
-  Widget buildHeaders(List<String> strings, Color color) {
+  Widget buildRows(List<String> strings, Color color, double cellWidth) {
     return Container(
       color: color,
       height: 60,
-      width: strings.length * 160,
+      width: strings.length * cellWidth,
       child: Row(
         children: strings
             .map<Widget>(
               (e) => Flexible(
-                child: Center(
-                  child: Text(e),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: Text(e),
+                  ),
                 ),
               ),
             )
             .toList(),
+      ),
+    );
+  }
+
+  Widget buildHeaders(
+      IconData iconData, String text, String buttonText, onClick) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: Icon(iconData),
+          ),
+          Expanded(
+            flex: 10,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                text,
+                style: kLabelThinStyle2,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: CustomButton(
+              title: buttonText,
+              pressAction: onClick,
+            ),
+          )
+        ],
       ),
     );
   }
