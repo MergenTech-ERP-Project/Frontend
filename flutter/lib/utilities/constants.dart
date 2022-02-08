@@ -69,6 +69,9 @@ const kLabelHeader2Style = TextStyle(
     fontSize: 24
 );
 
+const kLabelHeader3Style =
+    TextStyle(color: kTextFontColor, fontFamily: 'Comfortaa', fontSize: 24);
+
 final kBoxDecorationStyle = BoxDecoration(
   color: const Color(0xFF6CA8F1),
   borderRadius: BorderRadius.circular(10.0),

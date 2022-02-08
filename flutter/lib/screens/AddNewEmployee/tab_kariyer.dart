@@ -55,6 +55,9 @@ class _TabKariyerState extends State<TabKariyer> {
       behavior: MyCustomScrollBehavior(),
       child: Column(
         children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 8,
+          ),
           buildHeaders(
             Icons.person,
             "Pozisyon",
@@ -129,10 +132,11 @@ class _TabKariyerState extends State<TabKariyer> {
             ),
           ),
           Expanded(
-            flex: 3,
+            flex: 2,
             child: CustomButton(
               title: buttonText,
               pressAction: onClick,
+              height: 36,
             ),
           )
         ],

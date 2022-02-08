@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/utilities/constants.dart';
 
 class TabGenelFirstCard extends StatelessWidget {
   const TabGenelFirstCard({
@@ -31,47 +32,47 @@ class TabGenelFirstCard extends StatelessWidget {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: const [
                   Text("İşe Başlama Tarihi"),
                   Text("2 Aralık 2009"),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: const [
                   Text("Şirket"),
                   Text("Mergen Yazılım"),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: const [
                   Text("Şube"),
                   Text("Eskişehir Teknopark"),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: const [
                   Text("Departman"),
                   Text("Yazılım Geliştirme"),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: const [
                   Text("E-posta (iş)"),
                   Text("omerfarukozturk026@gmail.com"),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: const [
                   Text("İş Telefonu"),
                   Text("54"),
                 ],
@@ -94,8 +95,8 @@ class TabGenelFirstCard extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8),
               child: Center(
                 child: Container(
-                  height: 100,
-                  width: 100,
+                  height: 160,
+                  width: 160,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.blue[200]),
@@ -104,23 +105,38 @@ class TabGenelFirstCard extends StatelessWidget {
                     "ÖÖ",
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize: 36,
                     ),
                   )),
                 ),
               ),
             ),
-            SizedBox(height: 10),
-            Text("ömer faruk öztürk"),
-            Wrap(
-              spacing: 10,
-              children: [
-                Container(
-                  color: Colors.green,
-                  child: Text("Aktif Çalışan"),
-                ),
-              ],
+            const SizedBox(height: 10),
+            const Text(
+              "ömer faruk öztürk",
+              style: kLabelHeader3Style,
             ),
-            Divider(),
+            const SizedBox(height: 4),
+            Container(
+              height: 30,
+              width: 110,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.green,
+              ),
+              child: Center(
+                child: Wrap(
+                  spacing: 10,
+                  children: const [
+                    Text(
+                      "Aktif Çalışan",
+                      style: kLabelAppBarThinStyle,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const Divider(),
           ],
         ),
       ),
