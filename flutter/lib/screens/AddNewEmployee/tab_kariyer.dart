@@ -235,6 +235,8 @@ class _TabKariyerState extends State<TabKariyer> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: CustomDateTimePicker(
+                                      suffixWidget: const Icon(
+                                          Icons.calendar_today_outlined),
                                       borderless: true,
                                       labelText: 'Başlangıç Tarihi',
                                       onChanged: (val) {
@@ -248,6 +250,8 @@ class _TabKariyerState extends State<TabKariyer> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: CustomDateTimePicker(
+                                      suffixWidget: const Icon(
+                                          Icons.calendar_today_outlined),
                                       borderless: true,
                                       labelText: 'Bitiş Tarihi',
                                       onChanged: (val) {
