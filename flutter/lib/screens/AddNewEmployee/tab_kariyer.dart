@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_scrollableColumn.dart';
+import 'package:vtys_kalite/componenets/custom_switch.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 import 'package:vtys_kalite/utilities/custom_scroll_behaviour.dart';
@@ -62,6 +63,7 @@ class _TabKariyerState extends State<TabKariyer> {
   TextEditingController controllerUnit = TextEditingController();
   DateTime positionDateTimeBaslangic = DateTime.now();
   DateTime positionDateTimeBitis = DateTime.now();
+  bool asgariUcretSwitch = true;
 
   @override
   Widget build(BuildContext context) {
@@ -357,16 +359,8 @@ class _TabKariyerState extends State<TabKariyer> {
                                   ),
                                 ),
                                 Expanded(
-                                  child: Row(
-                                    children: [
-                                      Switch(
-                                        onChanged: (bool value) {},
-                                        value: true,
-                                      ),
-                                      const Text("Asgari Ücret",
-                                          style: kLabelStyle)
-                                    ],
-                                  ),
+                                  child: CustomSwitch(
+                                      switchValue: asgariUcretSwitch),
                                 ),
                               ],
                             ),
