@@ -18,6 +18,7 @@ Future<void> main() async {
   }
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
+    scrollBehavior: MyCustomScrollBehavior(),
     title: 'VTYS Kalite',
     theme: ThemeData(
     primaryColor: kPrimaryColor,

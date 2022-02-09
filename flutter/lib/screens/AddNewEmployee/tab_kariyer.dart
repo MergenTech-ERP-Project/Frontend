@@ -51,41 +51,75 @@ class _TabKariyerState extends State<TabKariyer> {
   );
   @override
   Widget build(BuildContext context) {
-    return ScrollConfiguration(
-      behavior: MyCustomScrollBehavior(),
-      child: Column(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 8,
-          ),
-          buildHeaders(
-            Icons.person,
-            "Pozisyon",
-            "Pozisyon Ekle",
-            () {},
-          ),
-          CustomScrollableColumn(
-            scrollController: scrollController,
-            children: [
-              buildRows(widget.positionHeaders, Colors.white, 200),
-              buildRows(widget.positionChildren1, Colors.white, 200),
-            ],
-          ),
-          buildHeaders(
-            Icons.account_balance_wallet,
-            "Maaş",
-            "Maaş Ekle",
-            () {},
-          ),
-          CustomScrollableColumn(
-            scrollController: scrollController,
-            children: [
-              buildRows(widget.salaryHeaders, Colors.white, 320),
-              buildRows(widget.salaryChildren1, Colors.white, 320),
-            ],
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        SizedBox(
+          height: MediaQuery.of(context).size.height / 8,
+        ),
+        buildHeaders(
+          Icons.person,
+          "Pozisyon",
+          "Pozisyon Ekle",
+          () {
+            showDialog(
+                context: context,
+                builder: (_) => AlertDialog(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      ),
+                      title: Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Flexible(
+                              flex: 8,
+                              child: Text('Pozisyon Ekle',
+                                  style: kLabelHeader2Style),
+                            ),
+                            Flexible(
+                              flex: 1,
+                              child: CustomButton(
+                                title: "Kaydet",
+                                height: 30,
+                                pressAction: () {},
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      content: Builder(
+                        builder: (context) {
+                          var width = MediaQuery.of(context).size.width / 1.5;
+                          return Container(
+                            width: width - 20,
+                            child: const Text("asd"),
+                          );
+                        },
+                      ),
+                    ));
+          },
+        ),
+        CustomScrollableColumn(
+          scrollController: scrollController,
+          children: [
+            buildRows(widget.positionHeaders, Colors.white, 200),
+            buildRows(widget.positionChildren1, Colors.white, 200),
+          ],
+        ),
+        buildHeaders(
+          Icons.account_balance_wallet,
+          "Maaş",
+          "Maaş Ekle",
+          () {},
+        ),
+        CustomScrollableColumn(
+          scrollController: scrollController,
+          children: [
+            buildRows(widget.salaryHeaders, Colors.white, 320),
+            buildRows(widget.salaryChildren1, Colors.white, 320),
+          ],
+        ),
+      ],
     );
   }
 
@@ -95,7 +129,9 @@ class _TabKariyerState extends State<TabKariyer> {
       height: 60,
       width: strings.length * cellWidth,
       child: Row(
-        children: strings.map((e) => Flexible(
+        children: strings
+            .map(
+              (e) => Flexible(
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(

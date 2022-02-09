@@ -22,7 +22,8 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
           elevation: 0,
           //automaticallyImplyLeading: true, //geri butonunu kaldırma
           backgroundColor: Colors.white,
-          bottom: const TabBar(
+          bottom: TabBar(
+            isScrollable: true,
             indicatorColor: Colors.blue,
             tabs: [
               Tab(text: 'Genel'),
@@ -33,7 +34,15 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
               Tab(text: 'Ödemeler'),
               Tab(text: 'Mesai'),
               Tab(text: 'Bodro'),
-              Tab(text: 'Diğer'),
+              Tab(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Diğer"),
+                    Icon(Icons.keyboard_arrow_down),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
