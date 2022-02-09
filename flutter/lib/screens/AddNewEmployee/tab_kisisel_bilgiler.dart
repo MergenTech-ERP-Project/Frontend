@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_custom_textbox_use.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
 class TabPersonalInformation extends StatefulWidget {
@@ -64,10 +63,11 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
               ),
             ),
             Expanded(
-              child: TabCustomTextBoxUse(
+              child: CustomTextBox(
+                borderless: true,
                 controller: widget.controllerIdentificationNumber,
                 label: "Kimlik Numarası",
-                widgetIcon: const Icon(Icons.keyboard_arrow_down),
+                suffixWidget: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
           ],
@@ -75,17 +75,19 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
         Row(
           children: [
             Expanded(
-              child: TabCustomTextBoxUse(
+              child: CustomTextBox(
+                borderless: true,
                 controller: widget.controllerMaritalStatus,
                 label: "Medeni Hal",
-                widgetIcon: const Icon(Icons.keyboard_arrow_down),
+                suffixWidget: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
             Expanded(
-              child: TabCustomTextBoxUse(
+              child: CustomTextBox(
+                borderless: true,
                 controller: widget.controllerGender,
                 label: "Cinsiyet",
-                widgetIcon: const Icon(Icons.keyboard_arrow_down),
+                suffixWidget: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
           ],
@@ -93,17 +95,19 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
         Row(
           children: [
             Expanded(
-              child: TabCustomTextBoxUse(
+              child: CustomTextBox(
+                borderless: true,
                 controller: widget.controllerDisabilityLevel,
                 label: "Engel Derecesi",
-                widgetIcon: const Icon(Icons.keyboard_arrow_down),
+                suffixWidget: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
             Expanded(
-              child: TabCustomTextBoxUse(
+              child: CustomTextBox(
+                borderless: true,
                 controller: widget.controllerNationality,
                 label: "Uyruğu",
-                widgetIcon: const Icon(Icons.keyboard_arrow_down),
+                suffixWidget: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
           ],
@@ -111,10 +115,11 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
         Row(
           children: [
             Expanded(
-              child: TabCustomTextBoxUse(
+              child: CustomTextBox(
+                borderless: true,
                 controller: widget.controllerCountOfChildren,
                 label: "Çocuk Sayısı",
-                widgetIcon: const Icon(Icons.keyboard_arrow_down),
+                suffixWidget: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
             const Flexible(
@@ -128,17 +133,19 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
         Row(
           children: [
             Expanded(
-              child: TabCustomTextBoxUse(
+              child: CustomTextBox(
+                borderless: true,
                 controller: widget.controllerBloodGroup,
                 label: "Kan Grubu",
-                widgetIcon: const Icon(Icons.keyboard_arrow_down),
+                suffixWidget: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
             Expanded(
-              child: TabCustomTextBoxUse(
+              child: CustomTextBox(
+                borderless: true,
                 controller: widget.controllerEdicationStatus,
                 label: "Eğitim Durumu",
-                widgetIcon: const Icon(Icons.keyboard_arrow_down),
+                suffixWidget: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
           ],
@@ -146,17 +153,19 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
         Row(
           children: [
             Expanded(
-              child: TabCustomTextBoxUse(
+              child: CustomTextBox(
+                borderless: true,
                 controller: widget.controllerHighestLevelOfEducationCompleted,
                 label: "Tamamlanan En Yüksek Eğitim Seviyesi",
-                widgetIcon: const Icon(Icons.keyboard_arrow_down),
+                suffixWidget: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
             Expanded(
-              child: TabCustomTextBoxUse(
+              child: CustomTextBox(
+                borderless: true,
                 controller: widget.controllerLastCompletedEducationStatus,
                 label: "Son Tamamlanan Eğitim Kurumu",
-                widgetIcon: const Icon(Icons.keyboard_arrow_down),
+                suffixWidget: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
           ],

@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_scrollableColumn.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_custom_textbox_use.dart';
+import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 import 'package:vtys_kalite/utilities/custom_scroll_behaviour.dart';
-
-import 'components/tab_custom_textbox_use.dart';
 
 class TabKariyer extends StatefulWidget {
   TabKariyer({Key? key}) : super(key: key);
@@ -146,9 +144,10 @@ class _TabKariyerState extends State<TabKariyer> {
                             Row(
                               children: [
                                 Expanded(
-                                  child: TabCustomTextBoxUse(
+                                  child: CustomTextBox(
                                       controller: positionSirket,
-                                      widgetIcon: Row(
+                                      borderless: true,
+                                      suffixWidget: Row(
                                         children: const [
                                           Icon(Icons.close),
                                           Icon(Icons.keyboard_arrow_down),
@@ -157,9 +156,10 @@ class _TabKariyerState extends State<TabKariyer> {
                                       label: "Şirket"),
                                 ),
                                 Expanded(
-                                  child: TabCustomTextBoxUse(
+                                  child: CustomTextBox(
                                       controller: positionSube,
-                                      widgetIcon: Row(
+                                      borderless: true,
+                                      suffixWidget: Row(
                                         children: const [
                                           Icon(Icons.close),
                                           Icon(Icons.keyboard_arrow_down),
@@ -172,9 +172,10 @@ class _TabKariyerState extends State<TabKariyer> {
                             Row(
                               children: [
                                 Expanded(
-                                  child: TabCustomTextBoxUse(
+                                  child: CustomTextBox(
                                       controller: positionDepartman,
-                                      widgetIcon: Row(
+                                      borderless: true,
+                                      suffixWidget: Row(
                                         children: const [
                                           Icon(Icons.close),
                                           Icon(Icons.keyboard_arrow_down),
@@ -183,9 +184,10 @@ class _TabKariyerState extends State<TabKariyer> {
                                       label: "Departman"),
                                 ),
                                 Expanded(
-                                  child: TabCustomTextBoxUse(
+                                  child: CustomTextBox(
                                       controller: positionUnvan,
-                                      widgetIcon: Row(
+                                      borderless: true,
+                                      suffixWidget: Row(
                                         children: const [
                                           Icon(Icons.close),
                                           Icon(Icons.keyboard_arrow_down),
@@ -198,16 +200,18 @@ class _TabKariyerState extends State<TabKariyer> {
                             Row(
                               children: [
                                 Expanded(
-                                  child: TabCustomTextBoxUse(
+                                  child: CustomTextBox(
+                                      borderless: true,
                                       controller: positionYoneticisi,
-                                      widgetIcon:
+                                      suffixWidget:
                                           const Icon(Icons.keyboard_arrow_down),
                                       label: "Yönetici"),
                                 ),
                                 Expanded(
-                                  child: TabCustomTextBoxUse(
+                                  child: CustomTextBox(
+                                      borderless: true,
                                       controller: positionCalismaSekli,
-                                      widgetIcon:
+                                      suffixWidget:
                                           const Icon(Icons.keyboard_arrow_down),
                                       label: "Çalışma Şekli"),
                                 ),
@@ -317,17 +321,19 @@ class _TabKariyerState extends State<TabKariyer> {
                             Row(
                               children: [
                                 Expanded(
-                                  child: TabCustomTextBoxUse(
+                                  child: CustomTextBox(
+                                    borderless: true,
                                     controller: controllerSalary,
                                     label: "Maaş",
-                                    widgetIcon: const SizedBox(),
+                                    suffixWidget: const SizedBox(),
                                   ),
                                 ),
                                 Expanded(
-                                  child: TabCustomTextBoxUse(
+                                  child: CustomTextBox(
+                                    borderless: true,
                                     controller: controllerUnit,
                                     label: "Birim",
-                                    widgetIcon: Row(
+                                    suffixWidget: Row(
                                       children: const [
                                         Icon(Icons.close),
                                         Icon(Icons.keyboard_arrow_down),
