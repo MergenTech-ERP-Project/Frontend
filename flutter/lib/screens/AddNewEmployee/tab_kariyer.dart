@@ -4,6 +4,8 @@ import 'package:vtys_kalite/componenets/custom_scrollableColumn.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 import 'package:vtys_kalite/utilities/custom_scroll_behaviour.dart';
 
+import 'components/tab_custom_textbox_use.dart';
+
 class TabKariyer extends StatefulWidget {
   TabKariyer({Key? key}) : super(key: key);
 
@@ -49,6 +51,10 @@ class _TabKariyerState extends State<TabKariyer> {
   ScrollController scrollController = ScrollController(
     initialScrollOffset: 0,
   );
+
+  TextEditingController controllerSalary = TextEditingController();
+  TextEditingController controllerUnit = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -62,41 +68,41 @@ class _TabKariyerState extends State<TabKariyer> {
           "Pozisyon Ekle",
           () {
             showDialog(
-                context: context,
-                builder: (_) => AlertDialog(
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              context: context,
+              builder: (_) => AlertDialog(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                title: Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Flexible(
+                        flex: 8,
+                        child: Text('Pozisyon Ekle', style: kLabelHeader2Style),
                       ),
-                      title: Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Flexible(
-                              flex: 8,
-                              child: Text('Pozisyon Ekle',
-                                  style: kLabelHeader2Style),
-                            ),
-                            Flexible(
-                              flex: 1,
-                              child: CustomButton(
-                                title: "Kaydet",
-                                height: 30,
-                                pressAction: () {},
-                              ),
-                            ),
-                          ],
+                      Flexible(
+                        flex: 1,
+                        child: CustomButton(
+                          title: "Kaydet",
+                          height: 30,
+                          pressAction: () {},
                         ),
                       ),
-                      content: Builder(
-                        builder: (context) {
-                          var width = MediaQuery.of(context).size.width / 1.5;
-                          return Container(
-                            width: width - 20,
-                            child: const Text("asd"),
-                          );
-                        },
-                      ),
-                    ));
+                    ],
+                  ),
+                ),
+                content: Builder(
+                  builder: (context) {
+                    var width = MediaQuery.of(context).size.width / 1.5;
+                    return Container(
+                      width: width - 20,
+                      child: const Text("asd"),
+                    );
+                  },
+                ),
+              ),
+            );
           },
         ),
         CustomScrollableColumn(
@@ -110,7 +116,99 @@ class _TabKariyerState extends State<TabKariyer> {
           Icons.account_balance_wallet,
           "Maaş",
           "Maaş Ekle",
-          () {},
+          () {
+            showDialog(
+              context: context,
+              builder: (_) => AlertDialog(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                title: Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Flexible(
+                        flex: 8,
+                        child: Text('Maaş Ekle', style: kLabelHeader2Style),
+                      ),
+                      Flexible(
+                        flex: 2,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: CustomButton(
+                                backgroundColor: Colors.white,
+                                foregroundColor: Colors.black,
+                                title: "İptal",
+                                height: 30,
+                                pressAction: () {},
+                              ),
+                            ),
+                            const Expanded(child: SizedBox(width: 10)),
+                            Expanded(
+                              child: CustomButton(
+                                title: "Kaydet",
+                                height: 30,
+                                pressAction: () {},
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                content: Builder(
+                  builder: (context) {
+                    var width = MediaQuery.of(context).size.width / 1.5;
+                    return SizedBox(
+                      width: width - 20,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: TabCustomTextBoxUse(
+                                    controller: controllerSalary,
+                                    label: "Maaş",
+                                    widgetIcon: const SizedBox(),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: TabCustomTextBoxUse(
+                                    controller: controllerUnit,
+                                    label: "Birim",
+                                    widgetIcon: Row(
+                                      children: const [
+                                        Icon(Icons.close),
+                                        Icon(Icons.keyboard_arrow_down),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      Switch(
+                                        onChanged: (bool value) {},
+                                        value: true,
+                                      ),
+                                      const Text("Asgari Ücret", style: kLabelStyle)
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            );
+          },
         ),
         CustomScrollableColumn(
           scrollController: scrollController,

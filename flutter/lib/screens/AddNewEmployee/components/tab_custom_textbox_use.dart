@@ -21,7 +21,7 @@ class TabCustomTextBoxUse extends StatelessWidget {
       child: Row(
         children: [
           Flexible(
-            flex: 9,
+            flex: 3,
             child: CustomTextBox(
               borderless: true,
               controller: controller,
