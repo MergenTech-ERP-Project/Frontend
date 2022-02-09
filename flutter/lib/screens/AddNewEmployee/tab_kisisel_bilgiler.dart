@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
+import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
-
-import '../../componenets/custom_text_box.dart';
 
 class TabPersonalInformation extends StatefulWidget {
   DateTime birthDate = DateTime.now();
