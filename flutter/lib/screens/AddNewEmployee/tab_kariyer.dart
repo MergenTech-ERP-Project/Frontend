@@ -148,6 +148,9 @@ class _TabKariyerState extends State<TabKariyer> {
                                       controller: positionSirket,
                                       borderless: true,
                                       suffixWidget: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisSize: MainAxisSize.min,
                                         children: const [
                                           Icon(Icons.close),
                                           Icon(Icons.keyboard_arrow_down),
@@ -160,6 +163,9 @@ class _TabKariyerState extends State<TabKariyer> {
                                       controller: positionSube,
                                       borderless: true,
                                       suffixWidget: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisSize: MainAxisSize.min,
                                         children: const [
                                           Icon(Icons.close),
                                           Icon(Icons.keyboard_arrow_down),
@@ -176,6 +182,9 @@ class _TabKariyerState extends State<TabKariyer> {
                                       controller: positionDepartman,
                                       borderless: true,
                                       suffixWidget: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisSize: MainAxisSize.min,
                                         children: const [
                                           Icon(Icons.close),
                                           Icon(Icons.keyboard_arrow_down),
@@ -188,6 +197,9 @@ class _TabKariyerState extends State<TabKariyer> {
                                       controller: positionUnvan,
                                       borderless: true,
                                       suffixWidget: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisSize: MainAxisSize.min,
                                         children: const [
                                           Icon(Icons.close),
                                           Icon(Icons.keyboard_arrow_down),
@@ -334,6 +346,9 @@ class _TabKariyerState extends State<TabKariyer> {
                                     controller: controllerUnit,
                                     label: "Birim",
                                     suffixWidget: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisSize: MainAxisSize.min,
                                       children: const [
                                         Icon(Icons.close),
                                         Icon(Icons.keyboard_arrow_down),

@@ -12,6 +12,7 @@ class CustomTextBox extends StatefulWidget {
   final void Function(String)? onTextChanged;
   final double customFontSize;
   final Color fillcolor;
+  final double padding;
 
   const CustomTextBox({
     Key? key,
@@ -28,6 +29,7 @@ class CustomTextBox extends StatefulWidget {
     this.customFontSize = 16,
     this.fillcolor = Colors.white,
     this.suffixWidget = const SizedBox(),
+    this.padding = 8,
   }) : super(key: key);
 
   @override
@@ -53,44 +55,47 @@ class _CustomTextBoxState extends State<CustomTextBox> {
             ? Text(widget.title!, style: kLabelStyle)
             : const SizedBox(height: 1),
         const SizedBox(height: 10),
-        TextFormField(
-          controller: widget.controller,
-          readOnly: widget.readOnly!,
-          validator: widget.validator,
-          obscureText: confirmObscured,
-          onChanged: widget.onTextChanged,
-          style: TextStyle(
-            color: kTextFontColor,
-            fontFamily: 'Comfortaa',
-            fontSize: widget.customFontSize,
-          ),
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: widget.fillcolor,
-            prefixIcon: widget.decorationIcon,
-            suffixIcon: (widget.obscureText!)
-                ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        confirmObscured = !confirmObscured;
-                      });
-                    },
-                    icon: confirmObscured
-                        ? const Icon(Icons.visibility_off)
-                        : const Icon(Icons.visibility),
-                  )
-                : widget.suffixWidget,
-            labelText: widget.label,
-            hintText: widget.hint,
-            border: !widget.borderless!
-                ? OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.purple),
-                    borderRadius: BorderRadius.circular(20),
-                  )
-                : null,
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: widget.padding),
+          child: TextFormField(
+            controller: widget.controller,
+            readOnly: widget.readOnly!,
+            validator: widget.validator,
+            obscureText: confirmObscured,
+            onChanged: widget.onTextChanged,
+            style: TextStyle(
+              color: kTextFontColor,
+              fontFamily: 'Comfortaa',
+              fontSize: widget.customFontSize,
+            ),
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: widget.fillcolor,
+              prefixIcon: widget.decorationIcon,
+              suffixIcon: (widget.obscureText!)
+                  ? IconButton(
+                      onPressed: () {
+                        setState(() {
+                          confirmObscured = !confirmObscured;
+                        });
+                      },
+                      icon: confirmObscured
+                          ? const Icon(Icons.visibility_off)
+                          : const Icon(Icons.visibility),
+                    )
+                  : widget.suffixWidget,
+              labelText: widget.label,
+              hintText: widget.hint,
+              border: !widget.borderless!
+                  ? OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.purple),
+                      borderRadius: BorderRadius.circular(20),
+                    )
+                  : null,
+            ),
           ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
       ],
     );
   }
