@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_custom_textbox_use.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
 class TabGenelSecondCard extends StatelessWidget {
@@ -45,79 +46,61 @@ class TabGenelSecondCard extends StatelessWidget {
             const SizedBox(height: 40),
             Row(
               children: [
-                Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: CustomTextBox(
-                      borderless: true,
-                      controller: controllerName,
-                      label: "Ad",
-                    ),
+                Expanded(
+                  child: TabCustomTextBoxUse(
+                    controller: controllerName,
+                    label: "Ad",
+                    widgetIcon: const SizedBox(),
                   ),
                 ),
-                Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: CustomTextBox(
-                      borderless: true,
-                      controller: controllerSurname,
-                      label: "Soyad",
-                    ),
+                Expanded(
+                  child: TabCustomTextBoxUse(
+                    controller: controllerSurname,
+                    label: "Soyad",
+                    widgetIcon: const SizedBox(),
                   ),
                 ),
               ],
             ),
             Row(
               children: [
-                Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: CustomTextBox(
-                      borderless: true,
-                      controller: controllerEPostaWork,
-                      label: "E-Posta (İş)",
-                    ),
+                Expanded(
+                  child: TabCustomTextBoxUse(
+                    controller: controllerEPostaWork,
+                    label: "E-Posta (İş)",
+                    widgetIcon: const SizedBox(),
                   ),
                 ),
-                Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: CustomTextBox(
-                      borderless: true,
-                      controller: controllerEPostaPersonal,
-                      label: "E-Posta (Genel)",
-                    ),
+                Expanded(
+                  child: TabCustomTextBoxUse(
+                    controller: controllerEPostaPersonal,
+                    label: "E-Posta (Genel)",
+                    widgetIcon: const SizedBox(),
                   ),
                 ),
               ],
             ),
             Row(
               children: [
-                Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: CustomTextBox(
-                      borderless: true,
-                      controller: controllerTelephoneWork,
-                      label: "Telefon (İş)",
-                    ),
+                Expanded(
+                  child: TabCustomTextBoxUse(
+                    controller: controllerTelephoneWork,
+                    label: "Telefon (İş)",
+                    widgetIcon: const SizedBox(),
                   ),
                 ),
-                Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: CustomTextBox(
-                      borderless: true,
-                      controller: controllerTelephonePersonal,
-                      label: "Telefon (Kişisel)",
-                    ),
+                Expanded(
+                  child: TabCustomTextBoxUse(
+                    controller: controllerTelephonePersonal,
+                    label: "Telefon (Kişisel)",
+                    widgetIcon: const SizedBox(),
                   ),
                 ),
               ],
             ),
             Row(
               children: [
-                Flexible(
+                Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(
@@ -147,53 +130,25 @@ class TabGenelSecondCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 9,
-                          child: CustomTextBox(
-                            borderless: true,
-                            controller: controllerAccessType,
-                            label: "Erişim Türü",
-                          ),
-                        ),
-                        const Expanded(
-                          flex: 1,
-                          child: Icon(Icons.keyboard_arrow_down),
-                        ),
-                      ],
-                    ),
+                Expanded(
+                  child: TabCustomTextBoxUse(
+                    controller: controllerAccessType,
+                    label: "Erişim Türü",
+                    widgetIcon: const Icon(Icons.keyboard_arrow_down),
                   ),
                 ),
               ],
             ),
             Row(
               children: [
-                Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 9,
-                          child: CustomTextBox(
-                            borderless: true,
-                            controller: controllerContractType,
-                            label: "Sözleşme Türü",
-                          ),
-                        ),
-                        const Expanded(
-                          flex: 1,
-                          child: Icon(Icons.keyboard_arrow_down),
-                        ),
-                      ],
-                    ),
+                Expanded(
+                  child: TabCustomTextBoxUse(
+                    controller: controllerContractType,
+                    label: "Sözleşme Türü",
+                    widgetIcon: const Icon(Icons.keyboard_arrow_down),
                   ),
                 ),
-                Flexible(
+                Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(

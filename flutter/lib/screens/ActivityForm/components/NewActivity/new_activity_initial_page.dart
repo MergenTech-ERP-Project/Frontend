@@ -43,7 +43,7 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
                   buildTextBox(
                       NewActivityPage.placeController, 'Place', 'Place'),
                   CustomDateTimePicker(
-                    text: 'Date',
+                    labelText: 'Date',
                 
                     onChanged: (val) {
                       if (val != null) {
