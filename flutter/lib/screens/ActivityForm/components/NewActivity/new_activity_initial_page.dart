@@ -34,24 +34,31 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                buildTextBox(NewActivityPage.nameController, 'Name'),
-                buildTextBox(NewActivityPage.placeController, 'Place'),
-                CustomDateTimePicker(
-                  labelText: "Date",
-                  onChanged: (val) {
-                    if (val != null) {
-                      try {
-                        NewActivityPage.date = dateTimeFormat.parse(val);
-                      } catch (e) {
-                        debugPrint(e.toString());
+                buildTextBox(
+                    NewActivityPage.nameController, 'Name', Icons.person),
+                buildTextBox(
+                    NewActivityPage.placeController, 'Place', Icons.home),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CustomDateTimePicker(
+                    suffixWidget: const Icon(Icons.calendar_today_outlined),
+                    labelText: "Date",
+                    onChanged: (val) {
+                      if (val != null) {
+                        try {
+                          NewActivityPage.date = dateTimeFormat.parse(val);
+                        } catch (e) {
+                          debugPrint(e.toString());
 
+                        }
                       }
-                    }
-                  },
+                    },
+                  ),
                 ),
                 const SizedBox(height: 10),
                 buildTextBox(
-                    NewActivityPage.organizatorController, 'Organizer'),
+                    NewActivityPage.organizatorController, 'Organizer',
+                    Icons.person),
               ],
             ),
           ),
@@ -84,9 +91,11 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
     );
   }
 
-  CustomTextBox buildTextBox(TextEditingController controller, String label) {
+  CustomTextBox buildTextBox(
+      TextEditingController controller, String label, IconData iconData) {
     return CustomTextBox(
       controller: controller,
+      suffixWidget: Icon(iconData),
       label: label,
       validator: (val) {
         if (val!.isEmpty) {
@@ -99,8 +108,8 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
   }
 
   bool validation() {
-    return NewActivityPage.nameController.text.trim() == "" &&
+    return !(NewActivityPage.nameController.text.trim() == "" &&
         NewActivityPage.placeController.text.trim() == "" &&
-        NewActivityPage.organizatorController.text.trim() == "";
+        NewActivityPage.organizatorController.text.trim() == "");
   }
 }
