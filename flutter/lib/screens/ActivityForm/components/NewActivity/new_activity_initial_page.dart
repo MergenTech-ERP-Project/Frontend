@@ -22,8 +22,6 @@ class NewActivityInitialPage extends StatefulWidget {
 }
 
 class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
-  final newActivityKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,35 +29,29 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
       children: [
         Expanded(
           flex: 8,
-          child: Form(
-            key: newActivityKey,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  buildTextBox(NewActivityPage.nameController, 'Name', 'Name'),
-                  buildTextBox(
-                      NewActivityPage.placeController, 'Place', 'Place'),
-                  CustomDateTimePicker(
-                    text: 'Date',
-                
-                    onChanged: (val) {
-                      if (val != null) {
-                        print("DateTime picker : " + val);
-                        try {
-                          NewActivityPage.date = dateTimeFormat.parse(val);
-                        } catch (e) {
-                          print(e.toString());
-                        }
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                buildTextBox(NewActivityPage.nameController, 'Name'),
+                buildTextBox(NewActivityPage.placeController, 'Place'),
+                CustomDateTimePicker(
+                  labelText: "Date",
+                  onChanged: (val) {
+                    if (val != null) {
+                      try {
+                        NewActivityPage.date = dateTimeFormat.parse(val);
+                      } catch (e) {
+                        debugPrint(e.toString());
                       }
-                    },
-                  ),
-                  buildTextBox(NewActivityPage.organizatorController,
-                      'Organizer', 'Organizer'),
-                ],
-              ),
+                    }
+                  },
+                ),
+                const SizedBox(height: 10),
+                buildTextBox(
+                    NewActivityPage.organizatorController, 'Organizer'),
+              ],
             ),
           ),
         ),
@@ -81,7 +73,7 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
                 flex: 2,
                 child: NewActivityNextButton(
                   controller: widget.controller,
-                  newActivityKey: newActivityKey,
+                  isValid: validation(),
                 ),
               ),
             ],
@@ -91,12 +83,10 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
     );
   }
 
-  CustomTextBox buildTextBox(
-      TextEditingController controller, String title, String hint) {
+  CustomTextBox buildTextBox(TextEditingController controller, String label) {
     return CustomTextBox(
       controller: controller,
-      title: title,
-      hint: hint,
+      label: label,
       validator: (val) {
         if (val!.isEmpty) {
           return "Cannot Be Blank";
@@ -105,5 +95,11 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
         }
       },
     );
+  }
+
+  bool validation() {
+    return NewActivityPage.nameController.text.trim() == "" &&
+        NewActivityPage.placeController.text.trim() == "" &&
+        NewActivityPage.organizatorController.text.trim() == "";
   }
 }

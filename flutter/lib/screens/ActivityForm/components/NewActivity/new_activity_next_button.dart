@@ -3,11 +3,11 @@ import 'package:vtys_kalite/componenets/custom_button.dart';
 
 class NewActivityNextButton extends StatelessWidget {
   final PageController controller;
-  final newActivityKey;
+  final bool isValid;
 
   const NewActivityNextButton({
     Key? key,
-    required this.newActivityKey,
+    required this.isValid,
     required this.controller,
   }) : super(key: key);
 
@@ -16,11 +16,9 @@ class NewActivityNextButton extends StatelessWidget {
     return CustomButton(
       title: 'Next',
       pressAction: () {
-        bool isValid = newActivityKey.currentState!.validate();
-        if(!isValid){
+        if (!isValid) {
           return;
         }
-        newActivityKey.currentState!.save();
         controller.nextPage(
           duration: const Duration(milliseconds: 100),
           curve: Curves.decelerate,

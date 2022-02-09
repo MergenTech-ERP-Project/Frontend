@@ -63,55 +63,30 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                       thickness: 3,
                     ),
                     CustomTextBox(
-                        controller: widget.controllerCompanyName,
-                        label: "Şirket Adı",
-                        validator: (val) {
-                          if (val!.isEmpty) {
-                            return "Cannot Be Blank";
-                          } else {
-                            return null;
-                          }
-                        }),
+                      controller: widget.controllerCompanyName,
+                      label: "Şirket Adı",
+                      validator: validator(),
+                    ),
                     CustomTextBox(
                         controller: widget.controllerCompanyPhone,
                         label: "Telefon",
-                        validator: (val) {
-                          if (val!.isEmpty) {
-                            return "Cannot Be Blank";
-                          } else {
-                            return null;
-                          }
-                        }),
+                      validator: validator(),
+                    ),
                     CustomTextBox(
                         controller: widget.controllerDomainName,
                         label: "E-posta Uzantısı",
-                        validator: (val) {
-                          if (val!.isEmpty) {
-                            return "Cannot Be Blank";
-                          } else {
-                            return null;
-                          }
-                        }),
+                      validator: validator(),
+                    ),
                     CustomTextBox(
                         controller: widget.controllerMersisNo,
                         label: "Mersis Numarası",
-                        validator: (val) {
-                          if (val!.isEmpty) {
-                            return "Cannot Be Blank";
-                          } else {
-                            return null;
-                          }
-                        }),
+                      validator: validator(),
+                    ),
                     CustomTextBox(
                         controller: widget.controllerSGKCompanyNo,
                         label: "SGK İş Yeri Numarası",
-                        validator: (val) {
-                          if (val!.isEmpty) {
-                            return "Cannot Be Blank";
-                          } else {
-                            return null;
-                          }
-                        }),
+                      validator: validator(),
+                    ),
                     CustomButton(
                       title: "Ekle",
                       pressAction: () {
@@ -119,11 +94,12 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                           for (Company company in Statics
                               .instance.companyController.companyList) {
                             if (company.company_name ==
-                                widget.controllerCompanyName) {
+                                widget.controllerCompanyName.text) {
                               showDialog(
                                   context: context,
                                   builder: (_) => const SimpleDialog(
-                                      title: Text("Same Company Name exists!")));
+                                      title:
+                                          Text("Same Company Name exists!")));
                               return;
                             }
                           }
@@ -143,7 +119,7 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                               "Şirket Kaydedildi",
                               snackPosition: SnackPosition.BOTTOM,
                               backgroundColor: kPrimaryColor,
-                              padding: EdgeInsets.only(left: width/2 - 100),
+                              padding: EdgeInsets.only(left: width / 2 - 100),
                             );
                           }
                         });
@@ -157,5 +133,15 @@ class _AddNewCompanyState extends State<AddNewCompany> {
         },
       ),
     );
+  }
+
+  validator() {
+    return (val) {
+      if (val!.isEmpty) {
+        return "Cannot Be Blank";
+      } else {
+        return null;
+      }
+    };
   }
 }
