@@ -44,6 +44,7 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
                         NewActivityPage.date = dateTimeFormat.parse(val);
                       } catch (e) {
                         debugPrint(e.toString());
+
                       }
                     }
                   },
