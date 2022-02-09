@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_custom_textbox_use.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
 class TabPersonalInformation extends StatefulWidget {
@@ -62,142 +63,58 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
                 ),
               ),
             ),
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 9,
-                      child: CustomTextBox(
-                        borderless: true,
-                        controller: widget.controllerIdentificationNumber,
-                        label: "Kimlik Numarası",
-                      ),
-                    ),
-                    const Expanded(
-                          flex: 1,
-                          child: Icon(Icons.keyboard_arrow_down, color: Colors.white),
-                        ),
-                  ],
-                ),
+            Expanded(
+              child: TabCustomTextBoxUse(
+                controller: widget.controllerIdentificationNumber,
+                label: "Kimlik Numarası",
+                widgetIcon: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
           ],
         ),
         Row(
           children: [
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 9,
-                      child: CustomTextBox(
-                        borderless: true,
-                        controller: widget.controllerMaritalStatus,
-                        label: "Medeni Hal",
-                      ),
-                    ),
-                    const Expanded(
-                      flex: 1,
-                      child: Icon(Icons.keyboard_arrow_down),
-                    ),
-                  ],
-                ),
+            Expanded(
+              child: TabCustomTextBoxUse(
+                controller: widget.controllerMaritalStatus,
+                label: "Medeni Hal",
+                widgetIcon: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 9,
-                      child: CustomTextBox(
-                        borderless: true,
-                        controller: widget.controllerGender,
-                        label: "Cinsiyet",
-                      ),
-                    ),
-                    const Expanded(
-                      flex: 1,
-                      child: Icon(Icons.keyboard_arrow_down),
-                    ),
-                  ],
-                ),
+            Expanded(
+              child: TabCustomTextBoxUse(
+                controller: widget.controllerGender,
+                label: "Cinsiyet",
+                widgetIcon: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
           ],
         ),
         Row(
           children: [
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 9,
-                      child: CustomTextBox(
-                        borderless: true,
-                        controller: widget.controllerDisabilityLevel,
-                        label: "Engel Derecesi",
-                      ),
-                    ),
-                    const Expanded(
-                      flex: 1,
-                      child: Icon(Icons.keyboard_arrow_down),
-                    ),
-                  ],
-                ),
+            Expanded(
+              child: TabCustomTextBoxUse(
+                controller: widget.controllerDisabilityLevel,
+                label: "Engel Derecesi",
+                widgetIcon: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 9,
-                      child: CustomTextBox(
-                        borderless: true,
-                        controller: widget.controllerNationality,
-                        label: "Uyruğu",
-                      ),
-                    ),
-                    const Expanded(
-                      flex: 1,
-                      child: Icon(Icons.keyboard_arrow_down),
-                    ),
-                  ],
-                ),
+            Expanded(
+              child: TabCustomTextBoxUse(
+                controller: widget.controllerNationality,
+                label: "Uyruğu",
+                widgetIcon: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
           ],
         ),
         Row(
           children: [
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 9,
-                      child: CustomTextBox(
-                        borderless: true,
-                        controller: widget.controllerCountOfChildren,
-                        label: "Çocuk Sayısı",
-                      ),
-                    ),
-                    const Expanded(
-                      flex: 1,
-                      child: Icon(Icons.keyboard_arrow_down),
-                    ),
-                  ],
-                ),
+            Expanded(
+              child: TabCustomTextBoxUse(
+                controller: widget.controllerCountOfChildren,
+                label: "Çocuk Sayısı",
+                widgetIcon: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
             const Flexible(
@@ -210,92 +127,36 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
         ),
         Row(
           children: [
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 9,
-                      child: CustomTextBox(
-                        borderless: true,
-                        controller: widget.controllerBloodGroup,
-                        label: "Kan Grubu",
-                      ),
-                    ),
-                    const Expanded(
-                      flex: 1,
-                      child: Icon(Icons.keyboard_arrow_down),
-                    ),
-                  ],
-                ),
+            Expanded(
+              child: TabCustomTextBoxUse(
+                controller: widget.controllerBloodGroup,
+                label: "Kan Grubu",
+                widgetIcon: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 9,
-                      child: CustomTextBox(
-                        borderless: true,
-                        controller: widget.controllerEdicationStatus,
-                        label: "Eğitim Durumu",
-                      ),
-                    ),
-                    const Expanded(
-                      flex: 1,
-                      child: Icon(Icons.keyboard_arrow_down),
-                    ),
-                  ],
-                ),
+            Expanded(
+              child: TabCustomTextBoxUse(
+                controller: widget.controllerEdicationStatus,
+                label: "Eğitim Durumu",
+                widgetIcon: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
           ],
         ),
         Row(
           children: [
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 9,
-                      child: CustomTextBox(
-                        borderless: true,
-                        controller: widget.controllerHighestLevelOfEducationCompleted,
-                        label: "Tamamlanan En Yüksek Eğitim Seviyesi",
-                      ),
-                    ),
-                    const Expanded(
-                          flex: 1,
-                          child: Icon(Icons.keyboard_arrow_down),
-                        ),
-                  ],
-                ),
+            Expanded(
+              child: TabCustomTextBoxUse(
+                controller: widget.controllerHighestLevelOfEducationCompleted,
+                label: "Tamamlanan En Yüksek Eğitim Seviyesi",
+                widgetIcon: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 9,
-                      child: CustomTextBox(
-                        borderless: true,
-                        controller: widget.controllerLastCompletedEducationStatus,
-                        label: "Son Tamamlanan Eğitim Kurumu",
-                      ),
-                    ),
-                    const Expanded(
-                          flex: 1,
-                          child: Icon(Icons.keyboard_arrow_down),
-                        ),
-                  ],
-                ),
+            Expanded(
+              child: TabCustomTextBoxUse(
+                controller: widget.controllerLastCompletedEducationStatus,
+                label: "Son Tamamlanan Eğitim Kurumu",
+                widgetIcon: const Icon(Icons.keyboard_arrow_down),
               ),
             ),
           ],

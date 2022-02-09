@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
+import 'components/tab_custom_textbox_use.dart';
+
 class TabAnotherInformation extends StatefulWidget {
   TextEditingController controllerAdressInformation = TextEditingController();
   TextEditingController controllerHomePhone = TextEditingController();
@@ -79,45 +81,17 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
                 Row(
                   children: [
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              flex: 9,
-                              child: CustomTextBox(
-                                borderless: true,
-                                controller: widget.controllerBankName,
-                                label: "Banka Adı",
-                              ),
-                            ),
-                            const Flexible(
-                              flex: 1,
-                              child: SizedBox(),
-                            ),
-                          ],
-                        ),
+                      child: TabCustomTextBoxUse(
+                        controller: widget.controllerBankName,
+                        label: "Banka Adı",
+                        widgetIcon: const SizedBox(),
                       ),
                     ),
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              flex: 9,
-                              child: CustomTextBox(
-                                borderless: true,
-                                controller: widget.controllerAccountType,
-                                label: "Hesap Tipi",
-                              ),
-                            ),
-                            const Flexible(
-                              flex: 1,
-                              child: Icon(Icons.arrow_drop_down),
-                            ),
-                          ],
-                        ),
+                      child: TabCustomTextBoxUse(
+                        controller: widget.controllerAccountType,
+                        label: "Hesap Tipi",
+                        widgetIcon: const Icon(Icons.arrow_drop_down),
                       ),
                     ),
                   ],
@@ -125,45 +99,17 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
                 Row(
                   children: [
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              flex: 9,
-                              child: CustomTextBox(
-                                borderless: true,
-                                controller: widget.controllerAccountNo,
-                                label: "Hesap No",
-                              ),
-                            ),
-                            const Flexible(
-                              flex: 1,
-                              child: SizedBox(),
-                            ),
-                          ],
-                        ),
+                      child: TabCustomTextBoxUse(
+                        controller: widget.controllerAccountNo,
+                        label: "Hesap No",
+                        widgetIcon: const SizedBox(),
                       ),
                     ),
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              flex: 9,
-                              child: CustomTextBox(
-                                borderless: true,
-                                controller: widget.controllerIBAN,
-                                label: "IBAN",
-                              ),
-                            ),
-                            const Flexible(
-                              flex: 1,
-                              child: SizedBox(),
-                            ),
-                          ],
-                        ),
+                      child: TabCustomTextBoxUse(
+                        controller: widget.controllerIBAN,
+                        label: "IBAN",
+                        widgetIcon: const SizedBox(),
                       ),
                     ),
                   ],
@@ -224,45 +170,17 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
                 Row(
                   children: [
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              flex: 9,
-                              child: CustomTextBox(
-                                borderless: true,
-                                controller: widget.controllerHomePhone,
-                                label: "Ev Telefonu",
-                              ),
-                            ),
-                            const Flexible(
-                              flex: 1,
-                              child: SizedBox(),
-                            ),
-                          ],
-                        ),
+                      child: TabCustomTextBoxUse(
+                        controller: widget.controllerHomePhone,
+                        label: "Ev Telefonu",
+                        widgetIcon: const SizedBox(),
                       ),
                     ),
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              flex: 9,
-                              child: CustomTextBox(
-                                borderless: true,
-                                controller: widget.controllerCountry,
-                                label: "Ülke",
-                              ),
-                            ),
-                            const Flexible(
-                              flex: 1,
-                              child: Icon(Icons.arrow_drop_down),
-                            ),
-                          ],
-                        ),
+                      child: TabCustomTextBoxUse(
+                        controller: widget.controllerCountry,
+                        label: "Ülke",
+                        widgetIcon: const Icon(Icons.arrow_drop_down),
                       ),
                     ),
                   ],
@@ -270,45 +188,17 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
                 Row(
                   children: [
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              flex: 9,
-                              child: CustomTextBox(
-                                borderless: true,
-                                controller: widget.controllerCity,
-                                label: "Şehir",
-                              ),
-                            ),
-                            const Flexible(
-                              flex: 1,
-                              child: SizedBox(),
-                            ),
-                          ],
-                        ),
+                      child: TabCustomTextBoxUse(
+                        controller: widget.controllerCity,
+                        label: "Şehir",
+                        widgetIcon: const SizedBox(),
                       ),
                     ),
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              flex: 9,
-                              child: CustomTextBox(
-                                borderless: true,
-                                controller: widget.controllerPostCode,
-                                label: "Posta Kodu",
-                              ),
-                            ),
-                            const Flexible(
-                              flex: 1,
-                              child: SizedBox(),
-                            ),
-                          ],
-                        ),
+                      child: TabCustomTextBoxUse(
+                        controller: widget.controllerPostCode,
+                        label: "Posta Kodu",
+                        widgetIcon: const Icon(Icons.keyboard_arrow_down),
                       ),
                     ),
                   ],
