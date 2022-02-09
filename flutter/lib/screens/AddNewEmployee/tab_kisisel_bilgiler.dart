@@ -39,7 +39,7 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
                 child: Row(
                   children: [
                     Expanded(
-                      flex: 9,
+                      flex: 3,
                       child: CustomDateTimePicker(
                         labelText: "Sözleşme Bitiş Tarihi",
                         borderless: true,

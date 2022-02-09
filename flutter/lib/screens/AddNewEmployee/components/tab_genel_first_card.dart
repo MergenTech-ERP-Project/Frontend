@@ -98,7 +98,7 @@ class TabGenelFirstCard extends StatelessWidget {
                   height: 160,
                   width: 160,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(100),
                       color: Colors.blue[200]),
                   child: const Center(
                       child: Text(

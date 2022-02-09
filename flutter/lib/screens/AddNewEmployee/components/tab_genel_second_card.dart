@@ -39,11 +39,10 @@ class TabGenelSecondCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const Padding(
-              padding: EdgeInsets.only(top: 8.0),
+              padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: Text("Genel Bilgiler",
                   style: kLabelHeader2Style, textAlign: TextAlign.center),
             ),
-            const SizedBox(height: 40),
             Row(
               children: [
                 Expanded(
@@ -106,7 +105,7 @@ class TabGenelSecondCard extends StatelessWidget {
                     child: Row(
                       children: [
                         Expanded(
-                          flex: 9,
+                          flex: 3,
                           child: CustomDateTimePicker(
                             labelText: "İşe Başlangıç Tarihi",
                             borderless: true,
@@ -156,7 +155,7 @@ class TabGenelSecondCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          flex: 9,
+                          flex: 3,
                           child: CustomDateTimePicker(
                             labelText: "Sözleşme Bitiş Tarihi",
                             borderless: true,

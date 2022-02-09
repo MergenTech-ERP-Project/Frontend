@@ -53,7 +53,7 @@ class _TabKariyerState extends State<TabKariyer> {
   ScrollController scrollController = ScrollController(
     initialScrollOffset: 0,
   );
-  
+
   TextEditingController positionSirket = TextEditingController();
   TextEditingController positionSube = TextEditingController();
   TextEditingController positionDepartman = TextEditingController();
@@ -92,145 +92,165 @@ class _TabKariyerState extends State<TabKariyer> {
                         child: Text('Pozisyon Ekle', style: kLabelHeader2Style),
                       ),
                       Flexible(
-                        flex: 1,
-                        child: CustomButton(
-                          title: "Kaydet",
-                          height: 30,
-                          pressAction: () {},
+                        flex: 2,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: CustomButton(
+                                backgroundColor: Colors.white,
+                                foregroundColor: Colors.black,
+                                title: "İptal",
+                                height: 30,
+                                pressAction: () {},
+                              ),
+                            ),
+                            const Expanded(child: SizedBox(width: 10)),
+                            Expanded(
+                              child: CustomButton(
+                                title: "Kaydet",
+                                height: 30,
+                                pressAction: () {},
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      content: Builder(
-                        builder: (context) {
-                          var width = MediaQuery.of(context).size.width - 20;
-                          return Container(
-                            width: width / 1.2,
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  Card(
-                                    child: Row(
-                                      children: const [
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 8.0),
-                                          child: Icon(Icons.info),
-                                        ),
-                                        Flexible(
-                                          child: Text(
-                                              "Şirket, çalışma şekli ve maaş güncellemeleri içeren pozisyon değişikliklerinde "
-                                              "şirketinizin kurallarını kontrol ediniz.\n"
-                                              "İleri tarihli varsayılan pozisyonlar başlandgıç tarihinden itibaren geçerli olur."),
-                                        ),
-                                      ],
-                                    ),
+                    ],
+                  ),
+                ),
+                content: Builder(
+                  builder: (context) {
+                    var width = MediaQuery.of(context).size.width - 20;
+                    return Container(
+                      width: width / 1.2,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Card(
+                              child: Row(
+                                children: const [
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 8.0),
+                                    child: Icon(Icons.info),
                                   ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: TabCustomTextBoxUse(
-                                            controller: positionSirket,
-                                            widgetIcon: Row(
-                                              children: const [
-                                                Icon(Icons.close),
-                                                Icon(Icons.keyboard_arrow_down),
-                                              ],
-                                            ),
-                                            label: "Şirket"),
-                                      ),
-                                      Expanded(
-                                        child: TabCustomTextBoxUse(
-                                            controller: positionSube,
-                                            widgetIcon: Row(
-                                              children: const [
-                                                Icon(Icons.close),
-                                                Icon(Icons.keyboard_arrow_down),
-                                              ],
-                                            ),
-                                            label: "Şube"),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: TabCustomTextBoxUse(
-                                            controller: positionDepartman,
-                                            widgetIcon: Row(
-                                              children: const [
-                                                Icon(Icons.close),
-                                                Icon(Icons.keyboard_arrow_down),
-                                              ],
-                                            ),
-                                            label: "Departman"),
-                                      ),
-                                      Expanded(
-                                        child: TabCustomTextBoxUse(
-                                            controller: positionUnvan,
-                                            widgetIcon: Row(
-                                              children: const [
-                                                Icon(Icons.close),
-                                                Icon(Icons.keyboard_arrow_down),
-                                              ],
-                                            ),
-                                            label: "Unvan"),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: TabCustomTextBoxUse(
-                                            controller: positionYoneticisi,
-                                            widgetIcon: const Icon(
-                                                Icons.keyboard_arrow_down),
-                                            label: "Yönetici"),
-                                      ),
-                                      Expanded(
-                                        child: TabCustomTextBoxUse(
-                                            controller: positionCalismaSekli,
-                                            widgetIcon: const Icon(
-                                                Icons.keyboard_arrow_down),
-                                            label: "Çalışma Şekli"),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: CustomDateTimePicker(
-                                            borderless: true,
-                                            labelText: 'Başlangıç Tarihi',
-                                            onChanged: (val) {
-                                              positionDateTimeBaslangic =
-                                                  dateTimeFormat.parse(val!);
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: CustomDateTimePicker(
-                                            borderless: true,
-                                            labelText: 'Bitiş Tarihi',
-                                            onChanged: (val) {
-                                              positionDateTimeBitis =
-                                                  dateTimeFormat.parse(val!);
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                  Flexible(
+                                    child: Text(
+                                        "Şirket, çalışma şekli ve maaş güncellemeleri içeren pozisyon değişikliklerinde "
+                                        "şirketinizin kurallarını kontrol ediniz.\n"
+                                        "İleri tarihli varsayılan pozisyonlar başlandgıç tarihinden itibaren geçerli olur."),
                                   ),
                                 ],
                               ),
                             ),
-                          );
-                        },
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: TabCustomTextBoxUse(
+                                      controller: positionSirket,
+                                      widgetIcon: Row(
+                                        children: const [
+                                          Icon(Icons.close),
+                                          Icon(Icons.keyboard_arrow_down),
+                                        ],
+                                      ),
+                                      label: "Şirket"),
+                                ),
+                                Expanded(
+                                  child: TabCustomTextBoxUse(
+                                      controller: positionSube,
+                                      widgetIcon: Row(
+                                        children: const [
+                                          Icon(Icons.close),
+                                          Icon(Icons.keyboard_arrow_down),
+                                        ],
+                                      ),
+                                      label: "Şube"),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: TabCustomTextBoxUse(
+                                      controller: positionDepartman,
+                                      widgetIcon: Row(
+                                        children: const [
+                                          Icon(Icons.close),
+                                          Icon(Icons.keyboard_arrow_down),
+                                        ],
+                                      ),
+                                      label: "Departman"),
+                                ),
+                                Expanded(
+                                  child: TabCustomTextBoxUse(
+                                      controller: positionUnvan,
+                                      widgetIcon: Row(
+                                        children: const [
+                                          Icon(Icons.close),
+                                          Icon(Icons.keyboard_arrow_down),
+                                        ],
+                                      ),
+                                      label: "Unvan"),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: TabCustomTextBoxUse(
+                                      controller: positionYoneticisi,
+                                      widgetIcon:
+                                          const Icon(Icons.keyboard_arrow_down),
+                                      label: "Yönetici"),
+                                ),
+                                Expanded(
+                                  child: TabCustomTextBoxUse(
+                                      controller: positionCalismaSekli,
+                                      widgetIcon:
+                                          const Icon(Icons.keyboard_arrow_down),
+                                      label: "Çalışma Şekli"),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: CustomDateTimePicker(
+                                      borderless: true,
+                                      labelText: 'Başlangıç Tarihi',
+                                      onChanged: (val) {
+                                        positionDateTimeBaslangic =
+                                            dateTimeFormat.parse(val!);
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: CustomDateTimePicker(
+                                      borderless: true,
+                                      labelText: 'Bitiş Tarihi',
+                                      onChanged: (val) {
+                                        positionDateTimeBitis =
+                                            dateTimeFormat.parse(val!);
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ));
+                    );
+                  },
+                ),
+              ),
+            );
           },
         ),
         CustomScrollableColumn(
@@ -322,7 +342,8 @@ class _TabKariyerState extends State<TabKariyer> {
                                         onChanged: (bool value) {},
                                         value: true,
                                       ),
-                                      const Text("Asgari Ücret", style: kLabelStyle)
+                                      const Text("Asgari Ücret",
+                                          style: kLabelStyle)
                                     ],
                                   ),
                                 ),
