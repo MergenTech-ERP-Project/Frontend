@@ -60,25 +60,15 @@ class _AddNewBranchState extends State<AddNewBranch> {
                     thickness: 3,
                   ),
                   CustomTextBox(
-                      label: "Birim Adı",
-                      controller: widget.controllerBranchName,
-                      validator: (val) {
-                        if (val!.isEmpty) {
-                          return "Cannot Be Blank";
-                        } else {
-                          return null;
-                        }
-                      }),
+                    label: "Birim Adı",
+                    controller: widget.controllerBranchName,
+                    validator: validator(),
+                  ),
                   CustomTextBox(
-                      label: "Bağlı Olduğu Üst Birim (Opsiyonel)",
-                      controller: widget.controllerBranchUpper,
-                      validator: (val) {
-                        if (val!.isEmpty) {
-                          return "Cannot Be Blank";
-                        } else {
-                          return null;
-                        }
-                      }),
+                    label: "Bağlı Olduğu Üst Birim (Opsiyonel)",
+                    controller: widget.controllerBranchUpper,
+                    validator: validator(),
+                  ),
                   const Text(
                     "Kurallar",
                     style: kLabelThinStyle,
@@ -88,19 +78,13 @@ class _AddNewBranchState extends State<AddNewBranch> {
                     controller: widget.controllerRules,
                   ),
                   CustomTextBox(
-                      controller: widget.controllerVacationDays,
-                      hint: "Seçiniz",
-                      label: "Tatil Takvimleri",
-                      validator: (val) {
-                        if (val!.isEmpty) {
-                          return "Cannot Be Blank";
-                        } else {
-                          return null;
-                        }
-                      }
+                    controller: widget.controllerVacationDays,
+                    hint: "Seçiniz",
+                    label: "Tatil Takvimleri",
+                    validator: validator(),
 
-                      ///DateTimePickerEklenmeli
-                      ),
+                    ///DateTimePickerEklenmeli
+                  ),
                   CustomButton(
                     title: "Ekle",
                     pressAction: () {
@@ -144,5 +128,15 @@ class _AddNewBranchState extends State<AddNewBranch> {
         );
       }),
     );
+  }
+
+  validator() {
+    return (val) {
+      if (val!.isEmpty) {
+        return "Cannot Be Blank";
+      } else {
+        return null;
+      }
+    };
   }
 }
