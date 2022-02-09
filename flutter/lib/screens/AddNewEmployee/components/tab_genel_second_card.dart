@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_custom_textbox_use.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
 class TabGenelSecondCard extends StatelessWidget {
@@ -46,17 +45,19 @@ class TabGenelSecondCard extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: TabCustomTextBoxUse(
+                  child: CustomTextBox(
+                    borderless: true,
                     controller: controllerName,
                     label: "Ad",
-                    widgetIcon: const SizedBox(),
+                    suffixWidget: const SizedBox(),
                   ),
                 ),
                 Expanded(
-                  child: TabCustomTextBoxUse(
+                  child: CustomTextBox(
+                    borderless: true,
                     controller: controllerSurname,
                     label: "Soyad",
-                    widgetIcon: const SizedBox(),
+                    suffixWidget: const SizedBox(),
                   ),
                 ),
               ],
@@ -64,17 +65,19 @@ class TabGenelSecondCard extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: TabCustomTextBoxUse(
+                  child: CustomTextBox(
+                    borderless: true,
                     controller: controllerEPostaWork,
                     label: "E-Posta (İş)",
-                    widgetIcon: const SizedBox(),
+                    suffixWidget: const SizedBox(),
                   ),
                 ),
                 Expanded(
-                  child: TabCustomTextBoxUse(
+                  child: CustomTextBox(
+                    borderless: true,
                     controller: controllerEPostaPersonal,
                     label: "E-Posta (Genel)",
-                    widgetIcon: const SizedBox(),
+                    suffixWidget: const SizedBox(),
                   ),
                 ),
               ],
@@ -82,17 +85,19 @@ class TabGenelSecondCard extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: TabCustomTextBoxUse(
+                  child: CustomTextBox(
+                    borderless: true,
                     controller: controllerTelephoneWork,
                     label: "Telefon (İş)",
-                    widgetIcon: const SizedBox(),
+                    suffixWidget: const SizedBox(),
                   ),
                 ),
                 Expanded(
-                  child: TabCustomTextBoxUse(
+                  child: CustomTextBox(
+                    borderless: true,
                     controller: controllerTelephonePersonal,
                     label: "Telefon (Kişisel)",
-                    widgetIcon: const SizedBox(),
+                    suffixWidget: const SizedBox(),
                   ),
                 ),
               ],
@@ -130,10 +135,11 @@ class TabGenelSecondCard extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: TabCustomTextBoxUse(
+                  child: CustomTextBox(
+                    borderless: true,
                     controller: controllerAccessType,
                     label: "Erişim Türü",
-                    widgetIcon: const Icon(Icons.keyboard_arrow_down),
+                    suffixWidget: const Icon(Icons.keyboard_arrow_down),
                   ),
                 ),
               ],
@@ -141,10 +147,11 @@ class TabGenelSecondCard extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: TabCustomTextBoxUse(
+                  child: CustomTextBox(
+                    borderless: true,
                     controller: controllerContractType,
                     label: "Sözleşme Türü",
-                    widgetIcon: const Icon(Icons.keyboard_arrow_down),
+                    suffixWidget: const Icon(Icons.keyboard_arrow_down),
                   ),
                 ),
                 Expanded(

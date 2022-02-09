@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
-import 'components/tab_custom_textbox_use.dart';
-
 class TabAnotherInformation extends StatefulWidget {
   TextEditingController controllerAdressInformation = TextEditingController();
   TextEditingController controllerHomePhone = TextEditingController();
@@ -81,17 +79,19 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
                 Row(
                   children: [
                     Expanded(
-                      child: TabCustomTextBoxUse(
+                      child: CustomTextBox(
+                        borderless: true,
                         controller: widget.controllerBankName,
                         label: "Banka Adı",
-                        widgetIcon: const SizedBox(),
+                        suffixWidget: const SizedBox(),
                       ),
                     ),
                     Expanded(
-                      child: TabCustomTextBoxUse(
+                      child: CustomTextBox(
+                        borderless: true,
                         controller: widget.controllerAccountType,
                         label: "Hesap Tipi",
-                        widgetIcon: const Icon(Icons.arrow_drop_down),
+                        suffixWidget: const Icon(Icons.arrow_drop_down),
                       ),
                     ),
                   ],
@@ -99,17 +99,19 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
                 Row(
                   children: [
                     Expanded(
-                      child: TabCustomTextBoxUse(
+                      child: CustomTextBox(
+                        borderless: true,
                         controller: widget.controllerAccountNo,
                         label: "Hesap No",
-                        widgetIcon: const SizedBox(),
+                        suffixWidget: const SizedBox(),
                       ),
                     ),
                     Expanded(
-                      child: TabCustomTextBoxUse(
+                      child: CustomTextBox(
+                        borderless: true,
                         controller: widget.controllerIBAN,
                         label: "IBAN",
-                        widgetIcon: const SizedBox(),
+                        suffixWidget: const SizedBox(),
                       ),
                     ),
                   ],
@@ -170,17 +172,19 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
                 Row(
                   children: [
                     Expanded(
-                      child: TabCustomTextBoxUse(
+                      child: CustomTextBox(
+                        borderless: true,
                         controller: widget.controllerHomePhone,
                         label: "Ev Telefonu",
-                        widgetIcon: const SizedBox(),
+                        suffixWidget: const SizedBox(),
                       ),
                     ),
                     Expanded(
-                      child: TabCustomTextBoxUse(
+                      child: CustomTextBox(
+                        borderless: true,
                         controller: widget.controllerCountry,
                         label: "Ülke",
-                        widgetIcon: const Icon(Icons.arrow_drop_down),
+                        suffixWidget: const Icon(Icons.arrow_drop_down),
                       ),
                     ),
                   ],
@@ -188,17 +192,19 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
                 Row(
                   children: [
                     Expanded(
-                      child: TabCustomTextBoxUse(
+                      child: CustomTextBox(
+                        borderless: true,
                         controller: widget.controllerCity,
                         label: "Şehir",
-                        widgetIcon: const SizedBox(),
+                        suffixWidget: const SizedBox(),
                       ),
                     ),
                     Expanded(
-                      child: TabCustomTextBoxUse(
+                      child: CustomTextBox(
+                        borderless: true,
                         controller: widget.controllerPostCode,
                         label: "Posta Kodu",
-                        widgetIcon: const Icon(Icons.keyboard_arrow_down),
+                        suffixWidget: const Icon(Icons.keyboard_arrow_down),
                       ),
                     ),
                   ],
