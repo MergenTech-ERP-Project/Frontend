@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
+import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_scrollableColumn.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_custom_textbox_use.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 import 'package:vtys_kalite/utilities/custom_scroll_behaviour.dart';
 
@@ -49,6 +51,15 @@ class _TabKariyerState extends State<TabKariyer> {
   ScrollController scrollController = ScrollController(
     initialScrollOffset: 0,
   );
+  TextEditingController positionSirket = TextEditingController();
+  TextEditingController positionSube = TextEditingController();
+  TextEditingController positionDepartman = TextEditingController();
+  TextEditingController positionUnvan = TextEditingController();
+  TextEditingController positionYoneticisi = TextEditingController();
+  TextEditingController positionCalismaSekli = TextEditingController();
+  DateTime positionDateTimeBaslangic = DateTime.now();
+  DateTime positionDateTimeBitis = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -89,10 +100,132 @@ class _TabKariyerState extends State<TabKariyer> {
                       ),
                       content: Builder(
                         builder: (context) {
-                          var width = MediaQuery.of(context).size.width / 1.5;
+                          var width = MediaQuery.of(context).size.width - 20;
                           return Container(
-                            width: width - 20,
-                            child: const Text("asd"),
+                            width: width / 1.2,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Card(
+                                    child: Row(
+                                      children: const [
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 8.0),
+                                          child: Icon(Icons.info),
+                                        ),
+                                        Flexible(
+                                          child: Text(
+                                              "Şirket, çalışma şekli ve maaş güncellemeleri içeren pozisyon değişikliklerinde "
+                                              "şirketinizin kurallarını kontrol ediniz.\n"
+                                              "İleri tarihli varsayılan pozisyonlar başlandgıç tarihinden itibaren geçerli olur."),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: TabCustomTextBoxUse(
+                                            controller: positionSirket,
+                                            widgetIcon: Row(
+                                              children: const [
+                                                Icon(Icons.close),
+                                                Icon(Icons.keyboard_arrow_down),
+                                              ],
+                                            ),
+                                            label: "Şirket"),
+                                      ),
+                                      Expanded(
+                                        child: TabCustomTextBoxUse(
+                                            controller: positionSube,
+                                            widgetIcon: Row(
+                                              children: const [
+                                                Icon(Icons.close),
+                                                Icon(Icons.keyboard_arrow_down),
+                                              ],
+                                            ),
+                                            label: "Şube"),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: TabCustomTextBoxUse(
+                                            controller: positionDepartman,
+                                            widgetIcon: Row(
+                                              children: const [
+                                                Icon(Icons.close),
+                                                Icon(Icons.keyboard_arrow_down),
+                                              ],
+                                            ),
+                                            label: "Departman"),
+                                      ),
+                                      Expanded(
+                                        child: TabCustomTextBoxUse(
+                                            controller: positionUnvan,
+                                            widgetIcon: Row(
+                                              children: const [
+                                                Icon(Icons.close),
+                                                Icon(Icons.keyboard_arrow_down),
+                                              ],
+                                            ),
+                                            label: "Unvan"),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: TabCustomTextBoxUse(
+                                            controller: positionYoneticisi,
+                                            widgetIcon: const Icon(
+                                                Icons.keyboard_arrow_down),
+                                            label: "Yönetici"),
+                                      ),
+                                      Expanded(
+                                        child: TabCustomTextBoxUse(
+                                            controller: positionCalismaSekli,
+                                            widgetIcon: const Icon(
+                                                Icons.keyboard_arrow_down),
+                                            label: "Çalışma Şekli"),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: CustomDateTimePicker(
+                                            borderless: true,
+                                            labelText: 'Başlangıç Tarihi',
+                                            onChanged: (val) {
+                                              positionDateTimeBaslangic =
+                                                  dateTimeFormat.parse(val!);
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: CustomDateTimePicker(
+                                            borderless: true,
+                                            labelText: 'Bitiş Tarihi',
+                                            onChanged: (val) {
+                                              positionDateTimeBitis =
+                                                  dateTimeFormat.parse(val!);
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
                           );
                         },
                       ),
