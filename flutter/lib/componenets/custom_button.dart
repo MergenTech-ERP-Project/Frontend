@@ -6,6 +6,8 @@ class CustomButton extends StatefulWidget {
   final Function()? pressAction;
   final double? height;
   final IconData? icon;
+  final Color backgroundColor;
+  final Color foregroundColor;
 
   const CustomButton({
     Key? key,
@@ -13,6 +15,8 @@ class CustomButton extends StatefulWidget {
     this.icon,
     this.height = 40,
     required this.title,
+    this.backgroundColor = kPrimaryColor,
+    this.foregroundColor = Colors.white,
   }) : super(key: key);
 
   @override
@@ -28,8 +32,8 @@ class _CustomButtonState extends State<CustomButton> {
       child: ElevatedButton(
         onPressed: widget.pressAction,
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(kPrimaryColor),
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          backgroundColor:
+              MaterialStateProperty.all<Color>(widget.backgroundColor),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(widget.height! / 2),
@@ -39,14 +43,18 @@ class _CustomButtonState extends State<CustomButton> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if(widget.icon != null)
+            if (widget.icon != null)
               Icon(
                 widget.icon,
                 size: 20,
               ),
             Text(
               (widget.icon != null ? "  " : "") + widget.title,
-              style: kLabelAppBarThinStyle,
+              style: TextStyle(
+                color: widget.foregroundColor,
+                fontFamily: 'Comfortaa',
+                fontSize: 16,
+              ),
             ),
           ],
         ),
