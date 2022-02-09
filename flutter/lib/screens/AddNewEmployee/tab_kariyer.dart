@@ -95,9 +95,7 @@ class _TabKariyerState extends State<TabKariyer> {
       height: 60,
       width: strings.length * cellWidth,
       child: Row(
-        children: strings
-            .map<Widget>(
-              (e) => Flexible(
+        children: strings.map((e) => Flexible(
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(

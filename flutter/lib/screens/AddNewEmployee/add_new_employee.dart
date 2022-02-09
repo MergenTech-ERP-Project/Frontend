@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/tab_diger_bilgiler.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_genel.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kisisel_bilgiler.dart';
@@ -14,7 +15,7 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 8,
+      length: 9,
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 0,
@@ -27,6 +28,7 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
               Tab(text: 'Genel'),
               Tab(text: 'Kariyer'),
               Tab(text: 'Kişisel Bilgiler'),
+              Tab(text: 'Diğer Bilgiler'),
               Tab(text: 'İzin'),
               Tab(text: 'Ödemeler'),
               Tab(text: 'Mesai'),
@@ -41,6 +43,7 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
               TabGenel(),
               TabKariyer(),
               TabPersonalInformation(),
+              TabAnotherInformation(),
               Center(child: Text("4")),
               Center(child: Text("5")),
               Center(child: Text("6")),
