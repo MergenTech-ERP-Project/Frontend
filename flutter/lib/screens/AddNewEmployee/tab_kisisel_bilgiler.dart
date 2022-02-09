@@ -35,30 +35,20 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
             Flexible(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: CustomDateTimePicker(
-                        labelText: "Sözleşme Bitiş Tarihi",
-                        borderless: true,
-                        onChanged: (val) {
-                          if (val != null) {
-                            print("DateTime picker : " + val);
-                          }
-                          try {
-                            widget.birthDate = dateTimeFormat.parse(val!);
-                          } catch (e) {
-                            print(e.toString());
-                          }
-                        },
-                      ),
-                    ),
-                    const Expanded(
-                      flex: 1,
-                      child: Icon(Icons.calendar_today_outlined),
-                    ),
-                  ],
+                child: CustomDateTimePicker(
+                  suffixWidget: const Icon(Icons.calendar_today_outlined),
+                  labelText: "Sözleşme Bitiş Tarihi",
+                  borderless: true,
+                  onChanged: (val) {
+                    if (val != null) {
+                      print("DateTime picker : " + val);
+                    }
+                    try {
+                      widget.birthDate = dateTimeFormat.parse(val!);
+                    } catch (e) {
+                      print(e.toString());
+                    }
+                  },
                 ),
               ),
             ),

@@ -107,30 +107,20 @@ class TabGenelSecondCard extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: CustomDateTimePicker(
-                            labelText: "İşe Başlangıç Tarihi",
-                            borderless: true,
-                            onChanged: (val) {
-                              if (val != null) {
-                                print("DateTime picker : " + val);
-                              }
-                              try {
-                                dateOfStart = dateTimeFormat.parse(val!);
-                              } catch (e) {
-                                print(e.toString());
-                              }
-                            },
-                          ),
-                        ),
-                        const Expanded(
-                          flex: 1,
-                          child: Icon(Icons.calendar_today_outlined),
-                        ),
-                      ],
+                    child: CustomDateTimePicker(
+                      suffixWidget: const Icon(Icons.calendar_today_outlined),
+                      labelText: "İşe Başlangıç Tarihi",
+                      borderless: true,
+                      onChanged: (val) {
+                        if (val != null) {
+                          print("DateTime picker : " + val);
+                        }
+                        try {
+                          dateOfStart = dateTimeFormat.parse(val!);
+                        } catch (e) {
+                          print(e.toString());
+                        }
+                      },
                     ),
                   ),
                 ),
@@ -157,32 +147,20 @@ class TabGenelSecondCard extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Row(
-                      //scrollDirection: Axis.horizontal,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: CustomDateTimePicker(
-                            labelText: "Sözleşme Bitiş Tarihi",
-                            borderless: true,
-                            onChanged: (val) {
-                              if (val != null) {
-                                print("DateTime picker : " + val);
-                              }
-                              try {
-                                contractEndDate = dateTimeFormat.parse(val!);
-                              } catch (e) {
-                                print(e.toString());
-                              }
-                            },
-                          ),
-                        ),
-                        const Expanded(
-                          flex: 1,
-                          child: Icon(Icons.calendar_today_outlined),
-                        ),
-                      ],
+                    child: CustomDateTimePicker(
+                      suffixWidget: const Icon(Icons.calendar_today_outlined),
+                      labelText: "Sözleşme Bitiş Tarihi",
+                      borderless: true,
+                      onChanged: (val) {
+                        if (val != null) {
+                          print("DateTime picker : " + val);
+                        }
+                        try {
+                          contractEndDate = dateTimeFormat.parse(val!);
+                        } catch (e) {
+                          print(e.toString());
+                        }
+                      },
                     ),
                   ),
                 ),

@@ -7,6 +7,7 @@ class CustomDateTimePicker extends StatefulWidget {
   bool? borderless;
   final Color fillcolor;
   final String? labelText;
+  final Widget suffixWidget;
 
   CustomDateTimePicker({
     Key? key,
@@ -14,6 +15,7 @@ class CustomDateTimePicker extends StatefulWidget {
     this.borderless = false,
     this.fillcolor = Colors.white,
     this.labelText,
+    this.suffixWidget = const SizedBox(),
   }) : super(key: key);
 
   @override
@@ -34,6 +36,7 @@ class _CustomDateTimePickerState extends State<CustomDateTimePicker> {
           firstDate: DateTime.now(),
           lastDate: DateTime.now().add(const Duration(days: 1000)),
           decoration: InputDecoration(
+            suffixIcon: widget.suffixWidget,
             labelStyle: const TextStyle(
               color: kTextFontColor,
               fontFamily: 'Comfortaa',
