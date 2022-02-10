@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
 
 class BranchRemoteServices {
@@ -8,7 +9,7 @@ class BranchRemoteServices {
 
   static Future<List<Branch>?> fetchBranches() async {
     var response = await http.get(Uri.parse(
-        'https://kalite-takip-yonetim-sistemi.herokuapp.com/branch/branches'));
+        Statics.instance.serviceHttp + '/branch/branches'));
     if (response.statusCode == 200) {
       var jsonString = response.body;
       return branchFromJson(jsonString);
@@ -19,7 +20,7 @@ class BranchRemoteServices {
 
   static Future<int> fetchBranch(String _branch_name) async {
     var response = await http.get(Uri.parse(
-        'https://kalite-takip-yonetim-sistemi.herokuapp.com/branch/branches/$_branch_name'));
+        Statics.instance.serviceHttp + '/branch/branches/$_branch_name'));
     int branchId = -1;
     if (response.statusCode == 200) {
       var jsonString = response.body;
@@ -40,7 +41,7 @@ class BranchRemoteServices {
     var response = await http
         .post(
       Uri.parse(
-          'https://kalite-takip-yonetim-sistemi.herokuapp.com/branch/post'),
+          Statics.instance.serviceHttp + '/branch/post'),
       headers: <String, String>{
         'Content-type': 'application/json',
         'Accept': 'application/json',
@@ -61,7 +62,7 @@ class BranchRemoteServices {
     var response = await http
         .put(
       Uri.parse(
-          "https://kalite-takip-yonetim-sistemi.herokuapp.com/branch/put/$id"),
+          Statics.instance.serviceHttp + "/branch/put/$id"),
       headers: <String, String>{
         'Content-type': 'application/json',
         'Accept': 'application/json',
@@ -81,7 +82,7 @@ class BranchRemoteServices {
     var response = await http
         .delete(
       Uri.parse(
-          'https://kalite-takip-yonetim-sistemi.herokuapp.com/branch/delete/$id'),
+          Statics.instance.serviceHttp + '/branch/delete/$id'),
       headers: <String, String>{
         'Content-type': 'application/json',
         'Accept': 'application/json',
