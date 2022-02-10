@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/user.dart';
 
 class UserRemoteServices {
@@ -8,7 +9,7 @@ class UserRemoteServices {
 
   static Future<List<User>?> fetchUsers() async {
     var response = await http.get(Uri.parse(
-        'https://kalite-takip-yonetim-sistemi.herokuapp.com/user/users'));
+        Statics.instance.serviceHttp + '/user/users'));
     if (response.statusCode == 200) {
       var jsonString = response.body;
       return userFromJson(jsonString);
@@ -19,7 +20,7 @@ class UserRemoteServices {
 
   static Future<int> fetchUser(String name, String password) async {
     var response = await http.get(Uri.parse(
-        'https://kalite-takip-yonetim-sistemi.herokuapp.com/user/users'));
+        Statics.instance.serviceHttp + '/user/users'));
     int userID = -1;
     if (response.statusCode == 200) {
       var jsonString = response.body;
@@ -41,7 +42,7 @@ class UserRemoteServices {
     var response = await http
         .post(
             Uri.parse(
-                'https://kalite-takip-yonetim-sistemi.herokuapp.com/user/post'),
+                Statics.instance.serviceHttp + '/user/post'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
@@ -62,7 +63,7 @@ class UserRemoteServices {
     var response = await http
         .put(
             Uri.parse(
-                'https://kalite-takip-yonetim-sistemi.herokuapp.com/user/put/$id'),
+                Statics.instance.serviceHttp + '/user/put/$id'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
@@ -82,7 +83,7 @@ class UserRemoteServices {
     var response = await http
         .delete(
             Uri.parse(
-                'https://kalite-takip-yonetim-sistemi.herokuapp.com/user/delete/$id'),
+                Statics.instance.serviceHttp + '/user/delete/$id'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',

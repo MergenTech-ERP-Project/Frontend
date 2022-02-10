@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
 
 class CompanyRemoteServices {
@@ -8,7 +9,7 @@ class CompanyRemoteServices {
 
   static Future<List<Company>?> fetchCompanies() async {
     var response = await http.get(Uri.parse(
-        'https://kalite-takip-yonetim-sistemi.herokuapp.com/company/companies'));
+        Statics.instance.serviceHttp + '/company/companies'));
     if (response.statusCode == 200) {
       var jsonString = response.body;
       return companyFromJson(jsonString);
@@ -19,7 +20,7 @@ class CompanyRemoteServices {
 
   static Future<int> fetchCompany(String _company_name) async {
     var response = await http.get(Uri.parse(
-        'https://kalite-takip-yonetim-sistemi.herokuapp.com/company/companies/$_company_name'));
+        Statics.instance.serviceHttp + '/company/companies/$_company_name'));
     int companyId = -1;
     if (response.statusCode == 200) {
       var jsonString = response.body;
@@ -40,7 +41,7 @@ class CompanyRemoteServices {
     var response = await http
         .post(
           Uri.parse(
-              'https://kalite-takip-yonetim-sistemi.herokuapp.com/company/post'),
+              Statics.instance.serviceHttp + '/company/post'),
           headers: <String, String>{
             'Content-type': 'application/json',
             'Accept': 'application/json',
@@ -61,7 +62,7 @@ class CompanyRemoteServices {
     var response = await http
         .put(
           Uri.parse(
-              "https://kalite-takip-yonetim-sistemi.herokuapp.com/company/put/$id"),
+              Statics.instance.serviceHttp + "/company/put/$id"),
           headers: <String, String>{
             'Content-type': 'application/json',
             'Accept': 'application/json',
@@ -81,7 +82,7 @@ class CompanyRemoteServices {
     var response = await http
         .delete(
           Uri.parse(
-              'https://kalite-takip-yonetim-sistemi.herokuapp.com/company/delete/$id'),
+              Statics.instance.serviceHttp + '/company/delete/$id'),
           headers: <String, String>{
             'Content-type': 'application/json',
             'Accept': 'application/json',

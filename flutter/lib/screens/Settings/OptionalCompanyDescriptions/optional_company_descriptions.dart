@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
-import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Components/add_new_company.dart';
 import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Components/optional_company_sirket.dart';
-import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/models/long_press_company.dart';
+import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Components/optional_company_sube.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
 import 'Components/add_new_branch.dart';
@@ -38,16 +36,34 @@ class _OptionalCompanyDescriptionsState
     extends State<OptionalCompanyDescriptions> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        cardSirket(),
-        const SizedBox(height: 20),
-        cardSube(),
-        const SizedBox(height: 20),
-        cardDepartmant(),
-        const SizedBox(height: 20),
-        cardUnvan(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const Expanded(
+            flex: 1,
+            child: Text(""),
+          ),
+          Expanded(
+            flex: 2,
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                cardSirket(),
+                const SizedBox(height: 20),
+                cardSube(),
+                const SizedBox(height: 20),
+                cardDepartmant(),
+                const SizedBox(height: 20),
+                cardUnvan(),
+              ],
+            ),
+          ),
+          const Expanded(
+            flex: 1,
+            child: Text(""),
+          ),
+        ],
+      ),
     );
   }
 
@@ -92,8 +108,12 @@ class _OptionalCompanyDescriptionsState
   Visibility cardDepartmant() {
     return Visibility(
       visible: widget.departmant,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 250),
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            widget.departmant = !widget.departmant;
+          });
+        },
         child: Card(
           elevation: 10,
           child: Column(
@@ -133,8 +153,12 @@ class _OptionalCompanyDescriptionsState
   Visibility cardSube() {
     return Visibility(
       visible: widget.branch,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 250),
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            widget.branch = !widget.branch;
+          });
+        },
         child: Card(
           elevation: 10,
           child: Column(
@@ -164,48 +188,13 @@ class _OptionalCompanyDescriptionsState
                   ],
                 ),
               ),
-              Column(
-                children: [
-                  const CustomTextBox(
-                    borderless: true,
-                    hint: "Birim adı giriniz",
-                    decorationIcon: Icon(Icons.search),
-                    fillcolor: Colors.white60,
-                  ),
-                  Obx(() {
-                    return (Statics.instance.branchController.isLoading.value
-                        ? const Center(child: CircularProgressIndicator())
-                        : ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: widget.branchList.length + 1,
-                            itemBuilder: (_, index) {
-                              return InkWell(
-                                onTap: index == 0
-                                    ? null
-                                    : () {
-                                        setState(() {
-                                          widget.branch = true;
-                                        });
-                                      },
-                                child: SizedBox(
-                                  height: 61,
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: Center(
-                                            child: Text(index == 0
-                                                ? "Birim Adı"
-                                                : widget.branchList[index - 1]
-                                                    .branch_name)),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          ));
-                  }),
-                ],
+              OptionalCompanySube(
+                branchList: widget.branchList,
+                onBranchSelected: () {
+                  setState(() {
+                    widget.departmant = true;
+                  });
+                },
               ),
             ],
           ),
@@ -218,7 +207,7 @@ class _OptionalCompanyDescriptionsState
     return InkWell(
       onTap: () {
         setState(() {
-          widget.company = true;
+          widget.company = !widget.company;
         });
       },
       child: Card(

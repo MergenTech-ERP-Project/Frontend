@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/active_to_user.dart';
 
 class ActiveToUserRemoteServices {
@@ -8,7 +9,7 @@ class ActiveToUserRemoteServices {
 
   static Future<List<ActiveToUser>?> fetchActiveToUsers() async {
     var response = await http.get(
-      Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/activetouser/activetousers'),
+      Uri.parse(Statics.instance.serviceHttp + '/activetouser/activetousers'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -27,7 +28,7 @@ class ActiveToUserRemoteServices {
 
   static Future<int> fetchActiveToUser(int activityId, int userId) async {
     var response = await http.get(
-      Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/activetouser/activetousers'),
+      Uri.parse(Statics.instance.serviceHttp + '/activetouser/activetousers'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -46,7 +47,7 @@ class ActiveToUserRemoteServices {
 
   static Future<String> postActiveToUser(String json) async {
     var response = await http
-        .post(Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/activetouser/post'),
+        .post(Uri.parse(Statics.instance.serviceHttp + '/activetouser/post'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Accept': 'application/json',
@@ -65,7 +66,9 @@ class ActiveToUserRemoteServices {
 
   static Future<String> deleteActiveToUser(int id) async {
     var response = await http
-        .delete(Uri.parse('https://kalite-takip-yonetim-sistemi.herokuapp.com/activetouser/delete/$id'),
+        .delete(
+            Uri.parse(
+                Statics.instance.serviceHttp + '/activetouser/delete/$id'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Accept': 'application/json',

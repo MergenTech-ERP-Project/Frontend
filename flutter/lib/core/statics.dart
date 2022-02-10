@@ -11,6 +11,8 @@ import 'package:vtys_kalite/models/user.dart';
 class Statics {
   //Singleton
   static Statics instance = Statics._internal();
+
+  var serviceHttp = "https://kalite-takip-yonetim-sistemi.herokuapp.com";
   Statics._internal(){
     instance = this;
   }
