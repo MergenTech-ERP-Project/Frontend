@@ -1,15 +1,16 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/active_to_user.dart';
+
+var serviceHttp = "https://kalite-takip-yonetim-sistemi.herokuapp.com";
 
 class ActiveToUserRemoteServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
   static Future<List<ActiveToUser>?> fetchActiveToUsers() async {
     var response = await http.get(
-      Uri.parse(Statics.instance.serviceHttp + '/activetouser/activetousers'),
+      Uri.parse(serviceHttp + '/activetouser/activetousers'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -28,7 +29,7 @@ class ActiveToUserRemoteServices {
 
   static Future<int> fetchActiveToUser(int activityId, int userId) async {
     var response = await http.get(
-      Uri.parse(Statics.instance.serviceHttp + '/activetouser/activetousers'),
+      Uri.parse(serviceHttp + '/activetouser/activetousers'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -47,17 +48,17 @@ class ActiveToUserRemoteServices {
 
   static Future<String> postActiveToUser(String json) async {
     var response = await http
-        .post(Uri.parse(Statics.instance.serviceHttp + '/activetouser/post'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Accept': 'application/json',
-          //'Authorization': '<Your token>'
-        },
-        body: json,
-        encoding: encoding)
+        .post(Uri.parse(serviceHttp + '/activetouser/post'),
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+              'Accept': 'application/json',
+              //'Authorization': '<Your token>'
+            },
+            body: json,
+            encoding: encoding)
         .timeout(
-      const Duration(seconds: 10),
-    );
+          const Duration(seconds: 10),
+        );
     print("postActiveToUser : JSON : ${json}");
     return response.statusCode == 200
         ? "Success: ActiveToUser"
@@ -66,18 +67,16 @@ class ActiveToUserRemoteServices {
 
   static Future<String> deleteActiveToUser(int id) async {
     var response = await http
-        .delete(
-            Uri.parse(
-                Statics.instance.serviceHttp + '/activetouser/delete/$id'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Accept': 'application/json',
-          //'Authorization': '<Your token>'
-        },
-        encoding: encoding)
+        .delete(Uri.parse(serviceHttp + '/activetouser/delete/$id'),
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+              'Accept': 'application/json',
+              //'Authorization': '<Your token>'
+            },
+            encoding: encoding)
         .timeout(
-      const Duration(seconds: 10),
-    );
+          const Duration(seconds: 10),
+        );
     return response.statusCode == 200
         ? "Success: ActiveToUser"
         : "Error: ActiveToUser ${response.statusCode}";

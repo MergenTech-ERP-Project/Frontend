@@ -4,12 +4,14 @@ import 'package:http/http.dart' as http;
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
 
+var serviceHttp = "https://kalite-takip-yonetim-sistemi.herokuapp.com";
+
 class BranchRemoteServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
   static Future<List<Branch>?> fetchBranches() async {
     var response = await http.get(Uri.parse(
-        Statics.instance.serviceHttp + '/branch/branches'));
+       serviceHttp + '/branch/branches'));
     if (response.statusCode == 200) {
       var jsonString = response.body;
       return branchFromJson(jsonString);
@@ -20,7 +22,7 @@ class BranchRemoteServices {
 
   static Future<int> fetchBranch(String _branch_name) async {
     var response = await http.get(Uri.parse(
-        Statics.instance.serviceHttp + '/branch/branches/$_branch_name'));
+        serviceHttp + '/branch/branches/$_branch_name'));
     int branchId = -1;
     if (response.statusCode == 200) {
       var jsonString = response.body;
@@ -41,7 +43,7 @@ class BranchRemoteServices {
     var response = await http
         .post(
       Uri.parse(
-          Statics.instance.serviceHttp + '/branch/post'),
+          serviceHttp + '/branch/post'),
       headers: <String, String>{
         'Content-type': 'application/json',
         'Accept': 'application/json',
@@ -62,7 +64,7 @@ class BranchRemoteServices {
     var response = await http
         .put(
       Uri.parse(
-          Statics.instance.serviceHttp + "/branch/put/$id"),
+          serviceHttp + "/branch/put/$id"),
       headers: <String, String>{
         'Content-type': 'application/json',
         'Accept': 'application/json',
@@ -82,7 +84,7 @@ class BranchRemoteServices {
     var response = await http
         .delete(
       Uri.parse(
-          Statics.instance.serviceHttp + '/branch/delete/$id'),
+        serviceHttp + '/branch/delete/$id'),
       headers: <String, String>{
         'Content-type': 'application/json',
         'Accept': 'application/json',

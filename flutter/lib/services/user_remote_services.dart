@@ -4,12 +4,13 @@ import 'package:http/http.dart' as http;
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/user.dart';
 
+var serviceHttp = "https://kalite-takip-yonetim-sistemi.herokuapp.com";
+
 class UserRemoteServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
   static Future<List<User>?> fetchUsers() async {
-    var response = await http.get(Uri.parse(
-        Statics.instance.serviceHttp + '/user/users'));
+    var response = await http.get(Uri.parse(serviceHttp + '/user/users'));
     if (response.statusCode == 200) {
       var jsonString = response.body;
       return userFromJson(jsonString);
@@ -19,8 +20,7 @@ class UserRemoteServices {
   }
 
   static Future<int> fetchUser(String name, String password) async {
-    var response = await http.get(Uri.parse(
-        Statics.instance.serviceHttp + '/user/users'));
+    var response = await http.get(Uri.parse(serviceHttp + '/user/users'));
     int userID = -1;
     if (response.statusCode == 200) {
       var jsonString = response.body;
@@ -40,9 +40,7 @@ class UserRemoteServices {
   static Future<String> postUser(String json) async {
     print("Json: $json");
     var response = await http
-        .post(
-            Uri.parse(
-                Statics.instance.serviceHttp + '/user/post'),
+        .post(Uri.parse(serviceHttp + '/user/post'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
@@ -61,9 +59,7 @@ class UserRemoteServices {
   static Future<String> putUser(int id, String json) async {
     print("Json: $json");
     var response = await http
-        .put(
-            Uri.parse(
-                Statics.instance.serviceHttp + '/user/put/$id'),
+        .put(Uri.parse(serviceHttp + '/user/put/$id'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
@@ -81,9 +77,7 @@ class UserRemoteServices {
 
   static Future<String> deleteUser(int id) async {
     var response = await http
-        .delete(
-            Uri.parse(
-                Statics.instance.serviceHttp + '/user/delete/$id'),
+        .delete(Uri.parse(serviceHttp + '/user/delete/$id'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
