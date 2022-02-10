@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/user.dart';
 
 var serviceHttp = "https://kalite-takip-yonetim-sistemi.herokuapp.com";
@@ -19,26 +17,35 @@ class UserRemoteServices {
     }
   }
 
-  static Future<int> fetchUser(String name, String password) async {
-    var response = await http.get(Uri.parse(serviceHttp + '/user/users'));
+  static Future<int> fetchUserByName(String name) async {
+    var response = await http.get(Uri.parse(serviceHttp + '/user/$name'));
     int userID = -1;
     if (response.statusCode == 200) {
       var jsonString = response.body;
       List<User> users = userFromJson(jsonString);
-      for (User user in users) {
-        if (user.name == name && user.password == password) {
-          userID = users.indexOf(user);
-          print(userID);
-          break;
-        }
+      if (users.isNotEmpty) {
+        userID = users[0].id;
       }
-      print(userID);
+    }
+    return userID;
+  }
+
+  static Future<int> fetchUserByNameAndPassword(
+      String name, String password) async {
+    var response =
+        await http.get(Uri.parse(serviceHttp + '/user/$name/$password'));
+    int userID = -1;
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+      List<User> users = userFromJson(jsonString);
+      if (users.isNotEmpty) {
+        userID = users[0].id;
+      }
     }
     return userID;
   }
 
   static Future<String> postUser(String json) async {
-    print("Json: $json");
     var response = await http
         .post(Uri.parse(serviceHttp + '/user/post'),
             headers: <String, String>{
@@ -57,7 +64,6 @@ class UserRemoteServices {
   }
 
   static Future<String> putUser(int id, String json) async {
-    print("Json: $json");
     var response = await http
         .put(Uri.parse(serviceHttp + '/user/put/$id'),
             headers: <String, String>{

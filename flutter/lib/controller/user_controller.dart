@@ -31,9 +31,10 @@ class UserController extends GetxController {
   Future<int> fetchUser(String name, String password) async {
     try {
       isLoading(true);
-      var user = await UserRemoteServices.fetchUser(name, password);
-      print("fetch User: " + user.toString());
-      return user;
+      var userId =
+          await UserRemoteServices.fetchUserByNameAndPassword(name, password);
+      print("fetch User: " + userId.toString());
+      return userId;
     } finally {
       isLoading(false);
     }
