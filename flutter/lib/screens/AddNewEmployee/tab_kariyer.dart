@@ -123,6 +123,7 @@ class _TabKariyerState extends State<TabKariyer> {
                     ],
                   ),
                 ),
+                bodyWidgetHeight: screenSize.height - 20,
                 bodyWidgetWidth: screenSize.width - 20,
                 bodyWidget: SizedBox(
                   width: screenSize.width - 20 / 1.2,
@@ -441,6 +442,7 @@ class _TabKariyerState extends State<TabKariyer> {
                                       titleWidget: SizedBox(),
                                       bodyWidget: SizedBox(),
                                       bodyWidgetWidth: screenSize.width / 1.5,
+                                      bodyWidgetHeight: screenSize.height / 1.5,
                                     ),
                                   );
                                 },
@@ -465,6 +467,7 @@ class _TabKariyerState extends State<TabKariyer> {
                   ),
                 ),
                 bodyWidgetWidth: screenSize.width / 1.5,
+                bodyWidgetHeight: screenSize.height / 1.5,
               ),
             );
           },

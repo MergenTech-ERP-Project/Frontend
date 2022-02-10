@@ -72,21 +72,42 @@ class _LoginPageState extends State<LoginPage> {
           showDialog(
             context: context,
             builder: (_) => CustomAlertDialog(
-              titleWidget: Text(
-                  "${Statics.instance.username} için yanlış kullanıcı adı veya şifre",
-                  style: kLabelHeaderStyle),
-              bodyWidget: Column(
-                children: [
-                  const Text(
-                      "Girdiğiniz şifre veya kullanıcı adı yanlış. Lütfen tekrar deneyiniz."),
-                  CustomButton(
-                      title: "Tekrar Dene",
-                      pressAction: () {
-                        Get.back();
-                      }),
-                ],
+              titleWidget: _usernameController.text != ""
+                  ? RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                              text: _usernameController.text,
+                              style: kLabelHeader2Style),
+                          const TextSpan(
+                              text: " için yanlış kullanıcı adı veya şifre",
+                              style: kLabelHeader3Style),
+                        ],
+                      ),
+                    )
+                  : const Text(
+                      "Kullanıcı adı veya şifre boş bırakılamaz.",
+                      style: kLabelHeader3Style,
+                      textAlign: TextAlign.center,
+                    ),
+              bodyWidget: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const Text(
+                        "Girdiğiniz şifre veya kullanıcı adı yanlış. Lütfen tekrar deneyiniz."),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    CustomButton(
+                        title: "Tekrar Dene",
+                        pressAction: () {
+                          Get.back();
+                        }),
+                  ],
+                ),
               ),
-              bodyWidgetWidth: screenSize.width / 2,
+              bodyWidgetWidth: screenSize.width / 3,
             ),
           );
           return;
