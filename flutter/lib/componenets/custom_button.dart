@@ -5,14 +5,15 @@ class CustomButton extends StatefulWidget {
   final String title;
   final Function()? pressAction;
   final double? height;
-  final IconData? icon;
+  final IconData? leftIcon, rightIcon;
   final Color backgroundColor;
   final Color foregroundColor;
 
   const CustomButton({
     Key? key,
     this.pressAction,
-    this.icon,
+    this.leftIcon,
+    this.rightIcon,
     this.height = 40,
     required this.title,
     this.backgroundColor = kPrimaryColor,
@@ -43,19 +44,26 @@ class _CustomButtonState extends State<CustomButton> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (widget.icon != null)
+            if (widget.leftIcon != null)
               Icon(
-                widget.icon,
+                widget.leftIcon,
                 size: 20,
+                color: widget.foregroundColor,
               ),
             Text(
-              (widget.icon != null ? "  " : "") + widget.title,
+              (widget.leftIcon != null ? "  " : "") + widget.title,
               style: TextStyle(
                 color: widget.foregroundColor,
                 fontFamily: 'Comfortaa',
                 fontSize: 16,
               ),
             ),
+            if (widget.rightIcon != null)
+              Icon(
+                widget.rightIcon,
+                size: 20,
+                color: widget.foregroundColor,
+              ),
           ],
         ),
       ),

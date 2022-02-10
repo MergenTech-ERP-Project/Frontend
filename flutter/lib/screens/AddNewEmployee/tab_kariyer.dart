@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/state_manager.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_scrollableColumn.dart';
 import 'package:vtys_kalite/componenets/custom_switch.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/models/odeme.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
-import 'package:vtys_kalite/utilities/custom_scroll_behaviour.dart';
 
 class TabKariyer extends StatefulWidget {
   TabKariyer({Key? key}) : super(key: key);
@@ -44,6 +45,8 @@ class TabKariyer extends StatefulWidget {
     'Ek Ödemeler',
   ];
 
+  List<Odeme> odemeler = <Odeme>[].obs;
+
   @override
   State<TabKariyer> createState() => _TabKariyerState();
 }
@@ -64,6 +67,9 @@ class _TabKariyerState extends State<TabKariyer> {
   DateTime positionDateTimeBaslangic = DateTime.now();
   DateTime positionDateTimeBitis = DateTime.now();
   bool asgariUcretSwitch = true;
+  bool NetSwitch = true;
+  bool agiDahilSwitch = true;
+  DateTime gecerlilikBaslangic = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -364,10 +370,101 @@ class _TabKariyerState extends State<TabKariyer> {
                                 ),
                                 Expanded(
                                   child: CustomSwitch(
-                                      switchValue: asgariUcretSwitch),
+                                    switchValue: asgariUcretSwitch,
+                                    text: "Asgari Ücret",
+                                  ),
                                 ),
                               ],
                             ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: CustomDateTimePicker(
+                                    suffixWidget:
+                                        Icon(Icons.calendar_today_outlined),
+                                    labelText: "Geçerlilik Başlangıç",
+                                    borderless: true,
+                                    onChanged: (val) {
+                                      if (val != null) {
+                                        print("DateTime picker : " + val);
+                                      }
+                                      try {
+                                        gecerlilikBaslangic =
+                                            dateTimeFormat.parse(val!);
+                                      } catch (e) {
+                                        print(e.toString());
+                                      }
+                                    },
+                                  ),
+                                ),
+                                Expanded(
+                                  child: CustomTextBox(
+                                    borderless: true,
+                                    controller: controllerUnit,
+                                    label: "Maaş Periyodu",
+                                    suffixWidget:
+                                        const Icon(Icons.keyboard_arrow_down),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: CustomSwitch(
+                                    switchValue: NetSwitch,
+                                    text: "Net",
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            CustomSwitch(
+                              switchValue: agiDahilSwitch,
+                              text: "AGİ dahil",
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  flex: 1,
+                                  child: CustomButton(
+                                    title: "Ödeme Ekle",
+                                    backgroundColor: Colors.white,
+                                    foregroundColor: kPrimaryColor,
+                                    rightIcon: Icons.keyboard_arrow_down,
+                                    pressAction: () {
+                                      setState(() {
+                                        widget.odemeler.add(Odeme(
+                                          id: 0,
+                                          name: "Yol Yardımı",
+                                          fee: 0,
+                                          description: "",
+                                          periot: "",
+                                          unit: "TL",
+                                          grossPrice: true,
+                                          includePayroll: true,
+                                        ));
+                                      });
+                                      //showDialog(context: context, builder: builder)
+                                    },
+                                  ),
+                                ),
+                                const Flexible(
+                                  flex: 4,
+                                  child: SizedBox(),
+                                )
+                              ],
+                            ),
+                            Obx(() => ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: widget.odemeler.length,
+                                    itemBuilder: ((context, index) {
+                                  return Card(
+                                    child: Text(widget.odemeler[index].name),
+                                  );
+                                }))),
                           ],
                         ),
                       ),

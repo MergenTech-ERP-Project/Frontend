@@ -63,7 +63,7 @@ class _EmployeesState extends State<Employees> {
                             padding: const EdgeInsets.all(20.0),
                             child: CustomButton(
                               title: 'New Employee',
-                              icon: Icons.person_add,
+                              leftIcon: Icons.person_add,
                               pressAction: () {
                                 showDialog(
                                     context: context,
@@ -127,7 +127,7 @@ class _EmployeesState extends State<Employees> {
                               padding: const EdgeInsets.all(20.0),
                               child: CustomButton(
                                 title: 'Admin Panel',
-                                icon: Icons.admin_panel_settings,
+                                leftIcon: Icons.admin_panel_settings,
                                 pressAction: () {
                                   Navigator.pushNamed(
                                       context, AdminPanelPage.routeName);
