@@ -4,12 +4,14 @@ import 'package:http/http.dart' as http;
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/activity.dart';
 
+var serviceHttp = "https://kalite-takip-yonetim-sistemi.herokuapp.com";
+
 class ActivityRemoteServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
   static Future<List<Activity>?> fetchActivities() async {
     var response = await http.get(
-      Uri.parse(Statics.instance.serviceHttp + '/activity/activities'),
+      Uri.parse(serviceHttp + '/activity/activities'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -28,7 +30,7 @@ class ActivityRemoteServices {
 
   static Future<List<Activity>?> fetchActivitiesByUser(int userId) async {
     var response = await http.get(
-      Uri.parse(Statics.instance.serviceHttp + '/activity/activities'),
+      Uri.parse(serviceHttp + '/activity/activities'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -47,7 +49,7 @@ class ActivityRemoteServices {
 
   static Future<int> fetchActivity(String name, String organizator) async {
     var response = await http.get(
-      Uri.parse(Statics.instance.serviceHttp + '/activity/activities'),
+      Uri.parse(serviceHttp + '/activity/activities'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -70,9 +72,10 @@ class ActivityRemoteServices {
     }
     return activityID;
   }
+
   static Future<Activity?> fetchActivitybyId(int id) async {
     var response = await http.get(
-      Uri.parse(Statics.instance.serviceHttp + '/activity/activities/$id'),
+      Uri.parse(serviceHttp + '/activity/activities/$id'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -80,7 +83,7 @@ class ActivityRemoteServices {
       },
     );
     print("fetchActivity response ${response.statusCode}");
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       var jsonString = response.body;
       return activityFromJson(jsonString)[0];
     }
@@ -90,7 +93,7 @@ class ActivityRemoteServices {
   static Future<String> postActivity(String json) async {
     print("Json: $json");
     var response = await http
-        .post(Uri.parse(Statics.instance.serviceHttp + '/activity/post'),
+        .post(Uri.parse(serviceHttp + '/activity/post'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
               'Accept': 'application/json',
@@ -109,7 +112,7 @@ class ActivityRemoteServices {
   static Future<String> deleteActivity(int id) async {
     var response = await http
         .delete(
-            Uri.parse(Statics.instance.serviceHttp + '/activity/delete/$id'),
+            Uri.parse(serviceHttp + '/activity/delete/$id'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
               'Accept': 'application/json',

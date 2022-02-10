@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/core/statics.dart';
@@ -56,11 +58,11 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-
     );
   }
 
   CustomButton loginButton(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return CustomButton(
       title: "Login",
       pressAction: () async {
@@ -68,9 +70,24 @@ class _LoginPageState extends State<LoginPage> {
             .fetchUser(_usernameController.text, _passwordController.text);
         if (id == -1) {
           showDialog(
-              context: context,
-              builder: (_) =>
-              const SimpleDialog(title: Text("Wrong Username Or Password!"))
+            context: context,
+            builder: (_) => CustomAlertDialog(
+              titleWidget: Text(
+                  "${Statics.instance.username} için yanlış kullanıcı adı veya şifre",
+                  style: kLabelHeaderStyle),
+              bodyWidget: Column(
+                children: [
+                  const Text(
+                      "Girdiğiniz şifre veya kullanıcı adı yanlış. Lütfen tekrar deneyiniz."),
+                  CustomButton(
+                      title: "Tekrar Dene",
+                      pressAction: () {
+                        Get.back();
+                      }),
+                ],
+              ),
+              bodyWidgetWidth: screenSize.width / 2,
+            ),
           );
           return;
         }

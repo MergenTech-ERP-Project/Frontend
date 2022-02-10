@@ -11,8 +11,7 @@ import 'package:vtys_kalite/models/user.dart';
 class Statics {
   //Singleton
   static Statics instance = Statics._internal();
-
-  var serviceHttp = "https://kalite-takip-yonetim-sistemi.herokuapp.com";
+  
   Statics._internal(){
     instance = this;
   }
@@ -38,6 +37,7 @@ class Statics {
   User? _user;
   String? username;
   int drawerSelectedIndex = 0;
+
   UserController userController = Get.put(UserController());
   ActivityController activityController = Get.put(ActivityController());
   ActivityEvaluationController activityEvaluationController = Get.put(ActivityEvaluationController());

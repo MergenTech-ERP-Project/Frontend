@@ -4,12 +4,14 @@ import 'package:http/http.dart' as http;
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
 
+var serviceHttp = "https://kalite-takip-yonetim-sistemi.herokuapp.com";
+
 class CompanyRemoteServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
   static Future<List<Company>?> fetchCompanies() async {
-    var response = await http.get(Uri.parse(
-        Statics.instance.serviceHttp + '/company/companies'));
+    var response =
+        await http.get(Uri.parse(serviceHttp + '/company/companies'));
     if (response.statusCode == 200) {
       var jsonString = response.body;
       return companyFromJson(jsonString);
@@ -19,8 +21,8 @@ class CompanyRemoteServices {
   }
 
   static Future<int> fetchCompany(String _company_name) async {
-    var response = await http.get(Uri.parse(
-        Statics.instance.serviceHttp + '/company/companies/$_company_name'));
+    var response = await http
+        .get(Uri.parse(serviceHttp + '/company/companies/$_company_name'));
     int companyId = -1;
     if (response.statusCode == 200) {
       var jsonString = response.body;
@@ -40,8 +42,7 @@ class CompanyRemoteServices {
     print("Json: $json");
     var response = await http
         .post(
-          Uri.parse(
-              Statics.instance.serviceHttp + '/company/post'),
+          Uri.parse(serviceHttp + '/company/post'),
           headers: <String, String>{
             'Content-type': 'application/json',
             'Accept': 'application/json',
@@ -61,8 +62,7 @@ class CompanyRemoteServices {
     print("Json: $json");
     var response = await http
         .put(
-          Uri.parse(
-              Statics.instance.serviceHttp + "/company/put/$id"),
+          Uri.parse(serviceHttp + "/company/put/$id"),
           headers: <String, String>{
             'Content-type': 'application/json',
             'Accept': 'application/json',
@@ -81,8 +81,7 @@ class CompanyRemoteServices {
   static Future<String> deleteCompany(int id) async {
     var response = await http
         .delete(
-          Uri.parse(
-              Statics.instance.serviceHttp + '/company/delete/$id'),
+          Uri.parse(serviceHttp + '/company/delete/$id'),
           headers: <String, String>{
             'Content-type': 'application/json',
             'Accept': 'application/json',
