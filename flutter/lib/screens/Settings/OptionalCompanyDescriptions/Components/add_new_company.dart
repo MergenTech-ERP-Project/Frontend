@@ -7,20 +7,15 @@ import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
 class AddNewCompany extends StatefulWidget {
-  const AddNewCompany({
+  AddNewCompany({
     Key? key,
-    required this.controllerCompanyName,
-    required this.controllerCompanyPhone,
-    required this.controllerDomainName,
-    required this.controllerMersisNo,
-    required this.controllerSGKCompanyNo,
   }) : super(key: key);
 
-  final TextEditingController controllerCompanyName;
-  final TextEditingController controllerCompanyPhone;
-  final TextEditingController controllerDomainName;
-  final TextEditingController controllerMersisNo;
-  final TextEditingController controllerSGKCompanyNo;
+  final TextEditingController controllerCompanyName = TextEditingController();
+  final TextEditingController controllerCompanyPhone = TextEditingController();
+  final TextEditingController controllerDomainName = TextEditingController();
+  final TextEditingController controllerMersisNo = TextEditingController();
+  final TextEditingController controllerSGKCompanyNo = TextEditingController();
 
   @override
   State<AddNewCompany> createState() => _AddNewCompanyState();
@@ -51,8 +46,8 @@ class _AddNewCompanyState extends State<AddNewCompany> {
           var width = MediaQuery.of(context).size.width;
           var height = MediaQuery.of(context).size.height;
           return SizedBox(
-            width: width - 400,
-            height: height - 200,
+            width: width / 1.4,
+            height: height / 1.2,
             child: SingleChildScrollView(
               child: Form(
                 key: _newCompanyKey,
@@ -89,8 +84,9 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                     ),
                     CustomButton(
                       title: "Ekle",
-                      pressAction: () {
+                      pressAction: () =>
                         setState(() {
+                        if (_newCompanyKey.currentState!.validate()) {
                           for (Company company in Statics
                               .instance.companyController.companyList) {
                             if (company.company_name ==
@@ -112,7 +108,6 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                             widget.controllerSGKCompanyNo.text,
                           );
                           print(response);
-                          if (_newCompanyKey.currentState!.validate()) {
                             Navigator.pop(context);
                             Get.snackbar(
                               "Şirket Ekleme Ekranı",
@@ -122,8 +117,7 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                               padding: EdgeInsets.only(left: width / 2 - 100),
                             );
                           }
-                        });
-                      },
+                      }),
                     ),
                   ],
                 ),

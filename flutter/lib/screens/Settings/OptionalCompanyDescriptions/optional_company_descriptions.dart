@@ -6,6 +6,7 @@ import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Components/add_new_company.dart';
+import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Components/optional_company_sirket.dart';
 import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/models/long_press_company.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
@@ -35,20 +36,8 @@ class OptionalCompanyDescriptions extends StatefulWidget {
 
 class _OptionalCompanyDescriptionsState
     extends State<OptionalCompanyDescriptions> {
-  final TextEditingController controllerCompanyName = TextEditingController();
-  final TextEditingController controllerTelephone = TextEditingController();
-  final TextEditingController controllerMail = TextEditingController();
-  final TextEditingController controllerMersisNumber = TextEditingController();
-  final TextEditingController controllerSGK = TextEditingController();
-
-  final TextEditingController controllerBranchName = TextEditingController();
-  final TextEditingController controllerBranchUpper = TextEditingController();
-  final TextEditingController controllerRules = TextEditingController();
-  final TextEditingController controllerVacationDays = TextEditingController();
-  var screenSize;
   @override
   Widget build(BuildContext context) {
-    screenSize = MediaQuery.of(context).size;
     return ListView(
       children: [
         cardSirket(),
@@ -167,14 +156,8 @@ class _OptionalCompanyDescriptionsState
                         pressAction: () async {
                           await showDialog(
                             context: context,
-                            builder: (_) => AddNewBranch(
-                              controllerBranchName: controllerBranchName,
-                              controllerBranchUpper: controllerBranchUpper,
-                              controllerRules: controllerRules,
-                              controllerVacationDays: controllerVacationDays,
-                            ),
+                            builder: (_) => AddNewBranch(),
                           );
-                          //Navigator.pop(context);
                         },
                       ),
                     )
@@ -238,153 +221,47 @@ class _OptionalCompanyDescriptionsState
           widget.company = true;
         });
       },
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.2),
-        child: Card(
-          elevation: 10,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Expanded(
-                      flex: 8,
-                      child: Text("Şirket", style: kLabelStyle),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: CustomButton(
-                          height: 20,
-                          title: "Yeni Ekle",
-                          pressAction: () async {
-                            await showDialog(
-                                context: context,
-                                builder: (_) => AddNewCompany(
-                                      controllerCompanyName:
-                                          controllerCompanyName,
-                                      controllerCompanyPhone:
-                                          controllerTelephone,
-                                      controllerDomainName: controllerMail,
-                                      controllerMersisNo:
-                                          controllerMersisNumber,
-                                      controllerSGKCompanyNo: controllerSGK,
-                                    ));
-                            //Navigator.pop(context);
-                          }),
-                    )
-                  ],
-                ),
+      child: Card(
+        elevation: 10,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Expanded(
+                    flex: 8,
+                    child: Text("Şirket", style: kLabelStyle),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: CustomButton(
+                        height: 20,
+                        title: "Yeni Ekle",
+                        pressAction: () async {
+                          await showDialog(
+                              context: context,
+                              builder: (_) => AddNewCompany());
+                        }),
+                  )
+                ],
               ),
-              Visibility(
-                visible: widget.company,
-                child: Column(
-                  children: [
-                    const CustomTextBox(
-                      borderless: true,
-                      hint: "Şirket adı giriniz",
-                      decorationIcon: Icon(Icons.search),
-                      fillcolor: Colors.white60,
-                    ),
-                    Obx(() {
-                      print(widget.companyList);
-                      return (Statics.instance.companyController.isLoading.value
-                          ? Center(
-                              child: Container(
-                              height: 50,
-                              width: 50,
-                              child: const CircularProgressIndicator(),
-                            ))
-                          : ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: widget.companyList.length + 1,
-                              itemBuilder: (_, index) {
-                                return InkWell(
-                                  onTap: index == 0
-                                      ? null
-                                      : () {
-                                          setState(() {
-                                            widget.branch = true;
-                                          });
-                                        },
-                                  child: SizedBox(
-                                    height: 61,
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Center(
-                                              child: Text(index == 0
-                                                  ? "Şirket Adı"
-                                                  : widget
-                                                      .companyList[index - 1]
-                                                      .company_name)),
-                                        ),
-                                        const VerticalDivider(thickness: 3),
-                                        Expanded(
-                                          child: Center(
-                                              child: Text(index == 0
-                                                  ? "Çalışan Sayısı"
-                                                  : "0")),
-                                        ),
-                                        index == 0
-                                            ? const Padding(
-                                                padding: EdgeInsets.all(8.0),
-                                                child: SizedBox(
-                                                  child: Icon(
-                                                      Icons.three_k_outlined,
-                                                      color: Colors.white),
-                                                ),
-                                              )
-                                            : PopupMenuButton<MenuItemCompany>(
-                                                onSelected: (item) =>
-                                                    onSelected(context, item),
-                                                itemBuilder: (context) => [
-                                                      ...MenuItemsCompany
-                                                          .itemsFirst
-                                                          .map(buildItemCompany)
-                                                          .toList(),
-                                                      //PopupMenuDivider();
-                                                    ]),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ));
-                    }),
-                  ],
-                ),
+            ),
+            Visibility(
+              visible: widget.company,
+              child: OptionalCompanySirket(
+                companyList: widget.companyList,
+                onCompanySelected: () {
+                  setState(() {
+                    widget.branch = true;
+                  });
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
-  }
-
-  PopupMenuItem<MenuItemCompany> buildItemCompany(MenuItemCompany item) =>
-      PopupMenuItem(
-        value: item,
-        child: Row(
-          children: [
-            Icon(item.icon, color: Colors.black, size: 20),
-            const SizedBox(height: 12),
-            Text(item.text),
-          ],
-        ),
-      );
-
-  onSelected(BuildContext context, MenuItemCompany item) {
-    setState(() {
-      switch (item) {
-        case MenuItemsCompany.itemUpdate:
-          print("update");
-          break;
-        case MenuItemsCompany.itemDelete:
-          print("delete");
-          break;
-      }
-    });
   }
 }
