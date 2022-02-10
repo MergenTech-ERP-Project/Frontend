@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class CustomAlertDialog extends StatefulWidget {
   final Widget titleWidget, bodyWidget;
   double bodyWidgetWidth;
+  double? bodyWidgetHeight;
 
   CustomAlertDialog({
     required this.titleWidget,
     required this.bodyWidget,
     required this.bodyWidgetWidth,
+    this.bodyWidgetHeight,
     Key? key,
   }) : super(key: key);
 
@@ -27,6 +29,7 @@ class _CustomAlertDialogState extends State<CustomAlertDialog> {
         builder: (context) {
           return SizedBox(
             width: widget.bodyWidgetWidth,
+            height: widget.bodyWidgetHeight,
             child: widget.bodyWidget,
           );
         },

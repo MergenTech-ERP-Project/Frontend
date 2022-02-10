@@ -35,7 +35,7 @@ class Statics {
     _user = user;
   }
   User? _user;
-  String? username;
+  String username = "";
   int drawerSelectedIndex = 0;
 
   UserController userController = Get.put(UserController());

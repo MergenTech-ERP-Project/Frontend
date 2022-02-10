@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
@@ -57,6 +59,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   CustomButton signUpButton(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return CustomButton(
       title: "Sign Up",
       pressAction: () {
@@ -64,9 +67,49 @@ class _SignUpPageState extends State<SignUpPage> {
           for (User user in Statics.instance.userController.userList) {
             if (user.name == _usernameController.text) {
               showDialog(
-                  context: context,
-                  builder: (_) =>
-                      const SimpleDialog(title: Text("Same Username exists!")));
+                context: context,
+                builder: (_) => CustomAlertDialog(
+                  titleWidget: _usernameController.text != ""
+                      ? RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                  text: _usernameController.text,
+                                  style: kLabelHeader2Style),
+                              const TextSpan(
+                                  text: " kullanıcı adı kullanılıyor.",
+                                  style: kLabelHeader3Style),
+                            ],
+                          ),
+                        )
+                      : const Text(
+                          "Kullanıcı adı veya şifre boş bırakılamaz.",
+                          style: kLabelHeader3Style,
+                          textAlign: TextAlign.center,
+                        ),
+                  bodyWidget: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const Text(
+                          "Girdiğiniz kullanıcı adı başka biri tarafından kullanılıyor. Lütfen tekrar deneyiniz.",
+                          textAlign: TextAlign.center,
+                          style: kLabelHeader3Style,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomButton(
+                            title: "Tekrar Dene",
+                            pressAction: () {
+                              Get.back();
+                            }),
+                      ],
+                    ),
+                  ),
+                  bodyWidgetWidth: screenSize.width / 3,
+                ),
+              );
               return;
             }
           }
