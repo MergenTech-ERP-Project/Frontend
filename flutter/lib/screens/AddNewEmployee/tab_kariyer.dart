@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
+import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_scrollableColumn.dart';
@@ -73,6 +74,7 @@ class _TabKariyerState extends State<TabKariyer> {
 
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return Column(
       children: [
         SizedBox(
@@ -85,11 +87,8 @@ class _TabKariyerState extends State<TabKariyer> {
           () {
             showDialog(
               context: context,
-              builder: (_) => AlertDialog(
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-                title: Expanded(
+              builder: (_) => CustomAlertDialog(
+                titleWidget: Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -124,158 +123,153 @@ class _TabKariyerState extends State<TabKariyer> {
                     ],
                   ),
                 ),
-                content: Builder(
-                  builder: (context) {
-                    var width = MediaQuery.of(context).size.width - 20;
-                    return Container(
-                      width: width / 1.2,
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Card(
-                              child: Row(
-                                children: const [
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 8.0),
-                                    child: Icon(Icons.info),
-                                  ),
-                                  Flexible(
-                                    child: Text(
-                                        "Şirket, çalışma şekli ve maaş güncellemeleri içeren pozisyon değişikliklerinde "
-                                        "şirketinizin kurallarını kontrol ediniz.\n"
-                                        "İleri tarihli varsayılan pozisyonlar başlandgıç tarihinden itibaren geçerli olur."),
-                                  ),
-                                ],
+                bodyWidgetWidth: screenSize.width - 20,
+                bodyWidget: SizedBox(
+                  width: screenSize.width - 20 / 1.2,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Card(
+                          child: Row(
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Icon(Icons.info),
                               ),
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: CustomTextBox(
-                                      controller: positionSirket,
-                                      borderless: true,
-                                      suffixWidget: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: const [
-                                          Icon(Icons.close),
-                                          Icon(Icons.keyboard_arrow_down),
-                                        ],
-                                      ),
-                                      label: "Şirket"),
-                                ),
-                                Expanded(
-                                  child: CustomTextBox(
-                                      controller: positionSube,
-                                      borderless: true,
-                                      suffixWidget: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: const [
-                                          Icon(Icons.close),
-                                          Icon(Icons.keyboard_arrow_down),
-                                        ],
-                                      ),
-                                      label: "Şube"),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: CustomTextBox(
-                                      controller: positionDepartman,
-                                      borderless: true,
-                                      suffixWidget: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: const [
-                                          Icon(Icons.close),
-                                          Icon(Icons.keyboard_arrow_down),
-                                        ],
-                                      ),
-                                      label: "Departman"),
-                                ),
-                                Expanded(
-                                  child: CustomTextBox(
-                                      controller: positionUnvan,
-                                      borderless: true,
-                                      suffixWidget: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: const [
-                                          Icon(Icons.close),
-                                          Icon(Icons.keyboard_arrow_down),
-                                        ],
-                                      ),
-                                      label: "Unvan"),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: CustomTextBox(
-                                      borderless: true,
-                                      controller: positionYoneticisi,
-                                      suffixWidget:
-                                          const Icon(Icons.keyboard_arrow_down),
-                                      label: "Yönetici"),
-                                ),
-                                Expanded(
-                                  child: CustomTextBox(
-                                      borderless: true,
-                                      controller: positionCalismaSekli,
-                                      suffixWidget:
-                                          const Icon(Icons.keyboard_arrow_down),
-                                      label: "Çalışma Şekli"),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: CustomDateTimePicker(
-                                      suffixWidget: const Icon(
-                                          Icons.calendar_today_outlined),
-                                      borderless: true,
-                                      labelText: 'Başlangıç Tarihi',
-                                      onChanged: (val) {
-                                        positionDateTimeBaslangic =
-                                            dateTimeFormat.parse(val!);
-                                      },
-                                    ),
+                              Flexible(
+                                child: Text(
+                                    "Şirket, çalışma şekli ve maaş güncellemeleri içeren pozisyon değişikliklerinde "
+                                    "şirketinizin kurallarını kontrol ediniz.\n"
+                                    "İleri tarihli varsayılan pozisyonlar başlandgıç tarihinden itibaren geçerli olur."),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CustomTextBox(
+                                  controller: positionSirket,
+                                  borderless: true,
+                                  suffixWidget: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: const [
+                                      Icon(Icons.close),
+                                      Icon(Icons.keyboard_arrow_down),
+                                    ],
                                   ),
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: CustomDateTimePicker(
-                                      suffixWidget: const Icon(
-                                          Icons.calendar_today_outlined),
-                                      borderless: true,
-                                      labelText: 'Bitiş Tarihi',
-                                      onChanged: (val) {
-                                        positionDateTimeBitis =
-                                            dateTimeFormat.parse(val!);
-                                      },
-                                    ),
+                                  label: "Şirket"),
+                            ),
+                            Expanded(
+                              child: CustomTextBox(
+                                  controller: positionSube,
+                                  borderless: true,
+                                  suffixWidget: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: const [
+                                      Icon(Icons.close),
+                                      Icon(Icons.keyboard_arrow_down),
+                                    ],
                                   ),
-                                ),
-                              ],
+                                  label: "Şube"),
                             ),
                           ],
                         ),
-                      ),
-                    );
-                  },
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CustomTextBox(
+                                  controller: positionDepartman,
+                                  borderless: true,
+                                  suffixWidget: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: const [
+                                      Icon(Icons.close),
+                                      Icon(Icons.keyboard_arrow_down),
+                                    ],
+                                  ),
+                                  label: "Departman"),
+                            ),
+                            Expanded(
+                              child: CustomTextBox(
+                                  controller: positionUnvan,
+                                  borderless: true,
+                                  suffixWidget: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: const [
+                                      Icon(Icons.close),
+                                      Icon(Icons.keyboard_arrow_down),
+                                    ],
+                                  ),
+                                  label: "Unvan"),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CustomTextBox(
+                                  borderless: true,
+                                  controller: positionYoneticisi,
+                                  suffixWidget:
+                                      const Icon(Icons.keyboard_arrow_down),
+                                  label: "Yönetici"),
+                            ),
+                            Expanded(
+                              child: CustomTextBox(
+                                  borderless: true,
+                                  controller: positionCalismaSekli,
+                                  suffixWidget:
+                                      const Icon(Icons.keyboard_arrow_down),
+                                  label: "Çalışma Şekli"),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CustomDateTimePicker(
+                                  suffixWidget:
+                                      const Icon(Icons.calendar_today_outlined),
+                                  borderless: true,
+                                  labelText: 'Başlangıç Tarihi',
+                                  onChanged: (val) {
+                                    positionDateTimeBaslangic =
+                                        dateTimeFormat.parse(val!);
+                                  },
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CustomDateTimePicker(
+                                  suffixWidget:
+                                      const Icon(Icons.calendar_today_outlined),
+                                  borderless: true,
+                                  labelText: 'Bitiş Tarihi',
+                                  onChanged: (val) {
+                                    positionDateTimeBitis =
+                                        dateTimeFormat.parse(val!);
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             );
@@ -295,11 +289,8 @@ class _TabKariyerState extends State<TabKariyer> {
           () {
             showDialog(
               context: context,
-              builder: (_) => AlertDialog(
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-                title: Expanded(
+              builder: (_) => CustomAlertDialog(
+                titleWidget: Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -334,143 +325,146 @@ class _TabKariyerState extends State<TabKariyer> {
                     ],
                   ),
                 ),
-                content: Builder(
-                  builder: (context) {
-                    var width = MediaQuery.of(context).size.width / 1.5;
-                    return SizedBox(
-                      width: width - 20,
-                      child: SingleChildScrollView(
-                        child: Column(
+                bodyWidget: SizedBox(
+                  width: screenSize.width - 20,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Row(
                           children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: CustomTextBox(
-                                    borderless: true,
-                                    controller: controllerSalary,
-                                    label: "Maaş",
-                                    suffixWidget: const SizedBox(),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: CustomTextBox(
-                                    borderless: true,
-                                    controller: controllerUnit,
-                                    label: "Birim",
-                                    suffixWidget: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: const [
-                                        Icon(Icons.close),
-                                        Icon(Icons.keyboard_arrow_down),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: CustomSwitch(
-                                    switchValue: asgariUcretSwitch,
-                                    text: "Asgari Ücret",
-                                  ),
-                                ),
-                              ],
+                            Expanded(
+                              child: CustomTextBox(
+                                borderless: true,
+                                controller: controllerSalary,
+                                label: "Maaş",
+                                suffixWidget: const SizedBox(),
+                              ),
                             ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: CustomDateTimePicker(
-                                    suffixWidget:
-                                        Icon(Icons.calendar_today_outlined),
-                                    labelText: "Geçerlilik Başlangıç",
-                                    borderless: true,
-                                    onChanged: (val) {
-                                      if (val != null) {
-                                        print("DateTime picker : " + val);
-                                      }
-                                      try {
-                                        gecerlilikBaslangic =
-                                            dateTimeFormat.parse(val!);
-                                      } catch (e) {
-                                        print(e.toString());
-                                      }
-                                    },
-                                  ),
+                            Expanded(
+                              child: CustomTextBox(
+                                borderless: true,
+                                controller: controllerUnit,
+                                label: "Birim",
+                                suffixWidget: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: const [
+                                    Icon(Icons.close),
+                                    Icon(Icons.keyboard_arrow_down),
+                                  ],
                                 ),
-                                Expanded(
-                                  child: CustomTextBox(
-                                    borderless: true,
-                                    controller: controllerUnit,
-                                    label: "Maaş Periyodu",
-                                    suffixWidget:
-                                        const Icon(Icons.keyboard_arrow_down),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: CustomSwitch(
-                                    switchValue: NetSwitch,
-                                    text: "Net",
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                            const SizedBox(
-                              height: 10,
+                            Expanded(
+                              child: CustomSwitch(
+                                switchValue: asgariUcretSwitch,
+                                text: "Asgari Ücret",
+                              ),
                             ),
-                            CustomSwitch(
-                              switchValue: agiDahilSwitch,
-                              text: "AGİ dahil",
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Flexible(
-                                  flex: 1,
-                                  child: CustomButton(
-                                    title: "Ödeme Ekle",
-                                    backgroundColor: Colors.white,
-                                    foregroundColor: kPrimaryColor,
-                                    rightIcon: Icons.keyboard_arrow_down,
-                                    pressAction: () {
-                                      setState(() {
-                                        widget.odemeler.add(Odeme(
-                                          id: 0,
-                                          name: "Yol Yardımı",
-                                          fee: 0,
-                                          description: "",
-                                          periot: "",
-                                          unit: "TL",
-                                          grossPrice: true,
-                                          includePayroll: true,
-                                        ));
-                                      });
-                                      //showDialog(context: context, builder: builder)
-                                    },
-                                  ),
-                                ),
-                                const Flexible(
-                                  flex: 4,
-                                  child: SizedBox(),
-                                )
-                              ],
-                            ),
-                            Obx(() => ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: widget.odemeler.length,
-                                    itemBuilder: ((context, index) {
-                                  return Card(
-                                    child: Text(widget.odemeler[index].name),
-                                  );
-                                }))),
                           ],
                         ),
-                      ),
-                    );
-                  },
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CustomDateTimePicker(
+                                suffixWidget:
+                                    Icon(Icons.calendar_today_outlined),
+                                labelText: "Geçerlilik Başlangıç",
+                                borderless: true,
+                                onChanged: (val) {
+                                  if (val != null) {
+                                    print("DateTime picker : " + val);
+                                  }
+                                  try {
+                                    gecerlilikBaslangic =
+                                        dateTimeFormat.parse(val!);
+                                  } catch (e) {
+                                    print(e.toString());
+                                  }
+                                },
+                              ),
+                            ),
+                            Expanded(
+                              child: CustomTextBox(
+                                borderless: true,
+                                controller: controllerUnit,
+                                label: "Maaş Periyodu",
+                                suffixWidget:
+                                    const Icon(Icons.keyboard_arrow_down),
+                              ),
+                            ),
+                            Expanded(
+                              child: CustomSwitch(
+                                switchValue: NetSwitch,
+                                text: "Net",
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomSwitch(
+                          switchValue: agiDahilSwitch,
+                          text: "AGİ dahil",
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              flex: 1,
+                              child: CustomButton(
+                                title: "Ödeme Ekle",
+                                backgroundColor: Colors.white,
+                                foregroundColor: kPrimaryColor,
+                                rightIcon: Icons.keyboard_arrow_down,
+                                pressAction: () {
+                                  setState(() {
+                                    widget.odemeler.add(Odeme(
+                                      id: 0,
+                                      name: "Yol Yardımı",
+                                      fee: 0,
+                                      description: "",
+                                      periot: "",
+                                      unit: "TL",
+                                      grossPrice: true,
+                                      includePayroll: true,
+                                    ));
+                                  });
+                                  showDialog(
+                                    context: context,
+                                    builder: (_) => CustomAlertDialog(
+                                      titleWidget: SizedBox(),
+                                      bodyWidget: SizedBox(),
+                                      bodyWidgetWidth: screenSize.width / 1.5,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            const Flexible(
+                              flex: 4,
+                              child: SizedBox(),
+                            )
+                          ],
+                        ),
+                        Obx(() => ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: widget.odemeler.length,
+                            itemBuilder: ((context, index) {
+                              return Card(
+                                child: Text(widget.odemeler[index].name),
+                              );
+                            }))),
+                      ],
+                    ),
+                  ),
                 ),
+                bodyWidgetWidth: screenSize.width / 1.5,
               ),
             );
           },
