@@ -21,7 +21,7 @@ class OptionalCompanyDescriptions extends StatefulWidget {
 
   OptionalCompanyDescriptions({
     Key? key,
-    this.company = false,
+    this.company = true,
     this.branch = false,
     this.departmant = false,
     this.title = false,
@@ -36,34 +36,32 @@ class _OptionalCompanyDescriptionsState
     extends State<OptionalCompanyDescriptions> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const Expanded(
-            flex: 1,
-            child: Text(""),
+    return Row(
+      children: [
+        const Expanded(
+          flex: 1,
+          child: Text(""),
+        ),
+        Expanded(
+          flex: 2,
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              cardSirket(),
+              const SizedBox(height: 20),
+              cardSube(),
+              const SizedBox(height: 20),
+              cardDepartmant(),
+              const SizedBox(height: 20),
+              cardUnvan(),
+            ],
           ),
-          Expanded(
-            flex: 2,
-            child: ListView(
-              shrinkWrap: true,
-              children: [
-                cardSirket(),
-                const SizedBox(height: 20),
-                cardSube(),
-                const SizedBox(height: 20),
-                cardDepartmant(),
-                const SizedBox(height: 20),
-                cardUnvan(),
-              ],
-            ),
-          ),
-          const Expanded(
-            flex: 1,
-            child: Text(""),
-          ),
-        ],
-      ),
+        ),
+        const Expanded(
+          flex: 1,
+          child: Text(""),
+        ),
+      ],
     );
   }
 

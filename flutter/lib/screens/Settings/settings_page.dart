@@ -21,22 +21,9 @@ class _SettingsPageState extends State<SettingsPage> {
           elevation: 0,
           //automaticallyImplyLeading: true, //geri butonunu kaldırma
           backgroundColor: Colors.white,
-          bottom: const TabBar(
-            indicatorColor: Colors.white38,
-            tabs: [
-              Tab(
-                icon: Icon(Icons.home),
-                text: 'Seçmeli Şirket Tanımları',
-              ),
-            ],
-          ),
         ),
         body: SafeArea(
-          child: TabBarView(
-            children: [
-              OptionalCompanyDescriptions(),
-            ],
-          )
+          child: OptionalCompanyDescriptions()
         ),
       ),
     );
