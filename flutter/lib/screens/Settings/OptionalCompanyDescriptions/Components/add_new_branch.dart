@@ -7,18 +7,14 @@ import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
 class AddNewBranch extends StatefulWidget {
-  const AddNewBranch({
+  AddNewBranch({
     Key? key,
-    required this.controllerBranchName,
-    required this.controllerBranchUpper,
-    required this.controllerVacationDays,
-    required this.controllerRules,
   }) : super(key: key);
 
-  final TextEditingController controllerBranchName;
-  final TextEditingController controllerBranchUpper;
-  final TextEditingController controllerVacationDays;
-  final TextEditingController controllerRules;
+  final TextEditingController controllerBranchName = TextEditingController();
+  final TextEditingController controllerBranchUpper = TextEditingController();
+  final TextEditingController controllerVacationDays = TextEditingController();
+  final TextEditingController controllerRules = TextEditingController();
 
   @override
   State<AddNewBranch> createState() => _AddNewBranchState();
@@ -48,8 +44,8 @@ class _AddNewBranchState extends State<AddNewBranch> {
         var width = MediaQuery.of(context).size.width;
         var height = MediaQuery.of(context).size.height;
         return SizedBox(
-          width: width - 400,
-          height: height - 200,
+          width: width / 1.4,
+          height: height / 1.2,
           child: SingleChildScrollView(
             child: Form(
               key: _newBranchKey,
@@ -69,14 +65,11 @@ class _AddNewBranchState extends State<AddNewBranch> {
                     controller: widget.controllerBranchUpper,
                     validator: validator(),
                   ),
-                  const Text(
-                    "Kurallar",
-                    style: kLabelThinStyle,
-                  ),
-                  SizedBox(height: 10),
                   CustomTextBox(
+                    label: "Kurallar",
                     controller: widget.controllerRules,
                   ),
+                  const SizedBox(height: 10),
                   CustomTextBox(
                     controller: widget.controllerVacationDays,
                     hint: "Seçiniz",
@@ -87,12 +80,13 @@ class _AddNewBranchState extends State<AddNewBranch> {
                   ),
                   CustomButton(
                     title: "Ekle",
-                    pressAction: () {
+                    pressAction: () =>
                       setState(() {
+                      if (_newBranchKey.currentState!.validate()) {
                         for (Branch branch
                             in Statics.instance.branchController.branchList) {
                           if (branch.branch_name ==
-                              widget.controllerBranchName) {
+                              widget.controllerBranchName.text) {
                             showDialog(
                                 context: context,
                                 builder: (_) => const SimpleDialog(
@@ -102,24 +96,25 @@ class _AddNewBranchState extends State<AddNewBranch> {
                         }
                         var response =
                             Statics.instance.branchController.postBranch(
-                          widget.controllerBranchName.text,
-                          widget.controllerBranchUpper.text,
-                          widget.controllerRules.text,
-                          widget.controllerVacationDays.text,
+                          Branch(
+                            id: 0,
+                            branch_name: widget.controllerBranchName.text,
+                            branch_upper: widget.controllerBranchUpper.text,
+                            rules: widget.controllerRules.text,
+                            vacation_dates: widget.controllerVacationDays.text,
+                          ),
                         );
                         print(response);
-                        if (_newBranchKey.currentState!.validate()) {
                           Navigator.pop(context);
                           Get.snackbar(
                             "Birim Ekleme Ekranı",
                             "Birim Kaydedildi",
                             snackPosition: SnackPosition.BOTTOM,
-                            backgroundColor: kPrimaryColor,
+                          backgroundColor: kSecondaryColor,
                             padding: EdgeInsets.only(left: width / 2 - 100),
                           );
                         }
-                      });
-                    },
+                    }),
                   ),
                 ],
               ),

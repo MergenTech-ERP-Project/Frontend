@@ -38,17 +38,9 @@ class BranchController extends GetxController {
     }
   }
 
-  Future<String?> postBranch(String _branch_name, String _branch_upper,
-      String _rules, String _vacation_dates) async {
+  Future<String?> postBranch(Branch newBranch) async {
     try {
       isLoading(true);
-      Branch newBranch = Branch(
-        id: 0,
-        branch_name: _branch_name,
-        branch_upper: _branch_upper,
-        rules: _rules,
-        vacation_dates: _vacation_dates,
-      );
       var response = await BranchRemoteServices.postBranch(
           json.encode(newBranch.toJson()).toString());
       fetchBranches(); //companyList.add(newCompany);
