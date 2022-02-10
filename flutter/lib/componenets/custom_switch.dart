@@ -3,9 +3,11 @@ import 'package:vtys_kalite/utilities/constants.dart';
 
 class CustomSwitch extends StatefulWidget {
   bool switchValue;
+  String text;
 
   CustomSwitch({
     required this.switchValue,
+    required this.text,
     Key? key,
   }) : super(key: key);
 
@@ -26,7 +28,7 @@ class _CustomSwitchState extends State<CustomSwitch> {
           },
           value: widget.switchValue,
         ),
-        const Text("Asgari Ücret", style: kLabelStyle)
+        Text(widget.text, style: kLabelStyle)
       ],
     );
   }
