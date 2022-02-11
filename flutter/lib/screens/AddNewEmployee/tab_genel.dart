@@ -14,8 +14,14 @@ class _TabGenelState extends State<TabGenel> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        TabGenelFirstCard(),
-        TabGenelSecondCard(),
+        Expanded(
+          flex: 3,
+          child: TabGenelFirstCard(),
+        ),
+        Expanded(
+          flex: 4,
+          child: TabGenelSecondCard(),
+        ),
       ],
     );
   }

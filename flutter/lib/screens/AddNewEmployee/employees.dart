@@ -65,52 +65,8 @@ class _EmployeesState extends State<Employees> {
                               title: 'New Employee',
                               leftIcon: Icons.person_add,
                               pressAction: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (_) => AlertDialog(
-                                          shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10.0)),
-                                          ),
-                                          title: Expanded(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                const Flexible(
-                                                  flex: 8,
-                                                  child: Text('User',
-                                                      style:
-                                                          kLabelHeader2Style),
-                                                ),
-                                                Flexible(
-                                                  flex: 1,
-                                                  child: CustomButton(
-                                                    title: "Kaydet",
-                                                    height: 30,
-                                                    pressAction: () {
-                                                      Get.back(); ///Kaydetmiyor
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          content: Builder(
-                                            builder: (context) {
-                                              var width = MediaQuery.of(context)
-                                                  .size
-                                                  .width;
-                                              return Container(
-                                                width: width - 20,
-                                                child: AddNewEmployee(),
-                                              );
-                                            },
-                                          ),
-                                        ));
-                                /* Navigator.pushNamed(
-                                    context, AddNewEmployee.routeName); */
+                                Navigator.pushReplacementNamed(
+                                    context, AddNewEmployee.routeName);
                               },
                             ),
                           ),
@@ -129,7 +85,7 @@ class _EmployeesState extends State<Employees> {
                                 title: 'Admin Panel',
                                 leftIcon: Icons.admin_panel_settings,
                                 pressAction: () {
-                                  Navigator.pushNamed(
+                                  Navigator.pushReplacementNamed(
                                       context, AdminPanelPage.routeName);
                                 },
                               ),

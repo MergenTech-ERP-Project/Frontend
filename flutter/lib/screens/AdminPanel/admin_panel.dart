@@ -9,7 +9,7 @@ import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/main_form_app_bar.dart';
-import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/main_form_drawer.dart';
+import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
 import 'package:vtys_kalite/utilities/constants.dart';
 
 class AdminPanelPage extends StatefulWidget {
@@ -165,7 +165,7 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
         print(widget.users[index - 1].id);
         await Statics.instance.userController
             .deleteUser(widget.users[index - 1].id);
-        Navigator.pop(context);
+        Navigator.pushReplacementNamed(context, MainFormPage.routeName);
       },
     );
   }
@@ -183,7 +183,7 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
                 name: widget.users[index - 1].name,
                 title: title,
                 password: widget.users[index - 1].password));
-        Navigator.pop(context);
+        Navigator.pushReplacementNamed(context, MainFormPage.routeName);
       },
     );
   }

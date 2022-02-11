@@ -47,6 +47,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     passwordTextBox(),
                     confirmPasswordTextBox(),
                     signUpButton(context),
+                    CustomTextDivider(text: "OR", thickness: 2),
+                    cancelButton(context),
                   ],
                 ),
               ),
@@ -116,9 +118,18 @@ class _SignUpPageState extends State<SignUpPage> {
               .postUser(_usernameController.text, _passwordController.text);
           print(response);
           if (_signUpKey.currentState!.validate()) {
-            Navigator.pop(context);
+            Navigator.pushReplacementNamed(context, LoginPage.routeName);
           }
         });
+      },
+    );
+  }
+  
+  CustomButton cancelButton(BuildContext context) {
+    return CustomButton(
+      title: "Cancel",
+      pressAction: () {
+        Navigator.pushReplacementNamed(context, LoginPage.routeName);
       },
     );
   }

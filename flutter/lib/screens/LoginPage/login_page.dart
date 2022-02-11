@@ -127,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
     return CustomButton(
         title: "Sign Up",
         pressAction: () {
-          Navigator.pushNamed(context, SignUpPage.routeName);
+          Navigator.pushReplacementNamed(context, SignUpPage.routeName);
         });
   }
 
