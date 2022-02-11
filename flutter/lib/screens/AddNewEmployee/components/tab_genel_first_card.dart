@@ -84,6 +84,8 @@ class TabGenelFirstCard extends StatelessWidget {
     );
   }
 
+  //
+
   Expanded FirstCardImageNameActive() {
     return Expanded(
       flex: 4,

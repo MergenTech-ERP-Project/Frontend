@@ -120,7 +120,7 @@ class _EmployeesState extends State<Employees> {
                   ),
                   Expanded(
                     flex: 1,
-                    child: widget.user.title == Departments.management
+                    child: widget.user.title == DepartmentsEnum.management
                         ? Align(
                             alignment: Alignment.bottomCenter,
                             child: Padding(

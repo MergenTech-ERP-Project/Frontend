@@ -1,0 +1,35 @@
+import 'package:mergen_stok/enums/enumhareketturuextension.dart';
+
+class Deneme {
+
+  int thid;
+  EnumHareketTuru ttur;
+  DateTime tbelgeTarihi,
+
+  Deneme({
+    this.thid,
+    this.ttur,
+  
+   });
+
+  factory Deneme.fromJson(Map<String, dynamic> json) {
+    return Deneme(
+        thid: json['thid'],
+        ttur: json['ttur']!=null?EnumHareketTuruExtension.atama(json['ttur']):null,
+        tbelgeTarihi : json['tbelgeTarihi']!=null?DateTime.parse(json['tbelgeTarihi']):null,
+     
+    );
+  }
+
+  Map<String, dynamic>  toJson() => {
+      'thid': thid,
+      'ttur': ttur!=null?EnumHareketTuruExtension.degerBulma(ttur.name):null,
+      'tbelgeTarihi' : tbelgeTarihi!=null?tbelgeTarihi.toIso8601String():null,
+
+  };
+
+  @override
+  String toString() {
+    return '"thid": "${this.thid}", "ttur": "${this.ttur}", "tbelgeTarihi": "${this.tbelgeTarihi}"';
+  }
+}

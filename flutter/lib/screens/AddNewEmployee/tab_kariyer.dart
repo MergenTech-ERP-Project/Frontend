@@ -12,6 +12,8 @@ import 'package:vtys_kalite/utilities/constants.dart';
 class TabKariyer extends StatefulWidget {
   TabKariyer({Key? key}) : super(key: key);
 
+  //enum
+
   List<String> positionHeaders = [
     'Başlangıç',
     'Bitiş',
