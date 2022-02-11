@@ -29,13 +29,13 @@ const kLabelStyle = TextStyle(
 const kLabelThinStyle = TextStyle(
     color: kTextFontColor,
     fontFamily: 'Comfortaa',
-    fontSize: 16
+    fontSize: 20
 );
 
 const kLabelThinStyle2 = TextStyle(
     color: kTextFontColor,
     fontFamily: 'Comfortaa',
-    fontSize: 20
+    fontSize: 16
 );
 
 const kLabelAppBarThinStyle = TextStyle(

@@ -52,7 +52,7 @@ class _CustomTextBoxState extends State<CustomTextBox> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         widget.title != null
-            ? Text(widget.title!, style: kLabelStyle)
+            ? Text(widget.title!, style: kLabelThinStyle)
             : const SizedBox(height: 1),
         const SizedBox(height: 10),
         Padding(
