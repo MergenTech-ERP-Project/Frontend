@@ -17,7 +17,6 @@ class TabGenelSecondCard extends StatelessWidget {
 
   DateTime dateOfStart = DateTime.now();
   DateTime contractEndDate = DateTime.now();
-  var screenSize;
 
   TabGenelSecondCard({
     Key? key,
@@ -25,150 +24,146 @@ class TabGenelSecondCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    screenSize = MediaQuery.of(context).size;
-    return AboutPersonal();
+    return SingleChildScrollView(
+      child: aboutPersonal(),
+    );
   }
 
-  Widget AboutPersonal() {
-    return Expanded(
-      flex: 4,
-      child: SingleChildScrollView(
-        child: Column(
-          //shrinkWrap: true,
-          mainAxisAlignment: MainAxisAlignment.start,
+  Widget aboutPersonal() {
+    return Column(
+      //shrinkWrap: true,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+          child: Text("Genel Bilgiler",
+              style: kLabelHeader2Style, textAlign: TextAlign.center),
+        ),
+        Row(
           children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
-              child: Text("Genel Bilgiler",
-                  style: kLabelHeader2Style, textAlign: TextAlign.center),
+            Expanded(
+              child: CustomTextBox(
+                borderless: true,
+                controller: controllerName,
+                label: "Ad",
+                suffixWidget: const SizedBox(),
+              ),
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: CustomTextBox(
-                    borderless: true,
-                    controller: controllerName,
-                    label: "Ad",
-                    suffixWidget: const SizedBox(),
-                  ),
-                ),
-                Expanded(
-                  child: CustomTextBox(
-                    borderless: true,
-                    controller: controllerSurname,
-                    label: "Soyad",
-                    suffixWidget: const SizedBox(),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: CustomTextBox(
-                    borderless: true,
-                    controller: controllerEPostaWork,
-                    label: "E-Posta (İş)",
-                    suffixWidget: const SizedBox(),
-                  ),
-                ),
-                Expanded(
-                  child: CustomTextBox(
-                    borderless: true,
-                    controller: controllerEPostaPersonal,
-                    label: "E-Posta (Genel)",
-                    suffixWidget: const SizedBox(),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: CustomTextBox(
-                    borderless: true,
-                    controller: controllerTelephoneWork,
-                    label: "Telefon (İş)",
-                    suffixWidget: const SizedBox(),
-                  ),
-                ),
-                Expanded(
-                  child: CustomTextBox(
-                    borderless: true,
-                    controller: controllerTelephonePersonal,
-                    label: "Telefon (Kişisel)",
-                    suffixWidget: const SizedBox(),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: CustomDateTimePicker(
-                      suffixWidget: const Icon(Icons.calendar_today_outlined),
-                      labelText: "İşe Başlangıç Tarihi",
-                      borderless: true,
-                      onChanged: (val) {
-                        if (val != null) {
-                          print("DateTime picker : " + val);
-                        }
-                        try {
-                          dateOfStart = dateTimeFormat.parse(val!);
-                        } catch (e) {
-                          print(e.toString());
-                        }
-                      },
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: CustomTextBox(
-                    borderless: true,
-                    controller: controllerAccessType,
-                    label: "Erişim Türü",
-                    suffixWidget: const Icon(Icons.keyboard_arrow_down),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: CustomTextBox(
-                    borderless: true,
-                    controller: controllerContractType,
-                    label: "Sözleşme Türü",
-                    suffixWidget: const Icon(Icons.keyboard_arrow_down),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: CustomDateTimePicker(
-                      suffixWidget: const Icon(Icons.calendar_today_outlined),
-                      labelText: "Sözleşme Bitiş Tarihi",
-                      borderless: true,
-                      onChanged: (val) {
-                        if (val != null) {
-                          print("DateTime picker : " + val);
-                        }
-                        try {
-                          contractEndDate = dateTimeFormat.parse(val!);
-                        } catch (e) {
-                          print(e.toString());
-                        }
-                      },
-                    ),
-                  ),
-                ),
-              ],
+            Expanded(
+              child: CustomTextBox(
+                borderless: true,
+                controller: controllerSurname,
+                label: "Soyad",
+                suffixWidget: const SizedBox(),
+              ),
             ),
           ],
         ),
-      ),
+        Row(
+          children: [
+            Expanded(
+              child: CustomTextBox(
+                borderless: true,
+                controller: controllerEPostaWork,
+                label: "E-Posta (İş)",
+                suffixWidget: const SizedBox(),
+              ),
+            ),
+            Expanded(
+              child: CustomTextBox(
+                borderless: true,
+                controller: controllerEPostaPersonal,
+                label: "E-Posta (Genel)",
+                suffixWidget: const SizedBox(),
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: CustomTextBox(
+                borderless: true,
+                controller: controllerTelephoneWork,
+                label: "Telefon (İş)",
+                suffixWidget: const SizedBox(),
+              ),
+            ),
+            Expanded(
+              child: CustomTextBox(
+                borderless: true,
+                controller: controllerTelephonePersonal,
+                label: "Telefon (Kişisel)",
+                suffixWidget: const SizedBox(),
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: CustomDateTimePicker(
+                  suffixWidget: const Icon(Icons.calendar_today_outlined),
+                  labelText: "İşe Başlangıç Tarihi",
+                  borderless: true,
+                  onChanged: (val) {
+                    if (val != null) {
+                      print("DateTime picker : " + val);
+                    }
+                    try {
+                      dateOfStart = dateTimeFormat.parse(val!);
+                    } catch (e) {
+                      print(e.toString());
+                    }
+                  },
+                ),
+              ),
+            ),
+            Expanded(
+              child: CustomTextBox(
+                borderless: true,
+                controller: controllerAccessType,
+                label: "Erişim Türü",
+                suffixWidget: const Icon(Icons.keyboard_arrow_down),
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: CustomTextBox(
+                borderless: true,
+                controller: controllerContractType,
+                label: "Sözleşme Türü",
+                suffixWidget: const Icon(Icons.keyboard_arrow_down),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: CustomDateTimePicker(
+                  suffixWidget: const Icon(Icons.calendar_today_outlined),
+                  labelText: "Sözleşme Bitiş Tarihi",
+                  borderless: true,
+                  onChanged: (val) {
+                    if (val != null) {
+                      print("DateTime picker : " + val);
+                    }
+                    try {
+                      contractEndDate = dateTimeFormat.parse(val!);
+                    } catch (e) {
+                      print(e.toString());
+                    }
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
