@@ -16,16 +16,15 @@ class UserController extends GetxController {
   }
 
   void fetchUsers() async {
-      try {
-        isLoading(true);
-        var users = await UserRemoteServices.fetchUsers();
-        if (users != null) {
-          userList.removeRange(0, userList.length); //-1 belki
-          userList.assignAll(users);
-        }
-      } finally {
-        isLoading(false);
-      }
+    try {
+      isLoading(true);
+      List<User>? users = await UserRemoteServices.fetchUsers();
+      users ??= <User>[];
+      userList.removeRange(0, userList.length); //-1 belki
+      userList.assignAll(users);
+    } finally {
+      isLoading(false);
+    }
   }
 
   Future<int> fetchUser(String name, String password) async {
@@ -47,8 +46,11 @@ class UserController extends GetxController {
           id: 0,
           name: name,
           password: password,
-          title: name == "admin" ? DepartmentsEnum.management : DepartmentsEnum.none);
-      var response = await UserRemoteServices.addNewUser(json.encode(newUser.toJson()).toString());
+          title: name == "admin"
+              ? DepartmentsEnum.management
+              : DepartmentsEnum.none);
+      var response = await UserRemoteServices.addNewUser(
+          json.encode(newUser.toJson()).toString());
       fetchUsers(); //userList.add(newUser);
       print("post User: " + response);
       return response;
@@ -56,11 +58,13 @@ class UserController extends GetxController {
       isLoading(false);
     }
   }
+
   Future<String?> putUser(int id, User user) async {
     try {
       isLoading(true);
       print(id);
-      var response = await UserRemoteServices.updateUser(id, json.encode(user.toJson()).toString());
+      var response = await UserRemoteServices.updateUser(
+          id, json.encode(user.toJson()).toString());
       fetchUsers(); //userList.add(newUser);
       print("put User: " + response);
       return response;

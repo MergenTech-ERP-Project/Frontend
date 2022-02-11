@@ -1,4 +1,6 @@
-class Odeme {
+import 'package:flutter/material.dart';
+
+class Odeme extends StatefulWidget {
   int id;
   String name;
   int fee;
@@ -9,13 +11,26 @@ class Odeme {
   bool includePayroll;
 
   Odeme({
+    Key? key,
     this.id = 0,
-    this.name = "",
+    required this.name,
     this.fee = 0,
-    this.unit = "",
+    this.unit = "TL",
     this.description = "",
     this.periot = "",
-    this.grossPrice = false,
-    this.includePayroll = false,
-  });
+    this.grossPrice = true,
+    this.includePayroll = true,
+  }) : super(key: key);
+
+  @override
+  _OdemeState createState() => _OdemeState();
+}
+
+class _OdemeState extends State<Odeme> {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Text(widget.name),
+    );
+  }
 }

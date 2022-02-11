@@ -33,7 +33,7 @@ class UserRemoteServices {
         await http.get(Uri.parse(serviceHttp + '/user/$name/$password'));
     int userID = -1;
     if (response.statusCode == 200) {
-      var jsonString = response.body.toString();
+      String jsonString = response.body.toString();
       jsonString = "[" + jsonString + "]";
       userID = parseUser(jsonString).id;
     }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/state_manager.dart';
 import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
@@ -67,6 +68,8 @@ class _TabKariyerState extends State<TabKariyer> {
   TextEditingController positionCalismaSekli = TextEditingController();
   TextEditingController controllerSalary = TextEditingController();
   TextEditingController controllerUnit = TextEditingController();
+  TextEditingController controllerPaymentScreenInSalary =
+      TextEditingController();
   DateTime positionDateTimeBaslangic = DateTime.now();
   DateTime positionDateTimeBitis = DateTime.now();
   bool asgariUcretSwitch = true;
@@ -441,10 +444,52 @@ class _TabKariyerState extends State<TabKariyer> {
                                   showDialog(
                                     context: context,
                                     builder: (_) => CustomAlertDialog(
-                                      titleWidget: SizedBox(),
-                                      bodyWidget: SizedBox(),
-                                      bodyWidgetWidth: screenSize.width / 1.5,
-                                      bodyWidgetHeight: screenSize.height / 1.5,
+                                      titleWidget: const Text(
+                                        "Ödeme Ekleme Ekranı",
+                                        style: kLabelHeader3Style,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      bodyWidget: Column(
+                                        children: [
+                                          CustomTextBox(
+                                            title: "Yapmak istediğiniz ödeme",
+                                            controller:
+                                                controllerPaymentScreenInSalary,
+                                            borderless: true,
+                                          ),
+                                          CustomButton(
+                                            title: "Kaydet",
+                                            pressAction: () {
+                                              setState(() {
+                                                if (controllerPaymentScreenInSalary
+                                                        .text
+                                                        .trim() ==
+                                                    "") {
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (_) =>
+                                                          CustomAlertDialog(
+                                                            titleWidget: const Text(
+                                                                "Ödeme Ekranı Boş Bırakılamaz"),
+                                                            bodyWidget:
+                                                                const SizedBox(),
+                                                            bodyWidgetWidth:
+                                                                screenSize.width
+                                                          ));
+                                                } else {
+                                                  widget.odemeler.add(Odeme(
+                                                      name:
+                                                          controllerPaymentScreenInSalary
+                                                              .text));
+                                                }
+                                                Get.back();
+                                              });
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                      bodyWidgetWidth: screenSize.width / 2,
+                                      bodyWidgetHeight: screenSize.height / 5.5,
                                     ),
                                   );
                                 },
@@ -457,13 +502,12 @@ class _TabKariyerState extends State<TabKariyer> {
                           ],
                         ),
                         Obx(() => ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: widget.odemeler.length,
-                            itemBuilder: ((context, index) {
-                              return Card(
-                                child: Text(widget.odemeler[index].name),
-                              );
-                            }))),
+                              shrinkWrap: true,
+                              itemCount: widget.odemeler.length,
+                              itemBuilder: ((context, index) {
+                                return widget.odemeler[index];
+                              }),
+                            )),
                       ],
                     ),
                   ),
