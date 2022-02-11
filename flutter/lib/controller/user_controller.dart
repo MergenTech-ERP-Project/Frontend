@@ -47,8 +47,8 @@ class UserController extends GetxController {
           id: 0,
           name: name,
           password: password,
-          title: name == "admin" ? Departments.management : Departments.none);
-      var response = await UserRemoteServices.postUser(json.encode(newUser.toJson()).toString());
+          title: name == "admin" ? DepartmentsEnum.management : DepartmentsEnum.none);
+      var response = await UserRemoteServices.addNewUser(json.encode(newUser.toJson()).toString());
       fetchUsers(); //userList.add(newUser);
       print("post User: " + response);
       return response;
@@ -60,7 +60,7 @@ class UserController extends GetxController {
     try {
       isLoading(true);
       print(id);
-      var response = await UserRemoteServices.putUser(id, json.encode(user.toJsonWithId()).toString());
+      var response = await UserRemoteServices.updateUser(id, json.encode(user.toJson()).toString());
       fetchUsers(); //userList.add(newUser);
       print("put User: " + response);
       return response;

@@ -56,7 +56,7 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    for (var departmant in Departments.values) {
+    for (var departmant in DepartmentsEnum.values) {
       titlesDepartmant.add(EnumToString.convertToString(departmant));
     }
     return Center(

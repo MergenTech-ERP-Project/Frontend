@@ -10,8 +10,8 @@ class UserRemoteServices {
   static Future<List<User>?> fetchUsers() async {
     var response = await http.get(Uri.parse(serviceHttp + '/user/users'));
     if (response.statusCode == 200) {
-      var jsonString = response.body;
-      return userFromJson(jsonString);
+      var jsonString = response.body.toString();
+      return parseUsers(jsonString);
     } else {
       return null;
     }
@@ -21,11 +21,8 @@ class UserRemoteServices {
     var response = await http.get(Uri.parse(serviceHttp + '/user/$name'));
     int userID = -1;
     if (response.statusCode == 200) {
-      var jsonString = response.body;
-      List<User> users = userFromJson(jsonString);
-      if (users.isNotEmpty) {
-        userID = users[0].id;
-      }
+      var jsonString = response.body.toString();
+      userID = parseUser(jsonString).id;
     }
     return userID;
   }
@@ -36,16 +33,14 @@ class UserRemoteServices {
         await http.get(Uri.parse(serviceHttp + '/user/$name/$password'));
     int userID = -1;
     if (response.statusCode == 200) {
-      var jsonString = response.body;
-      List<User> users = userFromJson(jsonString);
-      if (users.isNotEmpty) {
-        userID = users[0].id;
-      }
+      var jsonString = response.body.toString();
+      jsonString = "[" + jsonString + "]";
+      userID = parseUser(jsonString).id;
     }
     return userID;
   }
 
-  static Future<String> postUser(String json) async {
+  static Future<String> addNewUser(String json) async {
     var response = await http
         .post(Uri.parse(serviceHttp + '/user/post'),
             headers: <String, String>{
@@ -63,7 +58,7 @@ class UserRemoteServices {
         : "Error: User ${response.statusCode}";
   }
 
-  static Future<String> putUser(int id, String json) async {
+  static Future<String> updateUser(int id, String json) async {
     var response = await http
         .put(Uri.parse(serviceHttp + '/user/put/$id'),
             headers: <String, String>{

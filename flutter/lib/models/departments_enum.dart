@@ -1,4 +1,4 @@
-enum Departments {
+enum DepartmentsEnum {
   none,
   software,
   support,

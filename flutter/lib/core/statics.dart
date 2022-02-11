@@ -28,7 +28,7 @@ class Statics {
   void setUserName(String name) {
     _user!.name = name;
   }
-  void setUserTitle(Departments title) {
+  void setUserTitle(DepartmentsEnum title) {
     _user!.title = title;
   }
   void setUser(User? user){

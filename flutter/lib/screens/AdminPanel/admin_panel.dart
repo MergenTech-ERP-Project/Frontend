@@ -30,7 +30,7 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
   @override
   Widget build(BuildContext context) {
     print("Heelllloooo " + Statics.instance.getUser.name);
-    for (var departmant in Departments.values) {
+    for (var departmant in DepartmentsEnum.values) {
       titlesDepartmant.add(EnumToString.convertToString(departmant));
     }
     var screenSize = MediaQuery.of(context).size;
@@ -79,7 +79,7 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
           ? null
           : () {
               userTitleIndex =
-                  Departments.values.indexOf(widget.users[index - 1].title);
+                  DepartmentsEnum.values.indexOf(widget.users[index - 1].title);
               showDialog(
                   context: context,
                   builder: (_) => AlertDialog(
@@ -175,7 +175,7 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
       title: 'Save',
       pressAction: () async {
         print(widget.users[index - 1].id);
-        var title = Departments.values.elementAt(userTitleIndex);
+        var title = DepartmentsEnum.values.elementAt(userTitleIndex);
         await Statics.instance.userController.putUser(
             widget.users[index - 1].id,
             User(

@@ -34,7 +34,7 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
   @override
   Widget build(BuildContext context) {
 
-    for (var departmant in Departments.values) {
+    for (var departmant in DepartmentsEnum.values) {
       titlesDepartmant.add(EnumToString.convertToString(departmant));
     }
 
