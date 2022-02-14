@@ -10,7 +10,6 @@ import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
-import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
 import 'package:vtys_kalite/screens/widgets/top_navigation_bar.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 

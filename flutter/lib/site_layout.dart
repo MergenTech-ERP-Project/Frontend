@@ -3,6 +3,7 @@ import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/screens/widgets/large_screen.dart';
 import 'package:vtys_kalite/screens/widgets/side_menu.dart';
 import 'package:vtys_kalite/screens/widgets/small_screen.dart';
+import 'package:vtys_kalite/screens/widgets/top_navigation_bar.dart';
 
 class SiteLayout extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -11,9 +12,9 @@ class SiteLayout extends StatelessWidget {
     return Scaffold(
       key: _scaffoldKey,
       extendBodyBehindAppBar: true,
-      //appBar: topNavigationBar(context, _scaffoldKey),
+      appBar: topNavigationBar(context, _scaffoldKey),
       drawer: Drawer(child: SideMenu()),
-      body: const ResponsiveWidget(
+      body: ResponsiveWidget(
         largeScreen: LargeScreen(),
         smallScreen: SmallScreen(),
       ),

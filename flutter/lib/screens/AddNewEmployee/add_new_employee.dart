@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
-import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
+import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_diger_bilgiler.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_genel.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kisisel_bilgiler.dart';
-import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class AddNewEmployee extends StatefulWidget {
@@ -33,7 +32,7 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
           leading: IconButton(
             icon: const Icon(Icons.keyboard_arrow_left),
             onPressed: () {
-              Navigator.pushReplacementNamed(context, MainFormPage.routeName);
+              Navigator.pushReplacementNamed(context, mainFormPageRoute);
             },
           ),
           bottom: TabBar(
@@ -114,7 +113,7 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
                         backgroundColor: Colors.white,
                         pressAction: () {
                           Navigator.pushReplacementNamed(
-                              context, MainFormPage.routeName);
+                              context, mainFormPageRoute);
                         },
                       ),
                     ),
