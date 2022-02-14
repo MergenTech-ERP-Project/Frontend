@@ -44,8 +44,7 @@ class App extends StatelessWidget {
       scrollBehavior: MyCustomScrollBehavior(),
       title: 'Mergen Tech',
       theme: theme(context),
-      initialRoute:
-          user.name == "" ? LoginPage.routeName : mainFormPageRoute
+      initialRoute: user.name == "" ? loginPageRoute : mainFormPageRoute,
     );
   }
 

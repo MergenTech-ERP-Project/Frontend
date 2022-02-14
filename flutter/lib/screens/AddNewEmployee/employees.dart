@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/models/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
+import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
 import 'package:vtys_kalite/screens/AdminPanel/admin_panel.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 
 class Employees extends StatefulWidget {
-  Employees({Key? key}) : super(key: key);
-
-  List<User> users = Statics.instance.userController.userList;
+  List<User> users = userController.userList;
   User user = User();
+
   @override
   _EmployeesState createState() => _EmployeesState();
 }
@@ -20,10 +22,7 @@ class _EmployeesState extends State<Employees> {
   Widget build(BuildContext context) {
     return Center(
       child: Obx(() {
-        if (Statics.instance.userController.userList.isNotEmpty) {
-          widget.user = Statics.instance.getUser;
-        }
-        return (Statics.instance.userController.isLoading.value
+        return (userController.isLoading.value
             ? const CircularProgressIndicator()
             : Row(
                 children: [
@@ -45,9 +44,8 @@ class _EmployeesState extends State<Employees> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(
                                         left: 15.0, top: 20),
-                                    child: Text(
-                                      widget.users[index].name,
-                                      style: kLabelThinStyle,
+                                    child: CustomText(
+                                      text: widget.users[index].name,
                                     ),
                                   ),
                                 ),
@@ -62,10 +60,8 @@ class _EmployeesState extends State<Employees> {
                             child: CustomButton(
                               title: 'New Employee',
                               leftIcon: Icons.person_add,
-                              pressAction: () {
-                                Navigator.pushReplacementNamed(
-                                    context, AddNewEmployee.routeName);
-                              },
+                              pressAction: () =>
+                                  Get.toNamed(addNewEmployeePageRoute),
                             ),
                           ),
                         )
@@ -82,10 +78,8 @@ class _EmployeesState extends State<Employees> {
                               child: CustomButton(
                                 title: 'Admin Panel',
                                 leftIcon: Icons.admin_panel_settings,
-                                pressAction: () {
-                                  Navigator.pushReplacementNamed(
-                                      context, AdminPanelPage.routeName);
-                                },
+                                pressAction: () =>
+                                    Get.toNamed(adminPanelPageRoute),
                               ),
                             ),
                           )

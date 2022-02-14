@@ -6,13 +6,12 @@ import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_scrollableColumn.dart';
 import 'package:vtys_kalite/componenets/custom_switch.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/models/odeme.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabKariyer extends StatefulWidget {
-  TabKariyer({Key? key}) : super(key: key);
-
   //enum
 
   List<String> positionHeaders = [
@@ -99,7 +98,7 @@ class _TabKariyerState extends State<TabKariyer> {
                     children: [
                       const Flexible(
                         flex: 8,
-                        child: Text('Pozisyon Ekle', style: kLabelHeader2Style),
+                        child: CustomText(text: 'Pozisyon Ekle'),
                       ),
                       Flexible(
                         flex: 2,
@@ -143,10 +142,11 @@ class _TabKariyerState extends State<TabKariyer> {
                                 child: Icon(Icons.info),
                               ),
                               Flexible(
-                                child: Text(
-                                    "Şirket, çalışma şekli ve maaş güncellemeleri içeren pozisyon değişikliklerinde "
-                                    "şirketinizin kurallarını kontrol ediniz.\n"
-                                    "İleri tarihli varsayılan pozisyonlar başlandgıç tarihinden itibaren geçerli olur."),
+                                child: CustomText(
+                                    text:
+                                        "Şirket, çalışma şekli ve maaş güncellemeleri içeren pozisyon değişikliklerinde "
+                                        "şirketinizin kurallarını kontrol ediniz.\n"
+                                        "İleri tarihli varsayılan pozisyonlar başlandgıç tarihinden itibaren geçerli olur."),
                               ),
                             ],
                           ),
@@ -155,67 +155,35 @@ class _TabKariyerState extends State<TabKariyer> {
                           children: [
                             Expanded(
                               child: CustomTextBox(
-                                  controller: positionSirket,
-                                  borderless: true,
-                                  suffixWidget: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: const [
-                                      Icon(Icons.close),
-                                      Icon(Icons.keyboard_arrow_down),
-                                    ],
-                                  ),
-                                  label: "Şirket"),
+                                controller: positionSirket,
+                                borderless: true,
+                                suffixWidget: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: const [
+                                    Icon(Icons.close),
+                                    Icon(Icons.keyboard_arrow_down),
+                                  ],
+                                ),
+                                label: "Şirket",
+                              ),
                             ),
                             Expanded(
                               child: CustomTextBox(
-                                  controller: positionSube,
-                                  borderless: true,
-                                  suffixWidget: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: const [
-                                      Icon(Icons.close),
-                                      Icon(Icons.keyboard_arrow_down),
-                                    ],
-                                  ),
-                                  label: "Şube"),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: CustomTextBox(
-                                  controller: positionDepartman,
-                                  borderless: true,
-                                  suffixWidget: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: const [
-                                      Icon(Icons.close),
-                                      Icon(Icons.keyboard_arrow_down),
-                                    ],
-                                  ),
-                                  label: "Departman"),
-                            ),
-                            Expanded(
-                              child: CustomTextBox(
-                                  controller: positionUnvan,
-                                  borderless: true,
-                                  suffixWidget: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: const [
-                                      Icon(Icons.close),
-                                      Icon(Icons.keyboard_arrow_down),
-                                    ],
-                                  ),
-                                  label: "Unvan"),
+                                controller: positionSube,
+                                borderless: true,
+                                suffixWidget: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: const [
+                                    Icon(Icons.close),
+                                    Icon(Icons.keyboard_arrow_down),
+                                  ],
+                                ),
+                                label: "Şube",
+                              ),
                             ),
                           ],
                         ),
@@ -223,19 +191,57 @@ class _TabKariyerState extends State<TabKariyer> {
                           children: [
                             Expanded(
                               child: CustomTextBox(
-                                  borderless: true,
-                                  controller: positionYoneticisi,
-                                  suffixWidget:
-                                      const Icon(Icons.keyboard_arrow_down),
-                                  label: "Yönetici"),
+                                controller: positionDepartman,
+                                borderless: true,
+                                suffixWidget: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: const [
+                                    Icon(Icons.close),
+                                    Icon(Icons.keyboard_arrow_down),
+                                  ],
+                                ),
+                                label: "Departman",
+                              ),
                             ),
                             Expanded(
                               child: CustomTextBox(
-                                  borderless: true,
-                                  controller: positionCalismaSekli,
-                                  suffixWidget:
-                                      const Icon(Icons.keyboard_arrow_down),
-                                  label: "Çalışma Şekli"),
+                                controller: positionUnvan,
+                                borderless: true,
+                                suffixWidget: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: const [
+                                    Icon(Icons.close),
+                                    Icon(Icons.keyboard_arrow_down),
+                                  ],
+                                ),
+                                label: "Unvan",
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CustomTextBox(
+                                borderless: true,
+                                controller: positionYoneticisi,
+                                suffixWidget:
+                                    const Icon(Icons.keyboard_arrow_down),
+                                label: "Yönetici",
+                              ),
+                            ),
+                            Expanded(
+                              child: CustomTextBox(
+                                borderless: true,
+                                controller: positionCalismaSekli,
+                                suffixWidget:
+                                    const Icon(Icons.keyboard_arrow_down),
+                                label: "Çalışma Şekli",
+                              ),
                             ),
                           ],
                         ),
@@ -302,7 +308,9 @@ class _TabKariyerState extends State<TabKariyer> {
                     children: [
                       const Flexible(
                         flex: 8,
-                        child: Text('Maaş Ekle', style: kLabelHeader2Style),
+                        child: CustomText(
+                          text: 'Maaş Ekle',
+                        ),
                       ),
                       Flexible(
                         flex: 2,
@@ -375,7 +383,7 @@ class _TabKariyerState extends State<TabKariyer> {
                             Expanded(
                               child: CustomDateTimePicker(
                                 suffixWidget:
-                                    Icon(Icons.calendar_today_outlined),
+                                    const Icon(Icons.calendar_today_outlined),
                                 labelText: "Geçerlilik Başlangıç",
                                 borderless: true,
                                 onChanged: (val) {
@@ -425,8 +433,6 @@ class _TabKariyerState extends State<TabKariyer> {
                               flex: 1,
                               child: CustomButton(
                                 title: "Ödeme Ekle",
-                                backgroundColor: Colors.white,
-                                foregroundColor: kPrimaryColor,
                                 rightIcon: Icons.keyboard_arrow_down,
                                 pressAction: () {
                                   setState(() {
@@ -444,11 +450,8 @@ class _TabKariyerState extends State<TabKariyer> {
                                   showDialog(
                                     context: context,
                                     builder: (_) => CustomAlertDialog(
-                                      titleWidget: const Text(
-                                        "Ödeme Ekleme Ekranı",
-                                        style: kLabelHeader3Style,
-                                        textAlign: TextAlign.center,
-                                      ),
+                                      titleWidget: const CustomText(
+                                          text: "Ödeme Ekleme Ekranı"),
                                       bodyWidget: Column(
                                         children: [
                                           CustomTextBox(
@@ -467,15 +470,16 @@ class _TabKariyerState extends State<TabKariyer> {
                                                     "") {
                                                   showDialog(
                                                       context: context,
-                                                      builder: (_) =>
-                                                          CustomAlertDialog(
-                                                            titleWidget: const Text(
-                                                                "Ödeme Ekranı Boş Bırakılamaz"),
-                                                            bodyWidget:
-                                                                const SizedBox(),
-                                                            bodyWidgetWidth:
-                                                                screenSize.width
-                                                          ));
+                                                      builder: (_) => CustomAlertDialog(
+                                                          titleWidget:
+                                                              const CustomText(
+                                                                  text:
+                                                                      "Ödeme Ekranı Boş Bırakılamaz"),
+                                                          bodyWidget:
+                                                              const SizedBox(),
+                                                          bodyWidgetWidth:
+                                                              screenSize
+                                                                  .width));
                                                 } else {
                                                   widget.odemeler.add(Odeme(
                                                       name:
@@ -565,9 +569,8 @@ class _TabKariyerState extends State<TabKariyer> {
             flex: 10,
             child: Align(
               alignment: Alignment.centerLeft,
-              child: Text(
-                text,
-                style: kLabelThinStyle2,
+              child: CustomText(
+                text: text,
               ),
             ),
           ),
