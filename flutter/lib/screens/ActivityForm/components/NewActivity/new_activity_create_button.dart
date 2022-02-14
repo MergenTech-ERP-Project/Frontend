@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
-import 'package:vtys_kalite/core/statics.dart';
-import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
+import 'package:vtys_kalite/routing/routes.dart';
+import 'package:vtys_kalite/screens/ActivityForm/new_activity_page.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
-import '../../new_activity_page.dart';
 import 'new_activity_select_users_page.dart';
 
 class NewActivityCreateButton extends StatefulWidget {
@@ -26,7 +25,7 @@ class _NewActivityCreateButtonState extends State<NewActivityCreateButton> {
       pressAction: () {
         setState(() {
           if(widget.widget.selectedUsers.isNotEmpty) {
-            var response = Statics.instance.activityController.postActivity(
+            var response = activityController.postActivity(
               NewActivityPage.nameController.text,
               NewActivityPage.placeController.text,
               dateTimeFormat.format(NewActivityPage.date).toString(),
@@ -34,7 +33,7 @@ class _NewActivityCreateButtonState extends State<NewActivityCreateButton> {
               widget.widget.selectedUsers
             );
             print(response);
-            Navigator.pushReplacementNamed(context, MainFormPage.routeName);
+            Navigator.pushReplacementNamed(context, mainFormPageRoute);
           }
         });
       },

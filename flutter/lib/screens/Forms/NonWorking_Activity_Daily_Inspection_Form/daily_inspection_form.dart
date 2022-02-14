@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_radiolisttile.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/models/departments_enum.dart';
-import 'package:vtys_kalite/utilities/controllers.dart';
 
 class DailyInspectionFormPage extends StatefulWidget {
   static String routeName = '/DailyInspectionFormPage';
@@ -53,31 +53,31 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
             controller: widget.usernameController,
             customFontSize: 20,
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           MultipleChoiceCustomDropDownItems(
             list: titlesDepartmant,
             isExpandedYes: true,
             text: 'Select Departmant',
             iconSize: 20,
-            icon: Icon(Icons.arrow_drop_down),
+            icon: const Icon(Icons.arrow_drop_down),
             onChanged: (val){},
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           CustomTextBox(title: "Mesai Dışı Çalışma Tarihi"),
-          SizedBox(height: 10),
-          Text("MESAİ DIŞI ÇALIŞMA YERİ", style: kLabelStyle),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
+          const CustomText(text: "MESAİ DIŞI ÇALIŞMA YERİ"),
+          const SizedBox(height: 10),
           MultipleChoiceRadioListTile(
             list: outofHoursWorkPlace,
             groupValue: selectedOutofHoursWorkPlace,
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           buildDescriptionTextFormField(),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           CustomTextBox(title: "Çalışma Başlangıç Saati"),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           CustomTextBox(title: "Çalışma Bitiş Saati"),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           CustomTextBox(
             borderless: true,
             title: "Toplam Çalışma Süresi",
@@ -99,8 +99,8 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Mesai Dışı Faaliyet / Açıklama", style: kLabelStyle),
-        SizedBox(height: 10),
+        const CustomText(text: "Mesai Dışı Faaliyet / Açıklama"),
+        const SizedBox(height: 10),
         Container(
           height: 50,
           child: TextFormField(

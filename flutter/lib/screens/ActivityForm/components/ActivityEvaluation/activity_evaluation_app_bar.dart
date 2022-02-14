@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/models/activity.dart';
-import 'package:vtys_kalite/utilities/controllers.dart';
+import 'package:vtys_kalite/utilities/style.dart';
 
 class ActivityEvaluationAppBar extends StatelessWidget
     implements PreferredSizeWidget {
@@ -21,20 +22,18 @@ class ActivityEvaluationAppBar extends StatelessWidget
     return AppBar(
       title: Padding(
         padding: const EdgeInsets.only(left: 20.0),
-        child: Text(
-          activity.name,
-          style: kLabelAppBarStyle,
+        child: CustomText(
+          text: activity.name,
         ),
       ),
-      backgroundColor: kPrimaryColor,
+      backgroundColor: activeColor,
       foregroundColor: Colors.white,
       actions: [
         Center(
           child: Padding(
             padding: const EdgeInsets.only(right: 20.0),
-            child: Text(
-              "Due To : ${date.day}.${date.month}.${date.year}",
-              style: kLabelAppBarStyle,
+            child: CustomText(
+              text: "Due To : ${date.day}.${date.month}.${date.year}",
             ),
           ),
         )

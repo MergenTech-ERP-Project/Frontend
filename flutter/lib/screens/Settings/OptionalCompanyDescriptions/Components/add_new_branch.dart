@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
+import 'package:vtys_kalite/utilities/style.dart';
 
 class AddNewBranch extends StatefulWidget {
   AddNewBranch({
@@ -33,11 +34,11 @@ class _AddNewBranchState extends State<AddNewBranch> {
         children: const [
           Icon(
             Icons.add,
-            color: kTextFontColor,
+            color: Colors.black,
             size: 24,
           ),
           SizedBox(width: 20),
-          Text('Yeni Birim Ekle', style: kLabelHeader2Style),
+          CustomText(text: "Yeni Birim Ekle"),
         ],
       ),
       content: Builder(builder: (context) {
@@ -80,11 +81,9 @@ class _AddNewBranchState extends State<AddNewBranch> {
                   ),
                   CustomButton(
                     title: "Ekle",
-                    pressAction: () =>
-                      setState(() {
+                    pressAction: () => setState(() {
                       if (_newBranchKey.currentState!.validate()) {
-                        for (Branch branch
-                            in Statics.instance.branchController.branchList) {
+                        for (Branch branch in branchController.branchList) {
                           if (branch.branch_name ==
                               widget.controllerBranchName.text) {
                             showDialog(
@@ -94,8 +93,7 @@ class _AddNewBranchState extends State<AddNewBranch> {
                             return;
                           }
                         }
-                        var response =
-                            Statics.instance.branchController.postBranch(
+                        var response = branchController.postBranch(
                           Branch(
                             id: 0,
                             branch_name: widget.controllerBranchName.text,
@@ -105,15 +103,15 @@ class _AddNewBranchState extends State<AddNewBranch> {
                           ),
                         );
                         print(response);
-                          Navigator.pop(context);
-                          Get.snackbar(
-                            "Birim Ekleme Ekranı",
-                            "Birim Kaydedildi",
-                            snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: kSecondaryColor,
-                            padding: EdgeInsets.only(left: width / 2 - 100),
-                          );
-                        }
+                        Navigator.pop(context);
+                        Get.snackbar(
+                          "Birim Ekleme Ekranı",
+                          "Birim Kaydedildi",
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: activeColor,
+                          padding: EdgeInsets.only(left: width / 2 - 100),
+                        );
+                      }
                     }),
                   ),
                 ],
