@@ -18,10 +18,10 @@ import 'package:vtys_kalite/utilities/style.dart';
 
 late User user;
 Future<void> main() async {
+  user = User();
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? username = prefs.getString("username");
-  user = User();
 
   if (username != null) {
     user.name = username;
