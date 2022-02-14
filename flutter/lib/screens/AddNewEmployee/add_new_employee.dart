@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/routing/routes.dart';
@@ -31,9 +32,7 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
           title: const CustomText(text: "Employee"),
           leading: IconButton(
             icon: const Icon(Icons.keyboard_arrow_left),
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, mainFormPageRoute);
-            },
+            onPressed: () => Get.offAllNamed(rootRoute),
           ),
           bottom: TabBar(
             isScrollable: true,
@@ -111,10 +110,7 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
                         title: 'Cancel',
                         foregroundColor: Colors.black,
                         backgroundColor: Colors.white,
-                        pressAction: () {
-                          Navigator.pushReplacementNamed(
-                              context, mainFormPageRoute);
-                        },
+                        pressAction: () => Get.offAllNamed(rootRoute),
                       ),
                     ),
                   ],

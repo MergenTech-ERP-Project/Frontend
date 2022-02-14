@@ -35,6 +35,14 @@ class OptionalCompanyDescriptions extends StatefulWidget {
 class _OptionalCompanyDescriptionsState
     extends State<OptionalCompanyDescriptions> {
   @override
+  void initState() {
+    super.initState();
+    userController.fetchUsers();
+    branchController.fetchBranches();
+    companyController.fetchCompanies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Row(
       children: [

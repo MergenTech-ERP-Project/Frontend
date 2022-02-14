@@ -21,6 +21,10 @@ class UserRemoteServices {
     int userID = -1;
     if (response.statusCode == 200) {
       var jsonString = response.body.toString();
+      if (jsonString == "null") {
+        return userID;
+      }
+      jsonString = "[" + jsonString + "]";
       userID = parseUser(jsonString).id;
     }
     return userID;
@@ -33,6 +37,9 @@ class UserRemoteServices {
     int userID = -1;
     if (response.statusCode == 200) {
       String jsonString = response.body.toString();
+      if (jsonString == "null") {
+        return userID;
+      }
       jsonString = "[" + jsonString + "]";
       userID = parseUser(jsonString).id;
     }

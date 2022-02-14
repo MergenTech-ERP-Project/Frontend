@@ -5,7 +5,7 @@ import 'package:vtys_kalite/utilities/style.dart';
 
 class MenuController extends GetxController {
   static MenuController instance = Get.find();
-  var activeItem = mainFormPageDisplayName.obs;
+  var activeItem = employeesPageDisplayName.obs;
   var hoverItem = "".obs;
 
   changeActiveItem(String itemName) {

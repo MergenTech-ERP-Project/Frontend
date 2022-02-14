@@ -30,9 +30,9 @@ class PageNotFound extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 50),
               InkWell(
-                onTap: () => Get.offAllNamed(mainFormPageRoute),
+                onTap: () => Get.offAllNamed(rootRoute),
                 child: Container(
                   decoration: BoxDecoration(
                     color: activeColor,

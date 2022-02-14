@@ -5,6 +5,6 @@ import 'package:vtys_kalite/utilities/controllers.dart';
 
 Navigator localNavigator() => Navigator(
     key: navigatorController.navigationKey,
-    initialRoute: mainFormPageRoute,
+      initialRoute: employeesPageRoute,
     onGenerateRoute: generateRoute,
 );

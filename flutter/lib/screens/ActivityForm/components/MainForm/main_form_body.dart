@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/routing/routes.dart';
@@ -14,28 +15,22 @@ class MainFormBody extends StatefulWidget {
 
 class _MainFormBodyState extends State<MainFormBody> {
   @override
+  void initState() {
+    super.initState();
+    userController.fetchUsers();
+    activityController.fetchActivities();
+    activityEvaluationController.fetchActivityEvaluations();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Center(
-        child: Obx(
-          () {
-            return (activityController.isLoading.value
-                ? const CircularProgressIndicator()
-                : Row(
-                    children: [
-                      SideMenu(),
-                      Expanded(
-                        flex: 2,
-                        child: buildActivityCardList(),
-                      ),
-                      const Expanded(
-                        flex: 1,
-                        child: SizedBox(),
-                      )
-                    ],
-                  ));
-          },
-        ),
+    return Center(
+      child: Obx(
+        () {
+          return (activityController.isLoading.value
+              ? const CircularProgressIndicator()
+              : buildActivityCardList());
+        },
       ),
     );
   }
@@ -72,11 +67,7 @@ class _MainFormBodyState extends State<MainFormBody> {
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: ElevatedButton(
-          onPressed: () {
-            setState(() {
-              Navigator.pushReplacementNamed(context, newActivityPageRoute);
-            });
-          },
+          onPressed: () => Get.toNamed(newActivityPageRoute),
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(activeDarkColor),
           ),
@@ -88,9 +79,8 @@ class _MainFormBodyState extends State<MainFormBody> {
                 color: Colors.grey.shade700,
                 size: 22,
               ),
-              Text(
-                "  Add New Activity",
-                style: TextStyle(color: Colors.grey.shade700, fontSize: 18),
+              const CustomText(
+                text: "  Add New Activity",
               ),
             ],
           ),
@@ -106,7 +96,7 @@ class _MainFormBodyState extends State<MainFormBody> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(activity.name),
+            CustomText(text: activity.name),
             activityEvaluationId == -1
                 ? InkWell(
                     onTap: () {
@@ -121,19 +111,20 @@ class _MainFormBodyState extends State<MainFormBody> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: const [
                       Icon(Icons.check, color: Colors.green),
-                      Text(" Answered", style: TextStyle(color: Colors.green))
+                      CustomText(
+                        text: " Answered",
+                        color: Colors.green,
+                      ),
                     ],
                   ),
           ],
         ),
-        subtitle: Text(activity.organizator),
+        subtitle: CustomText(text: activity.organizator),
         onTap: () {
           setState(() {
-            print("Main Form activityEvaluationId:$activityEvaluationId");
             if (activityEvaluationId == -1) {
-              Navigator.pushReplacementNamed(
-                  context, activityEvaluationPageRoute,
-                  arguments: {'activityId': index});
+              activityEvaluationController.activityEvaluationId =
+                  activityEvaluationId;
             }
           });
         },

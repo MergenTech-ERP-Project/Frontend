@@ -6,7 +6,9 @@ import 'package:vtys_kalite/services/activity_evaluation_remote_services.dart';
 
 class ActivityEvaluationController extends GetxController {
   var isLoading = true.obs;
-  List<ActivityEvaluation> activityEvaluationList = <ActivityEvaluation>[].obs; //List<Activity>
+  var activityEvaluationId = -1.obs;
+  List<ActivityEvaluation> activityEvaluationList =
+      <ActivityEvaluation>[].obs; //List<Activity>
 
   @override
   void onInit() {
@@ -17,7 +19,8 @@ class ActivityEvaluationController extends GetxController {
   void fetchActivityEvaluations() async {
     try {
       isLoading(true);
-      var activityEvaluations = await ActivityEvaluationRemoteServices.fetchActivityEvaluations();
+      var activityEvaluations =
+          await ActivityEvaluationRemoteServices.fetchActivityEvaluations();
       if (activityEvaluations != null) {
         activityEvaluationList.assignAll(activityEvaluations);
       }
@@ -29,7 +32,9 @@ class ActivityEvaluationController extends GetxController {
   Future<int> fetchActivityEvaluation(int activityId, int userId) async {
     try {
       isLoading(true);
-      var activityEvaluation = await ActivityEvaluationRemoteServices.fetchActivityEvaluation(activityId, userId);
+      var activityEvaluation =
+          await ActivityEvaluationRemoteServices.fetchActivityEvaluation(
+              activityId, userId);
       print("fetch Activity: " + activityEvaluation.toString());
       return activityEvaluation;
     } finally {
@@ -37,15 +42,19 @@ class ActivityEvaluationController extends GetxController {
     }
   }
 
-  Future<String?> postActivityEvaluation(int activityId, int userId, String evaluation) async {
+  Future<String?> postActivityEvaluation(
+      int activityId, int userId, String evaluation) async {
     try {
       isLoading(true);
-      var response = await ActivityEvaluationRemoteServices.postActivityEvaluation(json.encode(ActivityEvaluation(
-        id: 0,
-        activityId: activityId,
-        userId: userId,
-        evaluation: evaluation,
-      ).toJson()).toString());
+      var response =
+          await ActivityEvaluationRemoteServices.postActivityEvaluation(json
+              .encode(ActivityEvaluation(
+                id: 0,
+                activityId: activityId,
+                userId: userId,
+                evaluation: evaluation,
+              ).toJson())
+              .toString());
       print("post Activity: " + response);
       return response;
     } finally {
