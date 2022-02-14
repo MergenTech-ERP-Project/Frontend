@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
 
 class Odeme extends StatefulWidget {
   int id;
@@ -30,7 +31,7 @@ class _OdemeState extends State<Odeme> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Text(widget.name),
+      child: CustomText(text: widget.name),
     );
   }
 }

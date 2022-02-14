@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
@@ -18,10 +19,6 @@ class TabGenelSecondCard extends StatelessWidget {
   DateTime dateOfStart = DateTime.now();
   DateTime contractEndDate = DateTime.now();
 
-  TabGenelSecondCard({
-    Key? key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -36,8 +33,9 @@ class TabGenelSecondCard extends StatelessWidget {
       children: [
         const Padding(
           padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
-          child: Text("Genel Bilgiler",
-              style: kLabelHeader2Style, textAlign: TextAlign.center),
+          child: CustomText(
+            text: "Genel Bilgiler",
+          ),
         ),
         Row(
           children: [

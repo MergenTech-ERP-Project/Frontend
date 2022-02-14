@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_diger_bilgiler.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_genel.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kisisel_bilgiler.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
+import 'package:vtys_kalite/utilities/style.dart';
 
 class AddNewEmployee extends StatefulWidget {
-  static String routeName = '/AddNewEmployee';
-
-  AddNewEmployee({Key? key}) : super(key: key);
-
   bool isSaved = false;
-
   @override
-  _AddNewEmployeeState createState() => _AddNewEmployeeState();
+  State<AddNewEmployee> createState() => _AddNewEmployeeState();
 }
 
 class _AddNewEmployeeState extends State<AddNewEmployee> {
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -27,11 +25,11 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
         appBar: AppBar(
           toolbarHeight: 0,
           elevation: 0,
-          backgroundColor: kPrimaryColor,
+          backgroundColor: activeColor,
           foregroundColor: Colors.white,
           automaticallyImplyLeading: true,
           centerTitle: true,
-          title: const Text("Employee"),
+          title: const CustomText(text: "Employee"),
           leading: IconButton(
             icon: const Icon(Icons.keyboard_arrow_left),
             onPressed: () {
@@ -54,7 +52,7 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
-                    Text("Diğer"),
+                    CustomText(text: "Diğer"),
                     Icon(Icons.keyboard_arrow_down),
                   ],
                 ),
@@ -72,11 +70,11 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
                     TabKariyer(),
                     TabPersonalInformation(),
                     TabAnotherInformation(),
-                    const Center(child: Text("4")),
-                    const Center(child: Text("5")),
-                    const Center(child: Text("6")),
-                    const Center(child: Text("7")),
-                    const Center(child: Text("8")),
+                    const Center(child: CustomText(text: "4")),
+                    const Center(child: CustomText(text: "5")),
+                    const Center(child: CustomText(text: "6")),
+                    const Center(child: CustomText(text: "7")),
+                    const Center(child: CustomText(text: "8")),
                   ],
                 ),
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
@@ -14,8 +15,6 @@ class TabAnotherInformation extends StatefulWidget {
   TextEditingController controllerAccountNo = TextEditingController();
   TextEditingController controllerIBAN = TextEditingController();
 
-  TabAnotherInformation({Key? key}) : super(key: key);
-
   @override
   _TabAnotherInformationState createState() => _TabAnotherInformationState();
 }
@@ -26,7 +25,6 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
     return ListView(
       children: [
         InkWell(
@@ -50,7 +48,7 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
     );
   }
 
-  Card CardBankInformation() {
+  Widget CardBankInformation() {
     return Card(
       clipBehavior: Clip.antiAlias,
       child: Column(
@@ -60,7 +58,9 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
             children: [
               const Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text("Banka Bilgileri", style: kLabelStyle),
+                child: CustomText(
+                  text: "Banka Bilgileri",
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -134,7 +134,9 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
             children: [
               const Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text("Adres Bilgileri", style: kLabelStyle),
+                child: CustomText(
+                  text: "Adres Bilgileri",
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

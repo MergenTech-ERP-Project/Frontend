@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabGenelFirstCard extends StatelessWidget {
-  const TabGenelFirstCard({
-    Key? key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -35,48 +32,48 @@ class TabGenelFirstCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
-                Text("İşe Başlama Tarihi"),
-                Text("2 Aralık 2009"),
+                CustomText(text: "İşe Başlama Tarihi"),
+                CustomText(text: "2 Aralık 2009"),
               ],
             ),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
-                Text("Şirket"),
-                Text("Mergen Yazılım"),
+                CustomText(text: "Şirket"),
+                CustomText(text: "Mergen Yazılım"),
               ],
             ),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
-                Text("Şube"),
-                Text("Eskişehir Teknopark"),
+                CustomText(text: "Şube"),
+                CustomText(text: "Eskişehir Teknopark"),
               ],
             ),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
-                Text("Departman"),
-                Text("Yazılım Geliştirme"),
+                CustomText(text: "Departman"),
+                CustomText(text: "Yazılım Geliştirme"),
               ],
             ),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
-                Text("E-posta (iş)"),
-                Text("omerfarukozturk026@gmail.com"),
+                CustomText(text: "E-posta (iş)"),
+                CustomText(text: "omerfarukozturk026@gmail.com"),
               ],
             ),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
-                Text("İş Telefonu"),
-                Text("54"),
+                CustomText(text: "İş Telefonu"),
+                CustomText(text: "+90 540 000 00 00"),
               ],
             ),
           ],
@@ -99,19 +96,15 @@ class TabGenelFirstCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100),
                   color: Colors.blue[200]),
               child: const Center(
-                  child: Text(
-                "ÖÖ",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 36,
+                child: CustomText(
+                  text: "ÖÖ",
                 ),
-              )),
+              ),
             ),
           ),
           const SizedBox(height: 10),
-          const Text(
-            "Ömer Faruk Öztürk",
-            style: kLabelHeader3Style,
+          const CustomText(
+            text: "Ömer Faruk Öztürk",
           ),
           const SizedBox(height: 4),
           Container(
@@ -125,9 +118,8 @@ class TabGenelFirstCard extends StatelessWidget {
               child: Wrap(
                 spacing: 10,
                 children: const [
-                  Text(
-                    "Aktif Çalışan",
-                    style: kLabelAppBarThinStyle,
+                  CustomText(
+                    text: "Aktif Çalışan",
                   ),
                 ],
               ),
