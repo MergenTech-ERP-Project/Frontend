@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:vtys_kalite/utilities/constants.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
+import 'package:vtys_kalite/utilities/style.dart';
 
 class CustomButton extends StatefulWidget {
   final String title;
   final Function()? pressAction;
   final double? height;
   final IconData? leftIcon, rightIcon;
-  final Color backgroundColor;
-  final Color foregroundColor;
+  final Color? backgroundColor, foregroundColor;
 
   const CustomButton({
     Key? key,
@@ -16,8 +17,8 @@ class CustomButton extends StatefulWidget {
     this.rightIcon,
     this.height = 40,
     required this.title,
-    this.backgroundColor = kPrimaryColor,
-    this.foregroundColor = Colors.white,
+    this.backgroundColor,
+    this.foregroundColor,
   }) : super(key: key);
 
   @override
@@ -33,8 +34,8 @@ class _CustomButtonState extends State<CustomButton> {
       child: ElevatedButton(
         onPressed: widget.pressAction,
         style: ButtonStyle(
-          backgroundColor:
-              MaterialStateProperty.all<Color>(widget.backgroundColor),
+          backgroundColor: MaterialStateProperty.all<Color>(
+              widget.backgroundColor ?? activeColor),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(widget.height! / 2),
@@ -48,21 +49,17 @@ class _CustomButtonState extends State<CustomButton> {
               Icon(
                 widget.leftIcon,
                 size: 20,
-                color: widget.foregroundColor,
+                color: widget.foregroundColor ?? whiteColor,
               ),
-            Text(
-              (widget.leftIcon != null ? "  " : "") + widget.title,
-              style: TextStyle(
-                color: widget.foregroundColor,
-                fontFamily: 'Comfortaa',
-                fontSize: 16,
-              ),
+            CustomText(
+              text: (widget.leftIcon != null ? "  " : "") + widget.title,
+              color: widget.foregroundColor ?? whiteColor,
             ),
             if (widget.rightIcon != null)
               Icon(
                 widget.rightIcon,
                 size: 20,
-                color: widget.foregroundColor,
+                color: widget.foregroundColor ?? whiteColor,
               ),
           ],
         ),

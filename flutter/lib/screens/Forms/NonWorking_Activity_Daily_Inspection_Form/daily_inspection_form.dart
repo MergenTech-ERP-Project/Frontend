@@ -5,7 +5,7 @@ import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_radiolisttile.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/models/departments_enum.dart';
-import 'package:vtys_kalite/utilities/constants.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 
 class DailyInspectionFormPage extends StatefulWidget {
   static String routeName = '/DailyInspectionFormPage';

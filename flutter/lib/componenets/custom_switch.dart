@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vtys_kalite/utilities/constants.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
 
 class CustomSwitch extends StatefulWidget {
   bool switchValue;
@@ -28,7 +28,9 @@ class _CustomSwitchState extends State<CustomSwitch> {
           },
           value: widget.switchValue,
         ),
-        Text(widget.text, style: kLabelStyle)
+        CustomText(
+          text: widget.text,
+        ),
       ],
     );
   }

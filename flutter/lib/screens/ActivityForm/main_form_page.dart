@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
-import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/employees.dart';
 import 'package:vtys_kalite/screens/Forms/NonWorking_Activity_Daily_Inspection_Form/daily_inspection_form.dart';
@@ -14,6 +12,7 @@ import 'components/MainForm/main_form_drawer.dart';
 
 class MainFormPage extends StatefulWidget {
   static String routeName = '/MainFormPage';
+  
 
   MainFormPage({Key? key}) : super(key: key);
   final PageController controller = PageController();

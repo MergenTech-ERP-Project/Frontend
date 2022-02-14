@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/ActivityEvaluation/activity_evaluation_app_bar.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/ActivityEvaluation/activity_evaluation_body.dart';
-import 'package:vtys_kalite/utilities/constants.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 
 class ActivityEvaluationPage extends StatefulWidget {
-  static String routeName = '/ActivityEvaluationPage';
-
-  const ActivityEvaluationPage({Key? key}) : super(key: key);
-
   @override
   _ActivityEvaluationPageState createState() => _ActivityEvaluationPageState();
 }

@@ -6,7 +6,7 @@ import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/models/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AdminPanel/admin_panel.dart';
-import 'package:vtys_kalite/utilities/constants.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 
 import '../../activity_evaluation_page.dart';
 import '../../new_activity_page.dart';

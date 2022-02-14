@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vtys_kalite/core/statics.dart';
-import 'package:vtys_kalite/utilities/constants.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 
 class MainFormDrawer extends StatelessWidget {
   MainFormDrawer({

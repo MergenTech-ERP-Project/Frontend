@@ -10,7 +10,7 @@ import 'package:vtys_kalite/models/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/main_form_app_bar.dart';
 import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
-import 'package:vtys_kalite/utilities/constants.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 
 class AdminPanelPage extends StatefulWidget {
   static String routeName = '/AdminPanelPage';
