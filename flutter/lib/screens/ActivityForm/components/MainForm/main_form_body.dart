@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
+import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/activity.dart';
-import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
+import 'package:vtys_kalite/screens/widgets/side_menu.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class MainFormBody extends StatefulWidget {
-  User user;
-
-  MainFormBody({
-    Key? key,
-    required this.user,
-  }) : super(key: key);
-
   @override
   State<MainFormBody> createState() => _MainFormBodyState();
 }
@@ -29,10 +23,7 @@ class _MainFormBodyState extends State<MainFormBody> {
                 ? const CircularProgressIndicator()
                 : Row(
                     children: [
-                      const Expanded(
-                        flex: 1,
-                        child: SizedBox(),
-                      ),
+                      SideMenu(),
                       Expanded(
                         flex: 2,
                         child: buildActivityCardList(),
@@ -58,7 +49,7 @@ class _MainFormBodyState extends State<MainFormBody> {
         }
         return FutureBuilder(
           future: activityEvaluationController.fetchActivityEvaluation(
-              activityController.activityList[index - 1].id, widget.user.id),
+              activityController.activityList[index - 1].id, user.id),
           builder: (context, snap) {
             Widget card = const SizedBox();
             if (snap.hasData) {

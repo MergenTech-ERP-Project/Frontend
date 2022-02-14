@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation_page.dart';
-import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
+import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/main_form_body.dart';
 import 'package:vtys_kalite/screens/ActivityForm/new_activity_page.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
 import 'package:vtys_kalite/screens/AdminPanel/admin_panel.dart';
@@ -13,7 +13,7 @@ import 'package:vtys_kalite/screens/loginpage/login_page.dart';
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case mainFormPageRoute:
-      return _getPageRoute(MainFormPage());
+      return _getPageRoute(MainFormBody());
     case loginPageRoute:
       return _getPageRoute(LoginPage());
     case signUpPageRoute:

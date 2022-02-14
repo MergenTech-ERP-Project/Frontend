@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/helpers/local_navigator.dart';
+import 'package:vtys_kalite/screens/widgets/side_menu.dart';
 
 class LargeScreen extends StatelessWidget {
-  const LargeScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Row(
+      children: [
+        SideMenu(),
+        Container(
+          width: MediaQuery.of(context).size.width - sideMenuWidth,
+          child: localNavigator(),
+        ),
+      ],
+    );
   }
 }
