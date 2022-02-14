@@ -4,6 +4,7 @@ import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation_page.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/main_form_body.dart';
 import 'package:vtys_kalite/screens/ActivityForm/new_activity_page.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/employees.dart';
 import 'package:vtys_kalite/screens/AdminPanel/admin_panel.dart';
 import 'package:vtys_kalite/screens/Forms/forms_page.dart';
 import 'package:vtys_kalite/screens/Settings/settings_page.dart';
@@ -30,6 +31,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(ActivityEvaluationPage());
     case formsPageRoute:
       return _getPageRoute(FormsPage());
+    case employeesPageRoute:
+      return _getPageRoute(Employees());
     default:
       return _getPageRoute(LoginPage());
   }
