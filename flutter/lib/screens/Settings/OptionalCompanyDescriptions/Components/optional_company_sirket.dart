@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Components/update_delete_popup_menu_button.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 
 class OptionalCompanySirket extends StatefulWidget {
   OptionalCompanySirket({
@@ -24,7 +24,7 @@ class _OptionalCompanySirketState extends State<OptionalCompanySirket> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const CustomTextBox(
+        CustomTextBox(
           borderless: true,
           hint: "Şirket adı giriniz",
           decorationIcon: Icon(Icons.search),
@@ -32,7 +32,7 @@ class _OptionalCompanySirketState extends State<OptionalCompanySirket> {
         ),
         Obx(() {
           print(widget.companyList);
-          return (Statics.instance.companyController.isLoading.value
+          return (companyController.isLoading.value
               ? Center(
                   child: Container(
                   height: 50,

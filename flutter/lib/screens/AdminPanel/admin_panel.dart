@@ -4,18 +4,20 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/core/statics.dart';
+import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
-import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/main_form_app_bar.dart';
+import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
+import 'package:vtys_kalite/screens/widgets/top_navigation_bar.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class AdminPanelPage extends StatefulWidget {
-  static String routeName = '/AdminPanelPage';
   final TextEditingController _searchController = TextEditingController();
-  List<User> users = Statics.instance.userController.userList;
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  List<User> users = userController.userList;
 
   AdminPanelPage({Key? key}) : super(key: key);
   @override
@@ -29,18 +31,17 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("Heelllloooo " + Statics.instance.getUser.name);
     for (var departmant in DepartmentsEnum.values) {
       titlesDepartmant.add(EnumToString.convertToString(departmant));
     }
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: MainFormAppBar(user: Statics.instance.getUser),
+      appBar: topNavigationBar(context, widget._scaffoldKey),
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: screenSize.width / 4),
           child: Obx(() {
-            return (Statics.instance.userController.isLoading.value
+            return (userController.isLoading.value
                 ? const CircularProgressIndicator()
                 : ListView.builder(
                     itemCount: widget.users.length + 1,
@@ -53,8 +54,7 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
                                 decorationIcon: const Icon(Icons.search),
                                 onTextChanged: (value) {
                                   setState(() {
-                                    widget.users = Statics
-                                        .instance.userController.userList
+                                    widget.users = userController.userList
                                         .where((e) => e.name
                                             .toLowerCase()
                                             .contains(value.toLowerCase()))
@@ -74,7 +74,7 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
 
   Widget UserCard(int index, width) {
     return InkWell(
-      onTap: widget.users[index - 1].name == Statics.instance.username
+      onTap: widget.users[index - 1].name == user.name
           //users cannot change their own informations
           ? null
           : () {
@@ -86,7 +86,7 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         ),
-                        title: const Text('User', style: kLabelHeader2Style),
+                        title: const CustomText(text: 'User'),
                         content: Builder(
                           builder: (context) {
                             var width = MediaQuery.of(context).size.width;
@@ -102,10 +102,8 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
                                   const SizedBox(height: 20),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 10.0),
-                                    child: Text(
-                                      widget.users[index - 1].name,
-                                      style: kLabelStyle,
-                                    ),
+                                    child: CustomText(
+                                        text: widget.users[index - 1].name),
                                   ),
                                   const SizedBox(height: 10),
                                   MultipleChoiceCustomDropDownItems(
@@ -149,10 +147,7 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
         height: 60,
         child: Padding(
           padding: const EdgeInsets.only(left: 15.0, top: 20),
-          child: Text(
-            widget.users[index - 1].name,
-            style: kLabelThinStyle,
-          ),
+          child: CustomText(text: widget.users[index - 1].name),
         ),
       ),
     );
@@ -163,9 +158,8 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
       title: 'Delete',
       pressAction: () async {
         print(widget.users[index - 1].id);
-        await Statics.instance.userController
-            .deleteUser(widget.users[index - 1].id);
-        Navigator.pushReplacementNamed(context, MainFormPage.routeName);
+        await userController.deleteUser(widget.users[index - 1].id);
+        Navigator.pushReplacementNamed(context, mainFormPageRoute);
       },
     );
   }
@@ -176,14 +170,14 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
       pressAction: () async {
         print(widget.users[index - 1].id);
         var title = DepartmentsEnum.values.elementAt(userTitleIndex);
-        await Statics.instance.userController.putUser(
+        await userController.putUser(
             widget.users[index - 1].id,
             User(
                 id: widget.users[index - 1].id,
                 name: widget.users[index - 1].name,
                 title: title,
                 password: widget.users[index - 1].password));
-        Navigator.pushReplacementNamed(context, MainFormPage.routeName);
+        Navigator.pushReplacementNamed(context, mainFormPageRoute);
       },
     );
   }

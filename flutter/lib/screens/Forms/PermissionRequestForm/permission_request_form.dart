@@ -1,22 +1,15 @@
-import 'dart:html';
-import 'dart:typed_data';
-
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_radiolisttile.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
-import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
-import 'package:vtys_kalite/utilities/controllers.dart';
 
 class PermissionRequestFormPage extends StatefulWidget {
-  static String routeName = '/PermissionRequestFormPage';
-  User user = Statics.instance.getUser;
-
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController departmantController = TextEditingController();
 
@@ -73,70 +66,69 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
             customFontSize: 20,
           ),
           const SizedBox(height: 10),
-          const Text("Department", style: kLabelStyle),
+          const CustomText(text: "Department"),
           MultipleChoiceCustomDropDownItems(
             list: titlesDepartmant,
             isExpandedYes: true,
             text: 'Select Department',
             iconSize: 20,
             icon: Icon(Icons.arrow_drop_down),
-            onChanged: (val){},
+            onChanged: (val) {},
           ),
           const SizedBox(height: 10),
-          CustomTextDivider(
-              height: 40, thickness: 2, text: "İZİN TÜRÜ", style: kLabelStyle),
+          CustomTextDivider(height: 40, thickness: 2, text: "İZİN TÜRÜ"),
           MultipleChoiceRadioListTile(
             list: permissionType,
             groupValue: selectedPermissionType,
           ),
           const SizedBox(height: 10),
           CustomTextDivider(
-              height: 40,
-              thickness: 2,
-              text: "İdari İzin Nedeni",
-              style: kLabelStyle),
-          const CustomTextBox(
+            height: 40,
+            thickness: 2,
+            text: "İdari İzin Nedeni",
+          ),
+          CustomTextBox(
             borderless: true,
             customFontSize: 20,
           ),
           const SizedBox(height: 10),
           CustomTextDivider(
-              height: 40,
-              thickness: 2,
-              text: "Yıllık izin ise, Hakediş Tarihi",
-              style: kLabelStyle),
+            height: 40,
+            thickness: 2,
+            text: "Yıllık izin ise, Hakediş Tarihi",
+          ),
           MultipleChoiceRadioListTile(
             list: vestingDate,
             groupValue: selectedVestingDate,
           ),
           const SizedBox(height: 10),
           CustomTextDivider(
-              height: 40,
-              thickness: 2,
-              text: "Mevcut İzin Gün Sayısı",
-              style: kLabelStyle),
+            height: 40,
+            thickness: 2,
+            text: "Mevcut İzin Gün Sayısı",
+          ),
           MultipleChoiceRadioListTile(
             list: permissionDateTime,
             groupValue: selectedPermissionDateTime,
           ),
           const SizedBox(height: 10),
           Row(
-            children: const [
+            children: [
               Expanded(
                   flex: 6,
                   child: CustomTextBox(title: "İzin Başlangıç Tarihi")),
-              Expanded(flex: 1, child: Text("")),
+              const Expanded(flex: 1, child: Text("")),
               Expanded(
                   flex: 6, child: CustomTextBox(title: "İzin Bitiş Tarihi")),
             ],
           ),
           const SizedBox(height: 10),
           CustomTextDivider(
-              height: 40,
-              thickness: 2,
-              text: "İzinli Gün Sayısı",
-              style: kLabelStyle),
-          const CustomTextBox(
+            height: 40,
+            thickness: 2,
+            text: "İzinli Gün Sayısı",
+          ),
+          CustomTextBox(
             customFontSize: 20,
           ),
           const SizedBox(height: 30),

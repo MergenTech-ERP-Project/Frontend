@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
+import 'package:vtys_kalite/utilities/style.dart';
 
 class AddNewCompany extends StatefulWidget {
   AddNewCompany({
@@ -31,14 +32,14 @@ class _AddNewCompanyState extends State<AddNewCompany> {
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
       ),
       title: Row(
-        children: const [
+        children: [
           Icon(
             Icons.add,
-            color: kTextFontColor,
+            color: blackColor,
             size: 24,
           ),
-          SizedBox(width: 20),
-          Text('Yeni Şirket Ekle', style: kLabelHeader2Style),
+          const SizedBox(width: 20),
+          const CustomText(text: "Yeni Şirket Ekle"),
         ],
       ),
       content: Builder(
@@ -63,32 +64,31 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                       validator: validator(),
                     ),
                     CustomTextBox(
-                        controller: widget.controllerCompanyPhone,
-                        label: "Telefon",
+                      controller: widget.controllerCompanyPhone,
+                      label: "Telefon",
                       validator: validator(),
                     ),
                     CustomTextBox(
-                        controller: widget.controllerDomainName,
-                        label: "E-posta Uzantısı",
+                      controller: widget.controllerDomainName,
+                      label: "E-posta Uzantısı",
                       validator: validator(),
                     ),
                     CustomTextBox(
-                        controller: widget.controllerMersisNo,
-                        label: "Mersis Numarası",
+                      controller: widget.controllerMersisNo,
+                      label: "Mersis Numarası",
                       validator: validator(),
                     ),
                     CustomTextBox(
-                        controller: widget.controllerSGKCompanyNo,
-                        label: "SGK İş Yeri Numarası",
+                      controller: widget.controllerSGKCompanyNo,
+                      label: "SGK İş Yeri Numarası",
                       validator: validator(),
                     ),
                     CustomButton(
                       title: "Ekle",
-                      pressAction: () =>
-                        setState(() {
+                      pressAction: () => setState(() {
                         if (_newCompanyKey.currentState!.validate()) {
-                          for (Company company in Statics
-                              .instance.companyController.companyList) {
+                          for (Company company
+                              in companyController.companyList) {
                             if (company.company_name ==
                                 widget.controllerCompanyName.text) {
                               showDialog(
@@ -100,7 +100,7 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                             }
                           }
                           var response =
-                              Statics.instance.companyController.postCompany(
+                             companyController.postCompany(
                             widget.controllerCompanyName.text,
                             widget.controllerCompanyPhone.text,
                             widget.controllerDomainName.text,
@@ -108,15 +108,15 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                             widget.controllerSGKCompanyNo.text,
                           );
                           print(response);
-                            Navigator.pop(context);
-                            Get.snackbar(
-                              "Şirket Ekleme Ekranı",
-                              "Şirket Kaydedildi",
-                              snackPosition: SnackPosition.BOTTOM,
-                              backgroundColor: kPrimaryColor,
-                              padding: EdgeInsets.only(left: width / 2 - 100),
-                            );
-                          }
+                          Navigator.pop(context);
+                          Get.snackbar(
+                            "Şirket Ekleme Ekranı",
+                            "Şirket Kaydedildi",
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: activeColor,
+                            padding: EdgeInsets.only(left: width / 2 - 100),
+                          );
+                        }
                       }),
                     ),
                   ],

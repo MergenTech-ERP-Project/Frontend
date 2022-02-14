@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
-import 'package:vtys_kalite/core/statics.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Components/add_new_company.dart';
@@ -16,8 +16,8 @@ class OptionalCompanyDescriptions extends StatefulWidget {
   bool departmant;
   bool title;
 
-  List<Company> companyList = Statics.instance.companyController.companyList;
-  List<Branch> branchList = Statics.instance.branchController.branchList;
+  List<Company> companyList = companyController.companyList;
+  List<Branch> branchList = branchController.branchList;
 
   OptionalCompanyDescriptions({
     Key? key,
@@ -81,7 +81,7 @@ class _OptionalCompanyDescriptionsState
                   children: [
                     const Expanded(
                       flex: 8,
-                      child: Text("Unvan", style: kLabelStyle),
+                      child: CustomText(text: "Unvan"),
                     ),
                     CustomButton(
                       title: "Yeni Ekle",
@@ -93,7 +93,7 @@ class _OptionalCompanyDescriptionsState
               ),
               Column(
                 children: const [
-                  Text("Yazılacak burası", style: kLabelThinStyle),
+                  CustomText(text: "Yazılacak burası"),
                 ],
               )
             ],
@@ -123,7 +123,7 @@ class _OptionalCompanyDescriptionsState
                   children: [
                     const Expanded(
                       flex: 8,
-                      child: Text("Departman", style: kLabelStyle),
+                      child: CustomText(text: "Departman"),
                     ),
                     Expanded(
                       flex: 2,
@@ -138,7 +138,7 @@ class _OptionalCompanyDescriptionsState
               ),
               Column(
                 children: const [
-                  Text("Yazılacak burası", style: kLabelThinStyle),
+                  CustomText(text: "Yazılacak burası"),
                 ],
               )
             ],
@@ -168,7 +168,7 @@ class _OptionalCompanyDescriptionsState
                   children: [
                     const Expanded(
                       flex: 8,
-                      child: Text("Şube", style: kLabelStyle),
+                      child: CustomText(text: "Şube"),
                     ),
                     Expanded(
                       flex: 2,
@@ -219,7 +219,7 @@ class _OptionalCompanyDescriptionsState
                 children: [
                   const Expanded(
                     flex: 8,
-                    child: Text("Şirket", style: kLabelStyle),
+                    child: CustomText(text: "Şirket"),
                   ),
                   Expanded(
                     flex: 3,

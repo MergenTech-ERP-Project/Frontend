@@ -10,6 +10,7 @@ import 'package:vtys_kalite/controller/Backend%20Controller/user_controller.dart
 import 'package:vtys_kalite/controller/Frontend%20Controller/menu_controller.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/navigator_controller.dart';
 import 'package:vtys_kalite/models/user.dart';
+import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/ActivityForm/main_form_page.dart';
 import 'package:vtys_kalite/screens/LoginPage/login_page.dart';
 import 'package:vtys_kalite/utilities/custom_scroll_behaviour.dart';
@@ -44,7 +45,7 @@ class App extends StatelessWidget {
       title: 'Mergen Tech',
       theme: theme(context),
       initialRoute:
-          user.name == "" ? LoginPage.routeName : MainFormPage.routeName,
+          user.name == "" ? LoginPage.routeName : mainFormPageRoute
     );
   }
 

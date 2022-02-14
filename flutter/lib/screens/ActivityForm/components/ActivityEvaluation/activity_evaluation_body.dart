@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/models/user.dart';
-
-import '../../main_form_page.dart';
+import 'package:vtys_kalite/routing/routes.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 
 class ActivityEvaluationBody extends StatefulWidget {
   final User user;
@@ -60,11 +59,11 @@ class _ActivityEvaluationBodyState extends State<ActivityEvaluationBody> {
       title: "Save",
       pressAction: () {
         setState(() {
-          Statics.instance.activityEvaluationController.postActivityEvaluation(
+          activityEvaluationController.postActivityEvaluation(
               widget.activity.id,
               widget.user.id,
               widget._evaluationController.text);
-          Navigator.pushReplacementNamed(context, MainFormPage.routeName);
+          Navigator.pushReplacementNamed(context, mainFormPageRoute);
         });
       },
     );
@@ -74,7 +73,7 @@ class _ActivityEvaluationBodyState extends State<ActivityEvaluationBody> {
     return CustomButton(
       title: "Cancel",
       pressAction: () {
-        Navigator.pushReplacementNamed(context, MainFormPage.routeName);
+        Navigator.pushReplacementNamed(context, mainFormPageRoute);
       },
     );
   }
