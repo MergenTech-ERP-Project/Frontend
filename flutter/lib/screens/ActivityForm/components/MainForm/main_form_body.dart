@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
-import 'package:vtys_kalite/componenets/custom_button.dart';
-import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/activity.dart';
-import 'package:vtys_kalite/models/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
-import 'package:vtys_kalite/screens/AdminPanel/admin_panel.dart';
+import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
-
-import '../../activity_evaluation_page.dart';
-import '../../new_activity_page.dart';
+import 'package:vtys_kalite/utilities/style.dart';
 
 class MainFormBody extends StatefulWidget {
   User user;
@@ -27,49 +22,51 @@ class _MainFormBodyState extends State<MainFormBody> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Center(child: Obx(() {
-        return (Statics.instance.activityController.isLoading.value
-            ? const CircularProgressIndicator()
-            : Row(
-                children: [
-                  const Expanded(
-                    flex: 1,
-                    child: SizedBox(),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: buildActivityCardList(),
-                  ),
-                  const Expanded(
-                    flex: 1,
-                    child: SizedBox(),
-                  )
-                ],
-              ));
-      })),
+      child: Center(
+        child: Obx(
+          () {
+            return (activityController.isLoading.value
+                ? const CircularProgressIndicator()
+                : Row(
+                    children: [
+                      const Expanded(
+                        flex: 1,
+                        child: SizedBox(),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: buildActivityCardList(),
+                      ),
+                      const Expanded(
+                        flex: 1,
+                        child: SizedBox(),
+                      )
+                    ],
+                  ));
+          },
+        ),
+      ),
     );
   }
 
   ListView buildActivityCardList() {
     return ListView.builder(
-      itemCount: Statics.instance.activityController.activityList.length + 1,
+      itemCount: activityController.activityList.length + 1,
       itemBuilder: (context, index) {
         if (index == 0) {
           return buildNewActivityButton(context);
         }
         return FutureBuilder(
-          future: Statics.instance.activityEvaluationController
-              .fetchActivityEvaluation(
-                  Statics
-                      .instance.activityController.activityList[index - 1].id,
-                  widget.user.id),
+          future: activityEvaluationController.fetchActivityEvaluation(
+              activityController.activityList[index - 1].id, widget.user.id),
           builder: (context, snap) {
             Widget card = const SizedBox();
             if (snap.hasData) {
               card = buildActivityCard(
-                  index - 1,
-                  Statics.instance.activityController.activityList[index - 1],
-                  snap.data as int);
+                index - 1,
+                activityController.activityList[index - 1],
+                snap.data as int,
+              );
             }
             return card;
           },
@@ -86,12 +83,11 @@ class _MainFormBodyState extends State<MainFormBody> {
         child: ElevatedButton(
           onPressed: () {
             setState(() {
-              Navigator.pushReplacementNamed(
-                  context, NewActivityPage.routeName);
+              Navigator.pushReplacementNamed(context, newActivityPageRoute);
             });
           },
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(kSecondaryColor),
+            backgroundColor: MaterialStateProperty.all<Color>(activeDarkColor),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -124,17 +120,17 @@ class _MainFormBodyState extends State<MainFormBody> {
                 ? InkWell(
                     onTap: () {
                       setState(() {
-                        Statics.instance.activityController.deleteActivity(
+                        activityController.deleteActivity(
                             activity.name, activity.organizator);
                       });
                     },
-                    child: const Icon(Icons.delete, color: kColorRed),
+                    child: const Icon(Icons.delete, color: Colors.red),
                   )
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: const [
-                      Icon(Icons.check, color: kColorGreen),
-                      Text(" Answered", style: TextStyle(color: kColorGreen))
+                      Icon(Icons.check, color: Colors.green),
+                      Text(" Answered", style: TextStyle(color: Colors.green))
                     ],
                   ),
           ],
@@ -145,7 +141,7 @@ class _MainFormBodyState extends State<MainFormBody> {
             print("Main Form activityEvaluationId:$activityEvaluationId");
             if (activityEvaluationId == -1) {
               Navigator.pushReplacementNamed(
-                  context, ActivityEvaluationPage.routeName,
+                  context, activityEvaluationPageRoute,
                   arguments: {'activityId': index});
             }
           });

@@ -21,8 +21,7 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
     activityId = arguments['activityId'];
 
     print("Activity ID : $activityId");
-    activity = Statics.instance.activityController.activityList[activityId];
-    user = Statics.instance.getUser;
+    activity = activityController.activityList[activityId];
 
     DateTime date = dateTimeFormat.parse(activity.datetime);
 
