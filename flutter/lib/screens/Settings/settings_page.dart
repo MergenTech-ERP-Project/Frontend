@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'OptionalCompanyDescriptions/optional_company_descriptions.dart';
 
 class SettingsPage extends StatefulWidget {
-  static String routeName = '/SettingsPage';
-  const SettingsPage({Key? key}) : super(key: key);
-
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
@@ -22,11 +19,8 @@ class _SettingsPageState extends State<SettingsPage> {
           //automaticallyImplyLeading: true, //geri butonunu kaldırma
           backgroundColor: Colors.white,
         ),
-        body: SafeArea(
-          child: OptionalCompanyDescriptions()
-        ),
+        body: SafeArea(child: OptionalCompanyDescriptions()),
       ),
     );
   }
 }
-

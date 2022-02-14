@@ -1,11 +1,12 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:vtys_kalite/utilities/constants.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
+import 'package:vtys_kalite/utilities/style.dart';
 
 class CustomDateTimePicker extends StatefulWidget {
   Function(String?)? onChanged;
   bool? borderless;
-  final Color fillcolor;
+  final Color? fillcolor;
   final String? labelText;
   final Widget suffixWidget;
 
@@ -13,7 +14,7 @@ class CustomDateTimePicker extends StatefulWidget {
     Key? key,
     required this.onChanged,
     this.borderless = false,
-    this.fillcolor = Colors.white,
+    this.fillcolor,
     this.labelText,
     this.suffixWidget = const SizedBox(),
   }) : super(key: key);
@@ -37,13 +38,13 @@ class _CustomDateTimePickerState extends State<CustomDateTimePicker> {
           lastDate: DateTime.now().add(const Duration(days: 1000)),
           decoration: InputDecoration(
             suffixIcon: widget.suffixWidget,
-            labelStyle: const TextStyle(
-              color: kTextFontColor,
+            labelStyle: TextStyle(
+              color: blackColor ,
               fontFamily: 'Comfortaa',
               fontSize: 16,
             ),
             labelText: widget.labelText,
-            fillColor: widget.fillcolor,
+            fillColor: widget.fillcolor ?? whiteColor,
             border: !widget.borderless!
                 ? OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),

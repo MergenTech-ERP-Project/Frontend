@@ -8,7 +8,7 @@ class MultipleChoiceCustomDropDownItems extends StatefulWidget {
   final bool isExpandedYes;
   final ValueChanged<String> onChanged;
 
-  MultipleChoiceCustomDropDownItems({
+  const MultipleChoiceCustomDropDownItems({
     Key? key,
     required this.list,
     required this.icon,

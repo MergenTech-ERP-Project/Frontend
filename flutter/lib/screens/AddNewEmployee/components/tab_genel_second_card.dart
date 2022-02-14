@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/utilities/constants.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabGenelSecondCard extends StatelessWidget {
   TextEditingController controllerName = TextEditingController();

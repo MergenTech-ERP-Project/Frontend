@@ -2,8 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:vtys_kalite/models/active_to_user.dart';
-
-var serviceHttp = "https://kalite-takip-yonetim-sistemi.herokuapp.com";
+import 'package:vtys_kalite/routing/routes.dart';
 
 class ActiveToUserRemoteServices {
   static Encoding? encoding = Encoding.getByName('utf-8');

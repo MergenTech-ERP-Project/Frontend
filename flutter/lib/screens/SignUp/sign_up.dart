@@ -2,16 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/core/statics.dart';
+import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/models/user.dart';
-import 'package:vtys_kalite/utilities/constants.dart';
+import 'package:vtys_kalite/screens/LoginPage/login_page.dart';
 
 class SignUpPage extends StatefulWidget {
-  static String routeName = '/SignUpPage';
-
-  SignUpPage({Key? key}) : super(key: key);
-
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
@@ -124,7 +120,7 @@ class _SignUpPageState extends State<SignUpPage> {
       },
     );
   }
-  
+
   CustomButton cancelButton(BuildContext context) {
     return CustomButton(
       title: "Cancel",

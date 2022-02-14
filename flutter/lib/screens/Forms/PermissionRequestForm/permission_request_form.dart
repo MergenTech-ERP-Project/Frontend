@@ -11,7 +11,7 @@ import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/core/statics.dart';
 import 'package:vtys_kalite/models/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
-import 'package:vtys_kalite/utilities/constants.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 
 class PermissionRequestFormPage extends StatefulWidget {
   static String routeName = '/PermissionRequestFormPage';

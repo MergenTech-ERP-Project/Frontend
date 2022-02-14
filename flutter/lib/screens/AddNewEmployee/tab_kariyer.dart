@@ -8,7 +8,7 @@ import 'package:vtys_kalite/componenets/custom_scrollableColumn.dart';
 import 'package:vtys_kalite/componenets/custom_switch.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/models/odeme.dart';
-import 'package:vtys_kalite/utilities/constants.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabKariyer extends StatefulWidget {
   TabKariyer({Key? key}) : super(key: key);
