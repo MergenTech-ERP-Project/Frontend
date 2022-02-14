@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/routing/routes.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -99,7 +101,7 @@ class SignUpPage extends StatelessWidget {
                 title: "Sign Up",
                 backgroundColor: activeColor,
                 foregroundColor: Colors.white,
-                pressAction: () => Get.offAllNamed(loginPageRoute),
+                pressAction: () => signUpPage(context),
               ),
               CustomTextDivider(
                 text: "OR",
@@ -116,5 +118,46 @@ class SignUpPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  signUpPage(context) async {
+    int id = await userController.fetchUserByNameAndPassword(
+        _usernameController.text, _passwordController.text);
+    if (id != -1) {
+      showDialog(
+        context: context,
+        builder: (_) => CustomAlertDialog(
+          titleWidget: CustomText(
+            text: _usernameController.text + " Zaten Kayıtlı",
+          ),
+          bodyWidget: SingleChildScrollView(
+            child: Column(
+              children: [
+                const CustomText(
+                  text:
+                      "Girdiğiniz kullanıcı adı başka bir kullanıcı tarafından"
+                      "kullanılmaktadır.\n Lütfen tekrar deneyiniz.",
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomButton(
+                  title: "Tekrar Dene",
+                  pressAction: () {
+                    Get.back();
+                  },
+                ),
+              ],
+            ),
+          ),
+          bodyWidgetWidth: MediaQuery.of(context).size.width / 3,
+        ),
+      );
+      return;
+    }
+    String? response = await userController.addNewUser(
+        _usernameController.text, _passwordController.text);
+    printInfo(info: response ?? "Error Sign Up");
+    Get.offAllNamed(loginPageRoute);
   }
 }

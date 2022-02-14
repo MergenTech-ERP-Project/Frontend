@@ -27,7 +27,7 @@ class UserController extends GetxController {
     }
   }
 
-  Future<int> fetchUser(String name, String password) async {
+  Future<int> fetchUserByNameAndPassword(String name, String password) async {
     try {
       isLoading(true);
       var userId =
@@ -39,7 +39,18 @@ class UserController extends GetxController {
     }
   }
 
-  Future<String?> postUser(String name, String password) async {
+  Future<int> fetchUserByName(String name) async {
+    try {
+      isLoading(true);
+      var userId = await UserRemoteServices.fetchUserByName(name);
+      print("fetch User: " + userId.toString());
+      return userId;
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<String?> addNewUser(String name, String password) async {
     try {
       isLoading(true);
       User newUser = User(
@@ -59,7 +70,7 @@ class UserController extends GetxController {
     }
   }
 
-  Future<String?> putUser(int id, User user) async {
+  Future<String?> updateUser(int id, User user) async {
     try {
       isLoading(true);
       print(id);

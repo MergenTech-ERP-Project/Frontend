@@ -158,7 +158,7 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
       pressAction: () async {
         print(widget.users[index - 1].id);
         await userController.deleteUser(widget.users[index - 1].id);
-        Navigator.pushReplacementNamed(context, mainFormPageRoute);
+        Get.offAllNamed(rootRoute);
       },
     );
   }
@@ -169,14 +169,14 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
       pressAction: () async {
         print(widget.users[index - 1].id);
         var title = DepartmentsEnum.values.elementAt(userTitleIndex);
-        await userController.putUser(
+        await userController.updateUser(
             widget.users[index - 1].id,
             User(
                 id: widget.users[index - 1].id,
                 name: widget.users[index - 1].name,
                 title: title,
                 password: widget.users[index - 1].password));
-        Navigator.pushReplacementNamed(context, mainFormPageRoute);
+        Get.offAllNamed(rootRoute);
       },
     );
   }

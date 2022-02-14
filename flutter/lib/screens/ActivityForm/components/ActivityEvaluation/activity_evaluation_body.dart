@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/models/activity.dart';
@@ -63,7 +64,7 @@ class _ActivityEvaluationBodyState extends State<ActivityEvaluationBody> {
               widget.activity.id,
               widget.user.id,
               widget._evaluationController.text);
-          Navigator.pushReplacementNamed(context, mainFormPageRoute);
+          Get.offAllNamed(rootRoute);
         });
       },
     );
@@ -72,9 +73,7 @@ class _ActivityEvaluationBodyState extends State<ActivityEvaluationBody> {
   CustomButton cancelCustomButton(BuildContext context) {
     return CustomButton(
       title: "Cancel",
-      pressAction: () {
-        Navigator.pushReplacementNamed(context, mainFormPageRoute);
-      },
+      pressAction: () => Get.offAllNamed(rootRoute),
     );
   }
 

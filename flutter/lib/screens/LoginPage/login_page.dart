@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/routing/routes.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class LoginPage extends StatelessWidget {
@@ -91,7 +94,7 @@ class LoginPage extends StatelessWidget {
                 title: "Login",
                 backgroundColor: activeColor,
                 foregroundColor: Colors.white,
-                pressAction: () => Get.offAllNamed(mainFormPageRoute),
+                pressAction: () => loginButton(context),
               ),
               CustomTextDivider(
                 text: "OR",
@@ -108,5 +111,54 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  loginButton(context) async {
+    int id = await userController.fetchUserByNameAndPassword(
+        _usernameController.text, _passwordController.text);
+    if (id == -1) {
+      showDialog(
+        context: context,
+        builder: (_) => CustomAlertDialog(
+          titleWidget: _usernameController.text != ""
+              ? CustomText(
+                  text: _usernameController.text +
+                      " için yanlış kullanıcı adı veya şifre",
+                )
+              : const CustomText(
+                  text: "Kullanıcı adı veya şifre boş bırakılamaz.",
+                ),
+          bodyWidget: SingleChildScrollView(
+            child: Column(
+              children: [
+                const CustomText(
+                  text:
+                      "Girdiğiniz şifre veya kullanıcı adı yanlış. Lütfen tekrar deneyiniz.",
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomButton(
+                  title: "Tekrar Dene",
+                  pressAction: () {
+                    Get.back();
+                  },
+                ),
+              ],
+            ),
+          ),
+          bodyWidgetWidth: MediaQuery.of(context).size.width / 3,
+        ),
+      );
+      return;
+    }
+    /* if (_loginKey.currentState!.validate()) {
+      Statics.instance.setUser(null);
+      Statics.instance.username = _usernameController.text;
+      //////////7
+    } */
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("username", _usernameController.text);
+    Get.offAllNamed(rootRoute);
   }
 }

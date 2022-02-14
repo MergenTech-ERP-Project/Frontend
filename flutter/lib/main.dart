@@ -12,6 +12,9 @@ import 'package:vtys_kalite/controller/Frontend%20Controller/navigator_controlle
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/LoginPage/login_page.dart';
+import 'package:vtys_kalite/screens/SignUp/sign_up.dart';
+import 'package:vtys_kalite/screens/page_not_found.dart';
+import 'package:vtys_kalite/screens/pages.dart';
 import 'package:vtys_kalite/site_layout.dart';
 import 'package:vtys_kalite/utilities/custom_scroll_behaviour.dart';
 import 'package:vtys_kalite/utilities/style.dart';
@@ -45,16 +48,11 @@ class App extends StatelessWidget {
       title: 'Mergen Tech',
       theme: theme(context),
       initialRoute: user.name == "" ? loginPageRoute : mainFormPageRoute,
-      getPages: [
-        GetPage(
-          name: mainFormPageRoute,
-          page: () => SiteLayout(),
-        ),
-        GetPage(
-          name: loginPageRoute,
-          page: () => LoginPage(),
-        ),
-      ],
+      unknownRoute: GetPage(
+        name: '/not-found',
+        page: () => PageNotFound(),
+      ),
+      getPages: pageList,
     );
   }
 

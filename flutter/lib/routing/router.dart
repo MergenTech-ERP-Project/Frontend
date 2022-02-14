@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation_page.dart';
@@ -13,27 +15,28 @@ import 'package:vtys_kalite/screens/loginpage/login_page.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
-    case mainFormPageRoute:
-      return _getPageRoute(MainFormBody());
     case loginPageRoute:
       return _getPageRoute(LoginPage());
     case signUpPageRoute:
       return _getPageRoute(SignUpPage());
-    case adminPanelPageRoute:
-      return _getPageRoute(AdminPanelPage());
+    case employeesPageRoute:
+      return _getPageRoute(Employees());
+    case mainFormPageRoute:
+      return _getPageRoute(MainFormBody());
+    case formsPageRoute:
+      return _getPageRoute(FormsPage());
     case settingsPageRoute:
       return _getPageRoute(SettingsPage());
+    case adminPanelPageRoute:
+      return _getPageRoute(AdminPanelPage());
     case addNewEmployeePageRoute:
       return _getPageRoute(AddNewEmployee());
     case newActivityPageRoute:
       return _getPageRoute(NewActivityPage());
     case activityEvaluationPageRoute:
       return _getPageRoute(ActivityEvaluationPage());
-    case formsPageRoute:
-      return _getPageRoute(FormsPage());
-    case employeesPageRoute:
-      return _getPageRoute(Employees());
     default:
+      print("Check Address on Router");
       return _getPageRoute(LoginPage());
   }
 }

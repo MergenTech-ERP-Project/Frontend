@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
@@ -70,10 +71,7 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
                 flex: 2,
                 child: CustomButton(
                     title: "Cancel",
-                    pressAction: () {
-                      Navigator.pushReplacementNamed(
-                          context, mainFormPageRoute);
-                    }),
+                    pressAction: () => Get.offAllNamed(mainFormPageRoute)),
               ),
               const Expanded(flex: 1, child: Text("")),
               Expanded(
