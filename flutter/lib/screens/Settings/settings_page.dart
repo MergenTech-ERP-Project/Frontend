@@ -10,11 +10,6 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        OptionalCompanyDescriptions(),
-      ],
-    );
+    return OptionalCompanyDescriptions();
   }
 }

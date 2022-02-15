@@ -12,6 +12,7 @@ class CustomTextBox extends StatefulWidget {
   final void Function(String)? onTextChanged;
   final double customFontSize;
   final Color? fillcolor, textColor;
+  final int? maxLines;
 
   CustomTextBox({
     Key? key,
@@ -29,6 +30,7 @@ class CustomTextBox extends StatefulWidget {
     this.textColor,
     this.fillcolor,
     this.suffixWidget = const SizedBox(),
+    this.maxLines,
   }) : super(key: key);
 
   @override
@@ -47,6 +49,7 @@ class _CustomTextBoxState extends State<CustomTextBox> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: widget.maxLines ?? 1,
       controller: widget.controller,
       readOnly: widget.readOnly!,
       validator: widget.validator,

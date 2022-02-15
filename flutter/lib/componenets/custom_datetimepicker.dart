@@ -26,35 +26,29 @@ class CustomDateTimePicker extends StatefulWidget {
 class _CustomDateTimePickerState extends State<CustomDateTimePicker> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        DateTimePicker(
-          type: DateTimePickerType.dateTime,
-          initialValue: dateTimeFormat.format(DateTime.now()),
-          initialDate: DateTime.now(),
-          firstDate: DateTime.now(),
-          lastDate: DateTime.now().add(const Duration(days: 1000)),
-          decoration: InputDecoration(
-            suffixIcon: widget.suffixWidget,
-            labelStyle: TextStyle(
-              color: blackColor ,
-              fontFamily: 'Comfortaa',
-              fontSize: 16,
-            ),
-            labelText: widget.labelText,
-            fillColor: widget.fillcolor ?? whiteColor,
-            border: !widget.borderless!
-                ? OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  )
-                : null,
-          ),
-          onChanged: widget.onChanged,
-          onSaved: widget.onChanged,
+    return DateTimePicker(
+      type: DateTimePickerType.dateTime,
+      initialValue: dateTimeFormat.format(DateTime.now()),
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 1000)),
+      decoration: InputDecoration(
+        suffixIcon: widget.suffixWidget,
+        labelStyle: TextStyle(
+          color: blackColor ,
+          fontFamily: 'Comfortaa',
+          fontSize: 16,
         ),
-      ],
+        labelText: widget.labelText,
+        fillColor: widget.fillcolor ?? whiteColor,
+        border: !widget.borderless!
+            ? OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+              )
+            : null,
+      ),
+      onChanged: widget.onChanged,
+      onSaved: widget.onChanged,
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/departments_enum.dart';
 import 'package:vtys_kalite/routing/routes.dart';
@@ -36,7 +37,7 @@ class _EmployeesState extends State<Employees> {
                         child: Text(""),
                       ),
                       Expanded(
-                        flex: 2,
+                        flex: ResponsiveWidget.isSmallScreen(context) ? 50 : 2,
                         child: Stack(
                           children: [
                             ListView.builder(
@@ -64,6 +65,7 @@ class _EmployeesState extends State<Employees> {
                               child: Container(
                                 padding: const EdgeInsets.all(20.0),
                                 child: CustomButton(
+                                  width: double.infinity,
                                   title: 'New Employee',
                                   leftIcon: Icons.person_add,
                                   pressAction: () =>

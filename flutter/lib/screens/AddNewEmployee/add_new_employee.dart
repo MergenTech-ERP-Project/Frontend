@@ -16,7 +16,6 @@ class AddNewEmployee extends StatefulWidget {
 }
 
 class _AddNewEmployeeState extends State<AddNewEmployee> {
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -38,20 +37,20 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
             isScrollable: true,
             indicatorColor: Colors.blue,
             tabs: [
-              const Tab(text: 'Genel'),
-              const Tab(text: 'Kariyer'),
-              const Tab(text: 'Kişisel Bilgiler'),
-              const Tab(text: 'Diğer Bilgiler'),
-              const Tab(text: 'İzin'),
-              const Tab(text: 'Ödemeler'),
-              const Tab(text: 'Mesai'),
-              const Tab(text: 'Bodro'),
+              Tab(child: CustomText(text: 'Genel', color: lightColor)),
+              Tab(child: CustomText(text: 'Kariyer', color: lightColor)),
+              Tab(child:CustomText(text: 'Kişisel Bilgiler', color: lightColor)),
+              Tab(child: CustomText(text: 'Diğer Bilgiler', color: lightColor)),
+              Tab(child: CustomText(text: 'İzin', color: lightColor)),
+              Tab(child: CustomText(text: 'Ödemeler', color: lightColor)),
+              Tab(child: CustomText(text: 'Mesai', color: lightColor)),
+              Tab(child: CustomText(text: 'Bodro', color: lightColor)),
               Tab(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    CustomText(text: "Diğer"),
-                    Icon(Icons.keyboard_arrow_down),
+                  children: [
+                    CustomText(text: "Diğer", color: lightColor),
+                    const Icon(Icons.keyboard_arrow_down),
                   ],
                 ),
               ),
