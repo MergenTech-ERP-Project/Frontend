@@ -3,19 +3,25 @@ import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/ActivityForm/new_activity_page.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
-import 'new_activity_next_button.dart';
-
 class NewActivityInitialPage extends StatefulWidget {
-  const NewActivityInitialPage({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController placeController = TextEditingController();
+  final TextEditingController organizatorController = TextEditingController();
+  DateTime date = DateTime.now();
 
-  final PageController controller;
+  final _newActivityInitialPageForm = GlobalKey<FormState>();
+
+  final Function() onNextButtonClick;
+
+  NewActivityInitialPage({
+    Key? key,
+    required this.onNextButtonClick,
+  }) : super(key: key);
 
   @override
   State<NewActivityInitialPage> createState() => _NewActivityInitialPageState();
@@ -29,15 +35,20 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
       children: [
         Expanded(
           flex: 8,
-          child: SingleChildScrollView(
+          child: Form(
+            key: widget._newActivityInitialPageForm,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 buildTextBox(
-                    NewActivityPage.nameController, 'Name', Icons.person),
+                  widget.nameController,
+                  'Name',
+                  Icons.person,
+                ),
                 buildTextBox(
-                    NewActivityPage.placeController, 'Place', Icons.home),
+                  widget.placeController,
+                  'Place',
+                  Icons.home,
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomDateTimePicker(
@@ -46,10 +57,9 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
                     onChanged: (val) {
                       if (val != null) {
                         try {
-                          NewActivityPage.date = dateTimeFormat.parse(val);
+                          widget.date = dateTimeFormat.parse(val);
                         } catch (e) {
                           debugPrint(e.toString());
-
                         }
                       }
                     },
@@ -57,8 +67,10 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
                 ),
                 const SizedBox(height: 10),
                 buildTextBox(
-                    NewActivityPage.organizatorController, 'Organizer',
-                    Icons.person),
+                  widget.organizatorController,
+                  'Organizer',
+                  Icons.person,
+                ),
               ],
             ),
           ),
@@ -76,9 +88,19 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
               const Expanded(flex: 1, child: Text("")),
               Expanded(
                 flex: 2,
-                child: NewActivityNextButton(
-                  controller: widget.controller,
-                  isValid: validation(),
+                child: CustomButton(
+                  title: "Create", //next
+                  pressAction: () {
+                    if (widget._newActivityInitialPageForm.currentState!
+                        .validate()) {
+                      widget.onNextButtonClick();
+                      activityController.postActivity(
+                          widget.nameController.text,
+                          widget.placeController.text,
+                          dateTimeFormat.format(widget.date).toString(),
+                          widget.organizatorController.text, <User>[]);
+                    }
+                  },
                 ),
               ),
             ],
@@ -88,25 +110,23 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
     );
   }
 
-  CustomTextBox buildTextBox(
+  Widget buildTextBox(
       TextEditingController controller, String label, IconData iconData) {
-    return CustomTextBox(
-      controller: controller,
-      suffixWidget: Icon(iconData),
-      label: label,
-      validator: (val) {
-        if (val!.isEmpty) {
-          return "Cannot Be Blank";
-        } else {
-          return null;
-        }
-      },
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: CustomTextBox(
+        borderless: true,
+        controller: controller,
+        suffixWidget: Icon(iconData),
+        label: label,
+        validator: (val) {
+          if (val!.isEmpty) {
+            return "Cannot Be Blank";
+          } else {
+            return null;
+          }
+        },
+      ),
     );
-  }
-
-  bool validation() {
-    return !(NewActivityPage.nameController.text.trim() == "" &&
-        NewActivityPage.placeController.text.trim() == "" &&
-        NewActivityPage.organizatorController.text.trim() == "");
   }
 }

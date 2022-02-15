@@ -32,8 +32,8 @@ class ActivityController extends GetxController {
   Future<int> fetchActivity(String name, String organizator) async {
     try {
       isLoading(true);
-      var activity = await ActivityRemoteServices.fetchActivity(name, organizator);
-      print("fetch Activity: " + activity.toString());
+      var activity =
+          await ActivityRemoteServices.fetchActivity(name, organizator);
       return activity;
     } finally {
       isLoading(false);
@@ -44,7 +44,6 @@ class ActivityController extends GetxController {
     try {
       isLoading(true);
       var activity = await ActivityRemoteServices.fetchActivitybyId(id);
-      print("fetch Activity: " + activity.toString());
       return activity;
     } finally {
       isLoading(false);
@@ -60,17 +59,17 @@ class ActivityController extends GetxController {
           datetime: datetime,
           place: place,
           organizator: organizator,
-      ).toJson()).toString());
-      print("post Activity: " + response);
+          ).toJson())
+          .toString());
       fetchActivities();
-      int activityId = await ActivityRemoteServices.fetchActivity(name, organizator);
+      /* int activityId = await ActivityRemoteServices.fetchActivity(name, organizator);
       for(User user in selectedUsers){
         await ActiveToUserRemoteServices.postActiveToUser(json.encode(ActiveToUser(
           id: 0,
           activityId: activityId,
           userId: user.id,
         ).toJson()).toString());
-      }
+      } */
       return response;
     } finally {
       isLoading(false);
@@ -88,7 +87,6 @@ class ActivityController extends GetxController {
           break;
         }
       }
-      print("delete Activity: " + response);
       fetchActivities();
       return response;
     } finally {

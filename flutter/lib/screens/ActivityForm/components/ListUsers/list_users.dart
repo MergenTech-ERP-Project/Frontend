@@ -9,15 +9,9 @@ import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class ListUsers extends StatefulWidget {
-  List<User>? selectedUsers;
-
-  ListUsers({
-    Key? key,
-    this.selectedUsers,
-  }) : super(key: key);
-
   final TextEditingController _searchController = TextEditingController();
   List<User> users = <User>[].obs;
+  List<User> selectedUsers = <User>[].obs;
   double containerHeight = 60;
 
   @override
@@ -25,15 +19,12 @@ class ListUsers extends StatefulWidget {
 }
 
 class _ListUsersState extends State<ListUsers> {
+  ///init state get selected users
   @override
   void initState() {
-    widget.users.clear();
-    for (User user in userController.userList) {
-      if (!widget.selectedUsers!.contains(user)) {
-        widget.users.add(user);
-      }
-    }
+    // TODO: implement initState
     super.initState();
+    widget.users.addAll(userController.userList);
   }
 
   @override
@@ -54,17 +45,19 @@ class _ListUsersState extends State<ListUsers> {
           text: "Selected User",
           thickness: 2,
         ),
-        widget.selectedUsers!.isEmpty
-            ? Column(
-                children: const [
-                  SizedBox(height: 10),
-                  CustomText(
-                    text: "No Selected Users",
-                  ),
-                  SizedBox(height: 10),
-                ],
-              )
-            : selectedUsersList(),
+        Obx(
+          () => widget.selectedUsers.isEmpty
+              ? Column(
+                  children: const [
+                    SizedBox(height: 10),
+                    CustomText(
+                      text: "No Selected Users",
+                    ),
+                    SizedBox(height: 10),
+                  ],
+                )
+              : selectedUsersList(),
+        ),
         CustomTextDivider(
           height: widget.containerHeight,
           text: "Users",
@@ -80,12 +73,8 @@ class _ListUsersState extends State<ListUsers> {
     return CustomButton(
       title: 'Remove All',
       pressAction: () {
-        setState(() {
-          for (User user in widget.selectedUsers!) {
-            widget.users.add(user);
-          }
-          widget.selectedUsers!.clear();
-        });
+        widget.users.addAll(widget.selectedUsers);
+        widget.selectedUsers.clear();
       },
     );
   }
@@ -94,38 +83,28 @@ class _ListUsersState extends State<ListUsers> {
     return CustomButton(
       title: 'Add All',
       pressAction: () {
-        setState(() {
-          for (User user in widget.users) {
-            widget.selectedUsers!.add(user);
-          }
-          widget.users.clear();
-        });
+        widget.selectedUsers.addAll(widget.users);
+        widget.users.clear();
       },
     );
   }
 
   Widget selectedUsersList() {
-    return Obx(() {
-      return widget.selectedUsers!.isEmpty
-          ? const SizedBox()
-          : SizedBox(
-              height: widget.selectedUsers!.length * widget.containerHeight,
-              child: ListView(
-                children: <Widget>[
-                  for (User user in widget.selectedUsers!)
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          widget.selectedUsers!.remove(user);
-                          widget.users.add(user);
-                        });
-                      },
-                      child: tileUsername(user, Icons.remove),
-                    )
-                ],
-              ),
-            );
-    });
+    return SizedBox(
+      height: widget.selectedUsers.length * widget.containerHeight,
+      child: ListView(
+        children: <Widget>[
+          for (User user in widget.selectedUsers)
+            InkWell(
+              onTap: () {
+                widget.selectedUsers.remove(user);
+                widget.users.add(user);
+              },
+              child: tileUsername(user, Icons.remove),
+            )
+        ],
+      ),
+    );
   }
 
   Widget usersList() {
@@ -139,10 +118,8 @@ class _ListUsersState extends State<ListUsers> {
                       for (var user in widget.users)
                         InkWell(
                           onTap: () {
-                            setState(() {
-                              widget.selectedUsers!.add(user);
-                              widget.users.remove(user);
-                            });
+                            widget.selectedUsers.add(user);
+                            widget.users.remove(user);
                           },
                           child: tileUsername(user, Icons.add),
                         )
@@ -163,7 +140,7 @@ class _ListUsersState extends State<ListUsers> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CustomText(
-              text: "user.name",
+              text: user.name,
             ),
             Icon(icon),
           ],
@@ -177,11 +154,9 @@ class _ListUsersState extends State<ListUsers> {
       controller: widget._searchController,
       decorationIcon: const Icon(Icons.search),
       onTextChanged: (value) {
-        setState(() {
-          widget.users = userController.userList
-              .where((e) => e.name.toLowerCase().contains(value.toLowerCase()))
-              .toList();
-        });
+        widget.users = userController.userList
+            .where((e) => e.name.toLowerCase().contains(value.toLowerCase()))
+            .toList();
       },
     );
   }

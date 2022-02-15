@@ -24,16 +24,20 @@ class ActivityEvaluationAppBar extends StatelessWidget
         padding: const EdgeInsets.only(left: 20.0),
         child: CustomText(
           text: activity.name,
+          color: whiteColor,
+          size: 20,
         ),
       ),
       backgroundColor: activeColor,
-      foregroundColor: Colors.white,
+      foregroundColor: whiteColor,
       actions: [
         Center(
           child: Padding(
             padding: const EdgeInsets.only(right: 20.0),
             child: CustomText(
               text: "Due To : ${date.day}.${date.month}.${date.year}",
+              color: whiteColor,
+              size: 18,
             ),
           ),
         )

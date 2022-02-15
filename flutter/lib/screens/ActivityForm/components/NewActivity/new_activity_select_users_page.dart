@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/models/user.dart';
+import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/ListUsers/list_users.dart';
-import '../../new_activity_page.dart';
-import 'new_activity_create_button.dart';
-import 'new_activity_previous_button.dart';
 
 class NewActivitySelectUsersPage extends StatefulWidget {
-  const NewActivitySelectUsersPage({
+  final Function() onPreviousButtonClick;
+
+  NewActivitySelectUsersPage({
     Key? key,
-    required this.widget,
-    required this.controller,
+    required this.onPreviousButtonClick,
   }) : super(key: key);
-
-  final NewActivityPage widget;
-  final PageController controller;
-
-  List<User> get selectedUsers => widget.selectedUsers;
 
   @override
   State<NewActivitySelectUsersPage> createState() =>
@@ -31,20 +27,27 @@ class _NewActivitySelectUsersPageState
       children: [
         Expanded(
             flex: 8,
-            child: ListUsers(selectedUsers: widget.widget.selectedUsers)),
+            child: ListUsers()),
         Expanded(
           flex: 1,
           child: Row(
             children: [
               Expanded(
                   flex: 2,
-                  child: NewActivityPreviousButton(
-                      controller: widget.controller)),
+                child: CustomButton(
+                  title: 'Previous',
+                  pressAction: widget.onPreviousButtonClick,
+                ),
+              ),
               const Expanded(flex: 1, child: Text("")),
               Expanded(
                 flex: 2,
-                child: NewActivityCreateButton(
-                  widget: widget,
+                child: CustomButton(
+                  title: "Create",
+                  pressAction: () {
+                    //active to user add selected user list
+                    Get.offAllNamed(rootRoute);
+                  },
                 ),
               ),
             ],
