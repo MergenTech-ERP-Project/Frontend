@@ -45,10 +45,8 @@ class _AddNewCompanyState extends State<AddNewCompany> {
       content: Builder(
         builder: (context) {
           var width = MediaQuery.of(context).size.width;
-          var height = MediaQuery.of(context).size.height;
           return SizedBox(
-            width: width / 1.4,
-            height: height / 1.2,
+            width: width / 2,
             child: SingleChildScrollView(
               child: Form(
                 key: _newCompanyKey,
@@ -59,30 +57,36 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                       thickness: 3,
                     ),
                     CustomTextBox(
+                      borderless: true,
                       controller: widget.controllerCompanyName,
                       label: "Şirket Adı",
                       validator: validator(),
                     ),
                     CustomTextBox(
+                      borderless: true,
                       controller: widget.controllerCompanyPhone,
                       label: "Telefon",
                       validator: validator(),
                     ),
                     CustomTextBox(
+                      borderless: true,
                       controller: widget.controllerDomainName,
                       label: "E-posta Uzantısı",
                       validator: validator(),
                     ),
                     CustomTextBox(
+                      borderless: true,
                       controller: widget.controllerMersisNo,
                       label: "Mersis Numarası",
                       validator: validator(),
                     ),
                     CustomTextBox(
+                      borderless: true,
                       controller: widget.controllerSGKCompanyNo,
                       label: "SGK İş Yeri Numarası",
                       validator: validator(),
                     ),
+                    const SizedBox(height: 20),
                     CustomButton(
                       title: "Ekle",
                       pressAction: () => setState(() {
@@ -99,8 +103,7 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                               return;
                             }
                           }
-                          var response =
-                             companyController.postCompany(
+                          var response = companyController.postCompany(
                             widget.controllerCompanyName.text,
                             widget.controllerCompanyPhone.text,
                             widget.controllerDomainName.text,
