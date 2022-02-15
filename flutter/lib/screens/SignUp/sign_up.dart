@@ -68,12 +68,14 @@ class SignUpPage extends StatelessWidget {
                 controller: _passwordController,
                 label: "Password",
                 hint: "******",
+                obscureBool: true,
               ),
               const SizedBox(height: 15),
               CustomTextBox(
                 controller: _confirmPasswordController,
                 label: "Confirm Password",
                 hint: "******",
+                obscureBool: true,
               ),
               const SizedBox(height: 15),
               Row(
