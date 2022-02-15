@@ -6,7 +6,6 @@ import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/models/user.dart';
-import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
@@ -34,26 +33,50 @@ class _ActivityEvaluationBodyState extends State<ActivityEvaluationBody> {
         Expanded(
           flex: ResponsiveWidget.isSmallScreen(context) ? 50 : 2,
           child: Container(
-            constraints: const BoxConstraints(minHeight: 800),
+            constraints: const BoxConstraints(minHeight: 800, maxWidth: 700),
             child: Center(
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    buildReadOnlyCustomTextBox(
-                        "Username", widget.user.name, true),
-                    buildReadOnlyCustomTextBox(
-                        "Organizer", widget.activity.organizator, true),
+                    Stack(
+                      children: [
+                        Container(
+                          color: whiteColor,
+                          height: 24,
+                          child: CustomText(
+                            text: "Username: " + widget.user.name,
+                            color: blackColor,
+                            size: 18,
+                          ),
+                        ),
+                        const Positioned(
+                          bottom: 0,
+                          child: Divider(),
+                        ),
+                      ],
+                    ),
+                    Stack(
+                      children: [
+                        Container(
+                          color: whiteColor,
+                          height: 24,
+                          child: CustomText(
+                            text: "Organizer: " + widget.activity.organizator,
+                            color: blackColor,
+                            size: 18,
+                          ),
+                        ),
+                        const Positioned(
+                          bottom: 0,
+                          child: Divider(),
+                        ),
+                      ],
+                    ),
                     evaluationContainer(),
                     const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Expanded(flex: 2, child: cancelCustomButton(context)),
-                        const Expanded(flex: 1, child: SizedBox()),
-                        Expanded(flex: 2, child: saveCustomButton(context)),
-                      ],
-                    )
+                    saveCustomButton(context),
                   ],
                 ),
               ),
@@ -68,42 +91,14 @@ class _ActivityEvaluationBodyState extends State<ActivityEvaluationBody> {
   CustomButton saveCustomButton(BuildContext context) {
     return CustomButton(
       title: "Save",
-      pressAction: () {
-        setState(() {
+      pressAction: () => setState(
+        () {
           activityEvaluationController.postActivityEvaluation(
               widget.activity.id,
               widget.user.id,
               widget._evaluationController.text);
-          Get.offAllNamed(rootRoute);
-        });
-      },
-    );
-  }
-
-  CustomButton cancelCustomButton(BuildContext context) {
-    return CustomButton(
-      title: "Cancel",
-      pressAction: () => Get.offAllNamed(rootRoute),
-    );
-  }
-
-  Widget buildReadOnlyCustomTextBox(
-      String? title, String? hint, bool? readOnly) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          CustomText(
-            text: title,
-            color: blackColor,
-            size: 18,
-          ),
-          CustomTextBox(
-            borderless: true,
-            hint: hint,
-            readOnly: readOnly,
-          ),
-        ],
+          Get.back();
+        },
       ),
     );
   }
@@ -117,11 +112,8 @@ class _ActivityEvaluationBodyState extends State<ActivityEvaluationBody> {
         maxLines: null,
         minLines: null,
         expands: true,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: "Please, write your thoughts about the event here...",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
         ),
       ),
     );

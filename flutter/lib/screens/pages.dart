@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:vtys_kalite/routing/routes.dart';
-import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation_page.dart';
 import 'package:vtys_kalite/screens/ActivityForm/new_activity_page.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
 import 'package:vtys_kalite/screens/AdminPanel/admin_panel.dart';
@@ -28,13 +27,5 @@ List<GetPage> pageList = [
   GetPage(
     name: addNewEmployeePageRoute,
     page: () => AddNewEmployee(),
-  ),
-  GetPage(
-    name: newActivityPageRoute,
-    page: () => NewActivityPage(),
-  ),
-  GetPage(
-    name: activityEvaluationPageRoute,
-    page: () => ActivityEvaluationPage(),
   ),
 ];

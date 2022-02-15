@@ -6,8 +6,8 @@ const rootRoute = "/home";
 const employeesPageDisplayName = "Employees";
 const employeesPageRoute = "/employees";
 
-const mainFormPageDisplayName = "My Activities";
-const mainFormPageRoute = "/mainFormPage";
+const myActivitiesPageDisplayName = "My Activities";
+const myActivitiesPageRoute = "/myActivitiesPage";
 
 const formsPageDisplayName = "Forms";
 const formsPageRoute = "/forms";
@@ -47,7 +47,7 @@ class MenuItem {
 
 List<MenuItem> sideMenuItems = [
   MenuItem(employeesPageDisplayName, employeesPageRoute),
-  MenuItem(mainFormPageDisplayName, mainFormPageRoute),
+  MenuItem(myActivitiesPageDisplayName, myActivitiesPageRoute),
   MenuItem(formsPageDisplayName, formsPageRoute),
   MenuItem(settingsPageDisplayName, settingsPageRoute),
 ];

@@ -21,20 +21,18 @@ class _NewActivityPageState extends State<NewActivityPage> {
   //final PageController pageController = PageController();
   @override
   Widget build(BuildContext context) {    
-    return Scaffold(
-      body: Center(
-        child: Row(
-          children: [
-            const Expanded(child: CustomText(text: "")),
-            Expanded(
-              flex: ResponsiveWidget.isSmallScreen(context) ? 50 : 6,
-              child: NewActivityInitialPage(
-                onNextButtonClick: () {},
-              ),
+    return Center(
+      child: Row(
+        children: [
+          const Expanded(child: CustomText(text: "")),
+          Expanded(
+            flex: ResponsiveWidget.isSmallScreen(context) ? 20 : 4,
+            child: NewActivityInitialPage(
+              onNextButtonClick: () {},
             ),
-            const Expanded(child: CustomText(text: "")),
-          ],
-        ),
+          ),
+          const Expanded(child: CustomText(text: "")),
+        ],
       ),
     );
   }
