@@ -10,17 +10,11 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 1,
-      child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 0,
-          elevation: 0,
-          //automaticallyImplyLeading: true, //geri butonunu kaldırma
-          backgroundColor: Colors.white,
-        ),
-        body: SafeArea(child: OptionalCompanyDescriptions()),
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        OptionalCompanyDescriptions(),
+      ],
     );
   }
 }

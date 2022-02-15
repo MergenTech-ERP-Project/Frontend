@@ -21,7 +21,7 @@ class OptionalCompanyDescriptions extends StatefulWidget {
 
   OptionalCompanyDescriptions({
     Key? key,
-    this.company = true,
+    this.company = false,
     this.branch = false,
     this.departmant = false,
     this.title = false,
@@ -48,10 +48,10 @@ class _OptionalCompanyDescriptionsState
       children: [
         const Expanded(
           flex: 1,
-          child: Text(""),
+          child: SizedBox(),
         ),
         Expanded(
-          flex: 2,
+          flex: 6,
           child: ListView(
             shrinkWrap: true,
             children: [
@@ -67,7 +67,7 @@ class _OptionalCompanyDescriptionsState
         ),
         const Expanded(
           flex: 1,
-          child: Text(""),
+          child: SizedBox(),
         ),
       ],
     );
@@ -89,7 +89,7 @@ class _OptionalCompanyDescriptionsState
                   children: [
                     const Expanded(
                       flex: 8,
-                      child: CustomText(text: "Unvan"),
+                      child: CustomText(text: "Unvan", weight: FontWeight.bold),
                     ),
                     CustomButton(
                       title: "Yeni Ekle",
@@ -225,21 +225,16 @@ class _OptionalCompanyDescriptionsState
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Expanded(
-                    flex: 8,
-                    child: CustomText(text: "Şirket"),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: CustomButton(
-                        height: 20,
-                        title: "Yeni Ekle",
-                        pressAction: () async {
-                          await showDialog(
-                              context: context,
-                              builder: (_) => AddNewCompany());
-                        }),
-                  )
+                  const CustomText(text: "Şirket", weight: FontWeight.bold),
+                  CustomButton(
+                      weight: 125,
+                      height: 20,
+                      leftIcon: Icons.add,
+                      title: "Yeni Ekle",
+                      pressAction: () async {
+                        await showDialog(
+                            context: context, builder: (_) => AddNewCompany());
+                      })
                 ],
               ),
             ),
