@@ -6,13 +6,21 @@ class CustomText extends StatelessWidget {
   final double? size;
   final Color? color;
   final FontWeight? weight;
-  const CustomText({Key? key, this.text, this.size, this.color, this.weight})
-      : super(key: key);
+  final TextAlign? textAlign;
+  const CustomText({
+    Key? key,
+    this.text,
+    this.size,
+    this.color,
+    this.weight,
+    this.textAlign,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text ?? "",
+      textAlign: textAlign ?? TextAlign.left,
       style: TextStyle(
           fontFamily: 'Comfortaa',
           fontSize: size ?? 16,

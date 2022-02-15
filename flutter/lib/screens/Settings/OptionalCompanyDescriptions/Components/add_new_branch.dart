@@ -1,6 +1,10 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
+import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
@@ -14,7 +18,6 @@ class AddNewBranch extends StatefulWidget {
 
   final TextEditingController controllerBranchName = TextEditingController();
   final TextEditingController controllerBranchUpper = TextEditingController();
-  final TextEditingController controllerVacationDays = TextEditingController();
   final TextEditingController controllerRules = TextEditingController();
 
   @override
@@ -23,7 +26,7 @@ class AddNewBranch extends StatefulWidget {
 
 class _AddNewBranchState extends State<AddNewBranch> {
   final _newBranchKey = GlobalKey<FormState>();
-
+  DateTime holidayCalanders = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -43,10 +46,8 @@ class _AddNewBranchState extends State<AddNewBranch> {
       ),
       content: Builder(builder: (context) {
         var width = MediaQuery.of(context).size.width;
-        var height = MediaQuery.of(context).size.height;
         return SizedBox(
           width: width / 1.4,
-          height: height / 1.2,
           child: SingleChildScrollView(
             child: Form(
               key: _newBranchKey,
@@ -57,29 +58,44 @@ class _AddNewBranchState extends State<AddNewBranch> {
                     thickness: 3,
                   ),
                   CustomTextBox(
+                    borderless: true,
                     label: "Birim Adı",
                     controller: widget.controllerBranchName,
                     validator: validator(),
                   ),
                   CustomTextBox(
+                    borderless: true,
                     label: "Bağlı Olduğu Üst Birim (Opsiyonel)",
                     controller: widget.controllerBranchUpper,
                     validator: validator(),
                   ),
                   CustomTextBox(
+                    maxLines: 6,
+                    borderless: true,
                     label: "Kurallar",
                     controller: widget.controllerRules,
+                    validator: validator(),
                   ),
                   const SizedBox(height: 10),
-                  CustomTextBox(
-                    controller: widget.controllerVacationDays,
-                    hint: "Seçiniz",
-                    label: "Tatil Takvimleri",
-                    validator: validator(),
-
-                    ///DateTimePickerEklenmeli
+                  CustomDateTimePicker(
+                    suffixWidget: const Icon(Icons.calendar_today_outlined),
+                    labelText: "Tatil Takvimleri - Başlangıç",
+                    borderless: true,
+                    onChanged: (val) {
+                      if (val != null) {
+                        print("Holiday Calanders picker : " + val);
+                      }
+                      try {
+                        holidayCalanders =
+                            dateTimeFormat.parse(val!);
+                      } catch (e) {
+                        print(e.toString());
+                      }
+                    },
                   ),
+                  const SizedBox(height: 30),
                   CustomButton(
+                    width: double.infinity,
                     title: "Ekle",
                     pressAction: () => setState(() {
                       if (_newBranchKey.currentState!.validate()) {
@@ -87,9 +103,42 @@ class _AddNewBranchState extends State<AddNewBranch> {
                           if (branch.branch_name ==
                               widget.controllerBranchName.text) {
                             showDialog(
-                                context: context,
-                                builder: (_) => const SimpleDialog(
-                                    title: Text("Same Branch Name exists!")));
+                              context: context,
+                              builder: (_) => CustomAlertDialog(
+                                titleWidget: widget.controllerBranchName.text !=
+                                        ""
+                                    ? CustomText(
+                                        textAlign: TextAlign.center,
+                                        text: widget.controllerBranchName.text +
+                                            " için şube adı zaten kayıtlı.",
+                                        weight: FontWeight.bold,
+                                      )
+                                    : const CustomText(
+                                        text: "Bilgiler boş bırakılamaz.",
+                                      ),
+                                bodyWidget: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      const CustomText(
+                                        text:
+                                            " Şube adını tekrar kontrol ediniz. Sistemde zaten kayıtlıdır.",
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      CustomButton(
+                                        title: "Tekrar Dene",
+                                        pressAction: () {
+                                          Get.back();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                bodyWidgetWidth:
+                                    MediaQuery.of(context).size.width / 3,
+                              ),
+                            );
                             return;
                           }
                         }
@@ -99,7 +148,7 @@ class _AddNewBranchState extends State<AddNewBranch> {
                             branch_name: widget.controllerBranchName.text,
                             branch_upper: widget.controllerBranchUpper.text,
                             rules: widget.controllerRules.text,
-                            vacation_dates: widget.controllerVacationDays.text,
+                            vacation_dates: holidayCalanders.toString(),
                           ),
                         );
                         print(response);
@@ -108,7 +157,7 @@ class _AddNewBranchState extends State<AddNewBranch> {
                           "Birim Ekleme Ekranı",
                           "Birim Kaydedildi",
                           snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: activeColor,
+                          backgroundColor: successfulColor,
                           padding: EdgeInsets.only(left: width / 2 - 100),
                         );
                       }

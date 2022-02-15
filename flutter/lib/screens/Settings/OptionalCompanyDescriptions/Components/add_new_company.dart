@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
@@ -91,15 +92,50 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                       title: "Ekle",
                       pressAction: () => setState(() {
                         if (_newCompanyKey.currentState!.validate()) {
+                          ///company name'e göre sorgu yapılması lazım.
                           for (Company company
                               in companyController.companyList) {
                             if (company.company_name ==
                                 widget.controllerCompanyName.text) {
                               showDialog(
-                                  context: context,
-                                  builder: (_) => const SimpleDialog(
-                                      title:
-                                          Text("Same Company Name exists!")));
+                                context: context,
+                                builder: (_) => CustomAlertDialog(
+                                  titleWidget:
+                                      widget.controllerCompanyName.text != ""
+                                          ? CustomText(
+                                              textAlign: TextAlign.center,
+                                              text: widget.controllerCompanyName
+                                                      .text +
+                                                  " için şirket adı zaten kayıtlı.",
+                                              weight: FontWeight.bold,
+                                            )
+                                          : const CustomText(
+                                              text: "Bilgiler boş bırakılamaz.",
+                                            ),
+                                  bodyWidget: SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        const CustomText(
+                                          text:
+                                              " Şirket adını tekrar kontrol ediniz. Sistemde zaten kayıtlıdır.",
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        CustomButton(
+                                          title: "Tekrar Dene",
+                                          pressAction: () {
+                                            Get.back();
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  bodyWidgetWidth:
+                                      MediaQuery.of(context).size.width / 3,
+                                ),
+                              );
+
                               return;
                             }
                           }
@@ -116,7 +152,7 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                             "Şirket Ekleme Ekranı",
                             "Şirket Kaydedildi",
                             snackPosition: SnackPosition.BOTTOM,
-                            backgroundColor: activeColor,
+                            backgroundColor: successfulColor,
                             padding: EdgeInsets.only(left: width / 2 - 100),
                           );
                         }

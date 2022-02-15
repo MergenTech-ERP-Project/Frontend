@@ -6,7 +6,7 @@ import 'package:vtys_kalite/utilities/style.dart';
 class CustomButton extends StatefulWidget {
   final String title;
   final Function()? pressAction;
-  final double? height, weight;
+  final double? height, width;
   final IconData? leftIcon, rightIcon;
   final Color? backgroundColor, foregroundColor;
 
@@ -16,7 +16,7 @@ class CustomButton extends StatefulWidget {
     this.leftIcon,
     this.rightIcon,
     this.height = 40,
-    this.weight = 120,
+    this.width = 120,
     required this.title,
     this.backgroundColor,
     this.foregroundColor,
@@ -30,7 +30,7 @@ class _CustomButtonState extends State<CustomButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.weight,
+      width: widget.width,
       height: widget.height,
       child: ElevatedButton(
         onPressed: widget.pressAction,

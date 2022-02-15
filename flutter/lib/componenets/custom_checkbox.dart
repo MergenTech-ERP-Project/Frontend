@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class CustomCheckbox extends StatefulWidget {
-  bool? value;
+  bool value = false;
+  String text;
   CustomCheckbox({
     Key? key,
-    this.value = false,
+    this.text = "",
   }) : super(key: key);
 
   @override
@@ -15,14 +17,29 @@ class CustomCheckbox extends StatefulWidget {
 class _CustomCheckboxState extends State<CustomCheckbox> {
   @override
   Widget build(BuildContext context) {
-    return Checkbox(
-      value: widget.value,
-      activeColor: activeColor,
-      onChanged: (val) {
+    return InkWell(
+      onTap: () {
         setState(() {
-          widget.value = val;
+          widget.value = !widget.value;
         });
       },
+      child: Row(
+        children: [
+          Checkbox(
+            value: widget.value,
+            activeColor: activeColor,
+            onChanged: (val) {
+              setState(() {
+                widget.value = val!;
+              });
+            },
+          ),
+          CustomText(
+            text: widget.text,
+            color: blackColor,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Components/add_new_company.dart';
@@ -11,21 +13,13 @@ import 'package:vtys_kalite/utilities/controllers.dart';
 import 'Components/add_new_branch.dart';
 
 class OptionalCompanyDescriptions extends StatefulWidget {
-  bool company;
-  bool branch;
-  bool departmant;
-  bool title;
+  RxBool company = false.obs;
+  RxBool branch = false.obs;
+  RxBool departmant = false.obs;
+  RxBool title = false.obs;
 
   List<Company> companyList = companyController.companyList;
   List<Branch> branchList = branchController.branchList;
-
-  OptionalCompanyDescriptions({
-    Key? key,
-    this.company = false,
-    this.branch = false,
-    this.departmant = false,
-    this.title = false,
-  }) : super(key: key);
 
   @override
   State<OptionalCompanyDescriptions> createState() =>
@@ -42,42 +36,43 @@ class _OptionalCompanyDescriptionsState
     companyController.fetchCompanies();
   }
 
+  ScrollController controller = ScrollController();
+
+  //const EdgeInsets.only(top: 50, left: 8, right: 8)
+  //: const EdgeInsets.only(top: 80, left: 40, right: 60),
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const Expanded(
-          flex: 1,
-          child: SizedBox(),
-        ),
-        Expanded(
-          flex: 6,
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              cardSirket(),
-              const SizedBox(height: 20),
-              cardSube(),
-              const SizedBox(height: 20),
-              cardDepartmant(),
-              const SizedBox(height: 20),
-              cardUnvan(),
-            ],
-          ),
-        ),
-        const Expanded(
-          flex: 1,
-          child: SizedBox(),
-        ),
-      ],
+    return Center(
+      child: Container(
+        padding: ResponsiveWidget.isSmallScreen(context)
+            ? const EdgeInsets.only(top: 50, left: 8, right: 8)
+            : const EdgeInsets.only(top: 60, left: 40, right: 60),
+        height: MediaQuery.of(context).size.height * .95,
+        child: Obx(() => SingleChildScrollView(
+              child: Column(
+                children: [
+                  cardSirket(),
+                  const SizedBox(height: 20),
+                  cardSube(),
+                  const SizedBox(height: 20),
+                  cardDepartmant(),
+                  const SizedBox(height: 20),
+                  cardUnvan(),
+                ],
+              ),
+            )),
+      ),
     );
   }
 
   Visibility cardUnvan() {
     return Visibility(
-      visible: widget.title,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 250),
+      visible: widget.title.value,
+      child: InkWell(
+        onTap: () {
+          widget.title.value = !widget.title.value;
+        },
         child: Card(
           elevation: 10,
           child: Column(
@@ -87,13 +82,11 @@ class _OptionalCompanyDescriptionsState
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Expanded(
-                      flex: 8,
-                      child: CustomText(text: "Unvan", weight: FontWeight.bold),
-                    ),
+                    const CustomText(text: "Unvan", weight: FontWeight.bold),
                     CustomButton(
-                      title: "Yeni Ekle",
+                      width: 125,
                       height: 20,
+                      title: "Yeni Ekle",
                       pressAction: () {},
                     ),
                   ],
@@ -113,12 +106,10 @@ class _OptionalCompanyDescriptionsState
 
   Visibility cardDepartmant() {
     return Visibility(
-      visible: widget.departmant,
+      visible: widget.departmant.value,
       child: InkWell(
         onTap: () {
-          setState(() {
-            widget.departmant = !widget.departmant;
-          });
+          widget.departmant.value = !widget.departmant.value;
         },
         child: Card(
           elevation: 10,
@@ -129,17 +120,13 @@ class _OptionalCompanyDescriptionsState
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Expanded(
-                      flex: 8,
-                      child: CustomText(text: "Departman"),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: CustomButton(
-                        title: "Yeni Ekle",
-                        height: 20,
-                        pressAction: () {},
-                      ),
+                    const CustomText(
+                        text: "Departman", weight: FontWeight.bold),
+                    CustomButton(
+                      title: "Yeni Ekle",
+                      width: 125,
+                      height: 20,
+                      pressAction: () {},
                     ),
                   ],
                 ),
@@ -158,12 +145,10 @@ class _OptionalCompanyDescriptionsState
 
   Visibility cardSube() {
     return Visibility(
-      visible: widget.branch,
+      visible: widget.branch.value,
       child: InkWell(
         onTap: () {
-          setState(() {
-            widget.branch = !widget.branch;
-          });
+          widget.branch.value = !widget.branch.value;
         },
         child: Card(
           elevation: 10,
@@ -174,32 +159,25 @@ class _OptionalCompanyDescriptionsState
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Expanded(
-                      flex: 8,
-                      child: CustomText(text: "Şube"),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: CustomButton(
+                    const CustomText(text: "Şube", weight: FontWeight.bold),
+                    CustomButton(
+                        width: 125,
                         height: 20,
+                        leftIcon: Icons.add,
                         title: "Yeni Ekle",
                         pressAction: () async {
                           await showDialog(
                             context: context,
                             builder: (_) => AddNewBranch(),
                           );
-                        },
-                      ),
-                    )
+                        })
                   ],
                 ),
               ),
               OptionalCompanySube(
                 branchList: widget.branchList,
                 onBranchSelected: () {
-                  setState(() {
-                    widget.departmant = true;
-                  });
+                  widget.departmant.value = true;
                 },
               ),
             ],
@@ -212,9 +190,7 @@ class _OptionalCompanyDescriptionsState
   Widget cardSirket() {
     return InkWell(
       onTap: () {
-        setState(() {
-          widget.company = !widget.company;
-        });
+        widget.company.value = !widget.company.value;
       },
       child: Card(
         elevation: 10,
@@ -227,7 +203,7 @@ class _OptionalCompanyDescriptionsState
                 children: [
                   const CustomText(text: "Şirket", weight: FontWeight.bold),
                   CustomButton(
-                      weight: 125,
+                      width: 125,
                       height: 20,
                       leftIcon: Icons.add,
                       title: "Yeni Ekle",
@@ -239,13 +215,11 @@ class _OptionalCompanyDescriptionsState
               ),
             ),
             Visibility(
-              visible: widget.company,
+              visible: widget.company.value,
               child: OptionalCompanySirket(
                 companyList: widget.companyList,
                 onCompanySelected: () {
-                  setState(() {
-                    widget.branch = true;
-                  });
+                  widget.branch.value = true;
                 },
               ),
             ),

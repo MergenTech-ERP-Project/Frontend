@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
+import 'package:vtys_kalite/componenets/custom_right_icon_button.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
+import 'package:vtys_kalite/utilities/style.dart';
 
 class OptionalCompanySube extends StatefulWidget {
-  OptionalCompanySube({
+  const OptionalCompanySube({
     Key? key,
     required this.branchList,
     required this.onBranchSelected,
@@ -26,7 +28,7 @@ class _OptionalCompanySubeState extends State<OptionalCompanySube> {
         CustomTextBox(
           borderless: true,
           hint: "Birim adı giriniz",
-          decorationIcon: Icon(Icons.search),
+          decorationIcon: const Icon(Icons.search),
           fillcolor: Colors.white60,
         ),
         Obx(() {
@@ -44,11 +46,43 @@ class _OptionalCompanySubeState extends State<OptionalCompanySube> {
                           children: [
                             Expanded(
                               child: Center(
-                                  child: Text(index == 0
+                                child: Text(
+                                  index == 0
                                       ? "Birim Adı"
                                       : widget
-                                          .branchList[index - 1].branch_name)),
+                                          .branchList[index - 1].branch_name,
+                                ),
+                              ),
                             ),
+                            index == 0
+                                ? Row(
+                                    children: [
+                                      RightIconButton(
+                                        icon:
+                                            Icon(Icons.edit, color: whiteColor),
+                                        function: () {},
+                                      ),
+                                      RightIconButton(
+                                        icon: Icon(Icons.delete,
+                                            color: whiteColor),
+                                        function: () {},
+                                      ),
+                                    ],
+                                  )
+                                : Row(
+                                    children: [
+                                      RightIconButton(
+                                        icon:
+                                            Icon(Icons.edit, color: darkColor),
+                                        function: () {},
+                                      ),
+                                      RightIconButton(
+                                        icon:
+                                            Icon(Icons.delete, color: redColor),
+                                        function: () {},
+                                      ),
+                                    ],
+                                  ),
                           ],
                         ),
                       ),
