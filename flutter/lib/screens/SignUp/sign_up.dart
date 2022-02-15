@@ -77,28 +77,7 @@ class SignUpPage extends StatelessWidget {
                 hint: "******",
                 obscureBool: true,
               ),
-              const SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: true,
-                        onChanged: (val) {},
-                      ),
-                      const CustomText(
-                        text: "Remember Me",
-                      ),
-                    ],
-                  ),
-                  CustomText(
-                    text: "Forgot Password",
-                    color: activeColor,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 30),
               CustomButton(
                 title: "Sign Up",
                 backgroundColor: activeColor,
