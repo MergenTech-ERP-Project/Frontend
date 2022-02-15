@@ -5,7 +5,7 @@ import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/services/branch_remote_services.dart';
 
 class BranchController extends GetxController {
-  var isLoading = true.obs;
+  var isLoading = false.obs;
   List<Branch> branchList = <Branch>[].obs; //List<Company>
 
   @override

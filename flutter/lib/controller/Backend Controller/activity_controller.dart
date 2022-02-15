@@ -8,7 +8,7 @@ import 'package:vtys_kalite/services/active_to_user_remote_services.dart';
 import 'package:vtys_kalite/services/activity_remote_services.dart';
 
 class ActivityController extends GetxController {
-  RxBool isLoading = true.obs;
+  RxBool isLoading = false.obs;
   List<Activity> activityList = <Activity>[].obs; //List<Activity>
 
   @override

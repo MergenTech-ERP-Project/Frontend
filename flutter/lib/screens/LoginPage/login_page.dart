@@ -8,6 +8,7 @@ import 'package:vtys_kalite/componenets/custom_checkbox.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
+import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
@@ -152,17 +153,13 @@ class LoginPage extends StatelessWidget {
       );
       return;
     }
-    /* if (_loginKey.currentState!.validate()) {
-      Statics.instance.setUser(null);
-      Statics.instance.username = _usernameController.text;
-      //////////7
-    } */
+    user.name = _usernameController.text;
     if (isCheckboxTrue) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString("username", _usernameController.text);
       Get.offAllNamed(rootRoute);
     } else {
-     Get.offAllNamed(rootRoute);
+      Get.offAllNamed(rootRoute);
     }
   }
 }

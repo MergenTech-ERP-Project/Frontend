@@ -85,7 +85,8 @@ AppBar topNavigationBar(context, key) => AppBar(
               children: [
                 CustomText(
                   text: user.name,
-                  color: lightGreyColor,
+                  color: darkColor,
+                  weight: FontWeight.bold,
                 ),
                 const SizedBox(width: 16),
               ],

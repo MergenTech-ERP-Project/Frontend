@@ -39,14 +39,6 @@ class SideMenu extends StatelessWidget {
                 .map((item) => SideMenuItem(
                       itemName: item.name,
                       onTap: () {
-                        /* mainFormPageDisplayName app bar
-                         
-                        if (item.route == loginPageRoute) {
-                          menuController
-                              .changeActiveItem(mainFormPageDisplayName);
-                          Get.offAllNamed(loginPageRoute);
-                          return;
-                        } */
                         if (!menuController.isActive(item.name)) {
                           menuController.changeActiveItem(item.name);
                           if (ResponsiveWidget.isSmallScreen(context)) {

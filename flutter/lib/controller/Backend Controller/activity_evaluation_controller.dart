@@ -5,7 +5,7 @@ import 'package:vtys_kalite/models/activity_evaluation.dart';
 import 'package:vtys_kalite/services/activity_evaluation_remote_services.dart';
 
 class ActivityEvaluationController extends GetxController {
-  var isLoading = true.obs;
+  var isLoading = false.obs;
   var activityEvaluationId = -1.obs;
   List<ActivityEvaluation> activityEvaluationList =
       <ActivityEvaluation>[].obs; //List<Activity>

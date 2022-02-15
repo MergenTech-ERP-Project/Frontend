@@ -5,7 +5,7 @@ import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/services/settings_company_remote_services.dart';
 
 class CompanyController extends GetxController {
-  var isLoading = true.obs;
+  var isLoading = false.obs;
   List<Company> companyList = <Company>[].obs; //List<Company>
 
   @override
