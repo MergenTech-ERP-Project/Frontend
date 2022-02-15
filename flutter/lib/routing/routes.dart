@@ -1,6 +1,4 @@
 String serviceHttp = "https://kalite-takip-yonetim-sistemi.herokuapp.com";
-
-///anısı var
 //String serviceHttp = "http://91.151.89.195:8090";
 
 const rootRoute = "/home";

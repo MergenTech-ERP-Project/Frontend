@@ -6,7 +6,7 @@ import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/services/user_remote_services.dart';
 
 class UserController extends GetxController {
-  var isLoading = true.obs;
+  var isLoading = false.obs;
   List<User> userList = <User>[].obs; //List<User>
 
   @override

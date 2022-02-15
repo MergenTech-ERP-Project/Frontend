@@ -4,7 +4,7 @@ import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 Navigator localNavigator() => Navigator(
-    key: navigatorController.navigationKey,
+      key: navigatorController.navigationKey,
       initialRoute: employeesPageRoute,
-    onGenerateRoute: generateRoute,
-);
+      onGenerateRoute: generateRoute,
+    );
