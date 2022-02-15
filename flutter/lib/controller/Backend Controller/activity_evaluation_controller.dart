@@ -6,15 +6,17 @@ import 'package:vtys_kalite/services/activity_evaluation_remote_services.dart';
 
 class ActivityEvaluationController extends GetxController {
   var isLoading = false.obs;
-  var activityEvaluationId = -1.obs;
+  var activityId = 0.obs;
   List<ActivityEvaluation> activityEvaluationList =
       <ActivityEvaluation>[].obs; //List<Activity>
 
   @override
   void onInit() {
     fetchActivityEvaluations();
+    activityId.value = -1;
     super.onInit();
   }
+  setActivityId(id) => activityId.value = id;
 
   void fetchActivityEvaluations() async {
     try {
@@ -22,7 +24,8 @@ class ActivityEvaluationController extends GetxController {
       var activityEvaluations =
           await ActivityEvaluationRemoteServices.fetchActivityEvaluations();
       if (activityEvaluations != null) {
-        activityEvaluationList.assignAll(activityEvaluations);
+        activityEvaluationList.clear();
+        activityEvaluationList.addAll(activityEvaluations);
       }
     } finally {
       isLoading(false);

@@ -8,7 +8,7 @@ class LargeScreen extends StatelessWidget {
     return Row(
       children: [
         SideMenu(),
-        Container(
+        SizedBox(
           width: MediaQuery.of(context).size.width - sideMenuWidth,
           child: localNavigator(),
         ),
