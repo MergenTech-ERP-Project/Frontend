@@ -37,7 +37,7 @@ class _EmployeesState extends State<Employees> {
                         child: Text(""),
                       ),
                       Expanded(
-                        flex: ResponsiveWidget.isSmallScreen(context) ? 50 : 2,
+                        flex: ResponsiveWidget.isSmallScreen(context) ? 50 : 8,
                         child: Stack(
                           children: [
                             ListView.builder(

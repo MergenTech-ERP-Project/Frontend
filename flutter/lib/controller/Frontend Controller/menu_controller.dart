@@ -25,7 +25,7 @@ class MenuController extends GetxController {
       case employeesPageDisplayName:
         iconData = Icons.person;
         break;
-      case mainFormPageDisplayName:
+      case myActivitiesPageDisplayName:
         iconData = Icons.event;
         break;
       case formsPageDisplayName:
