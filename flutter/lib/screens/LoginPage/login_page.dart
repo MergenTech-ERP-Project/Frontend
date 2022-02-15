@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
+import 'package:vtys_kalite/componenets/custom_checkbox.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
@@ -14,6 +15,7 @@ import 'package:vtys_kalite/utilities/style.dart';
 class LoginPage extends StatelessWidget {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
+  bool isCheckboxTrue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +69,7 @@ class LoginPage extends StatelessWidget {
                 controller: _passwordController,
                 label: "Password",
                 hint: "******",
+                obscureBool: true,
               ),
               const SizedBox(height: 15),
               Row(
@@ -74,10 +77,7 @@ class LoginPage extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Checkbox(
-                        value: true,
-                        onChanged: (val) {},
-                      ),
+                      CustomCheckbox(),
                       const CustomText(
                         text: "Remember Me",
                       ),
@@ -157,8 +157,12 @@ class LoginPage extends StatelessWidget {
       Statics.instance.username = _usernameController.text;
       //////////7
     } */
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("username", _usernameController.text);
-    Get.offAllNamed(rootRoute);
+    if (isCheckboxTrue) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString("username", _usernameController.text);
+      Get.offAllNamed(rootRoute);
+    } else {
+     Get.offAllNamed(rootRoute);
+    }
   }
 }

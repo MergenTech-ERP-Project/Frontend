@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/main.dart';
+import 'package:vtys_kalite/routing/routes.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 AppBar topNavigationBar(context, key) => AppBar(
@@ -74,11 +77,7 @@ AppBar topNavigationBar(context, key) => AppBar(
               ),
             ],
           ),
-          Container(
-            width: 1,
-            height: 22,
-            color: lightGreyColor
-          ),
+          Container(width: 1, height: 22, color: lightGreyColor),
           const SizedBox(width: 24),
           Visibility(
             visible: !ResponsiveWidget.isSmallScreen(context),
@@ -102,8 +101,12 @@ AppBar topNavigationBar(context, key) => AppBar(
               margin: const EdgeInsets.all(2),
               child: CircleAvatar(
                 backgroundColor: lightColor,
-                child: Icon(
-                  Icons.person_outline,
+                child: IconButton(
+                  icon: const Icon(Icons.person_outline),
+                  onPressed: () {
+                    menuController.changeActiveItem(employeesPageRoute);
+                    Get.offAllNamed(loginPageRoute);
+                  },
                   color: darkColor,
                 ),
               ),

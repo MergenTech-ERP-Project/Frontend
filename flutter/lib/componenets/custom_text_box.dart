@@ -7,7 +7,7 @@ class CustomTextBox extends StatefulWidget {
   final String? Function(String?)? validator;
   final String? title, label, hint;
   final Icon? decorationIcon;
-  final bool? obscureText, readOnly;
+  final bool? obscureBool, readOnly;
   final bool? borderless;
   final void Function(String)? onTextChanged;
   final double customFontSize;
@@ -19,7 +19,7 @@ class CustomTextBox extends StatefulWidget {
     this.label,
     this.hint,
     this.decorationIcon,
-    this.obscureText = false,
+    this.obscureBool = false,
     this.readOnly = false,
     this.validator,
     this.onTextChanged,
@@ -40,7 +40,7 @@ class _CustomTextBoxState extends State<CustomTextBox> {
 
   @override
   void initState() {
-    confirmObscured = widget.obscureText!;
+    confirmObscured = widget.obscureBool!;
     super.initState();
   }
 
@@ -61,7 +61,7 @@ class _CustomTextBoxState extends State<CustomTextBox> {
         filled: true,
         fillColor: widget.fillcolor ?? whiteColor,
         prefixIcon: widget.decorationIcon,
-        suffixIcon: (widget.obscureText!)
+        suffixIcon: (widget.obscureBool!)
             ? IconButton(
                 onPressed: () {
                   setState(() {
