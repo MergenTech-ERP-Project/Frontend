@@ -12,14 +12,15 @@ class ActivityController extends GetxController {
 
   @override
   void onInit() {
-    fetchActivities(user.id);
+    fetchActivities();
     super.onInit();
   }
 
-  void fetchActivities(int userId) async {
+  void fetchActivities() async {
+     ///TODO: (inşallah) int userId fetchActivitiesByUser
     try {
       isLoading(true);
-      var activities = await ActivityRemoteServices.fetchActivitiesByUser(userId);
+      var activities = await ActivityRemoteServices.fetchActivities();
       if (activities != null) {
         activityList.assignAll(activities);
       }
@@ -62,7 +63,7 @@ class ActivityController extends GetxController {
             organizator: organizator,
           ).toJson())
           .toString());
-      fetchActivities(user.id);
+      fetchActivities();
       return response;
     } finally {
       isLoading(false);
@@ -80,7 +81,7 @@ class ActivityController extends GetxController {
           break;
         }
       }
-      fetchActivities(user.id);
+      fetchActivities();
       return response;
     } finally {
       isLoading(false);
