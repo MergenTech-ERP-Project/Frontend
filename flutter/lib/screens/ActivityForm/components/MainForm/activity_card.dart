@@ -62,7 +62,8 @@ class _ActivityCardState extends State<ActivityCard> {
                   ),
                 ),
                 const Expanded(flex: 1, child: Text("")),
-                Flexible(
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
                   child: CustomText(
                     text: widget.activity.name,
                     size: 24,
