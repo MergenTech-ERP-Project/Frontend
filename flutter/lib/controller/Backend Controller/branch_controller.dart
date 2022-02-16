@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
@@ -27,10 +29,23 @@ class BranchController extends GetxController {
     }
   }
 
-  Future<int> fetchBranch(String _branch_name) async {
+   void fetchBranchesById(int company_id) async {
     try {
       isLoading(true);
-      var branch = await BranchRemoteServices.fetchBranch(_branch_name);
+      var branches = await BranchRemoteServices.fetchBranchesById(company_id);
+      if (branches != null) {
+        branchList.removeRange(0, branchList.length);
+        branchList.assignAll(branches);
+      }
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<int> fetchBranchByCompanyAndBranchName(int company_id, String _branch_name) async {
+    try {
+      isLoading(true);
+      var branch = await BranchRemoteServices.fetchBranch(company_id, _branch_name);
       print("fetch Branch: " + branch.toString());
       return branch;
     } finally {

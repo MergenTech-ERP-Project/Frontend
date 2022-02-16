@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -29,7 +31,7 @@ class ActivityRemoteServices {
 
   static Future<List<Activity>?> fetchActivitiesByUser(int userId) async {
     var response = await http.get(
-      Uri.parse(serviceHttp + '/activity/activities'),
+      Uri.parse(serviceHttp + '/activity/activities/$userId'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',

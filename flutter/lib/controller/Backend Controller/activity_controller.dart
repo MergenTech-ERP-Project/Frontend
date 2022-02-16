@@ -1,10 +1,9 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:vtys_kalite/models/active_to_user.dart';
+import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/models/user.dart';
-import 'package:vtys_kalite/services/active_to_user_remote_services.dart';
 import 'package:vtys_kalite/services/activity_remote_services.dart';
 
 class ActivityController extends GetxController {
@@ -13,14 +12,14 @@ class ActivityController extends GetxController {
 
   @override
   void onInit() {
-    fetchActivities();
+    fetchActivities(user.id);
     super.onInit();
   }
 
-  void fetchActivities() async {
+  void fetchActivities(int userId) async {
     try {
       isLoading(true);
-      var activities = await ActivityRemoteServices.fetchActivities();
+      var activities = await ActivityRemoteServices.fetchActivitiesByUser(userId);
       if (activities != null) {
         activityList.assignAll(activities);
       }
@@ -29,7 +28,7 @@ class ActivityController extends GetxController {
     }
   }
 
-  Future<int> fetchActivity(String name, String organizator) async {
+  Future<int> fetchActivityByNameAndOrganizator(String name, String organizator) async {
     try {
       isLoading(true);
       var activity =
@@ -50,26 +49,20 @@ class ActivityController extends GetxController {
     }
   }
 
-  Future<String?> postActivity(String name, String place, String datetime, String organizator, List<User> selectedUsers) async {
+  Future<String?> postActivity(String name, String place, String datetime,
+      String organizator, List<User> selectedUsers) async {
     try {
       isLoading(true);
-      var response = await ActivityRemoteServices.postActivity(json.encode(Activity(
-          id: 0,
-          name: name,
-          datetime: datetime,
-          place: place,
-          organizator: organizator,
+      var response = await ActivityRemoteServices.postActivity(json
+          .encode(Activity(
+            id: 0,
+            name: name,
+            datetime: datetime,
+            place: place,
+            organizator: organizator,
           ).toJson())
           .toString());
-      fetchActivities();
-      /* int activityId = await ActivityRemoteServices.fetchActivity(name, organizator);
-      for(User user in selectedUsers){
-        await ActiveToUserRemoteServices.postActiveToUser(json.encode(ActiveToUser(
-          id: 0,
-          activityId: activityId,
-          userId: user.id,
-        ).toJson()).toString());
-      } */
+      fetchActivities(user.id);
       return response;
     } finally {
       isLoading(false);
@@ -81,13 +74,13 @@ class ActivityController extends GetxController {
       isLoading(true);
       var response = "Failed!";
 
-      for(Activity activity in activityList) {
-        if(activity.name == name && activity.organizator == organizator) {
-          response =  await ActivityRemoteServices.deleteActivity(activity.id);
+      for (Activity activity in activityList) {
+        if (activity.name == name && activity.organizator == organizator) {
+          response = await ActivityRemoteServices.deleteActivity(activity.id);
           break;
         }
       }
-      fetchActivities();
+      fetchActivities(user.id);
       return response;
     } finally {
       isLoading(false);

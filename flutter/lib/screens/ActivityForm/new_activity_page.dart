@@ -4,10 +4,9 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/NewActivity/new_activity_initial_page.dart';
-import 'package:vtys_kalite/screens/ActivityForm/components/NewActivity/new_activity_select_users_page.dart';
 
 class NewActivityPage extends StatefulWidget {
-  static String routeName = '/NewActivityPage';
+ 
 
   NewActivityPage({Key? key}) : super(key: key);
 
@@ -18,7 +17,6 @@ class NewActivityPage extends StatefulWidget {
 
 
 class _NewActivityPageState extends State<NewActivityPage> {
-  //final PageController pageController = PageController();
   @override
   Widget build(BuildContext context) {    
     return Center(
@@ -37,25 +35,3 @@ class _NewActivityPageState extends State<NewActivityPage> {
     );
   }
 }
-
-/* pageController.nextPage(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.decelerate,
-                  ); */
-
-/* PageView(
-                controller: pageController,
-                scrollDirection: Axis.horizontal,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  ////////////
-                  NewActivitySelectUsersPage(
-                    onPreviousButtonClick: () {
-                      pageController.previousPage(
-                        duration: const Duration(milliseconds: 100),
-                        curve: Curves.decelerate,
-                      );
-                    },
-                  ),
-                ],
-              ) */

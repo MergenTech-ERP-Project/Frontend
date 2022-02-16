@@ -106,13 +106,14 @@ class SignUpPage extends StatelessWidget {
   }
 
   signUpPage(context) async {
-    int id = await userController.fetchUserByNameAndPassword(
-        _usernameController.text, _passwordController.text);
+    int id = await userController.fetchUserByName(
+        _usernameController.text);
     if (id != -1) {
       showDialog(
         context: context,
         builder: (_) => CustomAlertDialog(
           titleWidget: CustomText(
+            textAlign: TextAlign.center,
             text: _usernameController.text + " Zaten Kayıtlı",
           ),
           bodyWidget: SingleChildScrollView(

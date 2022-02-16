@@ -122,10 +122,12 @@ class LoginPage extends StatelessWidget {
         builder: (_) => CustomAlertDialog(
           titleWidget: _usernameController.text != ""
               ? CustomText(
+                  textAlign: TextAlign.center,
                   text: _usernameController.text +
                       " için yanlış kullanıcı adı veya şifre",
                 )
               : const CustomText(
+                  textAlign: TextAlign.center,
                   text: "Kullanıcı adı veya şifre boş bırakılamaz.",
                 ),
           bodyWidget: SingleChildScrollView(
