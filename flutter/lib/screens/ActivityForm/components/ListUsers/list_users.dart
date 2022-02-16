@@ -22,7 +22,6 @@ class _ListUsersState extends State<ListUsers> {
   ///init state get selected users
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     widget.users.addAll(userController.userList);
   }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
-import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/models/user.dart';
@@ -40,39 +39,27 @@ class _ActivityEvaluationBodyState extends State<ActivityEvaluationBody> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Stack(
-                      children: [
-                        Container(
-                          color: whiteColor,
-                          height: 24,
-                          child: CustomText(
-                            text: "Username: " + widget.user.name,
-                            color: blackColor,
-                            size: 18,
-                          ),
-                        ),
-                        const Positioned(
-                          bottom: 0,
-                          child: Divider(),
-                        ),
-                      ],
+                    Container(
+                      color: lightColor,
+                      height: 24,
+                      child: CustomText(
+                        text: "Username: " + widget.user.name,
+                        color: blackColor,
+                        size: 18,
+                      ),
                     ),
-                    Stack(
-                      children: [
-                        Container(
-                          color: whiteColor,
-                          height: 24,
-                          child: CustomText(
-                            text: "Organizer: " + widget.activity.organizator,
-                            color: blackColor,
-                            size: 18,
-                          ),
-                        ),
-                        const Positioned(
-                          bottom: 0,
-                          child: Divider(),
-                        ),
-                      ],
+                    Container(
+                      color: lightColor,
+                      height: 24,
+                      child: CustomText(
+                        text: "Organizer: " + widget.activity.organizator,
+                        color: blackColor,
+                        size: 18,
+                      ),
+                    ),
+                    const Positioned(
+                      bottom: 0,
+                      child: Divider(),
                     ),
                     evaluationContainer(),
                     const SizedBox(height: 20),
@@ -90,6 +77,7 @@ class _ActivityEvaluationBodyState extends State<ActivityEvaluationBody> {
 
   CustomButton saveCustomButton(BuildContext context) {
     return CustomButton(
+      width: double.infinity,
       title: "Save",
       pressAction: () => setState(
         () {
@@ -105,7 +93,7 @@ class _ActivityEvaluationBodyState extends State<ActivityEvaluationBody> {
 
   Widget evaluationContainer() {
     return SizedBox(
-      height: 200,
+      height: 150,
       child: TextFormField(
         controller: widget._evaluationController,
         textAlign: TextAlign.start,

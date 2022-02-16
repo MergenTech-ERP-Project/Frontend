@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
-import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/ListUsers/list_users.dart';
 
@@ -45,7 +44,7 @@ class _NewActivitySelectUsersPageState
                 child: CustomButton(
                   title: "Create",
                   pressAction: () {
-                    //active to user add selected user list
+                    ///active to user add selected user list
                     Get.offAllNamed(rootRoute);
                   },
                 ),

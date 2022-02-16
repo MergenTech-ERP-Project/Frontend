@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/main.dart';
-import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/activity_card.dart';
 import 'package:vtys_kalite/screens/ActivityForm/new_activity_page.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -78,10 +77,11 @@ class _MyActivitiesState extends State<MyActivities> {
         );
       },
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 300,
-          childAspectRatio: 1,
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 20),
+        maxCrossAxisExtent: 300,
+        childAspectRatio: 1,
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20,
+      ),
     );
   }
 

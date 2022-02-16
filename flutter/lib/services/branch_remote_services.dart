@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -10,7 +12,7 @@ class BranchRemoteServices {
 
   static Future<List<Branch>?> fetchBranches() async {
     var response = await http.get(Uri.parse(
-       serviceHttp + '/branch/branches'));
+       serviceHttp + '/branch/branches/'));
     if (response.statusCode == 200) {
       var jsonString = response.body;
       return branchFromJson(jsonString);
@@ -19,15 +21,26 @@ class BranchRemoteServices {
     }
   }
 
-  static Future<int> fetchBranch(String _branch_name) async {
+  static Future<List<Branch>?> fetchBranchesById(int company_id) async {
     var response = await http.get(Uri.parse(
-        serviceHttp + '/branch/branches/$_branch_name'));
+       serviceHttp + '/branch/branches/$company_id'));
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+      return branchFromJson(jsonString);
+    } else {
+      return null;
+    }
+  }
+
+  static Future<int> fetchBranch(int company_id, String branch_name) async {
+    var response = await http.get(Uri.parse(
+        serviceHttp + '/branch/$company_id/$branch_name'));
     int branchId = -1;
     if (response.statusCode == 200) {
       var jsonString = response.body;
       List<Branch> branches = branchFromJson(jsonString);
       for (Branch branch in branches) {
-        if (branch.branch_name == _branch_name) {
+        if (branch.branch_name == branch_name) {
           branchId = branches.indexOf(branch);
           print(branchId);
           break;

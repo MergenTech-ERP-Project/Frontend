@@ -111,33 +111,3 @@ class _ActivityCardState extends State<ActivityCard> {
     );
   }
 }
-
-/* Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              children: [
-                InkWell(
-                  child: const Icon(Icons.delete, color: Colors.red),
-                  onTap: () {
-                    setState(() {
-                      activityController.deleteActivity(
-                          widget.activity.name, widget.activity.organizator);
-                    });
-                  },
-                ),
-                Visibility(
-                  visible: widget.activityEvaluationId != -1,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
-                      Icon(Icons.check, color: Colors.green),
-                      CustomText(
-                        text: " Answered",
-                        color: Colors.green,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ), */
