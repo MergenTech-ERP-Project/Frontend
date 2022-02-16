@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
-import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabGenelFirstCard extends StatelessWidget {
   @override
@@ -9,14 +8,8 @@ class TabGenelFirstCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-            flex: 1,
-            child: firstCardImageNameActive(),
-          ),
-          Expanded(
-            flex: 1,
-            child: firstCardProfileAbout(),
-          ),
+          firstCardImageNameActive(),
+          firstCardProfileAbout(),
         ],
       ),
     );

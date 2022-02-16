@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_diger_bilgiler.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_genel.dart';
@@ -39,7 +40,9 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
             tabs: [
               Tab(child: CustomText(text: 'Genel', color: lightColor)),
               Tab(child: CustomText(text: 'Kariyer', color: lightColor)),
-              Tab(child:CustomText(text: 'Kişisel Bilgiler', color: lightColor)),
+              Tab(
+                  child:
+                      CustomText(text: 'Kişisel Bilgiler', color: lightColor)),
               Tab(child: CustomText(text: 'Diğer Bilgiler', color: lightColor)),
               Tab(child: CustomText(text: 'İzin', color: lightColor)),
               Tab(child: CustomText(text: 'Ödemeler', color: lightColor)),
@@ -79,9 +82,14 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
                 height: 60,
                 child: Row(
                   children: [
-                    const Expanded(
-                      flex: 3,
-                      child: Text(""),
+                    Visibility(
+                      visible: ResponsiveWidget.isSmallScreen(context)
+                          ? false
+                          : true,
+                      child: const Expanded(
+                        flex: 3,
+                        child: Text(""),
+                      ),
                     ),
                     Expanded(
                       child: Visibility(

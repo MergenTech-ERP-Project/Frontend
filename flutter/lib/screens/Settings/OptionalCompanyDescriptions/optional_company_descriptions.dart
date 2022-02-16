@@ -38,9 +38,6 @@ class _OptionalCompanyDescriptionsState
 
   ScrollController controller = ScrollController();
 
-  //const EdgeInsets.only(top: 50, left: 8, right: 8)
-  //: const EdgeInsets.only(top: 80, left: 40, right: 60),
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -84,8 +81,8 @@ class _OptionalCompanyDescriptionsState
                   children: [
                     const CustomText(text: "Unvan", weight: FontWeight.bold),
                     CustomButton(
-                      width: 125,
-                      height: 20,
+                      width: 150,
+                      height: 30,
                       title: "Yeni Ekle",
                       pressAction: () {},
                     ),
@@ -124,8 +121,8 @@ class _OptionalCompanyDescriptionsState
                         text: "Departman", weight: FontWeight.bold),
                     CustomButton(
                       title: "Yeni Ekle",
-                      width: 125,
-                      height: 20,
+                      width: 150,
+                      height: 30,
                       pressAction: () {},
                     ),
                   ],
@@ -161,8 +158,8 @@ class _OptionalCompanyDescriptionsState
                   children: [
                     const CustomText(text: "Şube", weight: FontWeight.bold),
                     CustomButton(
-                        width: 125,
-                        height: 20,
+                        width: 150,
+                        height: 30,
                         leftIcon: Icons.add,
                         title: "Yeni Ekle",
                         pressAction: () async {
@@ -203,8 +200,8 @@ class _OptionalCompanyDescriptionsState
                 children: [
                   const CustomText(text: "Şirket", weight: FontWeight.bold),
                   CustomButton(
-                      width: 125,
-                      height: 20,
+                      width: 150,
+                      height: 30,
                       leftIcon: Icons.add,
                       title: "Yeni Ekle",
                       pressAction: () async {
