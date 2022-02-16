@@ -67,19 +67,14 @@ class _OptionalCompanySirketState extends State<OptionalCompanySirket> {
                                       index == 0 ? "Çalışan Sayısı" : "0")),
                             ),
                             index == 0
-                                ? Row(
-                                    children: [
-                                      RightIconButton(
-                                        icon:
-                                            Icon(Icons.edit, color: whiteColor),
-                                        function: () {},
-                                      ),
-                                      RightIconButton(
-                                        icon: Icon(Icons.delete,
-                                            color: whiteColor),
-                                        function: () {},
-                                      ),
-                                    ],
+                                ? Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.delete, color: whiteColor),
+                                        Icon(Icons.delete, color: whiteColor),
+                                      ],
+                                    ),
                                   )
                                 : Row(
                                     children: [

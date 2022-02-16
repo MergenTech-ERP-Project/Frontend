@@ -8,6 +8,7 @@ import 'package:vtys_kalite/componenets/custom_checkbox.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
+import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -74,18 +75,7 @@ class LoginPage extends StatelessWidget {
                   obscureBool: true,
                 ),
                 const SizedBox(height: 15),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomCheckbox(
-                      text: "Remember Me",
-                    ),
-                    CustomText(
-                      text: "Forgot Password",
-                      color: activeColor,
-                    ),
-                  ],
-                ),
+                actionBar(context),
                 const SizedBox(height: 15),
                 CustomButton(
                   width: double.infinity,
@@ -111,6 +101,43 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget actionBar(context) {
+    return ResponsiveWidget.isLargeScreen(context)
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CustomCheckbox(
+                text: "Remember Me",
+              ),
+              CustomText(
+                text: "Forgot Password",
+                color: activeColor,
+              ),
+            ],
+          )
+        : Column(
+            children: [
+              CustomCheckbox(
+                text: "Remember Me",
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: CustomText(
+                      text: "Forgot Password",
+                      color: activeColor,
+                    ),
+                  ),
+                  const Expanded(
+                    child: SizedBox(),
+                  )
+                ],
+              ),
+            ],
+          );
   }
 
   loginButton(context) async {
