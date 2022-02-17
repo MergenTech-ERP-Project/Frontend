@@ -12,8 +12,6 @@ import 'package:vtys_kalite/screens/AddNewEmployee/models/odeme.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabKariyer extends StatefulWidget {
-  //enum
-
   List<String> positionHeaders = [
     'Başlangıç',
     'Bitiş',
@@ -69,12 +67,14 @@ class _TabKariyerState extends State<TabKariyer> {
   TextEditingController controllerUnit = TextEditingController();
   TextEditingController controllerPaymentScreenInSalary =
       TextEditingController();
+
   DateTime positionDateTimeBaslangic = DateTime.now();
   DateTime positionDateTimeBitis = DateTime.now();
-  bool asgariUcretSwitch = true;
-  bool NetSwitch = true;
-  bool agiDahilSwitch = true;
   DateTime gecerlilikBaslangic = DateTime.now();
+
+  bool asgariUcretSwitch = true;
+  bool netSwitch = true;
+  bool agiDahilSwitch = true;
 
   @override
   Widget build(BuildContext context) {
@@ -410,7 +410,7 @@ class _TabKariyerState extends State<TabKariyer> {
                             ),
                             Expanded(
                               child: CustomSwitch(
-                                switchValue: NetSwitch,
+                                switchValue: netSwitch,
                                 text: "Net",
                               ),
                             ),
@@ -563,19 +563,21 @@ class _TabKariyerState extends State<TabKariyer> {
       child: Row(
         children: [
           Expanded(
-            child: Icon(iconData),
-          ),
-          Expanded(
-            flex: 10,
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: CustomText(
-                text: text,
-              ),
+            flex: 1,
+            child: Row(
+              children: [
+                Icon(iconData),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: CustomText(
+                    text: text,
+                  ),
+                ),
+              ],
             ),
           ),
           Expanded(
-            flex: 2,
+            flex: 1,
             child: CustomButton(
               title: buttonText,
               pressAction: onClick,
