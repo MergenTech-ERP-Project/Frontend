@@ -7,6 +7,7 @@ import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_diger_bilgiler.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_genel.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer_small.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kisisel_bilgiler.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
@@ -60,14 +61,17 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
             ],
           ),
         ),
-        body: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
                 child: TabBarView(
                   children: [
                     const TabGenel(),
-                    TabKariyer(),
+                    ResponsiveWidget(
+                        largeScreen: TabKariyer(),
+                        smallScreen: TabKariyerSmall()),
                     TabPersonalInformation(),
                     TabAnotherInformation(),
                     const Center(child: CustomText(text: "4")),
@@ -78,8 +82,14 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
                   ],
                 ),
               ),
-              Container(
-                height: 60,
+            ),
+            Positioned(
+              right: 0,
+              left: 0,
+              bottom: 0,
+              height: 50,
+              child: Container(
+                color: lightColor,
                 child: Row(
                   children: [
                     Visibility(
@@ -123,8 +133,8 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

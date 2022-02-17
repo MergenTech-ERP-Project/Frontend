@@ -5,7 +5,6 @@ import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
-import 'package:vtys_kalite/utilities/style.dart';
 
 class TabGenelSecondCardSmall extends StatelessWidget {
   TextEditingController controllerName = TextEditingController();
@@ -33,6 +32,7 @@ class TabGenelSecondCardSmall extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
+        const SizedBox(height: 20),
         const Padding(
           padding: EdgeInsets.only(top: 8.0),
           child: CustomText(
@@ -137,6 +137,7 @@ class TabGenelSecondCardSmall extends StatelessWidget {
             ),
           ],
         ),
+        const SizedBox(height: 500)
       ],
     );
   }
