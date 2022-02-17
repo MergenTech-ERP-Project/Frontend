@@ -16,7 +16,9 @@ class _ActivityListSmallState extends State<ActivityListSmall> {
       itemCount: activityController.activityList.length + 1,
       itemBuilder: (context, index) {
         if (index == 0) {
-          return const NewActivityButton(height: 80);
+          return NewActivityButton(
+            height: 80,
+          );
         }
         return FutureBuilder(
           future: activityEvaluationController.fetchActivityEvaluation(

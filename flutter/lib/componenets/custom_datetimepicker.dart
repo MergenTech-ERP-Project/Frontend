@@ -26,29 +26,31 @@ class CustomDateTimePicker extends StatefulWidget {
 class _CustomDateTimePickerState extends State<CustomDateTimePicker> {
   @override
   Widget build(BuildContext context) {
-    return DateTimePicker(
-      type: DateTimePickerType.dateTime,
-      initialValue: dateTimeFormat.format(DateTime.now()),
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(const Duration(days: 1000)),
-      decoration: InputDecoration(
-        suffixIcon: widget.suffixWidget,
-        labelStyle: TextStyle(
-          color: blackColor ,
-          fontFamily: 'Comfortaa',
-          fontSize: 16,
+    return Container(
+      color: widget.fillcolor ?? whiteColor,
+      child: DateTimePicker(
+        type: DateTimePickerType.dateTime,
+        initialValue: dateTimeFormat.format(DateTime.now()),
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime.now().add(const Duration(days: 1000)),
+        decoration: InputDecoration(
+          suffixIcon: widget.suffixWidget,
+          labelStyle: TextStyle(
+            color: blackColor,
+            fontFamily: 'Comfortaa',
+            fontSize: 16,
+          ),
+          labelText: widget.labelText,
+          border: !widget.borderless!
+              ? OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                )
+              : null,
         ),
-        labelText: widget.labelText,
-        fillColor: widget.fillcolor ?? whiteColor,
-        border: !widget.borderless!
-            ? OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
-              )
-            : null,
+        onChanged: widget.onChanged,
+        onSaved: widget.onChanged,
       ),
-      onChanged: widget.onChanged,
-      onSaved: widget.onChanged,
     );
   }
 }
