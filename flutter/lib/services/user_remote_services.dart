@@ -46,7 +46,7 @@ class UserRemoteServices {
     return userID;
   }
 
-  static Future<String> addNewUser(String json) async {
+  static Future<int> addNewUser(String json) async {
     var response = await http
         .post(Uri.parse(serviceHttp + '/user/post'),
             headers: <String, String>{
@@ -59,9 +59,7 @@ class UserRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return response.statusCode == 200
-        ? "Success: User"
-        : "Error: User ${response.statusCode}";
+    return response.statusCode;
   }
 
   static Future<String> updateUser(int id, String json) async {

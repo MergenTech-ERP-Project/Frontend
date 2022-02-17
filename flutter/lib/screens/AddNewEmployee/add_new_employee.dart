@@ -9,6 +9,7 @@ import 'package:vtys_kalite/screens/AddNewEmployee/tab_genel.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer_small.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kisisel_bilgiler.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/tab_kisisel_bilgiler_small.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class AddNewEmployee extends StatefulWidget {
@@ -63,25 +64,23 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
         ),
         body: Stack(
           children: [
-            SingleChildScrollView(
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                child: TabBarView(
-                  children: [
-                    const TabGenel(),
-                    ResponsiveWidget(
-                        largeScreen: TabKariyer(),
-                        smallScreen: TabKariyerSmall()),
-                    TabPersonalInformation(),
-                    TabAnotherInformation(),
-                    const Center(child: CustomText(text: "4")),
-                    const Center(child: CustomText(text: "5")),
-                    const Center(child: CustomText(text: "6")),
-                    const Center(child: CustomText(text: "7")),
-                    const Center(child: CustomText(text: "8")),
-                  ],
+            TabBarView(
+              children: [
+                const TabGenel(),
+                ResponsiveWidget(
+                    largeScreen: TabKariyer(),
+                    smallScreen: TabKariyerSmall()),
+                ResponsiveWidget(
+                  largeScreen: TabPersonalInformation(),
+                  smallScreen: TabPersonalInformationSmall(),
                 ),
-              ),
+                TabAnotherInformation(),
+                const Center(child: CustomText(text: "4")),
+                const Center(child: CustomText(text: "5")),
+                const Center(child: CustomText(text: "6")),
+                const Center(child: CustomText(text: "7")),
+                const Center(child: CustomText(text: "8")),
+              ],
             ),
             Positioned(
               right: 0,
