@@ -106,28 +106,35 @@ class SignUpPage extends StatelessWidget {
   }
 
   signUpPage(context) async {
-    int id = await userController.fetchUserByName(
-        _usernameController.text);
-    if (id != -1) {
+    int? response = await userController.addNewUser(
+        _usernameController.text, _passwordController.text);
+
+    if (response != 200) {
       showDialog(
         context: context,
         builder: (_) => CustomAlertDialog(
           titleWidget: CustomText(
             textAlign: TextAlign.center,
-            text: _usernameController.text + " Zaten Kayıtlı",
+            text: response == 1000
+                ? _usernameController.text + " Zaten Kayıtlı"
+                : "Bağlantınızı kontrol edin.",
           ),
           bodyWidget: SingleChildScrollView(
             child: Column(
               children: [
-                const CustomText(
-                  text:
-                      "Girdiğiniz kullanıcı adı başka bir kullanıcı tarafından"
-                      "kullanılmaktadır.\n Lütfen tekrar deneyiniz.",
+                Visibility(
+                  visible: response == 1000,
+                  child: const CustomText(
+                    text:
+                        "Girdiğiniz kullanıcı adı başka bir kullanıcı tarafından"
+                        "kullanılmaktadır.\n Lütfen tekrar deneyiniz.",
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 CustomButton(
+                  width: double.infinity,
                   title: "Tekrar Dene",
                   pressAction: () {
                     Get.back();
@@ -141,9 +148,6 @@ class SignUpPage extends StatelessWidget {
       );
       return;
     }
-    String? response = await userController.addNewUser(
-        _usernameController.text, _passwordController.text);
-    printInfo(info: response ?? "Error Sign Up");
     Get.offAllNamed(loginPageRoute);
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/state_manager.dart';
@@ -8,6 +10,7 @@ import 'package:vtys_kalite/componenets/custom_scrollableColumn.dart';
 import 'package:vtys_kalite/componenets/custom_switch.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/models/odeme.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
@@ -525,8 +528,8 @@ class _TabKariyerState extends State<TabKariyer> {
         CustomScrollableColumn(
           scrollController: scrollController,
           children: [
-            buildRows(widget.salaryHeaders, Colors.white, 320),
-            buildRows(widget.salaryChildren1, Colors.white, 320),
+            buildRows(widget.salaryHeaders, Colors.white, 350),
+            buildRows(widget.salaryChildren1, Colors.white, 350),
           ],
         ),
       ],
@@ -563,13 +566,14 @@ class _TabKariyerState extends State<TabKariyer> {
       child: Row(
         children: [
           Expanded(
-            flex: 1,
+            flex: ResponsiveWidget.isLargeScreen(context) ? 4 : 1,
             child: Row(
               children: [
-                Icon(iconData),
+                Icon(iconData, size: 22),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: CustomText(
+                    size: 20,
                     text: text,
                   ),
                 ),

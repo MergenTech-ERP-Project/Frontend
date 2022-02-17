@@ -145,6 +145,7 @@ class LoginPage extends StatelessWidget {
         _usernameController.text, _passwordController.text);
     if (id == -1) {
       showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (_) => CustomAlertDialog(
           titleWidget: _usernameController.text != ""
@@ -168,6 +169,7 @@ class LoginPage extends StatelessWidget {
                   height: 10,
                 ),
                 CustomButton(
+                  width: double.infinity,
                   title: "Tekrar Dene",
                   pressAction: () {
                     Get.back();

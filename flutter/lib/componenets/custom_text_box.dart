@@ -12,9 +12,10 @@ class CustomTextBox extends StatefulWidget {
   final void Function(String)? onTextChanged;
   final double customFontSize;
   final Color? fillcolor, textColor;
-  final int? maxLines;
+  final int? maxLines, minLines;
+  final TextInputType? keyboardType;
 
-  CustomTextBox({
+  const CustomTextBox({
     Key? key,
     this.title,
     this.label,
@@ -31,6 +32,8 @@ class CustomTextBox extends StatefulWidget {
     this.fillcolor,
     this.suffixWidget = const SizedBox(),
     this.maxLines,
+    this.minLines,
+    this.keyboardType,
   }) : super(key: key);
 
   @override
@@ -49,7 +52,11 @@ class _CustomTextBoxState extends State<CustomTextBox> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      //autofocus: true,
+      //focusNode: FocusNode(),
+      keyboardType: widget.keyboardType ?? TextInputType.multiline,
       maxLines: widget.maxLines ?? 1,
+      minLines: widget.minLines,
       controller: widget.controller,
       readOnly: widget.readOnly!,
       validator: widget.validator,

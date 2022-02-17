@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:get/get.dart';
@@ -50,7 +52,7 @@ class UserController extends GetxController {
     }
   }
 
-  Future<String?> addNewUser(String name, String password) async {
+  Future<int?> addNewUser(String name, String password) async {
     try {
       isLoading(true);
       User newUser = User(
@@ -63,7 +65,7 @@ class UserController extends GetxController {
       var response = await UserRemoteServices.addNewUser(
           json.encode(newUser.toJson()).toString());
       fetchUsers(); //userList.add(newUser);
-      print("post User: " + response);
+      print("post User: " + response.toString());
       return response;
     } finally {
       isLoading(false);
