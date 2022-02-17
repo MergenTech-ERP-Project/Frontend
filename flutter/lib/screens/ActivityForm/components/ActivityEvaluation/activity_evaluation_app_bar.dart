@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
@@ -20,12 +21,15 @@ class ActivityEvaluationAppBar extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Padding(
-        padding: const EdgeInsets.only(left: 20.0),
-        child: CustomText(
-          text: activity.name,
-          color: whiteColor,
-          size: 20,
+      title: Visibility(
+        visible: ResponsiveWidget.isLargeScreen(context),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20.0),
+          child: CustomText(
+            text: activity.name,
+            color: whiteColor,
+            size: 20,
+          ),
         ),
       ),
       backgroundColor: activeColor,

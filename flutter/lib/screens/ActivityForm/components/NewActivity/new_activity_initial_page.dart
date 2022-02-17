@@ -29,71 +29,64 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(
-          flex: 8,
-          child: Center(
-            child: Form(
-              key: widget._newActivityInitialPageForm,
-              child: Column(
-                children: [
-                  buildTextBox(
-                    widget.nameController,
-                    'Name',
-                    Icons.person,
-                  ),
-                  buildTextBox(
-                    widget.placeController,
-                    'Place',
-                    Icons.home,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CustomDateTimePicker(
-                      suffixWidget: const Icon(Icons.calendar_today_outlined),
-                      labelText: "Date",
-                      onChanged: (val) {
-                        if (val != null) {
-                          try {
-                            widget.date = dateTimeFormat.parse(val);
-                          } catch (e) {
-                            debugPrint(e.toString());
-                          }
-                        }
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  buildTextBox(
-                    widget.organizatorController,
-                    'Organizer',
-                    Icons.person,
-                  ),
-                ],
+        Form(
+          key: widget._newActivityInitialPageForm,
+          child: Column(
+            children: [
+              buildTextBox(
+                widget.nameController,
+                'Name',
+                Icons.person,
               ),
-            ),
+              buildTextBox(
+                widget.placeController,
+                'Place',
+                Icons.home,
+              ),
+              buildTextBox(
+                widget.organizatorController,
+                'Organizer',
+                Icons.person,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CustomDateTimePicker(
+                  suffixWidget: const Icon(Icons.calendar_today_outlined),
+                  borderless: true,
+                  labelText: "Date",
+                  onChanged: (val) {
+                    if (val != null) {
+                      try {
+                        widget.date = dateTimeFormat.parse(val);
+                      } catch (e) {
+                        debugPrint(e.toString());
+                      }
+                    }
+                  },
+                ),
+              ),
+              const SizedBox(height: 10),
+            ],
           ),
         ),
-        Expanded(
-          flex: 1,
-          child: CustomButton(
-            width: double.infinity,
-            title: "Create", //next
-            pressAction: () {
-              if (widget._newActivityInitialPageForm.currentState!.validate()) {
-                widget.onNextButtonClick();
-                activityController.postActivity(
-                    widget.nameController.text,
-                    widget.placeController.text,
-                    dateTimeFormat.format(widget.date).toString(),
-                    widget.organizatorController.text, <User>[]);
-                Get.back();
-              }
-            },
-          ),
+        const SizedBox(height: 10),
+        CustomButton(
+          width: double.infinity,
+          title: "Create", //next
+          pressAction: () {
+            if (widget._newActivityInitialPageForm.currentState!.validate()) {
+              widget.onNextButtonClick();
+              activityController.postActivity(
+                  widget.nameController.text,
+                  widget.placeController.text,
+                  dateTimeFormat.format(widget.date).toString(),
+                  widget.organizatorController.text, <User>[]);
+              Get.back();
+            }
+          },
         ),
-        const SizedBox(height: 30),
       ],
     );
   }

@@ -19,7 +19,7 @@ class _ActivityListLargeState extends State<ActivityListLarge> {
       itemCount: activityController.activityList.length + 1,
       itemBuilder: (context, index) {
         if (index == 0) {
-          return const NewActivityButton();
+          return NewActivityButton();
         }
         return FutureBuilder(
           future: activityEvaluationController.fetchActivityEvaluation(
@@ -36,8 +36,8 @@ class _ActivityListLargeState extends State<ActivityListLarge> {
         );
       },
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 300,
-        childAspectRatio: 1,
+        maxCrossAxisExtent: 250,
+        childAspectRatio: 1.2,
         crossAxisSpacing: 20,
         mainAxisSpacing: 20,
       ),

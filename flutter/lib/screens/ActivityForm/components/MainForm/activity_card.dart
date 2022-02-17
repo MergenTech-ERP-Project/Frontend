@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation_page.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -104,9 +105,13 @@ class _ActivityCardState extends State<ActivityCard> {
       onTap: widget.activityEvaluationId == -1
           ? () => setState(() => showDialog(
               context: widget.context,
-              builder: (_) => Dialog(
+              builder: (context) => Dialog(
                     backgroundColor: whiteColor,
-                    child: ActivityEvaluationPage(activity: widget.activity),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width /
+                          (ResponsiveWidget.isLargeScreen(context) ? 2 : 1.1),
+                      child: ActivityEvaluationPage(activity: widget.activity),
+                    ),
                   )))
           : null,
     );
