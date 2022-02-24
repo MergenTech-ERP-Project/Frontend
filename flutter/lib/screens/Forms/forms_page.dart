@@ -7,6 +7,7 @@ class FormsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GridView.builder(
+        padding: const EdgeInsets.all(15),
         itemCount: formsList.length,
         itemBuilder: (context, index) {
           return FormsCard(
