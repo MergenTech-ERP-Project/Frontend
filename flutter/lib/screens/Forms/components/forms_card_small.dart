@@ -77,8 +77,6 @@ class _FormsCardSmallState extends State<FormsCardSmall> {
           ),
           onTap: () {
             setState(() {
-              widget.formsInfo.formsPageOnTap =
-                  !widget.formsInfo.formsPageOnTap;
               showDialog(
                 context: context,
                 builder: (BuildContext context) => Dialog(

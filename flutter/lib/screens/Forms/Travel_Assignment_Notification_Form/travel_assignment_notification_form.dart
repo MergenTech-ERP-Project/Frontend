@@ -1,13 +1,16 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_radiolisttile.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
+import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/screens/Forms/components/text_widget.dart';
+import 'package:vtys_kalite/screens/Forms/forms.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
@@ -59,13 +62,13 @@ class _TravelAssignmentNotificationFormPageState
         padding: const EdgeInsets.all(20),
         children: [
           Container(
-            height: 100,
+            height: ResponsiveWidget.isSmallScreen(context) ? 300 : 150,
             color: activeColor.withOpacity(.4),
             child: Center(
               child: CustomText(
                   color: whiteColor,
-                  text: "Seyahat Görevlendirme / Bildirim Formu",
-                  size: 40,
+                  text: "Seyahat Görevlendirme \n Bildirim Formu",
+                  size: 30,
                   textAlign: TextAlign.center),
             ),
           ),
@@ -165,75 +168,55 @@ class _TravelAssignmentNotificationFormPageState
           ),
           const CustomText(text: "Alınan Avanslar"),
           const SizedBox(height: 15),
-          Row(
-            children: [
-              Expanded(
-                flex: 4,
-                child: CustomDateTimePicker(
-                  suffixWidget: const Icon(Icons.calendar_today_outlined),
-                  labelText: "Tarih",
-                  borderless: true,
-                  onChanged: (val) {
-                    if (val != null) {
-                      print("DateTime picker : " + val);
-                    }
-                    try {
-                      widget.date = dateTimeFormat.parse(val!);
-                    } catch (e) {
-                      print(e.toString());
-                    }
-                  },
-                ),
-              ),
-              const Expanded(flex: 1, child: SizedBox()),
-              Expanded(
-                flex: 4,
-                child: textWidget(
-                  label: "Tutar ( TL )",
-                  textEditingController: widget.tutarTLController,
-                ),
-              ),
-            ],
+          CustomDateTimePicker(
+            suffixWidget: const Icon(Icons.calendar_today_outlined),
+            labelText: "Tarih",
+            borderless: true,
+            onChanged: (val) {
+              if (val != null) {
+                print("DateTime picker : " + val);
+              }
+              try {
+                widget.date = dateTimeFormat.parse(val!);
+              } catch (e) {
+                print(e.toString());
+              }
+            },
           ),
-          Row(
-            children: [
-              Expanded(
-                flex: 4,
-                child: CustomDateTimePicker(
-                  suffixWidget: const Icon(Icons.calendar_today_outlined),
-                  labelText: "Tarih",
-                  borderless: true,
-                  onChanged: (val) {
-                    if (val != null) {
-                      print("DateTime picker : " + val);
-                    }
-                    try {
-                      widget.date2 = dateTimeFormat.parse(val!);
-                    } catch (e) {
-                      print(e.toString());
-                    }
-                  },
-                ),
-              ),
-              const Expanded(flex: 1, child: SizedBox()),
-              Expanded(
-                flex: 4,
-                child: textWidget(
-                  label: "Tutar ( TL )",
-                  textEditingController: widget.tutarTLController2,
-                ),
-              ),
-            ],
+          textWidget(
+            label: "Tutar ( TL )",
+            textEditingController: widget.tutarTLController,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
-              CustomText(text: "A-AVANS TOPLAMI "),
-              CustomText(text: "27091998 TL"),
-            ],
+          CustomDateTimePicker(
+            suffixWidget: const Icon(Icons.calendar_today_outlined),
+            labelText: "Tarih",
+            borderless: true,
+            onChanged: (val) {
+              if (val != null) {
+                print("DateTime picker : " + val);
+              }
+              try {
+                widget.date2 = dateTimeFormat.parse(val!);
+              } catch (e) {
+                print(e.toString());
+              }
+            },
+          ),
+          textWidget(
+            label: "Tutar ( TL )",
+            textEditingController: widget.tutarTLController2,
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: const [
+                CustomText(text: "A-AVANS TOPLAMI "),
+                CustomText(text: "27091998 TL"),
+              ],
+            ),
           ),
           const SizedBox(height: 20),
-          const CustomText(text: "Seyahat Dönüş Bilgileri"),
           CustomTextDivider(
             height: 40,
             thickness: 2,
@@ -254,7 +237,12 @@ class _TravelAssignmentNotificationFormPageState
           const SizedBox(height: 30),
           CustomButton(
             title: "Kaydet",
-            pressAction: () {},
+            pressAction: () {
+              setState(() {
+                Get.back();
+                travelAssignmentNotificationFormInfo.formsPageOnTap = true;
+              });
+            },
           ),
         ],
       ),
