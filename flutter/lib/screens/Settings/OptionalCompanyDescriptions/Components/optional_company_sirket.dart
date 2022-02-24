@@ -27,10 +27,10 @@ class _OptionalCompanySirketState extends State<OptionalCompanySirket> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CustomTextBox(
+        const CustomTextBox(
           borderless: true,
           hint: "Şirket adı giriniz",
-          decorationIcon: const Icon(Icons.search),
+          decorationIcon: Icon(Icons.search),
           fillcolor: Colors.white60,
         ),
         Obx(() {
