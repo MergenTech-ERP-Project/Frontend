@@ -18,7 +18,7 @@ class _ActivityListLargeState extends State<ActivityListLarge> {
           return NewActivityButton();
         }
         return ActivityCard(
-          index: index - 1,
+          activity: activityController.activityList[index - 1],
         );
       },
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(

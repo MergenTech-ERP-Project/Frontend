@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation_page.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class ActivityCardSmall extends StatefulWidget {
-  final double? height;
   final BuildContext context;
+  final double? height;
   final Activity activity;
-  final int activityEvaluationId;
+  int? activityEvaluationId;
 
-  const ActivityCardSmall({
+  ActivityCardSmall({
     Key? key,
     required this.activity,
-    required this.activityEvaluationId,
     required this.context,
     this.height,
   }) : super(key: key);
@@ -24,6 +24,17 @@ class ActivityCardSmall extends StatefulWidget {
 }
 
 class _ActivityCardSmallState extends State<ActivityCardSmall> {
+  void func() async {
+    widget.activityEvaluationId = await activityEvaluationController
+        .fetchActivityEvaluation(widget.activity.id, user.id);
+  }
+
+  @override
+  void initState() {
+    func();
+    super.initState();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -62,7 +73,7 @@ class _ActivityCardSmallState extends State<ActivityCardSmall> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
+                        padding: const EdgeInsets.only(top: 12.0),
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: CustomText(
@@ -74,7 +85,7 @@ class _ActivityCardSmallState extends State<ActivityCardSmall> {
                       ),
                       const Expanded(child: SizedBox()),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
+                        padding: const EdgeInsets.only(bottom: 12.0),
                         child: Row(
                           children: [
                             CustomText(
@@ -82,9 +93,14 @@ class _ActivityCardSmallState extends State<ActivityCardSmall> {
                               size: 16,
                             ),
                             const Expanded(child: SizedBox()),
+                            
+                            const Icon(
+                              Icons.calendar_today_outlined,
+                              size: 12,
+                            ),
                             CustomText(
-                              text: widget.activity.datetime,
-                              size: 16,
+                              text: "  " + widget.activity.datetime,
+                              size: 12,
                             ),
                           ],
                         ),
