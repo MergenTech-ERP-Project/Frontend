@@ -13,7 +13,7 @@ class NewActivityPage extends StatefulWidget {
 
 class _NewActivityPageState extends State<NewActivityPage> {
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return SizedBox(
       width: ResponsiveWidget.isSmallScreen(context) ? width : width / 1.6,
