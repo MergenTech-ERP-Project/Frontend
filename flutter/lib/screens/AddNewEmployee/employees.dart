@@ -6,6 +6,7 @@ import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/departments_enum.dart';
 import 'package:vtys_kalite/routing/routes.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/components/employee_card.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class Employees extends StatefulWidget {
@@ -43,20 +44,8 @@ class _EmployeesState extends State<Employees> {
                             ListView.builder(
                               itemCount: userController.userList.length,
                               itemBuilder: (context, index) {
-                                return Card(
-                                  child: InkWell(
-                                    child: SizedBox(
-                                      height: 60,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 15.0, top: 20),
-                                        child: CustomText(
-                                          text: userController
-                                              .userList[index].name,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                return EmployeeCard(
+                                  user: userController.userList[index],
                                 );
                               },
                             ),

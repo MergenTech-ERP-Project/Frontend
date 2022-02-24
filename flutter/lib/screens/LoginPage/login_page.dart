@@ -183,13 +183,7 @@ class LoginPage extends StatelessWidget {
       );
       return;
     }
-    user.name = _usernameController.text;
-    if (isCheckboxTrue) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString("username", _usernameController.text);
-      Get.offAllNamed(rootRoute);
-    } else {
-      Get.offAllNamed(rootRoute);
-    }
+    authenticationController.login(_usernameController.text);
+    Get.offAllNamed(rootRoute);
   }
 }

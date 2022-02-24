@@ -5,7 +5,7 @@ import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
 import 'package:vtys_kalite/screens/AdminPanel/admin_panel.dart';
 import 'package:vtys_kalite/screens/LoginPage/login_page.dart';
 import 'package:vtys_kalite/screens/SignUp/sign_up.dart';
-import 'package:vtys_kalite/site_layout.dart';
+import 'package:vtys_kalite/screens/splash_view.dart';
 
 List<GetPage> pageList = [
   GetPage(
@@ -18,7 +18,7 @@ List<GetPage> pageList = [
   ),
   GetPage(
     name: rootRoute,
-    page: () => SiteLayout(),
+    page: () => SplashView(),
   ),
   GetPage(
     name: adminPanelPageRoute,

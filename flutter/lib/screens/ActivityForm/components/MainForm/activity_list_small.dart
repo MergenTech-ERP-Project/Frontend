@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/activity_card_small.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/new_activity_button.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -20,19 +19,10 @@ class _ActivityListSmallState extends State<ActivityListSmall> {
             height: 80,
           );
         }
-        return FutureBuilder(
-          future: activityEvaluationController.fetchActivityEvaluation(
-              activityController.activityList[index - 1].id, user.id),
-          builder: (context, snap) {
-            return snap.hasData
-                ? ActivityCardSmall(
-                    context: context,
-                    height: 80,
-                    activity: activityController.activityList[index - 1],
-                    activityEvaluationId: snap.data as int,
-                  )
-                : const SizedBox();
-          },
+        return ActivityCardSmall(
+          context: context,
+          height: 80,
+          activity: activityController.activityList[index - 1],
         );
       },
     );

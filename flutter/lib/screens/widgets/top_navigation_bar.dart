@@ -92,23 +92,26 @@ AppBar topNavigationBar(context, key) => AppBar(
               ],
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(30),
-            ),
+          InkWell(
+            onTap: () {
+              menuController.changeActiveItem(employeesPageRoute);
+              authenticationController.logOut();
+              Get.offAllNamed(loginPageRoute);
+            },
             child: Container(
-              padding: const EdgeInsets.all(2),
-              margin: const EdgeInsets.all(2),
-              child: CircleAvatar(
-                backgroundColor: lightColor,
-                child: IconButton(
-                  icon: const Icon(Icons.person_outline),
-                  onPressed: () {
-                    menuController.changeActiveItem(employeesPageRoute);
-                    Get.offAllNamed(loginPageRoute);
-                  },
-                  color: darkColor,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Container(
+                padding: const EdgeInsets.all(2),
+                margin: const EdgeInsets.all(2),
+                child: CircleAvatar(
+                  backgroundColor: lightColor,
+                  child: CustomText(
+                    color: darkColor,
+                    text: nameLetters(user.name),
+                  ),
                 ),
               ),
             ),

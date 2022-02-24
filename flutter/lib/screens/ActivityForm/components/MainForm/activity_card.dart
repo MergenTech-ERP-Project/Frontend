@@ -8,13 +8,12 @@ import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class ActivityCard extends StatefulWidget {
-  Activity? activity;
+  final Activity activity;
   int? activityEvaluationId;
-  final int index;
 
   ActivityCard({
     Key? key,
-    required this.index,
+    required this.activity,
   }) : super(key: key);
 
   @override
@@ -25,7 +24,7 @@ class _ActivityCardState extends State<ActivityCard> {
   void func() async {
     widget.activityEvaluationId =
         await activityEvaluationController.fetchActivityEvaluation(
-            activityController.activityList[widget.index].id, user.id);
+            widget.activity.id, user.id);
   }
 
   @override
@@ -67,7 +66,7 @@ class _ActivityCardState extends State<ActivityCard> {
                         size: 12,
                       ),
                       CustomText(
-                        text: "  " + widget.activity!.datetime,
+                        text: "  " + widget.activity.datetime,
                         size: 12,
                       ),
                     ],
@@ -77,14 +76,14 @@ class _ActivityCardState extends State<ActivityCard> {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: CustomText(
-                    text: widget.activity!.name,
+                    text: widget.activity.name,
                     size: 24,
                     weight: FontWeight.w400,
                   ),
                 ),
                 const Expanded(flex: 1, child: Text("")),
                 CustomText(
-                  text: widget.activity!.organizator,
+                  text: widget.activity.organizator,
                 ),
                 const Expanded(flex: 1, child: Text("")),
               ],
@@ -105,7 +104,7 @@ class _ActivityCardState extends State<ActivityCard> {
                 onTap: () {
                   setState(() {
                     activityController.deleteActivity(
-                        widget.activity!.name, widget.activity!.organizator);
+                        widget.activity.name, widget.activity.organizator);
                   });
                 },
               ),
@@ -121,7 +120,7 @@ class _ActivityCardState extends State<ActivityCard> {
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width /
                           (ResponsiveWidget.isLargeScreen(context) ? 2 : 1.1),
-                      child: ActivityEvaluationPage(activity: widget.activity!),
+                      child: ActivityEvaluationPage(activity: widget.activity),
                     ),
                   )))
           : null,
