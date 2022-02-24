@@ -8,8 +8,10 @@ import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_radiolisttile.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/models/departments_enum.dart';
 import 'package:vtys_kalite/screens/Forms/components/text_widget.dart';
+import 'package:vtys_kalite/screens/Forms/forms.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
@@ -52,13 +54,13 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
         padding: const EdgeInsets.all(20),
         children: [
           Container(
-            height: 100,
+            height: ResponsiveWidget.isSmallScreen(context) ? 200 : 150,
             color: activeColor.withOpacity(.4),
             child: Center(
               child: CustomText(
                   color: whiteColor,
                   text: "Mesai Dışı Günlük İzlem Formu",
-                  size: 40,
+                  size: 32,
                   textAlign: TextAlign.center),
             ),
           ),
@@ -123,7 +125,10 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
           CustomButton(
             title: "Kaydet",
             pressAction: () {
-              Get.back();
+              setState(() {
+                Get.back();
+                dailyInspectionFormInfo.formsPageOnTap = true;
+              });
             },
           ),
         ],

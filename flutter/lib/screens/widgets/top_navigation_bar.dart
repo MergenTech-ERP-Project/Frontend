@@ -59,8 +59,8 @@ AppBar topNavigationBar(context, key) => AppBar(
                 onPressed: () {},
               ),
               Positioned(
-                top: 7,
-                right: 7,
+                top: ResponsiveWidget.isSmallScreen(context) ? 10 : 7,
+                right: ResponsiveWidget.isSmallScreen(context) ? 10 : 7,
                 child: Container(
                   width: 12,
                   height: 12,

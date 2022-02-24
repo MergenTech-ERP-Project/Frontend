@@ -28,33 +28,30 @@ class _MultipleChoiceRadioListTileState
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: widget.list.length * 40,
-      child: ListView.builder(
-        shrinkWrap: true,
-        //physics: NeverScrollablePhysics(),
-        itemCount: widget.list.length,
-        itemBuilder: (context, index) {
-          return SizedBox(
-            height: 40,
-            child: RadioListTile(
-              value: index,
-              groupValue: widget.groupValue,
-              title: Text(widget.list[index].toString(),
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle1!
-                      .copyWith(color: widget.textColor ?? blackColor)),
-              onChanged: (val) {
-                setState(() {
-                  widget.groupValue = int.parse(val.toString());
-                });
-              },
-              activeColor: activeColor,
-            ),
-          );
-        },
-      ),
+    return ListView.builder(
+      shrinkWrap: true,
+      //physics: NeverScrollablePhysics(),
+      itemCount: widget.list.length,
+      itemBuilder: (context, index) {
+        return SizedBox(
+          height: 50,
+          child: RadioListTile(
+            value: index,
+            groupValue: widget.groupValue,
+            title: Text(widget.list[index].toString(),
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(color: widget.textColor ?? blackColor)),
+            onChanged: (val) {
+              setState(() {
+                widget.groupValue = int.parse(val.toString());
+              });
+            },
+            activeColor: activeColor,
+          ),
+        );
+      },
     );
   }
 }

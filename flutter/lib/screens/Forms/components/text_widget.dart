@@ -19,7 +19,7 @@ class textWidget extends StatelessWidget {
           borderless: true,
           label: label,
           controller: textEditingController,
-          customFontSize: 20,
+          customFontSize: 14,
         ),
         const SizedBox(height: 20),
       ],
