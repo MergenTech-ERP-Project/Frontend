@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/utilities/style.dart';
 
 class MultipleChoiceCustomDropDownItems extends StatefulWidget {
   final List<String> list;
@@ -12,7 +14,7 @@ class MultipleChoiceCustomDropDownItems extends StatefulWidget {
     Key? key,
     required this.list,
     required this.icon,
-    required this.text,
+    this.text = "",
     required this.iconSize,
     required this.isExpandedYes,
     required this.onChanged,
@@ -28,25 +30,27 @@ class _MultipleChoiceCustomDropDownItemsState
   String? valueChoose;
   @override
   Widget build(BuildContext context) {
-    return DropdownButton(
-      hint: Text(widget.text),
-      icon: widget.icon,
-      //Icon(Icons.arrow_drop_down)
-      iconSize: widget.iconSize,
-      isExpanded: widget.isExpandedYes,
-      value: valueChoose,
-      onChanged: (val) {
-        setState(() {
-          valueChoose = val.toString();
-          widget.onChanged(val.toString());
-        });
-      },
-      items: widget.list
-          .map((item) => DropdownMenuItem(
-                value: item,
-                child: Text(item),
-              ))
-          .toList(),
+    return Container(
+      color: whiteColor,
+      child: DropdownButton(
+        hint: CustomText(text: widget.text),
+        icon: widget.icon,
+        iconSize: widget.iconSize,
+        isExpanded: widget.isExpandedYes,
+        value: valueChoose,
+        onChanged: (val) {
+          setState(() {
+            valueChoose = val.toString();
+            widget.onChanged(val.toString());
+          });
+        },
+        items: widget.list
+            .map((item) => DropdownMenuItem(
+                  value: item,
+                  child: Text(item),
+                ))
+            .toList(),
+      ),
     );
   }
 }
