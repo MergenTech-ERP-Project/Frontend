@@ -31,25 +31,25 @@ class _MyActivitiesState extends State<MyActivities> {
           Expanded(
             flex: ResponsiveWidget.isSmallScreen(context) ? 50 : 8,
             child: Obx(
-              () {
-                return activityController.isLoading.value
-                    ? const Center(
-                        child: SizedBox(
-                          height: 100,
-                          width: 100,
-                          child: CircularProgressIndicator(),
-                        ),
-                      )
-                    : ResponsiveWidget(
-                        largeScreen: ActivityListLarge(),
-                        smallScreen: ActivityListSmall(),
-                      );
-              },
+              () => activityController.isLoading.value
+                  ? const Center(
+                      child: SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                  : ResponsiveWidget(
+                      largeScreen: ActivityListLarge(),
+                      smallScreen: ActivityListSmall(),
+                    ),
             ),
           ),
           const Expanded(
             flex: 1,
-            child: CustomText(text: ""),
+            child: CustomText(
+              text: "",
+            ),
           ),
         ],
       ),

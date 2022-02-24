@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
+import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation_page.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class ActivityCard extends StatefulWidget {
-  final BuildContext context;
-  final Activity activity;
-  final int activityEvaluationId;
+  Activity? activity;
+  int? activityEvaluationId;
+  final int index;
 
-  const ActivityCard({
+  ActivityCard({
     Key? key,
-    required this.activity,
-    required this.activityEvaluationId,
-    required this.context,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -23,6 +22,18 @@ class ActivityCard extends StatefulWidget {
 }
 
 class _ActivityCardState extends State<ActivityCard> {
+  void func() async {
+    widget.activityEvaluationId =
+        await activityEvaluationController.fetchActivityEvaluation(
+            activityController.activityList[widget.index].id, user.id);
+  }
+
+  @override
+  void initState() {
+    func();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -56,7 +67,7 @@ class _ActivityCardState extends State<ActivityCard> {
                         size: 12,
                       ),
                       CustomText(
-                        text: "  " + widget.activity.datetime,
+                        text: "  " + widget.activity!.datetime,
                         size: 12,
                       ),
                     ],
@@ -66,14 +77,14 @@ class _ActivityCardState extends State<ActivityCard> {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: CustomText(
-                    text: widget.activity.name,
+                    text: widget.activity!.name,
                     size: 24,
                     weight: FontWeight.w400,
                   ),
                 ),
                 const Expanded(flex: 1, child: Text("")),
                 CustomText(
-                  text: widget.activity.organizator,
+                  text: widget.activity!.organizator,
                 ),
                 const Expanded(flex: 1, child: Text("")),
               ],
@@ -94,7 +105,7 @@ class _ActivityCardState extends State<ActivityCard> {
                 onTap: () {
                   setState(() {
                     activityController.deleteActivity(
-                        widget.activity.name, widget.activity.organizator);
+                        widget.activity!.name, widget.activity!.organizator);
                   });
                 },
               ),
@@ -104,13 +115,13 @@ class _ActivityCardState extends State<ActivityCard> {
       ),
       onTap: widget.activityEvaluationId == -1
           ? () => setState(() => showDialog(
-              context: widget.context,
+              context: context,
               builder: (context) => Dialog(
                     backgroundColor: whiteColor,
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width /
                           (ResponsiveWidget.isLargeScreen(context) ? 2 : 1.1),
-                      child: ActivityEvaluationPage(activity: widget.activity),
+                      child: ActivityEvaluationPage(activity: widget.activity!),
                     ),
                   )))
           : null,
