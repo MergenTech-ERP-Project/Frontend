@@ -29,7 +29,7 @@ class LoginPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset("icon/mergentech_minimal.png", width: 250),
+                const Image(image: AssetImage("assets/icon/mergentech_minimal.png"), ),
                 Row(
                   children: [
                     Text(

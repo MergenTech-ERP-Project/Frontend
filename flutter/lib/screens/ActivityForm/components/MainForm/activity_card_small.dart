@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/main.dart';
@@ -87,17 +89,17 @@ class _ActivityCardSmallState extends State<ActivityCardSmall> {
                         ),
                         const Expanded(child: SizedBox()),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 12.0),
+                          padding: const EdgeInsets.only(bottom: 4.0),
                           child: Row(
                             children: [
                               CustomText(
                                 text: widget.activity.organizator,
-                                size: 16,
+                                size: 12,
                               ),
                               const Expanded(child: SizedBox()),
                               const Icon(
                                 Icons.calendar_today_outlined,
-                                size: 12,
+                                size: 16,
                               ),
                               CustomText(
                                 text: "  " + widget.activity.datetime,

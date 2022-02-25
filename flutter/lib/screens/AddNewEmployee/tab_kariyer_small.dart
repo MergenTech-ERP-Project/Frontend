@@ -199,31 +199,25 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                         ),
                         Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: CustomDateTimePicker(
-                                suffixWidget:
-                                    const Icon(Icons.calendar_today_outlined),
-                                borderless: true,
-                                labelText: 'Başlangıç Tarihi',
-                                onChanged: (val) {
-                                  positionDateTimeBaslangic =
-                                      dateTimeFormat.parse(val!);
-                                },
-                              ),
+                            CustomDateTimePicker(
+                              suffixWidget:
+                                  const Icon(Icons.calendar_today_outlined),
+                              borderless: true,
+                              labelText: 'Başlangıç Tarihi',
+                              onChanged: (val) {
+                                positionDateTimeBaslangic =
+                                    dateTimeFormat.parse(val!);
+                              },
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: CustomDateTimePicker(
-                                suffixWidget:
-                                    const Icon(Icons.calendar_today_outlined),
-                                borderless: true,
-                                labelText: 'Bitiş Tarihi',
-                                onChanged: (val) {
-                                  positionDateTimeBitis =
-                                      dateTimeFormat.parse(val!);
-                                },
-                              ),
+                            CustomDateTimePicker(
+                              suffixWidget:
+                                  const Icon(Icons.calendar_today_outlined),
+                              borderless: true,
+                              labelText: 'Bitiş Tarihi',
+                              onChanged: (val) {
+                                positionDateTimeBitis =
+                                    dateTimeFormat.parse(val!);
+                              },
                             ),
                           ],
                         ),

@@ -66,13 +66,13 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
           ),
           const SizedBox(height: 30),
           textWidget(
-            label: "Username",
+            label: "Kullanıcı Adı",
             textEditingController: widget.usernameController,
           ),
-          const CustomText(text: 'Select Departmant'),
+          const CustomText(text: 'Departman Seçin'),
           const SizedBox(height: 15),
           MultipleChoiceCustomDropDownItems(
-            text: "Select",
+            text: "Seç",
             list: titlesDepartmant,
             isExpandedYes: true,
             iconSize: 30,
