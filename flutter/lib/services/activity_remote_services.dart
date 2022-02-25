@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 
-
 class ActivityRemoteServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
@@ -31,7 +30,7 @@ class ActivityRemoteServices {
 
   static Future<List<Activity>?> fetchActivitiesByUser(int userId) async {
     var response = await http.get(
-      Uri.parse(serviceHttp + '/activity/activities/$userId'),
+      Uri.parse(serviceHttp + '/activetouser/user/$userId'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -112,8 +111,7 @@ class ActivityRemoteServices {
 
   static Future<String> deleteActivity(int id) async {
     var response = await http
-        .delete(
-            Uri.parse(serviceHttp + '/activity/delete/$id'),
+        .delete(Uri.parse(serviceHttp + '/activity/delete/$id'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
               'Accept': 'application/json',
