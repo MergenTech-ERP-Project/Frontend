@@ -224,18 +224,24 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                         const SizedBox(height: 40),
                         Row(
                           children: [
-                            CustomButton(
-                              backgroundColor: Colors.white,
-                              foregroundColor: Colors.black,
-                              title: "İptal",
-                              height: 50,
-                              pressAction: () {},
+                            Expanded(
+                              child: CustomButton(
+                                backgroundColor: Colors.white,
+                                foregroundColor: Colors.black,
+                                title: "İptal",
+                                height: 50,
+                                pressAction: () {
+                                  Get.back();
+                                },
+                              ),
                             ),
                             Expanded(
                               child: CustomButton(
                                 title: "Kaydet",
                                 height: 50,
-                                pressAction: () {},
+                                pressAction: () {
+                                  Get.back();
+                                },
                               ),
                             ),
                           ],
@@ -424,7 +430,7 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                                       ],
                                     ),
                                     bodyWidgetWidth: screenSize.width / 2,
-                                    bodyWidgetHeight: screenSize.height / 5.5,
+                                    bodyWidgetHeight: screenSize.height / 5,
                                   ),
                                 );
                               },
@@ -447,14 +453,18 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                                 foregroundColor: Colors.black,
                                 title: "İptal",
                                 height: 50,
-                                pressAction: () {},
+                                pressAction: () {
+                                  Get.back();
+                                },
                               ),
                             ),
                             Expanded(
                               child: CustomButton(
                                 title: "Kaydet",
                                 height: 50,
-                                pressAction: () {},
+                                pressAction: () {
+                                  Get.back();
+                                },
                               ),
                             ),
                           ],
