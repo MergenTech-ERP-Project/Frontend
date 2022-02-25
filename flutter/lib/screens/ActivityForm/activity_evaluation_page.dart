@@ -10,12 +10,10 @@ import 'package:vtys_kalite/utilities/style.dart';
 
 class ActivityEvaluationPage extends StatefulWidget {
   final Activity activity;
-  final Future onSave;
 
   ActivityEvaluationPage({
     Key? key,
     required this.activity,
-    required this.onSave,
   }) : super(key: key);
 
   final TextEditingController _evaluationController = TextEditingController();
@@ -120,9 +118,36 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
                             ],
                           ),
                           const SizedBox(height: 20),
-                          evaluationContainer(),
+                          Container(
+                            color: whiteColor,
+                            height: 100,
+                            child: TextFormField(
+                              controller: widget._evaluationController,
+                              textAlign: TextAlign.start,
+                              maxLines: null,
+                              minLines: null,
+                              expands: true,
+                              decoration: const InputDecoration(
+                                hintText: "Değerlendirme...",
+                              ),
+                            ),
+                          ),
                           const SizedBox(height: 20),
-                          saveCustomButton(context),
+                          Center(
+                            child: CustomButton(
+                              width: double.infinity,
+                              height: 40,
+                              title: "Kaydet",
+                              pressAction: () async {
+                                await activityEvaluationController
+                                    .postActivityEvaluation(
+                                        widget.activity.id,
+                                        user.id,
+                                        widget._evaluationController.text);
+                                Get.back();
+                              },
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -132,39 +157,6 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget saveCustomButton(BuildContext context) {
-    return Center(
-      child: CustomButton(
-        width: double.infinity,
-        height: 40,
-        title: "Kaydet",
-        pressAction: () async {
-          await activityEvaluationController.postActivityEvaluation(
-              widget.activity.id, user.id, widget._evaluationController.text);
-          await widget.onSave;
-          Get.back();
-        },
-      ),
-    );
-  }
-
-  Widget evaluationContainer() {
-    return Container(
-      color: whiteColor,
-      height: 100,
-      child: TextFormField(
-        controller: widget._evaluationController,
-        textAlign: TextAlign.start,
-        maxLines: null,
-        minLines: null,
-        expands: true,
-        decoration: const InputDecoration(
-          hintText: "Değerlendirme...",
-        ),
       ),
     );
   }

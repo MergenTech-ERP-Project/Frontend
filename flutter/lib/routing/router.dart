@@ -18,7 +18,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case formsPageRoute:
       return _getPageRoute(
         ResponsiveWidget(
-            largeScreen: FormsPage(), smallScreen: FormsPageSmall()),
+          largeScreen: FormsPage(),
+          smallScreen: FormsPageSmall(),
+        ),
       );
     case settingsPageRoute:
       return _getPageRoute(SettingsPage());
