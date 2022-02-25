@@ -29,15 +29,16 @@ class LoginPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Image(image: AssetImage("assets/icon/mergentech_minimal.png"), ),
+                const Image(
+                  image: AssetImage("assets/icon/mergentech_minimal.png"),
+                  width: 250,
+                ),
                 Row(
                   children: [
-                    Text(
-                      "Login",
-                      style: GoogleFonts.roboto(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    const CustomText(
+                      text: loginPageDisplayName,
+                      size: 30,
+                      weight: FontWeight.w500,
                     ),
                     Expanded(
                       child: Container(),
@@ -47,13 +48,13 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 15),
                 CustomTextBox(
                   controller: _usernameController,
-                  label: "Name",
+                  label: "İsim",
                   hint: "abcdef",
                 ),
                 const SizedBox(height: 15),
                 CustomTextBox(
                   controller: _passwordController,
-                  label: "Password",
+                  label: "Şifre",
                   hint: "******",
                   obscureBool: true,
                 ),
@@ -62,17 +63,17 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 15),
                 CustomButton(
                   width: double.infinity,
-                  title: "Login",
+                  title: "Giriş Yap",
                   backgroundColor: activeColor,
                   foregroundColor: Colors.white,
                   pressAction: () => loginButton(context),
                 ),
                 CustomTextDivider(
-                  text: "OR",
+                  text: "ya da",
                 ),
                 CustomButton(
                   width: double.infinity,
-                  title: "Sign Up",
+                  title: "Kayıt Ol",
                   backgroundColor: activeColor,
                   foregroundColor: Colors.white,
                   pressAction: () => Get.offAllNamed(signUpPageRoute),
@@ -92,10 +93,10 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomCheckbox(
-                text: "Remember Me",
+                text: "Hatırla",
               ),
               CustomText(
-                text: "Forgot Password",
+                text: "Şifremi Unuttum",
                 color: activeColor,
               ),
             ],
@@ -103,14 +104,14 @@ class LoginPage extends StatelessWidget {
         : Column(
             children: [
               CustomCheckbox(
-                text: "Remember Me",
+                text: "Hatırla",
               ),
               Row(
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     child: CustomText(
-                      text: "Forgot Password",
+                      text: "Şifremi Unuttum",
                       color: activeColor,
                     ),
                   ),
