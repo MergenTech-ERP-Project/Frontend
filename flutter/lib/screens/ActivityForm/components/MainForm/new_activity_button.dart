@@ -26,7 +26,7 @@ class NewActivityButton extends StatelessWidget {
         ),
       ];
 
-  NewActivityButton({
+  const NewActivityButton({
     Key? key,
     this.height,
   }) : super(key: key);
