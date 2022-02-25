@@ -26,32 +26,18 @@ class SignUpPage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.only(right: 12),
-                      child: CustomText(
-                        text: "Mergen Tech",
-                        color: darkColor,
-                        size: 24,
-                        weight: FontWeight.bold,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(),
-                    ),
-                  ],
+                const Image(
+                  image: AssetImage("assets/icon/mergentech_minimal.png"),
+                  width: 250,
                 ),
-                const SizedBox(height: 30),
                 Row(
                   children: [
-                    Text(
-                      "Sign Up",
-                      style: GoogleFonts.roboto(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    const CustomText(
+                      text: signUpPageDisplayName,
+                      size: 30,
+                      weight: FontWeight.w500,
                     ),
                     Expanded(
                       child: Container(),
@@ -61,37 +47,37 @@ class SignUpPage extends StatelessWidget {
                 const SizedBox(height: 15),
                 CustomTextBox(
                   controller: _usernameController,
-                  label: "Name",
+                  label: "İsim",
                   hint: "abcdef",
                 ),
                 const SizedBox(height: 15),
                 CustomTextBox(
                   controller: _passwordController,
-                  label: "Password",
+                  label: "Şifre",
                   hint: "******",
                   obscureBool: true,
                 ),
                 const SizedBox(height: 15),
                 CustomTextBox(
                   controller: _confirmPasswordController,
-                  label: "Confirm Password",
+                  label: "Şifreyi Onayla",
                   hint: "******",
                   obscureBool: true,
                 ),
                 const SizedBox(height: 30),
                 CustomButton(
                   width: double.infinity,
-                  title: "Sign Up",
+                  title: "Kayıt Ol",
                   backgroundColor: activeColor,
                   foregroundColor: Colors.white,
                   pressAction: () => signUpPage(context),
                 ),
                 CustomTextDivider(
-                  text: "OR",
+                  text: "ya da",
                 ),
                 CustomButton(
                   width: double.infinity,
-                  title: "Cancel",
+                  title: "İptal",
                   backgroundColor: activeColor,
                   foregroundColor: Colors.white,
                   pressAction: () => Get.offAllNamed(loginPageRoute),
@@ -127,7 +113,7 @@ class SignUpPage extends StatelessWidget {
                   child: const CustomText(
                     text:
                         "Girdiğiniz kullanıcı adı başka bir kullanıcı tarafından kullanılmaktadır.\nLütfen tekrar deneyiniz.",
-                        textAlign: TextAlign.center,
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 const SizedBox(
