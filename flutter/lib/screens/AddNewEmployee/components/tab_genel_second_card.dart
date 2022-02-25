@@ -100,23 +100,20 @@ class TabGenelSecondCard extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: CustomDateTimePicker(
-                  suffixWidget: const Icon(Icons.calendar_today_outlined),
-                  labelText: "İşe Başlangıç Tarihi",
-                  borderless: true,
-                  onChanged: (val) {
-                    if (val != null) {
-                      print("DateTime picker : " + val);
-                    }
-                    try {
-                      dateOfStart = dateTimeFormat.parse(val!);
-                    } catch (e) {
-                      print(e.toString());
-                    }
-                  },
-                ),
+              child: CustomDateTimePicker(
+                suffixWidget: const Icon(Icons.calendar_today_outlined),
+                labelText: "İşe Başlangıç Tarihi",
+                borderless: true,
+                onChanged: (val) {
+                  if (val != null) {
+                    print("DateTime picker : " + val);
+                  }
+                  try {
+                    dateOfStart = dateTimeFormat.parse(val!);
+                  } catch (e) {
+                    print(e.toString());
+                  }
+                },
               ),
             ),
             Expanded(
@@ -140,23 +137,20 @@ class TabGenelSecondCard extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: CustomDateTimePicker(
-                  suffixWidget: const Icon(Icons.calendar_today_outlined),
-                  labelText: "Sözleşme Bitiş Tarihi",
-                  borderless: true,
-                  onChanged: (val) {
-                    if (val != null) {
-                      print("DateTime picker : " + val);
-                    }
-                    try {
-                      contractEndDate = dateTimeFormat.parse(val!);
-                    } catch (e) {
-                      print(e.toString());
-                    }
-                  },
-                ),
+              child: CustomDateTimePicker(
+                suffixWidget: const Icon(Icons.calendar_today_outlined),
+                labelText: "Sözleşme Bitiş Tarihi",
+                borderless: true,
+                onChanged: (val) {
+                  if (val != null) {
+                    print("DateTime picker : " + val);
+                  }
+                  try {
+                    contractEndDate = dateTimeFormat.parse(val!);
+                  } catch (e) {
+                    print(e.toString());
+                  }
+                },
               ),
             ),
           ],

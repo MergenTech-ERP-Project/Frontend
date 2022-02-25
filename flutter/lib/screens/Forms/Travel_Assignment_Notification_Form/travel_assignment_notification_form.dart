@@ -74,7 +74,7 @@ class _TravelAssignmentNotificationFormPageState
           ),
           const SizedBox(height: 30),
           textWidget(
-            label: "Username",
+            label: "Kullanıcı Adı",
             textEditingController: widget.usernameController,
           ),
           CustomTextDivider(

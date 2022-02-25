@@ -80,14 +80,14 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
           ),
           const SizedBox(height: 30),
           textWidget(
-            label: "Username",
+            label: "Kullanıcı Adı",
             textEditingController: widget.usernameController,
           ),
-          const CustomText(text: "Department"),
+          const CustomText(text: "Departman"),
           MultipleChoiceCustomDropDownItems(
             list: titlesDepartmant,
             isExpandedYes: true,
-            text: 'Select Department',
+            text: 'Departmant Seçin',
             iconSize: 30,
             icon: const Icon(Icons.arrow_drop_down),
             onChanged: (val) {},

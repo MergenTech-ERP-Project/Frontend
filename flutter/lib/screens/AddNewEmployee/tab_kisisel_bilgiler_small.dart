@@ -38,23 +38,20 @@ class _TabPersonalInformationSmallState
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: CustomDateTimePicker(
-                suffixWidget: const Icon(Icons.calendar_today_outlined),
-                labelText: "Sözleşme Bitiş Tarihi",
-                borderless: true,
-                onChanged: (val) {
-                  if (val != null) {
-                    print("DateTime picker : " + val);
-                  }
-                  try {
-                    widget.birthDate = dateTimeFormat.parse(val!);
-                  } catch (e) {
-                    print(e.toString());
-                  }
-                },
-              ),
+            CustomDateTimePicker(
+              suffixWidget: const Icon(Icons.calendar_today_outlined),
+              labelText: "Sözleşme Bitiş Tarihi",
+              borderless: true,
+              onChanged: (val) {
+                if (val != null) {
+                  print("DateTime picker : " + val);
+                }
+                try {
+                  widget.birthDate = dateTimeFormat.parse(val!);
+                } catch (e) {
+                  print(e.toString());
+                }
+              },
             ),
             PersonalInformationCustomText(
               controller: widget.controllerIdentificationNumber,

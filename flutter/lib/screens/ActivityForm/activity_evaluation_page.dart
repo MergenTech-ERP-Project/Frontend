@@ -44,7 +44,7 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
                   child: CustomText(
                     text: widget.activity.name.capitalizeFirst,
                     color: blackColor,
-                    size: 28,
+                    size: ResponsiveWidget.isLargeScreen(context) ? 28 : 20,
                     weight: FontWeight.w400,
                   ),
                 ),
@@ -84,7 +84,7 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
                                 child: CustomText(
                                   text: "Kullanıcı Adı: ",
                                   color: blackColor,
-                                  size: 20,
+                                  size: ResponsiveWidget.isLargeScreen(context) ? 20 : 16,
                                   weight: FontWeight.w500,
                                 ),
                               ),
@@ -92,19 +92,20 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
                                 child: CustomText(
                                   text: user.name,
                                   color: blackColor,
-                                  size: 18,
-                                  weight: FontWeight.w200,
+                                  size: ResponsiveWidget.isLargeScreen(context) ? 18 : 16,
+                                  weight: FontWeight.w300,
                                 ),
                               ),
                             ],
                           ),
+                          const SizedBox(height: 10),
                           Row(
                             children: [
                               Expanded(
                                 child: CustomText(
-                                  text: "Organizatör: ",
+                                  text: "Organizatör:",
                                   color: blackColor,
-                                  size: 20,
+                                  size: ResponsiveWidget.isLargeScreen(context) ? 20 : 16,
                                   weight: FontWeight.w500,
                                 ),
                               ),
@@ -112,8 +113,8 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
                                 child: CustomText(
                                   text: widget.activity.organizator,
                                   color: blackColor,
-                                  size: 18,
-                                  weight: FontWeight.w200,
+                                  size: ResponsiveWidget.isLargeScreen(context) ? 18 : 16,
+                                  weight: FontWeight.w300,
                                 ),
                               ),
                             ],
