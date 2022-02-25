@@ -19,7 +19,7 @@ class NewActivityButton extends StatelessWidget {
         const Flexible(
           child: CustomText(
             textAlign: TextAlign.center,
-            text: "Add New Activity",
+            text: "Yeni Aktivite Ekle",
             color: Colors.white,
             size: 20,
           ),

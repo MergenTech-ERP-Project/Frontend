@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
-import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/departments_enum.dart';
@@ -55,7 +54,7 @@ class _EmployeesState extends State<Employees> {
                                 padding: const EdgeInsets.all(20.0),
                                 child: CustomButton(
                                   width: double.infinity,
-                                  title: 'New Employee',
+                                  title: 'Yeni Personel',
                                   leftIcon: Icons.person_add,
                                   pressAction: () =>
                                       Get.toNamed(addNewEmployeePageRoute),

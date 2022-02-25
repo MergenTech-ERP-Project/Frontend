@@ -22,36 +22,25 @@ class _MyActivitiesState extends State<MyActivities> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Row(
-        children: [
-          const Expanded(
-            flex: 1,
-            child: CustomText(text: ""),
-          ),
-          Expanded(
-            flex: ResponsiveWidget.isSmallScreen(context) ? 50 : 8,
-            child: Obx(
-              () => activityController.isLoading.value
-                  ? const Center(
-                      child: SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: CircularProgressIndicator(),
-                      ),
-                    )
-                  : ResponsiveWidget(
-                      largeScreen: ActivityListLarge(),
-                      smallScreen: ActivityListSmall(),
-                    ),
-            ),
-          ),
-          const Expanded(
-            flex: 1,
-            child: CustomText(
-              text: "",
-            ),
-          ),
-        ],
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width /
+              (ResponsiveWidget.isSmallScreen(context) ? 50 : 8),
+        ),
+        child: Obx(
+          () => activityController.isLoading.value
+              ? const Center(
+                  child: SizedBox(
+                    height: 50,
+                    width: 50,
+                    child: CircularProgressIndicator(),
+                  ),
+                )
+              : ResponsiveWidget(
+                  largeScreen: ActivityListLarge(),
+                  smallScreen: ActivityListSmall(),
+                ),
+        ),
       ),
     );
   }

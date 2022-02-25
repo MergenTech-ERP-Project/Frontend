@@ -37,17 +37,17 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
             children: [
               buildTextBox(
                 widget.nameController,
-                'Name',
+                'İsim',
                 Icons.person,
               ),
               buildTextBox(
                 widget.placeController,
-                'Place',
+                'Konum',
                 Icons.home,
               ),
               buildTextBox(
                 widget.organizatorController,
-                'Organizer',
+                'Organizatör',
                 Icons.person,
               ),
               Padding(
@@ -55,7 +55,7 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
                 child: CustomDateTimePicker(
                   suffixWidget: const Icon(Icons.calendar_today_outlined),
                   borderless: true,
-                  labelText: "Date",
+                  labelText: " Tarih",
                   onChanged: (val) {
                     if (val != null) {
                       try {
@@ -74,7 +74,7 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
         const SizedBox(height: 10),
         CustomButton(
           width: double.infinity,
-          title: "Create", //next
+          title: "Oluştur", //next
           pressAction: () {
             if (widget._newActivityInitialPageForm.currentState!.validate()) {
               widget.onNextButtonClick();
@@ -102,7 +102,7 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
         label: label,
         validator: (val) {
           if (val!.isEmpty) {
-            return "Cannot Be Blank";
+            return "Doldurulması Gerekli";
           } else {
             return null;
           }
