@@ -31,7 +31,7 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
           foregroundColor: Colors.white,
           automaticallyImplyLeading: true,
           centerTitle: true,
-          title: const CustomText(text: "Employee"),
+          title: const CustomText(text: addNewEmployeePageDisplayName),
           leading: IconButton(
             icon: const Icon(Icons.keyboard_arrow_left),
             onPressed: () => Get.offAllNamed(rootRoute),
@@ -106,14 +106,14 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
                         child: Row(
                           children: const [
                             Icon(Icons.done),
-                            Text(' Saved'),
+                            Text(' Kaydedildi!'),
                           ],
                         ),
                       ),
                     ),
                     Expanded(
                       child: CustomButton(
-                        title: 'Save',
+                        title: 'Kaydet',
                         pressAction: () {
                           setState(() {
                             widget.isSaved = true;
@@ -123,7 +123,7 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
                     ),
                     Expanded(
                       child: CustomButton(
-                        title: 'Cancel',
+                        title: 'İptal',
                         foregroundColor: Colors.black,
                         backgroundColor: Colors.white,
                         pressAction: () => Get.offAllNamed(rootRoute),

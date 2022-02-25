@@ -38,9 +38,15 @@ class _FormsCardState extends State<FormsCard> {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   height: 5,
                   width: 300,
-                  color: widget.formsInfo.formsPageOnTap
-                      ? Colors.greenAccent
-                      : Colors.redAccent,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
+                    ),
+                    color: widget.formsInfo.formsPageOnTap
+                        ? Colors.greenAccent
+                        : Colors.redAccent,
+                  ),
                 ),
                 Flexible(
                   child: Padding(

@@ -3,24 +3,24 @@ String serviceHttp = "https://kalite-takip-yonetim-sistemi.herokuapp.com";
 
 const rootRoute = "/home";
 
-const employeesPageDisplayName = "Employees";
+const employeesPageDisplayName = "Personel";
 const employeesPageRoute = "/employees";
 
-const myActivitiesPageDisplayName = "My Activities";
+const myActivitiesPageDisplayName = "Aktivite";
 const myActivitiesPageRoute = "/myActivitiesPage";
 
-const formsPageDisplayName = "Forms";
+const formsPageDisplayName = "Form";
 const formsPageRoute = "/forms";
 
-const settingsPageDisplayName = "Settings";
+const settingsPageDisplayName = "Seçenekler";
 const settingsPageRoute = "/settingsPage";
 
 ///Login - SignUp Sayfaları
 
-const loginPageDisplayName = "Login";
+const loginPageDisplayName = "Giriş Yap";
 const loginPageRoute = "/login";
 
-const signUpPageDisplayName = "Sign Up";
+const signUpPageDisplayName = "Kayıt Ol";
 const signUpPageRoute = "/signUp";
 
 ///Admin ve Ayarlar Sayfaları
@@ -29,25 +29,46 @@ const adminPanelPageDisplayName = "Admin Panel";
 const adminPanelPageRoute = "/adminPanel";
 
 ///New Activity Sayfaları ve New User
-const addNewEmployeePageDisplayName = "Employee";
-const addNewEmployeePageRoute = "/employee";
+const addNewEmployeePageDisplayName = "Personel Ekle";
+const addNewEmployeePageRoute = "/addEmployee";
 
-const newActivityPageDisplayName = "New Activity";
+const newActivityPageDisplayName = "Yeni Aktivite";
 const newActivityPageRoute = "/newActivity";
 
-const activityEvaluationPageDisplayName = "Activity Evaluation";
+const activityEvaluationPageDisplayName = "Aktivite Değerlendirme";
 const activityEvaluationPageRoute = "/activityEvaluation";
 
 class MenuItem {
   final String name;
   final String route;
+  final int color;
 
-  MenuItem(this.name, this.route);
+  MenuItem(
+    this.name,
+    this.route,
+    this.color,
+  );
 }
 
 List<MenuItem> sideMenuItems = [
-  MenuItem(employeesPageDisplayName, employeesPageRoute),
-  MenuItem(myActivitiesPageDisplayName, myActivitiesPageRoute),
-  MenuItem(formsPageDisplayName, formsPageRoute),
-  MenuItem(settingsPageDisplayName, settingsPageRoute),
+  MenuItem(
+    employeesPageDisplayName,
+    employeesPageRoute,
+    0xFFFF0000.toInt(),
+  ),
+  MenuItem(
+    myActivitiesPageDisplayName,
+    myActivitiesPageRoute,
+    0xFF0000FF.toInt(),
+  ),
+  MenuItem(
+    formsPageDisplayName,
+    formsPageRoute,
+    0xFF00FF00.toInt(),
+  ),
+  MenuItem(
+    settingsPageDisplayName,
+    settingsPageRoute,
+    0xFFF000F0.toInt(),
+  ),
 ];

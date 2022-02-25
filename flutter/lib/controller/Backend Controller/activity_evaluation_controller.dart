@@ -37,7 +37,7 @@ class ActivityEvaluationController extends GetxController {
       var activityEvaluation =
           await ActivityEvaluationRemoteServices.fetchActivityEvaluation(
               activityId, userId);
-      print("fetch Activity: " + activityEvaluation.toString());
+      print("fetch Activity Evaluation: " + activityEvaluation.toString());
       return activityEvaluation;
     } finally {
       isLoading(false);
@@ -57,7 +57,7 @@ class ActivityEvaluationController extends GetxController {
                 evaluation: evaluation,
               ).toJson())
               .toString());
-      print("post Activity: " + response);
+      print("post Activity Evaluation: " + response);
       return response;
     } finally {
       isLoading(false);

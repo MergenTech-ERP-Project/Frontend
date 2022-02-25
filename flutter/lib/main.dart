@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,15 +33,6 @@ void main() {
   Get.put(NavigatorController());
 
   runApp(App());
-}
-
-String? nameLetters(name) {
-  var words = name.split(' ');
-  String letters = name.length > 0
-      ? (words[0][0] +
-          (words.length > 1 ? ("" + words[words.length - 1][0]) : ""))
-      : "";
-  return letters != "" ? letters.capitalize : "";
 }
 
 class App extends StatelessWidget {

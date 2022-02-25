@@ -38,6 +38,7 @@ class SideMenu extends StatelessWidget {
             children: sideMenuItems
                 .map((item) => SideMenuItem(
                       itemName: item.name,
+                      color: item.color,
                       onTap: () {
                         if (!menuController.isActive(item.name)) {
                           menuController.changeActiveItem(item.name);
