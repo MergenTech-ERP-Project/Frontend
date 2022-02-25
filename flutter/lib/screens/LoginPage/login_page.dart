@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_checkbox.dart';
@@ -9,7 +8,6 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
-import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
@@ -29,24 +27,9 @@ class LoginPage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.only(right: 12),
-                      child: CustomText(
-                        text: "Mergen Tech",
-                        color: darkColor,
-                        size: 24,
-                        weight: FontWeight.bold,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 30),
+                Image.asset("icon/mergentech_minimal.png", width: 250),
                 Row(
                   children: [
                     Text(

@@ -115,19 +115,19 @@ class SignUpPage extends StatelessWidget {
         builder: (_) => CustomAlertDialog(
           titleWidget: CustomText(
             textAlign: TextAlign.center,
-            text: response == 1000
-                ? _usernameController.text + " Zaten Kayıtlı"
+            text: response != 5000
+                ? _usernameController.text + " zaten kayıtlı"
                 : "Bağlantınızı kontrol edin.",
           ),
           bodyWidget: SingleChildScrollView(
             child: Column(
               children: [
                 Visibility(
-                  visible: response == 1000,
+                  visible: response != 5000,
                   child: const CustomText(
                     text:
-                        "Girdiğiniz kullanıcı adı başka bir kullanıcı tarafından"
-                        "kullanılmaktadır.\n Lütfen tekrar deneyiniz.",
+                        "Girdiğiniz kullanıcı adı başka bir kullanıcı tarafından kullanılmaktadır.\nLütfen tekrar deneyiniz.",
+                        textAlign: TextAlign.center,
                   ),
                 ),
                 const SizedBox(

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ozturkomerfaruk.vtys_kalite">
    <application
-        android:label="vtys_kalite"
+        android:label="mergentech"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
