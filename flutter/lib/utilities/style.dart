@@ -10,6 +10,7 @@ Color activeDarkColor = const Color(0xFF475170);
 Color blackColor = Colors.black;
 Color whiteColor = Colors.white;
 Color redColor = Colors.red;
+Color greenColor = Colors.green;
 
 Color successfulColor = Colors.green.shade800;
 Color incorrectColor = Colors.red.shade800;
