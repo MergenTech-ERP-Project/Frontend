@@ -67,7 +67,10 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
             TabBarView(
               children: [
                 const TabGenel(),
-                TabKariyerSmall(),
+                ResponsiveWidget(
+                  largeScreen: TabKariyer(),
+                  smallScreen: TabKariyerSmall(),
+                ),
                 ResponsiveWidget(
                   largeScreen: TabPersonalInformation(),
                   smallScreen: TabPersonalInformationSmall(),

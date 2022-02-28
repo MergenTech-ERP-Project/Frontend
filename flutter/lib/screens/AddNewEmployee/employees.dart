@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/main.dart';
-import 'package:vtys_kalite/models/departments_enum.dart';
+import 'package:vtys_kalite/enums/departments_enum.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/employee_card.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class Employees extends StatefulWidget {
+  const Employees({Key? key}) : super(key: key);
+
   @override
   State<Employees> createState() => _EmployeesState();
 }

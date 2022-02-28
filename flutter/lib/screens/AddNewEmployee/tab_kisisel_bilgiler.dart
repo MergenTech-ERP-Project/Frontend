@@ -1,21 +1,29 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
-import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
-import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/utilities/controllers.dart';
+import 'package:vtys_kalite/enums/blood_type.dart';
+import 'package:vtys_kalite/enums/disabled_degree.dart';
+import 'package:vtys_kalite/enums/educational_status.dart';
+import 'package:vtys_kalite/enums/gender.dart';
+import 'package:vtys_kalite/enums/highest_education_level_completed.dart';
+import 'package:vtys_kalite/enums/marial_status.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdatetimepicker.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdropdownmenu.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
 
 class TabPersonalInformation extends StatefulWidget {
   DateTime birthDate = DateTime.now();
   TextEditingController controllerIdentificationNumber =
       TextEditingController();
-  TextEditingController controllerMaritalStatus = TextEditingController();
-  TextEditingController controllerGender = TextEditingController();
-  TextEditingController controllerDisabilityLevel = TextEditingController();
+  int maritalStatusIndex = 0;
+  int genderIndex = 0;
+  int disabilityDegreeIndex = 0;
+  int bloodGroupIndex = 0;
+  int highestEducationLevelCompletedIndex = 0;
+
   TextEditingController controllerNationality = TextEditingController();
   TextEditingController controllerCountOfChildren = TextEditingController();
-  TextEditingController controllerBloodGroup = TextEditingController();
   TextEditingController controllerEdicationStatus = TextEditingController();
-  TextEditingController controllerHighestLevelOfEducationCompleted =
-      TextEditingController();
   TextEditingController controllerLastCompletedEducationStatus =
       TextEditingController();
 
@@ -32,84 +40,53 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
       children: [
         Row(
           children: [
-            Flexible(
-              child: CustomDateTimePicker(
-                suffixWidget: const Icon(Icons.calendar_today_outlined),
-                labelText: "Sözleşme Bitiş Tarihi",
-                borderless: true,
-                onChanged: (val) {
-                  if (val != null) {
-                    print("DateTime picker : " + val);
-                  }
-                  try {
-                    widget.birthDate = dateTimeFormat.parse(val!);
-                  } catch (e) {
-                    print(e.toString());
-                  }
-                },
-              ),
+            ExpandedCustomDateTimePicker(
+              label: "Sözleşme Bitiş Tarihi",
+              dateTime: widget.birthDate,
             ),
-            Expanded(
-              child: CustomTextBox(
-                borderless: true,
-                controller: widget.controllerIdentificationNumber,
-                label: "Kimlik Numarası",
-                suffixWidget: const Icon(Icons.keyboard_arrow_down),
-              ),
+            ExpandedNameController(
+              controller: widget.controllerIdentificationNumber,
+              label: "Kimlik Numarası",
+              widget: const SizedBox(),
             ),
           ],
         ),
         Row(
           children: [
-            Expanded(
-              child: CustomTextBox(
-                borderless: true,
-                controller: widget.controllerMaritalStatus,
-                label: "Medeni Hal",
-                suffixWidget: const Icon(Icons.keyboard_arrow_down),
-              ),
+            ExpandedCustomDropDownMenu(
+              label: "Medeni Hal",
+              index: widget.maritalStatusIndex,
+              listExtension: MaritalStatusExtension.getList(),
             ),
-            Expanded(
-              child: CustomTextBox(
-                borderless: true,
-                controller: widget.controllerGender,
-                label: "Cinsiyet",
-                suffixWidget: const Icon(Icons.keyboard_arrow_down),
-              ),
+            ExpandedCustomDropDownMenu(
+              label: "Medeni Hal",
+              index: widget.genderIndex,
+              listExtension: GenderExtension.getList(),
             ),
           ],
         ),
         Row(
           children: [
-            Expanded(
-              child: CustomTextBox(
-                borderless: true,
-                controller: widget.controllerDisabilityLevel,
-                label: "Engel Derecesi",
-                suffixWidget: const Icon(Icons.keyboard_arrow_down),
-              ),
+            ExpandedCustomDropDownMenu(
+              label: "Engel Derecesi",
+              index: widget.disabilityDegreeIndex,
+              listExtension: DisabledDegreeExtension.getList(),
             ),
-            Expanded(
-              child: CustomTextBox(
-                borderless: true,
-                controller: widget.controllerNationality,
-                label: "Uyruğu",
-                suffixWidget: const Icon(Icons.keyboard_arrow_down),
-              ),
+            ExpandedNameController(
+              controller: widget.controllerNationality,
+              label: "Uyruğu",
+              widget: const SizedBox(),
             ),
           ],
         ),
         Row(
           children: [
-            Expanded(
-              child: CustomTextBox(
-                borderless: true,
-                controller: widget.controllerCountOfChildren,
-                label: "Çocuk Sayısı",
-                suffixWidget: const Icon(Icons.keyboard_arrow_down),
-              ),
+            ExpandedNameController(
+              controller: widget.controllerCountOfChildren,
+              label: "Çocuk Sayısı",
+              widget: const SizedBox(),
             ),
-            const Flexible(
+            const Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: SizedBox(),
@@ -119,41 +96,29 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
         ),
         Row(
           children: [
-            Expanded(
-              child: CustomTextBox(
-                borderless: true,
-                controller: widget.controllerBloodGroup,
-                label: "Kan Grubu",
-                suffixWidget: const Icon(Icons.keyboard_arrow_down),
-              ),
+            ExpandedCustomDropDownMenu(
+              label: "Kan Grubu",
+              index: widget.bloodGroupIndex,
+              listExtension: BloodTypeExtension.getList(),
             ),
-            Expanded(
-              child: CustomTextBox(
-                borderless: true,
-                controller: widget.controllerEdicationStatus,
-                label: "Eğitim Durumu",
-                suffixWidget: const Icon(Icons.keyboard_arrow_down),
-              ),
+            ExpandedCustomDropDownMenu(
+              label: "Eğitim Durumu",
+              index: widget.bloodGroupIndex,
+              listExtension: EducationalStatusExtension.getList(),
             ),
           ],
         ),
         Row(
           children: [
-            Expanded(
-              child: CustomTextBox(
-                borderless: true,
-                controller: widget.controllerHighestLevelOfEducationCompleted,
-                label: "Tamamlanan En Yüksek Eğitim Seviyesi",
-                suffixWidget: const Icon(Icons.keyboard_arrow_down),
-              ),
+            ExpandedCustomDropDownMenu(
+              label: "Tamamlanan En Yüksek Eğitim Seviyesi",
+              index: widget.highestEducationLevelCompletedIndex,
+              listExtension: HighestEducationLevelCompletedExtension.getList(),
             ),
-            Expanded(
-              child: CustomTextBox(
-                borderless: true,
-                controller: widget.controllerLastCompletedEducationStatus,
-                label: "Son Tamamlanan Eğitim Kurumu",
-                suffixWidget: const Icon(Icons.keyboard_arrow_down),
-              ),
+            ExpandedNameController(
+              controller: widget.controllerLastCompletedEducationStatus,
+              label: "Son Tamamlanan Eğitim Kurumu",
+              widget: const SizedBox(),
             ),
           ],
         ),

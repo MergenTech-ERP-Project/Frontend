@@ -11,7 +11,7 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
-import 'package:vtys_kalite/models/departments_enum.dart';
+import 'package:vtys_kalite/enums/departments_enum.dart';
 import 'package:vtys_kalite/screens/Forms/components/text_widget.dart';
 import 'package:vtys_kalite/screens/Forms/forms.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -84,14 +84,14 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
             textEditingController: widget.usernameController,
           ),
           const CustomText(text: "Departman"),
-          MultipleChoiceCustomDropDownItems(
-            list: titlesDepartmant,
-            isExpandedYes: true,
-            text: 'Departmant Seçin',
-            iconSize: 30,
-            icon: const Icon(Icons.arrow_drop_down),
-            onChanged: (val) {},
-          ),
+          // MultipleChoiceCustomDropDownItems(
+          //   list: titlesDepartmant,
+          //   isExpandedYes: true,
+          //   text: 'Departmant Seçin',
+          //   iconSize: 30,
+          //   icon: const Icon(Icons.arrow_drop_down),
+          //   onChanged: (val) {},
+          // ),
           const SizedBox(height: 15),
           CustomTextDivider(height: 40, thickness: 2, text: "İZİN TÜRÜ"),
           MultipleChoiceRadioListTile(

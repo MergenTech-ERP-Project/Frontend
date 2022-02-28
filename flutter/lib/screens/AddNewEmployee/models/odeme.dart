@@ -1,37 +1,89 @@
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/componenets/custom_switch.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/utilities/style.dart';
 
-class Odeme extends StatefulWidget {
+class YeniOdeme extends StatefulWidget {
   int id;
-  String name;
-  int fee;
-  String unit;
-  String description;
-  String periot;
-  bool grossPrice;
-  bool includePayroll;
+  String? name;
+  String? salary;
+  String? unit;
+  String? description;
+  String? periot;
+  bool? grossPrice;
+  bool? includePayroll;
 
-  Odeme({
+  YeniOdeme({
     Key? key,
     this.id = 0,
-    required this.name,
-    this.fee = 0,
-    this.unit = "TL",
-    this.description = "",
-    this.periot = "",
-    this.grossPrice = true,
-    this.includePayroll = true,
-  }) : super(key: key);
+    this.name,
+    this.salary,
+    this.unit,
+    this.description,
+    this.periot,
+    this.grossPrice,
+    this.includePayroll,
+  }) : super(key: key) {
+    name ??= "";
+    salary ??= "";
+    unit ??= "";
+    description ??= "";
+    periot ??= "";
+    salary ??= "";
+    grossPrice ??= true;
+    includePayroll ??= true;
+  }
 
   @override
-  _OdemeState createState() => _OdemeState();
+  _YeniOdemeState createState() => _YeniOdemeState();
 }
 
-class _OdemeState extends State<Odeme> {
+class _YeniOdemeState extends State<YeniOdeme> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: CustomText(text: widget.name),
+      elevation: 5,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.close),
+                color: redColor,
+                onPressed: () {},
+              ),
+              CustomText(text: widget.name),
+            ],
+          ),
+          Row(
+            children: [
+              const CustomText(
+                text: "Ücret: \t",
+              ),
+              const SizedBox(width: 10),
+              CustomTextBox(
+                borderless: true,
+                label: widget.salary,
+              ),
+              const CustomText(
+                text: "Ücret: \t",
+              ),
+              const SizedBox(width: 10),
+              CustomTextBox(
+                borderless: true,
+                label: widget.salary,
+              ),
+            ],
+          ),
+          CustomSwitch(
+            switchValue: widget.grossPrice!,
+            text: widget.grossPrice! ? "Brüt" : "Net",
+          ),
+        ],
+      ),
     );
   }
 }

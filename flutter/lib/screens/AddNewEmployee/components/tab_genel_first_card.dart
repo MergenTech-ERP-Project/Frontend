@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
-import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_genel_first_card_image.dart';
-import 'package:vtys_kalite/utilities/style.dart';
 
 class TabGenelFirstCard extends StatelessWidget {
+  const TabGenelFirstCard({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -57,12 +57,15 @@ class TabGenelFirstCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                CustomText(text: "E-posta (iş)"),
-                CustomText(text: "omerfarukozturk026@gmail.com"),
-              ],
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  CustomText(text: "E-posta (iş)"),
+                  CustomText(text: "omerfarukozturk026@gmail.com"),
+                ],
+              ),
             ),
             const SizedBox(height: 20),
             Row(

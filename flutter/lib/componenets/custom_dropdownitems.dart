@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
-class MultipleChoiceCustomDropDownItems extends StatefulWidget {
+class CustomDropDownMenu extends StatefulWidget {
   final List<String> list;
   final String text;
   final Icon icon;
@@ -10,7 +10,7 @@ class MultipleChoiceCustomDropDownItems extends StatefulWidget {
   final bool isExpandedYes;
   final ValueChanged<String> onChanged;
 
-  const MultipleChoiceCustomDropDownItems({
+  const CustomDropDownMenu({
     Key? key,
     required this.list,
     required this.icon,
@@ -21,35 +21,48 @@ class MultipleChoiceCustomDropDownItems extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<MultipleChoiceCustomDropDownItems> createState() =>
-      _MultipleChoiceCustomDropDownItemsState();
+  State<CustomDropDownMenu> createState() => _CustomDropDownMenuState();
 }
 
-class _MultipleChoiceCustomDropDownItemsState
-    extends State<MultipleChoiceCustomDropDownItems> {
+class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
   String? valueChoose;
   @override
   Widget build(BuildContext context) {
     return Container(
       color: whiteColor,
-      child: DropdownButton(
-        hint: CustomText(text: widget.text),
-        icon: widget.icon,
-        iconSize: widget.iconSize,
-        isExpanded: widget.isExpandedYes,
-        value: valueChoose,
-        onChanged: (val) {
-          setState(() {
-            valueChoose = val.toString();
-            widget.onChanged(val.toString());
-          });
-        },
-        items: widget.list
-            .map((item) => DropdownMenuItem(
-                  value: item,
-                  child: Text(item),
-                ))
-            .toList(),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          CustomText(text: widget.text + ":\t"),
+          Expanded(
+            child: DropdownButton(
+              style: TextStyle(
+                fontFamily: 'Comfortaa',
+                fontSize: 16,
+                color: blackColor,
+                fontWeight: FontWeight.normal,
+              ),
+              hint: const CustomText(text: "seçiniz..."),
+              underline: const SizedBox(),
+              icon: widget.icon,
+              iconSize: widget.iconSize,
+              isExpanded: widget.isExpandedYes,
+              value: valueChoose,
+              onChanged: (val) {
+                setState(() {
+                  valueChoose = val.toString();
+                  widget.onChanged(val.toString());
+                });
+              },
+              items: widget.list
+                  .map((item) => DropdownMenuItem(
+                        value: item,
+                        child: Text(item),
+                      ))
+                  .toList(),
+            ),
+          ),
+        ],
       ),
     );
   }
