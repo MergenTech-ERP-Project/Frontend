@@ -6,22 +6,11 @@ import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/new_activit
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
-class ActivityListSmall extends StatefulWidget {
-  @override
-  State<ActivityListSmall> createState() => _ActivityListSmallState();
-}
-
-class _ActivityListSmallState extends State<ActivityListSmall> {
-  @override
-  void initState() {
-    activityController.fetchActivities();
-    super.initState();
-  }
-
+class ActivityListSmall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => activityController.isLoading.value == false
+      () => activityController.isLoading.isFalse
           ? ListView.separated(
               itemCount: activityController.activityList.length + 1,
               separatorBuilder: (context, index) => const SizedBox(height: 10),
@@ -55,4 +44,5 @@ class _ActivityListSmallState extends State<ActivityListSmall> {
             ),
     );
   }
+
 }
