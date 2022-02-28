@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:enum_to_string/enum_to_string.dart';
 
-import 'departments_enum.dart';
+import '../enums/departments_enum.dart';
 
 List<User> parseUsers(String str) =>
     List<User>.from(json.decode(str).map((x) => User.fromJson(x)));

@@ -9,7 +9,7 @@ import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_radiolisttile.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
-import 'package:vtys_kalite/models/departments_enum.dart';
+import 'package:vtys_kalite/enums/departments_enum.dart';
 import 'package:vtys_kalite/screens/Forms/components/text_widget.dart';
 import 'package:vtys_kalite/screens/Forms/forms.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -71,14 +71,14 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
           ),
           const CustomText(text: 'Departman Seçin'),
           const SizedBox(height: 15),
-          MultipleChoiceCustomDropDownItems(
-            text: "Seç",
-            list: titlesDepartmant,
-            isExpandedYes: true,
-            iconSize: 30,
-            icon: const Icon(Icons.arrow_drop_down),
-            onChanged: (val) {},
-          ),
+          // MultipleChoiceCustomDropDownItems(
+          //   text: "Seç",
+          //   list: titlesDepartmant,
+          //   isExpandedYes: true,
+          //   iconSize: 30,
+          //   icon: const Icon(Icons.arrow_drop_down),
+          //   onChanged: (val) {},
+          // ),
           const SizedBox(height: 15),
           CustomDateTimePicker(
             suffixWidget: const Icon(Icons.calendar_today_outlined),

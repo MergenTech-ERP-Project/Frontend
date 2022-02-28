@@ -49,7 +49,7 @@ class TabKariyer extends StatefulWidget {
     'Ek Ödemeler',
   ];
 
-  List<Odeme> odemeler = <Odeme>[].obs;
+  List<YeniOdeme> odemelerList = <YeniOdeme>[].obs;
 
   @override
   State<TabKariyer> createState() => _TabKariyerState();
@@ -303,35 +303,27 @@ class _TabKariyerState extends State<TabKariyer> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Flexible(
-                        flex: 8,
-                        child: CustomText(
-                          text: 'Maaş Ekle',
-                        ),
+                      const CustomText(
+                        text: 'Maaş Ekle',
                       ),
-                      Flexible(
-                        flex: 2,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: CustomButton(
-                                backgroundColor: Colors.white,
-                                foregroundColor: Colors.black,
-                                title: "İptal",
-                                height: 30,
-                                pressAction: () {},
-                              ),
-                            ),
-                            const Expanded(child: SizedBox(width: 10)),
-                            Expanded(
-                              child: CustomButton(
-                                title: "Kaydet",
-                                height: 30,
-                                pressAction: () {},
-                              ),
-                            ),
-                          ],
-                        ),
+                      Row(
+                        children: [
+                          CustomButton(
+                            width: 120,
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.black,
+                            title: "İptal",
+                            height: 30,
+                            pressAction: () {},
+                          ),
+                          const SizedBox(width: 10),
+                          CustomButton(
+                            width: 120,
+                            title: "Kaydet",
+                            height: 30,
+                            pressAction: () {},
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -413,100 +405,78 @@ class _TabKariyerState extends State<TabKariyer> {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        const SizedBox(height: 10),
                         CustomSwitch(
-                          switchValue: agiDahilSwitch,
-                          text: "AGİ dahil",
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              flex: 1,
-                              child: CustomButton(
-                                title: "Ödeme Ekle",
-                                rightIcon: Icons.keyboard_arrow_down,
-                                pressAction: () {
-                                  setState(() {
-                                    widget.odemeler.add(Odeme(
-                                      id: 0,
-                                      name: "Yol Yardımı",
-                                      fee: 0,
-                                      description: "",
-                                      periot: "",
-                                      unit: "TL",
-                                      grossPrice: true,
-                                      includePayroll: true,
-                                    ));
-                                  });
-                                  showDialog(
-                                    context: context,
-                                    builder: (_) => CustomAlertDialog(
-                                      titleWidget: const CustomText(
-                                          text: "Ödeme Ekleme Ekranı"),
-                                      bodyWidget: Column(
-                                        children: [
-                                          CustomTextBox(
-                                            title: "Yapmak istediğiniz ödeme",
-                                            controller:
-                                                controllerPaymentScreenInSalary,
-                                            borderless: true,
-                                          ),
-                                          CustomButton(
-                                            title: "Kaydet",
-                                            pressAction: () {
-                                              setState(() {
-                                                if (controllerPaymentScreenInSalary
-                                                        .text
-                                                        .trim() ==
-                                                    "") {
-                                                  showDialog(
-                                                      context: context,
-                                                      builder: (_) => CustomAlertDialog(
-                                                          titleWidget:
-                                                              const CustomText(
-                                                                  text:
-                                                                      "Ödeme Ekranı Boş Bırakılamaz"),
-                                                          bodyWidget:
-                                                              const SizedBox(),
-                                                          bodyWidgetWidth:
-                                                              screenSize
-                                                                  .width));
-                                                } else {
-                                                  widget.odemeler.add(Odeme(
-                                                      name:
-                                                          controllerPaymentScreenInSalary
-                                                              .text));
-                                                }
-                                                Get.back();
-                                              });
-                                            },
-                                          ),
-                                        ],
+                            switchValue: agiDahilSwitch, text: "AGİ dahil"),
+                        const SizedBox(height: 20),
+                        CustomButton(
+                          width: 360,
+                          title: "Ödeme Ekle",
+                          rightIcon: Icons.keyboard_arrow_down,
+                          pressAction: () {
+                            showDialog(
+                              context: context,
+                              builder: (_) => CustomAlertDialog(
+                                titleWidget: const CustomText(
+                                  text: "Ödeme Ekleme Ekranı",
+                                ),
+                                bodyWidget: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 4,
+                                      child: CustomTextBox(
+                                        label: "Yapmak istediğiniz ödeme",
+                                        controller:
+                                            controllerPaymentScreenInSalary,
+                                        borderless: true,
                                       ),
-                                      bodyWidgetWidth: screenSize.width / 2,
-                                      bodyWidgetHeight: screenSize.height / 5.5,
                                     ),
-                                  );
-                                },
+                                    Expanded(
+                                      flex: 1,
+                                      child: CustomButton(
+                                        title: "Kaydet",
+                                        pressAction: () {
+                                          setState(() {
+                                            if (controllerPaymentScreenInSalary
+                                                    .text
+                                                    .trim() ==
+                                                "") {
+                                              showDialog(
+                                                context: context,
+                                                builder: (_) =>
+                                                    CustomAlertDialog(
+                                                  titleWidget: const CustomText(
+                                                    text:
+                                                        "Ödeme Ekranı Boş Bırakılamaz",
+                                                  ),
+                                                  bodyWidget: const SizedBox(),
+                                                  bodyWidgetWidth:
+                                                      screenSize.width,
+                                                ),
+                                              );
+                                            } else {
+                                              widget.odemelerList.add(
+                                                YeniOdeme(),
+                                              );
+                                            }
+                                            Get.back();
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                bodyWidgetWidth: screenSize.width / 2,
+                                bodyWidgetHeight: screenSize.height / 5.5,
                               ),
-                            ),
-                            const Flexible(
-                              flex: 4,
-                              child: SizedBox(),
-                            )
-                          ],
+                            );
+                          },
                         ),
                         Obx(() => ListView.builder(
                               shrinkWrap: true,
-                              itemCount: widget.odemeler.length,
+                              itemCount: widget.odemelerList.length,
                               itemBuilder: ((context, index) {
-                                return widget.odemeler[index];
+                                return widget.odemelerList[index];
                               }),
                             )),
                       ],

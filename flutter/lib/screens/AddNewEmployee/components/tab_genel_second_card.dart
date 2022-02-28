@@ -1,8 +1,13 @@
+// ignore_for_file: avoid_print
+
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
-import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
+import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
-import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/utilities/controllers.dart';
+import 'package:vtys_kalite/enums/contract_type.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdatetimepicker.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdropdownmenu.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
 
 class TabGenelSecondCard extends StatelessWidget {
   TextEditingController controllerName = TextEditingController();
@@ -13,11 +18,14 @@ class TabGenelSecondCard extends StatelessWidget {
   TextEditingController controllerTelephonePersonal = TextEditingController();
 
   TextEditingController controllerAccessType = TextEditingController();
-  TextEditingController controllerContractType = TextEditingController();
+  int contractTypeIndex = 0;
+
   TextEditingController controllerContractEndDate = TextEditingController();
 
   DateTime dateOfStart = DateTime.now();
   DateTime contractEndDate = DateTime.now();
+
+  TabGenelSecondCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +36,6 @@ class TabGenelSecondCard extends StatelessWidget {
 
   Widget aboutPersonal() {
     return Column(
-      //shrinkWrap: true,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         const Padding(
@@ -39,119 +46,69 @@ class TabGenelSecondCard extends StatelessWidget {
         ),
         Row(
           children: [
-            Expanded(
-              child: CustomTextBox(
-                borderless: true,
-                controller: controllerName,
-                label: "Ad",
-                suffixWidget: const SizedBox(),
-              ),
+            ExpandedNameController(
+              controller: controllerName,
+              label: "Ad",
+              widget: const SizedBox(),
             ),
-            Expanded(
-              child: CustomTextBox(
-                borderless: true,
-                controller: controllerSurname,
-                label: "Soyad",
-                suffixWidget: const SizedBox(),
-              ),
+            ExpandedNameController(
+              controller: controllerSurname,
+              label: "Soyad",
+              widget: const SizedBox(),
             ),
           ],
         ),
         Row(
           children: [
-            Expanded(
-              child: CustomTextBox(
-                borderless: true,
-                controller: controllerEPostaWork,
-                label: "E-Posta (İş)",
-                suffixWidget: const SizedBox(),
-              ),
+            ExpandedNameController(
+              controller: controllerEPostaWork,
+              label: "E-Posta (İş)",
+              widget: const SizedBox(),
             ),
-            Expanded(
-              child: CustomTextBox(
-                borderless: true,
-                controller: controllerEPostaPersonal,
-                label: "E-Posta (Genel)",
-                suffixWidget: const SizedBox(),
-              ),
+            ExpandedNameController(
+              controller: controllerEPostaPersonal,
+              label: "E-Posta (Genel)",
+              widget: const SizedBox(),
             ),
           ],
         ),
         Row(
           children: [
-            Expanded(
-              child: CustomTextBox(
-                borderless: true,
-                controller: controllerTelephoneWork,
-                label: "Telefon (İş)",
-                suffixWidget: const SizedBox(),
-              ),
+            ExpandedNameController(
+              controller: controllerTelephoneWork,
+              label: "Telefon (İş)",
+              widget: const SizedBox(),
             ),
-            Expanded(
-              child: CustomTextBox(
-                borderless: true,
-                controller: controllerTelephonePersonal,
-                label: "Telefon (Kişisel)",
-                suffixWidget: const SizedBox(),
-              ),
+            ExpandedNameController(
+              controller: controllerTelephonePersonal,
+              label: "Telefon (Kişisel)",
+              widget: const SizedBox(),
             ),
           ],
         ),
         Row(
           children: [
-            Expanded(
-              child: CustomDateTimePicker(
-                suffixWidget: const Icon(Icons.calendar_today_outlined),
-                labelText: "İşe Başlangıç Tarihi",
-                borderless: true,
-                onChanged: (val) {
-                  if (val != null) {
-                    print("DateTime picker : " + val);
-                  }
-                  try {
-                    dateOfStart = dateTimeFormat.parse(val!);
-                  } catch (e) {
-                    print(e.toString());
-                  }
-                },
-              ),
+            ExpandedCustomDateTimePicker(
+              label: "İşe Başlangıç Tarihi",
+              dateTime: dateOfStart,
             ),
-            Expanded(
-              child: CustomTextBox(
-                borderless: true,
-                controller: controllerAccessType,
-                label: "Erişim Türü",
-                suffixWidget: const Icon(Icons.keyboard_arrow_down),
-              ),
+            ExpandedCustomDateTimePicker(
+              label: "Sözleşme Bitiş Tarihi",
+              dateTime: contractEndDate,
             ),
           ],
         ),
         Row(
           children: [
-            Expanded(
-              child: CustomTextBox(
-                borderless: true,
-                controller: controllerContractType,
-                label: "Sözleşme Türü",
-                suffixWidget: const Icon(Icons.keyboard_arrow_down),
-              ),
+            ExpandedCustomDropDownMenu(
+              label: "Sözleşme Türü",
+              index: contractTypeIndex,
+              listExtension: ContractTypeExtension.getList(),
             ),
-            Expanded(
-              child: CustomDateTimePicker(
-                suffixWidget: const Icon(Icons.calendar_today_outlined),
-                labelText: "Sözleşme Bitiş Tarihi",
-                borderless: true,
-                onChanged: (val) {
-                  if (val != null) {
-                    print("DateTime picker : " + val);
-                  }
-                  try {
-                    contractEndDate = dateTimeFormat.parse(val!);
-                  } catch (e) {
-                    print(e.toString());
-                  }
-                },
-              ),
+            ExpandedNameController(
+              controller: controllerAccessType,
+              label: "Erişim Türü",
+              widget: const Icon(Icons.keyboard_arrow_down),
             ),
           ],
         ),

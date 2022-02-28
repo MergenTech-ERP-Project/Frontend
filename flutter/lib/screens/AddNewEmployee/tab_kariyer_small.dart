@@ -49,7 +49,9 @@ class TabKariyerSmall extends StatefulWidget {
     'Ek Ödemeler',
   ];
 
-  List<Odeme> odemeler = <Odeme>[].obs;
+  List<YeniOdeme> odemeler = <YeniOdeme>[].obs;
+
+  TabKariyerSmall({Key? key}) : super(key: key);
 
   @override
   State<TabKariyerSmall> createState() => _TabKariyerSmallState();
@@ -373,27 +375,16 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                               title: "Ödeme Ekle",
                               rightIcon: Icons.keyboard_arrow_down,
                               pressAction: () {
-                                setState(() {
-                                  widget.odemeler.add(Odeme(
-                                    id: 0,
-                                    name: "Yol Yardımı",
-                                    fee: 0,
-                                    description: "",
-                                    periot: "",
-                                    unit: "TL",
-                                    grossPrice: true,
-                                    includePayroll: true,
-                                  ));
-                                });
                                 showDialog(
                                   context: context,
                                   builder: (_) => CustomAlertDialog(
                                     titleWidget: const CustomText(
-                                        text: "Ödeme Ekleme Ekranı"),
+                                      text: "Ödeme Ekleme Ekranı",
+                                    ),
                                     bodyWidget: Column(
                                       children: [
                                         CustomTextBox(
-                                          title: "Yapmak istediğiniz ödeme",
+                                          label: "Yapmak istediğiniz ödeme",
                                           controller:
                                               controllerPaymentScreenInSalary,
                                           borderless: true,
@@ -418,10 +409,20 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                                                         bodyWidgetWidth:
                                                             screenSize.width));
                                               } else {
-                                                widget.odemeler.add(Odeme(
+                                                widget.odemeler.add(
+                                                  YeniOdeme(
                                                     name:
                                                         controllerPaymentScreenInSalary
-                                                            .text));
+                                                            .text,
+                                                    description:
+                                                        "Ömer Faruk Öztürk",
+                                                    grossPrice: true,
+                                                    includePayroll: false,
+                                                    periot: "Aylık",
+                                                    salary: "4400",
+                                                    unit: "TL",
+                                                  ),
+                                                );
                                               }
                                               Get.back();
                                             });

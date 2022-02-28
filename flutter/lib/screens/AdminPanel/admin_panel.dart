@@ -7,7 +7,7 @@ import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/main.dart';
-import 'package:vtys_kalite/models/departments_enum.dart';
+import 'package:vtys_kalite/enums/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/widgets/top_navigation_bar.dart';
@@ -105,7 +105,7 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
                                         text: widget.users[index - 1].name),
                                   ),
                                   const SizedBox(height: 10),
-                                  MultipleChoiceCustomDropDownItems(
+                                  CustomDropDownMenu(
                                     list: titlesDepartmant,
                                     isExpandedYes: true,
                                     text:

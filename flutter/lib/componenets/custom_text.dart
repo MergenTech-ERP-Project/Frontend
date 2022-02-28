@@ -22,10 +22,11 @@ class CustomText extends StatelessWidget {
       text ?? "",
       textAlign: textAlign ?? TextAlign.left,
       style: TextStyle(
-          fontFamily: 'Comfortaa',
-          fontSize: size ?? 16,
-          color: color ?? blackColor,
-          fontWeight: weight ?? FontWeight.normal),
+        fontFamily: 'Comfortaa',
+        fontSize: size ?? 16,
+        color: color ?? blackColor,
+        fontWeight: weight ?? FontWeight.normal,
+      ),
     );
   }
 }

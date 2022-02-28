@@ -5,7 +5,7 @@ class CustomTextBox extends StatefulWidget {
   final Widget? suffixWidget;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
-  final String? title, label, hint;
+  final String? label, hint;
   final Icon? decorationIcon;
   final bool? obscureBool, readOnly;
   final bool? borderless;
@@ -17,7 +17,6 @@ class CustomTextBox extends StatefulWidget {
 
   const CustomTextBox({
     Key? key,
-    this.title,
     this.label,
     this.hint,
     this.decorationIcon,
@@ -84,6 +83,12 @@ class _CustomTextBoxState extends State<CustomTextBox> {
               )
             : widget.suffixWidget,
         labelText: widget.label,
+        labelStyle: TextStyle(
+          fontFamily: 'Comfortaa',
+          fontSize: 16,
+          color: blackColor,
+          fontWeight: FontWeight.normal,
+        ),
         hintText: widget.hint,
         border: !widget.borderless!
             ? OutlineInputBorder(
