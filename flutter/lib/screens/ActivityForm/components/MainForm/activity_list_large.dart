@@ -6,12 +6,7 @@ import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/new_activit
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
-class ActivityListLarge extends StatefulWidget {
-  @override
-  State<ActivityListLarge> createState() => _ActivityListLargeState();
-}
-
-class _ActivityListLargeState extends State<ActivityListLarge> {
+class ActivityListLarge extends StatelessWidget {
   final gridDelegate = const SliverGridDelegateWithMaxCrossAxisExtent(
     maxCrossAxisExtent: 250,
     childAspectRatio: 1.2,
@@ -20,15 +15,9 @@ class _ActivityListLargeState extends State<ActivityListLarge> {
   );
 
   @override
-  void initState() {
-    activityController.fetchActivities();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Obx(
-      () => activityController.isLoading.value == false
+      () => activityController.isLoading.isFalse
           ? GridView.builder(
               padding: const EdgeInsets.all(12),
               gridDelegate: gridDelegate,
@@ -57,4 +46,5 @@ class _ActivityListLargeState extends State<ActivityListLarge> {
             ),
     );
   }
+
 }

@@ -12,18 +12,26 @@ import 'package:vtys_kalite/utilities/style.dart';
 class ActivityCard extends StatelessWidget {
   final Activity activity;
   var activityEvaluationId = -1;
+  final isFetch = false.obs;
+
+  ///TODO: Add Dialog to delete button to proceed deleting the activity is ok?
 
   ActivityCard({
-    Key? key,
+    Key? key, 
     required this.activity,
-  }) : super(key: key);
+  }) : super(key: key) {
+    checkAnswer();
+  } 
 
-  final isFetch = false.obs;
   checkAnswer() async {
     isFetch(true);
     try {
       activityEvaluationId = await activityEvaluationController
           .fetchActivityEvaluation(activity.id, user.id);
+      print("Activity Card : " +
+          activity.id.toString() +
+          ", " +
+          activityEvaluationId.toString());
     } finally {
       isFetch(false);
     }
@@ -31,8 +39,6 @@ class ActivityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (activityEvaluationId == -1) checkAnswer();
-    print("Activity Card : " + activityEvaluationId.toString());
     return Obx(
       () => isFetch.value
           ? Container(
@@ -114,8 +120,8 @@ class ActivityCard extends StatelessWidget {
                             size: 22,
                           ),
                         ),
-                        onTap: () => activityController.deleteActivity(
-                            activity.name, activity.organizator),
+                        onTap: () =>
+                            activityController.deleteActivity(activity.id),
                       ),
                     ),
                   ],
@@ -130,9 +136,7 @@ class ActivityCard extends StatelessWidget {
                             activity: activity,
                           ),
                         ),
-                      ).then(
-                        (value) => checkAnswer(),
-                      )
+                      ).then((value) => checkAnswer())
                   : null),
     );
   }

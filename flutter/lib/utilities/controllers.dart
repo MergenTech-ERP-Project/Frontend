@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/activity_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/activity_evaluation_controller.dart';
@@ -10,13 +11,14 @@ import 'package:vtys_kalite/controller/Frontend%20Controller/navigator_controlle
 
 DateFormat dateTimeFormat = DateFormat("yyyy-MM-dd HH:mm");
 
-AuthenticationController authenticationController = AuthenticationController();
-UserController userController = UserController();
-ActivityController activityController = ActivityController();
+AuthenticationController authenticationController =
+    Get.find<AuthenticationController>();
+UserController userController = Get.find<UserController>();
+ActivityController activityController = Get.find<ActivityController>();
 ActivityEvaluationController activityEvaluationController =
-    ActivityEvaluationController();
-CompanyController companyController = CompanyController();
-BranchController branchController = BranchController();
+    Get.find<ActivityEvaluationController>();
+CompanyController companyController = Get.find<CompanyController>();
+BranchController branchController = Get.find<BranchController>();
 
-MenuController menuController = MenuController();
-NavigatorController navigatorController = NavigatorController();
+MenuController menuController = Get.find<MenuController>();
+NavigatorController navigatorController = Get.find<NavigatorController>();

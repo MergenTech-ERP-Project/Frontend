@@ -39,7 +39,6 @@ class ActivityEvaluationRemoteServices {
   }
 
   static Future<String> postActivityEvaluation(String json) async {
-    print("Json: $json");
     var response = await http
         .post(Uri.parse(serviceHttp + '/activityevaluation/post'),
             headers: <String, String>{

@@ -15,6 +15,8 @@ class ActivityCardSmall extends StatelessWidget {
   final Activity activity;
   int activityEvaluationId = -1;
 
+  ///TODO: Add Dialog to delete button to proceed deleting the activity is ok?
+
   ActivityCardSmall({
     Key? key,
     required this.activity,
@@ -28,14 +30,21 @@ class ActivityCardSmall extends StatelessWidget {
     try {
       activityEvaluationId = await activityEvaluationController
           .fetchActivityEvaluation(activity.id, user.id);
+      print("Activity Card : " +
+          activity.id.toString() +
+          ", " +
+          activityEvaluationId.toString());
     } finally {
       isFetch(false);
     }
   }
   @override
   Widget build(BuildContext context) {
-    if (activityEvaluationId == -1) checkAnswer();
-    print("Activity Card : " + activityEvaluationId.toString());
+    if (activityEvaluationId == -1 &&
+        isFetch.isFalse &&
+        activityController.isLoading.isFalse) {
+      checkAnswer();
+    }
     return Obx(
       () => isFetch.value
           ? Container(
@@ -127,8 +136,7 @@ class ActivityCardSmall extends StatelessWidget {
                             ),
                           ),
                           onTap: () {
-                            activityController.deleteActivity(
-                                activity.name, activity.organizator);
+                            activityController.deleteActivity(activity.id);
                           },
                         ),
                       ),
