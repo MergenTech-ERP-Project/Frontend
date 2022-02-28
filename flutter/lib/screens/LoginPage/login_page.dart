@@ -8,6 +8,7 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
+import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
@@ -167,7 +168,11 @@ class LoginPage extends StatelessWidget {
       );
       return;
     }
-    authenticationController.login(_usernameController.text);
+    if (isCheckboxTrue) {
+      authenticationController.login(_usernameController.text);
+    } else {
+      user.name = _usernameController.text;
+    }
     Get.offAllNamed(rootRoute);
   }
 }

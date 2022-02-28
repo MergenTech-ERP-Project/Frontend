@@ -1,52 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/models/user.dart';
+import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
-class NewActivityInitialPage extends StatefulWidget {
+class NewActivityInitialPage extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController placeController = TextEditingController();
   final TextEditingController organizatorController = TextEditingController();
-  DateTime date = DateTime.now();
+  DateTime? initialDate;
 
   final _newActivityInitialPageForm = GlobalKey<FormState>();
 
-  final Function() onNextButtonClick;
+  final Function(Activity) onNextButtonClick;
 
   NewActivityInitialPage({
     Key? key,
+    this.initialDate,
     required this.onNextButtonClick,
-  }) : super(key: key);
-
-  @override
-  State<NewActivityInitialPage> createState() => _NewActivityInitialPageState();
-}
-
-class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
+  }) : super(key: key) {
+    initialDate ??= DateTime.now();
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Form(
-          key: widget._newActivityInitialPageForm,
+          key: _newActivityInitialPageForm,
           child: Column(
             children: [
               buildTextBox(
-                widget.nameController,
+                nameController,
                 'İsim',
                 Icons.person,
               ),
               buildTextBox(
-                widget.placeController,
+                placeController,
                 'Konum',
                 Icons.home,
               ),
               buildTextBox(
-                widget.organizatorController,
+                organizatorController,
                 'Organizatör',
                 Icons.person,
               ),
@@ -59,7 +55,7 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
                   onChanged: (val) {
                     if (val != null) {
                       try {
-                        widget.date = dateTimeFormat.parse(val);
+                        initialDate = dateTimeFormat.parse(val);
                       } catch (e) {
                         debugPrint(e.toString());
                       }
@@ -74,16 +70,19 @@ class _NewActivityInitialPageState extends State<NewActivityInitialPage> {
         const SizedBox(height: 10),
         CustomButton(
           width: double.infinity,
-          title: "Oluştur", //next
+          rightIcon: Icons.keyboard_arrow_right,
+          title: "Devam Et", //next
           pressAction: () {
-            if (widget._newActivityInitialPageForm.currentState!.validate()) {
-              widget.onNextButtonClick();
-              activityController.postActivity(
-                  widget.nameController.text,
-                  widget.placeController.text,
-                  dateTimeFormat.format(widget.date).toString(),
-                  widget.organizatorController.text, <User>[]);
-              Get.back();
+            if (_newActivityInitialPageForm.currentState!.validate()) {
+              Activity activity = Activity(
+                id: 0,
+                name: nameController.text,
+                place: placeController.text,
+                datetime: dateTimeFormat.format(initialDate!).toString(),
+                organizator: organizatorController.text,
+              );
+              onNextButtonClick(activity);
+              activityController.postActivity(activity);
             }
           },
         ),

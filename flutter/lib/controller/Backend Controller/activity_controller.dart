@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:get/get.dart';
@@ -43,18 +45,6 @@ class ActivityController extends GetxController {
     }
   }
 
-  Future<int> fetchActivityByNameAndOrganizator(
-      String name, String organizator) async {
-    try {
-      isLoading(true);
-      var activity =
-          await ActivityRemoteServices.fetchActivity(name, organizator);
-      return activity;
-    } finally {
-      isLoading(false);
-    }
-  }
-
   Future<Activity?> fetchActivitybyId(int id) async {
     try {
       isLoading(true);
@@ -65,19 +55,11 @@ class ActivityController extends GetxController {
     }
   }
 
-  Future<String?> postActivity(String name, String place, String datetime,
-      String organizator, List<User> selectedUsers) async {
+  Future<String?> postActivity(Activity activity) async {
     try {
       isLoading(true);
-      var response = await ActivityRemoteServices.postActivity(json
-          .encode(Activity(
-            id: 0,
-            name: name,
-            datetime: datetime,
-            place: place,
-            organizator: organizator,
-          ).toJson())
-          .toString());
+      var response = await ActivityRemoteServices.postActivity(
+          json.encode(activity.toJson()).toString());
       fetchActivities();
       return response;
     } finally {
@@ -89,13 +71,13 @@ class ActivityController extends GetxController {
     ActiveToUser activeToUser,
   ) async {
     try {
-      isLoading(true);
       var response = await ActiveToUserRemoteServices.postActiveToUser(
           json.encode(activeToUser.toJson()).toString());
       fetchActivities();
       return response;
-    } finally {
-      isLoading(false);
+    } catch (e) {
+      print(e);
+      return "";
     }
   }
 

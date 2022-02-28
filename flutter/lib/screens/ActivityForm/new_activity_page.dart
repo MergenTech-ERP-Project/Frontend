@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/NewActivity/new_activity_initial_page.dart';
+import 'package:vtys_kalite/screens/ActivityForm/components/NewActivity/new_activity_select_users_page.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class NewActivityPage extends StatefulWidget {
@@ -11,21 +13,39 @@ class NewActivityPage extends StatefulWidget {
   State<NewActivityPage> createState() => _NewActivityPageState();
 }
 
-
 class _NewActivityPageState extends State<NewActivityPage> {
+  var page = 0.obs;
+  var activityId = -1;
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    return Container(
+    final size = MediaQuery.of(context).size;
+    final width =
+        ResponsiveWidget.isSmallScreen(context) ? size.width : size.width / 1.6;
+    return AnimatedContainer(
       color: lightColor,
-      width: ResponsiveWidget.isSmallScreen(context) ? width : width / 1.6,
+      width: width,
+      duration: const Duration(milliseconds: 500),
       child: Wrap(
         children: [
           Padding(
             padding: const EdgeInsets.all(12),
-            child: NewActivityInitialPage(
-              onNextButtonClick: () {},
-            ),
+            child: Obx(() => page.value == 0
+                ? NewActivityInitialPage(
+                    onNextButtonClick: (activity) {
+                      page.value = 1;
+                      setState(() {
+                        activityId = activity.id;
+                      });
+                    },
+                  )
+                : NewActivitySelectUsersPage(
+                    width: width - 12,
+                    onPreviousButtonClick: () {
+                      page.value = 0;
+                    },
+                    containerHeight: 40,
+                    activityId: activityId,
+                  )),
           ),
         ],
       ),
