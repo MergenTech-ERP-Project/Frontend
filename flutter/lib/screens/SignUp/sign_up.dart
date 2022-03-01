@@ -67,7 +67,7 @@ class SignUpPage extends StatelessWidget {
                             if (val!.trim() == "") {
                               return "İsmini kontrol et!";
                             }
-                            return "";
+                            return null;
                           },
                         ),
                         const SizedBox(height: 15),
@@ -79,7 +79,7 @@ class SignUpPage extends StatelessWidget {
                             if (!val!.isValidEmail()) {
                               return "Email'i kontrol et!";
                             }
-                            return "";
+                            return null;
                           },
                         ),
                         const SizedBox(height: 15),
@@ -92,7 +92,7 @@ class SignUpPage extends StatelessWidget {
                             if (val!.trim() == "") {
                               return "Şifre'yi kontrol et!";
                             }
-                            return "";
+                            return null;
                           },
                         ),
                         const SizedBox(height: 15),
@@ -105,7 +105,7 @@ class SignUpPage extends StatelessWidget {
                             if (val!.trim() == "") {
                               return "Şifreyi Onayla'yı kontrol et!";
                             }
-                            return "";
+                            return null;
                           },
                         ),
                       ],
@@ -155,7 +155,7 @@ class SignUpPage extends StatelessWidget {
           titleWidget: CustomText(
             textAlign: TextAlign.center,
             text: response != 5000
-                ? _usernameController.text + " zaten kayıtlı"
+                ? _emailController.text + " zaten kayıtlı"
                 : "Bağlantınızı kontrol edin.",
           ),
           bodyWidget: SingleChildScrollView(
@@ -165,7 +165,7 @@ class SignUpPage extends StatelessWidget {
                   visible: response != 5000,
                   child: const CustomText(
                     text:
-                        "Girdiğiniz kullanıcı adı başka bir kullanıcı tarafından kullanılmaktadır.\nLütfen tekrar deneyiniz.",
+                        "Girdiğiniz email başka bir kullanıcı tarafından kullanılmaktadır.\nLütfen tekrar deneyiniz.",
                     textAlign: TextAlign.center,
                   ),
                 ),

@@ -3,11 +3,14 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class CustomCheckbox extends StatefulWidget {
-  bool value = false;
+  bool value;
   String text;
+  final Function() onChanged;
   CustomCheckbox({
     Key? key,
+    this.value = false,
     this.text = "",
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -18,11 +21,7 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        setState(() {
-          widget.value = !widget.value;
-        });
-      },
+      onTap: widget.onChanged,
       child: Row(
         children: [
           Checkbox(

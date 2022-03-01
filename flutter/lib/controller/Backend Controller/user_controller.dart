@@ -56,13 +56,14 @@ class UserController extends GetxController {
     try {
       isLoading(true);
       User newUser = User(
-          id: 0,
-          name: name,
-          email: email,
-          password: password,
-          title: name == "admin"
-              ? DepartmentsEnum.management
-              : DepartmentsEnum.none);
+        id: 0,
+        name: name,
+        password: password,
+        title:
+            name == "admin" ? DepartmentsEnum.management : DepartmentsEnum.none,
+        cellphone: "000",
+        email: email,
+      );
       var response = await UserRemoteServices.addNewUser(
           json.encode(newUser.toJson()).toString());
       fetchUsers(); //userList.add(newUser);

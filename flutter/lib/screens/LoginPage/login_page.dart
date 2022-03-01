@@ -68,7 +68,7 @@ class LoginPage extends StatelessWidget {
                             if (!val!.isValidEmail()) {
                               return "Email'i kontrol et!";
                             }
-                            return "";
+                            return null;
                           },
                         ),
                         const SizedBox(height: 15),
@@ -81,7 +81,7 @@ class LoginPage extends StatelessWidget {
                             if (val!.trim() == "") {
                               return "Şifre'yi kontrol et!";
                             }
-                            return "";
+                            return null;
                           },
                         ),
                       ],
@@ -89,7 +89,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 15),
-                const _ActionBar(),
+                _ActionBar(isCheckboxTrue: isCheckboxTrue),
                 const SizedBox(height: 15),
                 CustomButton(
                   width: double.infinity,
@@ -130,19 +130,18 @@ class LoginPage extends StatelessWidget {
           titleWidget: _emailController.text != ""
               ? CustomText(
                   textAlign: TextAlign.center,
-                  text: _emailController.text +
-                      " için yanlış kullanıcı adı veya şifre",
+                  text: _emailController.text + " için yanlış email veya şifre",
                 )
               : const CustomText(
                   textAlign: TextAlign.center,
-                  text: "Kullanıcı adı veya şifre boş bırakılamaz.",
+                  text: "Email veya şifre boş bırakılamaz.",
                 ),
           bodyWidget: SingleChildScrollView(
             child: Column(
               children: [
                 const CustomText(
                   text:
-                      "Girdiğiniz şifre veya kullanıcı adı yanlış. Lütfen tekrar deneyiniz.",
+                      "Girdiğiniz email veya şifre yanlış. Lütfen tekrar deneyiniz.",
                 ),
                 const SizedBox(
                   height: 10,
@@ -171,9 +170,18 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class _ActionBar extends StatelessWidget {
-  const _ActionBar({Key? key}) : super(key: key);
+class _ActionBar extends StatefulWidget {
+  _ActionBar({
+    Key? key,
+    this.isCheckboxTrue = false,
+  }) : super(key: key);
+  bool isCheckboxTrue;
 
+  @override
+  State<_ActionBar> createState() => _ActionBarState();
+}
+
+class _ActionBarState extends State<_ActionBar> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveWidget.isLargeScreen(context)
@@ -181,7 +189,13 @@ class _ActionBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomCheckbox(
+                value: widget.isCheckboxTrue,
                 text: "Hatırla",
+                onChanged: () {
+                  setState(() {
+                    widget.isCheckboxTrue = !widget.isCheckboxTrue;
+                  });
+                },
               ),
               CustomText(
                 text: "Şifremi Unuttum",
@@ -192,7 +206,13 @@ class _ActionBar extends StatelessWidget {
         : Column(
             children: [
               CustomCheckbox(
+                value: widget.isCheckboxTrue,
                 text: "Hatırla",
+                onChanged: () {
+                  setState(() {
+                    widget.isCheckboxTrue = !widget.isCheckboxTrue;
+                  });
+                },
               ),
               Row(
                 children: [
