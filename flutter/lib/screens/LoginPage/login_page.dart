@@ -11,6 +11,7 @@ import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/main.dart';
+import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
@@ -58,6 +59,7 @@ class LoginPage extends StatelessWidget {
                     }
                   },
                   child: Form(
+                    key: _formkey,
                     child: Column(
                       children: [
                         CustomTextBox(
@@ -161,10 +163,13 @@ class LoginPage extends StatelessWidget {
       );
       return;
     }
+    User? _user = await userController.fetchUserById(id);
+    print(_user != null ? _user.toJson().toString() : "null ulan");
+    if (_user == null) return;
     if (isCheckboxTrue) {
-      authenticationController.login(_emailController.text);
+      authenticationController.login(_user.name);
     } else {
-      user.name = _emailController.text;
+      user.name = _user.name;
     }
     Get.offAllNamed(rootRoute);
   }

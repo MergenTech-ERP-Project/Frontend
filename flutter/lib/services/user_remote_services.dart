@@ -10,7 +10,7 @@ class UserRemoteServices {
 
   static Future<List<User>?> fetchUsers() async {
     var response = await http.get(Uri.parse(serviceHttp + '/user/users'));
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = response.body.toString();
       return parseUsers(jsonString);
     } else {
@@ -18,10 +18,24 @@ class UserRemoteServices {
     }
   }
 
+  static Future<User?> fetchUserById(id) async {
+    var response = await http.get(Uri.parse(serviceHttp + '/user/users/$id'));
+    User? user;
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      var jsonString = response.body.toString();
+      if (jsonString == "null") {
+        return null;
+      }
+      jsonString = "[" + jsonString + "]";
+      user = parseUser(jsonString);
+    }
+    return user;
+  }
+
   static Future<int> fetchUserByName(String name) async {
     var response = await http.get(Uri.parse(serviceHttp + '/user/$name'));
     int userID = -1;
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = response.body.toString();
       if (jsonString == "null") {
         return userID;
@@ -37,7 +51,7 @@ class UserRemoteServices {
     var response =
         await http.get(Uri.parse(serviceHttp + '/user/$name/$password'));
     int userID = -1;
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       String jsonString = response.body.toString();
       if (jsonString == "null") {
         return userID;
@@ -51,9 +65,9 @@ class UserRemoteServices {
   static Future<int> fetchUserByEmailAndPassword(
       String email, String password) async {
     var response =
-        await http.get(Uri.parse(serviceHttp + '/check/$email/$password'));
+        await http.get(Uri.parse(serviceHttp + '/user/check/$email/$password'));
     int userID = -1;
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       String jsonString = response.body.toString();
       if (jsonString == "null") {
         return userID;
@@ -71,7 +85,6 @@ class UserRemoteServices {
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
-              //'Authorization': '<Your token>'
             },
             body: json,
             encoding: encoding)
@@ -94,7 +107,7 @@ class UserRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return response.statusCode == 200
+    return (response.statusCode >= 200 && response.statusCode < 300)
         ? "Success: User"
         : "Error: User ${response.statusCode}";
   }
@@ -111,7 +124,7 @@ class UserRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return response.statusCode == 200
+    return (response.statusCode >= 200 && response.statusCode < 300)
         ? "Success: User"
         : "Error: User ${response.statusCode}";
   }
