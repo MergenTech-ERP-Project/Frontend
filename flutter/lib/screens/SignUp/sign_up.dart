@@ -7,16 +7,19 @@ import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
+import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class SignUpPage extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
 
+  final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,12 +57,31 @@ class SignUpPage extends StatelessWidget {
                     }
                   },
                   child: Form(
+                    key: _formkey,
                     child: Column(
                       children: [
                         CustomTextBox(
                           controller: _usernameController,
                           label: "İsim",
                           hint: "abcdef",
+                          validator: (val) {
+                            if (val!.trim() == "") {
+                              return "İsmini kontrol et!";
+                            }
+                            return "";
+                          },
+                        ),
+                        const SizedBox(height: 15),
+                        CustomTextBox(
+                          controller: _emailController,
+                          label: "Email",
+                          hint: "abcdef@gmail.com",
+                          validator: (val) {
+                            if (!val!.isValidEmail()) {
+                              return "Email'i kontrol et!";
+                            }
+                            return "";
+                          },
                         ),
                         const SizedBox(height: 15),
                         CustomTextBox(
@@ -67,6 +89,12 @@ class SignUpPage extends StatelessWidget {
                           label: "Şifre",
                           hint: "******",
                           obscureBool: true,
+                          validator: (val) {
+                            if (val!.trim() == "") {
+                              return "Şifre'yi kontrol et!";
+                            }
+                            return "";
+                          },
                         ),
                         const SizedBox(height: 15),
                         CustomTextBox(
@@ -74,6 +102,12 @@ class SignUpPage extends StatelessWidget {
                           label: "Şifreyi Onayla",
                           hint: "******",
                           obscureBool: true,
+                          validator: (val) {
+                            if (val!.trim() == "") {
+                              return "Şifreyi Onayla'yı kontrol et!";
+                            }
+                            return "";
+                          },
                         ),
                       ],
                     ),
@@ -107,8 +141,13 @@ class SignUpPage extends StatelessWidget {
   }
 
   signUpPage(context) async {
+    if (!(_formkey.currentState!.validate())) return;
+    
     int? response = await userController.addNewUser(
-        _usernameController.text, _passwordController.text);
+      _usernameController.text,
+      _emailController.text,
+      _passwordController.text,
+    );
 
     if (response != 200) {
       showDialog(

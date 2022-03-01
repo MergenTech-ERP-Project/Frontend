@@ -29,11 +29,11 @@ class UserController extends GetxController {
     }
   }
 
-  Future<int> fetchUserByNameAndPassword(String name, String password) async {
+  Future<int> fetchUserByEmailAndPassword(String email, String password) async {
     try {
       isLoading(true);
       var userId =
-          await UserRemoteServices.fetchUserByNameAndPassword(name, password);
+          await UserRemoteServices.fetchUserByEmailAndPassword(email, password);
       print("fetch User: " + userId.toString());
       return userId;
     } finally {
@@ -52,12 +52,13 @@ class UserController extends GetxController {
     }
   }
 
-  Future<int?> addNewUser(String name, String password) async {
+  Future<int?> addNewUser(String name, String email, String password) async {
     try {
       isLoading(true);
       User newUser = User(
           id: 0,
           name: name,
+          email: email,
           password: password,
           title: name == "admin"
               ? DepartmentsEnum.management

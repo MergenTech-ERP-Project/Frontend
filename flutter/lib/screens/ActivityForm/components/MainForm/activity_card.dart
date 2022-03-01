@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation_page.dart';
@@ -17,11 +19,11 @@ class ActivityCard extends StatelessWidget {
   ///TODO: Add Dialog to delete button to proceed deleting the activity is ok?
 
   ActivityCard({
-    Key? key, 
+    Key? key,
     required this.activity,
   }) : super(key: key) {
     checkAnswer();
-  } 
+  }
 
   checkAnswer() async {
     isFetch(true);
@@ -120,8 +122,91 @@ class ActivityCard extends StatelessWidget {
                             size: 22,
                           ),
                         ),
-                        onTap: () =>
-                            activityController.deleteActivity(activity.id),
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => CustomAlertDialog(
+                              backgroundColor: lightGreyColor,
+                              titleWidget: Row(
+                                children: [
+                                  Icon(
+                                    Icons.warning_rounded,
+                                    size: 24,
+                                    color: yellowColor,
+                                  ),
+                                  CustomText(
+                                    text: "Dikkat",
+                                    size: 24,
+                                    color: yellowColor,
+                                  ),
+                                ],
+                              ),
+                              bodyWidget: Wrap(
+                                children: const [
+                                  Center(
+                                    child: CustomText(
+                                      text:
+                                          "Silmek istediğinizden emin misiniz?",
+                                      size: 18,
+                                      weight: FontWeight.w200,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              bodyWidgetWidth: 350,
+                              actions: [
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10),
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.close,
+                                              color: whiteColor,
+                                            ),
+                                            CustomText(
+                                              text: "Hayır",
+                                              color: whiteColor,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        Get.back();
+                                      },
+                                    ),
+                                    InkWell(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10),
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.done,
+                                              color: yellowColor,
+                                            ),
+                                            CustomText(
+                                              text: "Evet",
+                                              color: yellowColor,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      onTap: () async {
+                                        showDialogWaitingMessage(context);
+                                        await activityController
+                                            .deleteActivity(activity.id);
+                                        Navigator.of(context).pop(true);
+                                        showDialogDoneMessage(context, true);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ],

@@ -11,6 +11,7 @@ Color blackColor = Colors.black;
 Color whiteColor = Colors.white;
 Color redColor = Colors.red;
 Color greenColor = Colors.green;
+Color yellowColor = Colors.yellow;
 
 Color successfulColor = Colors.green.shade800;
 Color incorrectColor = Colors.red.shade800;

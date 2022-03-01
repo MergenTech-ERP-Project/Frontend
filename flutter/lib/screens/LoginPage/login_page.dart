@@ -8,6 +8,7 @@ import 'package:vtys_kalite/componenets/custom_checkbox.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
+import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/routing/routes.dart';
@@ -16,8 +17,9 @@ import 'package:vtys_kalite/utilities/style.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _usernameController = TextEditingController();
-  bool isCheckboxTrue = false;
+  final TextEditingController _emailController = TextEditingController();
+  bool isCheckboxTrue = true;
+  final _formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +61,15 @@ class LoginPage extends StatelessWidget {
                     child: Column(
                       children: [
                         CustomTextBox(
-                          controller: _usernameController,
-                          label: "İsim",
-                          hint: "abcdef",
+                          controller: _emailController,
+                          label: "Email",
+                          hint: "abcdef@gmail.com",
+                          validator: (val) {
+                            if (!val!.isValidEmail()) {
+                              return "Email'i kontrol et!";
+                            }
+                            return "";
+                          },
                         ),
                         const SizedBox(height: 15),
                         CustomTextBox(
@@ -69,13 +77,19 @@ class LoginPage extends StatelessWidget {
                           label: "Şifre",
                           hint: "******",
                           obscureBool: true,
+                          validator: (val) {
+                            if (val!.trim() == "") {
+                              return "Şifre'yi kontrol et!";
+                            }
+                            return "";
+                          },
                         ),
                       ],
                     ),
                   ),
                 ),
                 const SizedBox(height: 15),
-                actionBar(context),
+                const _ActionBar(),
                 const SizedBox(height: 15),
                 CustomButton(
                   width: double.infinity,
@@ -103,7 +117,65 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget actionBar(context) {
+  loginButton(context) async {
+    if (!(_formkey.currentState!.validate())) return;
+
+    int id = await userController.fetchUserByEmailAndPassword(
+        _emailController.text, _passwordController.text);
+    if (id == -1) {
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (_) => CustomAlertDialog(
+          titleWidget: _emailController.text != ""
+              ? CustomText(
+                  textAlign: TextAlign.center,
+                  text: _emailController.text +
+                      " için yanlış kullanıcı adı veya şifre",
+                )
+              : const CustomText(
+                  textAlign: TextAlign.center,
+                  text: "Kullanıcı adı veya şifre boş bırakılamaz.",
+                ),
+          bodyWidget: SingleChildScrollView(
+            child: Column(
+              children: [
+                const CustomText(
+                  text:
+                      "Girdiğiniz şifre veya kullanıcı adı yanlış. Lütfen tekrar deneyiniz.",
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomButton(
+                  width: double.infinity,
+                  title: "Tekrar Dene",
+                  pressAction: () {
+                    Get.back();
+                  },
+                ),
+              ],
+            ),
+          ),
+          bodyWidgetWidth: MediaQuery.of(context).size.width / 3,
+        ),
+      );
+      return;
+    }
+    if (isCheckboxTrue) {
+      authenticationController.login(_emailController.text);
+    } else {
+      user.name = _emailController.text;
+    }
+    Get.offAllNamed(rootRoute);
+  }
+}
+
+class _ActionBar extends StatelessWidget {
+  const _ActionBar({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return ResponsiveWidget.isLargeScreen(context)
         ? Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -138,56 +210,5 @@ class LoginPage extends StatelessWidget {
               ),
             ],
           );
-  }
-
-  loginButton(context) async {
-    int id = await userController.fetchUserByNameAndPassword(
-        _usernameController.text, _passwordController.text);
-    if (id == -1) {
-      showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (_) => CustomAlertDialog(
-          titleWidget: _usernameController.text != ""
-              ? CustomText(
-                  textAlign: TextAlign.center,
-                  text: _usernameController.text +
-                      " için yanlış kullanıcı adı veya şifre",
-                )
-              : const CustomText(
-                  textAlign: TextAlign.center,
-                  text: "Kullanıcı adı veya şifre boş bırakılamaz.",
-                ),
-          bodyWidget: SingleChildScrollView(
-            child: Column(
-              children: [
-                const CustomText(
-                  text:
-                      "Girdiğiniz şifre veya kullanıcı adı yanlış. Lütfen tekrar deneyiniz.",
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                CustomButton(
-                  width: double.infinity,
-                  title: "Tekrar Dene",
-                  pressAction: () {
-                    Get.back();
-                  },
-                ),
-              ],
-            ),
-          ),
-          bodyWidgetWidth: MediaQuery.of(context).size.width / 3,
-        ),
-      );
-      return;
-    }
-    if (isCheckboxTrue) {
-      authenticationController.login(_usernameController.text);
-    } else {
-      user.name = _usernameController.text;
-    }
-    Get.offAllNamed(rootRoute);
   }
 }

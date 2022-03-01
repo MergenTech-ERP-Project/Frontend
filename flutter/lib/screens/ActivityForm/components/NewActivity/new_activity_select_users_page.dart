@@ -4,6 +4,7 @@ import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
+import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/models/active_to_user.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/NewActivity/components/new_activity_user_card.dart';
@@ -48,14 +49,12 @@ class _NewActivitySelectUsersPageState
   @override
   Widget build(BuildContext context) {
     Future postUserListToActivity() async {
-      for (User user in selectedUsers) {
-        activityController.postActiveToUser(
-          ActiveToUser(
-            activity_ids: widget.activityId.toInt(),
-            user_ids: user.id.toInt(),
-          ),
-        );
-      }
+      selectedUsers.map((user) => activityController.postActiveToUser(
+            ActiveToUser(
+              activity_ids: widget.activityId.toInt(),
+              user_ids: user.id.toInt(),
+            ),
+          ));
       await Future.delayed(const Duration(milliseconds: 100));
     }
 
@@ -66,85 +65,12 @@ class _NewActivitySelectUsersPageState
           child: Padding(
             padding:
                 EdgeInsets.symmetric(vertical: widget.containerHeight + 10),
-            child: Column(
-              children: [
-                CustomTextDivider(
-                  height: widget.containerHeight,
-                  text: "Seçilen Personeller",
-                  thickness: 2,
-                ),
-                Obx(
-                  () => SizedBox(
-                    height:
-                        selectedUsers.isEmpty ? 50 : selectedUsers.length * 60,
-                    child: selectedUsers.isEmpty
-                        ? Column(
-                            children: const [
-                              SizedBox(height: 10),
-                              CustomText(
-                                text: "Seçilen Personel Yok",
-                              ),
-                              SizedBox(height: 10),
-                            ],
-                          )
-                        : SizedBox(
-                            height:
-                                selectedUsers.length * widget.containerHeight,
-                            child: ListView.separated(
-                              separatorBuilder:
-                                  (BuildContext context, int index) =>
-                                      const SizedBox(height: 10),
-                              itemCount: selectedUsers.length,
-                              itemBuilder: (context, index) => InkWell(
-                                child: NewActivityUserCard(
-                                  user: selectedUsers[index],
-                                  iconData: Icons.remove,
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    users.add(selectedUsers[index]);
-                                    selectedUsers.remove(selectedUsers[index]);
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
-                  ),
-                ),
-                CustomTextDivider(
-                  height: widget.containerHeight,
-                  text: "Personeller",
-                  thickness: 4,
-                ),
-                Obx(
-                  () => userController.isLoading.value
-                      ? const CircularProgressIndicator()
-                      : SizedBox(
-                          height: users.isEmpty ? 50 : users.length * 60,
-                          child: users.isNotEmpty
-                              ? ListView.separated(
-                                  separatorBuilder:
-                                      (BuildContext context, int index) =>
-                                          const SizedBox(height: 10),
-                                  itemCount: users.length,
-                                  itemBuilder: (context, index) => InkWell(
-                                    child: NewActivityUserCard(
-                                      user: users[index],
-                                      iconData: Icons.add,
-                                    ),
-                                    onTap: () {
-                                      setState(() {
-                                        selectedUsers.add(users[index]);
-                                        users.remove(users[index]);
-                                      });
-                                    },
-                                  ),
-                                )
-                              : const SizedBox(height: 50),
-                        ),
-                ),
-                const SizedBox(height: 50),
-              ],
+            child: Obx(
+              () => _UserList(
+                users: users,
+                selectedUsers: selectedUsers,
+                containerHeight: widget.containerHeight,
+              ),
             ),
           ),
         ),
@@ -263,99 +189,10 @@ class _NewActivitySelectUsersPageState
                     title: "Tamamla",
                     leftIcon: Icons.done,
                     pressAction: () async {
-                      showDialog(
-                        context: context,
-                        builder: (context) => Dialog(
-                          child: Container(
-                            color: lightColor,
-                            width: 200,
-                            height: 200,
-                            child: Center(
-                              child: Column(
-                                children: const [
-                                  SizedBox(
-                                    height: 50,
-                                    width: 50,
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                  CustomText(
-                                    text: "İşlem Bekleniyor",
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
+                      showDialogWaitingMessage(context);
                       await postUserListToActivity();
                       //Future.delayed(const Duration(seconds: 2));
-                      Navigator.of(context).pop(true);
-                      showDialog(
-                        context: context,
-                        builder: (context) => Dialog(
-                          child: Container(
-                            color: lightColor,
-                            width: 250,
-                            height: 250,
-                            child: Center(
-                              child: Wrap(
-                                children: [
-                                  Center(
-                                    child: Container(
-                                      width: 60,
-                                      height: 60,
-                                      decoration: BoxDecoration(
-                                        color: whiteColor,
-                                        borderRadius: BorderRadius.circular(25),
-                                      ),
-                                      child: Center(
-                                        child: Container(
-                                          padding: const EdgeInsets.all(2),
-                                          margin: const EdgeInsets.all(2),
-                                          decoration: BoxDecoration(
-                                            color: lightColor,
-                                            borderRadius:
-                                                BorderRadius.circular(25),
-                                          ),
-                                          child: Icon(
-                                            Icons.done,
-                                            size: 50,
-                                            color: greenColor,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 20),
-                                    child: Center(
-                                      child: CustomText(
-                                        text: "İşlem Kaydedildi.",
-                                        size: 24,
-                                        weight: FontWeight.w500,
-                                        color: greenColor,
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Center(
-                                      child: CustomText(
-                                        text:
-                                            "Çıkmak için\n Ekranda herhangi bir yere tıklayın.",
-                                        size: 14,
-                                        weight: FontWeight.w200,
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ).then((value) => Get.back());
+                      showDialogDoneMessage(context, true);
                     },
                   ),
                 ),
@@ -365,6 +202,109 @@ class _NewActivitySelectUsersPageState
         ),
       ],
     );
-    
+  }
+}
+
+class _UserList extends StatefulWidget {
+  const _UserList({
+    Key? key,
+    required this.users,
+    required this.selectedUsers,
+    required this.containerHeight,
+  }) : super(key: key);
+
+  final List<User> users;
+
+  final List<User> selectedUsers;
+
+  final double containerHeight;
+
+  @override
+  State<_UserList> createState() => _UserListState();
+}
+
+class _UserListState extends State<_UserList> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        CustomTextDivider(
+          height: widget.containerHeight,
+          text: "Seçilen Personeller",
+          thickness: 2,
+        ),
+        Obx(
+          () => SizedBox(
+            height: widget.selectedUsers.isEmpty
+                ? 50
+                : widget.selectedUsers.length * 60,
+            child: widget.selectedUsers.isEmpty
+                ? Column(
+                    children: const [
+                      SizedBox(height: 10),
+                      CustomText(
+                        text: "Seçilen Personel Yok",
+                      ),
+                      SizedBox(height: 10),
+                    ],
+                  )
+                : SizedBox(
+                    height:
+                        widget.selectedUsers.length * widget.containerHeight,
+                    child: ListView.separated(
+                      separatorBuilder: (BuildContext context, int index) =>
+                          const SizedBox(height: 10),
+                      itemCount: widget.selectedUsers.length,
+                      itemBuilder: (context, index) => InkWell(
+                        child: NewActivityUserCard(
+                          user: widget.selectedUsers[index],
+                          iconData: Icons.remove,
+                        ),
+                        onTap: () {
+                          setState(() {
+                            widget.users.add(widget.selectedUsers[index]);
+                            widget.selectedUsers
+                                .remove(widget.selectedUsers[index]);
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+          ),
+        ),
+        CustomTextDivider(
+          height: widget.containerHeight,
+          text: "Personeller",
+          thickness: 4,
+        ),
+        Obx(
+          () => userController.isLoading.value
+              ? const CircularProgressIndicator()
+              : SizedBox(
+                  height: widget.users.isEmpty ? 50 : widget.users.length * 60,
+                  child: widget.users.isNotEmpty
+                      ? ListView.separated(
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const SizedBox(height: 10),
+                          itemCount: widget.users.length,
+                          itemBuilder: (context, index) => InkWell(
+                            child: NewActivityUserCard(
+                              user: widget.users[index],
+                              iconData: Icons.add,
+                            ),
+                            onTap: () {
+                              setState(() {
+                                widget.selectedUsers.add(widget.users[index]);
+                                widget.users.remove(widget.users[index]);
+                              });
+                            },
+                          ),
+                        )
+                      : const SizedBox(height: 50),
+                ),
+        ),
+        const SizedBox(height: 50),
+      ],
+    );
   }
 }
