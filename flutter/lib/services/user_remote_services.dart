@@ -30,10 +30,10 @@ class UserRemoteServices {
     return userID;
   }
 
-  static Future<int> fetchUserByNameAndPassword(
-      String name, String password) async {
+  static Future<int> fetchUserByEmailAndPassword(
+      String email, String password) async {
     var response =
-        await http.get(Uri.parse(serviceHttp + '/user/$name/$password'));
+        await http.get(Uri.parse(serviceHttp + '/user/$email/$password'));
     int userID = -1;
     if (response.statusCode == 200) {
       String jsonString = response.body.toString();

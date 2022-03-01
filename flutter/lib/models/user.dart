@@ -17,24 +17,30 @@ class User {
   String name;
   DepartmentsEnum title;
   String password;
+  String cellphone;
+  String email;
 
   User({
     this.id = 0,
     this.name = "",
     this.title = DepartmentsEnum.none,
     this.password = "",
+    this.cellphone = "",
+    this.email = "",
   });
 
   String getDepartment() => EnumToString.convertToString(title);
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-        id: json['id'],
-        name: json['name'],
-        password: json['password'],
-        title: EnumToString.fromString(DepartmentsEnum.values, json['title'])!
-        //title: json['title'] != null ? EnumToString.fromString(DepartmentsEnum.values, json['title'])! : null,
-        );
+      id: json['id'],
+      name: json['name'],
+      password: json['password'],
+      title: EnumToString.fromString(DepartmentsEnum.values, json['title'])!,
+      //title: json['title'] != null ? EnumToString.fromString(DepartmentsEnum.values, json['title'])! : null,
+      cellphone: json['cellphone'],
+      email: json['email'],
+    );
   }
 
   Map<String, dynamic> toJson() => {
@@ -42,5 +48,7 @@ class User {
         "name": name,
         "title": EnumToString.convertToString(title),
         "password": password,
+        "cellphone": cellphone,
+        "email": email,
       };
 }
