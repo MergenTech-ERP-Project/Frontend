@@ -12,6 +12,9 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/models/odeme.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdatetimepicker.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customswitch.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabKariyer extends StatefulWidget {
@@ -107,22 +110,14 @@ class _TabKariyerState extends State<TabKariyer> {
                         flex: 2,
                         child: Row(
                           children: [
-                            Expanded(
-                              child: CustomButton(
-                                backgroundColor: Colors.white,
-                                foregroundColor: Colors.black,
-                                title: "İptal",
-                                height: 30,
-                                pressAction: () {},
-                              ),
+                            _ExpandedButtonName(
+                              name: "İptal",
+                              function: () {},
                             ),
                             const Expanded(child: SizedBox(width: 10)),
-                            Expanded(
-                              child: CustomButton(
-                                title: "Kaydet",
-                                height: 30,
-                                pressAction: () {},
-                              ),
+                            _ExpandedButtonName(
+                              name: "Kaydet",
+                              function: () {},
                             ),
                           ],
                         ),
@@ -146,105 +141,50 @@ class _TabKariyerState extends State<TabKariyer> {
                               ),
                               Flexible(
                                 child: CustomText(
-                                    text:
-                                        "Şirket, çalışma şekli ve maaş güncellemeleri içeren pozisyon değişikliklerinde "
-                                        "şirketinizin kurallarını kontrol ediniz.\n"
-                                        "İleri tarihli varsayılan pozisyonlar başlandgıç tarihinden itibaren geçerli olur."),
+                                  text:
+                                      "Şirket, çalışma şekli ve maaş güncellemeleri içeren pozisyon değişikliklerinde "
+                                      "şirketinizin kurallarını kontrol ediniz.\n"
+                                      "İleri tarihli varsayılan pozisyonlar başlandgıç tarihinden itibaren geçerli olur.",
+                                ),
                               ),
                             ],
                           ),
                         ),
                         Row(
                           children: [
-                            Expanded(
-                              child: CustomTextBox(
-                                controller: positionSirket,
-                                borderless: true,
-                                suffixWidget: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: const [
-                                    Icon(Icons.close),
-                                    Icon(Icons.keyboard_arrow_down),
-                                  ],
-                                ),
-                                label: "Şirket",
-                              ),
+                            _ExpandedLabelSirket(
+                              positionSirket: positionSirket,
+                              name: "Şirket",
                             ),
-                            Expanded(
-                              child: CustomTextBox(
-                                controller: positionSube,
-                                borderless: true,
-                                suffixWidget: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: const [
-                                    Icon(Icons.close),
-                                    Icon(Icons.keyboard_arrow_down),
-                                  ],
-                                ),
-                                label: "Şube",
-                              ),
+                            _ExpandedLabelSirket(
+                              positionSirket: positionSirket,
+                              name: "Şube",
                             ),
                           ],
                         ),
                         Row(
                           children: [
-                            Expanded(
-                              child: CustomTextBox(
-                                controller: positionDepartman,
-                                borderless: true,
-                                suffixWidget: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: const [
-                                    Icon(Icons.close),
-                                    Icon(Icons.keyboard_arrow_down),
-                                  ],
-                                ),
-                                label: "Departman",
-                              ),
+                            _ExpandedLabelSirket(
+                              positionSirket: positionSirket,
+                              name: "Departman",
                             ),
-                            Expanded(
-                              child: CustomTextBox(
-                                controller: positionUnvan,
-                                borderless: true,
-                                suffixWidget: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: const [
-                                    Icon(Icons.close),
-                                    Icon(Icons.keyboard_arrow_down),
-                                  ],
-                                ),
-                                label: "Unvan",
-                              ),
+                            _ExpandedLabelSirket(
+                              positionSirket: positionSirket,
+                              name: "Unvan",
                             ),
                           ],
                         ),
                         Row(
                           children: [
-                            Expanded(
-                              child: CustomTextBox(
-                                borderless: true,
-                                controller: positionYoneticisi,
-                                suffixWidget:
-                                    const Icon(Icons.keyboard_arrow_down),
-                                label: "Yönetici",
-                              ),
+                            ExpandedNameController(
+                              controller: positionYoneticisi,
+                              label: "Yönetici",
+                              widget: widget,
                             ),
-                            Expanded(
-                              child: CustomTextBox(
-                                borderless: true,
-                                controller: positionCalismaSekli,
-                                suffixWidget:
-                                    const Icon(Icons.keyboard_arrow_down),
-                                label: "Çalışma Şekli",
-                              ),
+                            ExpandedNameController(
+                              controller: positionCalismaSekli,
+                              label: "Çalışma Şekli",
+                              widget: widget,
                             ),
                           ],
                         ),
@@ -308,20 +248,14 @@ class _TabKariyerState extends State<TabKariyer> {
                       ),
                       Row(
                         children: [
-                          CustomButton(
-                            width: 120,
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.black,
-                            title: "İptal",
-                            height: 30,
-                            pressAction: () {},
+                          _ExpandedButtonName(
+                            name: "İptal",
+                            function: () {},
                           ),
                           const SizedBox(width: 10),
-                          CustomButton(
-                            width: 120,
-                            title: "Kaydet",
-                            height: 30,
-                            pressAction: () {},
+                          _ExpandedButtonName(
+                            name: "Kaydet",
+                            function: () {},
                           ),
                         ],
                       ),
@@ -335,74 +269,42 @@ class _TabKariyerState extends State<TabKariyer> {
                       children: [
                         Row(
                           children: [
-                            Expanded(
-                              child: CustomTextBox(
-                                borderless: true,
-                                controller: controllerSalary,
-                                label: "Maaş",
-                                suffixWidget: const SizedBox(),
+                            ExpandedNameController(
+                              controller: controllerSalary,
+                              label: "Maaş",
+                              widget: const SizedBox(),
+                            ),
+                            ExpandedNameController(
+                              controller: controllerUnit,
+                              label: "Birim",
+                              widget: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                mainAxisSize: MainAxisSize.min,
+                                children: const [
+                                  Icon(Icons.close),
+                                  Icon(Icons.keyboard_arrow_down),
+                                ],
                               ),
                             ),
-                            Expanded(
-                              child: CustomTextBox(
-                                borderless: true,
-                                controller: controllerUnit,
-                                label: "Birim",
-                                suffixWidget: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: const [
-                                    Icon(Icons.close),
-                                    Icon(Icons.keyboard_arrow_down),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: CustomSwitch(
-                                switchValue: asgariUcretSwitch,
-                                text: "Asgari Ücret",
-                              ),
-                            ),
+                            ExpandedCustomSwitch(
+                                asgariUcretSwitch: asgariUcretSwitch,
+                                text: "Asgari Ücret"),
                           ],
                         ),
                         Row(
                           children: [
-                            Expanded(
-                              child: CustomDateTimePicker(
-                                suffixWidget:
-                                    const Icon(Icons.calendar_today_outlined),
-                                labelText: "Geçerlilik Başlangıç",
-                                borderless: true,
-                                onChanged: (val) {
-                                  if (val != null) {
-                                    print("DateTime picker : " + val);
-                                  }
-                                  try {
-                                    gecerlilikBaslangic =
-                                        dateTimeFormat.parse(val!);
-                                  } catch (e) {
-                                    print(e.toString());
-                                  }
-                                },
-                              ),
+                            ExpandedCustomDateTimePicker(
+                              dateTime: gecerlilikBaslangic,
+                              label: "Geçerlilik Başlangıç",
                             ),
-                            Expanded(
-                              child: CustomTextBox(
-                                borderless: true,
-                                controller: controllerUnit,
-                                label: "Maaş Periyodu",
-                                suffixWidget:
-                                    const Icon(Icons.keyboard_arrow_down),
-                              ),
+                            ExpandedNameController(
+                              controller: controllerUnit,
+                              label: "Maaş Periyodu",
+                              widget: const Icon(Icons.keyboard_arrow_down),
                             ),
-                            Expanded(
-                              child: CustomSwitch(
-                                switchValue: netSwitch,
-                                text: "Net",
-                              ),
-                            ),
+                            ExpandedCustomSwitch(
+                                asgariUcretSwitch: netSwitch, text: "Net"),
                           ],
                         ),
                         const SizedBox(height: 10),
@@ -553,6 +455,61 @@ class _TabKariyerState extends State<TabKariyer> {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class _ExpandedButtonName extends StatelessWidget {
+  _ExpandedButtonName({
+    Key? key,
+    required this.name,
+    required this.function,
+  }) : super(key: key);
+
+  final String name;
+  Function() function;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: CustomButton(
+        width: 120,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        title: name,
+        height: 30,
+        pressAction: function,
+      ),
+    );
+  }
+}
+
+class _ExpandedLabelSirket extends StatelessWidget {
+  const _ExpandedLabelSirket({
+    Key? key,
+    required this.positionSirket,
+    required this.name,
+  }) : super(key: key);
+
+  final TextEditingController positionSirket;
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: CustomTextBox(
+        controller: positionSirket,
+        borderless: true,
+        suffixWidget: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Icon(Icons.close),
+            Icon(Icons.keyboard_arrow_down),
+          ],
+        ),
+        label: name,
       ),
     );
   }
