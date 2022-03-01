@@ -15,16 +15,16 @@ String fetchUsers(List<User> data) =>
 class User {
   final int id;
   String name;
-  DepartmentsEnum title;
   String password;
+  DepartmentsEnum title;
   String cellphone;
   String email;
 
   User({
     this.id = 0,
     this.name = "",
-    this.title = DepartmentsEnum.none,
     this.password = "",
+    this.title = DepartmentsEnum.none,
     this.cellphone = "",
     this.email = "",
   });
@@ -46,8 +46,8 @@ class User {
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-        "title": EnumToString.convertToString(title),
         "password": password,
+        "title": EnumToString.convertToString(title),
         "cellphone": cellphone,
         "email": email,
       };

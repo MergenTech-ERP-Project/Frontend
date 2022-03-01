@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:vtys_kalite/models/user.dart';
@@ -30,10 +32,26 @@ class UserRemoteServices {
     return userID;
   }
 
+  static Future<int> fetchUserByNameAndPassword(
+      String name, String password) async {
+    var response =
+        await http.get(Uri.parse(serviceHttp + '/user/$name/$password'));
+    int userID = -1;
+    if (response.statusCode == 200) {
+      String jsonString = response.body.toString();
+      if (jsonString == "null") {
+        return userID;
+      }
+      jsonString = "[" + jsonString + "]";
+      userID = parseUser(jsonString).id;
+    }
+    return userID;
+  }
+
   static Future<int> fetchUserByEmailAndPassword(
       String email, String password) async {
     var response =
-        await http.get(Uri.parse(serviceHttp + '/user/$email/$password'));
+        await http.get(Uri.parse(serviceHttp + '/check/$email/$password'));
     int userID = -1;
     if (response.statusCode == 200) {
       String jsonString = response.body.toString();
@@ -47,6 +65,7 @@ class UserRemoteServices {
   }
 
   static Future<int> addNewUser(String json) async {
+    print(json);
     var response = await http
         .post(Uri.parse(serviceHttp + '/user/post'),
             headers: <String, String>{
