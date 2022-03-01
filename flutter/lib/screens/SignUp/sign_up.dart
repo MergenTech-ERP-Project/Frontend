@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
@@ -45,24 +46,38 @@ class SignUpPage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 15),
-                CustomTextBox(
-                  controller: _usernameController,
-                  label: "İsim",
-                  hint: "abcdef",
-                ),
-                const SizedBox(height: 15),
-                CustomTextBox(
-                  controller: _passwordController,
-                  label: "Şifre",
-                  hint: "******",
-                  obscureBool: true,
-                ),
-                const SizedBox(height: 15),
-                CustomTextBox(
-                  controller: _confirmPasswordController,
-                  label: "Şifreyi Onayla",
-                  hint: "******",
-                  obscureBool: true,
+                RawKeyboardListener(
+                  focusNode: FocusNode(),
+                  onKey: (e) {
+                    if (e.isKeyPressed(LogicalKeyboardKey.enter)) {
+                      signUpPage(context);
+                    }
+                  },
+                  child: Form(
+                    child: Column(
+                      children: [
+                        CustomTextBox(
+                          controller: _usernameController,
+                          label: "İsim",
+                          hint: "abcdef",
+                        ),
+                        const SizedBox(height: 15),
+                        CustomTextBox(
+                          controller: _passwordController,
+                          label: "Şifre",
+                          hint: "******",
+                          obscureBool: true,
+                        ),
+                        const SizedBox(height: 15),
+                        CustomTextBox(
+                          controller: _confirmPasswordController,
+                          label: "Şifreyi Onayla",
+                          hint: "******",
+                          obscureBool: true,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 30),
                 CustomButton(
