@@ -7,23 +7,23 @@ String activeToUserToJson(List<ActiveToUser> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class ActiveToUser {
-  final int activity_ids;
-  final int user_ids;
+  final int activityId;
+  final int userId;
 
   ActiveToUser({
-    this.activity_ids = 0,
-    this.user_ids = 0,
+    this.activityId = 0,
+    this.userId = 0,
   });
 
   factory ActiveToUser.fromMap(Map activeToUserMap) {
     return ActiveToUser(
-      activity_ids: activeToUserMap['activity_ids'],
-      user_ids: activeToUserMap['user_ids'],
+      userId: activeToUserMap['user_ids'],
+      activityId: activeToUserMap['activity_ids'],
     );
   }
 
   Map toJson() => {
-        'activity_ids': activity_ids,
-        'userId': user_ids,
+        'user_ids': userId,
+        'activity_ids': activityId,
       };
 }

@@ -1,7 +1,10 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
@@ -10,6 +13,7 @@ class NewActivityInitialPage extends StatelessWidget {
   final TextEditingController placeController = TextEditingController();
   final TextEditingController organizatorController = TextEditingController();
   DateTime? initialDate;
+  Activity? activity;
 
   final _newActivityInitialPageForm = GlobalKey<FormState>();
 
@@ -19,8 +23,16 @@ class NewActivityInitialPage extends StatelessWidget {
     Key? key,
     this.initialDate,
     required this.onNextButtonClick,
+    this.activity,
   }) : super(key: key) {
-    initialDate ??= DateTime.now();
+    if (activity != null) {
+      nameController.text = activity!.name!;
+      placeController.text = activity!.place!;
+      initialDate = dateTimeFormat.parse(activity!.datetime!);
+      organizatorController.text = activity!.organizator!;
+    } else {
+      initialDate ??= DateTime.now();
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -51,6 +63,7 @@ class NewActivityInitialPage extends StatelessWidget {
                 child: CustomDateTimePicker(
                   suffixWidget: const Icon(Icons.calendar_today_outlined),
                   borderless: true,
+                  initialDate: initialDate,
                   labelText: " Tarih",
                   onChanged: (val) {
                     if (val != null) {
@@ -72,17 +85,23 @@ class NewActivityInitialPage extends StatelessWidget {
           width: double.infinity,
           rightIcon: Icons.keyboard_arrow_right,
           title: "Devam Et", //next
-          pressAction: () {
+          pressAction: () async {
             if (_newActivityInitialPageForm.currentState!.validate()) {
-              Activity activity = Activity(
-                id: 0,
-                name: nameController.text,
-                place: placeController.text,
-                datetime: dateTimeFormat.format(initialDate!).toString(),
-                organizator: organizatorController.text,
-              );
-              onNextButtonClick(activity);
-              activityController.postActivity(activity);
+              bool isActivitExists = activity != null;
+              activity = activity ?? Activity(id: 0);
+              activity!.name = nameController.text;
+              activity!.place = placeController.text;
+              activity!.datetime =
+                  dateTimeFormat.format(initialDate!).toString();
+              activity!.organizator = organizatorController.text;
+
+              onNextButtonClick(activity!);
+
+              showDialogWaitingMessage(context);
+              await (isActivitExists
+                  ? activityController.putActivity(activity!)
+                  : activityController.postActivity(activity!));
+              Navigator.of(context).pop(true);
             }
           },
         ),
