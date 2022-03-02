@@ -67,9 +67,21 @@ class ActivityController extends GetxController {
     }
   }
 
-  Future<String?> postActiveToUser(
-    ActiveToUser activeToUser,
-  ) async {
+  Future<String?> putActivity(Activity activity) async {
+    try {
+      isLoading(true);
+      var response = await ActivityRemoteServices.putActivity(
+        activity.id,
+        json.encode(activity.toJson()).toString(),
+      );
+      fetchActivities();
+      return response;
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<String?> postActiveToUser(ActiveToUser activeToUser) async {
     try {
       var response = await ActiveToUserRemoteServices.postActiveToUser(
           json.encode(activeToUser.toJson()).toString());

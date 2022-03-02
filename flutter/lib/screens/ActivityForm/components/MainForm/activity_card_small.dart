@@ -6,6 +6,8 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation_page.dart';
+import 'package:vtys_kalite/screens/ActivityForm/components/NewActivity/components/new_activity_delete_button.dart';
+import 'package:vtys_kalite/screens/ActivityForm/components/NewActivity/components/new_activity_edit_button.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
@@ -84,7 +86,7 @@ class ActivityCardSmall extends StatelessWidget {
                       ),
                       Positioned(
                         left: 20,
-                        right: 50,
+                        right: 130,
                         height: height,
                         child: Column(
                           children: [
@@ -114,7 +116,7 @@ class ActivityCardSmall extends StatelessWidget {
                                     size: 16,
                                   ),
                                   CustomText(
-                                    text: "  " + activity.datetime,
+                                    text: "  " + activity.datetime!,
                                     size: 12,
                                   ),
                                 ],
@@ -125,19 +127,21 @@ class ActivityCardSmall extends StatelessWidget {
                       ),
                       Positioned(
                         right: 5,
-                        width: 40,
+                        width: 120,
                         height: height,
-                        child: InkWell(
-                          child: const Center(
-                            child: Icon(
-                              Icons.delete,
-                              color: Colors.redAccent,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ActivityCardEditButton(
                               size: 30,
+                              activity: activity,
+                              then: (value) => checkAnswer(),
                             ),
-                          ),
-                          onTap: () {
-                            activityController.deleteActivity(activity.id);
-                          },
+                            ActivityCardDeleteButton(
+                              size: 30,
+                              activity: activity,
+                            ),
+                          ],
                         ),
                       ),
                     ],

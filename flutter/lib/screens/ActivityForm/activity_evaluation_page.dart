@@ -26,7 +26,7 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    DateTime date = dateTimeFormat.parse(widget.activity.datetime);
+    DateTime date = dateTimeFormat.parse(widget.activity.datetime!);
     return Container(
       color: lightColor,
       width: ResponsiveWidget.isSmallScreen(context) ? width : width / 1.6,
@@ -40,7 +40,7 @@ class _ActivityEvaluationPageState extends State<ActivityEvaluationPage> {
                   top: 0,
                   left: 0,
                   child: CustomText(
-                    text: widget.activity.name.capitalizeFirst,
+                    text: widget.activity.name!.capitalizeFirst,
                     color: blackColor,
                     size: ResponsiveWidget.isLargeScreen(context) ? 28 : 20,
                     weight: FontWeight.w400,

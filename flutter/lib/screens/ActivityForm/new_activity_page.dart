@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
-import 'package:vtys_kalite/models/user.dart';
+import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/NewActivity/new_activity_initial_page.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/NewActivity/new_activity_select_users_page.dart';
-import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
-class NewActivityPage extends StatefulWidget {
-  List<User> selectedUsers = <User>[].obs;
-  @override
-  State<NewActivityPage> createState() => _NewActivityPageState();
-}
+class NewActivityPage extends StatelessWidget {
+  NewActivityPage({
+    Key? key,
+    this.activity,
+  }) : super(key: key) {
+    activityId.value = activity != null ? activity!.id : 0;
+  }
 
-class _NewActivityPageState extends State<NewActivityPage> {
+  Activity? activity;
+  var activityId = 0.obs;
   var page = 0.obs;
-  var activityId = -1;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -31,11 +33,10 @@ class _NewActivityPageState extends State<NewActivityPage> {
             padding: const EdgeInsets.all(12),
             child: Obx(() => page.value == 0
                 ? NewActivityInitialPage(
+                    activity: activity,
                     onNextButtonClick: (activity) {
                       page.value = 1;
-                      setState(() {
-                        activityId = activity.id;
-                      });
+                      activityId.value = activity.id;
                     },
                   )
                 : NewActivitySelectUsersPage(
@@ -44,7 +45,7 @@ class _NewActivityPageState extends State<NewActivityPage> {
                       page.value = 0;
                     },
                     containerHeight: 40,
-                    activityId: activityId,
+                    activityId: activityId.value,
                   )),
           ),
         ],

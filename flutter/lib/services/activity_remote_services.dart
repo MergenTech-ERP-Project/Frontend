@@ -19,7 +19,7 @@ class ActivityRemoteServices {
       },
     );
     print("fetchActivities response ${response.statusCode}");
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = response.body;
       print("JSON : $jsonString");
       return activityFromJson(jsonString);
@@ -38,7 +38,7 @@ class ActivityRemoteServices {
       },
     );
     print("fetchActivities response ${response.statusCode}");
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = response.body;
       print("JSON : $jsonString");
       return activityFromJson(jsonString);
@@ -57,7 +57,7 @@ class ActivityRemoteServices {
       },
     );
     print("fetchActivity response ${response.statusCode}");
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = response.body;
       return activityFromJson(jsonString)[0];
     }
@@ -78,7 +78,26 @@ class ActivityRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return response.statusCode == 200
+    return response.statusCode >= 200 && response.statusCode < 300
+        ? "Success: Activity"
+        : "Error: Activity ${response.statusCode}";
+  }
+
+  static Future<String> putActivity(int id, String json) async {
+    print("Json: $json");
+    var response = await http
+        .post(Uri.parse(serviceHttp + '/activity/put/$id'),
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+              'Accept': 'application/json',
+              //'Authorization': '<Your token>'
+            },
+            body: json,
+            encoding: encoding)
+        .timeout(
+          const Duration(seconds: 10),
+        );
+    return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Activity"
         : "Error: Activity ${response.statusCode}";
   }
@@ -95,7 +114,7 @@ class ActivityRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return response.statusCode == 200
+    return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Activity"
         : "Error: Activity ${response.statusCode}";
   }

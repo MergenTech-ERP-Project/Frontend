@@ -18,7 +18,7 @@ randomColor() {
   return (Random().nextDouble() * 0xFFFFFFFF).toInt();
 }
 
-showDialogDoneMessage(context, furtherBack) async {
+showDialogDoneMessage(context) async {
   showDialog(
     context: context,
     builder: (context) => Dialog(
@@ -82,7 +82,7 @@ showDialogDoneMessage(context, furtherBack) async {
         ),
       ),
     ),
-  ).then((value) => furtherBack ? Get.back() : null);
+  ).then((value) => Get.back());
 }
 
 showDialogWaitingMessage(context) async {

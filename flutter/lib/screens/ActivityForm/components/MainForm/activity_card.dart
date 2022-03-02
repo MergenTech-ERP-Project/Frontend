@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
-import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation_page.dart';
+import 'package:vtys_kalite/screens/ActivityForm/components/NewActivity/components/new_activity_delete_button.dart';
+import 'package:vtys_kalite/screens/ActivityForm/components/NewActivity/components/new_activity_edit_button.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
@@ -15,8 +15,6 @@ class ActivityCard extends StatelessWidget {
   final Activity activity;
   var activityEvaluationId = -1;
   final isFetch = false.obs;
-
-  ///TODO: Add Dialog to delete button to proceed deleting the activity is ok?
 
   ActivityCard({
     Key? key,
@@ -87,7 +85,7 @@ class ActivityCard extends StatelessWidget {
                                 size: 12,
                               ),
                               CustomText(
-                                text: "  " + activity.datetime,
+                                text: "  " + activity.datetime!,
                                 size: 12,
                               ),
                             ],
@@ -113,100 +111,20 @@ class ActivityCard extends StatelessWidget {
                       right: 5,
                       bottom: 5,
                       height: 24,
-                      width: 24,
-                      child: InkWell(
-                        child: const Center(
-                          child: Icon(
-                            Icons.delete,
-                            color: Colors.redAccent,
+                      width: 48,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ActivityCardEditButton(
                             size: 22,
+                            activity: activity,
+                            then: (value) => checkAnswer(),
                           ),
-                        ),
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => CustomAlertDialog(
-                              backgroundColor: lightGreyColor,
-                              titleWidget: Row(
-                                children: [
-                                  Icon(
-                                    Icons.warning_rounded,
-                                    size: 24,
-                                    color: yellowColor,
-                                  ),
-                                  CustomText(
-                                    text: "Dikkat",
-                                    size: 24,
-                                    color: yellowColor,
-                                  ),
-                                ],
-                              ),
-                              bodyWidget: Wrap(
-                                children: const [
-                                  Center(
-                                    child: CustomText(
-                                      text:
-                                          "Silmek istediğinizden emin misiniz?",
-                                      size: 18,
-                                      weight: FontWeight.w200,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              bodyWidgetWidth: 350,
-                              actions: [
-                                Row(
-                                  children: [
-                                    InkWell(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(10),
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.close,
-                                              color: whiteColor,
-                                            ),
-                                            CustomText(
-                                              text: "Hayır",
-                                              color: whiteColor,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      onTap: () {
-                                        Get.back();
-                                      },
-                                    ),
-                                    InkWell(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(10),
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.done,
-                                              color: yellowColor,
-                                            ),
-                                            CustomText(
-                                              text: "Evet",
-                                              color: yellowColor,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      onTap: () async {
-                                        showDialogWaitingMessage(context);
-                                        await activityController
-                                            .deleteActivity(activity.id);
-                                        Navigator.of(context).pop(true);
-                                        showDialogDoneMessage(context, true);
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          );
-                        },
+                          ActivityCardDeleteButton(
+                            size: 22,
+                            activity: activity,
+                          ),
+                        ],
                       ),
                     ),
                   ],
