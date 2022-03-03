@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabGenelSecondCardSmall extends StatelessWidget {
@@ -20,6 +21,26 @@ class TabGenelSecondCardSmall extends StatelessWidget {
 
   DateTime dateOfStart = DateTime.now();
   DateTime contractEndDate = DateTime.now();
+
+  User? user;
+
+  TabGenelSecondCardSmall({
+    Key? key,
+    this.user,
+  }) : super(key: key) {
+    user ??= User();
+    var lastSpace = user!.name.lastIndexOf(' ');
+    String name =
+        lastSpace != -1 ? user!.name.substring(0, lastSpace) : user!.name;
+    String surname = lastSpace != -1 ? user!.name.substring(lastSpace + 1) : "";
+
+    controllerName.text = name;
+    controllerSurname.text = surname;
+
+    controllerEPostaPersonal.text = user!.email;
+
+    controllerTelephonePersonal.text = user!.cellphone;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +108,7 @@ class TabGenelSecondCardSmall extends StatelessWidget {
               child: CustomDateTimePicker(
                 suffixWidget: const Icon(Icons.calendar_today_outlined),
                 labelText: "İşe Başlangıç Tarihi",
+                initialDate: dateOfStart,
                 borderless: true,
                 onChanged: (val) {
                   if (val != null) {
@@ -116,6 +138,7 @@ class TabGenelSecondCardSmall extends StatelessWidget {
               child: CustomDateTimePicker(
                 suffixWidget: const Icon(Icons.calendar_today_outlined),
                 labelText: "Sözleşme Bitiş Tarihi",
+                initialDate: contractEndDate,
                 borderless: true,
                 onChanged: (val) {
                   if (val != null) {
