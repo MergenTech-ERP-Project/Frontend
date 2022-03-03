@@ -71,7 +71,7 @@ class UserController extends GetxController {
         password: password,
         title:
             name == "admin" ? DepartmentsEnum.management : DepartmentsEnum.none,
-        cellphone: "000",
+        cellphone: "0540",
         email: email,
       );
       var response = await UserRemoteServices.addNewUser(

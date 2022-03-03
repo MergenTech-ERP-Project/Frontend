@@ -1,15 +1,15 @@
 import 'package:enum_to_string/enum_to_string.dart';
 
-enum AccountType {
+enum BankAccountType {
   drawingAccount,
   checkAccount,
   other,
 }
 
-extension AccountTypeExtension on AccountType {
+extension AccountTypeExtension on BankAccountType {
   static List<String> getList() {
     List<String> accountTypeList = [];
-    for (var item in AccountType.values) {
+    for (var item in BankAccountType.values) {
       accountTypeList.add(item.name);
     }
     return accountTypeList;
@@ -17,11 +17,11 @@ extension AccountTypeExtension on AccountType {
 
   String get name {
     switch (this) {
-      case AccountType.drawingAccount:
+      case BankAccountType.drawingAccount:
         return "Vadesiz Hesap";
-      case AccountType.checkAccount:
+      case BankAccountType.checkAccount:
         return "Çek Hesabı";
-      case AccountType.other:
+      case BankAccountType.other:
         return "Diğer";
 
       default:

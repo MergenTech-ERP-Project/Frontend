@@ -43,13 +43,6 @@ AppBar topNavigationBar(context, key) => AppBar(
           Expanded(
             child: Container(),
           ),
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: darkColor.withOpacity(.7),
-            ),
-            onPressed: () {},
-          ),
           Stack(
             children: [
               IconButton(
@@ -67,7 +60,7 @@ AppBar topNavigationBar(context, key) => AppBar(
                   height: 12,
                   padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
-                    color: activeColor,
+                    color: redColor,
                     borderRadius: BorderRadius.circular(30),
                     border: Border.all(
                       color: lightColor,
@@ -78,19 +71,25 @@ AppBar topNavigationBar(context, key) => AppBar(
               ),
             ],
           ),
+          IconButton(
+            icon: Icon(
+              Icons.settings,
+              color: darkColor.withOpacity(.7),
+            ),
+            onPressed: () {},
+          ),
           Container(width: 1, height: 22, color: lightGreyColor),
-          const SizedBox(width: 24),
           Visibility(
             visible: !ResponsiveWidget.isSmallScreen(context),
-            child: Row(
-              children: [
-                CustomText(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Center(
+                child: CustomText(
                   text: user.name,
                   color: darkColor,
                   weight: FontWeight.bold,
                 ),
-                const SizedBox(width: 16),
-              ],
+              ),
             ),
           ),
           InkWell(

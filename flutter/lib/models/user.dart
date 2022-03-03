@@ -47,7 +47,7 @@ class User {
         "id": id,
         "name": name,
         "password": password,
-        "title": EnumToString.convertToString(title),
+        "title": getDepartment(),
         "cellphone": cellphone,
         "email": email,
       };

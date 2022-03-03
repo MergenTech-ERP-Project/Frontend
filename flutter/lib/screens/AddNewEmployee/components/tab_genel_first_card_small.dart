@@ -37,7 +37,7 @@ class TabGenelFirstCardSmall extends StatelessWidget {
             const SizedBox(height: 20),
             profileAbout("Şube", "Eskişehir Teknopark"),
             const SizedBox(height: 20),
-            profileAbout("Departman", user.getDepartment()),
+            profileAbout("Departman", user.title.name),
             const SizedBox(height: 20),
             profileAbout("E-posta (iş)", "abcdef@mergen.com"),
             const SizedBox(height: 20),
