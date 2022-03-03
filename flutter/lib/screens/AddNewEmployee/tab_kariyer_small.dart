@@ -313,6 +313,11 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                                 CustomSwitch(
                                   switchValue: asgariUcretSwitch,
                                   text: "Asgari Ücret",
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      asgariUcretSwitch = value;
+                                    });
+                                  },
                                 ),
                               ],
                             ),
@@ -356,6 +361,11 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                                 CustomSwitch(
                                   switchValue: netSwitch,
                                   text: "Net",
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      netSwitch = value;
+                                    });
+                                  },
                                 ),
                               ],
                             ),
@@ -365,6 +375,11 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                         CustomSwitch(
                           switchValue: agiDahilSwitch,
                           text: "AGİ dahil",
+                          onChanged: (bool value) {
+                            setState(() {
+                              agiDahilSwitch = value;
+                            });
+                          },
                         ),
                         const SizedBox(height: 20),
                         Row(

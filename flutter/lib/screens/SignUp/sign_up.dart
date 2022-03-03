@@ -17,6 +17,7 @@ class SignUpPage extends StatelessWidget {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  final TextEditingController _cellPhoneController = TextEditingController();
 
   final _formkey = GlobalKey<FormState>();
   @override
@@ -108,6 +109,18 @@ class SignUpPage extends StatelessWidget {
                             return null;
                           },
                         ),
+                        const SizedBox(height: 15),
+                        CustomTextBox(
+                          controller: _cellPhoneController,
+                          label: "Telefon Numarası",
+                          hint: "0 (555) 555 55 55",
+                          validator: (val) {
+                            if (!val!.isPhoneNumber) {
+                              return "Telefon Numarayı kontrol et";
+                            }
+                            return null;
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -141,12 +154,12 @@ class SignUpPage extends StatelessWidget {
 
   signUpPage(context) async {
     if (!(_formkey.currentState!.validate())) return;
-    
+
     int? response = await userController.addNewUser(
-      _usernameController.text,
-      _emailController.text,
-      _passwordController.text,
-    );
+        _usernameController.text,
+        _emailController.text,
+        _passwordController.text,
+        _cellPhoneController.text);
 
     if (response! < 200 || response >= 300) {
       showDialog(

@@ -51,6 +51,7 @@ class UserController extends GetxController {
       isLoading(false);
     }
   }
+
   Future<int> fetchUserByName(String name) async {
     try {
       isLoading(true);
@@ -62,7 +63,8 @@ class UserController extends GetxController {
     }
   }
 
-  Future<int?> addNewUser(String name, String email, String password) async {
+  Future<int?> addNewUser(String name, String email, String password,
+      String cellPhoneNumber) async {
     try {
       isLoading(true);
       User newUser = User(
@@ -71,7 +73,7 @@ class UserController extends GetxController {
         password: password,
         title:
             name == "admin" ? DepartmentsEnum.management : DepartmentsEnum.none,
-        cellphone: "0540",
+        cellphone: cellPhoneNumber,
         email: email,
       );
       var response = await UserRemoteServices.addNewUser(

@@ -1,21 +1,19 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/state_manager.dart';
 import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
-import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_scrollableColumn.dart';
 import 'package:vtys_kalite/componenets/custom_switch.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/models/odeme.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/widgets/custombuttonwidget.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdatetimepicker.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customswitch.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
-import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabKariyer extends StatefulWidget {
   List<String> positionHeaders = [
@@ -46,13 +44,19 @@ class TabKariyer extends StatefulWidget {
   ];
 
   List<String> salaryChildren1 = [
-    'Geçerlilik Başlangıç',
-    'Tutar',
-    'Ödeme Düzeni',
-    'Ek Ödemeler',
+    '2 Aralık 2009',
+    '8.000 TL / Aylık',
+    'Net',
+    '-',
   ];
 
+  bool asgariUcretSwitch = false;
+  bool netSwitch = false;
+  bool agiDahilSwitch = false;
+
   List<YeniOdeme> odemelerList = <YeniOdeme>[].obs;
+
+  TabKariyer({Key? key}) : super(key: key);
 
   @override
   State<TabKariyer> createState() => _TabKariyerState();
@@ -78,10 +82,6 @@ class _TabKariyerState extends State<TabKariyer> {
   DateTime positionDateTimeBitis = DateTime.now();
   DateTime gecerlilikBaslangic = DateTime.now();
 
-  bool asgariUcretSwitch = true;
-  bool netSwitch = true;
-  bool agiDahilSwitch = true;
-
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
@@ -98,127 +98,22 @@ class _TabKariyerState extends State<TabKariyer> {
             showDialog(
               context: context,
               builder: (_) => CustomAlertDialog(
-                titleWidget: Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Flexible(
-                        flex: 8,
-                        child: CustomText(text: 'Pozisyon Ekle'),
-                      ),
-                      Flexible(
-                        flex: 2,
-                        child: Row(
-                          children: [
-                            _ExpandedButtonName(
-                              name: "İptal",
-                              function: () {},
-                            ),
-                            const Expanded(child: SizedBox(width: 10)),
-                            _ExpandedButtonName(
-                              name: "Kaydet",
-                              function: () {},
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                titleWidget: const Expanded(
+                  child: _PozisyonEkleHeader(),
                 ),
                 bodyWidgetHeight: screenSize.height - 20,
                 bodyWidgetWidth: screenSize.width - 20,
                 bodyWidget: SizedBox(
                   width: screenSize.width - 20 / 1.2,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Card(
-                          child: Row(
-                            children: const [
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Icon(Icons.info),
-                              ),
-                              Flexible(
-                                child: CustomText(
-                                  text:
-                                      "Şirket, çalışma şekli ve maaş güncellemeleri içeren pozisyon değişikliklerinde "
-                                      "şirketinizin kurallarını kontrol ediniz.\n"
-                                      "İleri tarihli varsayılan pozisyonlar başlandgıç tarihinden itibaren geçerli olur.",
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            _ExpandedLabelSirket(
-                              positionSirket: positionSirket,
-                              name: "Şirket",
-                            ),
-                            _ExpandedLabelSirket(
-                              positionSirket: positionSirket,
-                              name: "Şube",
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            _ExpandedLabelSirket(
-                              positionSirket: positionSirket,
-                              name: "Departman",
-                            ),
-                            _ExpandedLabelSirket(
-                              positionSirket: positionSirket,
-                              name: "Unvan",
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            ExpandedNameController(
-                              controller: positionYoneticisi,
-                              label: "Yönetici",
-                              widget: widget,
-                            ),
-                            ExpandedNameController(
-                              controller: positionCalismaSekli,
-                              label: "Çalışma Şekli",
-                              widget: widget,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: CustomDateTimePicker(
-                                suffixWidget:
-                                    const Icon(Icons.calendar_today_outlined),
-                                borderless: true,
-                                labelText: 'Başlangıç Tarihi',
-                                onChanged: (val) {
-                                  positionDateTimeBaslangic =
-                                      dateTimeFormat.parse(val!);
-                                },
-                              ),
-                            ),
-                            Expanded(
-                              child: CustomDateTimePicker(
-                                suffixWidget:
-                                    const Icon(Icons.calendar_today_outlined),
-                                borderless: true,
-                                labelText: 'Bitiş Tarihi',
-                                onChanged: (val) {
-                                  positionDateTimeBitis =
-                                      dateTimeFormat.parse(val!);
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  child: _PozisyonEklemeBody(
+                      positionSirket: positionSirket,
+                      positionSube: positionSube,
+                      positionDepartman: positionDepartman,
+                      positionUnvan: positionUnvan,
+                      positionYoneticisi: positionYoneticisi,
+                      positionCalismaSekli: positionCalismaSekli,
+                      positionDateTimeBaslangic: positionDateTimeBaslangic,
+                      positionDateTimeBitis: positionDateTimeBitis),
                 ),
               ),
             );
@@ -239,29 +134,7 @@ class _TabKariyerState extends State<TabKariyer> {
             showDialog(
               context: context,
               builder: (_) => CustomAlertDialog(
-                titleWidget: Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const CustomText(
-                        text: 'Maaş Ekle',
-                      ),
-                      Row(
-                        children: [
-                          _ExpandedButtonName(
-                            name: "İptal",
-                            function: () {},
-                          ),
-                          const SizedBox(width: 10),
-                          _ExpandedButtonName(
-                            name: "Kaydet",
-                            function: () {},
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                titleWidget: const MaasEkleHeader(),
                 bodyWidget: SizedBox(
                   width: screenSize.width - 20,
                   child: SingleChildScrollView(
@@ -287,9 +160,15 @@ class _TabKariyerState extends State<TabKariyer> {
                                 ],
                               ),
                             ),
-                            ExpandedCustomSwitch(
-                                asgariUcretSwitch: asgariUcretSwitch,
-                                text: "Asgari Ücret"),
+                            CustomSwitch(
+                              switchValue: widget.asgariUcretSwitch,
+                              text: "Asgari Ücret",
+                              onChanged: (bool value) {
+                                setState(() {
+                                  widget.asgariUcretSwitch = value;
+                                });
+                              },
+                            ),
                           ],
                         ),
                         Row(
@@ -300,16 +179,30 @@ class _TabKariyerState extends State<TabKariyer> {
                             ),
                             ExpandedNameController(
                               controller: controllerUnit,
-                              label: "Maaş Periyodu",
-                              widget: const Icon(Icons.keyboard_arrow_down),
+                              label: "Maaş",
+                              widget: const SizedBox(),
                             ),
-                            ExpandedCustomSwitch(
-                                asgariUcretSwitch: netSwitch, text: "Net"),
+                            CustomSwitch(
+                              switchValue: widget.netSwitch,
+                              text: "Net",
+                              onChanged: (bool value) {
+                                setState(() {
+                                  widget.netSwitch = value;
+                                });
+                              },
+                            ),
                           ],
                         ),
                         const SizedBox(height: 10),
                         CustomSwitch(
-                            switchValue: agiDahilSwitch, text: "AGİ dahil"),
+                          switchValue: widget.agiDahilSwitch,
+                          text: "AGİ dahil",
+                          onChanged: (bool value) {
+                            setState(() {
+                              widget.agiDahilSwitch = value;
+                            });
+                          },
+                        ),
                         const SizedBox(height: 20),
                         CustomButton(
                           width: 360,
@@ -358,7 +251,11 @@ class _TabKariyerState extends State<TabKariyer> {
                                               );
                                             } else {
                                               widget.odemelerList.add(
-                                                YeniOdeme(),
+                                                YeniOdeme(
+                                                  name:
+                                                      controllerPaymentScreenInSalary
+                                                          .text,
+                                                ),
                                               );
                                             }
                                             Get.back();
@@ -369,24 +266,23 @@ class _TabKariyerState extends State<TabKariyer> {
                                   ],
                                 ),
                                 bodyWidgetWidth: screenSize.width / 2,
-                                bodyWidgetHeight: screenSize.height / 5.5,
                               ),
                             );
                           },
                         ),
-                        Obx(() => ListView.builder(
+                        SizedBox(
+                          child: Obx(
+                            () => ListView(
+                              children: widget.odemelerList,
                               shrinkWrap: true,
-                              itemCount: widget.odemelerList.length,
-                              itemBuilder: ((context, index) {
-                                return widget.odemelerList[index];
-                              }),
-                            )),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
                 bodyWidgetWidth: screenSize.width / 1.5,
-                bodyWidgetHeight: screenSize.height / 1.5,
               ),
             );
           },
@@ -460,57 +356,184 @@ class _TabKariyerState extends State<TabKariyer> {
   }
 }
 
-class _ExpandedButtonName extends StatelessWidget {
-  _ExpandedButtonName({
+class MaasEkleHeader extends StatelessWidget {
+  const MaasEkleHeader({
     Key? key,
-    required this.name,
-    required this.function,
   }) : super(key: key);
-
-  final String name;
-  Function() function;
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: CustomButton(
-        width: 120,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        title: name,
-        height: 30,
-        pressAction: function,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const CustomText(
+          text: 'Maaş Ekle',
+        ),
+        Row(
+          children: [
+            CustomButtonWidget(label: "İptal", function: () {}, iptalMi: true),
+            const SizedBox(width: 15),
+            CustomButtonWidget(
+                label: "Kaydet", function: () {}, iptalMi: false),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _PozisyonEklemeBody extends StatelessWidget {
+  const _PozisyonEklemeBody({
+    Key? key,
+    required this.positionSirket,
+    required this.positionSube,
+    required this.positionDepartman,
+    required this.positionUnvan,
+    required this.positionYoneticisi,
+    required this.positionCalismaSekli,
+    required this.positionDateTimeBaslangic,
+    required this.positionDateTimeBitis,
+  }) : super(key: key);
+
+  final TextEditingController positionSirket;
+  final TextEditingController positionSube;
+  final TextEditingController positionDepartman;
+  final TextEditingController positionUnvan;
+  final TextEditingController positionYoneticisi;
+  final TextEditingController positionCalismaSekli;
+  final DateTime positionDateTimeBaslangic;
+  final DateTime positionDateTimeBitis;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Card(
+            child: Row(
+              children: const [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Icon(Icons.info),
+                ),
+                Flexible(
+                  child: CustomText(
+                      text:
+                          "Şirket, çalışma şekli ve maaş güncellemeleri içeren pozisyon değişikliklerinde "
+                          "şirketinizin kurallarını kontrol ediniz.\n"
+                          "İleri tarihli varsayılan pozisyonlar başlandgıç tarihinden itibaren geçerli olur."),
+                ),
+              ],
+            ),
+          ),
+          Row(
+            children: [
+              ExpandedNameController(
+                controller: positionSirket,
+                label: "Şirket",
+                widget: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Icon(Icons.close),
+                    Icon(Icons.keyboard_arrow_down),
+                  ],
+                ),
+              ),
+              ExpandedNameController(
+                controller: positionSube,
+                label: "Şube",
+                widget: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Icon(Icons.close),
+                    Icon(Icons.keyboard_arrow_down),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              ExpandedNameController(
+                controller: positionDepartman,
+                label: "Departman",
+                widget: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Icon(Icons.close),
+                    Icon(Icons.keyboard_arrow_down),
+                  ],
+                ),
+              ),
+              ExpandedNameController(
+                controller: positionUnvan,
+                label: "Unvan",
+                widget: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Icon(Icons.close),
+                    Icon(Icons.keyboard_arrow_down),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              ExpandedNameController(
+                controller: positionYoneticisi,
+                label: "Yönetici",
+                widget: const Icon(Icons.keyboard_arrow_down),
+              ),
+              ExpandedNameController(
+                controller: positionCalismaSekli,
+                label: "Çalışma Şekli",
+                widget: const Icon(Icons.keyboard_arrow_down),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              ExpandedCustomDateTimePicker(
+                dateTime: positionDateTimeBaslangic,
+                label: 'Başlangıç Tarihi',
+              ),
+              ExpandedCustomDateTimePicker(
+                dateTime: positionDateTimeBitis,
+                label: 'Bitiş Tarihi',
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
 }
 
-class _ExpandedLabelSirket extends StatelessWidget {
-  const _ExpandedLabelSirket({
+class _PozisyonEkleHeader extends StatelessWidget {
+  const _PozisyonEkleHeader({
     Key? key,
-    required this.positionSirket,
-    required this.name,
   }) : super(key: key);
-
-  final TextEditingController positionSirket;
-  final String name;
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: CustomTextBox(
-        controller: positionSirket,
-        borderless: true,
-        suffixWidget: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            Icon(Icons.close),
-            Icon(Icons.keyboard_arrow_down),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const CustomText(text: 'Pozisyon Ekle'),
+        Row(
+          children: [
+            CustomButtonWidget(label: "İptal", function: () {}, iptalMi: true),
+            const SizedBox(width: 15),
+            CustomButtonWidget(
+                label: "Kaydet", function: () {}, iptalMi: false),
           ],
         ),
-        label: name,
-      ),
+      ],
     );
   }
 }

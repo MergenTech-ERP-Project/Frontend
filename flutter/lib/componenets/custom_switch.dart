@@ -4,10 +4,12 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 class CustomSwitch extends StatefulWidget {
   bool switchValue;
   String text;
+  final Function(bool) onChanged;
 
   CustomSwitch({
     required this.switchValue,
     required this.text,
+    required this.onChanged,
     Key? key,
   }) : super(key: key);
 
@@ -21,11 +23,7 @@ class _CustomSwitchState extends State<CustomSwitch> {
     return Row(
       children: [
         Switch(
-          onChanged: (bool value) {
-            setState(() {
-              widget.switchValue = value;
-            });
-          },
+          onChanged: widget.onChanged,
           value: widget.switchValue,
         ),
         CustomText(
