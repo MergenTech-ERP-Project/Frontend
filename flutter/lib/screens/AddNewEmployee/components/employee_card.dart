@@ -87,7 +87,7 @@ class _EmployeeCardState extends State<EmployeeCard> {
                       ),
                       const Expanded(child: SizedBox()),
                       CustomText(
-                        text: widget.user.getDepartment(),
+                        text: widget.user.title.name,
                         size: 20,
                         weight: FontWeight.w400,
                       ),

@@ -59,7 +59,7 @@ class TabGenelFirstCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const CustomText(text: "Departman"),
-                CustomText(text: user.getDepartment()),
+                CustomText(text: user.title.name),
               ],
             ),
             const SizedBox(height: 20),
