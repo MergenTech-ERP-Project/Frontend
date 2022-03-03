@@ -1,4 +1,5 @@
-String serviceHttp = "https://mergen-kalite-takip-sistemi.herokuapp.com";
+String serviceHttp =
+    "https://mergen-kalite-takip-sistemi.herokuapp.com"; //-yonetim
 //String serviceHttp = "http://91.151.89.195:8090";
 
 const rootRoute = "/home";
@@ -24,13 +25,6 @@ const signUpPageDisplayName = "Kayıt Ol";
 const signUpPageRoute = "/signUp";
 
 ///Admin ve Ayarlar Sayfaları
-
-const adminPanelPageDisplayName = "Admin Panel";
-const adminPanelPageRoute = "/adminPanel";
-
-///New Activity Sayfaları ve New User
-const addNewEmployeePageDisplayName = "Personel Ekle";
-const addNewEmployeePageRoute = "/addEmployee";
 
 const newActivityPageDisplayName = "Yeni Aktivite";
 const newActivityPageRoute = "/newActivity";

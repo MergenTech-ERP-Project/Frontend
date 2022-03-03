@@ -1,10 +1,9 @@
 // ignore_for_file: avoid_print
 
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
-import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/enums/contract_type.dart';
+import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdatetimepicker.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdropdownmenu.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
@@ -25,7 +24,22 @@ class TabGenelSecondCard extends StatelessWidget {
   DateTime dateOfStart = DateTime.now();
   DateTime contractEndDate = DateTime.now();
 
-  TabGenelSecondCard({Key? key}) : super(key: key);
+  User? user;
+
+  TabGenelSecondCard({Key? key, this.user}) : super(key: key) {
+    user ??= User();
+    var lastSpace = user!.name.lastIndexOf(' ');
+    String name =
+        lastSpace != -1 ? user!.name.substring(0, lastSpace) : user!.name;
+    String surname = lastSpace != -1 ? user!.name.substring(lastSpace + 1) : "";
+
+    controllerName.text = name;
+    controllerSurname.text = surname;
+
+    controllerEPostaPersonal.text = user!.email;
+
+    controllerTelephonePersonal.text = user!.cellphone;
+  }
 
   @override
   Widget build(BuildContext context) {

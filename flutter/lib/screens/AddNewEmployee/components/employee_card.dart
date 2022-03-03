@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/models/user.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class EmployeeCard extends StatefulWidget {
   final double? height;
-  final User user;
+  User user;
 
-  const EmployeeCard({
+  EmployeeCard({
     Key? key,
     this.height = 60,
     required this.user,
@@ -86,7 +87,7 @@ class _EmployeeCardState extends State<EmployeeCard> {
                       ),
                       const Expanded(child: SizedBox()),
                       CustomText(
-                        text: widget.user.getDepartment(),
+                        text: widget.user.title.name,
                         size: 20,
                         weight: FontWeight.w400,
                       ),
@@ -96,7 +97,16 @@ class _EmployeeCardState extends State<EmployeeCard> {
               ],
             ),
           ),
-          onTap: () {},
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (context) => Dialog(
+                child: AddNewEmployee(
+                  user: widget.user,
+                ),
+              ),
+            );
+          },
         ),
       ],
     );

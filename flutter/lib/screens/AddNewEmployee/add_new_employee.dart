@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
+import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_diger_bilgiler.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_genel.dart';
@@ -12,13 +13,15 @@ import 'package:vtys_kalite/screens/AddNewEmployee/tab_kisisel_bilgiler.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kisisel_bilgiler_small.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
-class AddNewEmployee extends StatefulWidget {
-  bool isSaved = false;
-  @override
-  State<AddNewEmployee> createState() => _AddNewEmployeeState();
-}
+class AddNewEmployee extends StatelessWidget {
+  var isSaved = false.obs;
+  User? user;
 
-class _AddNewEmployeeState extends State<AddNewEmployee> {
+  AddNewEmployee({
+    Key? key,
+    this.user,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -31,7 +34,7 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
           foregroundColor: Colors.white,
           automaticallyImplyLeading: true,
           centerTitle: true,
-          title: const CustomText(text: addNewEmployeePageDisplayName),
+          title: const CustomText(text: "Personel"),
           leading: IconButton(
             icon: const Icon(Icons.keyboard_arrow_left),
             onPressed: () => Get.offAllNamed(rootRoute),
@@ -64,24 +67,29 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
         ),
         body: Stack(
           children: [
-            TabBarView(
-              children: [
-                const TabGenel(),
-                ResponsiveWidget(
-                  largeScreen: TabKariyer(),
-                  smallScreen: TabKariyerSmall(),
-                ),
-                ResponsiveWidget(
-                  largeScreen: TabPersonalInformation(),
-                  smallScreen: TabPersonalInformationSmall(),
-                ),
-                TabAnotherInformation(),
-                const Center(child: CustomText(text: "4")),
-                const Center(child: CustomText(text: "5")),
-                const Center(child: CustomText(text: "6")),
-                const Center(child: CustomText(text: "7")),
-                const Center(child: CustomText(text: "8")),
-              ],
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: TabBarView(
+                children: [
+                  TabGenel(
+                    user: user,
+                  ),
+                  ResponsiveWidget(
+                    largeScreen: TabKariyer(),
+                    smallScreen: TabKariyerSmall(),
+                  ),
+                  ResponsiveWidget(
+                    largeScreen: TabPersonalInformation(),
+                    smallScreen: TabPersonalInformationSmall(),
+                  ),
+                  TabAnotherInformation(),
+                  const Center(child: CustomText(text: "4")),
+                  const Center(child: CustomText(text: "5")),
+                  const Center(child: CustomText(text: "6")),
+                  const Center(child: CustomText(text: "7")),
+                  const Center(child: CustomText(text: "8")),
+                ],
+              ),
             ),
             Positioned(
               right: 0,
@@ -102,13 +110,15 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
                       ),
                     ),
                     Expanded(
-                      child: Visibility(
-                        visible: widget.isSaved,
-                        child: Row(
-                          children: const [
-                            Icon(Icons.done),
-                            Text(' Kaydedildi!'),
-                          ],
+                      child: Obx(
+                        () => Visibility(
+                          visible: isSaved.value,
+                          child: Row(
+                            children: const [
+                              Icon(Icons.done),
+                              Text(' Kaydedildi!'),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -116,9 +126,7 @@ class _AddNewEmployeeState extends State<AddNewEmployee> {
                       child: CustomButton(
                         title: 'Kaydet',
                         pressAction: () {
-                          setState(() {
-                            widget.isSaved = true;
-                          });
+                          isSaved.value = true;
                         },
                       ),
                     ),

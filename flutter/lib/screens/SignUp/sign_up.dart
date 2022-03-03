@@ -161,7 +161,7 @@ class SignUpPage extends StatelessWidget {
         _passwordController.text,
         _cellPhoneController.text);
 
-    if (response != 200) {
+    if (response! < 200 || response >= 300) {
       showDialog(
         context: context,
         builder: (_) => CustomAlertDialog(

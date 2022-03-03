@@ -8,17 +8,17 @@ String activityToJson(List<Activity> data) =>
 
 class Activity {
   final int id;
-  String name;
-  String place;
-  String datetime;
-  String organizator;
+  String? name;
+  String? place;
+  String? datetime;
+  String? organizator;
 
   Activity({
     required this.id,
-    required this.name,
-    required this.place,
-    required this.datetime,
-    required this.organizator,
+    this.name = "",
+    this.place = "",
+    this.datetime = "",
+    this.organizator = "",
   });
 
   factory Activity.fromMap(Map activityMap) {

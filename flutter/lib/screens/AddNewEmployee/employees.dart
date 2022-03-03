@@ -4,8 +4,11 @@ import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/enums/departments_enum.dart';
+import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/employee_card.dart';
+import 'package:vtys_kalite/screens/AdminPanel/admin_panel.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class Employees extends StatefulWidget {
@@ -34,10 +37,7 @@ class _EmployeesState extends State<Employees> {
                 ? const CircularProgressIndicator()
                 : Row(
                     children: [
-                      const Expanded(
-                        flex: 1,
-                        child: Text(""),
-                      ),
+                      const Expanded(flex: 1, child: Text("")),
                       Expanded(
                         flex: ResponsiveWidget.isSmallScreen(context) ? 50 : 8,
                         child: Stack(
@@ -53,36 +53,59 @@ class _EmployeesState extends State<Employees> {
                             Align(
                               alignment: Alignment.bottomCenter,
                               child: Container(
-                                padding: const EdgeInsets.all(20.0),
-                                child: CustomButton(
-                                  width: double.infinity,
-                                  title: 'Yeni Personel',
-                                  leftIcon: Icons.person_add,
-                                  pressAction: () =>
-                                      Get.toNamed(addNewEmployeePageRoute),
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5),
+                                        child: CustomButton(
+                                          width: double.infinity,
+                                          title: 'Yeni Personel',
+                                          leftIcon: Icons.person_add,
+                                          pressAction: () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) => Dialog(
+                                                child: AddNewEmployee(
+                                                  user: null,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                    if (user.title ==
+                                        DepartmentsEnum.management)
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 5),
+                                          child: CustomButton(
+                                            title: 'Admin Panel',
+                                            leftIcon:
+                                                Icons.admin_panel_settings,
+                                            pressAction: () {
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) => Dialog(
+                                                  child: AdminPanelPage(),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                  ],
                                 ),
                               ),
                             )
                           ],
                         ),
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: user.title == DepartmentsEnum.management
-                            ? Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: CustomButton(
-                                    title: 'Admin Panel',
-                                    leftIcon: Icons.admin_panel_settings,
-                                    pressAction: () =>
-                                        Get.toNamed(adminPanelPageRoute),
-                                  ),
-                                ),
-                              )
-                            : const SizedBox(),
-                      ),
+                      const Expanded(flex: 1, child: SizedBox()),
                     ],
                   ));
           },

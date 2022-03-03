@@ -11,19 +11,19 @@ String? nameLetters(name) {
       ? (words[0][0] +
           (words.length > 1 ? ("" + words[words.length - 1][0]) : ""))
       : "";
-  return letters != "" ? letters.capitalize : "";
+  return letters != "" ? letters.toUpperCase() : "";
 }
 
 randomColor() {
   return (Random().nextDouble() * 0xFFFFFFFF).toInt();
 }
 
-showDialogDoneMessage(context, furtherBack) async {
+showDialogDoneMessage(context, {String text = "İşlem Kaydedildi."}) async {
   showDialog(
     context: context,
     builder: (context) => Dialog(
       child: Container(
-        color: lightGreyColor,
+        color: lightColor,
         width: 250,
         height: 250,
         child: Center(
@@ -48,7 +48,7 @@ showDialogDoneMessage(context, furtherBack) async {
                       child: Icon(
                         Icons.done,
                         size: 50,
-                        color: greenColor,
+                        color: successfulColor,
                       ),
                     ),
                   ),
@@ -58,10 +58,10 @@ showDialogDoneMessage(context, furtherBack) async {
                 padding: const EdgeInsets.only(top: 20),
                 child: Center(
                   child: CustomText(
-                    text: "İşlem Kaydedildi.",
+                    text: text,
                     size: 24,
                     weight: FontWeight.w500,
-                    color: greenColor,
+                    color: successfulColor,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -82,7 +82,7 @@ showDialogDoneMessage(context, furtherBack) async {
         ),
       ),
     ),
-  ).then((value) => furtherBack ? Get.back() : null);
+  ).then((value) => Get.back());
 }
 
 showDialogWaitingMessage(context) async {
@@ -90,7 +90,7 @@ showDialogWaitingMessage(context) async {
     context: context,
     builder: (context) => Dialog(
       child: Container(
-        color: lightGreyColor,
+        color: lightColor,
         width: 200,
         height: 200,
         child: Center(

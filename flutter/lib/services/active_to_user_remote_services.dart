@@ -48,6 +48,7 @@ class ActiveToUserRemoteServices {
   }
 
   static Future<String> postActiveToUser(String json) async {
+    print("Post Active To User : $json");
     var response = await http
         .post(Uri.parse(serviceHttp + '/activetouser/post'),
             headers: <String, String>{
@@ -60,7 +61,6 @@ class ActiveToUserRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    print("postActiveToUser : JSON : $json");
     return response.statusCode == 200
         ? "Success: ActiveToUser"
         : "Error: ActiveToUser ${response.statusCode}";
