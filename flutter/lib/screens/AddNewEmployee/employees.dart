@@ -4,7 +4,9 @@ import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/enums/departments_enum.dart';
+import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/employee_card.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
@@ -53,13 +55,21 @@ class _EmployeesState extends State<Employees> {
                             Align(
                               alignment: Alignment.bottomCenter,
                               child: Container(
-                                padding: const EdgeInsets.all(20.0),
+                                padding: const EdgeInsets.all(10.0),
                                 child: CustomButton(
                                   width: double.infinity,
                                   title: 'Yeni Personel',
                                   leftIcon: Icons.person_add,
-                                  pressAction: () =>
-                                      Get.toNamed(addNewEmployeePageRoute),
+                                  pressAction: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => Dialog(
+                                        child: AddNewEmployee(
+                                          user: null,
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             )

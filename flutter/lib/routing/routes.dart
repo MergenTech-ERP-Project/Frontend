@@ -28,10 +28,6 @@ const signUpPageRoute = "/signUp";
 const adminPanelPageDisplayName = "Admin Panel";
 const adminPanelPageRoute = "/adminPanel";
 
-///New Activity Sayfaları ve New User
-const addNewEmployeePageDisplayName = "Personel Ekle";
-const addNewEmployeePageRoute = "/addEmployee";
-
 const newActivityPageDisplayName = "Yeni Aktivite";
 const newActivityPageRoute = "/newActivity";
 

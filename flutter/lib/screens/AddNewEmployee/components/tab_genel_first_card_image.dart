@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
-import 'package:vtys_kalite/main.dart';
+import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class FirstCardImage extends StatelessWidget {
+  final User user;
+
+  const FirstCardImage({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Center(
