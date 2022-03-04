@@ -40,29 +40,26 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
                   child: CircularProgressIndicator(),
                 ),
               )
-            : SizedBox(
-                height: widget.users.length > 5
-                    ? widget.users.length + 1 * 60
-                    : 6 * 60,
-                child: Column(
-                  children: [
-                    _SearchBar(
-                      searchController: widget._searchController,
-                      onTextChanged: (value) {
-                        setState(() {
-                          widget.users = userController.userList
-                              .where((e) => e.name
-                                  .toLowerCase()
-                                  .contains(value.toLowerCase()))
-                              .toList();
-                        });
-                      },
-                    ),
-                    _ListView(
+            : Column(
+                children: [
+                  _SearchBar(
+                    searchController: widget._searchController,
+                    onTextChanged: (value) {
+                      setState(() {
+                        widget.users = userController.userList
+                            .where((e) => e.name
+                                .toLowerCase()
+                                .contains(value.toLowerCase()))
+                            .toList();
+                      });
+                    },
+                  ),
+                  Flexible(
+                    child: _ListView(
                       widget: widget,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ));
       }),
     );
@@ -79,16 +76,14 @@ class _ListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: ListView.separated(
-          shrinkWrap: true,
-          separatorBuilder: (context, index) => const SizedBox(height: 10),
-          itemCount: widget.users.length,
-          itemBuilder: (_, index) => _UserCard(
-            userInfo: widget.users[index],
-          ),
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: ListView.separated(
+        shrinkWrap: true,
+        separatorBuilder: (context, index) => const SizedBox(height: 10),
+        itemCount: widget.users.length,
+        itemBuilder: (_, index) => _UserCard(
+          userInfo: widget.users[index],
         ),
       ),
     );
