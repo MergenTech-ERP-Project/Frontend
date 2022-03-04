@@ -16,7 +16,7 @@ extension DisabledDegreeExtension on DisabledDegree {
     return disabledDegreeList;
   }
 
-  String get name {
+  String get getName {
     switch (this) {
       case DisabledDegree.none:
         return "Engeli Yok";

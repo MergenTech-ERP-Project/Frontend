@@ -46,11 +46,11 @@ class CompanyController extends GetxController {
       isLoading(true);
       Company newCompany = Company(
         id: 0,
-        company_name: _company_name,
-        company_phone: _company_phone,
-        domain_name: _domain_name,
-        mersis_no: _mersis_no,
-        sgk_company_no: _sgk_company_no,
+        companyName: _company_name,
+        companyPhone: _company_phone,
+        domainName: _domain_name,
+        mersisNo: _mersis_no,
+        sgkCompanyNo: _sgk_company_no,
       );
       var response = await CompanyRemoteServices.postCompany(json.encode(newCompany.toJson()).toString());
       fetchCompanies(); //companyList.add(newCompany);

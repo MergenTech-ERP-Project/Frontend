@@ -8,41 +8,41 @@ String branchToJson(List<Branch> data) =>
 
 class Branch {
   final int id;
-  String branch_name;
-  String branch_upper;
+  String branchName;
+  String branchUpper;
   String rules;
-  String vacation_dates;
+  String vacationDates;
 
   Branch({
     this.id = 0,
-    this.branch_name = "",
-    this.branch_upper = "",
+    this.branchName = "",
+    this.branchUpper = "",
     this.rules = "",
-    this.vacation_dates = "",
+    this.vacationDates = "",
   });
 
   factory Branch.fromMap(Map branchMap) {
     return Branch(
       id: branchMap['id'],
-      branch_name: branchMap['branch_name'],
-      branch_upper: branchMap['branch_upper'],
+      branchName: branchMap['branch_name'],
+      branchUpper: branchMap['branch_upper'],
       rules: branchMap['rules'],
-      vacation_dates: branchMap['vacation_dates'],
+      vacationDates: branchMap['vacation_dates'],
     );
   }
 
   Map toJson() => {
-    'branch_name': branch_name,
-    'branch_upper': branch_upper,
+    'branch_name': branchName,
+    'branch_upper': branchUpper,
     'rules': rules,
-    'vacation_dates': vacation_dates,
+    'vacation_dates': vacationDates,
   };
 
   Map toJsonWithId() => {
     'id': id,
-    'branch_name': branch_name,
-    'branch_upper': branch_upper,
+    'branch_name': branchName,
+    'branch_upper': branchUpper,
     'rules': rules,
-    'vacation_dates': vacation_dates,
+    'vacation_dates': vacationDates,
   };
 }

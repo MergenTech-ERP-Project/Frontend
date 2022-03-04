@@ -15,7 +15,7 @@ extension MaritalStatusExtension on MaritalStatus {
     return maritalStatusList;
   }
 
-  String get name {
+  String get getNames {
     switch (this) {
       case MaritalStatus.married:
         return "Evli";

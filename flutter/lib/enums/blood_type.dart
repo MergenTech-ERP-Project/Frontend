@@ -20,7 +20,7 @@ extension BloodTypeExtension on BloodType {
     return bloodTypeList;
   }
 
-  String get name {
+  String get getName {
     switch (this) {
       case BloodType.zeroPlus:
         return "0+";

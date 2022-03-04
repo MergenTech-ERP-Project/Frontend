@@ -100,7 +100,7 @@ class _AddNewBranchState extends State<AddNewBranch> {
                     pressAction: () => setState(() {
                       if (_newBranchKey.currentState!.validate()) {
                         for (Branch branch in branchController.branchList) {
-                          if (branch.branch_name ==
+                          if (branch.branchName ==
                               widget.controllerBranchName.text) {
                             showDialog(
                               context: context,
@@ -145,10 +145,10 @@ class _AddNewBranchState extends State<AddNewBranch> {
                         var response = branchController.postBranch(
                           Branch(
                             id: 0,
-                            branch_name: widget.controllerBranchName.text,
-                            branch_upper: widget.controllerBranchUpper.text,
+                            branchName: widget.controllerBranchName.text,
+                            branchUpper: widget.controllerBranchUpper.text,
                             rules: widget.controllerRules.text,
-                            vacation_dates: holidayCalanders.toString(),
+                            vacationDates: holidayCalanders.toString(),
                           ),
                         );
                         print(response);

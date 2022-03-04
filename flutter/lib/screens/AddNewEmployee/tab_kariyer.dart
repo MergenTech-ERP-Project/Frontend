@@ -50,9 +50,9 @@ class TabKariyer extends StatefulWidget {
     '-',
   ];
 
-  bool asgariUcretSwitch = false;
-  bool netSwitch = false;
-  bool agiDahilSwitch = false;
+  var asgariUcretSwitch = false.obs;
+  var netSwitch = false.obs;
+  var agiDahilSwitch = false.obs;
 
   List<YeniOdeme> odemelerList = <YeniOdeme>[].obs;
 
@@ -160,15 +160,15 @@ class _TabKariyerState extends State<TabKariyer> {
                                 ],
                               ),
                             ),
-                            CustomSwitch(
-                              switchValue: widget.asgariUcretSwitch,
-                              text: "Asgari Ücret",
-                              onChanged: (bool value) {
-                                setState(() {
-                                  widget.asgariUcretSwitch = value;
-                                });
-                              },
-                            ),
+                            Obx(
+                              () => CustomSwitch(
+                                switchValue: widget.asgariUcretSwitch.value,
+                                text: "Asgari Ücret",
+                                onChanged: (bool value) {
+                                  widget.asgariUcretSwitch.value = value;
+                                },
+                              ),
+                            )
                           ],
                         ),
                         Row(
@@ -182,26 +182,26 @@ class _TabKariyerState extends State<TabKariyer> {
                               label: "Maaş",
                               widget: const SizedBox(),
                             ),
-                            CustomSwitch(
-                              switchValue: widget.netSwitch,
-                              text: "Net",
-                              onChanged: (bool value) {
-                                setState(() {
-                                  widget.netSwitch = value;
-                                });
-                              },
-                            ),
+                            Obx(
+                              () => CustomSwitch(
+                                switchValue: widget.netSwitch.value,
+                                text: "Net",
+                                onChanged: (bool value) {
+                                  widget.netSwitch.value = value;
+                                },
+                              ),
+                            )
                           ],
                         ),
                         const SizedBox(height: 10),
-                        CustomSwitch(
-                          switchValue: widget.agiDahilSwitch,
-                          text: "AGİ dahil",
-                          onChanged: (bool value) {
-                            setState(() {
-                              widget.agiDahilSwitch = value;
-                            });
-                          },
+                        Obx(
+                          () => CustomSwitch(
+                            switchValue: widget.agiDahilSwitch.value,
+                            text: "AGİ dahil",
+                            onChanged: (bool value) {
+                              widget.agiDahilSwitch.value = value;
+                            },
+                          ),
                         ),
                         const SizedBox(height: 20),
                         CustomButton(

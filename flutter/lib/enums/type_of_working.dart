@@ -19,7 +19,7 @@ extension TypeOfWorkingExtension on TypeOfWorking {
     return typeOfWorkingList;
   }
 
-  String get name {
+  String get getName {
     switch (this) {
       case TypeOfWorking.fullTime:
         return "Tam Zamanlı";

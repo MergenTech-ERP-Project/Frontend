@@ -17,7 +17,7 @@ extension PaymentSchemeExtension on PaymentScheme {
     return maritalStatusList;
   }
 
-  String get name {
+  String get getName {
     switch (this) {
       case PaymentScheme.yearly:
         return "Yıllık";

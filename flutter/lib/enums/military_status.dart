@@ -16,7 +16,7 @@ extension MaritalStatusExtension on MilitaryStatus {
     return militaryStatusList;
   }
 
-  String get name {
+  String get getName {
     switch (this) {
       case MilitaryStatus.done:
         return "Yapıldı";

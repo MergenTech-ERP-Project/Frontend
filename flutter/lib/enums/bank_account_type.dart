@@ -15,7 +15,7 @@ extension AccountTypeExtension on BankAccountType {
     return accountTypeList;
   }
 
-  String get name {
+  String get getName {
     switch (this) {
       case BankAccountType.drawingAccount:
         return "Vadesiz Hesap";

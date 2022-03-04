@@ -50,7 +50,7 @@ class _OptionalCompanySubeState extends State<OptionalCompanySube> {
                                   index == 0
                                       ? "Birim Adı"
                                       : widget
-                                          .branchList[index - 1].branch_name,
+                                          .branchList[index - 1].branchName,
                                 ),
                               ),
                             ),
