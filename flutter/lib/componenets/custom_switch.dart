@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 
-class CustomSwitch extends StatefulWidget {
+class CustomSwitch extends StatelessWidget {
   bool switchValue;
   String text;
-  final Function(bool) onChanged;
+  final Function(bool val) onChanged;
 
   CustomSwitch({
     required this.switchValue,
@@ -14,20 +14,15 @@ class CustomSwitch extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CustomSwitch> createState() => _CustomSwitchState();
-}
-
-class _CustomSwitchState extends State<CustomSwitch> {
-  @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Switch(
-          onChanged: widget.onChanged,
-          value: widget.switchValue,
+          onChanged: onChanged,
+          value: switchValue,
         ),
         CustomText(
-          text: widget.text,
+          text: text,
         ),
       ],
     );

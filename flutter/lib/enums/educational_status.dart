@@ -14,7 +14,7 @@ extension EducationalStatusExtension on EducationalStatus {
     return educationalStatusList;
   }
 
-  String get name {
+  String get getName {
     switch (this) {
       case EducationalStatus.student:
         return "Öğrenci";

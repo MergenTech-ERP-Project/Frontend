@@ -14,7 +14,7 @@ extension ContractTypeExtension on ContractType {
     return contractTypeList;
   }
 
-  String get name {
+  String get getName {
     switch (this) {
       case ContractType.timely:
         return "Süreli";

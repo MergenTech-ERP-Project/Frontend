@@ -95,7 +95,7 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                           ///company name'e göre sorgu yapılması lazım.
                           for (Company company
                               in companyController.companyList) {
-                            if (company.company_name ==
+                            if (company.companyName ==
                                 widget.controllerCompanyName.text) {
                               showDialog(
                                 context: context,

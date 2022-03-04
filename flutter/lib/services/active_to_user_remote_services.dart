@@ -68,13 +68,15 @@ class ActiveToUserRemoteServices {
 
   static Future<String> deleteActiveToUser(int id) async {
     var response = await http
-        .delete(Uri.parse(serviceHttp + '/activetouser/delete/$id'),
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-              'Accept': 'application/json',
-              //'Authorization': '<Your token>'
-            },
-            encoding: encoding)
+        .delete(
+          Uri.parse(serviceHttp + '/activetouser/delete/$id'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json',
+            //'Authorization': '<Your token>'
+          },
+          encoding: encoding,
+        )
         .timeout(
           const Duration(seconds: 10),
         );

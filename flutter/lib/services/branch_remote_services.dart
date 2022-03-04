@@ -40,7 +40,7 @@ class BranchRemoteServices {
       var jsonString = utf8.decode(response.bodyBytes);
       List<Branch> branches = branchFromJson(jsonString);
       for (Branch branch in branches) {
-        if (branch.branch_name == branch_name) {
+        if (branch.branchName == branch_name) {
           branchId = branches.indexOf(branch);
           print(branchId);
           break;

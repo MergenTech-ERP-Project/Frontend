@@ -8,46 +8,46 @@ String companyToJson(List<Company> data) =>
 
 class Company {
   final int id;
-  String company_name;
-  String company_phone;
-  String domain_name;
-  String mersis_no;
-  String sgk_company_no;
+  String companyName;
+  String companyPhone;
+  String domainName;
+  String mersisNo;
+  String sgkCompanyNo;
 
   Company({
     this.id = 0,
-    this.company_name = "",
-    this.company_phone = "",
-    this.domain_name = "",
-    this.mersis_no = "",
-    this.sgk_company_no = "",
+    this.companyName = "",
+    this.companyPhone = "",
+    this.domainName = "",
+    this.mersisNo = "",
+    this.sgkCompanyNo = "",
   });
 
   factory Company.fromMap(Map companyMap) {
     return Company(
       id: companyMap['id'],
-      company_name: companyMap['company_name'],
-      company_phone: companyMap['company_phone'],
-      domain_name: companyMap['domain_name'],
-      mersis_no: companyMap['mersis_no'],
-      sgk_company_no: companyMap['sgk_company_no']
+      companyName: companyMap['company_name'],
+      companyPhone: companyMap['company_phone'],
+      domainName: companyMap['domain_name'],
+      mersisNo: companyMap['mersis_no'],
+      sgkCompanyNo: companyMap['sgk_company_no']
     );
   }
 
   Map toJson() => {
-    'company_name': company_name,
-    'company_phone': company_phone,
-    'domain_name': domain_name,
-    'mersis_no': mersis_no,
-    'sgk_company_no': sgk_company_no,
+    'company_name': companyName,
+    'company_phone': companyPhone,
+    'domain_name': domainName,
+    'mersis_no': mersisNo,
+    'sgk_company_no': sgkCompanyNo,
   };
 
   Map toJsonWithId() => {
     'id': id,
-    'company_name': company_name,
-    'company_phone': company_phone,
-    'domain_name': domain_name,
-    'mersis_no': mersis_no,
-    'sgk_company_no': sgk_company_no,
+    'company_name': companyName,
+    'company_phone': companyPhone,
+    'domain_name': domainName,
+    'mersis_no': mersisNo,
+    'sgk_company_no': sgkCompanyNo,
   };
 }

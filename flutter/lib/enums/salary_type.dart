@@ -14,7 +14,7 @@ extension SalaryTypeExtension on SalaryType {
     return salaryTypeList;
   }
 
-  String get name {
+  String get getName {
     switch (this) {
       case SalaryType.net:
         return "Net";

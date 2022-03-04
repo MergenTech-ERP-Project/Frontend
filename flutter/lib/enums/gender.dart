@@ -15,7 +15,7 @@ extension GenderExtension on Gender {
     return genderList;
   }
 
-  String get name {
+  String get getName {
     switch (this) {
       case Gender.male:
         return "Erkek";

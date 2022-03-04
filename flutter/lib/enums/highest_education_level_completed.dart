@@ -21,7 +21,7 @@ extension HighestEducationLevelCompletedExtension
     return highestEducationLevelCompletedList;
   }
 
-  String get name {
+  String get getName {
     switch (this) {
       case HighestEducationLevelCompleted.primarySchool:
         return "İlkokul";

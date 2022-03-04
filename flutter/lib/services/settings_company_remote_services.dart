@@ -27,7 +27,7 @@ class CompanyRemoteServices {
       var jsonString = utf8.decode(response.bodyBytes);
       List<Company> companies = companyFromJson(jsonString);
       for (Company company in companies) {
-        if (company.company_name == _company_name) {
+        if (company.companyName == _company_name) {
           companyId = companies.indexOf(company);
           print(companyId);
           break;

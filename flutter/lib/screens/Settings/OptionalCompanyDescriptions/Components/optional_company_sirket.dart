@@ -58,7 +58,7 @@ class _OptionalCompanySirketState extends State<OptionalCompanySirket> {
                                   child: Text(index == 0
                                       ? "Şirket Adı"
                                       : widget.companyList[index - 1]
-                                          .company_name)),
+                                          .companyName)),
                             ),
                             Expanded(
                               flex: 2,
