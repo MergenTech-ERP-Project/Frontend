@@ -25,7 +25,6 @@ class AdminPanelPage extends StatefulWidget {
 int userTitleIndex = 0;
 
 class _AdminPanelPageState extends State<AdminPanelPage> {
-
   @override
   Widget build(BuildContext context) {
     return Container(

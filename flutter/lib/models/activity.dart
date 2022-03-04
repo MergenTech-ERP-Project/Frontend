@@ -4,7 +4,7 @@ List<Activity> activityFromJson(String str) =>
     List<Activity>.from(json.decode(str).map((x) => Activity.fromMap(x)));
 
 String activityToJson(List<Activity> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJsonWithId())));
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Activity {
   final int id;
@@ -32,13 +32,6 @@ class Activity {
   }
 
   Map toJson() => {
-        'name': name,
-        'place': place,
-        'datetime': datetime,
-        'organizator': organizator,
-      };
-
-  Map toJsonWithId() => {
         "id": id,
         'name': name,
         'place': place,

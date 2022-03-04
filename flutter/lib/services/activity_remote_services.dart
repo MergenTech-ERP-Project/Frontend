@@ -84,9 +84,9 @@ class ActivityRemoteServices {
   }
 
   static Future<String> putActivity(int id, String json) async {
-    print("Json: $json");
+    print("Put Activity $id Json: $json");
     var response = await http
-        .post(Uri.parse(serviceHttp + '/activity/put/$id'),
+        .put(Uri.parse(serviceHttp + '/activity/put/$id'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
               'Accept': 'application/json',

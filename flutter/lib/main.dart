@@ -31,7 +31,6 @@ void main() {
   Get.put(BranchController());
   Get.put(MenuController());
   Get.put(NavigatorController());
-
   runApp(App());
 }
 
