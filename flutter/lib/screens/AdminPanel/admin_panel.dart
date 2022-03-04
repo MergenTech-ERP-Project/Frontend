@@ -40,29 +40,26 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
                   child: CircularProgressIndicator(),
                 ),
               )
-            : SizedBox(
-                height: widget.users.length > 5
-                    ? widget.users.length + 1 * 60
-                    : 6 * 60,
-                child: Column(
-                  children: [
-                    _SearchBar(
-                      searchController: widget._searchController,
-                      onTextChanged: (value) {
-                        setState(() {
-                          widget.users = userController.userList
-                              .where((e) => e.name
-                                  .toLowerCase()
-                                  .contains(value.toLowerCase()))
-                              .toList();
-                        });
-                      },
-                    ),
-                    _ListView(
+            : Column(
+                children: [
+                  _SearchBar(
+                    searchController: widget._searchController,
+                    onTextChanged: (value) {
+                      setState(() {
+                        widget.users = userController.userList
+                            .where((e) => e.name
+                                .toLowerCase()
+                                .contains(value.toLowerCase()))
+                            .toList();
+                      });
+                    },
+                  ),
+                  Flexible(
+                    child: _ListView(
                       widget: widget,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ));
       }),
     );

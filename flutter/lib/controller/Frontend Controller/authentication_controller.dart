@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/cache_manager.dart';
 import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/user.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 
 class AuthenticationController extends GetxController with CacheManager {
   var isLogged = false.obs;
@@ -16,17 +17,15 @@ class AuthenticationController extends GetxController with CacheManager {
 
   void login(User token) async {
     isLogged.value = true;
-    var users = <User>[];
-    users.add(token);
     user = token;
-    await saveToken(fetchUsers(users));
+    await saveToken(user.id);
   }
 
-  void checkLoginStatus() async {
+  Future<void> checkLoginStatus() async {
     final token = await getToken();
     if (token != null) {
+      user = (await userController.fetchUserById(token))!;
       isLogged.value = true;
-      user = parseUser(token);
       print("Remembered ${user.name}");
     }
   }

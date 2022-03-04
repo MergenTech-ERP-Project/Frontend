@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/models/active_to_user.dart';
 import 'package:vtys_kalite/models/activity.dart';
-import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/services/active_to_user_remote_services.dart';
 import 'package:vtys_kalite/services/activity_remote_services.dart';
 
@@ -19,8 +18,7 @@ class ActivityController extends GetxController {
     super.onInit();
   }
 
-  void fetchActivities() async {
-    ///TODO: (inşallah) int userId fetchActivitiesByUser
+  Future<void> fetchActivities() async {
     try {
       isLoading(true);
       var activities = await ActivityRemoteServices.fetchActivities();
@@ -32,7 +30,7 @@ class ActivityController extends GetxController {
     }
   }
 
-  void fetchActivityByUserId(int userId) async {
+  Future<void> fetchActivityByUserId(int userId) async {
     try {
       isLoading(true);
       var activities =

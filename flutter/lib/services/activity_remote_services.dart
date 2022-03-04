@@ -37,7 +37,8 @@ class ActivityRemoteServices {
         //'Authorization': '<Your token>'
       },
     );
-    print("fetchActivities response ${response.statusCode}");
+    print(
+        "fetchActivities by user $userId response ${response.statusCode}\n ${response.body}");
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       print("JSON : $jsonString");
@@ -84,9 +85,9 @@ class ActivityRemoteServices {
   }
 
   static Future<String> putActivity(int id, String json) async {
-    print("Json: $json");
+    print("Put Activity $id Json: $json");
     var response = await http
-        .post(Uri.parse(serviceHttp + '/activity/put/$id'),
+        .put(Uri.parse(serviceHttp + '/activity/put/$id'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
               'Accept': 'application/json',

@@ -37,6 +37,7 @@ void main() {
   Get.put(UserDetailController());
   Get.put(UserDetailCareerController());
   Get.put(UserDetailPaymentController());
+
   runApp(App());
 }
 
