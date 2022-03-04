@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/models/active_to_user.dart';
 import 'package:vtys_kalite/models/activity.dart';
-import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/services/active_to_user_remote_services.dart';
 import 'package:vtys_kalite/services/activity_remote_services.dart';
 

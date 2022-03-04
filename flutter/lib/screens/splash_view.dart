@@ -5,7 +5,7 @@ import 'package:vtys_kalite/utilities/controllers.dart';
 
 class SplashView extends StatelessWidget {
   Future<void> initializeSettings() async {
-    authenticationController.checkLoginStatus();
+    await authenticationController.checkLoginStatus();
     await Future.delayed(const Duration(milliseconds: 100));
   }
 
