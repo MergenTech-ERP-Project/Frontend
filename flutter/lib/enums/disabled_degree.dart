@@ -1,30 +1,29 @@
-import 'package:enum_to_string/enum_to_string.dart';
 
-enum DisabledDegree {
+enum DisabledDegreeEnum {
   none,
   firstDegreeDisabled,
   secondDegreeDisabled,
   thirdDegreeDisabled
 }
 
-extension DisabledDegreeExtension on DisabledDegree {
+extension DisabledDegreeExtension on DisabledDegreeEnum {
   static List<String> getList() {
     List<String> disabledDegreeList = [];
-    for (var item in DisabledDegree.values) {
-      disabledDegreeList.add(item.name);
+    for (var item in DisabledDegreeEnum.values) {
+      disabledDegreeList.add(item.getName);
     }
     return disabledDegreeList;
   }
 
   String get getName {
     switch (this) {
-      case DisabledDegree.none:
+      case DisabledDegreeEnum.none:
         return "Engeli Yok";
-      case DisabledDegree.firstDegreeDisabled:
+      case DisabledDegreeEnum.firstDegreeDisabled:
         return "1. Dereceden Engelli";
-      case DisabledDegree.secondDegreeDisabled:
+      case DisabledDegreeEnum.secondDegreeDisabled:
         return "2. Dereceden Engelli";
-      case DisabledDegree.thirdDegreeDisabled:
+      case DisabledDegreeEnum.thirdDegreeDisabled:
         return "3. Dereceden Engelli";
       default:
         return "";

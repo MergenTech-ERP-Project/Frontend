@@ -1,6 +1,5 @@
-import 'package:enum_to_string/enum_to_string.dart';
 
-enum BloodType {
+enum BloodTypeEnum {
   zeroPlus,
   zeroMinus,
   aPlus,
@@ -11,32 +10,32 @@ enum BloodType {
   abMinus,
 }
 
-extension BloodTypeExtension on BloodType {
+extension BloodTypeExtension on BloodTypeEnum {
   static List<String> getList() {
     List<String> bloodTypeList = [];
-    for (var item in BloodType.values) {
-      bloodTypeList.add(item.name);
+    for (var item in BloodTypeEnum.values) {
+      bloodTypeList.add(item.getName);
     }
     return bloodTypeList;
   }
 
   String get getName {
     switch (this) {
-      case BloodType.zeroPlus:
+      case BloodTypeEnum.zeroPlus:
         return "0+";
-      case BloodType.zeroMinus:
+      case BloodTypeEnum.zeroMinus:
         return "0-";
-      case BloodType.aPlus:
+      case BloodTypeEnum.aPlus:
         return "A+";
-      case BloodType.aMinus:
+      case BloodTypeEnum.aMinus:
         return "A-";
-      case BloodType.bPlus:
+      case BloodTypeEnum.bPlus:
         return "B+";
-      case BloodType.bMinus:
+      case BloodTypeEnum.bMinus:
         return "B-";
-      case BloodType.abPlus:
+      case BloodTypeEnum.abPlus:
         return "AB+";
-      case BloodType.abMinus:
+      case BloodTypeEnum.abMinus:
         return "AB-";
       default:
         return "";

@@ -111,6 +111,7 @@ class SignUpPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 15),
                         CustomTextBox(
+                          maxLength: 11,
                           controller: _cellPhoneController,
                           label: "Telefon Numarası",
                           hint: "0 (555) 555 55 55",
@@ -156,10 +157,11 @@ class SignUpPage extends StatelessWidget {
     if (!(_formkey.currentState!.validate())) return;
 
     int? response = await userController.addNewUser(
-        _usernameController.text,
-        _emailController.text,
-        _passwordController.text,
-        _cellPhoneController.text);
+      _usernameController.text,
+      _emailController.text,
+      _passwordController.text,
+      _cellPhoneController.text,
+    );
 
     if (response! < 200 || response >= 300) {
       showDialog(

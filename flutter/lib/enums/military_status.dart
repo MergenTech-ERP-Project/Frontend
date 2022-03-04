@@ -1,30 +1,28 @@
-import 'package:enum_to_string/enum_to_string.dart';
-
-enum MilitaryStatus {
+enum MilitaryStatusEnum {
   done,
   notDone,
   exempt,
   deferred,
 }
 
-extension MaritalStatusExtension on MilitaryStatus {
+extension MaritalStatusExtension on MilitaryStatusEnum {
   static List<String> getList() {
     List<String> militaryStatusList = [];
-    for (var item in MilitaryStatus.values) {
-      militaryStatusList.add(item.name);
+    for (var item in MilitaryStatusEnum.values) {
+      militaryStatusList.add(item.getName);
     }
     return militaryStatusList;
   }
 
   String get getName {
     switch (this) {
-      case MilitaryStatus.done:
+      case MilitaryStatusEnum.done:
         return "Yapıldı";
-      case MilitaryStatus.notDone:
+      case MilitaryStatusEnum.notDone:
         return "Yapılmadı";
-      case MilitaryStatus.exempt:
+      case MilitaryStatusEnum.exempt:
         return "Muaf";
-      case MilitaryStatus.deferred:
+      case MilitaryStatusEnum.deferred:
         return "Tecilli";
       default:
         return "";

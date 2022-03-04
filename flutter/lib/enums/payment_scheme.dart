@@ -1,6 +1,5 @@
-import 'package:enum_to_string/enum_to_string.dart';
 
-enum PaymentScheme {
+enum PaymentSchemeEnum {
   yearly,
   monthly,
   weekly,
@@ -8,26 +7,26 @@ enum PaymentScheme {
   hourly,
 }
 
-extension PaymentSchemeExtension on PaymentScheme {
+extension PaymentSchemeExtension on PaymentSchemeEnum {
   static List<String> getList() {
     List<String> maritalStatusList = [];
-    for (var item in PaymentScheme.values) {
-      maritalStatusList.add(item.name);
+    for (var item in PaymentSchemeEnum.values) {
+      maritalStatusList.add(item.getName);
     }
     return maritalStatusList;
   }
 
   String get getName {
     switch (this) {
-      case PaymentScheme.yearly:
+      case PaymentSchemeEnum.yearly:
         return "Yıllık";
-      case PaymentScheme.monthly:
+      case PaymentSchemeEnum.monthly:
         return "Aylık";
-      case PaymentScheme.weekly:
+      case PaymentSchemeEnum.weekly:
         return "Haftalık";
-      case PaymentScheme.daily:
+      case PaymentSchemeEnum.daily:
         return "Günlük";
-      case PaymentScheme.hourly:
+      case PaymentSchemeEnum.hourly:
         return "Saatlik";
       default:
         return "";

@@ -1,6 +1,5 @@
-import 'package:enum_to_string/enum_to_string.dart';
 
-enum HighestEducationLevelCompleted {
+enum HighestEducationLevelCompletedEnum {
   primarySchool,
   middleSchool,
   highSchool,
@@ -12,32 +11,32 @@ enum HighestEducationLevelCompleted {
 }
 
 extension HighestEducationLevelCompletedExtension
-    on HighestEducationLevelCompleted {
+    on HighestEducationLevelCompletedEnum {
   static List<String> getList() {
     List<String> highestEducationLevelCompletedList = [];
-    for (var item in HighestEducationLevelCompleted.values) {
-      highestEducationLevelCompletedList.add(item.name);
+    for (var item in HighestEducationLevelCompletedEnum.values) {
+      highestEducationLevelCompletedList.add(item.getName);
     }
     return highestEducationLevelCompletedList;
   }
 
   String get getName {
     switch (this) {
-      case HighestEducationLevelCompleted.primarySchool:
+      case HighestEducationLevelCompletedEnum.primarySchool:
         return "İlkokul";
-      case HighestEducationLevelCompleted.middleSchool:
+      case HighestEducationLevelCompletedEnum.middleSchool:
         return "Ortaokul";
-      case HighestEducationLevelCompleted.highSchool:
+      case HighestEducationLevelCompletedEnum.highSchool:
         return "Lise";
-      case HighestEducationLevelCompleted.associateDegree:
+      case HighestEducationLevelCompletedEnum.associateDegree:
         return "Ön Lisans";
-      case HighestEducationLevelCompleted.bachelorsDegree:
+      case HighestEducationLevelCompletedEnum.bachelorsDegree:
         return "Lisans";
-      case HighestEducationLevelCompleted.mastersDegree:
+      case HighestEducationLevelCompletedEnum.mastersDegree:
         return "Yüksek Lisans";
-      case HighestEducationLevelCompleted.doctoratePhd:
+      case HighestEducationLevelCompletedEnum.doctoratePhd:
         return "Doktora";
-      case HighestEducationLevelCompleted.none:
+      case HighestEducationLevelCompletedEnum.none:
         return "Yok";
       default:
         return "";

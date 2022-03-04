@@ -1,6 +1,4 @@
-import 'package:enum_to_string/enum_to_string.dart';
-
-enum TypeOfWorking {
+enum EmploymentType {
   fullTime,
   partTime,
   temporary,
@@ -10,30 +8,30 @@ enum TypeOfWorking {
   mobile,
 }
 
-extension TypeOfWorkingExtension on TypeOfWorking {
+extension TypeOfWorkingExtension on EmploymentType {
   static List<String> getList() {
     List<String> typeOfWorkingList = [];
-    for (var item in TypeOfWorking.values) {
-      typeOfWorkingList.add(item.name);
+    for (var item in EmploymentType.values) {
+      typeOfWorkingList.add(item.getName);
     }
     return typeOfWorkingList;
   }
 
   String get getName {
     switch (this) {
-      case TypeOfWorking.fullTime:
+      case EmploymentType.fullTime:
         return "Tam Zamanlı";
-      case TypeOfWorking.partTime:
+      case EmploymentType.partTime:
         return "Yarı Zamanlı";
-      case TypeOfWorking.temporary:
+      case EmploymentType.temporary:
         return "Geçici";
-      case TypeOfWorking.contract:
+      case EmploymentType.contract:
         return "Kontratlı";
-      case TypeOfWorking.freelancer:
+      case EmploymentType.freelancer:
         return "Serbest Çalışan";
-      case TypeOfWorking.intern:
+      case EmploymentType.intern:
         return "Stajyer";
-      case TypeOfWorking.mobile:
+      case EmploymentType.mobile:
         return "Gezici (Mobil)";
       default:
         return "";

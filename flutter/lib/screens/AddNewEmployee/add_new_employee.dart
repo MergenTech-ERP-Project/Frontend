@@ -125,9 +125,7 @@ class AddNewEmployee extends StatelessWidget {
                     Expanded(
                       child: CustomButton(
                         title: 'Kaydet',
-                        pressAction: () {
-                          isSaved.value = true;
-                        },
+                        pressAction: () => userDetailSave(context),
                       ),
                     ),
                     Expanded(
@@ -146,5 +144,9 @@ class AddNewEmployee extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  userDetailSave(BuildContext context) async {
+    isSaved.value = true;
   }
 }

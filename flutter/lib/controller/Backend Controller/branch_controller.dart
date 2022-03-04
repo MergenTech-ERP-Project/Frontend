@@ -29,10 +29,10 @@ class BranchController extends GetxController {
     }
   }
 
-   void fetchBranchesById(int company_id) async {
+  void fetchBranchesById(int companyId) async {
     try {
       isLoading(true);
-      var branches = await BranchRemoteServices.fetchBranchesById(company_id);
+      var branches = await BranchRemoteServices.fetchBranchesById(companyId);
       if (branches != null) {
         branchList.removeRange(0, branchList.length);
         branchList.assignAll(branches);
@@ -42,10 +42,12 @@ class BranchController extends GetxController {
     }
   }
 
-  Future<int> fetchBranchByCompanyAndBranchName(int company_id, String _branch_name) async {
+  Future<int> fetchBranchByCompanyAndBranchName(
+      int companyId, String _branchName) async {
     try {
       isLoading(true);
-      var branch = await BranchRemoteServices.fetchBranch(company_id, _branch_name);
+      var branch =
+          await BranchRemoteServices.fetchBranch(companyId, _branchName);
       print("fetch Branch: " + branch.toString());
       return branch;
     } finally {
@@ -66,11 +68,12 @@ class BranchController extends GetxController {
     }
   }
 
-  Future <String?> putBranch(int id, Branch branch) async {
+  Future<String?> putBranch(int id, Branch branch) async {
     try {
       isLoading(true);
       print(id);
-      var response = await BranchRemoteServices.putBranch(id, json.encode(branch.toJsonWithId()).toString());
+      var response = await BranchRemoteServices.putBranch(
+          id, json.encode(branch.toJsonWithId()).toString());
       fetchBranches();
       print("delete Branch: " + response);
       return response;
@@ -79,7 +82,7 @@ class BranchController extends GetxController {
     }
   }
 
-  Future <String?> deleteBranch(int id, Branch branch) async {
+  Future<String?> deleteBranch(int id, Branch branch) async {
     try {
       isLoading(true);
       print(id);

@@ -1,24 +1,23 @@
-import 'package:enum_to_string/enum_to_string.dart';
 
-enum ContractType {
+enum ContractTypeEnum {
   timely,
   indenfinite,
 }
 
-extension ContractTypeExtension on ContractType {
+extension ContractTypeExtension on ContractTypeEnum {
   static List<String> getList() {
     List<String> contractTypeList = [];
-    for (var item in ContractType.values) {
-      contractTypeList.add(item.name);
+    for (var item in ContractTypeEnum.values) {
+      contractTypeList.add(item.getName);
     }
     return contractTypeList;
   }
 
   String get getName {
     switch (this) {
-      case ContractType.timely:
+      case ContractTypeEnum.timely:
         return "Süreli";
-      case ContractType.indenfinite:
+      case ContractTypeEnum.indenfinite:
         return "Süresiz";
 
       default:
