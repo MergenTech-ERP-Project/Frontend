@@ -1,6 +1,7 @@
-String serviceHttp =
-    "https://mergen-kalite-takip-sistemi.herokuapp.com"; //-yonetim
-//String serviceHttp = "http://91.151.89.195:8090";
+String serviceHttp = 
+//"https://exxxp.herokuapp.com";
+    "https://kalite-takip-yonetim-sistemi.herokuapp.com"; //mergen-kalite-takip-sistemi
+//"http://91.151.89.195:8090";
 
 const rootRoute = "/home";
 
