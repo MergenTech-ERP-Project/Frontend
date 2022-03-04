@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/site_layout.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class SplashView extends StatelessWidget {
   Future<void> initializeSettings() async {
     await authenticationController.checkLoginStatus();
+    await activityController
+        .fetchActivities(); //fetchActivityByUserId(user.id);
     await Future.delayed(const Duration(milliseconds: 100));
   }
 
