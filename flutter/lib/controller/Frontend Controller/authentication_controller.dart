@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:get/get.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/cache_manager.dart';
 import 'package:vtys_kalite/main.dart';

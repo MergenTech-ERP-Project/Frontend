@@ -1,27 +1,25 @@
-import 'package:enum_to_string/enum_to_string.dart';
-
-enum MaritalStatus {
+enum MaritalStatusEnum {
   married,
   single,
   unspecified,
 }
 
-extension MaritalStatusExtension on MaritalStatus {
+extension MaritalStatusExtension on MaritalStatusEnum {
   static List<String> getList() {
     List<String> maritalStatusList = [];
-    for (var item in MaritalStatus.values) {
-      maritalStatusList.add(item.name);
+    for (var item in MaritalStatusEnum.values) {
+      maritalStatusList.add(item.getName);
     }
     return maritalStatusList;
   }
 
-  String get getNames {
+  String get getName {
     switch (this) {
-      case MaritalStatus.married:
+      case MaritalStatusEnum.married:
         return "Evli";
-      case MaritalStatus.single:
+      case MaritalStatusEnum.single:
         return "Bekar";
-      case MaritalStatus.unspecified:
+      case MaritalStatusEnum.unspecified:
         return "Belirtilmemiş";
       default:
         return "";

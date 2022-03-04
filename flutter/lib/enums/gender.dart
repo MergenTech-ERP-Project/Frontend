@@ -1,27 +1,26 @@
-import 'package:enum_to_string/enum_to_string.dart';
 
-enum Gender {
+enum GenderEnum {
   male,
   female,
   unspecified,
 }
 
-extension GenderExtension on Gender {
+extension GenderExtension on GenderEnum {
   static List<String> getList() {
     List<String> genderList = [];
-    for (var item in Gender.values) {
-      genderList.add(item.name);
+    for (var item in GenderEnum.values) {
+      genderList.add(item.getName);
     }
     return genderList;
   }
 
   String get getName {
     switch (this) {
-      case Gender.male:
+      case GenderEnum.male:
         return "Erkek";
-      case Gender.female:
+      case GenderEnum.female:
         return "Kadın";
-      case Gender.unspecified:
+      case GenderEnum.unspecified:
         return "Belirtilmemiş";
 
       default:

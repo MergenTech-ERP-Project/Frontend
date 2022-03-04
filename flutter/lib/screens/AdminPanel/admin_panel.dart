@@ -25,7 +25,6 @@ class AdminPanelPage extends StatefulWidget {
 int userTitleIndex = 0;
 
 class _AdminPanelPageState extends State<AdminPanelPage> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -80,16 +79,14 @@ class _ListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: ListView.separated(
-          shrinkWrap: true,
-          separatorBuilder: (context, index) => const SizedBox(height: 10),
-          itemCount: widget.users.length,
-          itemBuilder: (_, index) => _UserCard(
-            userInfo: widget.users[index],
-          ),
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: ListView.separated(
+        shrinkWrap: true,
+        separatorBuilder: (context, index) => const SizedBox(height: 10),
+        itemCount: widget.users.length,
+        itemBuilder: (_, index) => _UserCard(
+          userInfo: widget.users[index],
         ),
       ),
     );

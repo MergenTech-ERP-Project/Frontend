@@ -7,7 +7,10 @@ import 'package:vtys_kalite/controller/Backend%20Controller/activity_controller.
 import 'package:vtys_kalite/controller/Backend%20Controller/activity_evaluation_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/branch_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/company_controller.dart';
+import 'package:vtys_kalite/controller/Backend%20Controller/user_career_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/user_controller.dart';
+import 'package:vtys_kalite/controller/Backend%20Controller/user_detail_controller.dart';
+import 'package:vtys_kalite/controller/Backend%20Controller/user_payment_controller.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/authentication_controller.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/menu_controller.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/navigator_controller.dart';
@@ -31,7 +34,9 @@ void main() {
   Get.put(BranchController());
   Get.put(MenuController());
   Get.put(NavigatorController());
-
+  Get.put(UserDetailController());
+  Get.put(UserDetailCareerController());
+  Get.put(UserDetailPaymentController());
   runApp(App());
 }
 

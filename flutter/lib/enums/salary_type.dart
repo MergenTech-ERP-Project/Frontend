@@ -1,24 +1,23 @@
-import 'package:enum_to_string/enum_to_string.dart';
 
-enum SalaryType {
+enum SalaryTypeEnum {
   net,
   gross,
 }
 
-extension SalaryTypeExtension on SalaryType {
+extension SalaryTypeExtension on SalaryTypeEnum {
   static List<String> getList() {
     List<String> salaryTypeList = [];
-    for (var item in SalaryType.values) {
-      salaryTypeList.add(item.name);
+    for (var item in SalaryTypeEnum.values) {
+      salaryTypeList.add(item.getName);
     }
     return salaryTypeList;
   }
 
   String get getName {
     switch (this) {
-      case SalaryType.net:
+      case SalaryTypeEnum.net:
         return "Net";
-      case SalaryType.gross:
+      case SalaryTypeEnum.gross:
         return "Brüt";
 
       default:

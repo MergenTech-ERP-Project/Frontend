@@ -1,24 +1,23 @@
-import 'package:enum_to_string/enum_to_string.dart';
 
-enum EducationalStatus {
+enum EducationalStatusEnum {
   student,
   graduate,
 }
 
-extension EducationalStatusExtension on EducationalStatus {
+extension EducationalStatusExtension on EducationalStatusEnum {
   static List<String> getList() {
     List<String> educationalStatusList = [];
-    for (var item in EducationalStatus.values) {
-      educationalStatusList.add(item.name);
+    for (var item in EducationalStatusEnum.values) {
+      educationalStatusList.add(item.getName);
     }
     return educationalStatusList;
   }
 
   String get getName {
     switch (this) {
-      case EducationalStatus.student:
+      case EducationalStatusEnum.student:
         return "Öğrenci";
-      case EducationalStatus.graduate:
+      case EducationalStatusEnum.graduate:
         return "Mezun";
 
       default:

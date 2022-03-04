@@ -59,7 +59,7 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
               listExtension: MaritalStatusExtension.getList(),
             ),
             ExpandedCustomDropDownMenu(
-              label: "Medeni Hal",
+              label: "Cinsiyet",
               index: widget.genderIndex,
               listExtension: GenderExtension.getList(),
             ),
