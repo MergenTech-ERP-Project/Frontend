@@ -14,7 +14,7 @@ class BranchRemoteServices {
     var response = await http.get(Uri.parse(
        serviceHttp + '/branch/branches/'));
     if (response.statusCode == 200) {
-      var jsonString = response.body;
+      var jsonString = utf8.decode(response.bodyBytes);
       return branchFromJson(jsonString);
     } else {
       return null;
@@ -25,7 +25,7 @@ class BranchRemoteServices {
     var response = await http.get(Uri.parse(
        serviceHttp + '/branch/branches/$company_id'));
     if (response.statusCode == 200) {
-      var jsonString = response.body;
+      var jsonString = utf8.decode(response.bodyBytes);
       return branchFromJson(jsonString);
     } else {
       return null;
@@ -37,7 +37,7 @@ class BranchRemoteServices {
         serviceHttp + '/branch/$company_id/$branch_name'));
     int branchId = -1;
     if (response.statusCode == 200) {
-      var jsonString = response.body;
+      var jsonString = utf8.decode(response.bodyBytes);
       List<Branch> branches = branchFromJson(jsonString);
       for (Branch branch in branches) {
         if (branch.branch_name == branch_name) {

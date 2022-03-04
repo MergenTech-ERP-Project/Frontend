@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/enums/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_genel_first_card_image.dart';
 
@@ -59,7 +60,7 @@ class TabGenelFirstCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const CustomText(text: "Departman"),
-                CustomText(text: user.title.name),
+                CustomText(text: user.title.getName),
               ],
             ),
             const SizedBox(height: 20),

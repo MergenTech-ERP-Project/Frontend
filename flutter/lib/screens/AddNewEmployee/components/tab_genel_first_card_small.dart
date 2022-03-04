@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/enums/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_genel_first_card_image.dart';
 
@@ -37,7 +38,7 @@ class TabGenelFirstCardSmall extends StatelessWidget {
             const SizedBox(height: 20),
             profileAbout("Şube", "Eskişehir Teknopark"),
             const SizedBox(height: 20),
-            profileAbout("Departman", user.title.name),
+            profileAbout("Departman", user.title.getName),
             const SizedBox(height: 20),
             profileAbout("E-posta (iş)", "abcdef@mergen.com"),
             const SizedBox(height: 20),

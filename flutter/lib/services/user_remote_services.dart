@@ -11,8 +11,7 @@ class UserRemoteServices {
   static Future<List<User>?> fetchUsers() async {
     var response = await http.get(Uri.parse(serviceHttp + '/user/users'));
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      var jsonString = response.body.toString();
-      return parseUsers(jsonString);
+      return parseUsers(utf8.decode(response.bodyBytes));
     } else {
       return null;
     }
@@ -22,7 +21,7 @@ class UserRemoteServices {
     var response = await http.get(Uri.parse(serviceHttp + '/user/users/$id'));
     User? user;
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      var jsonString = response.body.toString();
+      var jsonString = utf8.decode(response.bodyBytes);
       if (jsonString == "null") {
         return null;
       }
@@ -36,7 +35,7 @@ class UserRemoteServices {
     var response = await http.get(Uri.parse(serviceHttp + '/user/$name'));
     int userID = -1;
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      var jsonString = response.body.toString();
+      var jsonString = utf8.decode(response.bodyBytes);
       if (jsonString == "null") {
         return userID;
       }
@@ -52,7 +51,7 @@ class UserRemoteServices {
         await http.get(Uri.parse(serviceHttp + '/user/$name/$password'));
     int userID = -1;
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      String jsonString = response.body.toString();
+      String jsonString = utf8.decode(response.bodyBytes);
       if (jsonString == "null") {
         return userID;
       }
@@ -68,7 +67,7 @@ class UserRemoteServices {
         await http.get(Uri.parse(serviceHttp + '/user/check/$email/$password'));
     int userID = -1;
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      String jsonString = response.body.toString();
+      String jsonString = utf8.decode(response.bodyBytes);
       if (jsonString == "null") {
         return userID;
       }
