@@ -199,7 +199,7 @@ class _AdminDialog extends StatelessWidget {
             child: CustomDropDownMenu(
               list: DepartmentsEnumExtension.getList(),
               isExpandedYes: true,
-              text: user.title.name,
+              text: user.title.getName,
               iconSize: 20,
               icon: const Icon(Icons.arrow_drop_down),
               onChanged: (val) {

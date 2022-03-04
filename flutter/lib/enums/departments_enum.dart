@@ -13,12 +13,12 @@ extension DepartmentsEnumExtension on DepartmentsEnum {
   static List<String> getList() {
     List<String> departmentsEnumList = [];
     for (var item in DepartmentsEnum.values) {
-      departmentsEnumList.add(item.name);
+      departmentsEnumList.add(item.getName);
     }
     return departmentsEnumList;
   }
 
-  String get name {
+  String get getName {
     switch (this) {
       case DepartmentsEnum.none:
         return "Yok";

@@ -12,7 +12,7 @@ class ActivityEvaluationRemoteServices {
     var response = await http
         .get(Uri.parse(serviceHttp + '/activityevaluation/evaluations'));
     if (response.statusCode == 200) {
-      var jsonString = response.body;
+      var jsonString = utf8.decode(response.bodyBytes);
       return activityEvaluationFromJson(jsonString);
     } else {
       return null;
@@ -24,7 +24,7 @@ class ActivityEvaluationRemoteServices {
         .get(Uri.parse(serviceHttp + '/activityevaluation/evaluations'));
     int activityEvaluationID = -1;
     if (response.statusCode == 200) {
-      var jsonString = response.body;
+      var jsonString = utf8.decode(response.bodyBytes);
       List<ActivityEvaluation> activityEvaluations =
           activityEvaluationFromJson(jsonString);
       for (ActivityEvaluation evaluation in activityEvaluations) {

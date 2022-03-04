@@ -20,7 +20,7 @@ class ActiveToUserRemoteServices {
     );
     print("fetchActiveToUsers response ${response.statusCode}");
     if (response.statusCode == 200) {
-      var jsonString = response.body;
+      var jsonString = utf8.decode(response.bodyBytes);
       print("JSON : $jsonString");
       return activeToUserFromJson(jsonString);
     } else {
@@ -40,7 +40,7 @@ class ActiveToUserRemoteServices {
     int id = -1;
     print("fetchActiveToUser response ${response.statusCode}");
     if (response.statusCode == 200) {
-      var jsonString = response.body;
+      var jsonString = utf8.decode(response.bodyBytes);
 
       print("JSON : $jsonString");
     }

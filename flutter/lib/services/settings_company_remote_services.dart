@@ -12,7 +12,7 @@ class CompanyRemoteServices {
     var response =
         await http.get(Uri.parse(serviceHttp + '/company/companies'));
     if (response.statusCode == 200) {
-      var jsonString = response.body;
+      var jsonString = utf8.decode(response.bodyBytes);
       return companyFromJson(jsonString);
     } else {
       return null;
@@ -24,7 +24,7 @@ class CompanyRemoteServices {
         .get(Uri.parse(serviceHttp + '/company/companies/$_company_name'));
     int companyId = -1;
     if (response.statusCode == 200) {
-      var jsonString = response.body;
+      var jsonString = utf8.decode(response.bodyBytes);
       List<Company> companies = companyFromJson(jsonString);
       for (Company company in companies) {
         if (company.company_name == _company_name) {

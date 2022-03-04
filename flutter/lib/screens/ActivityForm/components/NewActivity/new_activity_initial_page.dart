@@ -1,10 +1,7 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
@@ -97,11 +94,9 @@ class NewActivityInitialPage extends StatelessWidget {
 
               onNextButtonClick(activity!);
 
-              showDialogWaitingMessage(context);
               await (isActivitExists
                   ? activityController.putActivity(activity!)
                   : activityController.postActivity(activity!));
-              Navigator.of(context).pop(true);
             }
           },
         ),

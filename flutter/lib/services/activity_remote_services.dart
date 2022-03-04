@@ -20,7 +20,7 @@ class ActivityRemoteServices {
     );
     print("fetchActivities response ${response.statusCode}");
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      var jsonString = response.body;
+      var jsonString = utf8.decode(response.bodyBytes);
       print("JSON : $jsonString");
       return activityFromJson(jsonString);
     } else {
@@ -39,7 +39,7 @@ class ActivityRemoteServices {
     );
     print("fetchActivities response ${response.statusCode}");
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      var jsonString = response.body;
+      var jsonString = utf8.decode(response.bodyBytes);
       print("JSON : $jsonString");
       return activityFromJson(jsonString);
     } else {
@@ -58,7 +58,7 @@ class ActivityRemoteServices {
     );
     print("fetchActivity response ${response.statusCode}");
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      var jsonString = response.body;
+      var jsonString = utf8.decode(response.bodyBytes);
       return activityFromJson(jsonString)[0];
     }
     return null;
