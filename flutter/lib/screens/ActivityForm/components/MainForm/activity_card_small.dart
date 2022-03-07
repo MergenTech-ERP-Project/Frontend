@@ -6,6 +6,7 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation_page.dart';
+import 'package:vtys_kalite/screens/ActivityForm/components/ActivityEvaluations/list_activity_evaluations_button.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/NewActivity/components/new_activity_delete_button.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/NewActivity/components/new_activity_edit_button.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -136,6 +137,11 @@ class ActivityCardSmall extends StatelessWidget {
                               size: 30,
                               activity: activity,
                               then: (value) => checkAnswer(),
+                            ),
+                            ListActivityEvaluationsButton(
+                              size: 30,
+                              activity: activity,
+                              then: (value) {},
                             ),
                             ActivityCardDeleteButton(
                               size: 30,

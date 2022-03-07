@@ -7,7 +7,7 @@ import 'package:vtys_kalite/screens/widgets/side_menu_item.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
-const double sideMenuWidth = 270;
+const double sideMenuWidth = 300;
 
 class SideMenu extends StatelessWidget {
   @override

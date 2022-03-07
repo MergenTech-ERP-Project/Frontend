@@ -12,21 +12,21 @@ import 'package:vtys_kalite/screens/Settings/settings_page.dart';
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case employeesPageRoute:
-      return _getPageRoute(Employees());
+      return _getPageRoute(const Employees());
     case myActivitiesPageRoute:
       return _getPageRoute(MyActivities());
     case formsPageRoute:
       return _getPageRoute(
         ResponsiveWidget(
           largeScreen: FormsPage(),
-          smallScreen: FormsPageSmall(),
+          smallScreen: const FormsPageSmall(),
         ),
       );
     case settingsPageRoute:
       return _getPageRoute(SettingsPage());
     default:
       print("Check Address on Router.dart");
-      return _getPageRoute(Employees());
+      return _getPageRoute(const Employees());
   }
 }
 

@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:vtys_kalite/models/activity_evaluation.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 
-
 class ActivityEvaluationRemoteServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
@@ -36,6 +35,20 @@ class ActivityEvaluationRemoteServices {
       }
     }
     return activityEvaluationID;
+  }
+
+  static Future<List<ActivityEvaluation>?> fetchActivityEvaluationsByActivityId(
+      int activityId) async {
+    var response = await http
+        .get(Uri.parse(serviceHttp + '/activityevaluation/evaluations'));
+    if (response.statusCode == 200) {
+      var jsonString = utf8.decode(response.bodyBytes);
+      List<ActivityEvaluation> activityEvaluations =
+          activityEvaluationFromJson(jsonString);
+      return activityEvaluations
+          .where((element) => element.activityId == activityId)
+          .toList();
+    }
   }
 
   static Future<String> postActivityEvaluation(String json) async {

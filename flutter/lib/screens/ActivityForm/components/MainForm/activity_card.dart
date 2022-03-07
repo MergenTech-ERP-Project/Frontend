@@ -6,6 +6,7 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/screens/ActivityForm/activity_evaluation_page.dart';
+import 'package:vtys_kalite/screens/ActivityForm/components/ActivityEvaluations/list_activity_evaluations_button.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/NewActivity/components/new_activity_delete_button.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/NewActivity/components/new_activity_edit_button.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -61,22 +62,20 @@ class ActivityCard extends StatelessWidget {
                     Column(
                       children: [
                         Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          height: 5,
+                          height: 10,
                           width: 300,
                           decoration: BoxDecoration(
                             color: activityEvaluationId != -1
                                 ? Colors.greenAccent
                                 : Colors.redAccent,
                             borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5),
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(12),
+                          padding: const EdgeInsets.all(8),
                           child: Row(
                             children: [
                               const Expanded(flex: 1, child: Text("")),
@@ -101,27 +100,36 @@ class ActivityCard extends StatelessWidget {
                           ),
                         ),
                         const Expanded(flex: 1, child: Text("")),
-                        CustomText(
-                          text: activity.organizator,
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: CustomText(
+                            text: activity.organizator,
+                            size: 18,
+                            weight: FontWeight.w400,
+                          ),
                         ),
-                        const Expanded(flex: 1, child: Text("")),
+                        const Expanded(flex: 2, child: Text("")),
                       ],
                     ),
                     Positioned(
-                      right: 5,
+                      right: 0,
+                      left: 0,
                       bottom: 5,
-                      height: 24,
-                      width: 48,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ActivityCardEditButton(
-                            size: 22,
+                            size: 24,
                             activity: activity,
                             then: (value) => checkAnswer(),
                           ),
+                          ListActivityEvaluationsButton(
+                            size: 24,
+                            activity: activity,
+                            then: (value) {},
+                          ),
                           ActivityCardDeleteButton(
-                            size: 22,
+                            size: 24,
                             activity: activity,
                           ),
                         ],
