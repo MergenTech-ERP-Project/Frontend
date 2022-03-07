@@ -8,6 +8,7 @@ Color lightActiveColor = const Color(0xFF4566D2);
 Color activeDarkColor = const Color(0xFF475170);
 
 Color blackColor = Colors.black;
+Color greyColor = Colors.grey;
 Color whiteColor = Colors.white;
 Color redColor = Colors.red;
 Color greenColor = Colors.green;

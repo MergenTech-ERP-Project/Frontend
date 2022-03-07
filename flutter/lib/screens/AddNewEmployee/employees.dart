@@ -28,7 +28,11 @@ class Employees extends StatelessWidget {
                         child: Column(
                           children: [
                             Expanded(
-                              child: ListView.builder(
+                              child: ListView.separated(
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(
+                                  height: 10,
+                                ),
                                 itemCount: userController.userList.length,
                                 itemBuilder: (context, index) {
                                   return EmployeeCard(

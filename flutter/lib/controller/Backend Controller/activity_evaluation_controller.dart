@@ -23,8 +23,7 @@ class ActivityEvaluationController extends GetxController {
       var activityEvaluations =
           await ActivityEvaluationRemoteServices.fetchActivityEvaluations();
       if (activityEvaluations != null) {
-        activityEvaluationList.clear();
-        activityEvaluationList.addAll(activityEvaluations);
+        activityEvaluationList.assignAll(activityEvaluations);
       }
     } finally {
       isLoading(false);
@@ -39,6 +38,19 @@ class ActivityEvaluationController extends GetxController {
               activityId, userId);
       print("fetch Activity Evaluation: " + activityEvaluation.toString());
       return activityEvaluation;
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  void fetchActivityEvaluationByActivityId(int activityId) async {
+    try {
+      isLoading(true);
+      var activityEvaluations = await ActivityEvaluationRemoteServices
+          .fetchActivityEvaluationsByActivityId(activityId);
+      if (activityEvaluations != null) {
+        activityEvaluationList.assignAll(activityEvaluations);
+      }
     } finally {
       isLoading(false);
     }
