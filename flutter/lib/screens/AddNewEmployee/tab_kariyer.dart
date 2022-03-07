@@ -14,6 +14,7 @@ import 'package:vtys_kalite/screens/AddNewEmployee/models/odeme.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/custombuttonwidget.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdatetimepicker.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabKariyer extends StatefulWidget {
   List<String> positionHeaders = [
@@ -50,11 +51,11 @@ class TabKariyer extends StatefulWidget {
     '-',
   ];
 
+  List<YeniOdeme> odemelerList = <YeniOdeme>[].obs;
+
   var asgariUcretSwitch = false.obs;
   var netSwitch = false.obs;
   var agiDahilSwitch = false.obs;
-
-  List<YeniOdeme> odemelerList = <YeniOdeme>[].obs;
 
   TabKariyer({Key? key}) : super(key: key);
 
@@ -66,21 +67,6 @@ class _TabKariyerState extends State<TabKariyer> {
   ScrollController scrollController = ScrollController(
     initialScrollOffset: 0,
   );
-
-  TextEditingController positionSirket = TextEditingController();
-  TextEditingController positionSube = TextEditingController();
-  TextEditingController positionDepartman = TextEditingController();
-  TextEditingController positionUnvan = TextEditingController();
-  TextEditingController positionYoneticisi = TextEditingController();
-  TextEditingController positionCalismaSekli = TextEditingController();
-  TextEditingController controllerSalary = TextEditingController();
-  TextEditingController controllerUnit = TextEditingController();
-  TextEditingController controllerPaymentScreenInSalary =
-      TextEditingController();
-
-  DateTime positionDateTimeBaslangic = DateTime.now();
-  DateTime positionDateTimeBitis = DateTime.now();
-  DateTime gecerlilikBaslangic = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -98,22 +84,23 @@ class _TabKariyerState extends State<TabKariyer> {
             showDialog(
               context: context,
               builder: (_) => CustomAlertDialog(
-                titleWidget: const Expanded(
-                  child: _PozisyonEkleHeader(),
-                ),
-                bodyWidgetHeight: screenSize.height - 20,
+                titleWidget: _PozisyonEkleHeader(),
                 bodyWidgetWidth: screenSize.width - 20,
                 bodyWidget: SizedBox(
                   width: screenSize.width - 20 / 1.2,
                   child: _PozisyonEklemeBody(
-                      positionSirket: positionSirket,
-                      positionSube: positionSube,
-                      positionDepartman: positionDepartman,
-                      positionUnvan: positionUnvan,
-                      positionYoneticisi: positionYoneticisi,
-                      positionCalismaSekli: positionCalismaSekli,
-                      positionDateTimeBaslangic: positionDateTimeBaslangic,
-                      positionDateTimeBitis: positionDateTimeBitis),
+                      positionSirket: tabKariyerController.positionSirket,
+                      positionSube: tabKariyerController.positionSube,
+                      positionDepartman: tabKariyerController.positionDepartman,
+                      positionUnvan: tabKariyerController.positionUnvan,
+                      positionYoneticisi:
+                          tabKariyerController.positionYoneticisi,
+                      positionCalismaSekli:
+                          tabKariyerController.positionCalismaSekli,
+                      positionDateTimeBaslangic:
+                          tabKariyerController.positionDateTimeBaslangic,
+                      positionDateTimeBitis:
+                          tabKariyerController.positionDateTimeBitis),
                 ),
               ),
             );
@@ -143,12 +130,12 @@ class _TabKariyerState extends State<TabKariyer> {
                         Row(
                           children: [
                             ExpandedNameController(
-                              controller: controllerSalary,
+                              controller: tabKariyerController.controllerSalary,
                               label: "Maaş",
                               widget: const SizedBox(),
                             ),
                             ExpandedNameController(
-                              controller: controllerUnit,
+                              controller: tabKariyerController.controllerUnit,
                               label: "Birim",
                               widget: Row(
                                 mainAxisAlignment:
@@ -174,12 +161,13 @@ class _TabKariyerState extends State<TabKariyer> {
                         Row(
                           children: [
                             ExpandedCustomDateTimePicker(
-                              dateTime: gecerlilikBaslangic,
+                              dateTime:
+                                  tabKariyerController.gecerlilikBaslangic,
                               label: "Geçerlilik Başlangıç",
                             ),
                             ExpandedNameController(
-                              controller: controllerUnit,
-                              label: "Maaş",
+                              controller: tabKariyerController.controllerUnit,
+                              label: "Maaş Tipi",
                               widget: const SizedBox(),
                             ),
                             Obx(
@@ -221,8 +209,8 @@ class _TabKariyerState extends State<TabKariyer> {
                                       flex: 4,
                                       child: CustomTextBox(
                                         label: "Yapmak istediğiniz ödeme",
-                                        controller:
-                                            controllerPaymentScreenInSalary,
+                                        controller: tabKariyerController
+                                            .controllerPaymentScreenInSalary,
                                         borderless: true,
                                       ),
                                     ),
@@ -232,7 +220,8 @@ class _TabKariyerState extends State<TabKariyer> {
                                         title: "Kaydet",
                                         pressAction: () {
                                           setState(() {
-                                            if (controllerPaymentScreenInSalary
+                                            if (tabKariyerController
+                                                    .controllerPaymentScreenInSalary
                                                     .text
                                                     .trim() ==
                                                 "") {
@@ -252,9 +241,9 @@ class _TabKariyerState extends State<TabKariyer> {
                                             } else {
                                               widget.odemelerList.add(
                                                 YeniOdeme(
-                                                  name:
-                                                      controllerPaymentScreenInSalary
-                                                          .text,
+                                                  name: tabKariyerController
+                                                      .controllerPaymentScreenInSalary
+                                                      .text,
                                                 ),
                                               );
                                             }

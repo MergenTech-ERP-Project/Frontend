@@ -1,4 +1,3 @@
-
 enum BloodTypeEnum {
   zeroPlus,
   zeroMinus,
@@ -10,7 +9,7 @@ enum BloodTypeEnum {
   abMinus,
 }
 
-extension BloodTypeExtension on BloodTypeEnum {
+extension BloodTypeEnumExtension on BloodTypeEnum {
   static List<String> getList() {
     List<String> bloodTypeList = [];
     for (var item in BloodTypeEnum.values) {

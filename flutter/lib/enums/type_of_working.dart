@@ -1,4 +1,4 @@
-enum EmploymentType {
+enum EmploymentTypeEnum {
   fullTime,
   partTime,
   temporary,
@@ -8,10 +8,10 @@ enum EmploymentType {
   mobile,
 }
 
-extension TypeOfWorkingExtension on EmploymentType {
+extension EmploymentTypeEnumExtension on EmploymentTypeEnum {
   static List<String> getList() {
     List<String> typeOfWorkingList = [];
-    for (var item in EmploymentType.values) {
+    for (var item in EmploymentTypeEnum.values) {
       typeOfWorkingList.add(item.getName);
     }
     return typeOfWorkingList;
@@ -19,19 +19,19 @@ extension TypeOfWorkingExtension on EmploymentType {
 
   String get getName {
     switch (this) {
-      case EmploymentType.fullTime:
+      case EmploymentTypeEnum.fullTime:
         return "Tam Zamanlı";
-      case EmploymentType.partTime:
+      case EmploymentTypeEnum.partTime:
         return "Yarı Zamanlı";
-      case EmploymentType.temporary:
+      case EmploymentTypeEnum.temporary:
         return "Geçici";
-      case EmploymentType.contract:
+      case EmploymentTypeEnum.contract:
         return "Kontratlı";
-      case EmploymentType.freelancer:
+      case EmploymentTypeEnum.freelancer:
         return "Serbest Çalışan";
-      case EmploymentType.intern:
+      case EmploymentTypeEnum.intern:
         return "Stajyer";
-      case EmploymentType.mobile:
+      case EmploymentTypeEnum.mobile:
         return "Gezici (Mobil)";
       default:
         return "";

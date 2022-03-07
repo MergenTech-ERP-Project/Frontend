@@ -5,7 +5,7 @@ enum MilitaryStatusEnum {
   deferred,
 }
 
-extension MaritalStatusExtension on MilitaryStatusEnum {
+extension MilitaryStatusEnumExtension on MilitaryStatusEnum {
   static List<String> getList() {
     List<String> militaryStatusList = [];
     for (var item in MilitaryStatusEnum.values) {

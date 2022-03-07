@@ -15,7 +15,7 @@ class UserDetailCareerController extends GetxController {
       isLoading(true);
       UserDetailCareer? detailCareer =
           await UserDetailCareerServices.fetchUserDetailCareerById(id);
-      print("fetch User Detail Career: " + detailCareer!.id.toString());
+      print("fetch User Detail Career: " + detailCareer!.tcno.toString());
       return detailCareer;
     } finally {
       isLoading(false);
@@ -30,7 +30,7 @@ class UserDetailCareerController extends GetxController {
           json.encode(newUserDetailCareer.toJson()).toString());
 
       print("post User Detail Career: " + response.toString());
-      fetchUserDetailCareerById(userDetailCareer.id);
+      fetchUserDetailCareerById(userDetailCareer.tcno);
       return response;
     } finally {
       isLoading(false);

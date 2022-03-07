@@ -62,21 +62,6 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
     initialScrollOffset: 0,
   );
 
-  TextEditingController positionSirket = TextEditingController();
-  TextEditingController positionSube = TextEditingController();
-  TextEditingController positionDepartman = TextEditingController();
-  TextEditingController positionUnvan = TextEditingController();
-  TextEditingController positionYoneticisi = TextEditingController();
-  TextEditingController positionCalismaSekli = TextEditingController();
-  TextEditingController controllerSalary = TextEditingController();
-  TextEditingController controllerUnit = TextEditingController();
-  TextEditingController controllerPaymentScreenInSalary =
-      TextEditingController();
-
-  DateTime positionDateTimeBaslangic = DateTime.now();
-  DateTime positionDateTimeBitis = DateTime.now();
-  DateTime gecerlilikBaslangic = DateTime.now();
-
   bool asgariUcretSwitch = true;
   bool netSwitch = true;
   bool agiDahilSwitch = true;
@@ -128,7 +113,7 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                         Column(
                           children: [
                             PozitionWidget(
-                              controller: positionSirket,
+                              controller: tabKariyerController.positionSirket,
                               label: "Şirket",
                               widget: Row(
                                 mainAxisAlignment:
@@ -141,7 +126,7 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                               ),
                             ),
                             PozitionWidget(
-                              controller: positionSube,
+                              controller: tabKariyerController.positionSube,
                               label: "Şube",
                               widget: Row(
                                 mainAxisAlignment:
@@ -158,7 +143,7 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                         Column(
                           children: [
                             PozitionWidget(
-                              controller: positionDepartman,
+                              controller: tabKariyerController.positionDepartman,
                               label: "Departman",
                               widget: Row(
                                 mainAxisAlignment:
@@ -171,7 +156,7 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                               ),
                             ),
                             PozitionWidget(
-                              controller: positionUnvan,
+                              controller:tabKariyerController. positionUnvan,
                               label: "Unvan",
                               widget: Row(
                                 mainAxisAlignment:
@@ -188,12 +173,12 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                         Column(
                           children: [
                             PozitionWidget(
-                              controller: positionYoneticisi,
+                              controller: tabKariyerController.positionYoneticisi,
                               label: "Yönetici",
                               widget: const Icon(Icons.keyboard_arrow_down),
                             ),
                             PozitionWidget(
-                              controller: positionCalismaSekli,
+                              controller: tabKariyerController.positionCalismaSekli,
                               label: "Çalışma Şekli",
                               widget: const Icon(Icons.keyboard_arrow_down),
                             ),
@@ -207,7 +192,7 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                               borderless: true,
                               labelText: 'Başlangıç Tarihi',
                               onChanged: (val) {
-                                positionDateTimeBaslangic =
+                                tabKariyerController.positionDateTimeBaslangic =
                                     dateTimeFormat.parse(val!);
                               },
                             ),
@@ -217,7 +202,7 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                               borderless: true,
                               labelText: 'Bitiş Tarihi',
                               onChanged: (val) {
-                                positionDateTimeBitis =
+                                tabKariyerController.positionDateTimeBitis =
                                     dateTimeFormat.parse(val!);
                               },
                             ),
@@ -292,13 +277,13 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                               children: [
                                 CustomTextBox(
                                   borderless: true,
-                                  controller: controllerSalary,
+                                  controller: tabKariyerController.controllerSalary,
                                   label: "Maaş",
                                   suffixWidget: const SizedBox(),
                                 ),
                                 CustomTextBox(
                                   borderless: true,
-                                  controller: controllerUnit,
+                                  controller: tabKariyerController.controllerUnit,
                                   label: "Birim",
                                   suffixWidget: Row(
                                     mainAxisAlignment:
@@ -344,7 +329,7 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                                       print("DateTime picker : " + val);
                                     }
                                     try {
-                                      gecerlilikBaslangic =
+                                      tabKariyerController.gecerlilikBaslangic =
                                           dateTimeFormat.parse(val!);
                                     } catch (e) {
                                       print(e.toString());
@@ -353,7 +338,7 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                                 ),
                                 CustomTextBox(
                                   borderless: true,
-                                  controller: controllerUnit,
+                                  controller: tabKariyerController.controllerUnit,
                                   label: "Maaş Periyodu",
                                   suffixWidget:
                                       const Icon(Icons.keyboard_arrow_down),
@@ -401,14 +386,14 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                                         CustomTextBox(
                                           label: "Yapmak istediğiniz ödeme",
                                           controller:
-                                              controllerPaymentScreenInSalary,
+                                              tabKariyerController.controllerPaymentScreenInSalary,
                                           borderless: true,
                                         ),
                                         CustomButton(
                                           title: "Kaydet",
                                           pressAction: () {
                                             setState(() {
-                                              if (controllerPaymentScreenInSalary
+                                              if (tabKariyerController.controllerPaymentScreenInSalary
                                                       .text
                                                       .trim() ==
                                                   "") {
@@ -427,7 +412,7 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                                                 widget.odemeler.add(
                                                   YeniOdeme(
                                                     name:
-                                                        controllerPaymentScreenInSalary
+                                                        tabKariyerController.controllerPaymentScreenInSalary
                                                             .text,
                                                     description:
                                                         "Ömer Faruk Öztürk",

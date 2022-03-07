@@ -15,7 +15,7 @@ class UserDetailPaymentController extends GetxController {
       isLoading(true);
       UserDetailPayment? detailPayment =
           await UserDetailPaymentServices.fetchUserDetailPaymentById(id);
-      print("fetch User Detail Payment: " + detailPayment!.id.toString());
+      print("fetch User Detail Payment: " + detailPayment!.tcno.toString());
       return detailPayment;
     } finally {
       isLoading(false);
@@ -31,7 +31,7 @@ class UserDetailPaymentController extends GetxController {
           json.encode(newUserDetailPayment.toJson()).toString());
 
       print("post User Detail Payment: " + response.toString());
-      fetchUserDetailPaymentById(userDetailPayment.id);
+      fetchUserDetailPaymentById(userDetailPayment.tcno);
       return response;
     } finally {
       isLoading(false);
