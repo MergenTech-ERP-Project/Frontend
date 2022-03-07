@@ -16,6 +16,10 @@ import 'package:vtys_kalite/controller/Frontend%20Controller/menu_controller.dar
 import 'package:vtys_kalite/controller/Frontend%20Controller/navigator_controller.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_diger_bilgiler_controller.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_genel_controller.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_kariyer_controller.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_kisisel_bilgiler_controller.dart';
 import 'package:vtys_kalite/screens/page_not_found.dart';
 import 'package:vtys_kalite/screens/pages.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -25,19 +29,7 @@ import 'package:vtys_kalite/utilities/style.dart';
 User user = User();
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
-  Get.put(AuthenticationController());
-  Get.put(UserController());
-  Get.put(ActivityController());
-  Get.put(ActivityEvaluationController());
-  Get.put(CompanyController());
-  Get.put(BranchController());
-  Get.put(MenuController());
-  Get.put(NavigatorController());
-  Get.put(UserDetailController());
-  Get.put(UserDetailCareerController());
-  Get.put(UserDetailPaymentController());
-
+  controllerMethod();
   runApp(App());
 }
 
@@ -74,4 +66,22 @@ class App extends StatelessWidget {
           },
         ),
       );
+}
+
+controllerMethod() {
+  Get.put(AuthenticationController());
+  Get.put(UserController());
+  Get.put(ActivityController());
+  Get.put(ActivityEvaluationController());
+  Get.put(CompanyController());
+  Get.put(BranchController());
+  Get.put(MenuController());
+  Get.put(NavigatorController());
+  Get.put(UserDetailController());
+  Get.put(UserDetailCareerController());
+  Get.put(UserDetailPaymentController());
+  Get.put(TabGenelController());
+  Get.put(TabKariyerController());
+  Get.put(TabDigerBilgilerController());
+  Get.put(TabKisiselBilgilerController());
 }

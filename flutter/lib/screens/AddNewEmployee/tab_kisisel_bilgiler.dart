@@ -7,26 +7,13 @@ import 'package:vtys_kalite/enums/educational_status.dart';
 import 'package:vtys_kalite/enums/gender.dart';
 import 'package:vtys_kalite/enums/highest_education_level_completed.dart';
 import 'package:vtys_kalite/enums/marial_status.dart';
+import 'package:vtys_kalite/enums/military_status.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdatetimepicker.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdropdownmenu.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabPersonalInformation extends StatefulWidget {
-  DateTime birthDate = DateTime.now();
-  TextEditingController controllerIdentificationNumber =
-      TextEditingController();
-  int maritalStatusIndex = 0;
-  int genderIndex = 0;
-  int disabilityDegreeIndex = 0;
-  int bloodGroupIndex = 0;
-  int highestEducationLevelCompletedIndex = 0;
-
-  TextEditingController controllerNationality = TextEditingController();
-  TextEditingController controllerCountOfChildren = TextEditingController();
-  TextEditingController controllerEdicationStatus = TextEditingController();
-  TextEditingController controllerLastCompletedEducationStatus =
-      TextEditingController();
-
   TabPersonalInformation({Key? key}) : super(key: key);
 
   @override
@@ -41,11 +28,11 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
         Row(
           children: [
             ExpandedCustomDateTimePicker(
-              label: "Sözleşme Bitiş Tarihi",
-              dateTime: widget.birthDate,
+              label: "Doğum Tarihi",
+              dateTime: tabKisiselBilgilerController.birthDate,
             ),
             ExpandedNameController(
-              controller: widget.controllerIdentificationNumber,
+              controller: tabKisiselBilgilerController.controllerTcNo,
               label: "Kimlik Numarası",
               widget: const SizedBox(),
             ),
@@ -55,12 +42,12 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Medeni Hal",
-              index: widget.maritalStatusIndex,
+              index: tabKisiselBilgilerController.maritalStatusIndex,
               listExtension: MaritalStatusExtension.getList(),
             ),
             ExpandedCustomDropDownMenu(
               label: "Cinsiyet",
-              index: widget.genderIndex,
+              index: tabKisiselBilgilerController.genderIndex,
               listExtension: GenderExtension.getList(),
             ),
           ],
@@ -69,11 +56,11 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Engel Derecesi",
-              index: widget.disabilityDegreeIndex,
+              index: tabKisiselBilgilerController.disabledDegreeIndex,
               listExtension: DisabledDegreeExtension.getList(),
             ),
             ExpandedNameController(
-              controller: widget.controllerNationality,
+              controller: tabKisiselBilgilerController.controllerNationality,
               label: "Uyruğu",
               widget: const SizedBox(),
             ),
@@ -82,15 +69,14 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
         Row(
           children: [
             ExpandedNameController(
-              controller: widget.controllerCountOfChildren,
+              controller: tabKisiselBilgilerController.controllerNumberOfKids,
               label: "Çocuk Sayısı",
               widget: const SizedBox(),
             ),
-            const Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                child: SizedBox(),
-              ),
+            ExpandedCustomDropDownMenu(
+              label: "Askerlik Durumu",
+              index: tabKisiselBilgilerController.militaryStatusIndex,
+              listExtension: MilitaryStatusEnumExtension.getList(),
             ),
           ],
         ),
@@ -98,12 +84,12 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Kan Grubu",
-              index: widget.bloodGroupIndex,
-              listExtension: BloodTypeExtension.getList(),
+              index: tabKisiselBilgilerController.bloodGroupIndex,
+              listExtension: BloodTypeEnumExtension.getList(),
             ),
             ExpandedCustomDropDownMenu(
               label: "Eğitim Durumu",
-              index: widget.bloodGroupIndex,
+              index: tabKisiselBilgilerController.educationalStatusIndex,
               listExtension: EducationalStatusExtension.getList(),
             ),
           ],
@@ -112,11 +98,13 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Tamamlanan En Yüksek Eğitim Seviyesi",
-              index: widget.highestEducationLevelCompletedIndex,
+              index: tabKisiselBilgilerController
+                  .highestEducationLevelCompletedIndex,
               listExtension: HighestEducationLevelCompletedExtension.getList(),
             ),
             ExpandedNameController(
-              controller: widget.controllerLastCompletedEducationStatus,
+              controller: tabKisiselBilgilerController
+                  .controllerLastCompletedEducationStatus,
               label: "Son Tamamlanan Eğitim Kurumu",
               widget: const SizedBox(),
             ),

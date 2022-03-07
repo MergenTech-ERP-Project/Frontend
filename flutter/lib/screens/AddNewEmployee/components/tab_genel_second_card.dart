@@ -3,43 +3,17 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/enums/contract_type.dart';
+import 'package:vtys_kalite/enums/type_of_working.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdatetimepicker.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdropdownmenu.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabGenelSecondCard extends StatelessWidget {
-  TextEditingController controllerName = TextEditingController();
-  TextEditingController controllerSurname = TextEditingController();
-  TextEditingController controllerEPostaWork = TextEditingController();
-  TextEditingController controllerEPostaPersonal = TextEditingController();
-  TextEditingController controllerTelephoneWork = TextEditingController();
-  TextEditingController controllerTelephonePersonal = TextEditingController();
-
-  TextEditingController controllerAccessType = TextEditingController();
-  int contractTypeIndex = 0;
-
-  TextEditingController controllerContractEndDate = TextEditingController();
-
-  DateTime dateOfStart = DateTime.now();
-  DateTime contractEndDate = DateTime.now();
-
   User? user;
 
-  TabGenelSecondCard({Key? key, this.user}) : super(key: key) {
-    user ??= User();
-    var lastSpace = user!.name.lastIndexOf(' ');
-    String name =
-        lastSpace != -1 ? user!.name.substring(0, lastSpace) : user!.name;
-    String surname = lastSpace != -1 ? user!.name.substring(lastSpace + 1) : "";
-
-    controllerName.text = name;
-    controllerSurname.text = surname;
-
-    controllerEPostaPersonal.text = user!.email;
-
-    controllerTelephonePersonal.text = user!.cellphone;
-  }
+  TabGenelSecondCard({Key? key, this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,12 +35,12 @@ class TabGenelSecondCard extends StatelessWidget {
         Row(
           children: [
             ExpandedNameController(
-              controller: controllerName,
+              controller: tabGenelController.controllerName,
               label: "Ad",
               widget: const SizedBox(),
             ),
             ExpandedNameController(
-              controller: controllerSurname,
+              controller: tabGenelController.controllerSurname,
               label: "Soyad",
               widget: const SizedBox(),
             ),
@@ -75,12 +49,12 @@ class TabGenelSecondCard extends StatelessWidget {
         Row(
           children: [
             ExpandedNameController(
-              controller: controllerEPostaWork,
+              controller: tabGenelController.controllerEPostaWork,
               label: "E-Posta (İş)",
               widget: const SizedBox(),
             ),
             ExpandedNameController(
-              controller: controllerEPostaPersonal,
+              controller: tabGenelController.controllerEPostaPersonal,
               label: "E-Posta (Genel)",
               widget: const SizedBox(),
             ),
@@ -89,12 +63,12 @@ class TabGenelSecondCard extends StatelessWidget {
         Row(
           children: [
             ExpandedNameController(
-              controller: controllerTelephoneWork,
+              controller: tabGenelController.controllerWorkPhone,
               label: "Telefon (İş)",
               widget: const SizedBox(),
             ),
             ExpandedNameController(
-              controller: controllerTelephonePersonal,
+              controller: tabGenelController.controllerTelephonePersonal,
               label: "Telefon (Kişisel)",
               widget: const SizedBox(),
             ),
@@ -104,11 +78,11 @@ class TabGenelSecondCard extends StatelessWidget {
           children: [
             ExpandedCustomDateTimePicker(
               label: "İşe Başlangıç Tarihi",
-              dateTime: dateOfStart,
+              dateTime: tabGenelController.dateOfStart,
             ),
             ExpandedCustomDateTimePicker(
               label: "Sözleşme Bitiş Tarihi",
-              dateTime: contractEndDate,
+              dateTime: tabGenelController.contractEndDate,
             ),
           ],
         ),
@@ -116,13 +90,13 @@ class TabGenelSecondCard extends StatelessWidget {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Sözleşme Türü",
-              index: contractTypeIndex,
+              index: tabGenelController.contractTypeIndex,
               listExtension: ContractTypeExtension.getList(),
             ),
-            ExpandedNameController(
-              controller: controllerAccessType,
-              label: "Erişim Türü",
-              widget: const Icon(Icons.keyboard_arrow_down),
+            ExpandedCustomDropDownMenu(
+              label: "Çalışma Şekli",
+              index: tabGenelController.employmentTypeIndex,
+              listExtension: EmploymentTypeEnumExtension.getList(),
             ),
           ],
         ),

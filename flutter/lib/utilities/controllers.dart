@@ -4,10 +4,17 @@ import 'package:vtys_kalite/controller/Backend%20Controller/activity_controller.
 import 'package:vtys_kalite/controller/Backend%20Controller/activity_evaluation_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/branch_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/company_controller.dart';
+import 'package:vtys_kalite/controller/Backend%20Controller/user_career_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/user_controller.dart';
+import 'package:vtys_kalite/controller/Backend%20Controller/user_detail_controller.dart';
+import 'package:vtys_kalite/controller/Backend%20Controller/user_payment_controller.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/authentication_controller.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/menu_controller.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/navigator_controller.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_diger_bilgiler_controller.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_genel_controller.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_kariyer_controller.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_kisisel_bilgiler_controller.dart';
 
 DateFormat dateTimeFormat = DateFormat("yyyy-MM-dd HH:mm");
 
@@ -22,3 +29,16 @@ BranchController branchController = Get.find<BranchController>();
 
 MenuController menuController = Get.find<MenuController>();
 NavigatorController navigatorController = Get.find<NavigatorController>();
+
+UserDetailController userDetailController = Get.find<UserDetailController>();
+UserDetailCareerController userDetailCareerController =
+    Get.find<UserDetailCareerController>();
+UserDetailPaymentController userDetailPaymentController =
+    Get.find<UserDetailPaymentController>();
+
+TabGenelController tabGenelController = Get.find<TabGenelController>();
+TabKariyerController tabKariyerController = Get.find<TabKariyerController>();
+TabDigerBilgilerController tabDigerBilgilerController =
+    Get.find<TabDigerBilgilerController>();
+TabKisiselBilgilerController tabKisiselBilgilerController =
+    Get.find<TabKisiselBilgilerController>();

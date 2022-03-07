@@ -11,7 +11,7 @@ String fetchUsers(List<UserDetailCareer> data) =>
 /// The part written with // places written with json.
 
 class UserDetailCareer {
-  final int? id; //id
+  final String? tcno; //tcno
   final String? managerName; //manager_name
   final String? managerTcno; //manager_tcno
   final String? unitCompany; //unit_company
@@ -20,7 +20,7 @@ class UserDetailCareer {
   final String? unitTitle; //unit_title
 
   UserDetailCareer({
-    this.id,
+    this.tcno,
     this.managerName,
     this.managerTcno,
     this.unitCompany,
@@ -31,7 +31,7 @@ class UserDetailCareer {
 
   factory UserDetailCareer.fromJson(Map<String, dynamic> json) {
     return UserDetailCareer(
-      id: json['id'],
+      tcno: json['tcno'],
       managerName: json['manager_name'],
       managerTcno: json['manager_tcno'],
       unitCompany: json['unit_company'],
@@ -42,7 +42,7 @@ class UserDetailCareer {
   }
 
   Map<String, dynamic> toJson() => {
-        "id": id,
+        "tcno": tcno,
         "manager_name": managerName,
         "manager_tcno": managerTcno,
         "unit_company": unitCompany,

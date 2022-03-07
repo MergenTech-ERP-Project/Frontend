@@ -35,7 +35,7 @@ class UserDetail {
   HighestEducationLevelCompletedEnum?
       highestEducationLevelCompleted; //highest_education_level_completed
   final String? lastCompletedEducationStatus; //last_completed_education_status
-  EmploymentType? employmentType; //employment_type
+  EmploymentTypeEnum? employmentType; //employment_type
   MilitaryStatusEnum? militaryStatus; //military_service_status
   final String? startDateWork; //date_of_start
   ContractTypeEnum? contractType; //contract_type
@@ -111,7 +111,7 @@ class UserDetail {
       dateofbirth: json['dateofbirth'],
       workPhone: json['work_phone'],
       maritalStatus: EnumToString.fromString(
-          MaritalStatusEnum.values, json['maritalStatus'])!,
+          MaritalStatusEnum.values, json['maritalstatus'])!,
       numberofkids: json['numberofkids'],
       disabledDegree: EnumToString.fromString(
           DisabledDegreeEnum.values, json['degree_of_disability'])!,
@@ -121,12 +121,12 @@ class UserDetail {
       highestEducationLevelCompleted: json['highest_education_level_completed'],
       lastCompletedEducationStatus: json['last_completed_education_status'],
       employmentType: EnumToString.fromString(
-          EmploymentType.values, json['education_status'])!,
+          EmploymentTypeEnum.values, json['employment_type'])!,
       militaryStatus: EnumToString.fromString(
-          MilitaryStatusEnum.values, json['militaryStatus'])!,
+          MilitaryStatusEnum.values, json['military_service_status'])!,
       startDateWork: json['date_of_start'],
       contractType: EnumToString.fromString(
-          ContractTypeEnum.values, json['contractType'])!,
+          ContractTypeEnum.values, json['contract_type'])!,
       contractEndDate: json['contract_end_date'],
       workEmail: json['work_email'],
       address: json['adress'],
@@ -138,7 +138,7 @@ class UserDetail {
       bankNames:
           EnumToString.fromString(BankNamesEnum.values, json['bankNames'])!,
       bankAccountType: EnumToString.fromString(
-          BankAccountTypeEnum.values, json['bankAccountType'])!,
+          BankAccountTypeEnum.values, json['bank_account_type'])!,
       bankAccountNumber: json['bank_account_number'],
       iban: json['iban'],
       emergencyContactPerson: json['emergency_contact'],

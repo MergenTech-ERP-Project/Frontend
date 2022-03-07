@@ -20,7 +20,7 @@ enum BankNamesEnum {
   albaraTurk,
 }
 
-extension AccountTypeExtension on BankNamesEnum {
+extension BankNamesEnumExtension on BankNamesEnum {
   static List<String> getList() {
     List<String> accountTypeList = [];
     for (var item in BankNamesEnum.values) {
