@@ -376,6 +376,7 @@ class AddNewEmployee extends StatelessWidget {
     String name =
         lastSpace != -1 ? user!.name.substring(0, lastSpace) : user!.name;
     String surname = lastSpace != -1 ? user!.name.substring(lastSpace + 1) : "";
+
     tabGenelController.controllerName.text = name;
     tabGenelController.controllerSurname.text = surname;
     // tabGenelController.controllerEPostaWork.text = userDetail!.workEmail!;
@@ -390,5 +391,8 @@ class AddNewEmployee extends StatelessWidget {
     //     ContractTypeEnum.values.indexOf(userDetail!.contractType!);
     // tabGenelController.employmentTypeIndex =
     //     EmploymentTypeEnum.values.indexOf(userDetail!.employmentType!);
+
+    
+    
   }
 }
