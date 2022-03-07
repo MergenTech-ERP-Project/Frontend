@@ -39,6 +39,8 @@ class AddNewEmployee extends StatelessWidget {
   User? user;
 
   UserDetail? userDetail;
+
+  ///null döndürür
   UserDetailCareer? userDetailCareer;
   UserDetailPayment? userDetailPayment;
 
@@ -376,17 +378,17 @@ class AddNewEmployee extends StatelessWidget {
     String surname = lastSpace != -1 ? user!.name.substring(lastSpace + 1) : "";
     tabGenelController.controllerName.text = name;
     tabGenelController.controllerSurname.text = surname;
-    tabGenelController.controllerEPostaWork.text = userDetail!.workEmail!;
+    // tabGenelController.controllerEPostaWork.text = userDetail!.workEmail!;
+    // tabGenelController.controllerWorkPhone.text = userDetail!.workPhone!;
     tabGenelController.controllerEPostaPersonal.text = user!.email;
-    tabGenelController.controllerWorkPhone.text = userDetail!.workPhone!;
     tabGenelController.controllerTelephonePersonal.text = user!.cellphone;
-    tabGenelController.dateOfStart =
-        dateTimeFormat.parse(userDetail!.startDateWork!);
-    tabGenelController.contractEndDate =
-        dateTimeFormat.parse(userDetail!.contractEndDate!);
-    tabGenelController.contractTypeIndex =
-        ContractTypeEnum.values.indexOf(userDetail!.contractType!);
-    tabGenelController.employmentTypeIndex =
-        EmploymentTypeEnum.values.indexOf(userDetail!.employmentType!);
+    // tabGenelController.dateOfStart =
+    //     dateTimeFormat.parse(userDetail!.startDateWork!);
+    // tabGenelController.contractEndDate =
+    //     dateTimeFormat.parse(userDetail!.contractEndDate!);
+    // tabGenelController.contractTypeIndex =
+    //     ContractTypeEnum.values.indexOf(userDetail!.contractType!);
+    // tabGenelController.employmentTypeIndex =
+    //     EmploymentTypeEnum.values.indexOf(userDetail!.employmentType!);
   }
 }
