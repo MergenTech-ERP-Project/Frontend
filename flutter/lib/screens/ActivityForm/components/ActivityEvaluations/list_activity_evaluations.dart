@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/ActivityEvaluations/activity_evaluation_card.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -25,8 +26,9 @@ class ListActivityEvaluations extends StatelessWidget {
             child: CircularProgressIndicator(),
           )
         : SizedBox(
-            width: MediaQuery.of(context).size.width / 2.5,
-            height: activityEvaluationController.activityEvaluationList.length <
+            width: MediaQuery.of(context).size.width /
+                (ResponsiveWidget.isLargeScreen(context) ? 2.5 : 1),
+            height: activityEvaluationController.activityEvaluationList.length >
                     6
                 ? activityEvaluationController.activityEvaluationList.length *
                     70

@@ -6,7 +6,6 @@ import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_radiolisttile.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
-import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/screens/Forms/components/text_widget.dart';
@@ -41,8 +40,6 @@ class TravelAssignmentNotificationFormPage extends StatefulWidget {
 
   DateTime date2 = DateTime.now();
   final TextEditingController tutarTLController2 = TextEditingController();
-
-  TravelAssignmentNotificationFormPage({Key? key}) : super(key: key);
 
   @override
   _TravelAssignmentNotificationFormPageState createState() =>

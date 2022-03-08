@@ -5,7 +5,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/state_manager.dart';
 import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
-import 'package:vtys_kalite/componenets/custom_scrollableColumn.dart';
+import 'package:vtys_kalite/componenets/custom_scrollable_column.dart';
 import 'package:vtys_kalite/componenets/custom_switch.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
-import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_radiolisttile.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
@@ -23,8 +22,6 @@ class DailyInspectionFormPage extends StatefulWidget {
   final TextEditingController startWorkController = TextEditingController();
   final TextEditingController endWorkController = TextEditingController();
   final TextEditingController outofWorkPlace = TextEditingController();
-
-  DailyInspectionFormPage({Key? key}) : super(key: key);
 
   @override
   _DailyInspectionFormPageState createState() =>
@@ -47,8 +44,6 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
     for (var departmant in DepartmentsEnum.values) {
       titlesDepartmant.add(EnumToString.convertToString(departmant));
     }
-
-    var screenSize = MediaQuery.of(context).size;
     return Center(
       child: ListView(
         padding: const EdgeInsets.all(20),
