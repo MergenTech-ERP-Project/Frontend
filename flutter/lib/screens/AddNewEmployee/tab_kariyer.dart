@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print, must_be_immutable
 
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/state_manager.dart';
@@ -9,12 +10,18 @@ import 'package:vtys_kalite/componenets/custom_scrollableColumn.dart';
 import 'package:vtys_kalite/componenets/custom_switch.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/enums/departments_enum.dart';
+import 'package:vtys_kalite/enums/employment_type.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
+import 'package:vtys_kalite/models/settings/branch.dart';
+import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/models/odeme.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/custombuttonwidget.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdatetimepicker.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdropdownmenu.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
+import 'package:vtys_kalite/utilities/style.dart';
 
 class TabKariyer extends StatefulWidget {
   List<String> positionHeaders = [
@@ -27,6 +34,21 @@ class TabKariyer extends StatefulWidget {
     'Ünvan',
   ];
 
+  List<String> positionChildren1 = [
+    (dateFormat.format(tabGenelController.dateOfStart)),
+    (dateFormat.format(tabGenelController.contractEndDate)),
+    EmploymentTypeEnumExtension.getList()[
+            tabGenelController.employmentTypeIndex]
+        .toString(),
+    companyController
+        .companyList[tabKariyerController.positionSirketIndex].companyName,
+    branchController
+        .branchList[tabKariyerController.positionSubeIndex].branchName,
+    DepartmentsEnumExtension.getList()[
+        tabKariyerController.positionDepartmanIndex],
+    tabKariyerController.positionUnvan.text.toString(),
+  ];
+
   List<String> salaryHeaders = [
     'Geçerlilik Başlangıç',
     'Tutar',
@@ -34,21 +56,14 @@ class TabKariyer extends StatefulWidget {
     'Ek Ödemeler',
   ];
 
-  List<String> positionChildren1 = [
-    '1 Aralık 2021',
-    '-',
-    'Tam Zamanlı',
-    'mergen yazılım',
-    'eskişehir teknopark',
-    'yazılım geliştirme',
-    '-',
-  ];
-
   List<String> salaryChildren1 = [
-    '2 Aralık 2009',
-    '8.000 TL / Aylık',
-    'Net',
-    '-',
+    (dateFormat.format(tabKariyerController.gecerlilikBaslangic)),
+    tabKariyerController.controllerSalary.text.toString() +
+        EmploymentTypeEnumExtension.getList()[
+                tabGenelController.employmentTypeIndex]
+            .toString(),
+    tabKariyerController.controllerPaymentScreenInSalary.text.toString(),
+    'Buraya Nasıl Ekleyeceğim Bakacağım Sonra',
   ];
 
   List<YeniOdeme> odemelerList = <YeniOdeme>[].obs;
@@ -84,23 +99,11 @@ class _TabKariyerState extends State<TabKariyer> {
             showDialog(
               context: context,
               builder: (_) => CustomAlertDialog(
-                titleWidget: _PozisyonEkleHeader(),
+                titleWidget: const _PozisyonEkleHeader(),
                 bodyWidgetWidth: screenSize.width - 20,
                 bodyWidget: SizedBox(
                   width: screenSize.width - 20 / 1.2,
-                  child: _PozisyonEklemeBody(
-                      positionSirket: tabKariyerController.positionSirket,
-                      positionSube: tabKariyerController.positionSube,
-                      positionDepartman: tabKariyerController.positionDepartman,
-                      positionUnvan: tabKariyerController.positionUnvan,
-                      positionYoneticisi:
-                          tabKariyerController.positionYoneticisi,
-                      positionCalismaSekli:
-                          tabKariyerController.positionCalismaSekli,
-                      positionDateTimeBaslangic:
-                          tabKariyerController.positionDateTimeBaslangic,
-                      positionDateTimeBitis:
-                          tabKariyerController.positionDateTimeBitis),
+                  child: _PozisyonEklemeBody(),
                 ),
               ),
             );
@@ -371,28 +374,12 @@ class MaasEkleHeader extends StatelessWidget {
   }
 }
 
-class _PozisyonEklemeBody extends StatelessWidget {
-  const _PozisyonEklemeBody({
-    Key? key,
-    required this.positionSirket,
-    required this.positionSube,
-    required this.positionDepartman,
-    required this.positionUnvan,
-    required this.positionYoneticisi,
-    required this.positionCalismaSekli,
-    required this.positionDateTimeBaslangic,
-    required this.positionDateTimeBitis,
-  }) : super(key: key);
+class _PozisyonEklemeBody extends StatefulWidget {
+  @override
+  State<_PozisyonEklemeBody> createState() => _PozisyonEklemeBodyState();
+}
 
-  final TextEditingController positionSirket;
-  final TextEditingController positionSube;
-  final TextEditingController positionDepartman;
-  final TextEditingController positionUnvan;
-  final TextEditingController positionYoneticisi;
-  final TextEditingController positionCalismaSekli;
-  final DateTime positionDateTimeBaslangic;
-  final DateTime positionDateTimeBitis;
-
+class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -417,56 +404,55 @@ class _PozisyonEklemeBody extends StatelessWidget {
           ),
           Row(
             children: [
-              ExpandedNameController(
-                controller: positionSirket,
-                label: "Şirket",
-                widget: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    Icon(Icons.close),
-                    Icon(Icons.keyboard_arrow_down),
-                  ],
-                ),
+              Obx(
+                () {
+                  List<String> companyNames = [];
+                  for (Company c in companyController.companyList) {
+                    companyNames.add(c.companyName);
+                  }
+                  return ExpandedCustomDropDownMenu(
+                    label: "Şirket",
+                    index: tabKariyerController.positionSirketIndex,
+                    listExtension: companyNames,
+                  );
+                },
               ),
-              ExpandedNameController(
-                controller: positionSube,
-                label: "Şube",
-                widget: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    Icon(Icons.close),
-                    Icon(Icons.keyboard_arrow_down),
-                  ],
-                ),
+              Obx(
+                () {
+                  List<String> branchNames = [];
+                  for (Branch b in branchController.branchList) {
+                    branchNames.add(b.branchName);
+                  }
+                  return ExpandedCustomDropDownMenu(
+                    label: "Şube",
+                    index: tabKariyerController.positionSubeIndex,
+                    listExtension: branchNames,
+                  );
+                },
               ),
             ],
           ),
           Row(
             children: [
+              // ExpandedCustomDropDownMenu(
+              //   label: "Departman",
+              //   index: tabKariyerController.positionDepartmanIndex,
+              //   listExtension: DepartmentsEnumExtension.getList(),
+              //   onChangedFunction: (val) {
+              //     setState(() {
+              //       widget.userDetail.employmentType = EnumToString.fromString(
+              //           EmploymentTypeEnum.values, val.toString());
+              //     });
+              //   },
+              // ),
               ExpandedNameController(
-                controller: positionDepartman,
-                label: "Departman",
-                widget: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    Icon(Icons.close),
-                    Icon(Icons.keyboard_arrow_down),
-                  ],
-                ),
-              ),
-              ExpandedNameController(
-                controller: positionUnvan,
+                controller: tabKariyerController.positionUnvan,
                 label: "Unvan",
-                widget: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    Icon(Icons.close),
-                    Icon(Icons.keyboard_arrow_down),
-                  ],
+                widget: IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () {
+                    tabKariyerController.positionUnvan.text = "";
+                  },
                 ),
               ),
             ],
@@ -474,25 +460,35 @@ class _PozisyonEklemeBody extends StatelessWidget {
           Row(
             children: [
               ExpandedNameController(
-                controller: positionYoneticisi,
+                controller: tabKariyerController.positionYoneticisi,
                 label: "Yönetici",
-                widget: const Icon(Icons.keyboard_arrow_down),
+                widget: IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () {
+                    tabKariyerController.positionYoneticisi.text = "";
+                  },
+                ),
               ),
               ExpandedNameController(
-                controller: positionCalismaSekli,
+                controller: tabKariyerController.positionCalismaSekli,
                 label: "Çalışma Şekli",
-                widget: const Icon(Icons.keyboard_arrow_down),
+                widget: IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () {
+                    tabKariyerController.positionCalismaSekli.text = "";
+                  },
+                ),
               ),
             ],
           ),
           Row(
             children: [
               ExpandedCustomDateTimePicker(
-                dateTime: positionDateTimeBaslangic,
+                dateTime: tabKariyerController.positionDateTimeBaslangic,
                 label: 'Başlangıç Tarihi',
               ),
               ExpandedCustomDateTimePicker(
-                dateTime: positionDateTimeBitis,
+                dateTime: tabKariyerController.positionDateTimeBitis,
                 label: 'Bitiş Tarihi',
               ),
             ],

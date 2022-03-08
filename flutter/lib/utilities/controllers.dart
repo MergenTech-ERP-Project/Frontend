@@ -17,6 +17,7 @@ import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_kariyer_contro
 import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_kisisel_bilgiler_controller.dart';
 
 DateFormat dateTimeFormat = DateFormat("yyyy-MM-dd HH:mm");
+DateFormat dateFormat = DateFormat("dd/MM/yyyy");
 
 AuthenticationController authenticationController =
     Get.find<AuthenticationController>();

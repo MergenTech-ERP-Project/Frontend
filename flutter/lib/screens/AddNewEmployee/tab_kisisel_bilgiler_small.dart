@@ -30,89 +30,89 @@ class _TabPersonalInformationSmallState
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: ExpandedCustomDateTimePicker(
-                label: "Sözleşme Bitiş Tarihi",
-                dateTime: tabKisiselBilgilerController.birthDate,
-              ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: ExpandedNameController(
-                controller:
-                    tabKisiselBilgilerController.controllerTcNo,
-                label: "Kimlik Numarası",
-                widget: const SizedBox(),
-              ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: ExpandedCustomDropDownMenu(
-                label: "Medeni Hal",
-                index: tabKisiselBilgilerController.maritalStatusIndex,
-                listExtension: MaritalStatusExtension.getList(),
-              ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: ExpandedCustomDropDownMenu(
-                label: "Cinsiyet",
-                index: tabKisiselBilgilerController.genderIndex,
-                listExtension: GenderExtension.getList(),
-              ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: ExpandedCustomDropDownMenu(
-                label: "Engel Derecesi",
-                index: tabKisiselBilgilerController.disabledDegreeIndex,
-                listExtension: DisabledDegreeExtension.getList(),
-              ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: ExpandedNameController(
-                controller: tabKisiselBilgilerController.controllerNationality,
-                label: "Uyruğu",
-                widget: const SizedBox(),
-              ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: ExpandedNameController(
-                controller:
-                    tabKisiselBilgilerController.controllerNumberOfKids,
-                label: "Çocuk Sayısı",
-                widget: const SizedBox(),
-              ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: ExpandedCustomDropDownMenu(
-                label: "Kan Grubu",
-                index: tabKisiselBilgilerController.bloodGroupIndex,
-                listExtension: BloodTypeEnumExtension.getList(),
-              ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: ExpandedCustomDropDownMenu(
-                label: "Eğitim Durumu",
-                index: tabKisiselBilgilerController.bloodGroupIndex,
-                listExtension: EducationalStatusExtension.getList(),
-              ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: ExpandedCustomDropDownMenu(
-                label: "Tamamlanan En Yüksek Eğitim Seviyesi",
-                index: tabKisiselBilgilerController
-                    .highestEducationLevelCompletedIndex,
-                listExtension:
-                    HighestEducationLevelCompletedExtension.getList(),
-              ),
-            ),
+            // SizedBox(
+            //   width: MediaQuery.of(context).size.width,
+            //   child: ExpandedCustomDateTimePicker(
+            //     label: "Sözleşme Bitiş Tarihi",
+            //     dateTime: tabKisiselBilgilerController.birthDate,
+            //   ),
+            // ),
+            // SizedBox(
+            //   width: MediaQuery.of(context).size.width,
+            //   child: ExpandedNameController(
+            //     controller:
+            //         tabKisiselBilgilerController.controllerTcNo,
+            //     label: "Kimlik Numarası",
+            //     widget: const SizedBox(),
+            //   ),
+            // ),
+            // SizedBox(
+            //   width: MediaQuery.of(context).size.width,
+            //   child: ExpandedCustomDropDownMenu(
+            //     label: "Medeni Hal",
+            //     index: tabKisiselBilgilerController.maritalStatusIndex,
+            //     listExtension: MaritalStatusExtension.getList(),
+            //   ),
+            // ),
+            // SizedBox(
+            //   width: MediaQuery.of(context).size.width,
+            //   child: ExpandedCustomDropDownMenu(
+            //     label: "Cinsiyet",
+            //     index: tabKisiselBilgilerController.genderIndex,
+            //     listExtension: GenderExtension.getList(),
+            //   ),
+            // ),
+            // SizedBox(
+            //   width: MediaQuery.of(context).size.width,
+            //   child: ExpandedCustomDropDownMenu(
+            //     label: "Engel Derecesi",
+            //     index: tabKisiselBilgilerController.disabledDegreeIndex,
+            //     listExtension: DisabledDegreeExtension.getList(),
+            //   ),
+            // ),
+            // SizedBox(
+            //   width: MediaQuery.of(context).size.width,
+            //   child: ExpandedNameController(
+            //     controller: tabKisiselBilgilerController.controllerNationality,
+            //     label: "Uyruğu",
+            //     widget: const SizedBox(),
+            //   ),
+            // ),
+            // SizedBox(
+            //   width: MediaQuery.of(context).size.width,
+            //   child: ExpandedNameController(
+            //     controller:
+            //         tabKisiselBilgilerController.controllerNumberOfKids,
+            //     label: "Çocuk Sayısı",
+            //     widget: const SizedBox(),
+            //   ),
+            // ),
+            // SizedBox(
+            //   width: MediaQuery.of(context).size.width,
+            //   child: ExpandedCustomDropDownMenu(
+            //     label: "Kan Grubu",
+            //     index: tabKisiselBilgilerController.bloodGroupIndex,
+            //     listExtension: BloodTypeEnumExtension.getList(),
+            //   ),
+            // ),
+            // SizedBox(
+            //   width: MediaQuery.of(context).size.width,
+            //   child: ExpandedCustomDropDownMenu(
+            //     label: "Eğitim Durumu",
+            //     index: tabKisiselBilgilerController.bloodGroupIndex,
+            //     listExtension: EducationalStatusExtension.getList(),
+            //   ),
+            // ),
+            // SizedBox(
+            //   width: MediaQuery.of(context).size.width,
+            //   child: ExpandedCustomDropDownMenu(
+            //     label: "Tamamlanan En Yüksek Eğitim Seviyesi",
+            //     index: tabKisiselBilgilerController
+            //         .highestEducationLevelCompletedIndex,
+            //     listExtension:
+            //         HighestEducationLevelCompletedExtension.getList(),
+            //   ),
+            // ),
             SizedBox(
               width: MediaQuery.of(context).size.width,
               child: ExpandedNameController(

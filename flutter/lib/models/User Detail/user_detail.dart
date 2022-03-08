@@ -11,7 +11,7 @@ import 'package:vtys_kalite/enums/gender.dart';
 import 'package:vtys_kalite/enums/highest_education_level_completed.dart';
 import 'package:vtys_kalite/enums/marial_status.dart';
 import 'package:vtys_kalite/enums/military_status.dart';
-import 'package:vtys_kalite/enums/type_of_working.dart';
+import 'package:vtys_kalite/enums/employment_type.dart';
 
 List<UserDetail> parseUsers(String str) =>
     List<UserDetail>.from(json.decode(str).map((x) => UserDetail.fromJson(x)));

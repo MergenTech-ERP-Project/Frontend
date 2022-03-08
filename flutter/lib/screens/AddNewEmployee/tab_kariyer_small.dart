@@ -113,7 +113,7 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                         Column(
                           children: [
                             PozitionWidget(
-                              controller: tabKariyerController.positionSirket,
+                              controller: tabKariyerController.controllerSalary,
                               label: "Şirket",
                               widget: Row(
                                 mainAxisAlignment:
@@ -126,7 +126,7 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                               ),
                             ),
                             PozitionWidget(
-                              controller: tabKariyerController.positionSube,
+                              controller: tabKariyerController.controllerSalary,
                               label: "Şube",
                               widget: Row(
                                 mainAxisAlignment:
@@ -143,7 +143,7 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                         Column(
                           children: [
                             PozitionWidget(
-                              controller: tabKariyerController.positionDepartman,
+                              controller: tabKariyerController.controllerSalary,
                               label: "Departman",
                               widget: Row(
                                 mainAxisAlignment:
@@ -186,26 +186,26 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                         ),
                         Column(
                           children: [
-                            CustomDateTimePicker(
-                              suffixWidget:
-                                  const Icon(Icons.calendar_today_outlined),
-                              borderless: true,
-                              labelText: 'Başlangıç Tarihi',
-                              onChanged: (val) {
-                                tabKariyerController.positionDateTimeBaslangic =
-                                    dateTimeFormat.parse(val!);
-                              },
-                            ),
-                            CustomDateTimePicker(
-                              suffixWidget:
-                                  const Icon(Icons.calendar_today_outlined),
-                              borderless: true,
-                              labelText: 'Bitiş Tarihi',
-                              onChanged: (val) {
-                                tabKariyerController.positionDateTimeBitis =
-                                    dateTimeFormat.parse(val!);
-                              },
-                            ),
+                            // CustomDateTimePicker(
+                            //   suffixWidget:
+                            //       const Icon(Icons.calendar_today_outlined),
+                            //   borderless: true,
+                            //   labelText: 'Başlangıç Tarihi',
+                            //   onChanged: (val) {
+                            //     tabKariyerController.positionDateTimeBaslangic =
+                            //         dateTimeFormat.parse(val!);
+                            //   },
+                            // ),
+                            // CustomDateTimePicker(
+                            //   suffixWidget:
+                            //       const Icon(Icons.calendar_today_outlined),
+                            //   borderless: true,
+                            //   labelText: 'Bitiş Tarihi',
+                            //   onChanged: (val) {
+                            //     tabKariyerController.positionDateTimeBitis =
+                            //         dateTimeFormat.parse(val!);
+                            //   },
+                            // ),
                           ],
                         ),
                         const SizedBox(height: 40),
@@ -319,23 +319,23 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                             ),
                             child: Column(
                               children: [
-                                CustomDateTimePicker(
-                                  suffixWidget:
-                                      const Icon(Icons.calendar_today_outlined),
-                                  labelText: "Geçerlilik Başlangıç",
-                                  borderless: true,
-                                  onChanged: (val) {
-                                    if (val != null) {
-                                      print("DateTime picker : " + val);
-                                    }
-                                    try {
-                                      tabKariyerController.gecerlilikBaslangic =
-                                          dateTimeFormat.parse(val!);
-                                    } catch (e) {
-                                      print(e.toString());
-                                    }
-                                  },
-                                ),
+                                // CustomDateTimePicker(
+                                //   suffixWidget:
+                                //       const Icon(Icons.calendar_today_outlined),
+                                //   labelText: "Geçerlilik Başlangıç",
+                                //   borderless: true,
+                                //   onChanged: (val) {
+                                //     if (val != null) {
+                                //       print("DateTime picker : " + val);
+                                //     }
+                                //     try {
+                                //       tabKariyerController.gecerlilikBaslangic =
+                                //           dateTimeFormat.parse(val!);
+                                //     } catch (e) {
+                                //       print(e.toString());
+                                //     }
+                                //   },
+                                // ),
                                 CustomTextBox(
                                   borderless: true,
                                   controller: tabKariyerController.controllerUnit,
