@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 
 class ExpandedNameController extends StatelessWidget {
-  const ExpandedNameController({
+  ExpandedNameController({
     Key? key,
     required this.controller,
     required this.label,
@@ -16,11 +16,14 @@ class ExpandedNameController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: CustomTextBox(
-        borderless: true,
-        controller: controller,
-        label: label,
-        suffixWidget: widget,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CustomTextBox(
+          borderless: true,
+          controller: controller,
+          label: label,
+          suffixWidget: widget,
+        ),
       ),
     );
   }

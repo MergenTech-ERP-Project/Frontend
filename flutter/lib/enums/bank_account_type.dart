@@ -1,17 +1,16 @@
-
 enum BankAccountTypeEnum {
   drawingAccount,
   checkAccount,
   other,
 }
 
-extension AccountTypeExtension on BankAccountTypeEnum {
+extension BankAccountTypeExtension on BankAccountTypeEnum {
   static List<String> getList() {
-    List<String> accountTypeList = [];
+    List<String> bankAccountTypeList = [];
     for (var item in BankAccountTypeEnum.values) {
-      accountTypeList.add(item.getName);
+      bankAccountTypeList.add(item.getName);
     }
-    return accountTypeList;
+    return bankAccountTypeList;
   }
 
   String get getName {

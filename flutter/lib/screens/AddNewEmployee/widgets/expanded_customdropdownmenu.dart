@@ -9,24 +9,30 @@ class ExpandedCustomDropDownMenu extends StatelessWidget {
     required this.label,
     required this.index,
     required this.listExtension,
+    required this.onChangedFunction,
   }) : super(key: key);
 
   String label;
   int index;
   List<String> listExtension;
+  Function(String?)? onChangedFunction;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: CustomDropDownMenu(
-        text: label,
-        list: listExtension,
-        icon: const Icon(Icons.arrow_drop_down),
-        iconSize: 20,
-        isExpandedYes: true,
-        onChanged: (val) {
-          index = listExtension.indexOf(val);
-        },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CustomDropDownMenu(
+          onChangedFunction: onChangedFunction,
+          text: label,
+          list: listExtension,
+          icon: const Icon(Icons.arrow_drop_down),
+          iconSize: 20,
+          isExpandedYes: true,
+          onChanged: (val) {
+            index = listExtension.indexOf(val);
+          },
+        ),
       ),
     );
   }

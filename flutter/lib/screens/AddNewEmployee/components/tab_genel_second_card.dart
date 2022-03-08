@@ -1,20 +1,32 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, must_be_immutable
 
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/enums/contract_type.dart';
-import 'package:vtys_kalite/enums/type_of_working.dart';
+import 'package:vtys_kalite/enums/employment_type.dart';
+import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdatetimepicker.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdropdownmenu.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
-class TabGenelSecondCard extends StatelessWidget {
+class TabGenelSecondCard extends StatefulWidget {
   User? user;
+  UserDetail userDetail;
 
-  TabGenelSecondCard({Key? key, this.user}) : super(key: key);
+  TabGenelSecondCard({
+    Key? key,
+    this.user,
+    required this.userDetail,
+  }) : super(key: key);
 
+  @override
+  State<TabGenelSecondCard> createState() => _TabGenelSecondCardState();
+}
+
+class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -30,6 +42,7 @@ class TabGenelSecondCard extends StatelessWidget {
           padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
           child: CustomText(
             text: "Genel Bilgiler",
+            size: 32,
           ),
         ),
         Row(
@@ -90,13 +103,25 @@ class TabGenelSecondCard extends StatelessWidget {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Sözleşme Türü",
-              index: tabGenelController.contractTypeIndex,
+              index: widget.userDetail.contractType!.index,
               listExtension: ContractTypeExtension.getList(),
+              onChangedFunction: (val) {
+                setState(() {
+                  widget.userDetail.contractType = EnumToString.fromString(
+                      ContractTypeEnum.values, val.toString());
+                });
+              },
             ),
             ExpandedCustomDropDownMenu(
               label: "Çalışma Şekli",
-              index: tabGenelController.employmentTypeIndex,
+              index: widget.userDetail.employmentType!.index,
               listExtension: EmploymentTypeEnumExtension.getList(),
+              onChangedFunction: (val) {
+                setState(() {
+                  widget.userDetail.employmentType = EnumToString.fromString(
+                      EmploymentTypeEnum.values, val.toString());
+                });
+              },
             ),
           ],
         ),

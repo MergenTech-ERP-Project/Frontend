@@ -10,7 +10,4 @@ class TabDigerBilgilerController extends GetxController {
   TextEditingController controllerDistrict = TextEditingController();
   TextEditingController controllerAccountNumber = TextEditingController();
   TextEditingController controllerIBAN = TextEditingController();
-
-  int bankNameIndex = 0;
-  int bankAccountType = 0;
 }

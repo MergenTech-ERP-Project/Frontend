@@ -17,20 +17,23 @@ class ExpandedCustomDateTimePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: CustomDateTimePicker(
-        suffixWidget: const Icon(Icons.calendar_today_outlined),
-        labelText: label,
-        borderless: true,
-        onChanged: (val) {
-          if (val != null) {
-            print("DateTime picker : " + val);
-          }
-          try {
-            dateTime = dateTimeFormat.parse(val!);
-          } catch (e) {
-            print(e.toString());
-          }
-        },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CustomDateTimePicker(
+          suffixWidget: const Icon(Icons.calendar_today_outlined),
+          labelText: label,
+          borderless: true,
+          onChanged: (val) {
+            if (val != null) {
+              print("DateTime picker : " + val);
+            }
+            try {
+              dateTime = dateTimeFormat.parse(val!);
+            } catch (e) {
+              print(e.toString());
+            }
+          },
+        ),
       ),
     );
   }

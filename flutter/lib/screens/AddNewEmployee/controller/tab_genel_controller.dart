@@ -10,11 +10,4 @@ class TabGenelController extends GetxController {
   TextEditingController controllerTelephonePersonal = TextEditingController();
   TextEditingController controllerAccessType = TextEditingController();
   TextEditingController controllerContractEndDate = TextEditingController();
-
-  int contractTypeIndex = 0;
-  int employmentTypeIndex = 0;
-
-
-  DateTime dateOfStart = DateTime.now();
-  DateTime contractEndDate = DateTime.now();
 }
