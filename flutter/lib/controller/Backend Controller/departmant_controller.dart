@@ -12,7 +12,7 @@ class DepartmentController extends GetxController {
 
   @override
   void onInit() {
-    fetchDepartments();
+    //fetchDepartments();
     super.onInit();
   }
 
@@ -43,10 +43,10 @@ class DepartmentController extends GetxController {
     }
   } */
 
-  Future<String?> postDepartment(Department newDepartment) async {
+  Future<String?> newDepartment(Department newDepartment) async {
     try {
       isLoading(true);
-      var response = await DepartmentRemoteServices.postDepartment(
+      var response = await DepartmentRemoteServices.newDepartment(
           json.encode(newDepartment.toJson()).toString());
       fetchDepartments(); //companyList.add(newCompany);
       print("New Department: " + response);
@@ -56,11 +56,11 @@ class DepartmentController extends GetxController {
     }
   }
 
-  Future<String?> putDepartment(int id, Department department) async {
+  Future<String?> updateDepartment(int id, Department department) async {
     try {
       isLoading(true);
       print(id);
-      var response = await DepartmentRemoteServices.putDepartment(
+      var response = await DepartmentRemoteServices.updateDepartment(
           id, json.encode(department.toJsonWithId()).toString());
       fetchDepartments();
       print("Update Department: " + response);
@@ -70,11 +70,11 @@ class DepartmentController extends GetxController {
     }
   }
 
-  Future<String?> deleteDepartment(int id, Department department) async {
+  Future<String?> removeDepartment(int id) async {
     try {
       isLoading(true);
       print(id);
-      var response = await DepartmentRemoteServices.deleteDepartment(id);
+      var response = await DepartmentRemoteServices.removeDepartment(id);
       fetchDepartments();
       print("Remove Department: " + response);
       return response;
