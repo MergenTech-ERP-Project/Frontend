@@ -32,7 +32,7 @@ class BranchController extends GetxController {
   void fetchBranchesById(int companyId) async {
     try {
       isLoading(true);
-      var branches = await BranchRemoteServices.fetchBranchesById(companyId);
+      var branches = await BranchRemoteServices.fetchBranchesByCompanyId(companyId);
       if (branches != null) {
         branchList.removeRange(0, branchList.length);
         branchList.assignAll(branches);

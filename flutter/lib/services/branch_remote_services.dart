@@ -12,7 +12,7 @@ class BranchRemoteServices {
 
   static Future<List<Branch>?> fetchBranches() async {
     var response = await http.get(Uri.parse(
-       serviceHttp + '/branch/branches/'));
+       serviceHttp + '/branch/list'));
     if (response.statusCode == 200) {
       var jsonString = utf8.decode(response.bodyBytes);
       return branchFromJson(jsonString);
@@ -21,9 +21,9 @@ class BranchRemoteServices {
     }
   }
 
-  static Future<List<Branch>?> fetchBranchesById(int company_id) async {
+  static Future<List<Branch>?> fetchBranchesByCompanyId(int companyId) async {
     var response = await http.get(Uri.parse(
-       serviceHttp + '/branch/branches/$company_id'));
+       serviceHttp + '/branch/list/$companyId'));
     if (response.statusCode == 200) {
       var jsonString = utf8.decode(response.bodyBytes);
       return branchFromJson(jsonString);
@@ -32,15 +32,15 @@ class BranchRemoteServices {
     }
   }
 
-  static Future<int> fetchBranch(int company_id, String branch_name) async {
+  static Future<int> fetchBranch(int companyId, String branchName) async {
     var response = await http.get(Uri.parse(
-        serviceHttp + '/branch/$company_id/$branch_name'));
+        serviceHttp + '/branch/$companyId/$branchName'));
     int branchId = -1;
     if (response.statusCode == 200) {
       var jsonString = utf8.decode(response.bodyBytes);
       List<Branch> branches = branchFromJson(jsonString);
       for (Branch branch in branches) {
-        if (branch.branchName == branch_name) {
+        if (branch.branchName == branchName) {
           branchId = branches.indexOf(branch);
           print(branchId);
           break;
@@ -55,7 +55,7 @@ class BranchRemoteServices {
     var response = await http
         .post(
       Uri.parse(
-          serviceHttp + '/branch/post'),
+          serviceHttp + '/branch/new'),
       headers: <String, String>{
         'Content-type': 'application/json',
         'Accept': 'application/json',
@@ -76,7 +76,7 @@ class BranchRemoteServices {
     var response = await http
         .put(
       Uri.parse(
-          serviceHttp + "/branch/put/$id"),
+          serviceHttp + "/branch/update/$id"),
       headers: <String, String>{
         'Content-type': 'application/json',
         'Accept': 'application/json',
@@ -96,7 +96,7 @@ class BranchRemoteServices {
     var response = await http
         .delete(
       Uri.parse(
-        serviceHttp + '/branch/delete/$id'),
+        serviceHttp + '/branch/remove/$id'),
       headers: <String, String>{
         'Content-type': 'application/json',
         'Accept': 'application/json',

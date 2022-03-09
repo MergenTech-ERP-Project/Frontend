@@ -11,7 +11,7 @@ class ActivityRemoteServices {
 
   static Future<List<Activity>?> fetchActivities() async {
     var response = await http.get(
-      Uri.parse(serviceHttp + '/activity/activities'),
+      Uri.parse(serviceHttp + '/activity/list'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -50,7 +50,7 @@ class ActivityRemoteServices {
 
   static Future<Activity?> fetchActivitybyId(int id) async {
     var response = await http.get(
-      Uri.parse(serviceHttp + '/activity/activities/$id'),
+      Uri.parse(serviceHttp + '/activity/list/$id'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -68,7 +68,7 @@ class ActivityRemoteServices {
   static Future<String> postActivity(String json) async {
     print("Json: $json");
     var response = await http
-        .post(Uri.parse(serviceHttp + '/activity/post'),
+        .post(Uri.parse(serviceHttp + '/activity/new'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
               'Accept': 'application/json',
@@ -87,7 +87,7 @@ class ActivityRemoteServices {
   static Future<String> putActivity(int id, String json) async {
     print("Put Activity $id Json: $json");
     var response = await http
-        .put(Uri.parse(serviceHttp + '/activity/put/$id'),
+        .put(Uri.parse(serviceHttp + '/activity/update/$id'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
               'Accept': 'application/json',
@@ -105,7 +105,7 @@ class ActivityRemoteServices {
 
   static Future<String> deleteActivity(int id) async {
     var response = await http
-        .delete(Uri.parse(serviceHttp + '/activity/delete/$id'),
+        .delete(Uri.parse(serviceHttp + '/activity/remove/$id'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
               'Accept': 'application/json',

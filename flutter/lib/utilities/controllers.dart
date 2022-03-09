@@ -4,6 +4,7 @@ import 'package:vtys_kalite/controller/Backend%20Controller/activity_controller.
 import 'package:vtys_kalite/controller/Backend%20Controller/activity_evaluation_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/branch_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/company_controller.dart';
+import 'package:vtys_kalite/controller/Backend%20Controller/departmant_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/user_career_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/user_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/user_detail_controller.dart';
@@ -27,6 +28,7 @@ ActivityEvaluationController activityEvaluationController =
     Get.find<ActivityEvaluationController>();
 CompanyController companyController = Get.find<CompanyController>();
 BranchController branchController = Get.find<BranchController>();
+DepartmentController departmentController = Get.find<DepartmentController>();
 
 MenuController menuController = Get.find<MenuController>();
 NavigatorController navigatorController = Get.find<NavigatorController>();

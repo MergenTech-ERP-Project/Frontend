@@ -9,7 +9,7 @@ class UserDetailCareerServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
   static Future<UserDetailCareer?> fetchUserDetailCareerById(id) async {
-    var response = await http.get(Uri.parse(serviceHttp + '/careers/list/$id'));
+    var response = await http.get(Uri.parse(serviceHttp + '/career/list/$id'));
     UserDetailCareer? userDetailCareer;
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
@@ -26,7 +26,7 @@ class UserDetailCareerServices {
     print(json);
     var response = await http
         .post(
-          Uri.parse(serviceHttp + '/careers/post'),
+          Uri.parse(serviceHttp + '/career/post'),
           headers: <String, String>{
             'Content-type': 'application/json',
             'Accept': 'application/json',
@@ -42,7 +42,7 @@ class UserDetailCareerServices {
 
   static Future<String> updateUserDetailCareer(int id, String json) async {
     var response = await http
-        .put(Uri.parse(serviceHttp + '/careers/put/$id'),
+        .put(Uri.parse(serviceHttp + '/career/put/$id'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
@@ -60,7 +60,7 @@ class UserDetailCareerServices {
 
   static Future<String> deleteUserDetailCareers(int id) async {
     var response = await http
-        .delete(Uri.parse(serviceHttp + '/careers/delete/$id'),
+        .delete(Uri.parse(serviceHttp + '/career/delete/$id'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',

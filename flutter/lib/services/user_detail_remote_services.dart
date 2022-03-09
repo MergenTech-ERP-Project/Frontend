@@ -10,7 +10,7 @@ class UserDetailServices {
 
   static Future<UserDetail?> fetchUserDetailByTCNO(tcNo) async {
     var response =
-        await http.get(Uri.parse(serviceHttp + '/userdetail/userdetails'));
+        await http.get(Uri.parse(serviceHttp + '/userdetail/list'));
     UserDetail? user;
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
@@ -27,7 +27,7 @@ class UserDetailServices {
     print(json);
     var response = await http
         .post(
-          Uri.parse(serviceHttp + '/userdetail/post'),
+          Uri.parse(serviceHttp + '/userdetail/new'),
           headers: <String, String>{
             'Content-type': 'application/json',
             'Accept': 'application/json',
@@ -43,7 +43,7 @@ class UserDetailServices {
 
   static Future<String> updateUserDetail(String tcno, String json) async {
     var response = await http
-        .put(Uri.parse(serviceHttp + '/userdetail/put/$tcno'),
+        .put(Uri.parse(serviceHttp + '/userdetail/update/$tcno'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
@@ -61,7 +61,7 @@ class UserDetailServices {
 
   static Future<String> deleteUserDetail(String tcno) async {
     var response = await http
-        .delete(Uri.parse(serviceHttp + '/userdetail/delete/$tcno'),
+        .delete(Uri.parse(serviceHttp + '/userdetail/remove/$tcno'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
