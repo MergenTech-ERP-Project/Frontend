@@ -1,47 +1,43 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:vtys_kalite/models/settings/company.dart';
+import 'package:vtys_kalite/models/settings/department.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 
-
-class CompanyRemoteServices {
+class DepartmentRemoteServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
-  static Future<List<Company>?> fetchCompanies() async {
-    var response =
-        await http.get(Uri.parse(serviceHttp + '/company/companies'));
+  static Future<List<Department>?> fetchDepartments() async {
+    var response = await http.get(Uri.parse(serviceHttp + '/department/list'));
     if (response.statusCode == 200) {
       var jsonString = utf8.decode(response.bodyBytes);
-      return companyFromJson(jsonString);
+      return departmentFromJson(jsonString);
     } else {
       return null;
     }
   }
 
-  static Future<int> fetchCompany(String _company_name) async {
+  /* static Future<int> fetchDepartment(companyId, branchId) async {
     var response = await http
-        .get(Uri.parse(serviceHttp + '/company/companies/$_company_name'));
-    int companyId = -1;
+        .get(Uri.parse(serviceHttp + '/department/$companyId/$branchId'));
+    int departmentId = -1;
     if (response.statusCode == 200) {
       var jsonString = utf8.decode(response.bodyBytes);
-      List<Company> companies = companyFromJson(jsonString);
-      for (Company company in companies) {
-        if (company.companyName == _company_name) {
-          companyId = companies.indexOf(company);
-          print(companyId);
+      List<Department> companies = departmentFromJson(jsonString);
+      for (Department department in companies) {
+        if (department.departmentName == departmentName) {
+          departmentId = companies.indexOf(department);
           break;
         }
       }
     }
-    return companyId;
-  }
+    return departmentId;
+  } */
 
-  static Future<String> postCompany(String json) async {
-    print("Json: $json");
+  static Future<String> postDepartment(String json) async {
     var response = await http
         .post(
-          Uri.parse(serviceHttp + '/company/post'),
+          Uri.parse(serviceHttp + '/department/new'),
           headers: <String, String>{
             'Content-type': 'application/json',
             'Accept': 'application/json',
@@ -53,15 +49,14 @@ class CompanyRemoteServices {
           const Duration(seconds: 10),
         );
     return response.statusCode == 200
-        ? "Success: Company"
-        : "Error: Company ${response.statusCode}";
+        ? "Success: Department"
+        : "Error: Department ${response.statusCode}";
   }
 
-  static Future<String> putCompany(int id, String json) async {
-    print("Json: $json");
+  static Future<String> putDepartment(int id, String json) async {
     var response = await http
         .put(
-          Uri.parse(serviceHttp + "/company/put/$id"),
+          Uri.parse(serviceHttp + "/department/update/$id"),
           headers: <String, String>{
             'Content-type': 'application/json',
             'Accept': 'application/json',
@@ -73,14 +68,14 @@ class CompanyRemoteServices {
           const Duration(seconds: 10),
         );
     return response.statusCode == 200
-        ? "Success: Company"
-        : "Error: Company ${response.statusCode}";
+        ? "Success: Department"
+        : "Error: Department ${response.statusCode}";
   }
 
-  static Future<String> deleteCompany(int id) async {
+  static Future<String> deleteDepartment(int id) async {
     var response = await http
         .delete(
-          Uri.parse(serviceHttp + '/company/delete/$id'),
+          Uri.parse(serviceHttp + '/department/remove/$id'),
           headers: <String, String>{
             'Content-type': 'application/json',
             'Accept': 'application/json',
@@ -91,7 +86,7 @@ class CompanyRemoteServices {
           const Duration(seconds: 10),
         );
     return response.statusCode == 200
-        ? "Success: Company"
-        : "Error: Company ${response.statusCode}";
+        ? "Success: Department"
+        : "Error: Department ${response.statusCode}";
   }
 }

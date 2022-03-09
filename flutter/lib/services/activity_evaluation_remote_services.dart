@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/activity_evaluation.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 
@@ -9,7 +10,7 @@ class ActivityEvaluationRemoteServices {
 
   static Future<List<ActivityEvaluation>?> fetchActivityEvaluations() async {
     var response = await http
-        .get(Uri.parse(serviceHttp + '/activityevaluation/evaluations'));
+        .get(Uri.parse(serviceHttp + '/activityevaluation/list'));
     if (response.statusCode == 200) {
       var jsonString = utf8.decode(response.bodyBytes);
       return activityEvaluationFromJson(jsonString);
@@ -20,7 +21,8 @@ class ActivityEvaluationRemoteServices {
 
   static Future<int> fetchActivityEvaluation(int activityId, int userId) async {
     var response = await http
-        .get(Uri.parse(serviceHttp + '/activityevaluation/evaluations'));
+        .get(Uri.parse(
+        serviceHttp + '/activityevaluation/list/$activityId/$userId'));
     int activityEvaluationID = -1;
     if (response.statusCode == 200) {
       var jsonString = utf8.decode(response.bodyBytes);
@@ -40,7 +42,7 @@ class ActivityEvaluationRemoteServices {
   static Future<List<ActivityEvaluation>?> fetchActivityEvaluationsByActivityId(
       int activityId) async {
     var response = await http
-        .get(Uri.parse(serviceHttp + '/activityevaluation/evaluations'));
+        .get(Uri.parse(serviceHttp + '/activityevaluation/list/$activityId'));
     if (response.statusCode == 200) {
       var jsonString = utf8.decode(response.bodyBytes);
       List<ActivityEvaluation> activityEvaluations =
@@ -53,7 +55,7 @@ class ActivityEvaluationRemoteServices {
 
   static Future<String> postActivityEvaluation(String json) async {
     var response = await http
-        .post(Uri.parse(serviceHttp + '/activityevaluation/post'),
+        .post(Uri.parse(serviceHttp + '/activityevaluation/new'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',

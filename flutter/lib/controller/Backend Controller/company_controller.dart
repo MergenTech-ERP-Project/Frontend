@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
-import 'package:vtys_kalite/services/settings_company_remote_services.dart';
+import 'package:vtys_kalite/services/company_remote_services.dart';
 
 class CompanyController extends GetxController {
   var isLoading = false.obs;

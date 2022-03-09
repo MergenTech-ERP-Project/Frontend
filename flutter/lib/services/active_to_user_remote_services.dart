@@ -11,7 +11,7 @@ class ActiveToUserRemoteServices {
 
   static Future<List<ActiveToUser>?> fetchActiveToUsers() async {
     var response = await http.get(
-      Uri.parse(serviceHttp + '/activetouser/activetousers'),
+      Uri.parse(serviceHttp + '/activetouser/list'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -30,7 +30,7 @@ class ActiveToUserRemoteServices {
 
   static Future<int> fetchActiveToUser(int activityId, int userId) async {
     var response = await http.get(
-      Uri.parse(serviceHttp + '/activetouser/activetousers'),
+      Uri.parse(serviceHttp + '/activetouser/list'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -50,7 +50,7 @@ class ActiveToUserRemoteServices {
   static Future<String> postActiveToUser(String json) async {
     print("Post Active To User : $json");
     var response = await http
-        .post(Uri.parse(serviceHttp + '/activetouser/post'),
+        .post(Uri.parse(serviceHttp + '/activetouser/new'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
               'Accept': 'application/json',
@@ -69,7 +69,7 @@ class ActiveToUserRemoteServices {
   static Future<String> deleteActiveToUser(int id) async {
     var response = await http
         .delete(
-          Uri.parse(serviceHttp + '/activetouser/delete/$id'),
+          Uri.parse(serviceHttp + '/activetouser/remove/$id'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': 'application/json',
