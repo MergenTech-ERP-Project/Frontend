@@ -7,7 +7,7 @@ import 'package:vtys_kalite/routing/routes.dart';
 class TitleRemoteServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
-  static Future<List<Title>?> fetchTitles() async {
+  static Future<List<Titlee>?> fetchTitles() async {
     var response = await http.get(Uri.parse(serviceHttp + '/title/list'));
     if (response.statusCode == 200) {
       var jsonString = utf8.decode(response.bodyBytes);

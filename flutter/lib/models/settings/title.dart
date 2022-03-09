@@ -1,22 +1,22 @@
 import 'dart:convert';
 
-List<Title> titleFromJson(String str) =>
-    List<Title>.from(json.decode(str).map((x) => Title.fromMap(x)));
+List<Titlee> titleFromJson(String str) =>
+    List<Titlee>.from(json.decode(str).map((x) => Titlee.fromMap(x)));
 
-String titleToJson(List<Title> data) =>
+String titleToJson(List<Titlee> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJsonWithId())));
 
-class Title {
+class Titlee {
   final int id;
   String titleName;
 
-  Title({
+  Titlee({
     this.id = 0,
     this.titleName = "",
   });
 
-  factory Title.fromMap(Map companyMap) {
-    return Title(
+  factory Titlee.fromMap(Map companyMap) {
+    return Titlee(
       id: companyMap['id'],
       titleName: companyMap['title_name'],
     );

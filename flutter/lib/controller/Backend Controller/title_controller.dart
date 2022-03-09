@@ -8,7 +8,7 @@ import 'package:vtys_kalite/services/Title_remote_services.dart';
 
 class TitleController extends GetxController {
   var isLoading = false.obs;
-  List<Title> titleList = <Title>[].obs; //List<Company>
+  List<Titlee> titleList = <Titlee>[].obs; //List<Company>
 
   @override
   void onInit() {
@@ -22,7 +22,7 @@ class TitleController extends GetxController {
       var titles = await TitleRemoteServices.fetchTitles();
       if (titles != null) {
         titleList.removeRange(0, titleList.length);
-        titleList.assignAll(titles);
+        titleList.assignAll(titleList);
       }
     } finally {
       isLoading(false);
@@ -43,7 +43,7 @@ class TitleController extends GetxController {
     }
   } */
 
-  Future<String?> newTitle(Title newTitle) async {
+  Future<String?> newTitle(Titlee newTitle) async {
     try {
       isLoading(true);
       var response = await TitleRemoteServices.newTitle(
@@ -56,7 +56,7 @@ class TitleController extends GetxController {
     }
   }
 
-  Future<String?> updateTitle(int id, Title title) async {
+  Future<String?> updateTitle(int id, Titlee title) async {
     try {
       isLoading(true);
       print(id);
