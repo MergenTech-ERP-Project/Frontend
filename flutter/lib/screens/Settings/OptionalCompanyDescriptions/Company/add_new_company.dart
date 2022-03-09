@@ -9,10 +9,6 @@ import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class AddNewCompany extends StatefulWidget {
-  AddNewCompany({
-    Key? key,
-  }) : super(key: key);
-
   final TextEditingController controllerCompanyName = TextEditingController();
   final TextEditingController controllerCompanyPhone = TextEditingController();
   final TextEditingController controllerDomainName = TextEditingController();

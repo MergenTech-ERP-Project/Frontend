@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/activity_card.dart';
 import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/new_activity_button.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -13,18 +14,20 @@ class ActivityListLarge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      padding: const EdgeInsets.all(12),
-      gridDelegate: gridDelegate,
-      itemCount: activityController.activityList.length + 1,
-      itemBuilder: (context, index) {
-        if (index == 0) {
-          return const NewActivityButton();
-        }
-        return ActivityCard(
-          activity: activityController.activityList[index - 1],
-        );
-      },
+    return Obx(
+      () => GridView.builder(
+        padding: const EdgeInsets.all(12),
+        gridDelegate: gridDelegate,
+        itemCount: activityController.activityList.length + 1,
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            return const NewActivityButton();
+          }
+          return ActivityCard(
+            activity: activityController.activityList[index - 1],
+          );
+        },
+      ),
     );
   }
 }
