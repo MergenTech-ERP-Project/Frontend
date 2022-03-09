@@ -15,9 +15,9 @@ class TabGenel extends StatelessWidget {
 
   TabGenel({
     Key? key,
-    required this.user,
-    required this.userDetail,
-    required this.userDetailCareer,
+    this.user,
+    this.userDetail,
+    this.userDetailCareer,
   }) : super(key: key);
 
   @override

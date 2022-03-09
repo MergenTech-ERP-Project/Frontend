@@ -10,10 +10,10 @@ class UserDetailController extends GetxController {
   var isLoading = false.obs;
   List<UserDetail> userList = <UserDetail>[].obs; //List<UserDetail>
 
-  Future<UserDetail?> fetchUserDetailByTCNO(tcno) async {
+  Future<UserDetail?> fetchUserDetailById(userId) async {
     try {
       isLoading(true);
-      UserDetail? detail = await UserDetailServices.fetchUserDetailByTCNO(tcno);
+      UserDetail? detail = await UserDetailServices.fetchUserDetailById(userId);
       print("fetch User Detail: " + detail!.tcno.toString());
       return detail;
     } finally {
@@ -29,34 +29,34 @@ class UserDetailController extends GetxController {
           json.encode(newUserDetail.toJson()).toString());
 
       print("post User Detail: " + response.toString());
-      fetchUserDetailByTCNO(userDetail.tcno);
+      fetchUserDetailById(userDetail.tcno);
       return response;
     } finally {
       isLoading(false);
     }
   }
 
-  Future<String?> updateUserDetail(String tcno, UserDetail userDetail) async {
+  Future<String?> updateUserDetail(int id, UserDetail userDetail) async {
     try {
       isLoading(true);
-      print(tcno);
+      print(id);
       var response = await UserDetailServices.updateUserDetail(
-          tcno, json.encode(userDetail.toJson()).toString());
+          id, json.encode(userDetail.toJson()).toString());
       print("put User Detail: " + response);
-      fetchUserDetailByTCNO(tcno);
+      fetchUserDetailById(id);
       return response;
     } finally {
       isLoading(false);
     }
   }
 
-  Future<String?> deleteUserDetail(String tcno) async {
+  Future<String?> deleteUserDetail(int id) async {
     try {
       isLoading(true);
-      print(tcno);
-      var response = await UserDetailServices.deleteUserDetail(tcno);
+      print(id);
+      var response = await UserDetailServices.deleteUserDetail(id);
       print("delete User Detail: " + response);
-      fetchUserDetailByTCNO(tcno);
+      fetchUserDetailById(id);
       return response;
     } finally {
       isLoading(false);

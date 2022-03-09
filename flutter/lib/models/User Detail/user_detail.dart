@@ -24,6 +24,8 @@ String fetchUsers(List<UserDetail> data) =>
 /// The part written with // places written with json.
 
 class UserDetail {
+  final int id;
+  final int userId; //user_id
   final String? tcno; //tcno
   String? dateofbirth; //dateofbirth
   final String? workPhone; //work_phone
@@ -60,6 +62,8 @@ class UserDetail {
   BloodTypeEnum? bloodType; //blood_type
 
   UserDetail({
+    this.id = 0,
+    this.userId = 0,
     this.tcno,
     this.dateofbirth,
     this.workPhone,
@@ -107,6 +111,8 @@ class UserDetail {
 
   factory UserDetail.fromJson(Map<String, dynamic> json) {
     return UserDetail(
+      id: json['id'],
+      userId: json['user_id'],
       tcno: json['tcno'],
       dateofbirth: json['dateofbirth'],
       workPhone: json['work_phone'],
@@ -153,6 +159,8 @@ class UserDetail {
   }
 
   Map<String, dynamic> toJson() => {
+        "id": id,
+        "user_id": userId,
         "tcno": tcno,
         "dateofbirth": dateofbirth,
         "work_phone": workPhone,

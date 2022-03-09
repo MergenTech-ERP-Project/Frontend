@@ -12,7 +12,7 @@ class DepartmentController extends GetxController {
 
   @override
   void onInit() {
-    fetchDepartments();
+    //fetchDepartments();
     super.onInit();
   }
 

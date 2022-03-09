@@ -385,7 +385,7 @@ class MaasEkleHeader extends StatelessWidget {
   }
 }
 
-class _PozisyonEklemeBody extends StatefulWidget {
+class _PozisyonEklemeBody extends StatelessWidget {
   final UserDetail userDetail;
   final UserDetailCareer userDetailCareer;
 
@@ -394,12 +394,6 @@ class _PozisyonEklemeBody extends StatefulWidget {
     required this.userDetail,
     required this.userDetailCareer,
   }) : super(key: key);
-
-  @override
-  State<_PozisyonEklemeBody> createState() => _PozisyonEklemeBodyState();
-}
-
-class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -432,13 +426,11 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
                   }
                   return ExpandedCustomDropDownMenu(
                     label: "Şirket",
-                    index: tabKariyerController.unitCompanyIndex,
+                    index: tabKariyerController.unitCompanyIndex.value,
                     listExtension: companyNames,
                     onChanged: (val) {
-                      setState(() {
-                        tabKariyerController.unitCompanyIndex =
-                            companyNames.indexOf(val!);
-                      });
+                      tabKariyerController.unitCompanyIndex.value =
+                          companyNames.indexOf(val!);
                     },
                   );
                 },
@@ -451,13 +443,11 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
                   }
                   return ExpandedCustomDropDownMenu(
                     label: "Şube",
-                    index: tabKariyerController.unitBranchIndex,
+                    index: tabKariyerController.unitBranchIndex.value,
                     listExtension: branchNames,
                     onChanged: (val) {
-                      setState(() {
-                        tabKariyerController.unitCompanyIndex =
-                            branchNames.indexOf(val!);
-                      });
+                      tabKariyerController.unitCompanyIndex.value =
+                          branchNames.indexOf(val!);
                     },
                   );
                 },
@@ -535,11 +525,11 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
           Row(
             children: [
               ExpandedCustomDateTimePicker(
-                dateTime: dateFormat.parse(widget.userDetail.startDateWork!),
+                dateTime: dateFormat.parse(userDetail.startDateWork!),
                 label: 'Başlangıç Tarihi',
               ),
               ExpandedCustomDateTimePicker(
-                dateTime: dateFormat.parse(widget.userDetail.quitWorkDate!),
+                dateTime: dateFormat.parse(userDetail.quitWorkDate!),
                 label: 'Bitiş Tarihi',
               ),
             ],

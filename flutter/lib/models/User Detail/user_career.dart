@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-List<UserDetailCareer> parseUsers(String str) =>
-    List<UserDetailCareer>.from(json.decode(str).map((x) => UserDetailCareer.fromJson(x)));
+List<UserDetailCareer> parseUsers(String str) => List<UserDetailCareer>.from(
+    json.decode(str).map((x) => UserDetailCareer.fromJson(x)));
 
 UserDetailCareer parseUserCareer(String str) => parseUsers(str)[0];
 
@@ -11,7 +11,8 @@ String fetchUsers(List<UserDetailCareer> data) =>
 /// The part written with // places written with json.
 
 class UserDetailCareer {
-  final String? tcno; //tcno
+  final int id;
+  final int userDetailId; //user_detail_id
   final String? managerName; //manager_name
   final String? managerTcno; //manager_tcno
   final String? unitCompany; //unit_company
@@ -20,7 +21,8 @@ class UserDetailCareer {
   final String? unitTitle; //unit_title
 
   UserDetailCareer({
-    this.tcno,
+    this.id = 0,
+    this.userDetailId = 0,
     this.managerName,
     this.managerTcno,
     this.unitCompany,
@@ -31,7 +33,8 @@ class UserDetailCareer {
 
   factory UserDetailCareer.fromJson(Map<String, dynamic> json) {
     return UserDetailCareer(
-      tcno: json['tcno'],
+      id: json['id'],
+      userDetailId: json["user_detail_id"],
       managerName: json['manager_name'],
       managerTcno: json['manager_tcno'],
       unitCompany: json['unit_company'],
@@ -42,7 +45,8 @@ class UserDetailCareer {
   }
 
   Map<String, dynamic> toJson() => {
-        "tcno": tcno,
+        "id": id,
+        "user_detail_id": userDetailId,
         "manager_name": managerName,
         "manager_tcno": managerTcno,
         "unit_company": unitCompany,
