@@ -89,7 +89,7 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
                       label: "Banka Adı",
                       index: widget.userDetail!.bankNames!.index,
                       listExtension: BankNamesEnumExtension.getList(),
-                      onChangedFunction: (val) {
+                      onChanged: (val) {
                         setState(() {
                           widget.userDetail!.bankNames =
                               EnumToString.fromString(
@@ -101,7 +101,7 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
                       label: "Hesap Tipi",
                       index:  widget.userDetail!.bankAccountType!.index,
                       listExtension: BankAccountTypeExtension.getList(),
-                      onChangedFunction: (val) {
+                      onChanged: (val) {
                         setState(() {
                           widget.userDetail!.bankAccountType =
                               EnumToString.fromString(

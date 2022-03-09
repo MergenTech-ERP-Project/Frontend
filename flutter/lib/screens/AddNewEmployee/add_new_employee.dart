@@ -36,21 +36,14 @@ import 'package:vtys_kalite/utilities/style.dart';
 class AddNewEmployee extends StatelessWidget {
   var isSaved = false.obs;
   User? user;
-
-  UserDetail? userDetail;
-
-  ///null döndürür
-  UserDetailCareer? userDetailCareer;
-  UserDetailPayment? userDetailPayment;
+  late UserHelperController userHelper;
 
   AddNewEmployee({
     Key? key,
     this.user,
   }) : super(key: key) {
-    zeroToAllController();
-    if (user == null) {
-      return;
-    }
+    user ??= User();
+    userHelper = UserHelperController(user!.id);
     showInformationWhenOnClick();
   }
 
@@ -105,19 +98,26 @@ class AddNewEmployee extends StatelessWidget {
                 children: [
                   TabGenel(
                     user: user,
-                    userDetail: userDetail,
+                    userDetail: userHelper.userDetail,
+                    userDetailCareer: userHelper.userDetailCareer,
                   ),
                   ResponsiveWidget(
-                    largeScreen: TabKariyer(),
+                    largeScreen: TabKariyer(
+                      userDetail: userHelper.userDetail,
+                      userDetailCareer: userHelper.userDetailCareer,
+                      userDetailPayment: userHelper.userDetailPayment,
+                    ),
                     smallScreen: TabKariyerSmall(),
                   ),
                   ResponsiveWidget(
-                    largeScreen: TabPersonalInformation(),
+                    largeScreen: TabPersonalInformation(
+                      userDetail: userHelper.userDetail,
+                    ),
                     smallScreen: TabPersonalInformationSmall(),
                   ),
                   TabAnotherInformation(
                     user: user,
-                    userDetail: userDetail,
+                    userDetail: userHelper.userDetail,
                   ),
                   const Center(child: CustomText(text: "4")),
                   const Center(child: CustomText(text: "5")),
@@ -207,31 +207,29 @@ class AddNewEmployee extends StatelessWidget {
     int? responseUserDetail = await userDetailController.addNewUserDetail(
       UserDetail(
         tcno: tabKisiselBilgilerController.controllerTcNo.text,
-        dateofbirth: tabKisiselBilgilerController.birthDate.toString(),
+        dateofbirth: userHelper.userDetail.dateofbirth,
         workPhone: tabGenelController.controllerWorkPhone.text,
         maritalStatus: MaritalStatusEnum.values
-            .elementAt(tabKisiselBilgilerController.maritalStatusIndex),
+            .elementAt(userHelper.userDetail.maritalStatus!.index),
         numberofkids: tabKisiselBilgilerController.controllerNumberOfKids.text,
         disabledDegree: DisabledDegreeEnum.values
-            .elementAt(tabKisiselBilgilerController.disabledDegreeIndex),
-        gender: GenderEnum.values
-            .elementAt(tabKisiselBilgilerController.genderIndex),
+            .elementAt(userHelper.userDetail.disabledDegree!.index),
+        gender: GenderEnum.values.elementAt(userHelper.userDetail.gender!.index),
         educationalStatus: EducationalStatusEnum.values
-            .elementAt(tabKisiselBilgilerController.educationalStatusIndex),
+            .elementAt(userHelper.userDetail.educationalStatus!.index),
         highestEducationLevelCompleted: HighestEducationLevelCompletedEnum
             .values
-            .elementAt(tabKisiselBilgilerController
-                .highestEducationLevelCompletedIndex),
+            .elementAt(userHelper.userDetail.highestEducationLevelCompleted!.index),
         lastCompletedEducationStatus: tabKisiselBilgilerController
             .controllerLastCompletedEducationStatus.text,
         employmentType: EmploymentTypeEnum.values
-            .elementAt(tabGenelController.employmentTypeIndex),
+            .elementAt(userHelper.userDetail.employmentType!.index),
         militaryStatus: MilitaryStatusEnum.values
-            .elementAt(tabKisiselBilgilerController.militaryStatusIndex),
-        startDateWork: tabGenelController.dateOfStart.toString(),
-        contractType: ContractTypeEnum.values
-            .elementAt(tabGenelController.contractTypeIndex),
-        contractEndDate: tabGenelController.contractEndDate.toString(),
+            .elementAt(userHelper.userDetail.employmentType!.index),
+        startDateWork: userHelper.userDetail.startDateWork!,
+        contractType:
+            ContractTypeEnum.values.elementAt(userHelper.userDetail.contractType!.index),
+        contractEndDate: userHelper.userDetail.contractEndDate!,
         workEmail: tabGenelController.controllerEPostaWork.text,
         address: tabDigerBilgilerController.controllerAdress.text,
         addressCountry: tabDigerBilgilerController.controllerCountry.text,
@@ -239,21 +237,21 @@ class AddNewEmployee extends StatelessWidget {
         addressCity: tabDigerBilgilerController.controllerCity.text,
         addressZipCode: tabDigerBilgilerController.controllerZipCode.text,
         homePhone: tabDigerBilgilerController.controllerHomePhone.text,
-        bankNames: BankNamesEnum.values
-            .elementAt(tabDigerBilgilerController.bankNameIndex),
+        bankNames: BankNamesEnum.values.elementAt(userHelper.userDetail.bankNames!.index),
         bankAccountType: BankAccountTypeEnum.values
-            .elementAt(tabDigerBilgilerController.bankAccountTypeIndex),
+            .elementAt(userHelper.userDetail.bankAccountType!.index),
         bankAccountNumber:
             tabDigerBilgilerController.controllerAccountNumber.text,
         iban: tabDigerBilgilerController.controllerIBAN.text,
+
+        ///TODO: bunları unutma!!
         emergencyContactPerson: "Ömer Faruk Öztürk",
         relationshipEmergencyContact: "Boss",
         emergencyContactCellPhone: "05436176299",
-        quitWorkDate: tabGenelController.contractEndDate.toString(),
+        quitWorkDate: userHelper.userDetail.contractEndDate!,
         reasonTypeForQuit: "Ömer Faruk Kovdu Hepsini Muhahaha",
         reasonExplainForQuit: "Yok açıklama. Kovdum ahaha",
-        bloodType: BloodTypeEnum.values
-            .elementAt(tabKisiselBilgilerController.bloodGroupIndex),
+        bloodType: BloodTypeEnum.values.elementAt(userHelper.userDetail.bloodType!.index),
       ),
     );
     int? responseUserDetailCareer =

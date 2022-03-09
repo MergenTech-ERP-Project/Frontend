@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
+import 'package:vtys_kalite/models/User%20Detail/user_career.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_genel_first_card.dart';
@@ -10,11 +11,13 @@ import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_genel_second_c
 class TabGenel extends StatelessWidget {
   User? user;
   UserDetail? userDetail;
+  UserDetailCareer? userDetailCareer;
 
   TabGenel({
     Key? key,
-    this.user,
-    this.userDetail
+    required this.user,
+    required this.userDetail,
+    required this.userDetailCareer,
   }) : super(key: key);
 
   @override
@@ -25,11 +28,16 @@ class TabGenel extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 3,
-                  child: TabGenelFirstCard(user: user!),
+                  child: TabGenelFirstCard(
+                    user: user!,
+                    userDetail: userDetail!,
+                    userDetailCareer: userDetailCareer!,
+                  ),
                 ),
                 Expanded(
                   flex: 4,
-                  child: TabGenelSecondCard(user: user, userDetail: userDetail!),
+                  child:
+                      TabGenelSecondCard(user: user, userDetail: userDetail!),
                 ),
               ],
             )

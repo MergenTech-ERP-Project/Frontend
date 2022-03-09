@@ -8,7 +8,6 @@ import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_radiolisttile.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
-import 'package:vtys_kalite/enums/departments_enum.dart';
 import 'package:vtys_kalite/screens/Forms/components/text_widget.dart';
 import 'package:vtys_kalite/screens/Forms/forms.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -41,9 +40,7 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
 
   @override
   Widget build(BuildContext context) {
-    for (var departmant in DepartmentsEnum.values) {
-      titlesDepartmant.add(EnumToString.convertToString(departmant));
-    }
+  
     return Center(
       child: ListView(
         padding: const EdgeInsets.all(20),

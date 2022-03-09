@@ -91,11 +91,11 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
           children: [
             ExpandedCustomDateTimePicker(
               label: "İşe Başlangıç Tarihi",
-              dateTime: tabGenelController.dateOfStart,
+              dateTime: dateTimeFormat.parse(widget.userDetail.startDateWork!),
             ),
             ExpandedCustomDateTimePicker(
               label: "Sözleşme Bitiş Tarihi",
-              dateTime: tabGenelController.contractEndDate,
+              dateTime: dateTimeFormat.parse(widget.userDetail.contractEndDate!),
             ),
           ],
         ),
@@ -105,7 +105,7 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
               label: "Sözleşme Türü",
               index: widget.userDetail.contractType!.index,
               listExtension: ContractTypeExtension.getList(),
-              onChangedFunction: (val) {
+              onChanged: (val) {
                 setState(() {
                   widget.userDetail.contractType = EnumToString.fromString(
                       ContractTypeEnum.values, val.toString());
@@ -116,7 +116,7 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
               label: "Çalışma Şekli",
               index: widget.userDetail.employmentType!.index,
               listExtension: EmploymentTypeEnumExtension.getList(),
-              onChangedFunction: (val) {
+              onChanged: (val) {
                 setState(() {
                   widget.userDetail.employmentType = EnumToString.fromString(
                       EmploymentTypeEnum.values, val.toString());

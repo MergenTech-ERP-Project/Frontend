@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/enums/blood_type.dart';
 import 'package:vtys_kalite/enums/disabled_degree.dart';
@@ -8,13 +9,18 @@ import 'package:vtys_kalite/enums/gender.dart';
 import 'package:vtys_kalite/enums/highest_education_level_completed.dart';
 import 'package:vtys_kalite/enums/marial_status.dart';
 import 'package:vtys_kalite/enums/military_status.dart';
+import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdatetimepicker.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdropdownmenu.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabPersonalInformation extends StatefulWidget {
-  TabPersonalInformation({Key? key}) : super(key: key);
+  final UserDetail userDetail;
+  TabPersonalInformation({
+    Key? key,
+    required this.userDetail,
+  }) : super(key: key);
 
   @override
   _TabPersonalInformationState createState() => _TabPersonalInformationState();
@@ -29,7 +35,7 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDateTimePicker(
               label: "Doğum Tarihi",
-              dateTime: tabKisiselBilgilerController.birthDate,
+              dateTime: dateTimeFormat.parse(widget.userDetail.dateofbirth!),
             ),
             ExpandedNameController(
               controller: tabKisiselBilgilerController.controllerTcNo,
@@ -42,13 +48,25 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Medeni Hal",
-              index: tabKisiselBilgilerController.maritalStatusIndex,
+              index: widget.userDetail.maritalStatus!.index,
               listExtension: MaritalStatusExtension.getList(),
+              onChanged: (val) {
+                setState(() {
+                  widget.userDetail.maritalStatus = EnumToString.fromString(
+                      MaritalStatusEnum.values, val.toString());
+                });
+              },
             ),
             ExpandedCustomDropDownMenu(
               label: "Cinsiyet",
-              index: tabKisiselBilgilerController.genderIndex,
+              index: widget.userDetail.gender!.index,
               listExtension: GenderExtension.getList(),
+              onChanged: (val) {
+                setState(() {
+                  widget.userDetail.gender = EnumToString.fromString(
+                      GenderEnum.values, val.toString());
+                });
+              },
             ),
           ],
         ),
@@ -56,8 +74,14 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Engel Derecesi",
-              index: tabKisiselBilgilerController.disabledDegreeIndex,
+              index: widget.userDetail.disabledDegree!.index,
               listExtension: DisabledDegreeExtension.getList(),
+              onChanged: (val) {
+                setState(() {
+                  widget.userDetail.disabledDegree = EnumToString.fromString(
+                      DisabledDegreeEnum.values, val.toString());
+                });
+              },
             ),
             ExpandedNameController(
               controller: tabKisiselBilgilerController.controllerNationality,
@@ -75,8 +99,14 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
             ),
             ExpandedCustomDropDownMenu(
               label: "Askerlik Durumu",
-              index: tabKisiselBilgilerController.militaryStatusIndex,
+              index: widget.userDetail.militaryStatus!.index,
               listExtension: MilitaryStatusEnumExtension.getList(),
+              onChanged: (val) {
+                setState(() {
+                  widget.userDetail.militaryStatus = EnumToString.fromString(
+                      MilitaryStatusEnum.values, val.toString());
+                });
+              },
             ),
           ],
         ),
@@ -84,13 +114,25 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Kan Grubu",
-              index: tabKisiselBilgilerController.bloodGroupIndex,
+              index: widget.userDetail.bloodType!.index,
               listExtension: BloodTypeEnumExtension.getList(),
+              onChanged: (val) {
+                setState(() {
+                  widget.userDetail.bloodType = EnumToString.fromString(
+                      BloodTypeEnum.values, val.toString());
+                });
+              },
             ),
             ExpandedCustomDropDownMenu(
               label: "Eğitim Durumu",
-              index: tabKisiselBilgilerController.educationalStatusIndex,
+              index: widget.userDetail.educationalStatus!.index,
               listExtension: EducationalStatusExtension.getList(),
+              onChanged: (val) {
+                setState(() {
+                  widget.userDetail.educationalStatus = EnumToString.fromString(
+                      EducationalStatusEnum.values, val.toString());
+                });
+              },
             ),
           ],
         ),
@@ -98,9 +140,16 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Tamamlanan En Yüksek Eğitim Seviyesi",
-              index: tabKisiselBilgilerController
-                  .highestEducationLevelCompletedIndex,
+              index: widget.userDetail.highestEducationLevelCompleted!.index,
               listExtension: HighestEducationLevelCompletedExtension.getList(),
+              onChanged: (val) {
+                setState(() {
+                  widget.userDetail.highestEducationLevelCompleted =
+                      EnumToString.fromString(
+                          HighestEducationLevelCompletedEnum.values,
+                          val.toString());
+                });
+              },
             ),
             ExpandedNameController(
               controller: tabKisiselBilgilerController

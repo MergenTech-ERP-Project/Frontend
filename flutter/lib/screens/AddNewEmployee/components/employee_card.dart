@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
-import 'package:vtys_kalite/enums/departments_enum.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
@@ -77,11 +76,11 @@ class _EmployeeCardState extends State<EmployeeCard> {
                         ),
                       ),
                     ),
-                    Expanded(
+                    const Expanded(
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: CustomText(
-                          text: widget.user.title.getName,
+                          text: "", //widget.user.title.getName,
                           size: 20,
                           weight: FontWeight.w400,
                         ),

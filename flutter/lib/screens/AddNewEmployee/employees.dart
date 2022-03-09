@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/main.dart';
-import 'package:vtys_kalite/enums/departments_enum.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/employee_card.dart';
 import 'package:vtys_kalite/screens/AdminPanel/admin_panel.dart';
@@ -66,25 +65,25 @@ class Employees extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  if (user.title == DepartmentsEnum.management)
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 5),
-                                        child: CustomButton(
-                                          title: 'Admin Panel',
-                                          leftIcon: Icons.admin_panel_settings,
-                                          pressAction: () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) => Dialog(
-                                                child: AdminPanelPage(),
-                                              ),
-                                            );
-                                          },
-                                        ),
+                                  // if (user.title == DepartmentsEnum.management)
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5),
+                                      child: CustomButton(
+                                        title: 'Admin Panel',
+                                        leftIcon: Icons.admin_panel_settings,
+                                        pressAction: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) => Dialog(
+                                              child: AdminPanelPage(),
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ),
+                                  ),
                                 ],
                               ),
                             )
@@ -99,5 +98,4 @@ class Employees extends StatelessWidget {
       ),
     );
   }
-
 }
