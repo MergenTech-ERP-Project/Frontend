@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print, must_be_immutable
 
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/state_manager.dart';
@@ -17,6 +16,8 @@ import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_payment.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
+import 'package:vtys_kalite/models/settings/department.dart';
+import 'package:vtys_kalite/models/settings/title.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/models/odeme.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/custombuttonwidget.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdatetimepicker.dart';
@@ -455,47 +456,42 @@ class _PozisyonEklemeBody extends StatelessWidget {
             ],
           ),
           Row(
-            children: const [
-              ///TODO: Company and Branch Controller
-              // Obx(
-              //   () {
-              //     List<String> departmantNames = [];
-              //     for (Departmant d in departmantController.departmantList) {
-              //       departmantNames.add(d.departmantName);
-              //     }
-              //     return ExpandedCustomDropDownMenu(
-              //       label: "Departmant",
-              //       index: tabKariyerController.unitDepartmantIndex,
-              //       listExtension: departmantNames,
-              //       onChangedFunction: (val) {
-              //         setState(() {
-              //            tabKariyerController.unitCompanyIndex =
-              //               departmantNames.indexOf(val!);
-              //         });
-              //       },
-              //     );
-              //   },
-              // ),
-              ////////////////////////////////////////////////////////////////////////
-              // Obx(
-              //   () {
-              //     List<String> titleeNames = [];
-              //     for (Titlee t in titleeController.titleeList) {
-              //       titleeNames.add(t.titleeName);
-              //     }
-              //     return ExpandedCustomDropDownMenu(
-              //       label: "Title",
-              //       index: tabKariyerController.unitTitleIndex,
-              //       listExtension: titleeNames,
-              //       onChangedFunction: (val) {
-              //         setState(() {
-              //           tabKariyerController.unitTitleIndex =
-              //               titleeNames.indexOf(val!);
-              //         });
-              //       },
-              //     );
-              //   },
-              // ),
+            children: [
+              Obx(
+                () {
+                  List<String> departmantNames = [];
+                  for (Department d in departmentController.departmentList) {
+                    departmantNames.add(d.departmentName);
+                  }
+                  return ExpandedCustomDropDownMenu(
+                    label: "Department",
+                    index: tabKariyerController.unitDepartmantIndex.value,
+                    listExtension: departmantNames,
+                    onChanged: (val) {
+                      tabKariyerController.unitDepartmantIndex.value =
+                          departmantNames.indexOf(val!);
+                    },
+                  );
+                },
+              ),
+              //////////////////////////////////////////////////////////////////////
+              Obx(
+                () {
+                  List<String> titleNames = [];
+                  for (Titlee t in titleController.titleList) {
+                    titleNames.add(t.titleName);
+                  }
+                  return ExpandedCustomDropDownMenu(
+                    label: "Title",
+                    index: tabKariyerController.unitTitleIndex.value,
+                    listExtension: titleNames,
+                    onChanged: (val) {
+                      tabKariyerController.unitTitleIndex.value =
+                          titleNames.indexOf(val!);
+                    },
+                  );
+                },
+              ),
             ],
           ),
           Row(
