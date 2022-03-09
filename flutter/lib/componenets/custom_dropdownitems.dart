@@ -8,8 +8,7 @@ class CustomDropDownMenu extends StatefulWidget {
   final Icon icon;
   final double iconSize;
   final bool isExpandedYes;
-  final ValueChanged<String> onChanged;
-  final Function(String?)? onChangedFunction;
+  final Function(String?)? onChanged;
 
   const CustomDropDownMenu({
     Key? key,
@@ -19,7 +18,6 @@ class CustomDropDownMenu extends StatefulWidget {
     required this.iconSize,
     required this.isExpandedYes,
     required this.onChanged,
-    required this.onChangedFunction,
   }) : super(key: key);
 
   @override
@@ -50,7 +48,7 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
               iconSize: widget.iconSize,
               isExpanded: widget.isExpandedYes,
               value: valueChoose,
-              onChanged: widget.onChangedFunction,
+              onChanged: widget.onChanged,
               items: widget.list
                   .map((item) => DropdownMenuItem(
                         value: item,

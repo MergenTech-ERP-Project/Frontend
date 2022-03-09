@@ -23,7 +23,7 @@ class ExpandedCustomDropDownMenu extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: CustomDropDownMenu(
-          onChangedFunction: onChangedFunction,
+          onChanged: onChangedFunction,
           text: label,
           list: listExtension,
           icon: const Icon(Icons.arrow_drop_down),
