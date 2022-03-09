@@ -198,7 +198,7 @@ class _AdminDialog extends StatelessWidget {
               icon: const Icon(Icons.arrow_drop_down),
               onChanged: (val) {
                 userTitleIndex =
-                    DepartmentsEnumExtension.getList().indexOf(val);
+                    DepartmentsEnumExtension.getList().indexOf(val!);
               },
             ),
           ),
