@@ -9,7 +9,7 @@ class UserRemoteServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
   static Future<List<User>?> fetchUsers() async {
-    var response = await http.get(Uri.parse(serviceHttp + '/user/users'));
+    var response = await http.get(Uri.parse(serviceHttp + '/user/list'));
     if (response.statusCode >= 200 && response.statusCode < 300) {
       return parseUsers(utf8.decode(response.bodyBytes));
     } else {
@@ -18,7 +18,7 @@ class UserRemoteServices {
   }
 
   static Future<User?> fetchUserById(id) async {
-    var response = await http.get(Uri.parse(serviceHttp + '/user/users/$id'));
+    var response = await http.get(Uri.parse(serviceHttp + '/user/list/$id'));
     User? user;
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
@@ -80,7 +80,7 @@ class UserRemoteServices {
   static Future<int> addNewUser(String json) async {
     print(json);
     var response = await http
-        .post(Uri.parse(serviceHttp + '/user/post'),
+        .post(Uri.parse(serviceHttp + '/user/new'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
@@ -95,7 +95,7 @@ class UserRemoteServices {
 
   static Future<String> updateUser(int id, String json) async {
     var response = await http
-        .put(Uri.parse(serviceHttp + '/user/put/$id'),
+        .put(Uri.parse(serviceHttp + '/user/update/$id'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
@@ -113,7 +113,7 @@ class UserRemoteServices {
 
   static Future<String> deleteUser(int id) async {
     var response = await http
-        .delete(Uri.parse(serviceHttp + '/user/delete/$id'),
+        .delete(Uri.parse(serviceHttp + '/user/remove/$id'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',

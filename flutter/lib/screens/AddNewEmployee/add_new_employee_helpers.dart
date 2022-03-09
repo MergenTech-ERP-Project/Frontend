@@ -48,7 +48,7 @@ class UserHelperController {
     userDetail.bankAccountType = null;
 
     ///TODO: COMPANY BRANCH DEPARTMANT TITLE
-    // userDetailCareer.unitCompany = null;
+    //userDetailCareer.unitCompany = null;
     // userDetailCareer.unitBranch = null;
     // userDetailCareer.unitDepartment = null;
     // userDetailCareer.unitTitle = null;
