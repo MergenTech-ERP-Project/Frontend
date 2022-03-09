@@ -36,15 +36,18 @@ import 'package:vtys_kalite/utilities/style.dart';
 class AddNewEmployee extends StatelessWidget {
   var isSaved = false.obs;
   User? user;
-  late UserHelperController userHelper;
+  UserHelperController? userHelper;
 
   AddNewEmployee({
     Key? key,
     this.user,
   }) : super(key: key) {
-    user ??= User();
-    userHelper = UserHelperController(user!.id);
-    showInformationWhenOnClick();
+    if (user != null) {
+      showInformationWhenOnClick();
+      userHelper = UserHelperController(user!.id);
+    } else {
+      userHelper = UserHelperController(0);
+    }
   }
 
   @override
@@ -98,26 +101,26 @@ class AddNewEmployee extends StatelessWidget {
                 children: [
                   TabGenel(
                     user: user,
-                    userDetail: userHelper.userDetail,
-                    userDetailCareer: userHelper.userDetailCareer,
+                    userDetail: userHelper!.userDetail,
+                    userDetailCareer: userHelper!.userDetailCareer,
                   ),
                   ResponsiveWidget(
                     largeScreen: TabKariyer(
-                      userDetail: userHelper.userDetail,
-                      userDetailCareer: userHelper.userDetailCareer,
-                      userDetailPayment: userHelper.userDetailPayment,
+                      userDetail: userHelper!.userDetail,
+                      userDetailCareer: userHelper!.userDetailCareer,
+                      userDetailPayment: userHelper!.userDetailPayment,
                     ),
                     smallScreen: TabKariyerSmall(),
                   ),
                   ResponsiveWidget(
                     largeScreen: TabPersonalInformation(
-                      userDetail: userHelper.userDetail,
+                      userDetail: userHelper!.userDetail,
                     ),
                     smallScreen: TabPersonalInformationSmall(),
                   ),
                   TabAnotherInformation(
                     user: user,
-                    userDetail: userHelper.userDetail,
+                    userDetail: userHelper!.userDetail,
                   ),
                   const Center(child: CustomText(text: "4")),
                   const Center(child: CustomText(text: "5")),
@@ -184,15 +187,17 @@ class AddNewEmployee extends StatelessWidget {
 
   userDetailSave(BuildContext context) async {
     isSaved.value = true;
-
+    int userId = 0;
     if (user == null) {
-      userController.addNewUser(
+      await userController.addNewUser(
         tabGenelController.controllerName.text +
             tabGenelController.controllerSurname.text,
         tabGenelController.controllerEPostaPersonal.text,
         "qwe123",
         tabGenelController.controllerTelephonePersonal.text,
       );
+      userId = await userController.fetchUserByEmailAndPassword(
+          tabGenelController.controllerEPostaPersonal.text, "qwe123");
     } else {
       user!.name = tabGenelController.controllerName.text +
           tabGenelController.controllerSurname.text;
@@ -202,34 +207,37 @@ class AddNewEmployee extends StatelessWidget {
         user!.id,
         user!,
       );
+      userId = user!.id;
     }
 
     int? responseUserDetail = await userDetailController.addNewUserDetail(
       UserDetail(
+        userId: userId,
         tcno: tabKisiselBilgilerController.controllerTcNo.text,
-        dateofbirth: userHelper.userDetail.dateofbirth,
+        dateofbirth: userHelper!.userDetail.dateofbirth,
         workPhone: tabGenelController.controllerWorkPhone.text,
         maritalStatus: MaritalStatusEnum.values
-            .elementAt(userHelper.userDetail.maritalStatus!.index),
+            .elementAt(userHelper!.userDetail.maritalStatus!.index),
         numberofkids: tabKisiselBilgilerController.controllerNumberOfKids.text,
         disabledDegree: DisabledDegreeEnum.values
-            .elementAt(userHelper.userDetail.disabledDegree!.index),
-        gender: GenderEnum.values.elementAt(userHelper.userDetail.gender!.index),
+            .elementAt(userHelper!.userDetail.disabledDegree!.index),
+        gender:
+            GenderEnum.values.elementAt(userHelper!.userDetail.gender!.index),
         educationalStatus: EducationalStatusEnum.values
-            .elementAt(userHelper.userDetail.educationalStatus!.index),
-        highestEducationLevelCompleted: HighestEducationLevelCompletedEnum
-            .values
-            .elementAt(userHelper.userDetail.highestEducationLevelCompleted!.index),
+            .elementAt(userHelper!.userDetail.educationalStatus!.index),
+        highestEducationLevelCompleted:
+            HighestEducationLevelCompletedEnum.values.elementAt(
+                userHelper!.userDetail.highestEducationLevelCompleted!.index),
         lastCompletedEducationStatus: tabKisiselBilgilerController
             .controllerLastCompletedEducationStatus.text,
         employmentType: EmploymentTypeEnum.values
-            .elementAt(userHelper.userDetail.employmentType!.index),
+            .elementAt(userHelper!.userDetail.employmentType!.index),
         militaryStatus: MilitaryStatusEnum.values
-            .elementAt(userHelper.userDetail.employmentType!.index),
-        startDateWork: userHelper.userDetail.startDateWork!,
-        contractType:
-            ContractTypeEnum.values.elementAt(userHelper.userDetail.contractType!.index),
-        contractEndDate: userHelper.userDetail.contractEndDate!,
+            .elementAt(userHelper!.userDetail.employmentType!.index),
+        startDateWork: userHelper!.userDetail.startDateWork!,
+        contractType: ContractTypeEnum.values
+            .elementAt(userHelper!.userDetail.contractType!.index),
+        contractEndDate: userHelper!.userDetail.contractEndDate!,
         workEmail: tabGenelController.controllerEPostaWork.text,
         address: tabDigerBilgilerController.controllerAdress.text,
         addressCountry: tabDigerBilgilerController.controllerCountry.text,
@@ -237,9 +245,10 @@ class AddNewEmployee extends StatelessWidget {
         addressCity: tabDigerBilgilerController.controllerCity.text,
         addressZipCode: tabDigerBilgilerController.controllerZipCode.text,
         homePhone: tabDigerBilgilerController.controllerHomePhone.text,
-        bankNames: BankNamesEnum.values.elementAt(userHelper.userDetail.bankNames!.index),
+        bankNames: BankNamesEnum.values
+            .elementAt(userHelper!.userDetail.bankNames!.index),
         bankAccountType: BankAccountTypeEnum.values
-            .elementAt(userHelper.userDetail.bankAccountType!.index),
+            .elementAt(userHelper!.userDetail.bankAccountType!.index),
         bankAccountNumber:
             tabDigerBilgilerController.controllerAccountNumber.text,
         iban: tabDigerBilgilerController.controllerIBAN.text,
@@ -248,30 +257,39 @@ class AddNewEmployee extends StatelessWidget {
         emergencyContactPerson: "Ömer Faruk Öztürk",
         relationshipEmergencyContact: "Boss",
         emergencyContactCellPhone: "05436176299",
-        quitWorkDate: userHelper.userDetail.contractEndDate!,
+        quitWorkDate: userHelper!.userDetail.contractEndDate!,
         reasonTypeForQuit: "Ömer Faruk Kovdu Hepsini Muhahaha",
         reasonExplainForQuit: "Yok açıklama. Kovdum ahaha",
-        bloodType: BloodTypeEnum.values.elementAt(userHelper.userDetail.bloodType!.index),
+        bloodType: BloodTypeEnum.values
+            .elementAt(userHelper!.userDetail.bloodType!.index),
       ),
     );
+    UserDetail? userDetail =
+        await userDetailController.fetchUserDetailById(userId);
+
     int? responseUserDetailCareer =
         await userDetailCareerController.addNewUserDetailCareer(
       UserDetailCareer(
-        tcno: tabKisiselBilgilerController.controllerTcNo.text,
-        managerName: "Ömer Faruk Öztürk",
-        managerTcno: "12345678910",
-        unitCompany: "Mergen Yazılım",
-        unitBranch: "Esogu Teknopark",
-        unitDepartment: "Yazılım",
-        unitTitle: "Fakir Parası",
+        userDetailId: userDetail!.id,
+        managerName: tabKariyerController.positionYoneticisi.text,
+        managerTcno: "12345678910", //TODO
+        unitCompany: companyController
+            .companyList[tabKariyerController.unitCompanyIndex.value]
+            .companyName,
+        unitBranch: branchController
+            .branchList[tabKariyerController.unitBranchIndex.value].branchName,
+        unitDepartment: departmentController
+            .departmentList[tabKariyerController.unitDepartmantIndex.value]
+            .departmentName,
+        unitTitle: "Fakir Parası", //TODO
       ),
     );
     int? responseUserDetailPayment =
         await userDetailPaymentController.addNewUserDetailPayment(
       UserDetailPayment(
         tcno: tabKisiselBilgilerController.controllerTcNo.text,
-        salary: "543",
-        currency: "TL",
+        salary: tabKariyerController.controllerSalary.text,
+        currency: "TL", //TODO
         salaryType: SalaryTypeEnum.gross,
         paymentScheme: PaymentSchemeEnum.monthly,
         commuteSupportFee: "617",

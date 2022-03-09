@@ -8,9 +8,9 @@ import 'package:vtys_kalite/routing/routes.dart';
 class UserDetailServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
-  static Future<UserDetail?> fetchUserDetailByTCNO(tcNo) async {
+  static Future<UserDetail?> fetchUserDetailById(userId) async {
     var response =
-        await http.get(Uri.parse(serviceHttp + '/userdetail/list'));
+        await http.get(Uri.parse(serviceHttp + '/userdetail/list/$userId'));
     UserDetail? user;
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
@@ -41,9 +41,9 @@ class UserDetailServices {
     return response.statusCode;
   }
 
-  static Future<String> updateUserDetail(String tcno, String json) async {
+  static Future<String> updateUserDetail(int id, String json) async {
     var response = await http
-        .put(Uri.parse(serviceHttp + '/userdetail/update/$tcno'),
+        .put(Uri.parse(serviceHttp + '/userdetail/update/$id'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
@@ -59,9 +59,9 @@ class UserDetailServices {
         : "Error: User ${response.statusCode}";
   }
 
-  static Future<String> deleteUserDetail(String tcno) async {
+  static Future<String> deleteUserDetail(int id) async {
     var response = await http
-        .delete(Uri.parse(serviceHttp + '/userdetail/remove/$tcno'),
+        .delete(Uri.parse(serviceHttp + '/userdetail/remove/$id'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',

@@ -10,8 +10,8 @@ class TabKariyerController extends GetxController {
   TextEditingController controllerPaymentScreenInSalary =
       TextEditingController();
 
-  int unitCompanyIndex = 0;
-  int unitBranchIndex = 0;
-  int unitDepartmantIndex = 0;
-  int unitTitleIndex = 0;
+  var unitCompanyIndex = 0.obs;
+  var unitBranchIndex = 0.obs;
+  var unitDepartmantIndex = 0.obs;
+  var unitTitleIndex = 0.obs;
 }

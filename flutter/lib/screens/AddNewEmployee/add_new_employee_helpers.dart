@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/enums/bank_account_type.dart';
+import 'package:vtys_kalite/enums/bank_names.dart';
+import 'package:vtys_kalite/enums/blood_type.dart';
+import 'package:vtys_kalite/enums/contract_type.dart';
+import 'package:vtys_kalite/enums/disabled_degree.dart';
+import 'package:vtys_kalite/enums/educational_status.dart';
+import 'package:vtys_kalite/enums/employment_type.dart';
+import 'package:vtys_kalite/enums/gender.dart';
+import 'package:vtys_kalite/enums/highest_education_level_completed.dart';
+import 'package:vtys_kalite/enums/marial_status.dart';
+import 'package:vtys_kalite/enums/military_status.dart';
 import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_career.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
@@ -13,13 +24,17 @@ class UserHelperController {
   late UserDetailCareer userDetailCareer;
   late UserDetailPayment userDetailPayment;
 
-  UserHelperController(
-    this.userId,
-  ) {
+  UserHelperController(this.userId, {UserHelperController? userHelper}) {
     ///TODO: fetch yapılacak burada!!!
-    userDetail = UserDetail();
-    userDetailCareer = UserDetailCareer();
-    userDetailPayment = UserDetailPayment();
+    if (userHelper == null) {
+      userDetail = UserDetail();
+      userDetailCareer = UserDetailCareer();
+      userDetailPayment = UserDetailPayment();
+    } else {
+      userDetail = userHelper.userDetail;
+      userDetailCareer = userHelper.userDetailCareer;
+      userDetailPayment = userHelper.userDetailPayment;
+    }
   }
 
   zeroToAllController() {
@@ -31,8 +46,8 @@ class UserHelperController {
     tabGenelController.controllerTelephonePersonal.text = "";
     tabGenelController.controllerAccessType.text = "";
     tabGenelController.controllerContractEndDate.text = "";
-    userDetail.contractType = null;
-    userDetail.employmentType = null;
+    userDetail.contractType = ContractTypeEnum.values.first;
+    userDetail.employmentType = EmploymentTypeEnum.values.first;
     userDetail.startDateWork = dateTimeFormat.format(DateTime.now());
     userDetail.contractEndDate = dateTimeFormat.format(DateTime.now());
 
@@ -44,8 +59,8 @@ class UserHelperController {
     tabDigerBilgilerController.controllerDistrict.text = "";
     tabDigerBilgilerController.controllerAccountNumber.text = "";
     tabDigerBilgilerController.controllerIBAN.text = "";
-    userDetail.bankNames = null;
-    userDetail.bankAccountType = null;
+    userDetail.bankNames = BankNamesEnum.values.first;
+    userDetail.bankAccountType = BankAccountTypeEnum.values.first;
 
     ///TODO: COMPANY BRANCH DEPARTMANT TITLE
     //userDetailCareer.unitCompany = null;
@@ -65,13 +80,14 @@ class UserHelperController {
     tabKisiselBilgilerController.controllerEdicationStatus.text = "";
     tabKisiselBilgilerController.controllerLastCompletedEducationStatus.text =
         "";
-    userDetail.maritalStatus = null;
-    userDetail.gender = null;
-    userDetail.disabledDegree = null;
-    userDetail.bloodType = null;
-    userDetail.educationalStatus = null;
-    userDetail.highestEducationLevelCompleted = null;
-    userDetail.militaryStatus = null;
+    userDetail.maritalStatus = MaritalStatusEnum.values.first;
+    userDetail.gender = GenderEnum.values.first;
+    userDetail.disabledDegree = DisabledDegreeEnum.values.first;
+    userDetail.bloodType = BloodTypeEnum.values.first;
+    userDetail.educationalStatus = EducationalStatusEnum.values.first;
+    userDetail.highestEducationLevelCompleted =
+        HighestEducationLevelCompletedEnum.values.first;
+    userDetail.militaryStatus = MilitaryStatusEnum.values.first;
   }
 }
 
