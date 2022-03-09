@@ -24,7 +24,7 @@ class PageNotFound extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   CustomText(
-                    text: "Page Not Found",
+                    text: "Sayfa Bulunamadı",
                     size: 24,
                     weight: FontWeight.bold,
                   ),
@@ -42,7 +42,7 @@ class PageNotFound extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: const CustomText(
-                    text: "Return To Home",
+                    text: "Ana Sayfaya Git",
                     color: Colors.white,
                   ),
                 ),
