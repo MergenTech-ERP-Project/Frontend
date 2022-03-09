@@ -112,7 +112,7 @@ class _AddNewDepartmantState extends State<AddNewDepartmant> {
                               return;
                             }
                           }
-                          var response = departmentController.postDepartment(
+                          var response = departmentController.newDepartment(
                             Department(
                               departmentName:
                                   widget.controllerDepartmantName.text,
