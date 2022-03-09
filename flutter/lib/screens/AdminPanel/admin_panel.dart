@@ -1,4 +1,3 @@
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
@@ -8,7 +7,6 @@ import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/main.dart';
-import 'package:vtys_kalite/enums/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
@@ -148,7 +146,7 @@ class _UserCard extends StatelessWidget {
           //users cannot change their own informations
           ? null
           : () {
-              userTitleIndex = DepartmentsEnum.values.indexOf(userInfo.title);
+              // userTitleIndex = DepartmentsEnum.values.indexOf(userInfo.title);
               showDialog(
                 context: context,
                 builder: (_) => Dialog(
@@ -188,20 +186,20 @@ class _AdminDialog extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
-            child: CustomDropDownMenu(
-              list: DepartmentsEnumExtension.getList(),
-              isExpandedYes: true,
-              text: user.title.getName,
-              iconSize: 20,
-              icon: const Icon(Icons.arrow_drop_down),
-              onChanged: (val) {
-                userTitleIndex =
-                    DepartmentsEnumExtension.getList().indexOf(val!);
-              },
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
+          //   child: CustomDropDownMenu(
+          //     list: DepartmentsEnumExtension.getList(),
+          //     isExpandedYes: true,
+          //     text: user.title.getName,
+          //     iconSize: 20,
+          //     icon: const Icon(Icons.arrow_drop_down),
+          //     onChanged: (val) {
+          //       userTitleIndex =
+          //           DepartmentsEnumExtension.getList().indexOf(val!);
+          //     },
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.all(10),
             child: Row(
@@ -212,9 +210,9 @@ class _AdminDialog extends StatelessWidget {
                     title: 'Kaydet',
                     pressAction: () async {
                       showDialogWaitingMessage(context);
-                      var title =
-                          DepartmentsEnum.values.elementAt(userTitleIndex);
-                      user.title = title;
+                      // var title =
+                      //     DepartmentsEnum.values.elementAt(userTitleIndex);
+                      // user.title = title;
                       await userController.updateUser(user.id, user);
                       Navigator.of(context).pop(true);
                       showDialogDoneMessage(context);

@@ -2,58 +2,77 @@ import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/main.dart';
+import 'package:vtys_kalite/models/User%20Detail/user_career.dart';
+import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
+import 'package:vtys_kalite/models/User%20Detail/user_payment.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
-zeroToAllController() {
-  tabGenelController.controllerName.text = "";
-  tabGenelController.controllerSurname.text = "";
-  tabGenelController.controllerEPostaWork.text = "";
-  tabGenelController.controllerEPostaPersonal.text = "";
-  tabGenelController.controllerWorkPhone.text = "";
-  tabGenelController.controllerTelephonePersonal.text = "";
-  tabGenelController.controllerAccessType.text = "";
-  tabGenelController.controllerContractEndDate.text = "";
-  tabGenelController.contractTypeIndex = 0;
-  tabGenelController.employmentTypeIndex = 0;
-  tabGenelController.dateOfStart = DateTime.now();
-  tabGenelController.contractEndDate = DateTime.now();
+class UserHelperController {
+  final int userId;
+  late UserDetail userDetail;
+  late UserDetailCareer userDetailCareer;
+  late UserDetailPayment userDetailPayment;
 
-  tabDigerBilgilerController.controllerAdress.text = "";
-  tabDigerBilgilerController.controllerHomePhone.text = "";
-  tabDigerBilgilerController.controllerCountry.text = "";
-  tabDigerBilgilerController.controllerCity.text = "";
-  tabDigerBilgilerController.controllerZipCode.text = "";
-  tabDigerBilgilerController.controllerDistrict.text = "";
-  tabDigerBilgilerController.controllerAccountNumber.text = "";
-  tabDigerBilgilerController.controllerIBAN.text = "";
-  tabDigerBilgilerController.bankNameIndex = 0;
-  tabDigerBilgilerController.bankAccountTypeIndex = 0;
+  UserHelperController(
+    this.userId,
+  ) {
+    ///TODO: fetch yapılacak burada!!!
+    userDetail = UserDetail();
+    userDetailCareer = UserDetailCareer();
+    userDetailPayment = UserDetailPayment();
+  }
 
-  tabKariyerController.positionSirketIndex = 0;
-  tabKariyerController.positionSubeIndex = 0;
-  tabKariyerController.positionDepartmanIndex = 0;
-  tabKariyerController.positionUnvan.text = "";
-  tabKariyerController.positionYoneticisi.text = "";
-  tabKariyerController.controllerSalary.text = "";
-  tabKariyerController.controllerUnit.text = "";
-  tabKariyerController.controllerPaymentScreenInSalary.text = "";
-  tabKariyerController.positionDateTimeBaslangic = DateTime.now();
-  tabKariyerController.positionDateTimeBitis = DateTime.now();
-  tabKariyerController.gecerlilikBaslangic = DateTime.now();
+  zeroToAllController() {
+    tabGenelController.controllerName.text = "";
+    tabGenelController.controllerSurname.text = "";
+    tabGenelController.controllerEPostaWork.text = "";
+    tabGenelController.controllerEPostaPersonal.text = "";
+    tabGenelController.controllerWorkPhone.text = "";
+    tabGenelController.controllerTelephonePersonal.text = "";
+    tabGenelController.controllerAccessType.text = "";
+    tabGenelController.controllerContractEndDate.text = "";
+    userDetail.contractType = null;
+    userDetail.employmentType = null;
+    userDetail.startDateWork = dateTimeFormat.format(DateTime.now());
+    userDetail.contractEndDate = dateTimeFormat.format(DateTime.now());
 
-  tabKisiselBilgilerController.birthDate = DateTime.now();
-  tabKisiselBilgilerController.controllerTcNo.text = "";
-  tabKisiselBilgilerController.controllerNationality.text = "";
-  tabKisiselBilgilerController.controllerNumberOfKids.text = "";
-  tabKisiselBilgilerController.controllerEdicationStatus.text = "";
-  tabKisiselBilgilerController.controllerLastCompletedEducationStatus.text = "";
-  tabKisiselBilgilerController.maritalStatusIndex = 0;
-  tabKisiselBilgilerController.genderIndex = 0;
-  tabKisiselBilgilerController.disabledDegreeIndex = 0;
-  tabKisiselBilgilerController.bloodGroupIndex = 0;
-  tabKisiselBilgilerController.educationalStatusIndex = 0;
-  tabKisiselBilgilerController.highestEducationLevelCompletedIndex = 0;
-  tabKisiselBilgilerController.militaryStatusIndex = 0;
+    tabDigerBilgilerController.controllerAdress.text = "";
+    tabDigerBilgilerController.controllerHomePhone.text = "";
+    tabDigerBilgilerController.controllerCountry.text = "";
+    tabDigerBilgilerController.controllerCity.text = "";
+    tabDigerBilgilerController.controllerZipCode.text = "";
+    tabDigerBilgilerController.controllerDistrict.text = "";
+    tabDigerBilgilerController.controllerAccountNumber.text = "";
+    tabDigerBilgilerController.controllerIBAN.text = "";
+    userDetail.bankNames = null;
+    userDetail.bankAccountType = null;
+
+    ///TODO: COMPANY BRANCH DEPARTMANT TITLE
+    // userDetailCareer.unitCompany = null;
+    // userDetailCareer.unitBranch = null;
+    // userDetailCareer.unitDepartment = null;
+    // userDetailCareer.unitTitle = null;
+    tabKariyerController.positionUnvan.text = "";
+    tabKariyerController.positionYoneticisi.text = "";
+    tabKariyerController.controllerSalary.text = "";
+    tabKariyerController.controllerUnit.text = "";
+    tabKariyerController.controllerPaymentScreenInSalary.text = "";
+
+    userDetail.dateofbirth = dateTimeFormat.format(DateTime.now());
+    tabKisiselBilgilerController.controllerTcNo.text = "";
+    tabKisiselBilgilerController.controllerNationality.text = "";
+    tabKisiselBilgilerController.controllerNumberOfKids.text = "";
+    tabKisiselBilgilerController.controllerEdicationStatus.text = "";
+    tabKisiselBilgilerController.controllerLastCompletedEducationStatus.text =
+        "";
+    userDetail.maritalStatus = null;
+    userDetail.gender = null;
+    userDetail.disabledDegree = null;
+    userDetail.bloodType = null;
+    userDetail.educationalStatus = null;
+    userDetail.highestEducationLevelCompleted = null;
+    userDetail.militaryStatus = null;
+  }
 }
 
 showDialogResponseCheck(

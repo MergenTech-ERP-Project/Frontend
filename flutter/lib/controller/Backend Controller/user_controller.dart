@@ -3,7 +3,6 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:vtys_kalite/enums/departments_enum.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/services/user_remote_services.dart';
 
@@ -71,8 +70,8 @@ class UserController extends GetxController {
         id: 0,
         name: name,
         password: password,
-        title:
-            name == "admin" ? DepartmentsEnum.management : DepartmentsEnum.none,
+        title: "",
+            // name == "admin" ? DepartmentsEnum.management : DepartmentsEnum.none,
         cellphone: cellPhoneNumber,
         email: email,
       );

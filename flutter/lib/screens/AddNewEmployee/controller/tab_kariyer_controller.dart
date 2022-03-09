@@ -9,4 +9,9 @@ class TabKariyerController extends GetxController {
   TextEditingController controllerUnit = TextEditingController();
   TextEditingController controllerPaymentScreenInSalary =
       TextEditingController();
+
+  int unitCompanyIndex = 0;
+  int unitBranchIndex = 0;
+  int unitDepartmantIndex = 0;
+  int unitTitleIndex = 0;
 }

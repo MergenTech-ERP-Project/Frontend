@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:enum_to_string/enum_to_string.dart';
 
-import '../enums/departments_enum.dart';
-
 List<User> parseUsers(String str) =>
     List<User>.from(json.decode(str).map((x) => User.fromJson(x)));
 
@@ -16,7 +14,7 @@ class User {
   final int id;
   String name;
   String password;
-  DepartmentsEnum title;
+  String title;
   String cellphone;
   String email;
 
@@ -24,20 +22,17 @@ class User {
     this.id = 0,
     this.name = "",
     this.password = "",
-    this.title = DepartmentsEnum.none,
+    this.title = "",
     this.cellphone = "",
     this.email = "",
   });
-
-  String getDepartment() => EnumToString.convertToString(title);
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: json['id'],
       name: json['name'],
       password: json['password'],
-      title: EnumToString.fromString(DepartmentsEnum.values, json['title'])!,
-      //title: json['title'] != null ? EnumToString.fromString(DepartmentsEnum.values, json['title'])! : null,
+      title: json['title'],
       cellphone: json['cellphone'],
       email: json['email'],
     );
@@ -47,7 +42,7 @@ class User {
         "id": id,
         "name": name,
         "password": password,
-        "title": getDepartment(),
+        "title": title,
         "cellphone": cellphone,
         "email": email,
       };

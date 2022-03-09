@@ -25,7 +25,7 @@ String fetchUsers(List<UserDetail> data) =>
 
 class UserDetail {
   final String? tcno; //tcno
-  final String? dateofbirth; //dateofbirth
+  String? dateofbirth; //dateofbirth
   final String? workPhone; //work_phone
   MaritalStatusEnum? maritalStatus; //maritalstatus
   final String? numberofkids; //numberofkids
@@ -37,9 +37,9 @@ class UserDetail {
   final String? lastCompletedEducationStatus; //last_completed_education_status
   EmploymentTypeEnum? employmentType; //employment_type
   MilitaryStatusEnum? militaryStatus; //military_service_status
-  final String? startDateWork; //date_of_start
+  String? startDateWork; //date_of_start
   ContractTypeEnum? contractType; //contract_type
-  final String? contractEndDate; //contract_end_date
+  String? contractEndDate; //contract_end_date
   final String? workEmail; //work_email
   final String? address; //adress
   final String? addressCountry; //country
@@ -54,7 +54,7 @@ class UserDetail {
   final String? emergencyContactPerson; //emergency_contact
   final String? relationshipEmergencyContact; //relationship_emergency_contact
   final String? emergencyContactCellPhone; //emergency_contact_phone
-  final String? quitWorkDate; //quit_date
+  String? quitWorkDate; //quit_date
   final String? reasonTypeForQuit; //quit_reason_type
   final String? reasonExplainForQuit; //reason_explain_for_quit
   BloodTypeEnum? bloodType; //blood_type
