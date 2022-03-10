@@ -12,11 +12,11 @@ class CompanyList extends StatefulWidget {
   const CompanyList({
     Key? key,
     required this.companyList,
-    required this.onCompanySelected,
+    required this.onSelected,
   }) : super(key: key);
 
   final List<Company> companyList;
-  final Function() onCompanySelected;
+  final Function() onSelected;
 
   @override
   _CompanyListState createState() => _CompanyListState();
@@ -46,7 +46,7 @@ class _CompanyListState extends State<CompanyList> {
                   itemCount: widget.companyList.length + 1,
                   itemBuilder: (_, index) {
                     return InkWell(
-                      onTap: index == 0 ? null : widget.onCompanySelected,
+                      onTap: index == 0 ? null : widget.onSelected,
                       child: SizedBox(
                         height: 60,
                         child: Row(

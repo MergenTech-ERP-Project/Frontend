@@ -4,19 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:vtys_kalite/componenets/custom_right_icon_button.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/models/settings/company.dart';
+import 'package:vtys_kalite/models/settings/title.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class TitleList extends StatefulWidget {
   const TitleList({
     Key? key,
-    required this.companyList,
-    required this.onCompanySelected,
+    required this.titleList,
+    required this.onSelected,
   }) : super(key: key);
 
-  final List<Company> companyList;
-  final Function() onCompanySelected;
+  final List<Titlee> titleList;
+  final Function() onSelected;
 
   @override
   _TitleListState createState() => _TitleListState();
@@ -29,7 +29,7 @@ class _TitleListState extends State<TitleList> {
       children: [
         const CustomTextBox(
           borderless: true,
-          hint: "Şirket adı giriniz",
+          hint: "Ünvan adı giriniz",
           decorationIcon: Icon(Icons.search),
           fillcolor: Colors.white60,
         ),
@@ -43,27 +43,20 @@ class _TitleListState extends State<TitleList> {
                 ))
               : ListView.builder(
                   shrinkWrap: true,
-                  itemCount: widget.companyList.length + 1,
+                  itemCount: widget.titleList.length + 1,
                   itemBuilder: (_, index) {
                     return InkWell(
-                      onTap: index == 0 ? null : widget.onCompanySelected,
+                      onTap: index == 0 ? null : widget.onSelected,
                       child: SizedBox(
                         height: 60,
                         child: Row(
                           children: [
                             Expanded(
-                              flex: 3,
                               child: Center(
                                   child: Text(index == 0
-                                      ? "Şirket Adı"
+                                      ? "Ünvan Adı"
                                       : widget
-                                          .companyList[index - 1].companyName)),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Center(
-                                  child: Text(
-                                      index == 0 ? "Çalışan Sayısı" : "0")),
+                                          .titleList[index - 1].titleName)),
                             ),
                             Row(
                               children: [

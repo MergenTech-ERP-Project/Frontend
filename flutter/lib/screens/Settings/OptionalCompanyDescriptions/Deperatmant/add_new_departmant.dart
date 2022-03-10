@@ -6,6 +6,7 @@ import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/models/settings/department.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -62,12 +63,14 @@ class _AddNewDepartmantState extends State<AddNewDepartmant> {
                     const SizedBox(height: 20),
                     CustomButton(
                       title: "Ekle",
-                      pressAction: () => setState(() {
+                      pressAction: () async {
                         if (_newDepartmantKey.currentState!.validate()) {
+                          showDialogWaitingMessage(context);
+
                           ///company name'e göre sorgu yapılması lazım.
-                          for (Company company
-                              in companyController.companyList) {
-                            if (company.companyName ==
+                          for (Department department
+                              in departmentController.departmentList) {
+                            if (department.departmentName ==
                                 widget.controllerDepartmantName.text) {
                               showDialog(
                                 context: context,
@@ -112,13 +115,12 @@ class _AddNewDepartmantState extends State<AddNewDepartmant> {
                               return;
                             }
                           }
-                          var response = departmentController.newDepartment(
+                          await departmentController.newDepartment(
                             Department(
                               departmentName:
                                   widget.controllerDepartmantName.text,
                             ),
                           );
-                          print(response);
                           Navigator.pop(context);
                           Get.snackbar(
                             "Departman Ekleme Ekranı",
@@ -128,7 +130,7 @@ class _AddNewDepartmantState extends State<AddNewDepartmant> {
                             padding: EdgeInsets.only(left: width / 2 - 100),
                           );
                         }
-                      }),
+                      },
                     ),
                   ],
                 ),

@@ -88,6 +88,7 @@ showDialogDoneMessage(context, {String text = "İşlem Kaydedildi."}) async {
 showDialogWaitingMessage(context) async {
   showDialog(
     context: context,
+    barrierDismissible: false,
     builder: (context) => Dialog(
       child: Container(
         color: lightColor,
