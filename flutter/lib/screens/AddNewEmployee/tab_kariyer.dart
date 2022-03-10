@@ -9,11 +9,9 @@ import 'package:vtys_kalite/componenets/custom_scrollable_column.dart';
 import 'package:vtys_kalite/componenets/custom_switch.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/employment_type.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
-import 'package:vtys_kalite/models/User%20Detail/user_career.dart';
-import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
-import 'package:vtys_kalite/models/User%20Detail/user_payment.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/models/settings/department.dart';
@@ -32,16 +30,9 @@ class TabKariyer extends StatefulWidget {
   var netSwitch = false.obs;
   var agiDahilSwitch = false.obs;
 
-  final UserDetail userDetail;
-  final UserDetailCareer userDetailCareer;
-  final UserDetailPayment userDetailPayment;
+  final UserHelperController userHelper;
 
-  TabKariyer({
-    Key? key,
-    required this.userDetail,
-    required this.userDetailCareer,
-    required this.userDetailPayment,
-  }) : super(key: key);
+  TabKariyer({Key? key, required this.userHelper}) : super(key: key);
 
   @override
   State<TabKariyer> createState() => _TabKariyerState();
@@ -79,8 +70,7 @@ class _TabKariyerState extends State<TabKariyer> {
                 bodyWidget: SizedBox(
                   width: screenSize.width - 20 / 1.2,
                   child: _PozisyonEklemeBody(
-                    userDetail: widget.userDetail,
-                    userDetailCareer: widget.userDetailCareer,
+                    userHelper: widget.userHelper,
                   ),
                 ),
               ),
@@ -275,15 +265,15 @@ class _TabKariyerState extends State<TabKariyer> {
     ];
 
     positionChildren1 = [
-      widget.userDetail.startDateWork,
-      widget.userDetail.contractEndDate,
+      widget.userHelper.userDetail.startDateWork,
+      widget.userHelper.userDetail.contractEndDate,
       EmploymentTypeEnumExtension.getList()[
-              widget.userDetail.employmentType.index]
+              widget.userHelper.userDetail.employmentType.index]
           .toString(),
-      widget.userDetailCareer.unitCompany,
-      widget.userDetailCareer.unitBranch,
-      widget.userDetailCareer.unitDepartment,
-      widget.userDetailCareer.unitTitle,
+      widget.userHelper.userDetailCareer.unitCompany,
+      widget.userHelper.userDetailCareer.unitBranch,
+      widget.userHelper.userDetailCareer.unitDepartment,
+      widget.userHelper.userDetailCareer.unitTitle,
     ];
 
     salaryHeaders = [
@@ -295,7 +285,7 @@ class _TabKariyerState extends State<TabKariyer> {
     salaryChildren1 = [
       tabKariyerController.controllerSalary.text.toString() +
           EmploymentTypeEnumExtension.getList()[
-                  widget.userDetail.employmentType.index]
+                  widget.userHelper.userDetail.employmentType.index]
               .toString(),
       tabKariyerController.controllerPaymentScreenInSalary.text.toString(),
       'Buraya Nasıl Ekleyeceğim Bakacağım Sonra',
@@ -387,14 +377,10 @@ class MaasEkleHeader extends StatelessWidget {
 }
 
 class _PozisyonEklemeBody extends StatelessWidget {
-  final UserDetail userDetail;
-  final UserDetailCareer userDetailCareer;
+  final UserHelperController userHelper;
 
-  const _PozisyonEklemeBody({
-    Key? key,
-    required this.userDetail,
-    required this.userDetailCareer,
-  }) : super(key: key);
+  const _PozisyonEklemeBody({Key? key, required this.userHelper})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -427,11 +413,16 @@ class _PozisyonEklemeBody extends StatelessWidget {
                   }
                   return ExpandedCustomDropDownMenu(
                     label: "Şirket",
-                    index: tabKariyerController.unitCompanyIndex.value,
+                    value: companyNames[
+                        tabKariyerController.unitCompanyIndex.value],
                     listExtension: companyNames,
                     onChanged: (val) {
-                      tabKariyerController.unitCompanyIndex.value =
-                          companyNames.indexOf(val!);
+                      if (companyNames.isNotEmpty) {
+                        tabKariyerController.unitCompanyIndex.value =
+                            companyNames.indexOf(val!);
+                        userHelper.userDetailCareer.unitCompany = companyNames[
+                            tabKariyerController.unitCompanyIndex.value];
+                      }
                     },
                   );
                 },
@@ -444,11 +435,16 @@ class _PozisyonEklemeBody extends StatelessWidget {
                   }
                   return ExpandedCustomDropDownMenu(
                     label: "Şube",
-                    index: tabKariyerController.unitBranchIndex.value,
+                    value:branchNames.isEmpty ? "" :
+                        branchNames[tabKariyerController.unitBranchIndex.value],
                     listExtension: branchNames,
                     onChanged: (val) {
-                      tabKariyerController.unitCompanyIndex.value =
-                          branchNames.indexOf(val!);
+                      if (branchNames.isNotEmpty) {
+                        tabKariyerController.unitBranchIndex.value =
+                            branchNames.indexOf(val!);
+                        userHelper.userDetailCareer.unitBranch = branchNames[
+                            tabKariyerController.unitBranchIndex.value];
+                      }
                     },
                   );
                 },
@@ -465,16 +461,21 @@ class _PozisyonEklemeBody extends StatelessWidget {
                   }
                   return ExpandedCustomDropDownMenu(
                     label: "Department",
-                    index: tabKariyerController.unitDepartmantIndex.value,
+                    value: departmantNames.isEmpty ? "" : departmantNames[
+                        tabKariyerController.unitDepartmantIndex.value],
                     listExtension: departmantNames,
                     onChanged: (val) {
-                      tabKariyerController.unitDepartmantIndex.value =
-                          departmantNames.indexOf(val!);
+                      if (departmantNames.isNotEmpty) {
+                        tabKariyerController.unitDepartmantIndex.value =
+                            departmantNames.indexOf(val!);
+                        userHelper.userDetailCareer.unitDepartment =
+                            departmantNames[
+                                tabKariyerController.unitDepartmantIndex.value];
+                      }
                     },
                   );
                 },
               ),
-              //////////////////////////////////////////////////////////////////////
               Obx(
                 () {
                   List<String> titleNames = [];
@@ -483,11 +484,16 @@ class _PozisyonEklemeBody extends StatelessWidget {
                   }
                   return ExpandedCustomDropDownMenu(
                     label: "Title",
-                    index: tabKariyerController.unitTitleIndex.value,
+                    value: titleNames.isEmpty ? "" : titleNames[
+                        tabKariyerController.unitTitleIndex.value],
                     listExtension: titleNames,
                     onChanged: (val) {
-                      tabKariyerController.unitTitleIndex.value =
-                          titleNames.indexOf(val!);
+                      if (titleNames.isNotEmpty) {
+                        tabKariyerController.unitTitleIndex.value =
+                            titleNames.indexOf(val!);
+                        userHelper.userDetailCareer.unitTitle = titleNames[
+                            tabKariyerController.unitDepartmantIndex.value];
+                      }
                     },
                   );
                 },
@@ -521,11 +527,11 @@ class _PozisyonEklemeBody extends StatelessWidget {
           Row(
             children: [
               ExpandedCustomDateTimePicker(
-                label: 'Başlangıç Tarihi',                
+                label: 'Başlangıç Tarihi',
                 onChanged: (val) {
                   if (val != null) {
                     try {
-                      userDetail.startDateWork = val;
+                      userHelper.userDetail.startDateWork = val;
                     } catch (e) {
                       print(e.toString());
                     }
@@ -537,7 +543,7 @@ class _PozisyonEklemeBody extends StatelessWidget {
                 onChanged: (val) {
                   if (val != null) {
                     try {
-                      userDetail.quitWorkDate = val;
+                      userHelper.userDetail.quitWorkDate = val;
                     } catch (e) {
                       print(e.toString());
                     }

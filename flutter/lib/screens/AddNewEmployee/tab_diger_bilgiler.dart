@@ -3,9 +3,9 @@
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/bank_account_type.dart';
 import 'package:vtys_kalite/enums/bank_names.dart';
-import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdropdownmenu.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
@@ -13,12 +13,12 @@ import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabAnotherInformation extends StatefulWidget {
   final User? user;
-  final UserDetail? userDetail;
+  final UserHelperController userHelper;
 
   const TabAnotherInformation({
     Key? key,
     required this.user,
-    required this.userDetail,
+    required this.userHelper,
   }) : super(key: key);
 
   @override
@@ -86,26 +86,25 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
                 Row(
                   children: [
                     ExpandedCustomDropDownMenu(
+                      value: widget.userHelper.userDetail.bankNames.getName,
                       label: "Banka Adı",
-                      index: widget.userDetail!.bankNames.index,
                       listExtension: BankNamesEnumExtension.getList(),
                       onChanged: (val) {
                         setState(() {
-                          widget.userDetail!.bankNames =
-                              EnumToString.fromString(
-                                  BankNamesEnum.values, val.toString())!;
+                          widget.userHelper.userDetail.bankNames =
+                              BankNamesEnumExtension.getEnumFromName(val);
                         });
                       },
                     ),
                     ExpandedCustomDropDownMenu(
                       label: "Hesap Tipi",
-                      index:  widget.userDetail!.bankAccountType.index,
+                      value:
+                          widget.userHelper.userDetail.bankAccountType.getName,
                       listExtension: BankAccountTypeExtension.getList(),
                       onChanged: (val) {
                         setState(() {
-                          widget.userDetail!.bankAccountType =
-                              EnumToString.fromString(
-                                  BankAccountTypeEnum.values, val.toString())!;
+                          widget.userHelper.userDetail.bankAccountType =
+                              BankNamesEnumExtension.getEnumFromName(val);
                         });
                       },
                     ),

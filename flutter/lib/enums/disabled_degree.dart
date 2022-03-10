@@ -1,4 +1,3 @@
-
 enum DisabledDegreeEnum {
   none,
   firstDegreeDisabled,
@@ -28,5 +27,10 @@ extension DisabledDegreeExtension on DisabledDegreeEnum {
       default:
         return "";
     }
+  }
+
+  static getEnumFromName(name) {
+    return DisabledDegreeEnum
+        .values[DisabledDegreeExtension.getList().indexOf(name)];
   }
 }

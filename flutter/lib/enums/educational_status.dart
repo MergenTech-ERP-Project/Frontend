@@ -24,4 +24,9 @@ extension EducationalStatusExtension on EducationalStatusEnum {
         return "";
     }
   }
+
+   static getEnumFromName(name) {
+    return EducationalStatusEnum
+        .values[EducationalStatusExtension.getList().indexOf(name)];
+  }
 }

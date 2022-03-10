@@ -37,4 +37,9 @@ extension EmploymentTypeEnumExtension on EmploymentTypeEnum {
         return "";
     }
   }
+
+  static getEnumFromName(name) {
+    return EmploymentTypeEnum
+        .values[EmploymentTypeEnumExtension.getList().indexOf(name)];
+  }
 }

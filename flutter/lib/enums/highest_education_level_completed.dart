@@ -1,4 +1,3 @@
-
 enum HighestEducationLevelCompletedEnum {
   primarySchool,
   middleSchool,
@@ -41,5 +40,10 @@ extension HighestEducationLevelCompletedExtension
       default:
         return "";
     }
+  }
+
+  static getEnumFromName(name) {
+    return HighestEducationLevelCompletedEnum.values[
+        HighestEducationLevelCompletedExtension.getList().indexOf(name)];
   }
 }

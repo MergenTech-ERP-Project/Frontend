@@ -1,4 +1,3 @@
-
 enum PaymentSchemeEnum {
   yearly,
   monthly,
@@ -31,5 +30,10 @@ extension PaymentSchemeExtension on PaymentSchemeEnum {
       default:
         return "";
     }
+  }
+
+  static getEnumFromName(name) {
+    return PaymentSchemeEnum
+        .values[PaymentSchemeExtension.getList().indexOf(name)];
   }
 }
