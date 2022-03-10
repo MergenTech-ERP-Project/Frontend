@@ -48,6 +48,7 @@ class UserDetail {
   String emergencyContactCellPhone; //emergency_contact_phone
   String reasonTypeForQuit; //quit_reason_type
   String reasonExplainForQuit; //reason_explain_for_quit
+  String nationality; //nationality
   GenderEnum gender; //gender
   BloodTypeEnum bloodType; //blood_type
   BankNamesEnum bankNames; //bank_name
@@ -86,6 +87,7 @@ class UserDetail {
     this.quitWorkDate = "",
     this.reasonTypeForQuit = "",
     this.reasonExplainForQuit = "",
+    this.nationality = "",
     required this.maritalStatus,
     required this.disabledDegree,
     required this.gender,
@@ -99,7 +101,6 @@ class UserDetail {
     required this.bloodType,
   });
 
-  
   String getMaritalStatus() => EnumToString.convertToString(maritalStatus);
   String getDisabledDegree() => EnumToString.convertToString(disabledDegree);
   String getEducationalStatus() =>
@@ -156,6 +157,7 @@ class UserDetail {
       reasonExplainForQuit: json['reason_explain_for_quit'],
       bloodType:
           EnumToString.fromString(BloodTypeEnum.values, json['blood_type'])!,
+      nationality: json["nationality"],
     );
   }
 
@@ -196,5 +198,6 @@ class UserDetail {
         "quit_reason_type": reasonTypeForQuit,
         "reason_explain_for_quit": reasonExplainForQuit,
         "blood_type": getBloodtype(),
+        "nationality": nationality,
       };
 }

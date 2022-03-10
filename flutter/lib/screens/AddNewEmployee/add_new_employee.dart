@@ -28,7 +28,7 @@ class AddNewEmployee extends StatelessWidget {
   }) : super(key: key) {
     if (user != null) {
       userHelper = UserHelperController(user!.id);
-      showInformationWhenOnClick();
+      showInformationWhenOnClick(userHelper);
     } else {
       userHelper = UserHelperController(-1);
     }

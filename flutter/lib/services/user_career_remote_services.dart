@@ -40,7 +40,7 @@ class UserDetailCareerServices {
     return response.statusCode;
   }
 
-  static Future<String> updateUserDetailCareer(int id, String json) async {
+  static Future<int> updateUserDetailCareer(int id, String json) async {
     var response = await http
         .put(Uri.parse(serviceHttp + '/career/put/$id'),
             headers: <String, String>{
@@ -53,9 +53,7 @@ class UserDetailCareerServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return (response.statusCode >= 200 && response.statusCode < 300)
-        ? "Success: User Career"
-        : "Error: User Career ${response.statusCode}";
+    return response.statusCode;
   }
 
   static Future<String> deleteUserDetailCareers(int id) async {
