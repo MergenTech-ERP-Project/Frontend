@@ -1,14 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:vtys_kalite/enums/blood_type.dart';
-import 'package:vtys_kalite/enums/disabled_degree.dart';
-import 'package:vtys_kalite/enums/educational_status.dart';
-import 'package:vtys_kalite/enums/gender.dart';
-import 'package:vtys_kalite/enums/highest_education_level_completed.dart';
-import 'package:vtys_kalite/enums/marial_status.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdatetimepicker.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdropdownmenu.dart';
+
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 

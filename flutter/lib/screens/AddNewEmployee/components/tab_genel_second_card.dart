@@ -61,7 +61,7 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
         Row(
           children: [
             ExpandedNameController(
-              controller: tabGenelController.controllerEPostaWork,
+              controller: tabGenelController.controllerEPostaWork.value,
               label: "E-Posta (İş)",
               widget: const SizedBox(),
             ),
@@ -75,7 +75,7 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
         Row(
           children: [
             ExpandedNameController(
-              controller: tabGenelController.controllerWorkPhone,
+              controller: tabGenelController.controllerWorkPhone.value,
               label: "Telefon (İş)",
               widget: const SizedBox(),
             ),

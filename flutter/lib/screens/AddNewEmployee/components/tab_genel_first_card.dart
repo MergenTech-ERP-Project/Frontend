@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/models/user.dart';
@@ -77,7 +78,10 @@ class TabGenelFirstCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const CustomText(text: "E-posta (iş)"),
-                CustomText(text: tabGenelController.controllerEPostaWork.text),
+                Obx(() {
+                  return CustomText(
+                      text: tabGenelController.controllerEPostaWork.value.text);
+                })
               ],
             ),
             const SizedBox(height: 20),
@@ -85,7 +89,10 @@ class TabGenelFirstCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const CustomText(text: "İş Telefonu"),
-                CustomText(text: tabGenelController.controllerWorkPhone.text),
+                Obx(() {
+                  return CustomText(
+                      text: tabGenelController.controllerWorkPhone.value.text);
+                })
               ],
             ),
           ],
