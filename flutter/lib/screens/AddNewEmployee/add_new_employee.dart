@@ -5,23 +5,7 @@ import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
-import 'package:vtys_kalite/enums/bank_account_type.dart';
-import 'package:vtys_kalite/enums/bank_names.dart';
-import 'package:vtys_kalite/enums/blood_type.dart';
-import 'package:vtys_kalite/enums/contract_type.dart';
-import 'package:vtys_kalite/enums/disabled_degree.dart';
-import 'package:vtys_kalite/enums/educational_status.dart';
-import 'package:vtys_kalite/enums/gender.dart';
-import 'package:vtys_kalite/enums/highest_education_level_completed.dart';
-import 'package:vtys_kalite/enums/marial_status.dart';
-import 'package:vtys_kalite/enums/military_status.dart';
-import 'package:vtys_kalite/enums/payment_scheme.dart';
-import 'package:vtys_kalite/enums/salary_type.dart';
-import 'package:vtys_kalite/enums/employment_type.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
-import 'package:vtys_kalite/models/User%20Detail/user_career.dart';
-import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
-import 'package:vtys_kalite/models/User%20Detail/user_payment.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee_helpers.dart';
@@ -31,7 +15,6 @@ import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer_small.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kisisel_bilgiler.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kisisel_bilgiler_small.dart';
-import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class AddNewEmployee extends StatelessWidget {
@@ -106,7 +89,7 @@ class AddNewEmployee extends StatelessWidget {
                   ),
                   ResponsiveWidget(
                     largeScreen: TabKariyer(
-                     userHelper: userHelper,
+                      userHelper: userHelper,
                     ),
                     smallScreen: TabKariyerSmall(),
                   ),
@@ -162,7 +145,10 @@ class AddNewEmployee extends StatelessWidget {
                     Expanded(
                       child: CustomButton(
                         title: 'Kaydet',
-                        pressAction: () => userDetailSave(context),
+                        pressAction: () {
+                          isSaved.value = true;
+                          return userHelper.userDetailSave(context, user);
+                        },
                       ),
                     ),
                     Expanded(
@@ -180,130 +166,6 @@ class AddNewEmployee extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  userDetailSave(BuildContext context) async {
-    isSaved.value = true;
-    int userId = 0;
-    if (user == null) {
-      await userController.addNewUser(
-        tabGenelController.controllerName.text +
-            tabGenelController.controllerSurname.text,
-        tabGenelController.controllerEPostaPersonal.text,
-        "qwe123",
-        tabGenelController.controllerTelephonePersonal.text,
-      );
-      userId = await userController.fetchUserByEmailAndPassword(
-          tabGenelController.controllerEPostaPersonal.text, "qwe123");
-    } else {
-      user!.name = tabGenelController.controllerName.text +
-          tabGenelController.controllerSurname.text;
-      user!.email = tabGenelController.controllerEPostaPersonal.text;
-      user!.cellphone = tabGenelController.controllerTelephonePersonal.text;
-      userController.updateUser(
-        user!.id,
-        user!,
-      );
-      userId = user!.id;
-    }
-
-    int? responseUserDetail = await userDetailController.addNewUserDetail(
-      UserDetail(
-        userId: userId,
-        tcno: tabKisiselBilgilerController.controllerTcNo.text,
-        dateofbirth: userHelper.userDetail.dateofbirth,
-        workPhone: tabGenelController.controllerWorkPhone.text,
-        maritalStatus: MaritalStatusEnum.values
-            .elementAt(userHelper.userDetail.maritalStatus.index),
-        numberofkids: tabKisiselBilgilerController.controllerNumberOfKids.text,
-        disabledDegree: DisabledDegreeEnum.values
-            .elementAt(userHelper.userDetail.disabledDegree.index),
-        gender:
-            GenderEnum.values.elementAt(userHelper.userDetail.gender.index),
-        educationalStatus: EducationalStatusEnum.values
-            .elementAt(userHelper.userDetail.educationalStatus.index),
-        highestEducationLevelCompleted:
-            HighestEducationLevelCompletedEnum.values.elementAt(
-                userHelper.userDetail.highestEducationLevelCompleted.index),
-        lastCompletedEducationStatus: tabKisiselBilgilerController
-            .controllerLastCompletedEducationStatus.text,
-        employmentType: EmploymentTypeEnum.values
-            .elementAt(userHelper.userDetail.employmentType.index),
-        militaryStatus: MilitaryStatusEnum.values
-            .elementAt(userHelper.userDetail.employmentType.index),
-        startDateWork: userHelper.userDetail.startDateWork,
-        contractType: ContractTypeEnum.values
-            .elementAt(userHelper.userDetail.contractType.index),
-        contractEndDate: userHelper.userDetail.contractEndDate,
-        workEmail: tabGenelController.controllerEPostaWork.text,
-        address: tabDigerBilgilerController.controllerAdress.text,
-        addressCountry: tabDigerBilgilerController.controllerCountry.text,
-        addressDistrict: tabDigerBilgilerController.controllerDistrict.text,
-        addressCity: tabDigerBilgilerController.controllerCity.text,
-        addressZipCode: tabDigerBilgilerController.controllerZipCode.text,
-        homePhone: tabDigerBilgilerController.controllerHomePhone.text,
-        bankNames: BankNamesEnum.values
-            .elementAt(userHelper.userDetail.bankNames.index),
-        bankAccountType: BankAccountTypeEnum.values
-            .elementAt(userHelper.userDetail.bankAccountType.index),
-        bankAccountNumber:
-            tabDigerBilgilerController.controllerAccountNumber.text,
-        iban: tabDigerBilgilerController.controllerIBAN.text,
-
-        ///TODO: bunları unutma!!
-        emergencyContactPerson: "Ömer Faruk Öztürk",
-        relationshipEmergencyContact: "Boss",
-        emergencyContactCellPhone: "05436176299",
-        quitWorkDate: userHelper.userDetail.contractEndDate,
-        reasonTypeForQuit: "Ömer Faruk Kovdu Hepsini Muhahaha",
-        reasonExplainForQuit: "Yok açıklama. Kovdum ahaha",
-        bloodType: BloodTypeEnum.values
-            .elementAt(userHelper.userDetail.bloodType.index),
-      ),
-    );
-    
-    UserDetail? userDetail =
-        await userDetailController.fetchUserDetailById(userId);
-
-    int? responseUserDetailCareer =
-        await userDetailCareerController.addNewUserDetailCareer(
-      userDetail!.id,
-      UserDetailCareer(
-        userDetailId: userDetail.id,
-        managerName: tabKariyerController.positionYoneticisi.text,
-        managerTcno: "12345678910", //TODO
-        unitCompany: companyController
-            .companyList[tabKariyerController.unitCompanyIndex.value]
-            .companyName,
-        unitBranch: branchController
-            .branchList[tabKariyerController.unitBranchIndex.value].branchName,
-        unitDepartment: departmentController
-            .departmentList[tabKariyerController.unitDepartmantIndex.value]
-            .departmentName,
-        unitTitle: "Fakir Parası", //TODO
-      ),
-    );
-    int? responseUserDetailPayment =
-        await userDetailPaymentController.addNewUserDetailPayment(
-      userDetail.id,
-      UserDetailPayment(
-        userDetailId: userDetail.id,
-        tcno: tabKisiselBilgilerController.controllerTcNo.text,
-        salary: tabKariyerController.controllerSalary.text,
-        currency: "TL", //TODO
-        salaryType: SalaryTypeEnum.gross,
-        paymentScheme: PaymentSchemeEnum.monthly,
-        commuteSupportFee: "617",
-        foodSupportFee: "6299",
-      ),
-    );
-    
-    showDialogResponseCheck(
-      responseUserDetail!,
-      responseUserDetailCareer!,
-      responseUserDetailPayment!,
-      context,
     );
   }
 }
