@@ -7,6 +7,7 @@ import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
@@ -86,8 +87,7 @@ class _AddNewBranchState extends State<AddNewBranch> {
                         print("Holiday Calanders picker : " + val);
                       }
                       try {
-                        holidayCalanders =
-                            dateTimeFormat.parse(val!);
+                        holidayCalanders = dateTimeFormat.parse(val!);
                       } catch (e) {
                         print(e.toString());
                       }
@@ -95,74 +95,74 @@ class _AddNewBranchState extends State<AddNewBranch> {
                   ),
                   const SizedBox(height: 30),
                   CustomButton(
-                    width: double.infinity,
-                    title: "Ekle",
-                    pressAction: () => setState(() {
-                      if (_newBranchKey.currentState!.validate()) {
-                        for (Branch branch in branchController.branchList) {
-                          if (branch.branchName ==
-                              widget.controllerBranchName.text) {
-                            showDialog(
-                              context: context,
-                              builder: (_) => CustomAlertDialog(
-                                titleWidget: widget.controllerBranchName.text !=
-                                        ""
-                                    ? CustomText(
-                                        textAlign: TextAlign.center,
-                                        text: widget.controllerBranchName.text +
-                                            " için şube adı zaten kayıtlı.",
-                                        weight: FontWeight.bold,
-                                      )
-                                    : const CustomText(
-                                        text: "Bilgiler boş bırakılamaz.",
-                                      ),
-                                bodyWidget: SingleChildScrollView(
-                                  child: Column(
-                                    children: [
-                                      const CustomText(
-                                        text:
-                                            " Şube adını tekrar kontrol ediniz. Sistemde zaten kayıtlıdır.",
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      CustomButton(
-                                        title: "Tekrar Dene",
-                                        pressAction: () {
-                                          Get.back();
-                                        },
-                                      ),
-                                    ],
+                      width: double.infinity,
+                      title: "Ekle",
+                      pressAction: () async {
+                        if (_newBranchKey.currentState!.validate()) {
+                          showDialogWaitingMessage(context);
+                          for (Branch branch in branchController.branchList) {
+                            if (branch.branchName ==
+                                widget.controllerBranchName.text) {
+                              showDialog(
+                                context: context,
+                                builder: (_) => CustomAlertDialog(
+                                  titleWidget:
+                                      widget.controllerBranchName.text != ""
+                                          ? CustomText(
+                                              textAlign: TextAlign.center,
+                                              text: widget.controllerBranchName
+                                                      .text +
+                                                  " için şube adı zaten kayıtlı.",
+                                              weight: FontWeight.bold,
+                                            )
+                                          : const CustomText(
+                                              text: "Bilgiler boş bırakılamaz.",
+                                            ),
+                                  bodyWidget: SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        const CustomText(
+                                          text:
+                                              " Şube adını tekrar kontrol ediniz. Sistemde zaten kayıtlıdır.",
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        CustomButton(
+                                          title: "Tekrar Dene",
+                                          pressAction: () {
+                                            Get.back();
+                                          },
+                                        ),
+                                      ],
+                                    ),
                                   ),
+                                  bodyWidgetWidth:
+                                      MediaQuery.of(context).size.width / 3,
                                 ),
-                                bodyWidgetWidth:
-                                    MediaQuery.of(context).size.width / 3,
-                              ),
-                            );
-                            return;
+                              );
+                              return;
+                            }
                           }
+                          await branchController.postBranch(
+                            Branch(
+                              id: 0,
+                              branchName: widget.controllerBranchName.text,
+                              branchUpper: widget.controllerBranchUpper.text,
+                              rules: widget.controllerRules.text,
+                              vacationDates: holidayCalanders.toString(),
+                            ),
+                          );
+                          Navigator.pop(context);
+                          Get.snackbar(
+                            "Birim Ekleme Ekranı",
+                            "Birim Kaydedildi",
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: successfulColor,
+                            padding: EdgeInsets.only(left: width / 2 - 100),
+                          );
                         }
-                        var response = branchController.postBranch(
-                          Branch(
-                            id: 0,
-                            branchName: widget.controllerBranchName.text,
-                            branchUpper: widget.controllerBranchUpper.text,
-                            rules: widget.controllerRules.text,
-                            vacationDates: holidayCalanders.toString(),
-                          ),
-                        );
-                        print(response);
-                        Navigator.pop(context);
-                        Get.snackbar(
-                          "Birim Ekleme Ekranı",
-                          "Birim Kaydedildi",
-                          snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: successfulColor,
-                          padding: EdgeInsets.only(left: width / 2 - 100),
-                        );
-                      }
-                    }),
-                  ),
+                      }),
                 ],
               ),
             ),

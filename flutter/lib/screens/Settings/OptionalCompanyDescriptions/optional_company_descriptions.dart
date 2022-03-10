@@ -7,6 +7,10 @@ import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Branch/
 import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Company/add_new_company.dart';
 import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Company/company_list.dart';
 import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Components/optional_company_card.dart';
+import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Deperatmant/add_new_departmant.dart';
+import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Deperatmant/departmant_list.dart';
+import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Title/add_new_title.dart';
+import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Title/title_list.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class OptionalCompanyDescriptions extends StatelessWidget {
@@ -19,7 +23,7 @@ class OptionalCompanyDescriptions extends StatelessWidget {
     branchController.fetchBranches();
     companyController.fetchCompanies();
   }
-ScrollController controller = ScrollController();
+  ScrollController controller = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +42,10 @@ ScrollController controller = ScrollController();
                 title: "Şirket",
                 childWidget: CompanyList(
                   companyList: companyController.companyList,
-                  onCompanySelected: () {
+                  onSelected: () {
                     branch.value = true;
+                    departmant.value = false;
+                    title.value = false;
                   },
                 ),
               ),
@@ -49,30 +55,31 @@ ScrollController controller = ScrollController();
                 title: "Şube",
                 childWidget: BranchList(
                   branchList: branchController.branchList,
-                  onBranchSelected: () {
+                  onSelected: () {
                     departmant.value = true;
+                    title.value = false;
                   },
                 ),
               ),
               OptionalCompanyCard(
                 visible: departmant,
-                addNewWidget: const SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: CircularProgressIndicator(),
-                ),
+                addNewWidget: AddNewDepartmant(),
                 title: "Departman",
-                childWidget: const CustomText(text: "Soon..."),
+                childWidget: DepartmantList(
+                  departmentList: departmentController.departmentList,
+                  onSelected: () {
+                    title.value = true;
+                  },
+                ),
               ),
               OptionalCompanyCard(
                 visible: title,
-                addNewWidget: const SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: CircularProgressIndicator(),
+                addNewWidget: AddNewTitle(),
+                title: "Ünvan",
+                childWidget: TitleList(
+                  titleList: titleController.titleList,
+                  onSelected: () {},
                 ),
-                title: "Unvan",
-                childWidget: const CustomText(text: "Soon..."),
               ),
             ],
           ),

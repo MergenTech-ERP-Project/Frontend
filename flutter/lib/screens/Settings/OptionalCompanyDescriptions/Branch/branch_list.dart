@@ -10,11 +10,11 @@ class BranchList extends StatefulWidget {
   const BranchList({
     Key? key,
     required this.branchList,
-    required this.onBranchSelected,
+    required this.onSelected,
   }) : super(key: key);
 
   final List<Branch> branchList;
-  final Function() onBranchSelected;
+  final Function() onSelected;
 
   @override
   _BranchListState createState() => _BranchListState();
@@ -39,7 +39,7 @@ class _BranchListState extends State<BranchList> {
                   itemCount: widget.branchList.length + 1,
                   itemBuilder: (_, index) {
                     return InkWell(
-                      onTap: index == 0 ? null : widget.onBranchSelected,
+                      onTap: index == 0 ? null : widget.onSelected,
                       child: SizedBox(
                         height: 60,
                         child: Row(

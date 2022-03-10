@@ -4,23 +4,21 @@ import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
+import 'package:vtys_kalite/models/settings/title.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class AddNewTitle extends StatefulWidget {
-  final TextEditingController controllerCompanyName = TextEditingController();
-  final TextEditingController controllerCompanyPhone = TextEditingController();
-  final TextEditingController controllerDomainName = TextEditingController();
-  final TextEditingController controllerMersisNo = TextEditingController();
-  final TextEditingController controllerSGKCompanyNo = TextEditingController();
+  final TextEditingController controllerTitleName = TextEditingController();
 
   @override
   State<AddNewTitle> createState() => _AddNewTitleState();
 }
 
 class _AddNewTitleState extends State<AddNewTitle> {
-  final _newCompanyKey = GlobalKey<FormState>();
+  final _newTitleKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +34,7 @@ class _AddNewTitleState extends State<AddNewTitle> {
             size: 24,
           ),
           const SizedBox(width: 20),
-          const CustomText(text: "Yeni Şirket Ekle"),
+          const CustomText(text: "Yeni Ünvan Ekle"),
         ],
       ),
       content: Builder(
@@ -46,7 +44,7 @@ class _AddNewTitleState extends State<AddNewTitle> {
             width: width / 2,
             child: SingleChildScrollView(
               child: Form(
-                key: _newCompanyKey,
+                key: _newTitleKey,
                 child: Column(
                   children: [
                     const Divider(
@@ -55,54 +53,31 @@ class _AddNewTitleState extends State<AddNewTitle> {
                     ),
                     CustomTextBox(
                       borderless: true,
-                      controller: widget.controllerCompanyName,
-                      label: "Şirket Adı",
-                      validator: validator(),
-                    ),
-                    CustomTextBox(
-                      borderless: true,
-                      controller: widget.controllerCompanyPhone,
-                      label: "Telefon",
-                      validator: validator(),
-                    ),
-                    CustomTextBox(
-                      borderless: true,
-                      controller: widget.controllerDomainName,
-                      label: "E-posta Uzantısı",
-                      validator: validator(),
-                    ),
-                    CustomTextBox(
-                      borderless: true,
-                      controller: widget.controllerMersisNo,
-                      label: "Mersis Numarası",
-                      validator: validator(),
-                    ),
-                    CustomTextBox(
-                      borderless: true,
-                      controller: widget.controllerSGKCompanyNo,
-                      label: "SGK İş Yeri Numarası",
+                      controller: widget.controllerTitleName,
+                      label: "Ünvan Adı",
                       validator: validator(),
                     ),
                     const SizedBox(height: 20),
                     CustomButton(
                       title: "Ekle",
-                      pressAction: () => setState(() {
-                        if (_newCompanyKey.currentState!.validate()) {
+                      pressAction: () async {
+                        if (_newTitleKey.currentState!.validate()) {
+                          showDialogWaitingMessage(context);
+
                           ///company name'e göre sorgu yapılması lazım.
-                          for (Company company
-                              in companyController.companyList) {
-                            if (company.companyName ==
-                                widget.controllerCompanyName.text) {
+                          for (Titlee title in titleController.titleList) {
+                            if (title.titleName ==
+                                widget.controllerTitleName.text) {
                               showDialog(
                                 context: context,
                                 builder: (_) => CustomAlertDialog(
                                   titleWidget:
-                                      widget.controllerCompanyName.text != ""
+                                      widget.controllerTitleName.text != ""
                                           ? CustomText(
                                               textAlign: TextAlign.center,
-                                              text: widget.controllerCompanyName
+                                              text: widget.controllerTitleName
                                                       .text +
-                                                  " için şirket adı zaten kayıtlı.",
+                                                  " için ünvan adı zaten kayıtlı.",
                                               weight: FontWeight.bold,
                                             )
                                           : const CustomText(
@@ -113,7 +88,7 @@ class _AddNewTitleState extends State<AddNewTitle> {
                                       children: [
                                         const CustomText(
                                           text:
-                                              " Şirket adını tekrar kontrol ediniz. Sistemde zaten kayıtlıdır.",
+                                              " Ünvan adını tekrar kontrol ediniz. Sistemde zaten kayıtlıdır.",
                                         ),
                                         const SizedBox(
                                           height: 10,
@@ -135,14 +110,11 @@ class _AddNewTitleState extends State<AddNewTitle> {
                               return;
                             }
                           }
-                          var response = companyController.postCompany(
-                            widget.controllerCompanyName.text,
-                            widget.controllerCompanyPhone.text,
-                            widget.controllerDomainName.text,
-                            widget.controllerMersisNo.text,
-                            widget.controllerSGKCompanyNo.text,
+                          await titleController.newTitle(
+                            Titlee(
+                              titleName: widget.controllerTitleName.text,
+                            ),
                           );
-                          print(response);
                           Navigator.pop(context);
                           Get.snackbar(
                             "Şirket Ekleme Ekranı",
@@ -152,7 +124,7 @@ class _AddNewTitleState extends State<AddNewTitle> {
                             padding: EdgeInsets.only(left: width / 2 - 100),
                           );
                         }
-                      }),
+                      },
                     ),
                   ],
                 ),
