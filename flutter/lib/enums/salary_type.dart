@@ -1,4 +1,3 @@
-
 enum SalaryTypeEnum {
   net,
   gross,
@@ -23,5 +22,9 @@ extension SalaryTypeExtension on SalaryTypeEnum {
       default:
         return "";
     }
+  }
+
+  static getEnumFromName(name) {
+    return SalaryTypeEnum.values[SalaryTypeExtension.getList().indexOf(name)];
   }
 }

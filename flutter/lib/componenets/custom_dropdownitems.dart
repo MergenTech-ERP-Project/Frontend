@@ -44,7 +44,7 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
                 color: blackColor,
                 fontWeight: FontWeight.normal,
               ),
-              hint: const CustomText(text: "seçiniz..."),
+              hint: CustomText(text: widget.list.isEmpty ? "..." : "seçiniz..."),
               underline: const SizedBox(),
               icon: widget.icon,
               iconSize: widget.iconSize,

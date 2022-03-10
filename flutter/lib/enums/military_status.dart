@@ -28,4 +28,9 @@ extension MilitaryStatusEnumExtension on MilitaryStatusEnum {
         return "";
     }
   }
+
+  static getEnumFromName(name) {
+    return MilitaryStatusEnum
+        .values[MilitaryStatusEnumExtension.getList().indexOf(name)];
+  }
 }

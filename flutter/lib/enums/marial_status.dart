@@ -25,4 +25,9 @@ extension MaritalStatusExtension on MaritalStatusEnum {
         return "";
     }
   }
+
+  static getEnumFromName(name) {
+    return MaritalStatusEnum
+        .values[MaritalStatusExtension.getList().indexOf(name)];
+  }
 }

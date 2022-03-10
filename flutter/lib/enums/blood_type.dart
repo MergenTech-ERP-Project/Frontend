@@ -40,4 +40,9 @@ extension BloodTypeEnumExtension on BloodTypeEnum {
         return "";
     }
   }
+
+  static getEnumFromName(name) {
+    return BloodTypeEnum
+        .values[BloodTypeEnumExtension.getList().indexOf(name)];
+  }
 }

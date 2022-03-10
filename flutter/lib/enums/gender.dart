@@ -1,4 +1,3 @@
-
 enum GenderEnum {
   male,
   female,
@@ -26,5 +25,9 @@ extension GenderExtension on GenderEnum {
       default:
         return "";
     }
+  }
+
+  static getEnumFromName(name) {
+    return GenderEnum.values[GenderExtension.getList().indexOf(name)];
   }
 }

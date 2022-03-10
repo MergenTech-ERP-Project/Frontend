@@ -106,21 +106,19 @@ class AddNewEmployee extends StatelessWidget {
                   ),
                   ResponsiveWidget(
                     largeScreen: TabKariyer(
-                      userDetail: userHelper.userDetail,
-                      userDetailCareer: userHelper.userDetailCareer,
-                      userDetailPayment: userHelper.userDetailPayment,
+                     userHelper: userHelper,
                     ),
                     smallScreen: TabKariyerSmall(),
                   ),
                   ResponsiveWidget(
                     largeScreen: TabPersonalInformation(
-                      userDetail: userHelper.userDetail,
+                      userHelper: userHelper,
                     ),
                     smallScreen: TabPersonalInformationSmall(),
                   ),
                   TabAnotherInformation(
                     user: user,
-                    userDetail: userHelper.userDetail,
+                    userHelper: userHelper,
                   ),
                   const Center(child: CustomText(text: "4")),
                   const Center(child: CustomText(text: "5")),

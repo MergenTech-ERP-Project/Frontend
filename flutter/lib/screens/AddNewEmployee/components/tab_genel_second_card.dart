@@ -1,13 +1,10 @@
 // ignore_for_file: avoid_print, must_be_immutable
 
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
-import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/contract_type.dart';
 import 'package:vtys_kalite/enums/employment_type.dart';
-import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdatetimepicker.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdropdownmenu.dart';
@@ -126,8 +123,7 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
               onChanged: (val) {
                 setState(() {
                   widget.userHelper.userDetail.contractType =
-                      ContractTypeExtension.getEnumFromName(
-                          widget.userHelper.userDetail.contractType.getName);
+                      ContractTypeExtension.getEnumFromName(val);
                 });
               },
             ),
@@ -138,8 +134,7 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
               onChanged: (val) {
                 setState(() {
                   widget.userHelper.userDetail.employmentType =
-                      EnumToString.fromString(
-                          EmploymentTypeEnum.values, val.toString())!;
+                      EmploymentTypeEnumExtension.getEnumFromName(val);
                 });
               },
             ),
