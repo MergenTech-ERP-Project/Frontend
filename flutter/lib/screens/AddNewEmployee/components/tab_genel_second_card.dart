@@ -2,6 +2,7 @@
 
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/contract_type.dart';
@@ -120,19 +121,19 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Sözleşme Türü",
-              index: widget.userHelper.userDetail.contractType.index,
+              value: widget.userHelper.userDetail.contractType.getName,
               listExtension: ContractTypeExtension.getList(),
               onChanged: (val) {
                 setState(() {
                   widget.userHelper.userDetail.contractType =
-                      EnumToString.fromString(
-                          ContractTypeEnum.values, val.toString())!;
+                      ContractTypeExtension.getEnumFromName(
+                          widget.userHelper.userDetail.contractType.getName);
                 });
               },
             ),
             ExpandedCustomDropDownMenu(
               label: "Çalışma Şekli",
-              index: widget.userHelper.userDetail.employmentType.index,
+              value: widget.userHelper.userDetail.employmentType.getName,
               listExtension: EmploymentTypeEnumExtension.getList(),
               onChanged: (val) {
                 setState(() {

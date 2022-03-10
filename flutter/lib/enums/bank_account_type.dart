@@ -26,4 +26,9 @@ extension BankAccountTypeExtension on BankAccountTypeEnum {
         return "";
     }
   }
+
+  static getEnumFromName(name) {
+    return BankAccountTypeEnum
+        .values[BankAccountTypeExtension.getList().indexOf(name)];
+  }
 }
