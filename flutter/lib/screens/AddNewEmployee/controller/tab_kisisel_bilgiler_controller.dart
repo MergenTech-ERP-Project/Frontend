@@ -5,7 +5,6 @@ class TabKisiselBilgilerController extends GetxController {
   TextEditingController controllerTcNo = TextEditingController();
   TextEditingController controllerNationality = TextEditingController();
   TextEditingController controllerNumberOfKids = TextEditingController();
-  TextEditingController controllerEdicationStatus = TextEditingController();
   TextEditingController controllerLastCompletedEducationStatus =
       TextEditingController();
 }
