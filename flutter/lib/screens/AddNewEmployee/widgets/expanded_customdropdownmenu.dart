@@ -7,13 +7,13 @@ class ExpandedCustomDropDownMenu extends StatelessWidget {
   ExpandedCustomDropDownMenu({
     Key? key,
     required this.label,
-    required this.index,
+    required this.value,
     required this.listExtension,
     required this.onChanged,
   }) : super(key: key);
 
   String label;
-  int index;
+  String value;
   List<String> listExtension;
   Function(String?)? onChanged;
 
@@ -25,13 +25,11 @@ class ExpandedCustomDropDownMenu extends StatelessWidget {
         child: CustomDropDownMenu(
           text: label,
           list: listExtension,
+          valueChoose: value,
           icon: const Icon(Icons.arrow_drop_down),
           iconSize: 20,
           isExpandedYes: true,
-          onChanged: (val) {
-            index = listExtension.indexOf(val!);
-            onChanged!(val);
-          },
+          onChanged: onChanged,
         ),
       ),
     );

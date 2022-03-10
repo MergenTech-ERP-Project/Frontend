@@ -24,4 +24,9 @@ extension ContractTypeExtension on ContractTypeEnum {
         return "";
     }
   }
+
+  static getEnumFromName(name) {
+    return ContractTypeEnum
+        .values[ContractTypeExtension.getList().indexOf(name)];
+  }
 }

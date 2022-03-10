@@ -74,4 +74,8 @@ extension BankNamesEnumExtension on BankNamesEnum {
         return "";
     }
   }
+
+  static getEnumFromName(name) {
+    return BankNamesEnum.values[BankNamesEnumExtension.getList().indexOf(name)];
+  }
 }
