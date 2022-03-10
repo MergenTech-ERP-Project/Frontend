@@ -170,9 +170,9 @@ class UserHelperController {
   zeroToAllController() {
     tabGenelController.controllerName.text = "";
     tabGenelController.controllerSurname.text = "";
-    tabGenelController.controllerEPostaWork.value.text = "";
+    tabGenelController.controllerEPostaWork.text = "";
     tabGenelController.controllerEPostaPersonal.text = "";
-    tabGenelController.controllerWorkPhone.value.text = "";
+    tabGenelController.controllerWorkPhone.text = "";
     tabGenelController.controllerTelephonePersonal.text = "";
     tabGenelController.controllerAccessType.text = "";
     tabGenelController.controllerContractEndDate.text = "";
@@ -192,7 +192,6 @@ class UserHelperController {
     userDetail.bankNames = BankNamesEnum.values.first;
     userDetail.bankAccountType = BankAccountTypeEnum.values.first;
 
-    ///TODO: COMPANY BRANCH DEPARTMANT TITLE
     userDetailCareer.unitCompany = "";
     userDetailCareer.unitBranch = "";
     userDetailCareer.unitDepartment = "";
