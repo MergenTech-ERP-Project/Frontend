@@ -29,10 +29,10 @@ class CompanyController extends GetxController {
     }
   }
 
-  Future<int> fetchCompany(String _company_name) async {
+  Future<int> fetchCompany(String companyName) async {
     try {
       isLoading(true);
-      var company = await CompanyRemoteServices.fetchCompany(_company_name);
+      var company = await CompanyRemoteServices.fetchCompany(companyName);
       print("fetch Company: " + company.toString());
       return company;
     } finally {
@@ -40,19 +40,21 @@ class CompanyController extends GetxController {
     }
   }
 
-  Future<String?> postCompany(String _company_name, String _company_phone,
-      String _domain_name, String _mersis_no, String _sgk_company_no) async {
+  Future<String?> postCompany(String companyName, String companyPhone,
+      String domainName, String mersisNo, String sgkCompanyNo) async {
     try {
       isLoading(true);
       Company newCompany = Company(
         id: 0,
-        companyName: _company_name,
-        companyPhone: _company_phone,
-        domainName: _domain_name,
-        mersisNo: _mersis_no,
-        sgkCompanyNo: _sgk_company_no,
+        companyName: companyName,
+        companyPhone: companyPhone,
+        domainName: domainName,
+        mersisNo: mersisNo,
+        sgkCompanyNo: sgkCompanyNo,
       );
-      var response = await CompanyRemoteServices.postCompany(json.encode(newCompany.toJson()).toString());
+      var response = await CompanyRemoteServices.postCompany(
+        json.encode(newCompany.toJson()).toString(),
+      );
       fetchCompanies(); //companyList.add(newCompany);
       print("post Company: " + response);
       return response;
@@ -65,7 +67,10 @@ class CompanyController extends GetxController {
     try {
       isLoading(true);
       print(id);
-      var response = await CompanyRemoteServices.putCompany(id, json.encode(company.toJsonWithId()).toString());
+      var response = await CompanyRemoteServices.putCompany(
+        id,
+        json.encode(company.toJsonWithId()).toString(),
+      );
       fetchCompanies();
       print("delete Company: " + response);
       return response;

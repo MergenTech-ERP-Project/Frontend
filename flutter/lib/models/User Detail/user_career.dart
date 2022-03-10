@@ -13,22 +13,22 @@ String fetchUsers(List<UserDetailCareer> data) =>
 class UserDetailCareer {
   final int id;
   final int userDetailId; //user_detail_id
-  final String? managerName; //manager_name
-  final String? managerTcno; //manager_tcno
-  final String? unitCompany; //unit_company
-  final String? unitBranch; //unit_branch
-  final String? unitDepartment; //unit_department
-  final String? unitTitle; //unit_title
+  String managerName; //manager_name
+  String managerTcno; //manager_tcno
+  String unitCompany; //unit_company
+  String unitBranch; //unit_branch
+  String unitDepartment; //unit_department
+  String unitTitle; //unit_title
 
   UserDetailCareer({
     this.id = 0,
-    this.userDetailId = 0,
-    this.managerName,
-    this.managerTcno,
-    this.unitCompany,
-    this.unitBranch,
-    this.unitDepartment,
-    this.unitTitle,
+    required this.userDetailId,
+    this.managerName = "",
+    this.managerTcno = "",
+    this.unitCompany = "",
+    this.unitBranch = "",
+    this.unitDepartment = "",
+    this.unitTitle = "",
   });
 
   factory UserDetailCareer.fromJson(Map<String, dynamic> json) {

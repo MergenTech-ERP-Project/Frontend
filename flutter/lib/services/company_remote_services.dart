@@ -9,7 +9,7 @@ class CompanyRemoteServices {
 
   static Future<List<Company>?> fetchCompanies() async {
     var response = await http.get(Uri.parse(serviceHttp + '/company/list'));
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       return companyFromJson(jsonString);
     } else {
@@ -21,7 +21,7 @@ class CompanyRemoteServices {
     var response =
         await http.get(Uri.parse(serviceHttp + '/company/list/$companyName'));
     int companyId = -1;
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       List<Company> companies = companyFromJson(jsonString);
       for (Company company in companies) {
@@ -48,7 +48,7 @@ class CompanyRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return response.statusCode == 200
+    return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Company"
         : "Error: Company ${response.statusCode}";
   }
@@ -67,7 +67,7 @@ class CompanyRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return response.statusCode == 200
+    return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Company"
         : "Error: Company ${response.statusCode}";
   }
@@ -85,7 +85,7 @@ class CompanyRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return response.statusCode == 200
+    return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Company"
         : "Error: Company ${response.statusCode}";
   }

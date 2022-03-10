@@ -13,7 +13,7 @@ class BranchRemoteServices {
   static Future<List<Branch>?> fetchBranches() async {
     var response = await http.get(Uri.parse(
        serviceHttp + '/branch/list'));
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       return branchFromJson(jsonString);
     } else {
@@ -24,7 +24,7 @@ class BranchRemoteServices {
   static Future<List<Branch>?> fetchBranchesByCompanyId(int companyId) async {
     var response = await http.get(Uri.parse(
        serviceHttp + '/branch/list/$companyId'));
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       return branchFromJson(jsonString);
     } else {
@@ -36,7 +36,7 @@ class BranchRemoteServices {
     var response = await http.get(Uri.parse(
         serviceHttp + '/branch/$companyId/$branchName'));
     int branchId = -1;
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       List<Branch> branches = branchFromJson(jsonString);
       for (Branch branch in branches) {
@@ -66,7 +66,7 @@ class BranchRemoteServices {
         .timeout(
       const Duration(seconds: 10),
     );
-    return response.statusCode == 200
+    return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Branch"
         : "Error: Branch ${response.statusCode}";
   }
@@ -87,7 +87,7 @@ class BranchRemoteServices {
         .timeout(
       const Duration(seconds: 10),
     );
-    return response.statusCode == 200
+    return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Branch"
         : "Error: Branch ${response.statusCode}";
   }
@@ -106,7 +106,7 @@ class BranchRemoteServices {
         .timeout(
       const Duration(seconds: 10),
     );
-    return response.statusCode == 200
+    return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Branch"
         : "Error: Branch ${response.statusCode}";
   }

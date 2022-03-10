@@ -9,7 +9,7 @@ class DepartmentRemoteServices {
 
   static Future<List<Department>?> fetchDepartments() async {
     var response = await http.get(Uri.parse(serviceHttp + '/department/list'));
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       return departmentFromJson(jsonString);
     } else {
@@ -21,7 +21,7 @@ class DepartmentRemoteServices {
     var response = await http
         .get(Uri.parse(serviceHttp + '/department/$companyId/$branchId'));
     int departmentId = -1;
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       List<Department> companies = departmentFromJson(jsonString);
       for (Department department in companies) {
@@ -48,7 +48,7 @@ class DepartmentRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return response.statusCode == 200
+    return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Department"
         : "Error: Department ${response.statusCode}";
   }
@@ -67,7 +67,7 @@ class DepartmentRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return response.statusCode == 200
+    return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Department"
         : "Error: Department ${response.statusCode}";
   }
@@ -85,7 +85,7 @@ class DepartmentRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return response.statusCode == 200
+    return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Department"
         : "Error: Department ${response.statusCode}";
   }

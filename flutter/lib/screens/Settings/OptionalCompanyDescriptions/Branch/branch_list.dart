@@ -31,60 +31,53 @@ class _BranchListState extends State<BranchList> {
           decorationIcon: Icon(Icons.search),
           fillcolor: Colors.white60,
         ),
-        SizedBox(
-          height: widget.branchList.length > 6
-              ? 6 * 60
-              : widget.branchList.length * 60,
-          child: Obx(() {
-            return (branchController.isLoading.value
-                ? const Center(child: CircularProgressIndicator())
-                : ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: widget.branchList.length + 1,
-                    itemBuilder: (_, index) {
-                      return InkWell(
-                        onTap: index == 0 ? null : widget.onBranchSelected,
-                        child: SizedBox(
-                          height: 60,
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Center(
-                                  child: Text(
-                                    index == 0
-                                        ? "Birim Adı"
-                                        : widget
-                                            .branchList[index - 1].branchName,
-                                  ),
+        Obx(() {
+          return (branchController.isLoading.value
+              ? const Center(child: CircularProgressIndicator())
+              : ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: widget.branchList.length + 1,
+                  itemBuilder: (_, index) {
+                    return InkWell(
+                      onTap: index == 0 ? null : widget.onBranchSelected,
+                      child: SizedBox(
+                        height: 60,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Center(
+                                child: Text(
+                                  index == 0
+                                      ? "Birim Adı"
+                                      : widget.branchList[index - 1].branchName,
                                 ),
                               ),
-                              Row(
-                                children: [
-                                  RightIconButton(
-                                    icon: Icon(
-                                      Icons.edit,
-                                      color:
-                                          index == 0 ? whiteColor : darkColor,
-                                    ),
-                                    function: index == 0 ? null : () {},
+                            ),
+                            Row(
+                              children: [
+                                RightIconButton(
+                                  icon: Icon(
+                                    Icons.edit,
+                                    color: index == 0 ? whiteColor : darkColor,
                                   ),
-                                  RightIconButton(
-                                    icon: Icon(
-                                      Icons.delete,
-                                      color: index == 0 ? whiteColor : redColor,
-                                    ),
-                                    function: index == 0 ? null : () {},
+                                  function: index == 0 ? null : () {},
+                                ),
+                                RightIconButton(
+                                  icon: Icon(
+                                    Icons.delete,
+                                    color: index == 0 ? whiteColor : redColor,
                                   ),
-                                ],
-                              ),
-                            ],
-                          ),
+                                  function: index == 0 ? null : () {},
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      );
-                    },
-                  ));
-          }),
-        ),
+                      ),
+                    );
+                  },
+                ));
+        }),
       ],
     );
   }

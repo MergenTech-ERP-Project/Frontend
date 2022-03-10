@@ -27,6 +27,7 @@ UserController userController = Get.find<UserController>();
 ActivityController activityController = Get.find<ActivityController>();
 ActivityEvaluationController activityEvaluationController =
     Get.find<ActivityEvaluationController>();
+    
 CompanyController companyController = Get.find<CompanyController>();
 BranchController branchController = Get.find<BranchController>();
 DepartmentController departmentController = Get.find<DepartmentController>();

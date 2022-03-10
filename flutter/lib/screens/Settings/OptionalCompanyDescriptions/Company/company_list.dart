@@ -33,69 +33,63 @@ class _CompanyListState extends State<CompanyList> {
           decorationIcon: Icon(Icons.search),
           fillcolor: Colors.white60,
         ),
-        SizedBox(
-          height: widget.companyList.length > 6
-              ? 6 * 60
-              : widget.companyList.length * 60,
-          child: Obx(() {
-            return (companyController.isLoading.value
-                ? const Center(
-                    child: SizedBox(
-                    height: 50,
-                    width: 50,
-                    child: CircularProgressIndicator(),
-                  ))
-                : ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: widget.companyList.length + 1,
-                    itemBuilder: (_, index) {
-                      return InkWell(
-                        onTap: index == 0 ? null : widget.onCompanySelected,
-                        child: SizedBox(
-                          height: 60,
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 3,
-                                child: Center(
-                                    child: Text(index == 0
-                                        ? "Şirket Adı"
-                                        : widget.companyList[index - 1]
-                                            .companyName)),
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Center(
-                                    child: Text(
-                                        index == 0 ? "Çalışan Sayısı" : "0")),
-                              ),
-                              Row(
-                                children: [
-                                  RightIconButton(
-                                    icon: Icon(
-                                      Icons.edit,
-                                      color:
-                                          index == 0 ? whiteColor : darkColor,
-                                    ),
-                                    function: index == 0 ? null : () {},
+        Obx(() {
+          return (companyController.isLoading.value
+              ? const Center(
+                  child: SizedBox(
+                  height: 50,
+                  width: 50,
+                  child: CircularProgressIndicator(),
+                ))
+              : ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: widget.companyList.length + 1,
+                  itemBuilder: (_, index) {
+                    return InkWell(
+                      onTap: index == 0 ? null : widget.onCompanySelected,
+                      child: SizedBox(
+                        height: 60,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 3,
+                              child: Center(
+                                  child: Text(index == 0
+                                      ? "Şirket Adı"
+                                      : widget
+                                          .companyList[index - 1].companyName)),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Center(
+                                  child: Text(
+                                      index == 0 ? "Çalışan Sayısı" : "0")),
+                            ),
+                            Row(
+                              children: [
+                                RightIconButton(
+                                  icon: Icon(
+                                    Icons.edit,
+                                    color: index == 0 ? whiteColor : darkColor,
                                   ),
-                                  RightIconButton(
-                                    icon: Icon(
-                                      Icons.delete,
-                                      color: index == 0 ? whiteColor : redColor,
-                                    ),
-                                    function: index == 0 ? null : () {},
+                                  function: index == 0 ? null : () {},
+                                ),
+                                RightIconButton(
+                                  icon: Icon(
+                                    Icons.delete,
+                                    color: index == 0 ? whiteColor : redColor,
                                   ),
-                                ],
-                              ),
-                            ],
-                          ),
+                                  function: index == 0 ? null : () {},
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      );
-                    },
-                  ));
-          }),
-        ),
+                      ),
+                    );
+                  },
+                ));
+        }),
       ],
     );
   }

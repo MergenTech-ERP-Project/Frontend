@@ -15,22 +15,26 @@ String fetchUsers(List<UserDetailPayment> data) =>
 /// The part written with // places written with json.
 
 class UserDetailPayment {
-  final String? tcno; //tcno
-  final String? salary; //salary
-  final String? currency; //currency
+  final int id;
+  final int userDetailId; //user_detail_id
+  String tcno; //tcno
+  String salary; //salary
+  String currency; //currency
+  String commuteSupportFee; //commute_support_fee
+  String foodSupportFee; //food_support_fee
   SalaryTypeEnum? salaryType; //salary_type
   PaymentSchemeEnum? paymentScheme; //payment_scheme
-  final String? commuteSupportFee; //commute_support_fee
-  final String? foodSupportFee; //food_support_fee
 
   UserDetailPayment({
-    this.tcno,
-    this.salary,
-    this.currency,
+    this.id = 0,
+    required this.userDetailId,
+    this.tcno = "",
+    this.salary = "",
+    this.currency = "",
     this.salaryType,
     this.paymentScheme,
-    this.commuteSupportFee,
-    this.foodSupportFee,
+    this.commuteSupportFee = "",
+    this.foodSupportFee = "",
   });
 
   String getSalaryType() => EnumToString.convertToString(salaryType);
@@ -38,6 +42,8 @@ class UserDetailPayment {
 
   factory UserDetailPayment.fromJson(Map<String, dynamic> json) {
     return UserDetailPayment(
+      id: json['id'],
+      userDetailId: json["user_detail_id"],
       tcno: json['tcno'],
       salary: json['salary'],
       currency: json['currency'],
@@ -51,6 +57,8 @@ class UserDetailPayment {
   }
 
   Map<String, dynamic> toJson() => {
+        "id": id,
+        "user_detail_id": userDetailId,
         "tcno": tcno,
         "salary": salary,
         "currency": currency,

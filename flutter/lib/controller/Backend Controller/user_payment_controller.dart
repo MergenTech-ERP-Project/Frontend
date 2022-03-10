@@ -23,10 +23,12 @@ class UserDetailPaymentController extends GetxController {
   }
 
   Future<int?> addNewUserDetailPayment(
+      userDetailId,
       UserDetailPayment userDetailPayment) async {
     try {
       isLoading(true);
-      UserDetailPayment newUserDetailPayment = UserDetailPayment();
+      UserDetailPayment newUserDetailPayment =
+          UserDetailPayment(userDetailId: userDetailId);
       var response = await UserDetailPaymentServices.addNewUserDetailPayment(
           json.encode(newUserDetailPayment.toJson()).toString());
 

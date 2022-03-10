@@ -87,25 +87,25 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
                   children: [
                     ExpandedCustomDropDownMenu(
                       label: "Banka Adı",
-                      index: widget.userDetail!.bankNames!.index,
+                      index: widget.userDetail!.bankNames.index,
                       listExtension: BankNamesEnumExtension.getList(),
                       onChanged: (val) {
                         setState(() {
                           widget.userDetail!.bankNames =
                               EnumToString.fromString(
-                                  BankNamesEnum.values, val.toString());
+                                  BankNamesEnum.values, val.toString())!;
                         });
                       },
                     ),
                     ExpandedCustomDropDownMenu(
                       label: "Hesap Tipi",
-                      index:  widget.userDetail!.bankAccountType!.index,
+                      index:  widget.userDetail!.bankAccountType.index,
                       listExtension: BankAccountTypeExtension.getList(),
                       onChanged: (val) {
                         setState(() {
                           widget.userDetail!.bankAccountType =
                               EnumToString.fromString(
-                                  BankAccountTypeEnum.values, val.toString());
+                                  BankAccountTypeEnum.values, val.toString())!;
                         });
                       },
                     ),

@@ -19,7 +19,7 @@ class ActiveToUserRemoteServices {
       },
     );
     print("fetchActiveToUsers response ${response.statusCode}");
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       print("JSON : $jsonString");
       return activeToUserFromJson(jsonString);
@@ -39,7 +39,7 @@ class ActiveToUserRemoteServices {
     );
     int id = -1;
     print("fetchActiveToUser response ${response.statusCode}");
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
 
       print("JSON : $jsonString");
@@ -61,7 +61,7 @@ class ActiveToUserRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return response.statusCode == 200
+    return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: ActiveToUser"
         : "Error: ActiveToUser ${response.statusCode}";
   }
@@ -80,7 +80,7 @@ class ActiveToUserRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return response.statusCode == 200
+    return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: ActiveToUser"
         : "Error: ActiveToUser ${response.statusCode}";
   }

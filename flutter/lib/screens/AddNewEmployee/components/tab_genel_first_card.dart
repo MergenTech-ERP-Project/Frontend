@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
-import 'package:vtys_kalite/models/User%20Detail/user_career.dart';
-import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
+import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_genel_first_card_image.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabGenelFirstCard extends StatelessWidget {
   final User user;
-  final UserDetail userDetail;
-  final UserDetailCareer userDetailCareer;
+  UserHelperController userHelper;
 
-  const TabGenelFirstCard({
+  TabGenelFirstCard({
     Key? key,
     required this.user,
-    required this.userDetail,
-    required this.userDetailCareer,
+    required this.userHelper,
   }) : super(key: key);
 
   @override
@@ -45,7 +42,7 @@ class TabGenelFirstCard extends StatelessWidget {
               children: [
                 const CustomText(text: "İşe Başlama Tarih"),
                 CustomText(
-                  text: userDetail.startDateWork,
+                  text: userHelper.userDetail.startDateWork,
                 ),
               ],
             ),
@@ -54,7 +51,7 @@ class TabGenelFirstCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const CustomText(text: "Şirket"),
-                CustomText(text: userDetailCareer.unitCompany),
+                CustomText(text: userHelper.userDetailCareer.unitCompany),
               ],
             ),
             const SizedBox(height: 20),
@@ -63,7 +60,7 @@ class TabGenelFirstCard extends StatelessWidget {
               children: [
                 const CustomText(text: "Şube"),
                 CustomText(
-                  text: userDetailCareer.unitBranch,
+                  text: userHelper.userDetailCareer.unitBranch,
                 ),
               ],
             ),

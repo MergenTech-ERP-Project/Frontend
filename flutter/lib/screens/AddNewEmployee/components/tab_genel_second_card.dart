@@ -3,6 +3,7 @@
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/contract_type.dart';
 import 'package:vtys_kalite/enums/employment_type.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
@@ -14,12 +15,12 @@ import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabGenelSecondCard extends StatefulWidget {
   User? user;
-  UserDetail userDetail;
+  UserHelperController userHelper;
 
   TabGenelSecondCard({
     Key? key,
     this.user,
-    required this.userDetail,
+    required this.userHelper,
   }) : super(key: key);
 
   @override
@@ -91,11 +92,27 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
           children: [
             ExpandedCustomDateTimePicker(
               label: "İşe Başlangıç Tarihi",
-              dateTime: dateTimeFormat.parse(widget.userDetail.startDateWork!),
+              onChanged: (val) {
+                if (val != null) {
+                  try {
+                    widget.userHelper.userDetail.startDateWork = val;
+                  } catch (e) {
+                    print(e.toString());
+                  }
+                }
+              },
             ),
             ExpandedCustomDateTimePicker(
               label: "Sözleşme Bitiş Tarihi",
-              dateTime: dateTimeFormat.parse(widget.userDetail.contractEndDate!),
+              onChanged: (val) {
+                if (val != null) {
+                  try {
+                    widget.userHelper.userDetail.contractEndDate = val;
+                  } catch (e) {
+                    print(e.toString());
+                  }
+                }
+              },
             ),
           ],
         ),
@@ -103,23 +120,25 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Sözleşme Türü",
-              index: widget.userDetail.contractType!.index,
+              index: widget.userHelper.userDetail.contractType.index,
               listExtension: ContractTypeExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                  widget.userDetail.contractType = EnumToString.fromString(
-                      ContractTypeEnum.values, val.toString());
+                  widget.userHelper.userDetail.contractType =
+                      EnumToString.fromString(
+                          ContractTypeEnum.values, val.toString())!;
                 });
               },
             ),
             ExpandedCustomDropDownMenu(
               label: "Çalışma Şekli",
-              index: widget.userDetail.employmentType!.index,
+              index: widget.userHelper.userDetail.employmentType.index,
               listExtension: EmploymentTypeEnumExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                  widget.userDetail.employmentType = EnumToString.fromString(
-                      EmploymentTypeEnum.values, val.toString());
+                  widget.userHelper.userDetail.employmentType =
+                      EnumToString.fromString(
+                          EmploymentTypeEnum.values, val.toString())!;
                 });
               },
             ),
