@@ -78,10 +78,8 @@ class TabGenelFirstCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const CustomText(text: "E-posta (iş)"),
-                Obx(() {
-                  return CustomText(
-                      text: tabGenelController.controllerEPostaWork.value.text);
-                })
+                CustomText(
+                    text: tabGenelController.controllerEPostaWork.value.text),
               ],
             ),
             const SizedBox(height: 20),
@@ -89,10 +87,8 @@ class TabGenelFirstCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const CustomText(text: "İş Telefonu"),
-                Obx(() {
-                  return CustomText(
-                      text: tabGenelController.controllerWorkPhone.value.text);
-                })
+                CustomText(
+                    text: tabGenelController.controllerWorkPhone.value.text),
               ],
             ),
           ],
