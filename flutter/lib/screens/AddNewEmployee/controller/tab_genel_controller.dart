@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 class TabGenelController extends GetxController {
   TextEditingController controllerName = TextEditingController();
   TextEditingController controllerSurname = TextEditingController();
-  var controllerEPostaWork = TextEditingController().obs;
+  TextEditingController controllerEPostaWork = TextEditingController();
   TextEditingController controllerEPostaPersonal = TextEditingController();
-  var controllerWorkPhone = TextEditingController().obs;
+  TextEditingController controllerWorkPhone = TextEditingController();
   TextEditingController controllerTelephonePersonal = TextEditingController();
   TextEditingController controllerAccessType = TextEditingController();
   TextEditingController controllerContractEndDate = TextEditingController();
