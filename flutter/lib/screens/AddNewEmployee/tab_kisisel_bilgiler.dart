@@ -16,7 +16,7 @@ import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_control
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabPersonalInformation extends StatefulWidget {
-  final UserDetail userDetail;
+  UserDetail? userDetail;
   TabPersonalInformation({
     Key? key,
     required this.userDetail,
@@ -35,7 +35,15 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDateTimePicker(
               label: "Doğum Tarihi",
-              dateTime: dateTimeFormat.parse(widget.userDetail.dateofbirth!),
+              onChanged: (val) {
+                if (val != null) {
+                  try {
+                    widget.userDetail!.dateofbirth = val;
+                  } catch (e) {
+                    print(e.toString());
+                  }
+                }
+              },
             ),
             ExpandedNameController(
               controller: tabKisiselBilgilerController.controllerTcNo,
@@ -48,23 +56,23 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Medeni Hal",
-              index: widget.userDetail.maritalStatus!.index,
+              index: widget.userDetail!.maritalStatus.index,
               listExtension: MaritalStatusExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                  widget.userDetail.maritalStatus = EnumToString.fromString(
-                      MaritalStatusEnum.values, val.toString());
+                  widget.userDetail!.maritalStatus = EnumToString.fromString(
+                      MaritalStatusEnum.values, val.toString())!;
                 });
               },
             ),
             ExpandedCustomDropDownMenu(
               label: "Cinsiyet",
-              index: widget.userDetail.gender!.index,
+              index: widget.userDetail!.gender.index,
               listExtension: GenderExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                  widget.userDetail.gender = EnumToString.fromString(
-                      GenderEnum.values, val.toString());
+                  widget.userDetail!.gender = EnumToString.fromString(
+                      GenderEnum.values, val.toString())!;
                 });
               },
             ),
@@ -74,12 +82,12 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Engel Derecesi",
-              index: widget.userDetail.disabledDegree!.index,
+              index: widget.userDetail!.disabledDegree.index,
               listExtension: DisabledDegreeExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                  widget.userDetail.disabledDegree = EnumToString.fromString(
-                      DisabledDegreeEnum.values, val.toString());
+                  widget.userDetail!.disabledDegree = EnumToString.fromString(
+                      DisabledDegreeEnum.values, val.toString())!;
                 });
               },
             ),
@@ -99,12 +107,12 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
             ),
             ExpandedCustomDropDownMenu(
               label: "Askerlik Durumu",
-              index: widget.userDetail.militaryStatus!.index,
+              index: widget.userDetail!.militaryStatus.index,
               listExtension: MilitaryStatusEnumExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                  widget.userDetail.militaryStatus = EnumToString.fromString(
-                      MilitaryStatusEnum.values, val.toString());
+                  widget.userDetail!.militaryStatus = EnumToString.fromString(
+                      MilitaryStatusEnum.values, val.toString())!;
                 });
               },
             ),
@@ -114,23 +122,24 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Kan Grubu",
-              index: widget.userDetail.bloodType!.index,
+              index: widget.userDetail!.bloodType.index,
               listExtension: BloodTypeEnumExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                  widget.userDetail.bloodType = EnumToString.fromString(
-                      BloodTypeEnum.values, val.toString());
+                  widget.userDetail!.bloodType = EnumToString.fromString(
+                      BloodTypeEnum.values, val.toString())!;
                 });
               },
             ),
             ExpandedCustomDropDownMenu(
               label: "Eğitim Durumu",
-              index: widget.userDetail.educationalStatus!.index,
+              index: widget.userDetail!.educationalStatus.index,
               listExtension: EducationalStatusExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                  widget.userDetail.educationalStatus = EnumToString.fromString(
-                      EducationalStatusEnum.values, val.toString());
+                  widget.userDetail!.educationalStatus =
+                      EnumToString.fromString(
+                      EducationalStatusEnum.values, val.toString())!;
                 });
               },
             ),
@@ -140,14 +149,14 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Tamamlanan En Yüksek Eğitim Seviyesi",
-              index: widget.userDetail.highestEducationLevelCompleted!.index,
+              index: widget.userDetail!.highestEducationLevelCompleted.index,
               listExtension: HighestEducationLevelCompletedExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                  widget.userDetail.highestEducationLevelCompleted =
+                  widget.userDetail!.highestEducationLevelCompleted =
                       EnumToString.fromString(
                           HighestEducationLevelCompletedEnum.values,
-                          val.toString());
+                          val.toString())!;
                 });
               },
             ),

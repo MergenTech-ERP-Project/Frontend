@@ -9,7 +9,7 @@ class TitleRemoteServices {
 
   static Future<List<Titlee>?> fetchTitles() async {
     var response = await http.get(Uri.parse(serviceHttp + '/title/list'));
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       return titleFromJson(jsonString);
     } else {
@@ -21,7 +21,7 @@ class TitleRemoteServices {
     var response = await http.get(
         Uri.parse(serviceHttp + '/Title/$companyId/$branchId/$departmentId'));
     int titleId = -1;
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       List<Title> companies = titleFromJson(jsonString);
       for (Title title in companies) {
@@ -48,7 +48,7 @@ class TitleRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return response.statusCode == 200
+    return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Title"
         : "Error: Title ${response.statusCode}";
   }
@@ -67,7 +67,7 @@ class TitleRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return response.statusCode == 200
+    return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Title"
         : "Error: Title ${response.statusCode}";
   }
@@ -85,7 +85,7 @@ class TitleRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return response.statusCode == 200
+    return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Title"
         : "Error: Title ${response.statusCode}";
   }

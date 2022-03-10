@@ -8,13 +8,13 @@ import 'package:vtys_kalite/services/user_detail_remote_services.dart';
 
 class UserDetailController extends GetxController {
   var isLoading = false.obs;
-  List<UserDetail> userList = <UserDetail>[].obs; //List<UserDetail>
+  List<UserDetail> userDetailList = <UserDetail>[].obs; //List<UserDetail>
 
   Future<UserDetail?> fetchUserDetailById(userId) async {
     try {
       isLoading(true);
       UserDetail? detail = await UserDetailServices.fetchUserDetailById(userId);
-      print("fetch User Detail: " + detail!.tcno.toString());
+      print("fetch User Detail: " + detail!.userId.toString());
       return detail;
     } finally {
       isLoading(false);
@@ -24,12 +24,11 @@ class UserDetailController extends GetxController {
   Future<int?> addNewUserDetail(UserDetail userDetail) async {
     try {
       isLoading(true);
-      UserDetail newUserDetail = UserDetail();
       var response = await UserDetailServices.addNewUserDetail(
-          json.encode(newUserDetail.toJson()).toString());
+          json.encode(userDetail.toJson()).toString());
 
       print("post User Detail: " + response.toString());
-      fetchUserDetailById(userDetail.tcno);
+      fetchUserDetailById(userDetail.userId);
       return response;
     } finally {
       isLoading(false);

@@ -6,6 +6,7 @@ import 'package:vtys_kalite/controller/Backend%20Controller/activity_evaluation_
 import 'package:vtys_kalite/controller/Backend%20Controller/branch_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/company_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/departmant_controller.dart';
+import 'package:vtys_kalite/controller/Backend%20Controller/title_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/user_career_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/user_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/user_detail_controller.dart';
@@ -69,19 +70,26 @@ class App extends StatelessWidget {
 
 controllerMethod() {
   Get.put(AuthenticationController());
+
   Get.put(UserController());
+
   Get.put(ActivityController());
   Get.put(ActivityEvaluationController());
+
   Get.put(CompanyController());
   Get.put(BranchController());
+  Get.put(DepartmentController());
+  Get.put(TitleController());
+
   Get.put(MenuController());
   Get.put(NavigatorController());
+
   Get.put(UserDetailController());
   Get.put(UserDetailCareerController());
   Get.put(UserDetailPaymentController());
+
   Get.put(TabGenelController());
   Get.put(TabKariyerController());
   Get.put(TabDigerBilgilerController());
   Get.put(TabKisiselBilgilerController());
-  Get.put(DepartmentController());
 }

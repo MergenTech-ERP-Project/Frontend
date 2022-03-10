@@ -26,79 +26,80 @@ String fetchUsers(List<UserDetail> data) =>
 class UserDetail {
   final int id;
   final int userId; //user_id
-  final String? tcno; //tcno
-  String? dateofbirth; //dateofbirth
-  final String? workPhone; //work_phone
-  MaritalStatusEnum? maritalStatus; //maritalstatus
-  final String? numberofkids; //numberofkids
-  DisabledDegreeEnum? disabledDegree; //degree_of_disability
-  GenderEnum? gender; //gender
-  EducationalStatusEnum? educationalStatus; //education_status
-  HighestEducationLevelCompletedEnum?
+  String tcno; //tcno
+  String workPhone; //work_phone
+  String numberofkids; //numberofkids
+  String lastCompletedEducationStatus; //last_completed_education_status
+  String dateofbirth; //dateofbirth
+  String startDateWork; //date_of_start
+  String contractEndDate; //contract_end_date
+  String quitWorkDate; //quit_date
+  String workEmail; //work_email
+  String address; //adress
+  String addressCountry; //country
+  String addressDistrict; //address_district
+  String addressCity; //city
+  String addressZipCode; //zip_code
+  String homePhone; //home_telephone
+  String bankAccountNumber; //bank_account_number
+  String iban; //iban
+  String emergencyContactPerson; //emergency_contact
+  String relationshipEmergencyContact; //relationship_emergency_contact
+  String emergencyContactCellPhone; //emergency_contact_phone
+  String reasonTypeForQuit; //quit_reason_type
+  String reasonExplainForQuit; //reason_explain_for_quit
+  GenderEnum gender; //gender
+  BloodTypeEnum bloodType; //blood_type
+  BankNamesEnum bankNames; //bank_name
+  ContractTypeEnum contractType; //contract_type
+  MaritalStatusEnum maritalStatus; //maritalstatus
+  DisabledDegreeEnum disabledDegree; //degree_of_disability
+  MilitaryStatusEnum militaryStatus; //military_service_status
+  EmploymentTypeEnum employmentType; //employment_type
+  BankAccountTypeEnum bankAccountType; //bank_account_type
+  EducationalStatusEnum educationalStatus; //education_status
+  HighestEducationLevelCompletedEnum
       highestEducationLevelCompleted; //highest_education_level_completed
-  final String? lastCompletedEducationStatus; //last_completed_education_status
-  EmploymentTypeEnum? employmentType; //employment_type
-  MilitaryStatusEnum? militaryStatus; //military_service_status
-  String? startDateWork; //date_of_start
-  ContractTypeEnum? contractType; //contract_type
-  String? contractEndDate; //contract_end_date
-  final String? workEmail; //work_email
-  final String? address; //adress
-  final String? addressCountry; //country
-  final String? addressDistrict; //address_district
-  final String? addressCity; //city
-  final String? addressZipCode; //zip_code
-  final String? homePhone; //home_telephone
-  BankNamesEnum? bankNames; //bank_name
-  BankAccountTypeEnum? bankAccountType; //bank_account_type
-  final String? bankAccountNumber; //bank_account_number
-  final String? iban; //iban
-  final String? emergencyContactPerson; //emergency_contact
-  final String? relationshipEmergencyContact; //relationship_emergency_contact
-  final String? emergencyContactCellPhone; //emergency_contact_phone
-  String? quitWorkDate; //quit_date
-  final String? reasonTypeForQuit; //quit_reason_type
-  final String? reasonExplainForQuit; //reason_explain_for_quit
-  BloodTypeEnum? bloodType; //blood_type
 
   UserDetail({
     this.id = 0,
-    this.userId = 0,
-    this.tcno,
-    this.dateofbirth,
-    this.workPhone,
-    this.maritalStatus,
-    this.numberofkids,
-    this.disabledDegree,
-    this.gender,
-    this.educationalStatus,
-    this.highestEducationLevelCompleted,
-    this.lastCompletedEducationStatus,
-    this.employmentType,
-    this.militaryStatus,
-    this.startDateWork,
-    this.contractType,
-    this.contractEndDate,
-    this.workEmail,
-    this.address,
-    this.addressCountry,
-    this.addressDistrict,
-    this.addressCity,
-    this.addressZipCode,
-    this.homePhone,
-    this.bankNames,
-    this.bankAccountType,
-    this.bankAccountNumber,
-    this.iban,
-    this.emergencyContactPerson,
-    this.relationshipEmergencyContact,
-    this.emergencyContactCellPhone,
-    this.quitWorkDate,
-    this.reasonTypeForQuit,
-    this.reasonExplainForQuit,
-    this.bloodType,
+    required this.userId,
+    this.tcno = "",
+    this.dateofbirth = "",
+    this.workPhone = "",
+    this.numberofkids = "",
+    this.lastCompletedEducationStatus = "",
+    this.startDateWork = "",
+    this.contractEndDate = "",
+    this.workEmail = "",
+    this.address = "",
+    this.addressCountry = "",
+    this.addressDistrict = "",
+    this.addressCity = "",
+    this.addressZipCode = "",
+    this.homePhone = "",
+    this.bankAccountNumber = "",
+    this.iban = "",
+    this.emergencyContactPerson = "",
+    this.relationshipEmergencyContact = "",
+    this.emergencyContactCellPhone = "",
+    this.quitWorkDate = "",
+    this.reasonTypeForQuit = "",
+    this.reasonExplainForQuit = "",
+    required this.maritalStatus,
+    required this.disabledDegree,
+    required this.gender,
+    required this.educationalStatus,
+    required this.highestEducationLevelCompleted,
+    required this.employmentType,
+    required this.militaryStatus,
+    required this.contractType,
+    required this.bankNames,
+    required this.bankAccountType,
+    required this.bloodType,
   });
 
+  
   String getMaritalStatus() => EnumToString.convertToString(maritalStatus);
   String getDisabledDegree() => EnumToString.convertToString(disabledDegree);
   String getEducationalStatus() =>

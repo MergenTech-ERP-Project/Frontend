@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
-import 'package:vtys_kalite/models/User%20Detail/user_career.dart';
-import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_genel_first_card.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_genel_first_card_small.dart';
@@ -10,14 +9,12 @@ import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_genel_second_c
 
 class TabGenel extends StatelessWidget {
   User? user;
-  UserDetail? userDetail;
-  UserDetailCareer? userDetailCareer;
+  UserHelperController userHelper;
 
   TabGenel({
     Key? key,
     this.user,
-    this.userDetail,
-    this.userDetailCareer,
+    required this.userHelper,
   }) : super(key: key);
 
   @override
@@ -30,20 +27,17 @@ class TabGenel extends StatelessWidget {
                   flex: 3,
                   child: TabGenelFirstCard(
                     user: user!,
-                    userDetail: userDetail!,
-                    userDetailCareer: userDetailCareer!,
+                    userHelper: userHelper,
                   ),
                 ),
                 Expanded(
                   flex: 4,
-                  child:
-                      TabGenelSecondCard(user: user, userDetail: userDetail!),
+                  child: TabGenelSecondCard(user: user, userHelper: userHelper),
                 ),
               ],
             )
           : TabGenelSecondCard(
-              user: User(),
-              userDetail: UserDetail(),
+              userHelper: userHelper,
             ),
       smallScreen: user != null
           ? SingleChildScrollView(

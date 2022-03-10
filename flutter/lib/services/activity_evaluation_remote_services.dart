@@ -11,7 +11,7 @@ class ActivityEvaluationRemoteServices {
   static Future<List<ActivityEvaluation>?> fetchActivityEvaluations() async {
     var response = await http
         .get(Uri.parse(serviceHttp + '/activityevaluation/list'));
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       return activityEvaluationFromJson(jsonString);
     } else {
@@ -24,7 +24,7 @@ class ActivityEvaluationRemoteServices {
         .get(Uri.parse(
         serviceHttp + '/activityevaluation/list/$activityId/$userId'));
     int activityEvaluationID = -1;
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       List<ActivityEvaluation> activityEvaluations =
           activityEvaluationFromJson(jsonString);
@@ -43,7 +43,7 @@ class ActivityEvaluationRemoteServices {
       int activityId) async {
     var response = await http
         .get(Uri.parse(serviceHttp + '/activityevaluation/list/$activityId'));
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       List<ActivityEvaluation> activityEvaluations =
           activityEvaluationFromJson(jsonString);
@@ -66,7 +66,7 @@ class ActivityEvaluationRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return response.statusCode == 200
+    return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Activity"
         : "Error: Activity ${response.statusCode}";
   }

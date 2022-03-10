@@ -275,15 +275,15 @@ class _TabKariyerState extends State<TabKariyer> {
     ];
 
     positionChildren1 = [
-      widget.userDetail.startDateWork!,
-      widget.userDetail.contractEndDate!,
+      widget.userDetail.startDateWork,
+      widget.userDetail.contractEndDate,
       EmploymentTypeEnumExtension.getList()[
-              widget.userDetail.employmentType!.index]
+              widget.userDetail.employmentType.index]
           .toString(),
-      widget.userDetailCareer.unitCompany!,
-      widget.userDetailCareer.unitBranch!,
-      widget.userDetailCareer.unitDepartment!,
-      widget.userDetailCareer.unitTitle!,
+      widget.userDetailCareer.unitCompany,
+      widget.userDetailCareer.unitBranch,
+      widget.userDetailCareer.unitDepartment,
+      widget.userDetailCareer.unitTitle,
     ];
 
     salaryHeaders = [
@@ -295,7 +295,7 @@ class _TabKariyerState extends State<TabKariyer> {
     salaryChildren1 = [
       tabKariyerController.controllerSalary.text.toString() +
           EmploymentTypeEnumExtension.getList()[
-                  widget.userDetail.employmentType!.index]
+                  widget.userDetail.employmentType.index]
               .toString(),
       tabKariyerController.controllerPaymentScreenInSalary.text.toString(),
       'Buraya Nasıl Ekleyeceğim Bakacağım Sonra',
@@ -521,12 +521,28 @@ class _PozisyonEklemeBody extends StatelessWidget {
           Row(
             children: [
               ExpandedCustomDateTimePicker(
-                dateTime: dateFormat.parse(userDetail.startDateWork!),
-                label: 'Başlangıç Tarihi',
+                label: 'Başlangıç Tarihi',                
+                onChanged: (val) {
+                  if (val != null) {
+                    try {
+                      userDetail.startDateWork = val;
+                    } catch (e) {
+                      print(e.toString());
+                    }
+                  }
+                },
               ),
               ExpandedCustomDateTimePicker(
-                dateTime: dateFormat.parse(userDetail.quitWorkDate!),
                 label: 'Bitiş Tarihi',
+                onChanged: (val) {
+                  if (val != null) {
+                    try {
+                      userDetail.quitWorkDate = val;
+                    } catch (e) {
+                      print(e.toString());
+                    }
+                  }
+                },
               ),
             ],
           ),

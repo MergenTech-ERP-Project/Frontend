@@ -22,10 +22,12 @@ class UserDetailCareerController extends GetxController {
     }
   }
 
-  Future<int?> addNewUserDetailCareer(UserDetailCareer userDetailCareer) async {
+  Future<int?> addNewUserDetailCareer(
+      userDetailId, UserDetailCareer userDetailCareer) async {
     try {
       isLoading(true);
-      UserDetailCareer newUserDetailCareer = UserDetailCareer();
+      UserDetailCareer newUserDetailCareer =
+          UserDetailCareer(userDetailId: userDetailId);
       var response = await UserDetailCareerServices.addNewUserDetailCareer(
           json.encode(newUserDetailCareer.toJson()).toString());
 
