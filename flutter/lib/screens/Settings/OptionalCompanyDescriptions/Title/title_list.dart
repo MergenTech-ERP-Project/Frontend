@@ -1,7 +1,9 @@
 // ignore_for_file: avoid_print
 
+
+
 import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_right_icon_button.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/models/settings/title.dart';
@@ -34,7 +36,7 @@ class _TitleListState extends State<TitleList> {
           fillcolor: Colors.white60,
         ),
         Obx(() {
-          return (companyController.isLoading.value
+          return (titleController.isLoading.value
               ? const Center(
                   child: SizedBox(
                   height: 50,

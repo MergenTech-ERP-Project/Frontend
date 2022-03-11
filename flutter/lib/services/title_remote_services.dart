@@ -17,22 +17,19 @@ class TitleRemoteServices {
     }
   }
 
-  /* static Future<int> fetchTitle(companyId, branchId, departmentId) async {
+  static Future<List<Titlee>?> fetchTitleWithCompanyIdAndBranchIdAndDepartmentId(
+      companyId, branchId, departmentId) async {
     var response = await http.get(
-        Uri.parse(serviceHttp + '/Title/$companyId/$branchId/$departmentId'));
-    int titleId = -1;
+        Uri.parse(serviceHttp + '/title/$companyId/$branchId/$departmentId'));
+
+    ///TODO: request
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
-      List<Title> companies = titleFromJson(jsonString);
-      for (Title title in companies) {
-        if (title.titleName == TitleName) {
-          titleId = companies.indexOf(title);
-          break;
-        }
-      }
+      List<Titlee> titles = titleFromJson(jsonString);
+      return titles;
     }
-    return titleId;
-  } */
+    return null;
+  }
 
   static Future<String> newTitle(String json) async {
     var response = await http

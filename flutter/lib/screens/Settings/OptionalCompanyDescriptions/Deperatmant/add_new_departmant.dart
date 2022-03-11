@@ -7,7 +7,6 @@ import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
-import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/models/settings/department.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
@@ -117,6 +116,8 @@ class _AddNewDepartmantState extends State<AddNewDepartmant> {
                           }
                           await departmentController.newDepartment(
                             Department(
+                              branchId:
+                                  optionalCompanyController.branchId.value,
                               departmentName:
                                   widget.controllerDepartmantName.text,
                             ),

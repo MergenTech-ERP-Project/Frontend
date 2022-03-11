@@ -10,12 +10,12 @@ class UserDetailCareerController extends GetxController {
   var isLoading = false.obs;
   List<UserDetailCareer> userListCareer = <UserDetailCareer>[].obs;
 
-  Future<UserDetailCareer?> fetchUserDetailCareerById(id) async {
+  Future<UserDetailCareer?> fetchUserDetailCareerById(userDetailId) async {
     try {
       isLoading(true);
       UserDetailCareer? detailCareer =
-          await UserDetailCareerServices.fetchUserDetailCareerById(id);
-      print("fetch User Detail Career: " + detailCareer!.id.toString());
+          await UserDetailCareerServices.fetchUserDetailCareerById(userDetailId);
+      print("fetch User Detail Career: " + detailCareer!.userDetailId.toString());
       return detailCareer;
     } finally {
       isLoading(false);

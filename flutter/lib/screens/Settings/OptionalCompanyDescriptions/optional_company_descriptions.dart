@@ -1,6 +1,6 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Branch/add_new_branch.dart';
 import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Branch/branch_list.dart';
@@ -14,14 +14,13 @@ import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Title/t
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class OptionalCompanyDescriptions extends StatelessWidget {
-  RxBool company = true.obs;
-  RxBool branch = false.obs;
-  RxBool departmant = false.obs;
-  RxBool title = false.obs;
-
-  OptionalCompanyDescriptions({Key? key}) : super(key: key) {
+  OptionalCompanyDescriptions({
+    Key? key,
+  }) : super(key: key) {
     branchController.fetchBranches();
     companyController.fetchCompanies();
+    departmentController.fetchDepartments();
+    titleController.fetchTitles();
   }
   ScrollController controller = ScrollController();
 
@@ -37,43 +36,43 @@ class OptionalCompanyDescriptions extends StatelessWidget {
           child: Column(
             children: [
               OptionalCompanyCard(
-                visible: company,
+                visible: optionalCompanyController.companyBool,
                 addNewWidget: AddNewCompany(),
                 title: "Şirket",
                 childWidget: CompanyList(
                   companyList: companyController.companyList,
                   onSelected: () {
-                    branch.value = true;
-                    departmant.value = false;
-                    title.value = false;
+                    optionalCompanyController.branchBool.value = true;
+                    optionalCompanyController.departmantBool.value = false;
+                    optionalCompanyController.titleBool.value = false;
                   },
                 ),
               ),
               OptionalCompanyCard(
-                visible: branch,
+                visible: optionalCompanyController.branchBool,
                 addNewWidget: AddNewBranch(),
                 title: "Şube",
                 childWidget: BranchList(
                   branchList: branchController.branchList,
                   onSelected: () {
-                    departmant.value = true;
-                    title.value = false;
+                    optionalCompanyController.departmantBool.value = true;
+                    optionalCompanyController.titleBool.value = false;
                   },
                 ),
               ),
               OptionalCompanyCard(
-                visible: departmant,
+                visible: optionalCompanyController.departmantBool,
                 addNewWidget: AddNewDepartmant(),
                 title: "Departman",
                 childWidget: DepartmantList(
                   departmentList: departmentController.departmentList,
                   onSelected: () {
-                    title.value = true;
+                    optionalCompanyController.titleBool.value = true;
                   },
                 ),
               ),
               OptionalCompanyCard(
-                visible: title,
+                visible: optionalCompanyController.titleBool,
                 addNewWidget: AddNewTitle(),
                 title: "Ünvan",
                 childWidget: TitleList(

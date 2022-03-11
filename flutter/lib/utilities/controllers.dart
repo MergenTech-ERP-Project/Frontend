@@ -17,6 +17,7 @@ import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_diger_bilgiler
 import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_genel_controller.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_kariyer_controller.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_kisisel_bilgiler_controller.dart';
+import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/optional_company_descriptions_controller.dart';
 
 DateFormat dateTimeFormat = DateFormat("yyyy-MM-dd HH:mm");
 DateFormat dateFormat = DateFormat("dd/MM/yyyy");
@@ -27,7 +28,7 @@ UserController userController = Get.find<UserController>();
 ActivityController activityController = Get.find<ActivityController>();
 ActivityEvaluationController activityEvaluationController =
     Get.find<ActivityEvaluationController>();
-    
+
 CompanyController companyController = Get.find<CompanyController>();
 BranchController branchController = Get.find<BranchController>();
 DepartmentController departmentController = Get.find<DepartmentController>();
@@ -48,3 +49,6 @@ TabDigerBilgilerController tabDigerBilgilerController =
     Get.find<TabDigerBilgilerController>();
 TabKisiselBilgilerController tabKisiselBilgilerController =
     Get.find<TabKisiselBilgilerController>();
+
+OptionalCompanyDescriptionsController optionalCompanyController =
+    Get.find<OptionalCompanyDescriptionsController>();

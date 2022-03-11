@@ -12,7 +12,7 @@ class DepartmentController extends GetxController {
 
   @override
   void onInit() {
-    //fetchDepartments();
+    fetchDepartments();
     super.onInit();
   }
 
@@ -21,7 +21,7 @@ class DepartmentController extends GetxController {
       isLoading(true);
       var departments = await DepartmentRemoteServices.fetchDepartments();
       if (departments != null) {
-        departmentList.removeRange(0, departmentList.length);
+        
         departmentList.assignAll(departments);
       }
     } finally {
@@ -29,19 +29,18 @@ class DepartmentController extends GetxController {
     }
   }
 
-  /* void fetchDepartmentesById(int companyId, int branchId) async {
+  void fetchDepartmentesById(int companyId, int branchId) async {
     try {
       isLoading(true);
-      var departments = await DepartmentRemoteServices.fetchDepartmentsById(
-          companyId, branchId);
+      var departments = await DepartmentRemoteServices
+          .fetchDepartmentsWithCompanyIdAndBranchId(companyId, branchId);
       if (departments != null) {
-        departmentList.removeRange(0, departmentList.length);
         departmentList.assignAll(departments);
       }
     } finally {
       isLoading(false);
     }
-  } */
+  }
 
   Future<String?> newDepartment(Department newDepartment) async {
     try {
@@ -61,7 +60,7 @@ class DepartmentController extends GetxController {
       isLoading(true);
       print(id);
       var response = await DepartmentRemoteServices.updateDepartment(
-          id, json.encode(department.toJsonWithId()).toString());
+          id, json.encode(department.toJson()).toString());
       fetchDepartments();
       print("Update Department: " + response);
       return response;
