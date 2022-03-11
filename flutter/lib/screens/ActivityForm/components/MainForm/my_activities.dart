@@ -4,9 +4,11 @@ import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/activity_li
 import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/activity_list_small.dart';
 
 class MyActivities extends StatelessWidget {
+  const MyActivities({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return ResponsiveWidget(
+    return const ResponsiveWidget(
       largeScreen: ActivityListLarge(),
       smallScreen: ActivityListSmall(),
     );

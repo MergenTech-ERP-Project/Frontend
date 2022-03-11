@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,13 +13,21 @@ import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class AddNewBranch extends StatefulWidget {
-  AddNewBranch({
-    Key? key,
-  }) : super(key: key);
-
   final TextEditingController controllerBranchName = TextEditingController();
   final TextEditingController controllerBranchUpper = TextEditingController();
   final TextEditingController controllerRules = TextEditingController();
+  DateTime vacationDates = DateTime.now();
+
+  Branch? branch;
+
+  AddNewBranch({Key? key, this.branch}) : super(key: key) {
+    controllerBranchName.text = branch == null ? "" : branch!.branchName;
+    controllerBranchUpper.text = branch == null ? "" : branch!.branchUpper;
+    controllerRules.text = branch == null ? "" : branch!.rules;
+    vacationDates = branch == null
+        ? DateTime.now()
+        : dateTimeFormat.parse(branch!.vacationDates);
+  }
 
   @override
   State<AddNewBranch> createState() => _AddNewBranchState();
@@ -27,7 +35,7 @@ class AddNewBranch extends StatefulWidget {
 
 class _AddNewBranchState extends State<AddNewBranch> {
   final _newBranchKey = GlobalKey<FormState>();
-  DateTime holidayCalanders = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -35,14 +43,15 @@ class _AddNewBranchState extends State<AddNewBranch> {
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
       ),
       title: Row(
-        children: const [
+        children: [
           Icon(
-            Icons.add,
+            widget.branch == null ? Icons.add : Icons.edit,
             color: Colors.black,
             size: 24,
           ),
-          SizedBox(width: 20),
-          CustomText(text: "Yeni Birim Ekle"),
+          const SizedBox(width: 20),
+          CustomText(
+              text: widget.branch == null ? "Yeni Şube Ekle" : "Düzenle"),
         ],
       ),
       content: Builder(builder: (context) {
@@ -82,12 +91,13 @@ class _AddNewBranchState extends State<AddNewBranch> {
                     suffixWidget: const Icon(Icons.calendar_today_outlined),
                     labelText: "Tatil Takvimleri - Başlangıç",
                     borderless: true,
+                    initialDate: widget.vacationDates,
                     onChanged: (val) {
                       if (val != null) {
                         print("Holiday Calanders picker : " + val);
                       }
                       try {
-                        holidayCalanders = dateTimeFormat.parse(val!);
+                        widget.vacationDates = dateTimeFormat.parse(val!);
                       } catch (e) {
                         print(e.toString());
                       }
@@ -96,7 +106,7 @@ class _AddNewBranchState extends State<AddNewBranch> {
                   const SizedBox(height: 30),
                   CustomButton(
                       width: double.infinity,
-                      title: "Ekle",
+                      title: widget.branch == null ? "Ekle" : "Düzenle",
                       pressAction: () async {
                         if (_newBranchKey.currentState!.validate()) {
                           showDialogWaitingMessage(context);
@@ -140,24 +150,49 @@ class _AddNewBranchState extends State<AddNewBranch> {
                                   bodyWidgetWidth:
                                       MediaQuery.of(context).size.width / 3,
                                 ),
-                              );
+                              ).then((value) async {
+                                await Future.delayed(const Duration(seconds: 1));
+                                return Navigator.pop(context);
+                              });
                               return;
                             }
                           }
-                          await branchController.addNewBranch(
-                            Branch(
-                              id: 0,
-                              companyId: optionalCompanyController.companyId.value,
-                              branchName: widget.controllerBranchName.text,
-                              branchUpper: widget.controllerBranchUpper.text,
-                              rules: widget.controllerRules.text,
-                              vacationDates: holidayCalanders.toString(),
-                            ),
-                          );
+                          widget.branch == null
+                              ? await branchController.addNewBranch(
+                                  Branch(
+                                    id: 0,
+                                    companyId: optionalCompanyController
+                                        .companyId.value,
+                                    branchName:
+                                        widget.controllerBranchName.text,
+                                    branchUpper:
+                                        widget.controllerBranchUpper.text,
+                                    rules: widget.controllerRules.text,
+                                    vacationDates:
+                                        widget.vacationDates.toString(),
+                                  ),
+                                )
+                              : await branchController.updateBranch(
+                                  widget.branch!.id,
+                                  Branch(
+                                    id: widget.branch!.id,
+                                    companyId: optionalCompanyController
+                                        .companyId.value,
+                                    branchName:
+                                        widget.controllerBranchName.text,
+                                    branchUpper:
+                                        widget.controllerBranchUpper.text,
+                                    rules: widget.controllerRules.text,
+                                    vacationDates:
+                                        widget.vacationDates.toString(),
+                                  ),
+                                );
                           Navigator.pop(context);
                           Get.snackbar(
-                            "Birim Ekleme Ekranı",
-                            "Birim Kaydedildi",
+                            widget.branch == null
+                                ? "Şube Başarıyla Eklendi"
+                                : "Şube Başarıyla Düzenlendi",
+                            "",
                             snackPosition: SnackPosition.BOTTOM,
                             backgroundColor: successfulColor,
                             padding: EdgeInsets.only(left: width / 2 - 100),

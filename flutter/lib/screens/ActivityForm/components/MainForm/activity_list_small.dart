@@ -5,6 +5,8 @@ import 'package:vtys_kalite/screens/ActivityForm/components/MainForm/new_activit
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class ActivityListSmall extends StatelessWidget {
+  const ActivityListSmall({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Obx(

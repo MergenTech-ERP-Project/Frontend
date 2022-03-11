@@ -7,7 +7,7 @@ class CustomTextDivider extends StatelessWidget {
   final TextStyle? style;
   final Color? color;
 
-  CustomTextDivider({
+  const CustomTextDivider({
     Key? key,
     this.height = 40,
     this.thickness = 1,
@@ -18,7 +18,7 @@ class CustomTextDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: height,
       child: (Row(
         children: <Widget>[

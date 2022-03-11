@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
@@ -12,6 +14,14 @@ import 'package:vtys_kalite/utilities/style.dart';
 class AddNewTitle extends StatefulWidget {
   final TextEditingController controllerTitleName = TextEditingController();
 
+  Titlee? titlee;
+
+  AddNewTitle({
+    Key? key,
+    this.titlee,
+  }) : super(key: key) {
+    controllerTitleName.text = titlee == null ? "" : titlee!.titleName;
+  }
 
   @override
   State<AddNewTitle> createState() => _AddNewTitleState();
@@ -29,12 +39,13 @@ class _AddNewTitleState extends State<AddNewTitle> {
       title: Row(
         children: [
           Icon(
-            Icons.add,
+            widget.titlee == null ? Icons.add : Icons.edit,
             color: blackColor,
             size: 24,
           ),
           const SizedBox(width: 20),
-          const CustomText(text: "Yeni Ünvan Ekle"),
+          CustomText(
+              text: widget.titlee == null ? "Yeni Ünvan Ekle" : "Düzenle"),
         ],
       ),
       content: Builder(
@@ -59,7 +70,7 @@ class _AddNewTitleState extends State<AddNewTitle> {
                     ),
                     const SizedBox(height: 20),
                     CustomButton(
-                      title: "Ekle",
+                      title: widget.titlee == null ? "Ekle" : "Düzenle",
                       pressAction: () async {
                         if (_newTitleKey.currentState!.validate()) {
                           showDialogWaitingMessage(context);
@@ -105,22 +116,40 @@ class _AddNewTitleState extends State<AddNewTitle> {
                                   bodyWidgetWidth:
                                       MediaQuery.of(context).size.width / 3,
                                 ),
-                              );
+                              ).then((value) async {
+                                await Future.delayed(const Duration(seconds: 1));
+                                return Navigator.pop(context);
+                              });
 
                               return;
                             }
                           }
-                          await titleController.newTitle(
-                            Titlee(
-                                titleName: widget.controllerTitleName.text,
-                                departmentId: optionalCompanyController.departmentId.value),
-                          );
-                          Navigator.pop(context);
+                          widget.titlee == null
+                              ? await titleController.newTitle(
+                                  Titlee(
+                                      titleName:
+                                          widget.controllerTitleName.text,
+                                      departmentId: optionalCompanyController
+                                          .departmentId.value),
+                                )
+                              : await titleController.updateTitle(
+                                  widget.titlee!.id,
+                                  Titlee(
+                                      id: widget.titlee!.id,
+                                      titleName:
+                                          widget.controllerTitleName.text,
+                                      departmentId: optionalCompanyController
+                                          .departmentId.value),
+                                );
+                          Navigator.of(context).pop(true);
                           Get.snackbar(
-                            "Şirket Ekleme Ekranı",
-                            "Şirket Kaydedildi",
+                            widget.titlee == null
+                                ? "Ünvan Ekleme Başarıyla Yapıldı"
+                                : "Ünvan Düzenleme Başarıyla Yapıldı",
+                            "",
                             snackPosition: SnackPosition.BOTTOM,
                             backgroundColor: successfulColor,
+                            colorText: whiteColor,
                             padding: EdgeInsets.only(left: width / 2 - 100),
                           );
                         }

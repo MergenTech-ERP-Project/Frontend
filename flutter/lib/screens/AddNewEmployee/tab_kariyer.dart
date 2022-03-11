@@ -11,6 +11,7 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/employment_type.dart';
+import 'package:vtys_kalite/enums/salary_type.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
@@ -80,8 +81,8 @@ class _TabKariyerState extends State<TabKariyer> {
         CustomScrollableColumn(
           scrollController: scrollController,
           children: [
-            buildRows(positionHeaders, Colors.white, 200),
-            buildRows(positionChildren1, Colors.white, 200),
+            buildRows(positionHeaders, Colors.white, 210),
+            buildRows(positionChildren1, Colors.white, 210),
           ],
         ),
         buildHeaders(
@@ -131,10 +132,17 @@ class _TabKariyerState extends State<TabKariyer> {
                         ),
                         Row(
                           children: [
-                            ExpandedNameController(
-                              controller: tabKariyerController.controllerUnit,
+                            ExpandedCustomDropDownMenu(
+                              value: widget.userHelper.userDetailPayment
+                                  .salaryType!.getName,
                               label: "Maaş Tipi",
-                              widget: const SizedBox(),
+                              listExtension: SalaryTypeExtension.getList(),
+                              onChanged: (val) {
+                                setState(() {
+                                  widget.userHelper.userDetailPayment.salaryType =
+                                      SalaryTypeExtension.getEnumFromName(val);
+                                });
+                              },
                             ),
                             Obx(
                               () => CustomSwitch(
@@ -245,8 +253,8 @@ class _TabKariyerState extends State<TabKariyer> {
         CustomScrollableColumn(
           scrollController: scrollController,
           children: [
-            buildRows(salaryHeaders, Colors.white, 350),
-            buildRows(salaryChildren1, Colors.white, 350),
+            buildRows(salaryHeaders, Colors.white, 500),
+            buildRows(salaryChildren1, Colors.white, 500),
           ],
         ),
       ],
@@ -365,10 +373,19 @@ class MaasEkleHeader extends StatelessWidget {
         ),
         Row(
           children: [
-            CustomButtonWidget(label: "İptal", function: () {}, iptalMi: true),
+            CustomButtonWidget(
+                label: "İptal",
+                function: () {
+                  Get.back();
+                },
+                iptalMi: true),
             const SizedBox(width: 15),
             CustomButtonWidget(
-                label: "Kaydet", function: () {}, iptalMi: false),
+                label: "Kaydet",
+                function: () {
+                  Get.back();
+                },
+                iptalMi: false),
           ],
         ),
       ],
@@ -435,8 +452,10 @@ class _PozisyonEklemeBody extends StatelessWidget {
                   }
                   return ExpandedCustomDropDownMenu(
                     label: "Şube",
-                    value:branchNames.isEmpty ? "" :
-                        branchNames[tabKariyerController.unitBranchIndex.value],
+                    value: branchNames.isEmpty
+                        ? ""
+                        : branchNames[
+                            tabKariyerController.unitBranchIndex.value],
                     listExtension: branchNames,
                     onChanged: (val) {
                       if (branchNames.isNotEmpty) {
@@ -460,9 +479,11 @@ class _PozisyonEklemeBody extends StatelessWidget {
                     departmantNames.add(d.departmentName);
                   }
                   return ExpandedCustomDropDownMenu(
-                    label: "Department",
-                    value: departmantNames.isEmpty ? "" : departmantNames[
-                        tabKariyerController.unitDepartmantIndex.value],
+                    label: "Departman",
+                    value: departmantNames.isEmpty
+                        ? ""
+                        : departmantNames[
+                            tabKariyerController.unitDepartmantIndex.value],
                     listExtension: departmantNames,
                     onChanged: (val) {
                       if (departmantNames.isNotEmpty) {
@@ -483,9 +504,10 @@ class _PozisyonEklemeBody extends StatelessWidget {
                     titleNames.add(t.titleName);
                   }
                   return ExpandedCustomDropDownMenu(
-                    label: "Title",
-                    value: titleNames.isEmpty ? "" : titleNames[
-                        tabKariyerController.unitTitleIndex.value],
+                    label: "Ünvan",
+                    value: titleNames.isEmpty
+                        ? ""
+                        : titleNames[tabKariyerController.unitTitleIndex.value],
                     listExtension: titleNames,
                     onChanged: (val) {
                       if (titleNames.isNotEmpty) {
@@ -571,10 +593,19 @@ class _PozisyonEkleHeader extends StatelessWidget {
         const CustomText(text: 'Pozisyon Ekle'),
         Row(
           children: [
-            CustomButtonWidget(label: "İptal", function: () {}, iptalMi: true),
+            CustomButtonWidget(
+                label: "İptal",
+                function: () {
+                  Get.back();
+                },
+                iptalMi: true),
             const SizedBox(width: 15),
             CustomButtonWidget(
-                label: "Kaydet", function: () {}, iptalMi: false),
+                label: "Kaydet",
+                function: () {
+                  Get.back();
+                },
+                iptalMi: false),
           ],
         ),
       ],

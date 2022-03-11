@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:vtys_kalite/componenets/custom_right_icon_button.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/models/settings/department.dart';
+import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Deperatmant/add_new_departmant.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
@@ -55,8 +57,7 @@ class _DepartmantListState extends State<DepartmantList> {
                               child: Center(
                                   child: Text(index == 0
                                       ? "Departman Adı"
-                                      : widget
-                                          .departmentList[index - 1]
+                                      : widget.departmentList[index - 1]
                                           .departmentName)),
                             ),
                             Row(
@@ -66,14 +67,31 @@ class _DepartmantListState extends State<DepartmantList> {
                                     Icons.edit,
                                     color: index == 0 ? whiteColor : darkColor,
                                   ),
-                                  function: index == 0 ? null : () {},
+                                  function: index == 0
+                                      ? null
+                                      : () => showDialog(
+                                          context: context,
+                                          builder: (context) =>
+                                              AddNewDepartmant(
+                                                department: widget
+                                                    .departmentList[index - 1],
+                                              )),
                                 ),
                                 RightIconButton(
                                   icon: Icon(
                                     Icons.delete,
                                     color: index == 0 ? whiteColor : redColor,
                                   ),
-                                  function: index == 0 ? null : () {},
+                                  function: index == 0
+                                      ? null
+                                      : () async {
+                                          showDialogAreYouSureDelete(
+                                              context,
+                                              () async => departmentController
+                                                  .removeDepartment(widget
+                                                      .departmentList[index - 1]
+                                                      .id));
+                                        },
                                 ),
                               ],
                             ),

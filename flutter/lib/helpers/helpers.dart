@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
@@ -83,6 +84,88 @@ showDialogDoneMessage(context, {String text = "İşlem Kaydedildi."}) async {
       ),
     ),
   ).then((value) => Get.back());
+}
+
+showDialogAreYouSureDelete(context, Function() onAccept) async {
+  showDialog(
+    context: context,
+    builder: (context) => CustomAlertDialog(
+      backgroundColor: lightGreyColor,
+      titleWidget: Row(
+        children: [
+          Icon(
+            Icons.warning_rounded,
+            size: 24,
+            color: yellowColor,
+          ),
+          CustomText(
+            text: "Dikkat",
+            size: 24,
+            color: yellowColor,
+          ),
+        ],
+      ),
+      bodyWidget: Wrap(
+        children: const [
+          Center(
+            child: CustomText(
+              text: "Silmek istediğinizden emin misiniz?",
+              size: 18,
+              weight: FontWeight.w200,
+            ),
+          ),
+        ],
+      ),
+      bodyWidgetWidth: 350,
+      actions: [
+        Row(
+          children: [
+            InkWell(
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.close,
+                      color: whiteColor,
+                    ),
+                    CustomText(
+                      text: "Hayır",
+                      color: whiteColor,
+                    ),
+                  ],
+                ),
+              ),
+              onTap: () {
+                Get.back();
+              },
+            ),
+            InkWell(
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.done,
+                      color: yellowColor,
+                    ),
+                    CustomText(
+                      text: "Evet",
+                      color: yellowColor,
+                    ),
+                  ],
+                ),
+              ),
+              onTap: () {
+                onAccept();
+                Get.back();
+              },
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
 }
 
 showDialogWaitingMessage(context) async {

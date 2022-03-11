@@ -12,6 +12,8 @@ class ActivityListLarge extends StatelessWidget {
     mainAxisSpacing: 10,
   );
 
+  const ActivityListLarge({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Obx(

@@ -22,11 +22,11 @@ enum BankNamesEnum {
 
 extension BankNamesEnumExtension on BankNamesEnum {
   static List<String> getList() {
-    List<String> accountTypeList = [];
+    List<String> bankNamesList = [];
     for (var item in BankNamesEnum.values) {
-      accountTypeList.add(item.getName);
+      bankNamesList.add(item.getName);
     }
-    return accountTypeList;
+    return bankNamesList;
   }
 
   String get getName {

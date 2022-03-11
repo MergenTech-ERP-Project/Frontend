@@ -21,7 +21,7 @@ class TitleController extends GetxController {
       isLoading(true);
       var titles = await TitleRemoteServices.fetchTitles();
       if (titles != null) {
-        titleList.assignAll(titleList);
+        titleList.assignAll(titles);
       }
     } finally {
       isLoading(false);

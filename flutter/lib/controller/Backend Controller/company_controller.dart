@@ -40,19 +40,10 @@ class CompanyController extends GetxController {
     }
   }
 
-  Future<String?> postCompany(String companyName, String companyPhone,
-      String domainName, String mersisNo, String sgkCompanyNo) async {
+  Future<String?> newAddCompany(Company newCompany) async {
     try {
       isLoading(true);
-      Company newCompany = Company(
-        id: 0,
-        companyName: companyName,
-        companyPhone: companyPhone,
-        domainName: domainName,
-        mersisNo: mersisNo,
-        sgkCompanyNo: sgkCompanyNo,
-      );
-      var response = await CompanyRemoteServices.postCompany(
+      var response = await CompanyRemoteServices.newAddCompany(
         json.encode(newCompany.toJson()).toString(),
       );
       fetchCompanies(); //companyList.add(newCompany);
@@ -63,11 +54,11 @@ class CompanyController extends GetxController {
     }
   }
 
-  Future <String?> putCompany(int id, Company company) async {
+  Future <String?> updateCompany(int id, Company company) async {
     try {
       isLoading(true);
       print(id);
-      var response = await CompanyRemoteServices.putCompany(
+      var response = await CompanyRemoteServices.updateCompany(
         id,
         json.encode(company.toJsonWithId()).toString(),
       );
@@ -79,11 +70,11 @@ class CompanyController extends GetxController {
     }
   }
 
-  Future <String?> deleteCompany(int id, Company company) async {
+  Future <String?> removeCompany(int id) async {
     try {
       isLoading(true);
       print(id);
-      var response = await CompanyRemoteServices.deleteCompany(id);
+      var response = await CompanyRemoteServices.removeCompany(id);
       fetchCompanies();
       print("delete Company: " + response);
       return response;
