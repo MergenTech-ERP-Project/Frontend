@@ -10,11 +10,11 @@ class UserDetailPaymentController extends GetxController {
   var isLoading = false.obs;
   List<UserDetailPayment> userListPayment = <UserDetailPayment>[].obs;
 
-  Future<UserDetailPayment?> fetchUserDetailPaymentById(id) async {
+  Future<UserDetailPayment?> fetchUserDetailPaymentById(userDetailId) async {
     try {
       isLoading(true);
       UserDetailPayment? detailPayment =
-          await UserDetailPaymentServices.fetchUserDetailPaymentById(id);
+          await UserDetailPaymentServices.fetchUserDetailPaymentById(userDetailId);
       print("fetch User Detail Payment: " + detailPayment!.tcno.toString());
       return detailPayment;
     } finally {

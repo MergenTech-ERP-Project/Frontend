@@ -5,13 +5,13 @@ import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
-import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/models/settings/title.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class AddNewTitle extends StatefulWidget {
   final TextEditingController controllerTitleName = TextEditingController();
+
 
   @override
   State<AddNewTitle> createState() => _AddNewTitleState();
@@ -112,8 +112,8 @@ class _AddNewTitleState extends State<AddNewTitle> {
                           }
                           await titleController.newTitle(
                             Titlee(
-                              titleName: widget.controllerTitleName.text,
-                            ),
+                                titleName: widget.controllerTitleName.text,
+                                departmentId: optionalCompanyController.departmentId.value),
                           );
                           Navigator.pop(context);
                           Get.snackbar(

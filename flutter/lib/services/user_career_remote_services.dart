@@ -8,8 +8,8 @@ import 'package:vtys_kalite/routing/routes.dart';
 class UserDetailCareerServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
-  static Future<UserDetailCareer?> fetchUserDetailCareerById(id) async {
-    var response = await http.get(Uri.parse(serviceHttp + '/career/list/$id'));
+  static Future<UserDetailCareer?> fetchUserDetailCareerById(userDetailId) async {
+    var response = await http.get(Uri.parse(serviceHttp + '/career/list/$userDetailId'));
     UserDetailCareer? userDetailCareer;
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
@@ -40,9 +40,9 @@ class UserDetailCareerServices {
     return response.statusCode;
   }
 
-  static Future<int> updateUserDetailCareer(int id, String json) async {
+  static Future<int> updateUserDetailCareer(int userDetailId, String json) async {
     var response = await http
-        .put(Uri.parse(serviceHttp + '/career/put/$id'),
+        .put(Uri.parse(serviceHttp + '/career/put/$userDetailId'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',

@@ -6,13 +6,11 @@ import 'package:http/http.dart' as http;
 import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 
-
 class BranchRemoteServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
   static Future<List<Branch>?> fetchBranches() async {
-    var response = await http.get(Uri.parse(
-       serviceHttp + '/branch/list'));
+    var response = await http.get(Uri.parse(serviceHttp + '/branch/list'));
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       return branchFromJson(jsonString);
@@ -22,8 +20,8 @@ class BranchRemoteServices {
   }
 
   static Future<List<Branch>?> fetchBranchesByCompanyId(int companyId) async {
-    var response = await http.get(Uri.parse(
-       serviceHttp + '/branch/list/$companyId'));
+    var response =
+        await http.get(Uri.parse(serviceHttp + '/branch/list/$companyId'));
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       return branchFromJson(jsonString);
@@ -33,8 +31,8 @@ class BranchRemoteServices {
   }
 
   static Future<int> fetchBranch(int companyId, String branchName) async {
-    var response = await http.get(Uri.parse(
-        serviceHttp + '/branch/$companyId/$branchName'));
+    var response = await http
+        .get(Uri.parse(serviceHttp + '/branch/$companyId/$branchName'));
     int branchId = -1;
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
@@ -50,62 +48,59 @@ class BranchRemoteServices {
     return branchId;
   }
 
-  static Future<String> postBranch(String json) async {
+  static Future<String> newAddBranch(String json) async {
     print("Json: $json");
     var response = await http
         .post(
-      Uri.parse(
-          serviceHttp + '/branch/new'),
-      headers: <String, String>{
-        'Content-type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: json,
-      encoding: encoding,
-    )
+          Uri.parse(serviceHttp + '/branch/new'),
+          headers: <String, String>{
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: json,
+          encoding: encoding,
+        )
         .timeout(
-      const Duration(seconds: 10),
-    );
+          const Duration(seconds: 10),
+        );
     return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Branch"
         : "Error: Branch ${response.statusCode}";
   }
 
-  static Future<String> putBranch(int id, String json) async {
+  static Future<String> updateBranch(int id, String json) async {
     print("Json: $json");
     var response = await http
         .put(
-      Uri.parse(
-          serviceHttp + "/branch/update/$id"),
-      headers: <String, String>{
-        'Content-type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: json,
-      encoding: encoding,
-    )
+          Uri.parse(serviceHttp + "/branch/update/$id"),
+          headers: <String, String>{
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: json,
+          encoding: encoding,
+        )
         .timeout(
-      const Duration(seconds: 10),
-    );
+          const Duration(seconds: 10),
+        );
     return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Branch"
         : "Error: Branch ${response.statusCode}";
   }
 
-  static Future<String> deleteBranch(int id) async {
+  static Future<String> removeBranch(int id) async {
     var response = await http
         .delete(
-      Uri.parse(
-        serviceHttp + '/branch/remove/$id'),
-      headers: <String, String>{
-        'Content-type': 'application/json',
-        'Accept': 'application/json',
-      },
-      encoding: encoding,
-    )
+          Uri.parse(serviceHttp + '/branch/remove/$id'),
+          headers: <String, String>{
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+          },
+          encoding: encoding,
+        )
         .timeout(
-      const Duration(seconds: 10),
-    );
+          const Duration(seconds: 10),
+        );
     return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Branch"
         : "Error: Branch ${response.statusCode}";

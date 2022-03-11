@@ -144,9 +144,10 @@ class _AddNewBranchState extends State<AddNewBranch> {
                               return;
                             }
                           }
-                          await branchController.postBranch(
+                          await branchController.addNewBranch(
                             Branch(
                               id: 0,
+                              companyId: optionalCompanyController.companyId.value,
                               branchName: widget.controllerBranchName.text,
                               branchUpper: widget.controllerBranchUpper.text,
                               rules: widget.controllerRules.text,

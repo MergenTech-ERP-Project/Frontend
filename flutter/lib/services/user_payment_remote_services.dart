@@ -8,9 +8,9 @@ import 'package:vtys_kalite/routing/routes.dart';
 class UserDetailPaymentServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
-  static Future<UserDetailPayment?> fetchUserDetailPaymentById(id) async {
+  static Future<UserDetailPayment?> fetchUserDetailPaymentById(userDetailId) async {
     var response =
-        await http.get(Uri.parse(serviceHttp + '/payments/list/$id'));
+        await http.get(Uri.parse(serviceHttp + '/payments/list/$userDetailId'));
     UserDetailPayment? userDetailPayment;
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);

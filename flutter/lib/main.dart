@@ -20,6 +20,7 @@ import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_diger_bilgiler
 import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_genel_controller.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_kariyer_controller.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_kisisel_bilgiler_controller.dart';
+import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/optional_company_descriptions_controller.dart';
 import 'package:vtys_kalite/screens/page_not_found.dart';
 import 'package:vtys_kalite/screens/pages.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -92,4 +93,6 @@ controllerMethod() {
   Get.put(TabKariyerController());
   Get.put(TabDigerBilgilerController());
   Get.put(TabKisiselBilgilerController());
+
+  Get.put(OptionalCompanyDescriptionsController());
 }
