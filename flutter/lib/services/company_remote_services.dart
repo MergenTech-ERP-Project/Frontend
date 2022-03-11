@@ -34,7 +34,7 @@ class CompanyRemoteServices {
     return companyId;
   }
 
-  static Future<String> postCompany(String json) async {
+  static Future<String> newAddCompany(String json) async {
     var response = await http
         .post(
           Uri.parse(serviceHttp + '/company/new'),
@@ -53,7 +53,7 @@ class CompanyRemoteServices {
         : "Error: Company ${response.statusCode}";
   }
 
-  static Future<String> putCompany(int id, String json) async {
+  static Future<String> updateCompany(int id, String json) async {
     var response = await http
         .put(
           Uri.parse(serviceHttp + "/company/update/$id"),
@@ -72,7 +72,7 @@ class CompanyRemoteServices {
         : "Error: Company ${response.statusCode}";
   }
 
-  static Future<String> deleteCompany(int id) async {
+  static Future<String> removeCompany(int id) async {
     var response = await http
         .delete(
           Uri.parse(serviceHttp + '/company/remove/$id'),

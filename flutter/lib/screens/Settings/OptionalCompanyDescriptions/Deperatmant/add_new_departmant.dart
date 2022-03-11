@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_key_in_widget_constructors, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +14,16 @@ import 'package:vtys_kalite/utilities/style.dart';
 class AddNewDepartmant extends StatefulWidget {
   final TextEditingController controllerDepartmantName =
       TextEditingController();
+
+  Department? department;
+
+  AddNewDepartmant({
+    Key? key,
+    this.department,
+  }) : super(key: key) {
+    controllerDepartmantName.text =
+        department == null ? "" : department!.departmentName;
+  }
 
   @override
   State<AddNewDepartmant> createState() => _AddNewDepartmantState();
@@ -31,12 +41,15 @@ class _AddNewDepartmantState extends State<AddNewDepartmant> {
       title: Row(
         children: [
           Icon(
-            Icons.add,
+            widget.department == null ? Icons.add : Icons.edit,
             color: blackColor,
             size: 24,
           ),
           const SizedBox(width: 20),
-          const CustomText(text: "Yeni Departman Ekle"),
+          CustomText(
+              text: widget.department == null
+                  ? "Yeni Departman Ekle"
+                  : "Düzenle"),
         ],
       ),
       content: Builder(
@@ -61,7 +74,7 @@ class _AddNewDepartmantState extends State<AddNewDepartmant> {
                     ),
                     const SizedBox(height: 20),
                     CustomButton(
-                      title: "Ekle",
+                      title: widget.department == null ? "Ekle" : "Düzenle",
                       pressAction: () async {
                         if (_newDepartmantKey.currentState!.validate()) {
                           showDialogWaitingMessage(context);
@@ -109,23 +122,40 @@ class _AddNewDepartmantState extends State<AddNewDepartmant> {
                                   bodyWidgetWidth:
                                       MediaQuery.of(context).size.width / 3,
                                 ),
-                              );
+                              ).then((value) async {
+                                await Future.delayed(
+                                    const Duration(seconds: 1));
+                                return Navigator.pop(context);
+                              });
 
                               return;
                             }
                           }
-                          await departmentController.newDepartment(
-                            Department(
-                              branchId:
-                                  optionalCompanyController.branchId.value,
-                              departmentName:
-                                  widget.controllerDepartmantName.text,
-                            ),
-                          );
+                          widget.department == null
+                              ? await departmentController.newDepartment(
+                                  Department(
+                                    branchId: optionalCompanyController
+                                        .branchId.value,
+                                    departmentName:
+                                        widget.controllerDepartmantName.text,
+                                  ),
+                                )
+                              : await departmentController.updateDepartment(
+                                  widget.department!.id,
+                                  Department(
+                                    id: widget.department!.id,
+                                    branchId: optionalCompanyController
+                                        .branchId.value,
+                                    departmentName:
+                                        widget.controllerDepartmantName.text,
+                                  ),
+                                );
                           Navigator.pop(context);
                           Get.snackbar(
-                            "Departman Ekleme Ekranı",
-                            "Departman Kaydedildi",
+                            widget.department == null
+                                ? "Departman Ekleme Başarıyla Yapıldı"
+                                : "Ünvan Düzenleme Başarıyla Yapıldı",
+                            "",
                             snackPosition: SnackPosition.BOTTOM,
                             backgroundColor: successfulColor,
                             padding: EdgeInsets.only(left: width / 2 - 100),

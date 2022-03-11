@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors, must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
@@ -15,6 +17,19 @@ class AddNewCompany extends StatefulWidget {
   final TextEditingController controllerDomainName = TextEditingController();
   final TextEditingController controllerMersisNo = TextEditingController();
   final TextEditingController controllerSGKCompanyNo = TextEditingController();
+
+  Company? company;
+
+  AddNewCompany({
+    Key? key,
+    this.company,
+  }) : super(key: key) {
+    controllerCompanyName.text = company == null ? "" : company!.companyName;
+    controllerCompanyPhone.text = company == null ? "" : company!.companyPhone;
+    controllerDomainName.text = company == null ? "" : company!.domainName;
+    controllerMersisNo.text = company == null ? "" : company!.mersisNo;
+    controllerSGKCompanyNo.text = company == null ? "" : company!.sgkCompanyNo;
+  }
 
   @override
   State<AddNewCompany> createState() => _AddNewCompanyState();
@@ -37,7 +52,8 @@ class _AddNewCompanyState extends State<AddNewCompany> {
             size: 24,
           ),
           const SizedBox(width: 20),
-          const CustomText(text: "Yeni Şirket Ekle"),
+          CustomText(
+              text: widget.company == null ? "Yeni Şirket Ekle" : "Düzenle"),
         ],
       ),
       content: Builder(
@@ -86,10 +102,11 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                     ),
                     const SizedBox(height: 20),
                     CustomButton(
-                      title: "Ekle",
+                        title: widget.company == null ? "Ekle" : "Düzenle",
                         pressAction: () async {
-                        if (_newCompanyKey.currentState!.validate()) {
+                          if (_newCompanyKey.currentState!.validate()) {
                             showDialogWaitingMessage(context);
+
                             ///company name'e göre sorgu yapılması lazım.
                             for (Company company
                                 in companyController.companyList) {
@@ -134,29 +151,51 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                                     bodyWidgetWidth:
                                         MediaQuery.of(context).size.width / 3,
                                   ),
-                                );
-
+                                ).then((value) async {
+                                await Future.delayed(const Duration(seconds: 1));
+                                return Navigator.pop(context);
+                              });
                                 return;
                               }
                             }
-                            await companyController.postCompany(
-                              widget.controllerCompanyName.text,
-                              widget.controllerCompanyPhone.text,
-                              widget.controllerDomainName.text,
-                              widget.controllerMersisNo.text,
-                              widget.controllerSGKCompanyNo.text,
-                            );
+                            widget.company == null
+                                ? await companyController.newAddCompany(Company(
+                                    companyName:
+                                        widget.controllerCompanyName.text,
+                                    companyPhone:
+                                        widget.controllerCompanyPhone.text,
+                                    domainName:
+                                        widget.controllerDomainName.text,
+                                    mersisNo: widget.controllerMersisNo.text,
+                                    sgkCompanyNo:
+                                        widget.controllerSGKCompanyNo.text,
+                                  ))
+                                : await companyController.updateCompany(
+                                    widget.company!.id,
+                                    Company(
+                                      id: widget.company!.id,
+                                      companyName:
+                                          widget.controllerCompanyName.text,
+                                      companyPhone:
+                                          widget.controllerCompanyPhone.text,
+                                      domainName:
+                                          widget.controllerDomainName.text,
+                                      mersisNo: widget.controllerMersisNo.text,
+                                      sgkCompanyNo:
+                                          widget.controllerSGKCompanyNo.text,
+                                    ));
                             Navigator.pop(context);
                             Get.snackbar(
-                              "Şirket Ekleme Ekranı",
-                              "Şirket Kaydedildi",
+                              widget.company == null
+                                  ? "Şirket Ekleme Başarıyla Yapıldı"
+                                  : "Şirket Düzenleme Başarıyla Yapıldı",
+                              "",
                               snackPosition: SnackPosition.BOTTOM,
                               backgroundColor: successfulColor,
                               padding: EdgeInsets.only(left: width / 2 - 100),
                             );
                           }
-                        }
-                    ),
+                        }),
                   ],
                 ),
               ),

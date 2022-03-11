@@ -82,7 +82,7 @@ class BranchController extends GetxController {
     }
   }
 
-  Future<String?> removeBranch(int id, Branch branch) async {
+  Future<String?> removeBranch(int id) async {
     try {
       isLoading(true);
       print(id);

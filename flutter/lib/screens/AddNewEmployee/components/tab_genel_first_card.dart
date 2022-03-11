@@ -1,5 +1,6 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/models/user.dart';
@@ -68,9 +69,17 @@ class TabGenelFirstCard extends StatelessWidget {
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                CustomText(text: "Departman"),
-                CustomText(text: ""), //user.title.getName
+              children: [
+                const CustomText(text: "Departman"),
+                CustomText(text: userHelper.userDetailCareer.unitDepartment),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const CustomText(text: "Ünvan"),
+                CustomText(text: userHelper.userDetailCareer.unitTitle),
               ],
             ),
             const SizedBox(height: 20),

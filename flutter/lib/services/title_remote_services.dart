@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -11,14 +13,17 @@ class TitleRemoteServices {
     var response = await http.get(Uri.parse(serviceHttp + '/title/list'));
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
-      return titleFromJson(jsonString);
-    } else {
-      return null;
+      print(response.body);
+      List<Titlee> titles = titleFromJson(jsonString);
+
+      return titles;
     }
+    return null;
   }
 
-  static Future<List<Titlee>?> fetchTitleWithCompanyIdAndBranchIdAndDepartmentId(
-      companyId, branchId, departmentId) async {
+  static Future<List<Titlee>?>
+      fetchTitleWithCompanyIdAndBranchIdAndDepartmentId(
+          companyId, branchId, departmentId) async {
     var response = await http.get(
         Uri.parse(serviceHttp + '/title/$companyId/$branchId/$departmentId'));
 
@@ -51,6 +56,7 @@ class TitleRemoteServices {
   }
 
   static Future<String> updateTitle(int id, String json) async {
+    print("OMEEEEEEERRRRRRR update");
     var response = await http
         .put(
           Uri.parse(serviceHttp + "/title/update/$id"),

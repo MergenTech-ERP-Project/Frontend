@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
@@ -80,7 +82,8 @@ class _EmployeeCardState extends State<EmployeeCard> {
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: CustomText(
-                          text: "", //widget.user.title.getName,
+                          text: "",
+                          ///TODO widget.user.title.getName,
                           size: 20,
                           weight: FontWeight.w400,
                         ),

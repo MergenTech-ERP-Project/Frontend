@@ -20,9 +20,7 @@ class UserController extends GetxController {
     try {
       isLoading(true);
       List<User>? users = await UserRemoteServices.fetchUsers();
-      users ??= <User>[];
-      userList.removeRange(0, userList.length); //-1 belki
-      userList.assignAll(users);
+      userList.assignAll(users ?? []);
     } finally {
       isLoading(false);
     }
@@ -71,7 +69,7 @@ class UserController extends GetxController {
         name: name,
         password: password,
         title: "",
-            // name == "admin" ? DepartmentsEnum.management : DepartmentsEnum.none,
+        // name == "admin" ? DepartmentsEnum.management : DepartmentsEnum.none,
         cellphone: cellPhoneNumber,
         email: email,
       );

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:vtys_kalite/componenets/custom_right_icon_button.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
+import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Company/add_new_company.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
@@ -72,14 +74,31 @@ class _CompanyListState extends State<CompanyList> {
                                     Icons.edit,
                                     color: index == 0 ? whiteColor : darkColor,
                                   ),
-                                  function: index == 0 ? null : () {},
+                                  function: index == 0
+                                      ? null
+                                      : () => showDialog(
+                                            context: context,
+                                            builder: (context) => AddNewCompany(
+                                              company:
+                                                  widget.companyList[index - 1],
+                                            ),
+                                          ),
                                 ),
                                 RightIconButton(
                                   icon: Icon(
                                     Icons.delete,
                                     color: index == 0 ? whiteColor : redColor,
                                   ),
-                                  function: index == 0 ? null : () {},
+                                  function: index == 0
+                                      ? null
+                                      : () async {
+                                          showDialogAreYouSureDelete(
+                                            context,
+                                            () async => await companyController
+                                                .removeCompany(widget
+                                                    .companyList[index - 1].id),
+                                          );
+                                        },
                                 ),
                               ],
                             ),

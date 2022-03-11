@@ -1,12 +1,12 @@
 // ignore_for_file: avoid_print
 
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_right_icon_button.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/models/settings/title.dart';
+import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Title/add_new_title.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
@@ -57,8 +57,7 @@ class _TitleListState extends State<TitleList> {
                               child: Center(
                                   child: Text(index == 0
                                       ? "Ünvan Adı"
-                                      : widget
-                                          .titleList[index - 1].titleName)),
+                                      : widget.titleList[index - 1].titleName)),
                             ),
                             Row(
                               children: [
@@ -67,14 +66,31 @@ class _TitleListState extends State<TitleList> {
                                     Icons.edit,
                                     color: index == 0 ? whiteColor : darkColor,
                                   ),
-                                  function: index == 0 ? null : () {},
+                                  function: index == 0
+                                      ? null
+                                      : () => showDialog(
+                                            context: context,
+                                            builder: (context) => AddNewTitle(
+                                              titlee:
+                                                  widget.titleList[index - 1],
+                                            ),
+                                          ),
                                 ),
                                 RightIconButton(
                                   icon: Icon(
                                     Icons.delete,
                                     color: index == 0 ? whiteColor : redColor,
                                   ),
-                                  function: index == 0 ? null : () {},
+                                  function: index == 0
+                                      ? null
+                                      : () async {
+                                          showDialogAreYouSureDelete(
+                                            context,
+                                            () async => await titleController
+                                                .removeTitle(widget
+                                                    .titleList[index - 1].id),
+                                          );
+                                        },
                                 ),
                               ],
                             ),
