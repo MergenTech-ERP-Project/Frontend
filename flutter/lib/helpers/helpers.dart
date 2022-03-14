@@ -7,11 +7,15 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 String? nameLetters(name) {
-  var words = name.split(' ');
-  String letters = name.length > 0
-      ? (words[0][0] +
-          (words.length > 1 ? ("" + words[words.length - 1][0]) : ""))
-      : "";
+  String letters = "";
+  if (name.length > 0) {
+    name = name.trim();
+    var words = name.split(' ');
+    letters = name.length > 0
+        ? (words[0][0] +
+            (words.length > 1 ? ("" + words[words.length - 1][0]) : ""))
+        : "";
+  }
   return letters != "" ? letters.toUpperCase() : "";
 }
 

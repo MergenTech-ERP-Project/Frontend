@@ -8,19 +8,19 @@ import 'package:vtys_kalite/routing/routes.dart';
 class UserDetailServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
-  static Future<UserDetail?> fetchUserDetailById(userId) async {
-    var response =
-        await http.get(Uri.parse(serviceHttp + '/userdetail/list/$userId'));
-    UserDetail? user;
+  static Future<UserDetail?> fetchUserDetailByUserId(userId) async {
+    var response = await http
+        .get(Uri.parse(serviceHttp + '/userdetail/find/user:$userId'));
+    UserDetail? userDetail;
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       if (jsonString == "null") {
         return null;
       }
       jsonString = "[" + jsonString + "]";
-      user = parseUser(jsonString);
+      userDetail = parseUser(jsonString);
     }
-    return user;
+    return userDetail;
   }
 
   static Future<int> addNewUserDetail(String json) async {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/models/user.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee_helpers.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_genel_first_card.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_genel_first_card_small.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_genel_second_card.dart';
@@ -15,7 +16,9 @@ class TabGenel extends StatelessWidget {
     Key? key,
     this.user,
     required this.userHelper,
-  }) : super(key: key);
+  }) : super(key: key) {
+    showInformationWhenOnClick(user, userHelper);
+  }
 
   @override
   Widget build(BuildContext context) {

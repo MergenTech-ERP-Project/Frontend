@@ -83,6 +83,7 @@ class _EmployeeCardState extends State<EmployeeCard> {
                         scrollDirection: Axis.horizontal,
                         child: CustomText(
                           text: "",
+
                           ///TODO widget.user.title.getName,
                           size: 20,
                           weight: FontWeight.w400,
@@ -101,7 +102,7 @@ class _EmployeeCardState extends State<EmployeeCard> {
           context: context,
           builder: (context) => Dialog(
             child: AddNewEmployee(
-              user: widget.user,
+              newUser: widget.user,
             ),
           ),
         );

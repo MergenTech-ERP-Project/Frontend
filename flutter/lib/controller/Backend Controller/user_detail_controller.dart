@@ -10,10 +10,11 @@ class UserDetailController extends GetxController {
   var isLoading = false.obs;
   List<UserDetail> userDetailList = <UserDetail>[].obs; //List<UserDetail>
 
-  Future<UserDetail?> fetchUserDetailById(userId) async {
+  Future<UserDetail?> fetchUserDetailByUserId(userId) async {
     try {
       isLoading(true);
-      UserDetail? detail = await UserDetailServices.fetchUserDetailById(userId);
+      UserDetail? detail =
+          await UserDetailServices.fetchUserDetailByUserId(userId);
       print("fetch User Detail: " + detail!.userId.toString());
       return detail;
     } finally {
@@ -28,7 +29,7 @@ class UserDetailController extends GetxController {
           json.encode(userDetail.toJson()).toString());
 
       print("post User Detail: " + response.toString());
-      fetchUserDetailById(userDetail.userId);
+      fetchUserDetailByUserId(userDetail.userId);
       return response;
     } finally {
       isLoading(false);
@@ -38,24 +39,24 @@ class UserDetailController extends GetxController {
   Future<int?> updateUserDetail(int id, UserDetail userDetail) async {
     try {
       isLoading(true);
-      print(id);
+      print("Update User Detail ID: $id");
       var response = await UserDetailServices.updateUserDetail(
           id, json.encode(userDetail.toJson()).toString());
       print("put User Detail: " + response.toString());
-      fetchUserDetailById(id);
+      fetchUserDetailByUserId(userDetail.userId);
       return response;
     } finally {
       isLoading(false);
     }
   }
 
-  Future<String?> deleteUserDetail(int id) async {
+  Future<String?> deleteUserDetail(int id, userId) async {
     try {
       isLoading(true);
-      print(id);
+      print("Delete User Detail ID: $id");
       var response = await UserDetailServices.deleteUserDetail(id);
       print("delete User Detail: " + response);
-      fetchUserDetailById(id);
+      fetchUserDetailByUserId(userId);
       return response;
     } finally {
       isLoading(false);

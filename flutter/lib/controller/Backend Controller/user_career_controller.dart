@@ -14,8 +14,10 @@ class UserDetailCareerController extends GetxController {
     try {
       isLoading(true);
       UserDetailCareer? detailCareer =
-          await UserDetailCareerServices.fetchUserDetailCareerById(userDetailId);
-      print("fetch User Detail Career: " + detailCareer!.userDetailId.toString());
+          await UserDetailCareerServices.fetchUserDetailCareerById(
+              userDetailId);
+      print(
+          "fetch User Detail Career: " + detailCareer!.userDetailId.toString());
       return detailCareer;
     } finally {
       isLoading(false);
@@ -43,7 +45,7 @@ class UserDetailCareerController extends GetxController {
       int id, UserDetailCareer userDetailCareer) async {
     try {
       isLoading(true);
-      print(id);
+      print("put User Detail Career ID: $id");
       var response = await UserDetailCareerServices.updateUserDetailCareer(
           id, json.encode(userDetailCareer.toJson()).toString());
       print("put User Detail Career: " + response.toString());
@@ -57,7 +59,7 @@ class UserDetailCareerController extends GetxController {
   Future<String?> deleteUserDetailCareer(int id) async {
     try {
       isLoading(true);
-      print(id);
+      print("Delete User Detail Career ID: $id");
       var response = await UserDetailCareerServices.deleteUserDetailCareers(id);
       print("delete User Detail Career: " + response);
       fetchUserDetailCareerById(id);

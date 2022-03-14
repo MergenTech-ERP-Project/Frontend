@@ -16,7 +16,7 @@ class Employees extends StatelessWidget {
       body: Center(
         child: Obx(
           () {
-            return (userController.isLoading.value
+            return userController.isLoading.value
                 ? const CircularProgressIndicator()
                 : Row(
                     children: [
@@ -27,11 +27,11 @@ class Employees extends StatelessWidget {
                           children: [
                             Expanded(
                               child: ListView.separated(
+                                itemCount: userController.userList.length,
                                 separatorBuilder: (context, index) =>
                                     const SizedBox(
                                   height: 10,
                                 ),
-                                itemCount: userController.userList.length,
                                 itemBuilder: (context, index) {
                                   return EmployeeCard(
                                     user: userController.userList[index],
@@ -56,7 +56,7 @@ class Employees extends StatelessWidget {
                                             context: context,
                                             builder: (context) => Dialog(
                                               child: AddNewEmployee(
-                                                user: null,
+                                                newUser: null,
                                               ),
                                             ),
                                           );
@@ -91,7 +91,7 @@ class Employees extends StatelessWidget {
                       ),
                       const Expanded(flex: 1, child: SizedBox()),
                     ],
-                  ));
+                  );
           },
         ),
       ),
