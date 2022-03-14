@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
-import 'package:vtys_kalite/main.dart';
+import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 showDialogResponseCheck(
@@ -51,10 +51,14 @@ showDialogResponseCheck(
   }
 }
 
-showInformationWhenOnClick(UserHelperController userHelper) {
-  var lastSpace = user.name.lastIndexOf(' ');
-  String name = lastSpace != -1 ? user.name.substring(0, lastSpace) : user.name;
-  String surname = lastSpace != -1 ? user.name.substring(lastSpace + 1) : "";
+showInformationWhenOnClick(User? user, UserHelperController userHelper) {
+  String name = "";
+  String surname = "";
+  if (user != null) {
+    var lastSpace = user.name.lastIndexOf(' ');
+    name = lastSpace != -1 ? user.name.substring(0, lastSpace) : user.name;
+    surname = lastSpace != -1 ? user.name.substring(lastSpace + 1) : "";
+  }
 
   ///sadece controller var
 
@@ -63,8 +67,10 @@ showInformationWhenOnClick(UserHelperController userHelper) {
   tabGenelController.controllerEPostaWork.text =
       userHelper.userDetail.workEmail;
   tabGenelController.controllerWorkPhone.text = userHelper.userDetail.workPhone;
-  tabGenelController.controllerEPostaPersonal.text = user.email;
-  tabGenelController.controllerTelephonePersonal.text = user.cellphone;
+  tabGenelController.controllerEPostaPersonal.text =
+      user != null ? user.email : "";
+  tabGenelController.controllerTelephonePersonal.text =
+      user != null ? user.cellphone : "";
 
   tabKariyerController.positionUnvan.text =
       userHelper.userDetailCareer.unitTitle;

@@ -5,10 +5,10 @@ import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
+import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee_helpers.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_diger_bilgiler.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_genel.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer.dart';
@@ -19,16 +19,15 @@ import 'package:vtys_kalite/utilities/style.dart';
 
 class AddNewEmployee extends StatelessWidget {
   var isSaved = false.obs;
-  User? user;
+  User? newUser;
   late UserHelperController userHelper;
 
   AddNewEmployee({
     Key? key,
-    this.user,
+    this.newUser,
   }) : super(key: key) {
-    if (user != null) {
-      userHelper = UserHelperController(user!.id);
-      showInformationWhenOnClick(userHelper);
+    if (newUser != null) {
+      userHelper = UserHelperController(newUser!.id);
     } else {
       userHelper = UserHelperController(-1);
     }
@@ -84,7 +83,7 @@ class AddNewEmployee extends StatelessWidget {
               child: TabBarView(
                 children: [
                   TabGenel(
-                    user: user,
+                    user: newUser,
                     userHelper: userHelper,
                   ),
                   ResponsiveWidget(
@@ -100,7 +99,7 @@ class AddNewEmployee extends StatelessWidget {
                     smallScreen: TabPersonalInformationSmall(),
                   ),
                   TabAnotherInformation(
-                    user: user,
+                    user: newUser,
                     userHelper: userHelper,
                   ),
                   const Center(child: CustomText(text: "4")),
@@ -145,9 +144,11 @@ class AddNewEmployee extends StatelessWidget {
                     Expanded(
                       child: CustomButton(
                         title: 'Kaydet',
-                        pressAction: () {
+                        pressAction: () async {
+                          showDialogWaitingMessage(context);
+                          await userHelper.userDetailSave(context, newUser);
+                          Navigator.of(context).pop(true);
                           isSaved.value = true;
-                          return userHelper.userDetailSave(context, user);
                         },
                       ),
                     ),

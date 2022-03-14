@@ -20,8 +20,8 @@ class BranchRemoteServices {
   }
 
   static Future<List<Branch>?> fetchBranchesByCompanyId(int companyId) async {
-    var response =
-        await http.get(Uri.parse(serviceHttp + '/branch/list/$companyId'));
+    var response = await http
+        .get(Uri.parse(serviceHttp + '/branch/find/company:$companyId'));
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       return branchFromJson(jsonString);

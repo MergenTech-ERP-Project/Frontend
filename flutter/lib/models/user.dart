@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 
-List<User> parseUsers(String str) =>
+List<User>? parseUsers(String str) =>
     List<User>.from(json.decode(str).map((x) => User.fromJson(x)));
 
-User parseUser(String str) => parseUsers(str)[0];
+User? parseUser(String str) => parseUsers(str)?[0];
 
 String fetchUsers(List<User> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));

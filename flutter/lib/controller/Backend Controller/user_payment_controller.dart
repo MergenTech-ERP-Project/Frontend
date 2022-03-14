@@ -14,7 +14,8 @@ class UserDetailPaymentController extends GetxController {
     try {
       isLoading(true);
       UserDetailPayment? detailPayment =
-          await UserDetailPaymentServices.fetchUserDetailPaymentById(userDetailId);
+          await UserDetailPaymentServices.fetchUserDetailPaymentById(
+              userDetailId);
       print("fetch User Detail Payment: " + detailPayment!.tcno.toString());
       return detailPayment;
     } finally {
@@ -23,8 +24,7 @@ class UserDetailPaymentController extends GetxController {
   }
 
   Future<int?> addNewUserDetailPayment(
-      userDetailId,
-      UserDetailPayment userDetailPayment) async {
+      userDetailId, UserDetailPayment userDetailPayment) async {
     try {
       isLoading(true);
       UserDetailPayment newUserDetailPayment =
@@ -44,7 +44,7 @@ class UserDetailPaymentController extends GetxController {
       int id, UserDetailPayment userDetailPayment) async {
     try {
       isLoading(true);
-      print(id);
+      print("Update User Detail Payment ID: $id");
       var response = await UserDetailPaymentServices.updateUserDetailPayment(
           id, json.encode(userDetailPayment.toJson()).toString());
       print("put User Detail Payment: " + response);

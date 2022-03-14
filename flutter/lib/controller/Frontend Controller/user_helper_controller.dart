@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/enums/bank_account_type.dart';
 import 'package:vtys_kalite/enums/bank_names.dart';
@@ -27,7 +29,6 @@ class UserHelperController {
   UserHelperController(this.userId) {
     ///TODO: fetch yapılacak burada!!!
     userDetail = UserDetail(
-      
       userId: userId,
       bankAccountType: BankAccountTypeEnum.values.first,
       bankNames: BankNamesEnum.values.first,
@@ -71,8 +72,13 @@ class UserHelperController {
       userId = user!.id;
     }
 
+    print("User Helper User Created / Updated ID: $userId");
+
     UserDetail? userDetail =
-        await userDetailController.fetchUserDetailById(userId);
+        await userDetailController.fetchUserDetailByUserId(userId);
+
+    print("User Helper User UserDetail " +
+        (userDetail == null ? "not found" : "found ID: ${userDetail.id}"));
 
     int? responseUserDetail = (userDetail == null
         ? await userDetailController.addNewUserDetail(
@@ -133,8 +139,17 @@ class UserHelperController {
         : await userDetailController.updateUserDetail(
             userDetail.id, userDetail));
 
+    userDetail = await userDetailController.fetchUserDetailByUserId(userId);
+
+    print("User Helper new User UserDetail found ID: ${userDetail!.id}");
+
     UserDetailCareer? userDetailCareer = await userDetailCareerController
-        .fetchUserDetailCareerById(userDetail!.id);
+        .fetchUserDetailCareerById(userDetail.id);
+
+    print("User Helper User UserDetailCareer " +
+        (userDetailCareer == null
+            ? "not found"
+            : "found ID: ${userDetailCareer.id}"));
 
     ///TODO: userDetail!.id,
 
@@ -163,6 +178,7 @@ class UserHelperController {
       responseUserDetailCareer = await userDetailCareerController
           .updateUserDetailCareer(userDetail.id, userDetailCareer);
     }
+
     int? responseUserDetailPayment =
 
         ///TODO: update kaldı

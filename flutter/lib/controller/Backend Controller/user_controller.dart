@@ -86,7 +86,7 @@ class UserController extends GetxController {
   Future<String?> updateUser(int id, User user) async {
     try {
       isLoading(true);
-      print(id);
+      print("Update User ID: $id");
       var response = await UserRemoteServices.updateUser(
           id, json.encode(user.toJson()).toString());
       fetchUsers(); //userList.add(newUser);
@@ -100,7 +100,7 @@ class UserController extends GetxController {
   Future<String?> deleteUser(int id) async {
     try {
       isLoading(true);
-      print(id);
+      print("Delete User ID: $id");
       var response = await UserRemoteServices.deleteUser(id);
       fetchUsers(); //userList.add(newUser);
       print("delete User: " + response);

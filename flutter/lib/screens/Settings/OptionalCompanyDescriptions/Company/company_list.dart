@@ -48,7 +48,14 @@ class _CompanyListState extends State<CompanyList> {
                   itemCount: widget.companyList.length + 1,
                   itemBuilder: (_, index) {
                     return InkWell(
-                      onTap: index == 0 ? null : widget.onSelected,
+                      onTap: index == 0
+                          ? null
+                          : () {
+                              ///TODO: backend update waiting
+                              /* branchController.fetchBranchesByCompanyId(
+                                  widget.companyList[index].id); */
+                              widget.onSelected();
+                            },
                       child: SizedBox(
                         height: 60,
                         child: Row(

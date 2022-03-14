@@ -40,7 +40,8 @@ class UserRemoteServices {
         return userID;
       }
       jsonString = "[" + jsonString + "]";
-      userID = parseUser(jsonString).id;
+      User? _user = parseUser(jsonString);
+      userID = _user == null ?  -1 : _user.id;
     }
     return userID;
   }
@@ -56,7 +57,8 @@ class UserRemoteServices {
         return userID;
       }
       jsonString = "[" + jsonString + "]";
-      userID = parseUser(jsonString).id;
+      User? _user = parseUser(jsonString);
+      userID = _user == null ?  -1 : _user.id;
     }
     return userID;
   }
@@ -72,7 +74,8 @@ class UserRemoteServices {
         return userID;
       }
       jsonString = "[" + jsonString + "]";
-      userID = parseUser(jsonString).id;
+      User? _user = parseUser(jsonString);
+      userID = _user == null ?  -1 : _user.id;
     }
     return userID;
   }

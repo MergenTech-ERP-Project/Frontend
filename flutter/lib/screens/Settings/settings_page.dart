@@ -9,9 +9,6 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ///Tab
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 40),
-      child: OptionalCompanyDescriptions(),
-    );
+    return OptionalCompanyDescriptions();
   }
 }
