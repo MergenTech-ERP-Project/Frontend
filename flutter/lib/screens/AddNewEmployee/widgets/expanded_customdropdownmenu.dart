@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
+import 'package:vtys_kalite/helpers/responsiveness.dart';
 
 class ExpandedCustomDropDownMenu extends StatelessWidget {
   ExpandedCustomDropDownMenu({
@@ -19,9 +20,23 @@ class ExpandedCustomDropDownMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
+    return ResponsiveWidget(
+      largeScreen: Expanded(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CustomDropDownMenu(
+            text: label,
+            list: listExtension,
+            valueChoose: value,
+            icon: const Icon(Icons.arrow_drop_down),
+            iconSize: 20,
+            isExpandedYes: true,
+            onChanged: onChanged,
+          ),
+        ),
+      ),
+      smallScreen: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: CustomDropDownMenu(
           text: label,
           list: listExtension,

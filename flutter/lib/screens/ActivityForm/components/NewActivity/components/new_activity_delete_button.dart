@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
-import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
-import 'package:vtys_kalite/utilities/style.dart';
 
 class ActivityCardDeleteButton extends StatelessWidget {
   const ActivityCardDeleteButton({

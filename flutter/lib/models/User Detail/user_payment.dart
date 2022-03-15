@@ -22,8 +22,8 @@ class UserDetailPayment {
   String currency; //currency
   String commuteSupportFee; //commute_support_fee
   String foodSupportFee; //food_support_fee
-  SalaryTypeEnum? salaryType; //salary_type
-  PaymentSchemeEnum? paymentScheme; //payment_scheme
+  SalaryTypeEnum salaryType; //salary_type
+  PaymentSchemeEnum paymentScheme; //payment_scheme
 
   UserDetailPayment({
     this.id = 0,
@@ -31,14 +31,11 @@ class UserDetailPayment {
     this.tcno = "",
     this.salary = "",
     this.currency = "",
-    this.salaryType,
-    this.paymentScheme,
+    required this.salaryType,
+    required this.paymentScheme,
     this.commuteSupportFee = "",
     this.foodSupportFee = "",
   });
-
-  String getSalaryType() => EnumToString.convertToString(salaryType);
-  String getPaymentScheme() => EnumToString.convertToString(paymentScheme);
 
   factory UserDetailPayment.fromJson(Map<String, dynamic> json) {
     return UserDetailPayment(
@@ -62,8 +59,8 @@ class UserDetailPayment {
         "tcno": tcno,
         "salary": salary,
         "currency": currency,
-        "salary_type": getSalaryType(),
-        "payment_scheme": getPaymentScheme(),
+        "salary_type": EnumToString.convertToString(salaryType),
+        "payment_scheme": EnumToString.convertToString(paymentScheme),
         "commute_support_fee": commuteSupportFee,
         "food_support_fee": foodSupportFee,
       };

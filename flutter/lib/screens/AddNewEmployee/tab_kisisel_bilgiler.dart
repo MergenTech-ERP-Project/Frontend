@@ -54,7 +54,7 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Medeni Hal",
-              value: widget.userHelper.userDetail.maritalStatus.getName,
+              value: widget.userHelper.userDetail.maritalStatus!.getName,
               listExtension: MaritalStatusExtension.getList(),
               onChanged: (val) {
                 setState(() {

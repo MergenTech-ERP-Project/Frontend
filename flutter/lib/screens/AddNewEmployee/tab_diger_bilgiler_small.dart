@@ -5,32 +5,32 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/bank_account_type.dart';
 import 'package:vtys_kalite/enums/bank_names.dart';
-import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdropdownmenu.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
-class TabAnotherInformation extends StatefulWidget {
-  final User? user;
+class TabAnotherInformationSmall extends StatefulWidget {
   final UserHelperController userHelper;
 
-  const TabAnotherInformation({
+  const TabAnotherInformationSmall({
     Key? key,
-    required this.user,
     required this.userHelper,
   }) : super(key: key);
 
   @override
-  _TabAnotherInformationState createState() => _TabAnotherInformationState();
+  _TabAnotherInformationSmallState createState() =>
+      _TabAnotherInformationSmallState();
 }
 
-class _TabAnotherInformationState extends State<TabAnotherInformation> {
+class _TabAnotherInformationSmallState
+    extends State<TabAnotherInformationSmall> {
   bool isVisibleAdress = true;
   bool isVisibleBank = true;
 
   @override
   Widget build(BuildContext context) {
     return ListView(
+      shrinkWrap: true,
       children: [
         InkWell(
           child: CardAdressInformation(),
@@ -49,6 +49,7 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
             });
           },
         ),
+        const SizedBox(height: 40),
       ],
     );
   }
@@ -82,47 +83,38 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
             child: ListView(
               shrinkWrap: true,
               children: [
-                Row(
-                  children: [
-                    ExpandedCustomDropDownMenu(
-                      value: widget.userHelper.userDetail.bankNames.getName,
-                      label: "Banka Adı",
-                      listExtension: BankNamesEnumExtension.getList(),
-                      onChanged: (val) {
-                        setState(() {
-                          widget.userHelper.userDetail.bankNames =
-                              BankNamesEnumExtension.getEnumFromName(val);
-                        });
-                      },
-                    ),
-                    ExpandedCustomDropDownMenu(
-                      label: "Hesap Tipi",
-                      value:
-                          widget.userHelper.userDetail.bankAccountType.getName,
-                      listExtension: BankAccountTypeExtension.getList(),
-                      onChanged: (val) {
-                        setState(() {
-                          widget.userHelper.userDetail.bankAccountType =
-                              BankNamesEnumExtension.getEnumFromName(val);
-                        });
-                      },
-                    ),
-                  ],
+                ExpandedCustomDropDownMenu(
+                  value: widget.userHelper.userDetail.bankNames.getName,
+                  label: "Banka Adı",
+                  listExtension: BankNamesEnumExtension.getList(),
+                  onChanged: (val) {
+                    setState(() {
+                      widget.userHelper.userDetail.bankNames =
+                          BankNamesEnumExtension.getEnumFromName(val);
+                    });
+                  },
                 ),
-                Row(
-                  children: [
-                    ExpandedNameController(
-                      controller:
-                          tabDigerBilgilerController.controllerAccountNumber,
-                      label: "Hesap No",
-                      widget: const SizedBox(),
-                    ),
-                    ExpandedNameController(
-                      controller: tabDigerBilgilerController.controllerIBAN,
-                      label: "IBAN",
-                      widget: const SizedBox(),
-                    ),
-                  ],
+                ExpandedCustomDropDownMenu(
+                  label: "Hesap Tipi",
+                  value: widget.userHelper.userDetail.bankAccountType.getName,
+                  listExtension: BankAccountTypeExtension.getList(),
+                  onChanged: (val) {
+                    setState(() {
+                      widget.userHelper.userDetail.bankAccountType =
+                          BankNamesEnumExtension.getEnumFromName(val);
+                    });
+                  },
+                ),
+                ExpandedNameController(
+                  controller:
+                      tabDigerBilgilerController.controllerAccountNumber,
+                  label: "Hesap No",
+                  widget: const SizedBox(),
+                ),
+                ExpandedNameController(
+                  controller: tabDigerBilgilerController.controllerIBAN,
+                  label: "IBAN",
+                  widget: const SizedBox(),
                 ),
               ],
             ),
@@ -166,39 +158,30 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
                   label: "Adres Bilgileri",
                   widget: const SizedBox(),
                 ),
-                Row(
-                  children: [
-                    ExpandedNameController(
-                      controller:
-                          tabDigerBilgilerController.controllerHomePhone,
-                      label: "Ev Telefonu",
-                      widget: const SizedBox(),
-                    ),
-                    ExpandedNameController(
-                      controller: tabDigerBilgilerController.controllerZipCode,
-                      label: "Posta Kodu",
-                      widget: const SizedBox(),
-                    ),
-                  ],
+                ExpandedNameController(
+                  controller: tabDigerBilgilerController.controllerHomePhone,
+                  label: "Ev Telefonu",
+                  widget: const SizedBox(),
                 ),
-                Row(
-                  children: [
-                    ExpandedNameController(
-                      controller: tabDigerBilgilerController.controllerCountry,
-                      label: "Ülke",
-                      widget: const SizedBox(),
-                    ),
-                    ExpandedNameController(
-                      controller: tabDigerBilgilerController.controllerCity,
-                      label: "Şehir",
-                      widget: const SizedBox(),
-                    ),
-                    ExpandedNameController(
-                      controller: tabDigerBilgilerController.controllerDistrict,
-                      label: "İlçe",
-                      widget: const SizedBox(),
-                    ),
-                  ],
+                ExpandedNameController(
+                  controller: tabDigerBilgilerController.controllerZipCode,
+                  label: "Posta Kodu",
+                  widget: const SizedBox(),
+                ),
+                ExpandedNameController(
+                  controller: tabDigerBilgilerController.controllerCountry,
+                  label: "Ülke",
+                  widget: const SizedBox(),
+                ),
+                ExpandedNameController(
+                  controller: tabDigerBilgilerController.controllerCity,
+                  label: "Şehir",
+                  widget: const SizedBox(),
+                ),
+                ExpandedNameController(
+                  controller: tabDigerBilgilerController.controllerDistrict,
+                  label: "İlçe",
+                  widget: const SizedBox(),
                 )
               ],
             ),

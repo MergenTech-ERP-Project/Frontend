@@ -10,6 +10,7 @@ import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_diger_bilgiler.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/tab_diger_bilgiler_small.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_genel.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer_small.dart';
@@ -80,7 +81,9 @@ class AddNewEmployee extends StatelessWidget {
         body: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: ResponsiveWidget.isLargeScreen(context)
+                  ? const EdgeInsets.all(20)
+                  : const EdgeInsets.all(5),
               child: TabBarView(
                 children: [
                   TabGenel(
@@ -91,17 +94,21 @@ class AddNewEmployee extends StatelessWidget {
                     largeScreen: TabKariyer(
                       userHelper: userHelper,
                     ),
-                    smallScreen: TabKariyerSmall(),
+                    smallScreen: TabKariyerSmall(userHelper: userHelper),
                   ),
                   ResponsiveWidget(
                     largeScreen: TabPersonalInformation(
                       userHelper: userHelper,
                     ),
-                    smallScreen: TabPersonalInformationSmall(),
+                    smallScreen: TabPersonalInformationSmall(
+                      userHelper: userHelper,
+                    ),
                   ),
-                  TabAnotherInformation(
-                    user: newUser,
-                    userHelper: userHelper,
+                  ResponsiveWidget(
+                    largeScreen: TabAnotherInformation(
+                        user: newUser, userHelper: userHelper),
+                    smallScreen:
+                        TabAnotherInformationSmall(userHelper: userHelper),
                   ),
                   PermissionRequestFormPage(),
                   const Center(child: CustomText(text: "5")),

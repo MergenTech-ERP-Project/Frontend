@@ -39,70 +39,64 @@ class TabGenelFirstCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const CustomText(text: "İşe Başlama Tarih"),
-                CustomText(
-                  text: userHelper.userDetail.startDateWork,
-                ),
-              ],
+            ProfileAboutRow(
+              textConstant: "İşe Başlama Tarihi",
+              textUser: userHelper.userDetail.startDateWork,
             ),
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const CustomText(text: "Şirket"),
-                CustomText(text: userHelper.userDetailCareer.unitCompany),
-              ],
+            ProfileAboutRow(
+              textConstant: "Şirket",
+              textUser: userHelper.userDetailCareer.unitCompany,
             ),
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const CustomText(text: "Şube"),
-                CustomText(
-                  text: userHelper.userDetailCareer.unitBranch,
-                ),
-              ],
+            ProfileAboutRow(
+              textConstant: "Şube",
+              textUser: userHelper.userDetailCareer.unitBranch,
             ),
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const CustomText(text: "Departman"),
-                CustomText(text: userHelper.userDetailCareer.unitDepartment),
-              ],
+            ProfileAboutRow(
+              textConstant: "Departman",
+              textUser: userHelper.userDetailCareer.unitDepartment,
             ),
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const CustomText(text: "Ünvan"),
-                CustomText(text: userHelper.userDetailCareer.unitTitle),
-              ],
+            ProfileAboutRow(
+              textConstant: "Ünvan",
+              textUser: userHelper.userDetailCareer.unitTitle,
             ),
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const CustomText(text: "E-posta (iş)"),
-                CustomText(
-                    text: tabGenelController.controllerEPostaWork.value.text),
-              ],
+            ProfileAboutRow(
+              textConstant: "E-posta (iş)",
+              textUser: tabGenelController.controllerEPostaWork.value.text,
             ),
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const CustomText(text: "İş Telefonu"),
-                CustomText(
-                    text: tabGenelController.controllerWorkPhone.value.text),
-              ],
+            ProfileAboutRow(
+              textConstant: "İş Telefonu",
+              textUser: tabGenelController.controllerWorkPhone.value.text,
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class ProfileAboutRow extends StatelessWidget {
+  const ProfileAboutRow({
+    Key? key,
+    required this.textConstant,
+    required this.textUser,
+  }) : super(key: key);
+
+  final String textConstant;
+  final String textUser;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        CustomText(text: textConstant, weight: FontWeight.w500),
+        SingleChildScrollView(child: CustomText(text: textUser)),
+      ],
     );
   }
 }

@@ -1,167 +1,126 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
-import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
+import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
+import 'package:vtys_kalite/enums/contract_type.dart';
+import 'package:vtys_kalite/enums/employment_type.dart';
 import 'package:vtys_kalite/models/user.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdatetimepicker.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdropdownmenu.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
-class TabGenelSecondCardSmall extends StatelessWidget {
-  TextEditingController controllerName = TextEditingController();
-  TextEditingController controllerSurname = TextEditingController();
-  TextEditingController controllerEPostaWork = TextEditingController();
-  TextEditingController controllerEPostaPersonal = TextEditingController();
-  TextEditingController controllerTelephoneWork = TextEditingController();
-  TextEditingController controllerTelephonePersonal = TextEditingController();
-
-  TextEditingController controllerAccessType = TextEditingController();
-  TextEditingController controllerContractType = TextEditingController();
-  TextEditingController controllerContractEndDate = TextEditingController();
-
-  DateTime dateOfStart = DateTime.now();
-  DateTime contractEndDate = DateTime.now();
-
+class TabGenelSecondCardSmall extends StatefulWidget {
   User? user;
+  UserHelperController userHelper;
 
   TabGenelSecondCardSmall({
     Key? key,
     this.user,
-  }) : super(key: key) {
-    user ??= User();
-    var lastSpace = user!.name.lastIndexOf(' ');
-    String name =
-        lastSpace != -1 ? user!.name.substring(0, lastSpace) : user!.name;
-    String surname = lastSpace != -1 ? user!.name.substring(lastSpace + 1) : "";
-
-    controllerName.text = name;
-    controllerSurname.text = surname;
-
-    controllerEPostaPersonal.text = user!.email;
-
-    controllerTelephonePersonal.text = user!.cellphone;
-  }
+    required this.userHelper,
+  }) : super(key: key);
 
   @override
+  State<TabGenelSecondCardSmall> createState() =>
+      _TabGenelSecondCardSmallState();
+}
+
+class _TabGenelSecondCardSmallState extends State<TabGenelSecondCardSmall> {
+  @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: aboutPersonal(),
-    );
+    return aboutPersonal();
   }
 
   Widget aboutPersonal() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+    return ListView(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
       children: [
-        const SizedBox(height: 20),
-        const Padding(
-          padding: EdgeInsets.only(top: 8.0),
-          child: CustomText(
-            text: "Genel Bilgiler",
-          ),
+        ExpandedNameController(
+          controller: tabGenelController.controllerName,
+          label: "Ad",
+          widget: const SizedBox(),
         ),
-        Row(
-          children: [
-            generalInformation(
-              controller: controllerName,
-              label: "Ad",
-              widget: const SizedBox(),
-            ),
-            generalInformation(
-              controller: controllerSurname,
-              label: "Soyad",
-              widget: const SizedBox(),
-            ),
-          ],
+        ExpandedNameController(
+          controller: tabGenelController.controllerSurname,
+          label: "Soyad",
+          widget: const SizedBox(),
         ),
-        Row(
-          children: [
-            generalInformation(
-              controller: controllerEPostaWork,
-              label: "E-Posta (İş)",
-              widget: const SizedBox(),
-            ),
-            generalInformation(
-              controller: controllerEPostaPersonal,
-              label: "E-Posta (Genel)",
-              widget: const SizedBox(),
-            ),
-          ],
+        ExpandedNameController(
+          controller: tabGenelController.controllerEPostaWork,
+          label: "E-Posta (İş)",
+          widget: const SizedBox(),
         ),
-        Row(
-          children: [
-            generalInformation(
-              controller: controllerEPostaWork,
-              label: "Telefon (İş)",
-              widget: const SizedBox(),
-            ),
-            generalInformation(
-              controller: controllerEPostaPersonal,
-              label: "Telefon (Kişisel)",
-              widget: const SizedBox(),
-            ),
-          ],
+        ExpandedNameController(
+          controller: tabGenelController.controllerEPostaPersonal,
+          label: "E-Posta (Genel)",
+          widget: const SizedBox(),
         ),
-        Row(
-          children: [
-            Expanded(
-              child: CustomDateTimePicker(
-                suffixWidget: const Icon(Icons.calendar_today_outlined),
-                labelText: "İşe Başlangıç Tarihi",
-                initialDate: dateOfStart,
-                borderless: true,
-                onChanged: (val) {
-                  if (val != null) {
-                    print("DateTime picker : " + val);
-                  }
-                  try {
-                    dateOfStart = dateTimeFormat.parse(val!);
-                  } catch (e) {
-                    print(e.toString());
-                  }
-                },
-              ),
-            ),
-            generalInformation(
-                controller: controllerAccessType,
-                label: "Erişim Türü",
-                widget: const Icon(Icons.keyboard_arrow_down)),
-          ],
+        ExpandedNameController(
+          controller: tabGenelController.controllerWorkPhone,
+          label: "Telefon (İş)",
+          widget: const SizedBox(),
         ),
-        Row(
-          children: [
-            generalInformation(
-                controller: controllerContractType,
-                label: "Sözleşme Türü",
-                widget: const Icon(Icons.keyboard_arrow_down)),
-            Expanded(
-              child: CustomDateTimePicker(
-                suffixWidget: const Icon(Icons.calendar_today_outlined),
-                labelText: "Sözleşme Bitiş Tarihi",
-                initialDate: contractEndDate,
-                borderless: true,
-                onChanged: (val) {
-                  if (val != null) {
-                    print("DateTime picker : " + val);
-                  }
-                  try {
-                    contractEndDate = dateTimeFormat.parse(val!);
-                  } catch (e) {
-                    print(e.toString());
-                  }
-                },
-              ),
-            ),
-          ],
+        ExpandedNameController(
+          controller: tabGenelController.controllerTelephonePersonal,
+          label: "Telefon (Kişisel)",
+          widget: const SizedBox(),
         ),
-        const SizedBox(height: 500)
+        ExpandedCustomDateTimePicker(
+          label: "İşe Başlangıç Tarihi",
+          onChanged: (val) {
+            if (val != null) {
+              try {
+                widget.userHelper.userDetail.startDateWork = val;
+              } catch (e) {
+                print(e.toString());
+              }
+            }
+          },
+        ),
+        ExpandedCustomDateTimePicker(
+          label: "Sözleşme Bitiş Tarihi",
+          onChanged: (val) {
+            if (val != null) {
+              try {
+                widget.userHelper.userDetail.contractEndDate = val;
+              } catch (e) {
+                print(e.toString());
+              }
+            }
+          },
+        ),
+        ExpandedCustomDropDownMenu(
+          label: "Sözleşme Türü",
+          value: widget.userHelper.userDetail.contractType.getName,
+          listExtension: ContractTypeExtension.getList(),
+          onChanged: (val) {
+            setState(() {
+              widget.userHelper.userDetail.contractType =
+                  ContractTypeExtension.getEnumFromName(val);
+            });
+          },
+        ),
+        ExpandedCustomDropDownMenu(
+          label: "Çalışma Şekli",
+          value: widget.userHelper.userDetail.employmentType.getName,
+          listExtension: EmploymentTypeEnumExtension.getList(),
+          onChanged: (val) {
+            setState(() {
+              widget.userHelper.userDetail.employmentType =
+                  EmploymentTypeEnumExtension.getEnumFromName(val);
+            });
+          },
+        ),
+        const Expanded(child: SizedBox(height: 50)),
       ],
     );
   }
 }
 
-class generalInformation extends StatelessWidget {
-  generalInformation({
+class GeneralInformation extends StatelessWidget {
+  GeneralInformation({
     Key? key,
     required this.controller,
     required this.label,

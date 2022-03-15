@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
@@ -46,12 +48,12 @@ class TabGenel extends StatelessWidget {
           ? SingleChildScrollView(
               child: Column(
                 children: [
-                  TabGenelFirstCardSmall(user: user!),
-                  TabGenelSecondCardSmall(user: user),
+                  TabGenelFirstCardSmall(user: user!, userHelper: userHelper),
+                  TabGenelSecondCardSmall(user: user, userHelper: userHelper),
                 ],
               ),
             )
-          : TabGenelSecondCardSmall(user: User()),
+          : TabGenelSecondCardSmall(user: User(), userHelper: userHelper),
     );
   }
 }
