@@ -26,9 +26,9 @@ String fetchUsers(List<UserDetail> data) =>
 class UserDetail {
   final int id;
   final int userId; //user_id
+  int numberofkids; //numberofkids
   String tcno; //tcno
   String workPhone; //work_phone
-  String numberofkids; //numberofkids
   String lastCompletedEducationStatus; //last_completed_education_status
   String dateofbirth; //dateofbirth
   String startDateWork; //date_of_start
@@ -65,11 +65,11 @@ class UserDetail {
   UserDetail({
     this.id = 0,
     required this.userId,
+    this.numberofkids = 0,
     this.tcno = "",
-    this.dateofbirth = "",
     this.workPhone = "",
-    this.numberofkids = "",
     this.lastCompletedEducationStatus = "",
+    this.dateofbirth = "",
     this.startDateWork = "",
     this.contractEndDate = "",
     this.workEmail = "",
@@ -101,41 +101,32 @@ class UserDetail {
     required this.bloodType,
   });
 
-  String getMaritalStatus() => EnumToString.convertToString(maritalStatus);
-  String getDisabledDegree() => EnumToString.convertToString(disabledDegree);
-  String getEducationalStatus() =>
+  String? getGender() => EnumToString.convertToString(gender);
+  String? getBloodtype() => EnumToString.convertToString(bloodType);
+  String? getBankNames() => EnumToString.convertToString(bankNames);
+  String? getContractType() => EnumToString.convertToString(contractType);
+  String? getMaritalStatus() => EnumToString.convertToString(maritalStatus);
+  String? getDisabledDegree() => EnumToString.convertToString(disabledDegree);
+  String? getMilitaryStatus() => EnumToString.convertToString(militaryStatus);
+  String? getEmploymentType() => EnumToString.convertToString(employmentType);
+  String? getBankAccountType() => EnumToString.convertToString(bankAccountType);
+  String? getEducationalStatus() =>
       EnumToString.convertToString(educationalStatus);
-  String getHighestEducationLevelCompleted() =>
+  String? getHighestEducationLevelCompleted() =>
       EnumToString.convertToString(highestEducationLevelCompleted);
-  String getBankNames() => EnumToString.convertToString(bankNames);
-  String getBankAccountType() => EnumToString.convertToString(bankAccountType);
-  String getBloodtype() => EnumToString.convertToString(bloodType);
 
   factory UserDetail.fromJson(Map<String, dynamic> json) {
     return UserDetail(
       id: json['id'],
       userId: json['user_id'],
-      tcno: json['tcno'],
-      dateofbirth: json['dateofbirth'],
-      workPhone: json['work_phone'],
-      maritalStatus: EnumToString.fromString(
-          MaritalStatusEnum.values, json['maritalstatus'])!,
       numberofkids: json['numberofkids'],
-      disabledDegree: EnumToString.fromString(
-          DisabledDegreeEnum.values, json['degree_of_disability'])!,
-      gender: EnumToString.fromString(GenderEnum.values, json['gender'])!,
-      educationalStatus: EnumToString.fromString(
-          EducationalStatusEnum.values, json['education_status'])!,
-      highestEducationLevelCompleted: json['highest_education_level_completed'],
+      tcno: json['tcno'],
+      workPhone: json['work_phone'],
       lastCompletedEducationStatus: json['last_completed_education_status'],
-      employmentType: EnumToString.fromString(
-          EmploymentTypeEnum.values, json['employment_type'])!,
-      militaryStatus: EnumToString.fromString(
-          MilitaryStatusEnum.values, json['military_service_status'])!,
+      dateofbirth: json['dateofbirth'],
       startDateWork: json['date_of_start'],
-      contractType: EnumToString.fromString(
-          ContractTypeEnum.values, json['contract_type'])!,
       contractEndDate: json['contract_end_date'],
+      quitWorkDate: json['quit_date'],
       workEmail: json['work_email'],
       address: json['adress'],
       addressCountry: json['country'],
@@ -143,43 +134,51 @@ class UserDetail {
       addressCity: json['city'],
       addressZipCode: json['zip_code'],
       homePhone: json['home_telephone'],
-      bankNames:
-          EnumToString.fromString(BankNamesEnum.values, json['bankNames'])!,
-      bankAccountType: EnumToString.fromString(
-          BankAccountTypeEnum.values, json['bank_account_type'])!,
       bankAccountNumber: json['bank_account_number'],
       iban: json['iban'],
       emergencyContactPerson: json['emergency_contact'],
       relationshipEmergencyContact: json['relationship_emergency_contact'],
       emergencyContactCellPhone: json['emergency_contact_phone'],
-      quitWorkDate: json['quit_date'],
       reasonTypeForQuit: json['quit_reason_type'],
       reasonExplainForQuit: json['reason_explain_for_quit'],
+      nationality: json["nationality"],
+      gender: EnumToString.fromString(GenderEnum.values, json['gender'])!,
       bloodType:
           EnumToString.fromString(BloodTypeEnum.values, json['blood_type'])!,
-      nationality: json["nationality"],
+      bankNames:
+          EnumToString.fromString(BankNamesEnum.values, json['bankNames'])!,
+      contractType: EnumToString.fromString(
+          ContractTypeEnum.values, json['contract_type'])!,
+      maritalStatus: EnumToString.fromString(
+          MaritalStatusEnum.values, json['maritalstatus'])!,
+      disabledDegree: EnumToString.fromString(
+          DisabledDegreeEnum.values, json['degree_of_disability'])!,
+      militaryStatus: EnumToString.fromString(
+          MilitaryStatusEnum.values, json['military_service_status'])!,
+      employmentType: EnumToString.fromString(
+          EmploymentTypeEnum.values, json['employment_type'])!,
+      bankAccountType: EnumToString.fromString(
+          BankAccountTypeEnum.values, json['bank_account_type'])!,
+      educationalStatus: EnumToString.fromString(
+          EducationalStatusEnum.values, json['education_status'])!,
+      highestEducationLevelCompleted: EnumToString.fromString(
+        HighestEducationLevelCompletedEnum.values,
+        json['highest_education_level_completed'],
+      )!,
     );
   }
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "user_id": userId,
+        "numberofkids": numberofkids.toString(),
         "tcno": tcno,
-        "dateofbirth": dateofbirth,
         "work_phone": workPhone,
-        "maritalstatus": getMaritalStatus(),
-        "numberofkids": numberofkids,
-        "degree_of_disability": getDisabledDegree(),
-        "gender": gender,
-        "education_status": getEducationalStatus(),
-        "highest_education_level_completed":
-            getHighestEducationLevelCompleted(),
         "last_completed_education_status": lastCompletedEducationStatus,
-        "employment_type": employmentType,
-        "military_service_status": militaryStatus,
+        "dateofbirth": dateofbirth,
         "date_of_start": startDateWork,
-        "contract_type": contractType,
         "contract_end_date": contractEndDate,
+        "quit_date": quitWorkDate,
         "work_email": workEmail,
         "adress": address,
         "country": addressCountry,
@@ -187,17 +186,25 @@ class UserDetail {
         "city": addressCity,
         "zip_code": addressZipCode,
         "home_telephone": homePhone,
-        "bank_name": getBankNames(),
-        "bank_account_type": getBloodtype(),
         "bank_account_number": bankAccountNumber,
         "iban": iban,
         "emergency_contact": emergencyContactPerson,
         "relationship_emergency_contact": relationshipEmergencyContact,
         "emergency_contact_phone": emergencyContactCellPhone,
-        "quit_date": quitWorkDate,
         "quit_reason_type": reasonTypeForQuit,
         "reason_explain_for_quit": reasonExplainForQuit,
-        "blood_type": getBloodtype(),
         "nationality": nationality,
+        "gender": getGender() ?? "",
+        "blood_type": getBloodtype() ?? "",
+        "bank_name": getBankNames() ?? "",
+        "contract_type": getContractType() ?? "",
+        "maritalstatus": getMaritalStatus() ?? "",
+        "degree_of_disability": getDisabledDegree() ?? "",
+        "military_service_status": getMilitaryStatus() ?? "",
+        "employment_type": getEmploymentType() ?? "",
+        "bank_account_type": getBankAccountType() ?? "",
+        "education_status": getEducationalStatus() ?? "",
+        "highest_education_level_completed":
+            getHighestEducationLevelCompleted() ?? "",
       };
 }

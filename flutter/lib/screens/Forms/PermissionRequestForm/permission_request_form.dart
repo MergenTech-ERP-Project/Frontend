@@ -63,7 +63,7 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
       child: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          Container(
+          /* Container(
             height: ResponsiveWidget.isSmallScreen(context) ? 200 : 150,
             color: activeColor.withOpacity(.4),
             child: Center(
@@ -74,7 +74,7 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
                   textAlign: TextAlign.center),
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 30), */
           textWidget(
             label: "Kullanıcı Adı",
             textEditingController: widget.usernameController,
@@ -159,7 +159,7 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
             controller: widget.permissionDayController,
           ),
           const SizedBox(height: 30),
-          CustomButton(
+          /*CustomButton(
             title: "Kaydet",
             pressAction: () {
               setState(() {
@@ -167,7 +167,7 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
                 Get.back();
               });
             },
-          ),
+          ), */
         ],
       ),
     );
