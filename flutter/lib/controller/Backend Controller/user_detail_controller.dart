@@ -15,7 +15,9 @@ class UserDetailController extends GetxController {
       isLoading(true);
       UserDetail? detail =
           await UserDetailServices.fetchUserDetailByUserId(userId);
-      print("fetch User Detail: " + detail!.userId.toString());
+      if (detail != null) {
+        ("fetch User Detail: user.id: " + detail.userId.toString());
+      }
       return detail;
     } finally {
       isLoading(false);

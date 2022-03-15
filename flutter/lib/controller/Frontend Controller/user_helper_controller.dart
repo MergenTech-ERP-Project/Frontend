@@ -17,6 +17,7 @@ import 'package:vtys_kalite/enums/salary_type.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_career.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_payment.dart';
+import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee_helpers.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
@@ -47,10 +48,11 @@ class UserHelperController {
     userDetailPayment = UserDetailPayment(userDetailId: userDetail.id);
   }
 
-  userDetailSave(BuildContext context, user) async {
+  userDetailSave(BuildContext context, User? user) async {
     int userId = 0;
     try {
       if (user == null) {
+        print("User: null");
         await userController.addNewUser(
           tabGenelController.controllerName.text +
               tabGenelController.controllerSurname.text,
@@ -61,30 +63,27 @@ class UserHelperController {
         userId = await userController.fetchUserByEmailAndPassword(
             tabGenelController.controllerEPostaPersonal.text, "qwe123");
       } else {
-        user!.name = tabGenelController.controllerName.text +
+        print("User: " + user.toJson().toString());
+        user.name = tabGenelController.controllerName.text +
             " " +
             tabGenelController.controllerSurname.text;
-        user!.email = tabGenelController.controllerEPostaPersonal.text;
-        user!.cellphone = tabGenelController.controllerTelephonePersonal.text;
+        user.email = tabGenelController.controllerEPostaPersonal.text;
+        user.cellphone = tabGenelController.controllerTelephonePersonal.text;
         userController.updateUser(
-          user!.id,
-          user!,
+          user.id,
+          user,
         );
-        userId = user!.id;
+        userId = user.id;
       }
 
       print("User Helper User Created / Updated ID: $userId");
 
-      UserDetail? userDetail = await userDetailController
-          .fetchUserDetailByUserId(userId)
-          .onError((error, stackTrace) =>
-              throw "Error: Get UserDetail by user.id 1");
+      UserDetail? userDetail =
+          await userDetailController.fetchUserDetailByUserId(userId);
 
-      print("User Helper UserDetail " +
-          (userDetail == null ? "not found" : "found ID: ${userDetail.id}"));
+      print("User Helper UserDetail " + userDetail.toString());
 
       UserDetail? newUserDetail = UserDetail(
-        id: userDetail == null ? 0 : userDetail.id,
         userId: userId,
         numberofkids:
             int.parse(tabKisiselBilgilerController.controllerNumberOfKids.text),
@@ -143,16 +142,10 @@ class UserHelperController {
 
       print("User Helper UserDetail created/updated");
 
-      userDetail = await userDetailController
-          .fetchUserDetailByUserId(userId)
-          .onError((error, stackTrace) =>
-              throw "Error: Get UserDetail by user.id 2");
-      print("User Helper new User UserDetail found ID: ${userDetail!.id}");
+      userDetail = await userDetailController.fetchUserDetailByUserId(userId);
 
       UserDetailCareer? userDetailCareer = await userDetailCareerController
-          .fetchUserDetailCareerById(userDetail.id)
-          .onError((error, stackTrace) =>
-              throw "Error: Get UserDetailCareer by userDetail.id");
+          .fetchUserDetailCareerById(userDetail?.id);
 
       print("User Helper User UserDetailCareer " +
           (userDetailCareer == null
@@ -163,9 +156,9 @@ class UserHelperController {
       if ((userDetailCareer == null)) {
         responseUserDetailCareer =
             await userDetailCareerController.addNewUserDetailCareer(
-          userDetail.id,
+          userDetail?.id,
           UserDetailCareer(
-            userDetailId: userDetail.id,
+            userDetailId: userDetail!.id,
             managerName: tabKariyerController.positionYoneticisi.text,
             managerTcno: "12345678910", //TODO
             unitCompany: companyController
@@ -182,7 +175,7 @@ class UserHelperController {
         );
       } else {
         responseUserDetailCareer = await userDetailCareerController
-            .updateUserDetailCareer(userDetail.id, userDetailCareer);
+            .updateUserDetailCareer(userDetail!.id, userDetailCareer);
       }
 
       int? responseUserDetailPayment =

@@ -139,7 +139,8 @@ class _TabKariyerState extends State<TabKariyer> {
                               listExtension: SalaryTypeExtension.getList(),
                               onChanged: (val) {
                                 setState(() {
-                                  widget.userHelper.userDetailPayment.salaryType =
+                                  widget.userHelper.userDetailPayment
+                                          .salaryType =
                                       SalaryTypeExtension.getEnumFromName(val);
                                 });
                               },
@@ -273,8 +274,8 @@ class _TabKariyerState extends State<TabKariyer> {
     ];
 
     positionChildren1 = [
-      widget.userHelper.userDetail.startDateWork,
-      widget.userHelper.userDetail.contractEndDate,
+      widget.userHelper.userDetail.startDateWork ?? "",
+      widget.userHelper.userDetail.contractEndDate ?? "",
       EmploymentTypeEnumExtension.getList()[
               widget.userHelper.userDetail.employmentType.index]
           .toString(),
