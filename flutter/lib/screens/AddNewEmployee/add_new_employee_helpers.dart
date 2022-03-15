@@ -65,8 +65,9 @@ showInformationWhenOnClick(User? user, UserHelperController userHelper) {
   tabGenelController.controllerName.text = name;
   tabGenelController.controllerSurname.text = surname;
   tabGenelController.controllerEPostaWork.text =
-      userHelper.userDetail.workEmail;
-  tabGenelController.controllerWorkPhone.text = userHelper.userDetail.workPhone;
+      userHelper.userDetail.workEmail!;
+  tabGenelController.controllerWorkPhone.text =
+      userHelper.userDetail.workPhone!;
   tabGenelController.controllerEPostaPersonal.text =
       user != null ? user.email : "";
   tabGenelController.controllerTelephonePersonal.text =
@@ -84,37 +85,37 @@ showInformationWhenOnClick(User? user, UserHelperController userHelper) {
       userHelper.userDetailPayment.currency;
 
   tabDigerBilgilerController.controllerAdress.text =
-      userHelper.userDetail.address;
+      userHelper.userDetail.address!;
 
   tabDigerBilgilerController.controllerHomePhone.text =
-      userHelper.userDetail.homePhone;
+      userHelper.userDetail.homePhone!;
 
   tabDigerBilgilerController.controllerCountry.text =
-      userHelper.userDetail.addressCountry;
+      userHelper.userDetail.addressCountry!;
 
   tabDigerBilgilerController.controllerCity.text =
-      userHelper.userDetail.addressCity;
+      userHelper.userDetail.addressCity!;
 
   tabDigerBilgilerController.controllerZipCode.text =
-      userHelper.userDetail.addressZipCode;
+      userHelper.userDetail.addressZipCode!;
 
   tabDigerBilgilerController.controllerDistrict.text =
-      userHelper.userDetail.addressDistrict;
+      userHelper.userDetail.addressDistrict!;
 
   tabDigerBilgilerController.controllerAccountNumber.text =
-      userHelper.userDetail.bankAccountNumber;
+      userHelper.userDetail.bankAccountNumber!;
 
-  tabDigerBilgilerController.controllerIBAN.text = userHelper.userDetail.iban;
+  tabDigerBilgilerController.controllerIBAN.text = userHelper.userDetail.iban!;
 
   tabKisiselBilgilerController.controllerTcNo.text =
-      userHelper.userDetail.bankAccountNumber;
+      userHelper.userDetail.bankAccountNumber!;
 
   tabKisiselBilgilerController.controllerNationality.text =
-      userHelper.userDetail.nationality;
+      userHelper.userDetail.nationality!;
 
   tabKisiselBilgilerController.controllerNumberOfKids.text =
       userHelper.userDetail.numberofkids.toString();
 
   tabKisiselBilgilerController.controllerLastCompletedEducationStatus.text =
-      userHelper.userDetail.lastCompletedEducationStatus;
+      userHelper.userDetail.lastCompletedEducationStatus!;
 }

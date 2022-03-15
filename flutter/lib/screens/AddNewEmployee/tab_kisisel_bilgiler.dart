@@ -59,8 +59,7 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
               onChanged: (val) {
                 setState(() {
                   widget.userHelper.userDetail.employmentType =
-                      MaritalStatusExtension.getEnumFromName(
-                        val);
+                      MaritalStatusExtension.getEnumFromName(val);
                 });
               },
             ),
@@ -71,8 +70,7 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
               onChanged: (val) {
                 setState(() {
                   widget.userHelper.userDetail.gender =
-                      GenderExtension.getEnumFromName(
-                        val);
+                      GenderExtension.getEnumFromName(val);
                 });
               },
             ),
@@ -87,8 +85,7 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
               onChanged: (val) {
                 setState(() {
                   widget.userHelper.userDetail.disabledDegree =
-                      GenderExtension.getEnumFromName(
-                         val);
+                      GenderExtension.getEnumFromName(val);
                 });
               },
             ),
@@ -113,8 +110,7 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
               onChanged: (val) {
                 setState(() {
                   widget.userHelper.userDetail.militaryStatus =
-                      MilitaryStatusEnumExtension.getEnumFromName(
-                         val);
+                      MilitaryStatusEnumExtension.getEnumFromName(val);
                 });
               },
             ),
@@ -129,8 +125,7 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
               onChanged: (val) {
                 setState(() {
                   widget.userHelper.userDetail.bloodType =
-                      BloodTypeEnumExtension.getEnumFromName(
-                         val);
+                      BloodTypeEnumExtension.getEnumFromName(val);
                 });
               },
             ),
@@ -140,9 +135,8 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
               listExtension: EducationalStatusExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                 widget.userHelper.userDetail.educationalStatus =
-                      EducationalStatusExtension.getEnumFromName(
-                         val);
+                  widget.userHelper.userDetail.educationalStatus =
+                      EducationalStatusExtension.getEnumFromName(val);
                 });
               },
             ),
@@ -152,7 +146,8 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Tamamlanan En Yüksek Eğitim Seviyesi",
-              value:widget.userHelper.userDetail.highestEducationLevelCompleted.getName,
+              value: widget
+                  .userHelper.userDetail.highestEducationLevelCompleted.getName,
               listExtension: HighestEducationLevelCompletedExtension.getList(),
               onChanged: (val) {
                 setState(() {

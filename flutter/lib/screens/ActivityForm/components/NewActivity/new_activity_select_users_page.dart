@@ -17,7 +17,7 @@ class NewActivitySelectUsersPage extends StatefulWidget {
   final double width;
   final int activityId;
 
-  NewActivitySelectUsersPage({
+  const NewActivitySelectUsersPage({
     Key? key,
     required this.onPreviousButtonClick,
     required this.containerHeight,
