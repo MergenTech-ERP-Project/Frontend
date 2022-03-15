@@ -44,7 +44,7 @@ class TabGenelFirstCard extends StatelessWidget {
               children: [
                 const CustomText(text: "İşe Başlama Tarih"),
                 CustomText(
-                  text: userHelper.userDetail.startDateWork,
+                  text: userHelper.userDetail!.startDateWork,
                 ),
               ],
             ),
@@ -53,7 +53,7 @@ class TabGenelFirstCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const CustomText(text: "Şirket"),
-                CustomText(text: userHelper.userDetailCareer.unitCompany),
+                CustomText(text: userHelper.userDetailCareer!.unitCompany),
               ],
             ),
             const SizedBox(height: 20),
@@ -62,7 +62,7 @@ class TabGenelFirstCard extends StatelessWidget {
               children: [
                 const CustomText(text: "Şube"),
                 CustomText(
-                  text: userHelper.userDetailCareer.unitBranch,
+                  text: userHelper.userDetailCareer!.unitBranch,
                 ),
               ],
             ),
@@ -71,7 +71,7 @@ class TabGenelFirstCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const CustomText(text: "Departman"),
-                CustomText(text: userHelper.userDetailCareer.unitDepartment),
+                CustomText(text: userHelper.userDetailCareer!.unitDepartment),
               ],
             ),
             const SizedBox(height: 20),
@@ -79,7 +79,7 @@ class TabGenelFirstCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const CustomText(text: "Ünvan"),
-                CustomText(text: userHelper.userDetailCareer.unitTitle),
+                CustomText(text: userHelper.userDetailCareer!.unitTitle),
               ],
             ),
             const SizedBox(height: 20),
