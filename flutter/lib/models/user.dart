@@ -1,13 +1,12 @@
 import 'dart:convert';
 
-
 List<User>? parseUsers(String str) =>
     List<User>.from(json.decode(str).map((x) => User.fromJson(x)));
 
 User? parseUser(String str) => parseUsers(str)?[0];
 
 String fetchUsers(List<User> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+    json.encode(List<dynamic>.from(data.map((x) => x.toJsonWithId())));
 
 class User {
   final int id;
@@ -38,6 +37,13 @@ class User {
   }
 
   Map<String, dynamic> toJson() => {
+        "name": name,
+        "password": password,
+        "title": title,
+        "cellphone": cellphone,
+        "email": email,
+      };
+  Map<String, dynamic> toJsonWithId() => {
         "id": id,
         "name": name,
         "password": password,

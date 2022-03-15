@@ -133,13 +133,13 @@ class _TabKariyerState extends State<TabKariyer> {
                         Row(
                           children: [
                             ExpandedCustomDropDownMenu(
-                              value: widget.userHelper.userDetailPayment
+                              value: widget.userHelper.userDetailPayment!
                                   .salaryType!.getName,
                               label: "Maaş Tipi",
                               listExtension: SalaryTypeExtension.getList(),
                               onChanged: (val) {
                                 setState(() {
-                                  widget.userHelper.userDetailPayment
+                                  widget.userHelper.userDetailPayment!
                                           .salaryType =
                                       SalaryTypeExtension.getEnumFromName(val);
                                 });
@@ -274,15 +274,15 @@ class _TabKariyerState extends State<TabKariyer> {
     ];
 
     positionChildren1 = [
-      widget.userHelper.userDetail.startDateWork ?? "",
-      widget.userHelper.userDetail.contractEndDate ?? "",
+      widget.userHelper.userDetail!.startDateWork,
+      widget.userHelper.userDetail!.contractEndDate,
       EmploymentTypeEnumExtension.getList()[
-              widget.userHelper.userDetail.employmentType.index]
+              widget.userHelper.userDetail!.employmentType.index]
           .toString(),
-      widget.userHelper.userDetailCareer.unitCompany,
-      widget.userHelper.userDetailCareer.unitBranch,
-      widget.userHelper.userDetailCareer.unitDepartment,
-      widget.userHelper.userDetailCareer.unitTitle,
+      widget.userHelper.userDetailCareer!.unitCompany,
+      widget.userHelper.userDetailCareer!.unitBranch,
+      widget.userHelper.userDetailCareer!.unitDepartment,
+      widget.userHelper.userDetailCareer!.unitTitle,
     ];
 
     salaryHeaders = [
@@ -294,7 +294,7 @@ class _TabKariyerState extends State<TabKariyer> {
     salaryChildren1 = [
       tabKariyerController.controllerSalary.text.toString() +
           EmploymentTypeEnumExtension.getList()[
-                  widget.userHelper.userDetail.employmentType.index]
+                  widget.userHelper.userDetail!.employmentType.index]
               .toString(),
       tabKariyerController.controllerPaymentScreenInSalary.text.toString(),
       'Buraya Nasıl Ekleyeceğim Bakacağım Sonra',
@@ -438,7 +438,7 @@ class _PozisyonEklemeBody extends StatelessWidget {
                       if (companyNames.isNotEmpty) {
                         tabKariyerController.unitCompanyIndex.value =
                             companyNames.indexOf(val!);
-                        userHelper.userDetailCareer.unitCompany = companyNames[
+                        userHelper.userDetailCareer!.unitCompany = companyNames[
                             tabKariyerController.unitCompanyIndex.value];
                       }
                     },
@@ -462,7 +462,7 @@ class _PozisyonEklemeBody extends StatelessWidget {
                       if (branchNames.isNotEmpty) {
                         tabKariyerController.unitBranchIndex.value =
                             branchNames.indexOf(val!);
-                        userHelper.userDetailCareer.unitBranch = branchNames[
+                        userHelper.userDetailCareer!.unitBranch = branchNames[
                             tabKariyerController.unitBranchIndex.value];
                       }
                     },
@@ -490,7 +490,7 @@ class _PozisyonEklemeBody extends StatelessWidget {
                       if (departmantNames.isNotEmpty) {
                         tabKariyerController.unitDepartmantIndex.value =
                             departmantNames.indexOf(val!);
-                        userHelper.userDetailCareer.unitDepartment =
+                        userHelper.userDetailCareer!.unitDepartment =
                             departmantNames[
                                 tabKariyerController.unitDepartmantIndex.value];
                       }
@@ -514,7 +514,7 @@ class _PozisyonEklemeBody extends StatelessWidget {
                       if (titleNames.isNotEmpty) {
                         tabKariyerController.unitTitleIndex.value =
                             titleNames.indexOf(val!);
-                        userHelper.userDetailCareer.unitTitle = titleNames[
+                        userHelper.userDetailCareer!.unitTitle = titleNames[
                             tabKariyerController.unitDepartmantIndex.value];
                       }
                     },
@@ -554,7 +554,7 @@ class _PozisyonEklemeBody extends StatelessWidget {
                 onChanged: (val) {
                   if (val != null) {
                     try {
-                      userHelper.userDetail.startDateWork = val;
+                      userHelper.userDetail!.startDateWork = val;
                     } catch (e) {
                       print(e.toString());
                     }
@@ -566,7 +566,7 @@ class _PozisyonEklemeBody extends StatelessWidget {
                 onChanged: (val) {
                   if (val != null) {
                     try {
-                      userHelper.userDetail.quitWorkDate = val;
+                      userHelper.userDetail!.quitWorkDate = val;
                     } catch (e) {
                       print(e.toString());
                     }

@@ -26,29 +26,29 @@ String fetchUsers(List<UserDetail> data) =>
 class UserDetail {
   final int id;
   final int userId; //user_id
-  int? numberofkids; //numberofkids
-  String? tcno; //tcno
-  String? workPhone; //work_phone
-  String? lastCompletedEducationStatus; //last_completed_education_status
-  String? dateofbirth; //dateofbirth
-  String? startDateWork; //date_of_start
-  String? contractEndDate; //contract_end_date
-  String? quitWorkDate; //quit_date
-  String? workEmail; //work_email
-  String? address; //adress
-  String? addressCountry; //country
-  String? addressDistrict; //address_district
-  String? addressCity; //city
-  String? addressZipCode; //zip_code
-  String? homePhone; //home_telephone
-  String? bankAccountNumber; //bank_account_number
-  String? iban; //iban
-  String? emergencyContactPerson; //emergency_contact
-  String? relationshipEmergencyContact; //relationship_emergency_contact
-  String? emergencyContactCellPhone; //emergency_contact_phone
-  String? reasonTypeForQuit; //quit_reason_type
-  String? reasonExplainForQuit; //reason_explain_for_quit
-  String? nationality; //nationality
+  int numberofkids; //numberofkids
+  String tcno; //tc_no
+  String workPhone; //work_phone
+  String lastCompletedEducationStatus; //last_completed_education_status
+  String dateofbirth; //dateofbirth
+  String startDateWork; //date_of_start
+  String contractEndDate; //contract_end_date
+  String quitWorkDate; //quit_date
+  String workEmail; //work_email
+  String address; //address
+  String addressCountry; //country
+  String addressDistrict; //address_district
+  String addressCity; //city
+  String addressZipCode; //zip_code
+  String homePhone; //home_telephone
+  String bankAccountNumber; //bank_account_number
+  String iban; //iban
+  String emergencyContactPerson; //emergency_contact
+  String relationshipEmergencyContact; //relationship_emergency_contact
+  String emergencyContactCellPhone; //emergency_contact_phone
+  String reasonTypeForQuit; //quit_reason_type
+  String quitExplanation; //quit_explanation
+  String nationality; //nationality
   GenderEnum gender; //gender
   BloodTypeEnum bloodType; //blood_type
   BankNamesEnum bankNames; //bank_name
@@ -63,7 +63,7 @@ class UserDetail {
       highestEducationLevelCompleted; //highest_education_level_completed
 
   UserDetail({
-    this.id = 0,
+    this.id = -1,
     required this.userId,
     this.numberofkids = 0,
     this.tcno = "",
@@ -86,7 +86,7 @@ class UserDetail {
     this.emergencyContactCellPhone = "",
     this.quitWorkDate = "",
     this.reasonTypeForQuit = "",
-    this.reasonExplainForQuit = "",
+    this.quitExplanation = "none",
     this.nationality = "",
     required this.maritalStatus,
     required this.disabledDegree,
@@ -120,7 +120,7 @@ class UserDetail {
       id: json['id'],
       userId: json['user_id'],
       numberofkids: json['numberofkids'],
-      tcno: json['tcno'] ?? "",
+      tcno: json['tc_no'] ?? "",
       workPhone: json['work_phone'] ?? "",
       lastCompletedEducationStatus:
           json['last_completed_education_status'] ?? "",
@@ -129,7 +129,7 @@ class UserDetail {
       contractEndDate: json['contract_end_date'] ?? "",
       quitWorkDate: json['quit_date'] ?? "",
       workEmail: json['work_email'] ?? "",
-      address: json['adress'] ?? "",
+      address: json['address'] ?? "",
       addressCountry: json['country'] ?? "",
       addressDistrict: json['address_district'] ?? "",
       addressCity: json['city'] ?? "",
@@ -142,7 +142,7 @@ class UserDetail {
           json['relationship_emergency_contact'] ?? "",
       emergencyContactCellPhone: json['emergency_contact_phone'] ?? "",
       reasonTypeForQuit: json['quit_reason_type'] ?? "",
-      reasonExplainForQuit: json['reason_explain_for_quit'] ?? "",
+      quitExplanation: json['quit_explanation'] ?? "",
       nationality: json["nationality"] ?? "",
       gender: EnumToString.fromString(GenderEnum.values, json['gender'])!,
       bloodType:
@@ -174,28 +174,28 @@ class UserDetail {
         "id": id,
         "user_id": userId,
         "numberofkids": numberofkids.toString(),
-        "tcno": tcno ?? "",
-        "work_phone": workPhone ?? "",
-        "last_completed_education_status": lastCompletedEducationStatus ?? "",
-        "dateofbirth": dateofbirth ?? "",
-        "date_of_start": startDateWork ?? "",
-        "contract_end_date": contractEndDate ?? "",
-        "quit_date": quitWorkDate ?? "",
-        "work_email": workEmail ?? "",
-        "adress": address ?? "",
-        "country": addressCountry ?? "",
-        "address_district": addressDistrict ?? "",
-        "city": addressCity ?? "",
-        "zip_code": addressZipCode ?? "",
-        "home_telephone": homePhone ?? "",
-        "bank_account_number": bankAccountNumber ?? "",
-        "iban": iban ?? "",
-        "emergency_contact": emergencyContactPerson ?? "",
-        "relationship_emergency_contact": relationshipEmergencyContact ?? "",
-        "emergency_contact_phone": emergencyContactCellPhone ?? "",
-        "quit_reason_type": reasonTypeForQuit ?? "",
-        "reason_explain_for_quit": reasonExplainForQuit ?? "",
-        "nationality": nationality ?? "",
+        "tc_no": tcno,
+        "work_phone": workPhone,
+        "last_completed_education_status": lastCompletedEducationStatus,
+        "dateofbirth": dateofbirth,
+        "date_of_start": startDateWork,
+        "contract_end_date": contractEndDate,
+        "quit_date": quitWorkDate,
+        "work_email": workEmail,
+        "address": address,
+        "country": addressCountry,
+        "address_district": addressDistrict,
+        "city": addressCity,
+        "zip_code": addressZipCode,
+        "home_telephone": homePhone,
+        "bank_account_number": bankAccountNumber,
+        "iban": iban,
+        "emergency_contact": emergencyContactPerson,
+        "relationship_emergency_contact": relationshipEmergencyContact,
+        "emergency_contact_phone": emergencyContactCellPhone,
+        "quit_reason_type": reasonTypeForQuit,
+        "quit_explanation": quitExplanation,
+        "nationality": nationality,
         "gender": getGender() ?? "",
         "blood_type": getBloodtype() ?? "",
         "bank_name": getBankNames() ?? "",

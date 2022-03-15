@@ -16,7 +16,7 @@ class UserController extends GetxController {
     super.onInit();
   }
 
-  void fetchUsers() async {
+  Future<void> fetchUsers() async {
     try {
       isLoading(true);
       List<User>? users = await UserRemoteServices.fetchUsers();
@@ -61,21 +61,19 @@ class UserController extends GetxController {
   }
 
   Future<int?> addNewUser(String name, String email, String password,
-      String cellPhoneNumber) async {
+      String title, String cellPhoneNumber) async {
     try {
       isLoading(true);
       User newUser = User(
-        id: 0,
         name: name,
         password: password,
-        title: "",
-        // name == "admin" ? DepartmentsEnum.management : DepartmentsEnum.none,
+        title: title,
         cellphone: cellPhoneNumber,
         email: email,
       );
       var response = await UserRemoteServices.addNewUser(
           json.encode(newUser.toJson()).toString());
-      fetchUsers(); //userList.add(newUser);
+      await fetchUsers(); //userList.add(newUser);
       print("post User: " + response.toString());
       return response;
     } finally {
@@ -89,7 +87,7 @@ class UserController extends GetxController {
       print("Update User ID: $id");
       var response = await UserRemoteServices.updateUser(
           id, json.encode(user.toJson()).toString());
-      fetchUsers(); //userList.add(newUser);
+      await fetchUsers(); //userList.add(newUser);
       print("put User: " + response);
       return response;
     } finally {
@@ -102,7 +100,7 @@ class UserController extends GetxController {
       isLoading(true);
       print("Delete User ID: $id");
       var response = await UserRemoteServices.deleteUser(id);
-      fetchUsers(); //userList.add(newUser);
+      await fetchUsers(); //userList.add(newUser);
       print("delete User: " + response);
       return response;
     } finally {
