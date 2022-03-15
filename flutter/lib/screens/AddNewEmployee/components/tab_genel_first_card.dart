@@ -39,6 +39,7 @@ class TabGenelFirstCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+
             ProfileAboutRow(
               textConstant: "İşe Başlama Tarihi",
               textUser: userHelper.userDetail.startDateWork,
@@ -62,6 +63,7 @@ class TabGenelFirstCard extends StatelessWidget {
             ProfileAboutRow(
               textConstant: "Ünvan",
               textUser: userHelper.userDetailCareer.unitTitle,
+
             ),
             const SizedBox(height: 20),
             ProfileAboutRow(

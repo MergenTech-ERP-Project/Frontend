@@ -17,146 +17,145 @@ import 'package:vtys_kalite/enums/salary_type.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_career.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_payment.dart';
+import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee_helpers.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class UserHelperController {
-  final int userId;
-  late UserDetail userDetail;
-  late UserDetailCareer userDetailCareer;
-  late UserDetailPayment userDetailPayment;
+  int userId;
+  UserDetail? userDetail;
+  UserDetailCareer? userDetailCareer;
+  UserDetailPayment? userDetailPayment;
 
-  UserHelperController(this.userId) {
-    ///TODO: fetch yapılacak burada!!!
-    userDetail = UserDetail(
+  Future<void> init() async {
+    userDetail = await userDetailController.fetchUserDetailByUserId(userId);
+    userDetail ??= UserDetail(
       userId: userId,
-      bankAccountType: BankAccountTypeEnum.values.first,
-      bankNames: BankNamesEnum.values.first,
-      bloodType: BloodTypeEnum.values.first,
-      contractType: ContractTypeEnum.values.first,
+      maritalStatus: MaritalStatusEnum.values.first,
       disabledDegree: DisabledDegreeEnum.values.first,
-      educationalStatus: EducationalStatusEnum.values.first,
-      employmentType: EmploymentTypeEnum.values.first,
       gender: GenderEnum.values.first,
+      educationalStatus: EducationalStatusEnum.values.first,
       highestEducationLevelCompleted:
           HighestEducationLevelCompletedEnum.values.first,
-      maritalStatus: MaritalStatusEnum.values.first,
+      employmentType: EmploymentTypeEnum.values.first,
       militaryStatus: MilitaryStatusEnum.values.first,
+      contractType: ContractTypeEnum.values.first,
+      bankNames: BankNamesEnum.values.first,
+      bankAccountType: BankAccountTypeEnum.values.first,
+      bloodType: BloodTypeEnum.values.first,
     );
+
     userDetailCareer = UserDetailCareer(userDetailId: userDetail.id);
     userDetailPayment = UserDetailPayment(
       userDetailId: userDetail.id,
       paymentScheme: PaymentSchemeEnum.values.first,
       salaryType: SalaryTypeEnum.values.first,
     );
+
   }
 
-  userDetailSave(BuildContext context, user) async {
-    int userId = 0;
+  UserHelperController(this.userId);
+
+  getUserDetail() {
+    return UserDetail(
+      userId: userId,
+      numberofkids:
+          int.parse(tabKisiselBilgilerController.controllerNumberOfKids.text),
+      tcno: tabKisiselBilgilerController.controllerTcNo.text,
+      workPhone: tabGenelController.controllerWorkPhone.text,
+      lastCompletedEducationStatus: tabKisiselBilgilerController
+          .controllerLastCompletedEducationStatus.text,
+      dateofbirth: userDetail!.dateofbirth,
+      startDateWork: userDetail!.startDateWork,
+      contractEndDate: userDetail!.contractEndDate,
+      quitWorkDate: userDetail!.contractEndDate,
+      workEmail: tabGenelController.controllerEPostaWork.value.text,
+      address: tabDigerBilgilerController.controllerAdress.text,
+      addressCountry: tabDigerBilgilerController.controllerCountry.text,
+      addressDistrict: tabDigerBilgilerController.controllerDistrict.text,
+      addressCity: tabDigerBilgilerController.controllerCity.text,
+      addressZipCode: tabDigerBilgilerController.controllerZipCode.text,
+      homePhone: tabDigerBilgilerController.controllerHomePhone.text,
+      bankAccountNumber:
+          tabDigerBilgilerController.controllerAccountNumber.text,
+      iban: tabDigerBilgilerController.controllerIBAN.text,
+      emergencyContactPerson: "",
+      relationshipEmergencyContact: "",
+      emergencyContactCellPhone: "",
+      reasonTypeForQuit: "",
+      quitExplanation: "",
+      nationality: tabKisiselBilgilerController.controllerNationality.text,
+      gender: GenderEnum.values.elementAt(userDetail!.gender.index),
+      bloodType: BloodTypeEnum.values.elementAt(userDetail!.bloodType.index),
+      bankNames: BankNamesEnum.values.elementAt(userDetail!.bankNames.index),
+      contractType:
+          ContractTypeEnum.values.elementAt(userDetail!.contractType.index),
+      maritalStatus:
+          MaritalStatusEnum.values.elementAt(userDetail!.maritalStatus.index),
+      disabledDegree:
+          DisabledDegreeEnum.values.elementAt(userDetail!.disabledDegree.index),
+      militaryStatus:
+          MilitaryStatusEnum.values.elementAt(userDetail!.employmentType.index),
+      employmentType:
+          EmploymentTypeEnum.values.elementAt(userDetail!.employmentType.index),
+      bankAccountType: BankAccountTypeEnum.values
+          .elementAt(userDetail!.bankAccountType.index),
+      educationalStatus: EducationalStatusEnum.values
+          .elementAt(userDetail!.educationalStatus.index),
+      highestEducationLevelCompleted: HighestEducationLevelCompletedEnum.values
+          .elementAt(userDetail!.highestEducationLevelCompleted.index),
+    );
+  }
+
+  userDetailSave(BuildContext context, User? user) async {
+    int? responseUserDetail;
+    print(
+        "\n\n----------------------------USER HELPER----------------------------\n\n");
     try {
-      if (user == null) {
+      if (userId == -1) {
+        print("User: null");
         await userController.addNewUser(
           tabGenelController.controllerName.text +
               tabGenelController.controllerSurname.text,
           tabGenelController.controllerEPostaPersonal.text,
           "qwe123",
+          "management",
           tabGenelController.controllerTelephonePersonal.text,
         );
+        print("New User Added!");
         userId = await userController.fetchUserByEmailAndPassword(
             tabGenelController.controllerEPostaPersonal.text, "qwe123");
+        print("User ID: $userId");
+        responseUserDetail =
+            await userDetailController.addNewUserDetail(getUserDetail());
+        print("New UserDetail Added!");
       } else {
-        user!.name = tabGenelController.controllerName.text +
+        print("User: " + user!.toJsonWithId().toString());
+        user.name = tabGenelController.controllerName.text +
             " " +
             tabGenelController.controllerSurname.text;
-        user!.email = tabGenelController.controllerEPostaPersonal.text;
-        user!.cellphone = tabGenelController.controllerTelephonePersonal.text;
+        user.email = tabGenelController.controllerEPostaPersonal.text;
+        user.cellphone = tabGenelController.controllerTelephonePersonal.text;
         userController.updateUser(
-          user!.id,
-          user!,
+          user.id,
+          user,
         );
-        userId = user!.id;
+        print("User Updated!");
+        userId = user.id;
+        print("User ID: $userId");
+        responseUserDetail = userDetail!.id == -1
+            ? await userDetailController.addNewUserDetail(getUserDetail())
+            : await userDetailController.updateUserDetail(
+                userDetail!.id, getUserDetail());
+        print("UserDetail Updated!");
       }
 
-      print("User Helper User Created / Updated ID: $userId");
-
-      UserDetail? userDetail = await userDetailController
-          .fetchUserDetailByUserId(userId)
-          .onError((error, stackTrace) =>
-              throw "Error: Get UserDetail by user.id 1");
-
-      print("User Helper UserDetail " +
-          (userDetail == null ? "not found" : "found ID: ${userDetail.id}"));
-
-      UserDetail? newUserDetail = UserDetail(
-        id: userDetail == null ? 0 : userDetail.id,
-        userId: userId,
-        numberofkids:
-            int.parse(tabKisiselBilgilerController.controllerNumberOfKids.text),
-        tcno: tabKisiselBilgilerController.controllerTcNo.text,
-        workPhone: tabGenelController.controllerWorkPhone.text,
-        lastCompletedEducationStatus: tabKisiselBilgilerController
-            .controllerLastCompletedEducationStatus.text,
-        dateofbirth: this.userDetail.dateofbirth,
-        startDateWork: this.userDetail.startDateWork,
-        contractEndDate: this.userDetail.contractEndDate,
-        quitWorkDate: this.userDetail.contractEndDate,
-        workEmail: tabGenelController.controllerEPostaWork.value.text,
-        address: tabDigerBilgilerController.controllerAdress.text,
-        addressCountry: tabDigerBilgilerController.controllerCountry.text,
-        addressDistrict: tabDigerBilgilerController.controllerDistrict.text,
-        addressCity: tabDigerBilgilerController.controllerCity.text,
-        addressZipCode: tabDigerBilgilerController.controllerZipCode.text,
-        homePhone: tabDigerBilgilerController.controllerHomePhone.text,
-        bankAccountNumber:
-            tabDigerBilgilerController.controllerAccountNumber.text,
-        iban: tabDigerBilgilerController.controllerIBAN.text,
-        emergencyContactPerson: "",
-        relationshipEmergencyContact: "",
-        emergencyContactCellPhone: "",
-        reasonTypeForQuit: "",
-        reasonExplainForQuit: "",
-        nationality: tabKisiselBilgilerController.controllerNationality.text,
-        gender: GenderEnum.values.elementAt(this.userDetail.gender.index),
-        bloodType:
-            BloodTypeEnum.values.elementAt(this.userDetail.bloodType.index),
-        bankNames:
-            BankNamesEnum.values.elementAt(this.userDetail.bankNames.index),
-        contractType: ContractTypeEnum.values
-            .elementAt(this.userDetail.contractType.index),
-        maritalStatus: MaritalStatusEnum.values
-            .elementAt(this.userDetail.maritalStatus.index),
-        disabledDegree: DisabledDegreeEnum.values
-            .elementAt(this.userDetail.disabledDegree.index),
-        militaryStatus: MilitaryStatusEnum.values
-            .elementAt(this.userDetail.employmentType.index),
-        employmentType: EmploymentTypeEnum.values
-            .elementAt(this.userDetail.employmentType.index),
-        bankAccountType: BankAccountTypeEnum.values
-            .elementAt(this.userDetail.bankAccountType.index),
-        educationalStatus: EducationalStatusEnum.values
-            .elementAt(this.userDetail.educationalStatus.index),
-        highestEducationLevelCompleted: HighestEducationLevelCompletedEnum
-            .values
-            .elementAt(this.userDetail.highestEducationLevelCompleted.index),
-      );
-
-      int? responseUserDetail = (userDetail == null
-          ? await userDetailController.addNewUserDetail(newUserDetail)
-          : await userDetailController.updateUserDetail(
-              userDetail.id, newUserDetail));
-
-      print("User Helper UserDetail created/updated");
-
-      userDetail = await userDetailController
-          .fetchUserDetailByUserId(userId)
-          .onError((error, stackTrace) =>
-              throw "Error: Get UserDetail by user.id 2");
-      print("User Helper new User UserDetail found ID: ${userDetail!.id}");
+      userDetail =
+          (await userDetailController.fetchUserDetailByUserId(userId))!;
+      print("UserDetail : ${userDetail!.id}");
 
       UserDetailCareer? userDetailCareer = await userDetailCareerController
-          .fetchUserDetailCareerById(userDetail.id)
-          .onError((error, stackTrace) =>
-              throw "Error: Get UserDetailCareer by userDetail.id");
+          .fetchUserDetailCareerById(userDetail?.id);
 
       print("User Helper User UserDetailCareer " +
           (userDetailCareer == null
@@ -167,9 +166,9 @@ class UserHelperController {
       if ((userDetailCareer == null)) {
         responseUserDetailCareer =
             await userDetailCareerController.addNewUserDetailCareer(
-          userDetail.id,
+          userDetail!.id,
           UserDetailCareer(
-            userDetailId: userDetail.id,
+            userDetailId: userDetail!.id,
             managerName: tabKariyerController.positionYoneticisi.text,
             managerTcno: "12345678910", //TODO
             unitCompany: companyController
@@ -186,16 +185,16 @@ class UserHelperController {
         );
       } else {
         responseUserDetailCareer = await userDetailCareerController
-            .updateUserDetailCareer(userDetail.id, userDetailCareer);
+            .updateUserDetailCareer(userDetail!.id, userDetailCareer);
       }
 
       int? responseUserDetailPayment =
 
           ///TODO: update kaldı
           await userDetailPaymentController.addNewUserDetailPayment(
-        userDetail.id,
+        userDetail!.id,
         UserDetailPayment(
-          userDetailId: userDetail.id,
+          userDetailId: userDetail!.id,
           tcno: tabKisiselBilgilerController.controllerTcNo.text,
           salary: tabKariyerController.controllerSalary.text,
           currency: "TL", //TODO
@@ -212,6 +211,9 @@ class UserHelperController {
         responseUserDetailPayment!,
         context,
       );
+
+      print(
+          "\n\n----------------------------USER HELPER END----------------------------\n\n");
     } catch (e) {
       print(e.toString());
     }
@@ -226,10 +228,10 @@ class UserHelperController {
     tabGenelController.controllerTelephonePersonal.text = "";
     tabGenelController.controllerAccessType.text = "";
     tabGenelController.controllerContractEndDate.text = "";
-    userDetail.contractType = ContractTypeEnum.values.first;
-    userDetail.employmentType = EmploymentTypeEnum.values.first;
-    userDetail.startDateWork = dateTimeFormat.format(DateTime.now());
-    userDetail.contractEndDate = dateTimeFormat.format(DateTime.now());
+    userDetail!.contractType = ContractTypeEnum.values.first;
+    userDetail!.employmentType = EmploymentTypeEnum.values.first;
+    userDetail!.startDateWork = dateTimeFormat.format(DateTime.now());
+    userDetail!.contractEndDate = dateTimeFormat.format(DateTime.now());
 
     tabDigerBilgilerController.controllerAdress.text = "";
     tabDigerBilgilerController.controllerHomePhone.text = "";
@@ -239,33 +241,33 @@ class UserHelperController {
     tabDigerBilgilerController.controllerDistrict.text = "";
     tabDigerBilgilerController.controllerAccountNumber.text = "";
     tabDigerBilgilerController.controllerIBAN.text = "";
-    userDetail.bankNames = BankNamesEnum.values.first;
-    userDetail.bankAccountType = BankAccountTypeEnum.values.first;
+    userDetail!.bankNames = BankNamesEnum.values.first;
+    userDetail!.bankAccountType = BankAccountTypeEnum.values.first;
 
-    userDetailCareer.unitCompany = "";
-    userDetailCareer.unitBranch = "";
-    userDetailCareer.unitDepartment = "";
-    userDetailCareer.unitTitle = "";
+    userDetailCareer!.unitCompany = "";
+    userDetailCareer!.unitBranch = "";
+    userDetailCareer!.unitDepartment = "";
+    userDetailCareer!.unitTitle = "";
     tabKariyerController.positionUnvan.text = "";
     tabKariyerController.positionYoneticisi.text = "";
     tabKariyerController.controllerSalary.text = "";
     tabKariyerController.controllerUnit.text = "";
     tabKariyerController.controllerPaymentScreenInSalary.text = "";
 
-    userDetail.dateofbirth = dateTimeFormat.format(DateTime.now());
+    userDetail!.dateofbirth = dateTimeFormat.format(DateTime.now());
     tabKisiselBilgilerController.controllerTcNo.text = "";
     tabKisiselBilgilerController.controllerNationality.text = "";
     tabKisiselBilgilerController.controllerNumberOfKids.text = "";
     tabKisiselBilgilerController.controllerLastCompletedEducationStatus.text =
         "";
-    userDetail.nationality = "";
-    userDetail.maritalStatus = MaritalStatusEnum.values.first;
-    userDetail.gender = GenderEnum.values.first;
-    userDetail.disabledDegree = DisabledDegreeEnum.values.first;
-    userDetail.bloodType = BloodTypeEnum.values.first;
-    userDetail.educationalStatus = EducationalStatusEnum.values.first;
-    userDetail.highestEducationLevelCompleted =
+    userDetail!.nationality = "";
+    userDetail!.maritalStatus = MaritalStatusEnum.values.first;
+    userDetail!.gender = GenderEnum.values.first;
+    userDetail!.disabledDegree = DisabledDegreeEnum.values.first;
+    userDetail!.bloodType = BloodTypeEnum.values.first;
+    userDetail!.educationalStatus = EducationalStatusEnum.values.first;
+    userDetail!.highestEducationLevelCompleted =
         HighestEducationLevelCompletedEnum.values.first;
-    userDetail.militaryStatus = MilitaryStatusEnum.values.first;
+    userDetail!.militaryStatus = MilitaryStatusEnum.values.first;
   }
 }

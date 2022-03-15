@@ -18,7 +18,9 @@ class UserDetailServices {
         return null;
       }
       jsonString = "[" + jsonString + "]";
+      print("User Detail JSON : $jsonString");
       userDetail = parseUser(jsonString);
+      print("User Detail JSON 2 : ${userDetail!.toJson().toString()}");
     }
     return userDetail;
   }

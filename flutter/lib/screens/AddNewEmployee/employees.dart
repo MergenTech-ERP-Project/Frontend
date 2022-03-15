@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
+import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/employee_card.dart';
@@ -57,6 +58,8 @@ class Employees extends StatelessWidget {
                                             builder: (context) => Dialog(
                                               child: AddNewEmployee(
                                                 newUser: null,
+                                                userHelper:
+                                                    UserHelperController(-1),
                                               ),
                                             ),
                                           );

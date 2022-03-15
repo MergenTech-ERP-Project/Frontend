@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
@@ -103,6 +104,7 @@ class _EmployeeCardState extends State<EmployeeCard> {
           builder: (context) => Dialog(
             child: AddNewEmployee(
               newUser: widget.user,
+              userHelper: UserHelperController(widget.user.id),
             ),
           ),
         );

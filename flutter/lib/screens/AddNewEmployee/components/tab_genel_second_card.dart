@@ -93,7 +93,7 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
               onChanged: (val) {
                 if (val != null) {
                   try {
-                    widget.userHelper.userDetail.startDateWork = val;
+                    widget.userHelper.userDetail!.startDateWork = val;
                   } catch (e) {
                     print(e.toString());
                   }
@@ -105,7 +105,7 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
               onChanged: (val) {
                 if (val != null) {
                   try {
-                    widget.userHelper.userDetail.contractEndDate = val;
+                    widget.userHelper.userDetail!.contractEndDate = val;
                   } catch (e) {
                     print(e.toString());
                   }
@@ -118,22 +118,22 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Sözleşme Türü",
-              value: widget.userHelper.userDetail.contractType.getName,
+              value: widget.userHelper.userDetail!.contractType.getName,
               listExtension: ContractTypeExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                  widget.userHelper.userDetail.contractType =
+                  widget.userHelper.userDetail!.contractType =
                       ContractTypeExtension.getEnumFromName(val);
                 });
               },
             ),
             ExpandedCustomDropDownMenu(
               label: "Çalışma Şekli",
-              value: widget.userHelper.userDetail.employmentType.getName,
+              value: widget.userHelper.userDetail!.employmentType.getName,
               listExtension: EmploymentTypeEnumExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                  widget.userHelper.userDetail.employmentType =
+                  widget.userHelper.userDetail!.employmentType =
                       EmploymentTypeEnumExtension.getEnumFromName(val);
                 });
               },

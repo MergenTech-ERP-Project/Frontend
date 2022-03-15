@@ -36,7 +36,7 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
               onChanged: (val) {
                 if (val != null) {
                   try {
-                    widget.userHelper.userDetail.dateofbirth = val;
+                    widget.userHelper.userDetail!.dateofbirth = val;
                   } catch (e) {
                     print(e.toString());
                   }
@@ -54,25 +54,24 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Medeni Hal",
-              value: widget.userHelper.userDetail.maritalStatus!.getName,
+           value: widget.userHelper.userDetail.maritalStatus!.getName,
+
               listExtension: MaritalStatusExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                  widget.userHelper.userDetail.employmentType =
-                      MaritalStatusExtension.getEnumFromName(
-                        val);
+                  widget.userHelper.userDetail!.employmentType =
+                      MaritalStatusExtension.getEnumFromName(val);
                 });
               },
             ),
             ExpandedCustomDropDownMenu(
               label: "Cinsiyet",
-              value: widget.userHelper.userDetail.gender.getName,
+              value: widget.userHelper.userDetail!.gender.getName,
               listExtension: GenderExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                  widget.userHelper.userDetail.gender =
-                      GenderExtension.getEnumFromName(
-                        val);
+                  widget.userHelper.userDetail!.gender =
+                      GenderExtension.getEnumFromName(val);
                 });
               },
             ),
@@ -82,13 +81,12 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Engel Derecesi",
-              value: widget.userHelper.userDetail.disabledDegree.getName,
+              value: widget.userHelper.userDetail!.disabledDegree.getName,
               listExtension: DisabledDegreeExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                  widget.userHelper.userDetail.disabledDegree =
-                      GenderExtension.getEnumFromName(
-                         val);
+                  widget.userHelper.userDetail!.disabledDegree =
+                      GenderExtension.getEnumFromName(val);
                 });
               },
             ),
@@ -108,13 +106,12 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
             ),
             ExpandedCustomDropDownMenu(
               label: "Askerlik Durumu",
-              value: widget.userHelper.userDetail.militaryStatus.getName,
+              value: widget.userHelper.userDetail!.militaryStatus.getName,
               listExtension: MilitaryStatusEnumExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                  widget.userHelper.userDetail.militaryStatus =
-                      MilitaryStatusEnumExtension.getEnumFromName(
-                         val);
+                  widget.userHelper.userDetail!.militaryStatus =
+                      MilitaryStatusEnumExtension.getEnumFromName(val);
                 });
               },
             ),
@@ -124,25 +121,23 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Kan Grubu",
-              value: widget.userHelper.userDetail.bloodType.getName,
+              value: widget.userHelper.userDetail!.bloodType.getName,
               listExtension: BloodTypeEnumExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                  widget.userHelper.userDetail.bloodType =
-                      BloodTypeEnumExtension.getEnumFromName(
-                         val);
+                  widget.userHelper.userDetail!.bloodType =
+                      BloodTypeEnumExtension.getEnumFromName(val);
                 });
               },
             ),
             ExpandedCustomDropDownMenu(
               label: "Eğitim Durumu",
-              value: widget.userHelper.userDetail.educationalStatus.getName,
+              value: widget.userHelper.userDetail!.educationalStatus.getName,
               listExtension: EducationalStatusExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                 widget.userHelper.userDetail.educationalStatus =
-                      EducationalStatusExtension.getEnumFromName(
-                         val);
+                  widget.userHelper.userDetail!.educationalStatus =
+                      EducationalStatusExtension.getEnumFromName(val);
                 });
               },
             ),
@@ -152,11 +147,12 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
           children: [
             ExpandedCustomDropDownMenu(
               label: "Tamamlanan En Yüksek Eğitim Seviyesi",
-              value:widget.userHelper.userDetail.highestEducationLevelCompleted.getName,
+              value: widget.userHelper.userDetail!
+                  .highestEducationLevelCompleted.getName,
               listExtension: HighestEducationLevelCompletedExtension.getList(),
               onChanged: (val) {
                 setState(() {
-                  widget.userHelper.userDetail.highestEducationLevelCompleted =
+                  widget.userHelper.userDetail!.highestEducationLevelCompleted =
                       HighestEducationLevelCompletedExtension.getEnumFromName(
                           val);
                 });

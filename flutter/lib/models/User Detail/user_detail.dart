@@ -13,10 +13,10 @@ import 'package:vtys_kalite/enums/marial_status.dart';
 import 'package:vtys_kalite/enums/military_status.dart';
 import 'package:vtys_kalite/enums/employment_type.dart';
 
-List<UserDetail> parseUsers(String str) =>
+List<UserDetail>? parseUsers(String str) =>
     List<UserDetail>.from(json.decode(str).map((x) => UserDetail.fromJson(x)));
 
-UserDetail parseUser(String str) => parseUsers(str)[0];
+UserDetail? parseUser(String str) => parseUsers(str)?[0];
 
 String fetchUsers(List<UserDetail> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -27,7 +27,7 @@ class UserDetail {
   final int id;
   final int userId; //user_id
   int numberofkids; //numberofkids
-  String tcno; //tcno
+  String tcno; //tc_no
   String workPhone; //work_phone
   String lastCompletedEducationStatus; //last_completed_education_status
   String dateofbirth; //dateofbirth
@@ -35,7 +35,7 @@ class UserDetail {
   String contractEndDate; //contract_end_date
   String quitWorkDate; //quit_date
   String workEmail; //work_email
-  String address; //adress
+  String address; //address
   String addressCountry; //country
   String addressDistrict; //address_district
   String addressCity; //city
@@ -47,7 +47,7 @@ class UserDetail {
   String relationshipEmergencyContact; //relationship_emergency_contact
   String emergencyContactCellPhone; //emergency_contact_phone
   String reasonTypeForQuit; //quit_reason_type
-  String reasonExplainForQuit; //reason_explain_for_quit
+  String quitExplanation; //quit_explanation
   String nationality; //nationality
   GenderEnum gender; //gender
   BloodTypeEnum bloodType; //blood_type
@@ -63,7 +63,7 @@ class UserDetail {
       highestEducationLevelCompleted; //highest_education_level_completed
 
   UserDetail({
-    this.id = 0,
+    this.id = -1,
     required this.userId,
     this.numberofkids = 0,
     this.tcno = "",
@@ -86,7 +86,7 @@ class UserDetail {
     this.emergencyContactCellPhone = "",
     this.quitWorkDate = "",
     this.reasonTypeForQuit = "",
-    this.reasonExplainForQuit = "",
+    this.quitExplanation = "none",
     this.nationality = "",
     required this.maritalStatus,
     required this.disabledDegree,
@@ -120,28 +120,30 @@ class UserDetail {
       id: json['id'],
       userId: json['user_id'],
       numberofkids: json['numberofkids'],
-      tcno: json['tcno'],
-      workPhone: json['work_phone'],
-      lastCompletedEducationStatus: json['last_completed_education_status'],
-      dateofbirth: json['dateofbirth'],
-      startDateWork: json['date_of_start'],
-      contractEndDate: json['contract_end_date'],
-      quitWorkDate: json['quit_date'],
-      workEmail: json['work_email'],
-      address: json['adress'],
-      addressCountry: json['country'],
-      addressDistrict: json['address_district'],
-      addressCity: json['city'],
-      addressZipCode: json['zip_code'],
-      homePhone: json['home_telephone'],
-      bankAccountNumber: json['bank_account_number'],
-      iban: json['iban'],
-      emergencyContactPerson: json['emergency_contact'],
-      relationshipEmergencyContact: json['relationship_emergency_contact'],
-      emergencyContactCellPhone: json['emergency_contact_phone'],
-      reasonTypeForQuit: json['quit_reason_type'],
-      reasonExplainForQuit: json['reason_explain_for_quit'],
-      nationality: json["nationality"],
+      tcno: json['tc_no'] ?? "",
+      workPhone: json['work_phone'] ?? "",
+      lastCompletedEducationStatus:
+          json['last_completed_education_status'] ?? "",
+      dateofbirth: json['dateofbirth'] ?? "",
+      startDateWork: json['date_of_start'] ?? "",
+      contractEndDate: json['contract_end_date'] ?? "",
+      quitWorkDate: json['quit_date'] ?? "",
+      workEmail: json['work_email'] ?? "",
+      address: json['address'] ?? "",
+      addressCountry: json['country'] ?? "",
+      addressDistrict: json['address_district'] ?? "",
+      addressCity: json['city'] ?? "",
+      addressZipCode: json['zip_code'] ?? "",
+      homePhone: json['home_telephone'] ?? "",
+      bankAccountNumber: json['bank_account_number'] ?? "",
+      iban: json['iban'] ?? "",
+      emergencyContactPerson: json['emergency_contact'] ?? "",
+      relationshipEmergencyContact:
+          json['relationship_emergency_contact'] ?? "",
+      emergencyContactCellPhone: json['emergency_contact_phone'] ?? "",
+      reasonTypeForQuit: json['quit_reason_type'] ?? "",
+      quitExplanation: json['quit_explanation'] ?? "",
+      nationality: json["nationality"] ?? "",
       gender: EnumToString.fromString(GenderEnum.values, json['gender'])!,
       bloodType:
           EnumToString.fromString(BloodTypeEnum.values, json['blood_type'])!,
@@ -172,7 +174,7 @@ class UserDetail {
         "id": id,
         "user_id": userId,
         "numberofkids": numberofkids.toString(),
-        "tcno": tcno,
+        "tc_no": tcno,
         "work_phone": workPhone,
         "last_completed_education_status": lastCompletedEducationStatus,
         "dateofbirth": dateofbirth,
@@ -180,7 +182,7 @@ class UserDetail {
         "contract_end_date": contractEndDate,
         "quit_date": quitWorkDate,
         "work_email": workEmail,
-        "adress": address,
+        "address": address,
         "country": addressCountry,
         "address_district": addressDistrict,
         "city": addressCity,
@@ -192,7 +194,7 @@ class UserDetail {
         "relationship_emergency_contact": relationshipEmergencyContact,
         "emergency_contact_phone": emergencyContactCellPhone,
         "quit_reason_type": reasonTypeForQuit,
-        "reason_explain_for_quit": reasonExplainForQuit,
+        "quit_explanation": quitExplanation,
         "nationality": nationality,
         "gender": getGender() ?? "",
         "blood_type": getBloodtype() ?? "",
