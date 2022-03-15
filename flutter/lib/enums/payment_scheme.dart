@@ -8,11 +8,11 @@ enum PaymentSchemeEnum {
 
 extension PaymentSchemeExtension on PaymentSchemeEnum {
   static List<String> getList() {
-    List<String> maritalStatusList = [];
+    List<String> paymentSchemeList = [];
     for (var item in PaymentSchemeEnum.values) {
-      maritalStatusList.add(item.getName);
+      paymentSchemeList.add(item.getName);
     }
-    return maritalStatusList;
+    return paymentSchemeList;
   }
 
   String get getName {

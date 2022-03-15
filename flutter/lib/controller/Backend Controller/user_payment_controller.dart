@@ -3,6 +3,8 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:vtys_kalite/enums/payment_scheme.dart';
+import 'package:vtys_kalite/enums/salary_type.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_payment.dart';
 import 'package:vtys_kalite/services/user_payment_remote_services.dart';
 
@@ -27,8 +29,11 @@ class UserDetailPaymentController extends GetxController {
       userDetailId, UserDetailPayment userDetailPayment) async {
     try {
       isLoading(true);
-      UserDetailPayment newUserDetailPayment =
-          UserDetailPayment(userDetailId: userDetailId);
+      UserDetailPayment newUserDetailPayment = UserDetailPayment(
+        userDetailId: userDetailId,
+        paymentScheme: PaymentSchemeEnum.values.first,
+        salaryType: SalaryTypeEnum.values.first,
+      );
       var response = await UserDetailPaymentServices.addNewUserDetailPayment(
           json.encode(newUserDetailPayment.toJson()).toString());
 

@@ -10,6 +10,7 @@ import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_diger_bilgiler.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/tab_diger_bilgiler_small.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_genel.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer_small.dart';
@@ -72,7 +73,70 @@ class AddNewEmployee extends StatelessWidget {
             ],
           ),
         ),
-        body: FutureBuilder(
+
+        body: Stack(
+          children: [
+            Padding(
+              padding: ResponsiveWidget.isLargeScreen(context)
+                  ? const EdgeInsets.all(20)
+                  : const EdgeInsets.all(5),
+              child: TabBarView(
+                children: [
+                  TabGenel(
+                    user: newUser,
+                    userHelper: userHelper,
+                  ),
+                  ResponsiveWidget(
+                    largeScreen: TabKariyer(
+                      userHelper: userHelper,
+                    ),
+                    smallScreen: TabKariyerSmall(userHelper: userHelper),
+                  ),
+                  ResponsiveWidget(
+                    largeScreen: TabPersonalInformation(
+                      userHelper: userHelper,
+                    ),
+                    smallScreen: TabPersonalInformationSmall(
+                      userHelper: userHelper,
+                    ),
+                  ),
+                  ResponsiveWidget(
+                    largeScreen: TabAnotherInformation(
+                        user: newUser, userHelper: userHelper),
+                    smallScreen:
+                        TabAnotherInformationSmall(userHelper: userHelper),
+                  ),
+                  PermissionRequestFormPage(),
+                  const Center(child: CustomText(text: "5")),
+                  const Center(child: CustomText(text: "6")),
+                  const Center(child: CustomText(text: "7")),
+                  const Center(child: CustomText(text: "8")),
+                ],
+              ),
+            ),
+            Positioned(
+              right: 0,
+              left: 0,
+              bottom: 0,
+              height: 50,
+              child: Container(
+                color: lightColor,
+                child: Row(
+                  children: [
+                    Visibility(
+                      visible: ResponsiveWidget.isSmallScreen(context)
+                          ? false
+                          : true,
+                      child: const Expanded(
+                        flex: 3,
+                        child: Text(""),
+
+                       /*
+                        body: Stack(
+          children: [
+            Padding( kısmından itibaren conflicte girmiş Yahya
+                       */
+        /*body: FutureBuilder(
             future: userHelper.init(),
             builder: (context, snap) {
               return snap.connectionState == ConnectionState.waiting
@@ -80,7 +144,8 @@ class AddNewEmployee extends StatelessWidget {
                       child: SizedBox(
                         height: 70,
                         width: 70,
-                        child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(),*/
+
                       ),
                     )
                   : snap.hasError

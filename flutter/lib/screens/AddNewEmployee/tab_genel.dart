@@ -48,12 +48,12 @@ class TabGenel extends StatelessWidget {
           ? SingleChildScrollView(
               child: Column(
                 children: [
-                  TabGenelFirstCardSmall(user: user!),
-                  TabGenelSecondCardSmall(user: user),
+                  TabGenelFirstCardSmall(user: user!, userHelper: userHelper),
+                  TabGenelSecondCardSmall(user: user, userHelper: userHelper),
                 ],
               ),
             )
-          : TabGenelSecondCardSmall(user: User()),
+          : TabGenelSecondCardSmall(user: User(), userHelper: userHelper),
     );
   }
 }

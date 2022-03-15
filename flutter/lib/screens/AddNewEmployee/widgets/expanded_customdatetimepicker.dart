@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
+import 'package:vtys_kalite/helpers/responsiveness.dart';
 
 class ExpandedCustomDateTimePicker extends StatelessWidget {
   ExpandedCustomDateTimePicker({
@@ -15,9 +16,20 @@ class ExpandedCustomDateTimePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
+    return ResponsiveWidget(
+      largeScreen: Expanded(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CustomDateTimePicker(
+            suffixWidget: const Icon(Icons.calendar_today_outlined),
+            labelText: label,
+            borderless: true,
+            onChanged: onChanged,
+          ),
+        ),
+      ),
+      smallScreen: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: CustomDateTimePicker(
           suffixWidget: const Icon(Icons.calendar_today_outlined),
           labelText: label,

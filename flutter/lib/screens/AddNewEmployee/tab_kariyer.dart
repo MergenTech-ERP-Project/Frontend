@@ -132,19 +132,20 @@ class _TabKariyerState extends State<TabKariyer> {
                         ),
                         Row(
                           children: [
-                            ExpandedCustomDropDownMenu(
-                              value: widget.userHelper.userDetailPayment!
-                                  .salaryType!.getName,
-                              label: "Maaş Tipi",
-                              listExtension: SalaryTypeExtension.getList(),
-                              onChanged: (val) {
-                                setState(() {
-                                  widget.userHelper.userDetailPayment!
-                                          .salaryType =
-                                      SalaryTypeExtension.getEnumFromName(val);
-                                });
-                              },
-                            ),
+
+                            // ExpandedCustomDropDownMenu(
+                            //   value: widget.userHelper.userDetailPayment
+                            //       .salaryType!.getName,
+                            //   label: "Maaş Tipi",
+                            //   listExtension: SalaryTypeExtension.getList(),
+                            //   onChanged: (val) {
+                            //     setState(() {
+                            //       widget.userHelper.userDetailPayment.salaryType =
+                            //           SalaryTypeExtension.getEnumFromName(val);
+                            //     });
+                            //   },
+                            // ),
+
                             Obx(
                               () => CustomSwitch(
                                 switchValue: widget.netSwitch.value,
@@ -216,6 +217,8 @@ class _TabKariyerState extends State<TabKariyer> {
                                             } else {
                                               widget.odemelerList.add(
                                                 YeniOdeme(
+                                                  userHelperController:
+                                                      widget.userHelper,
                                                   name: tabKariyerController
                                                       .controllerPaymentScreenInSalary
                                                       .text,

@@ -44,8 +44,14 @@ class UserHelperController {
       bankAccountType: BankAccountTypeEnum.values.first,
       bloodType: BloodTypeEnum.values.first,
     );
-    userDetailCareer = UserDetailCareer(userDetailId: userDetail!.id);
-    userDetailPayment = UserDetailPayment(userDetailId: userDetail!.id);
+
+    userDetailCareer = UserDetailCareer(userDetailId: userDetail.id);
+    userDetailPayment = UserDetailPayment(
+      userDetailId: userDetail.id,
+      paymentScheme: PaymentSchemeEnum.values.first,
+      salaryType: SalaryTypeEnum.values.first,
+    );
+
   }
 
   UserHelperController(this.userId);
@@ -192,10 +198,10 @@ class UserHelperController {
           tcno: tabKisiselBilgilerController.controllerTcNo.text,
           salary: tabKariyerController.controllerSalary.text,
           currency: "TL", //TODO
-          salaryType: SalaryTypeEnum.gross,
-          paymentScheme: PaymentSchemeEnum.monthly,
-          commuteSupportFee: "617",
-          foodSupportFee: "6299",
+          salaryType: SalaryTypeEnum.values.elementAt(userDetailPayment.salaryType.index),
+          paymentScheme: PaymentSchemeEnum.values.elementAt(userDetailPayment.paymentScheme.index),
+          commuteSupportFee: "617", //TODO
+          foodSupportFee: "6299", //TODO
         ),
       );
 
