@@ -113,7 +113,7 @@ showInformationWhenOnClick(User? user, UserHelperController userHelper) {
       userHelper.userDetail.nationality;
 
   tabKisiselBilgilerController.controllerNumberOfKids.text =
-      userHelper.userDetail.numberofkids;
+      userHelper.userDetail.numberofkids.toString();
 
   tabKisiselBilgilerController.controllerLastCompletedEducationStatus.text =
       userHelper.userDetail.lastCompletedEducationStatus;

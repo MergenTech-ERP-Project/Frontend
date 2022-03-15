@@ -15,6 +15,7 @@ import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer_small.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kisisel_bilgiler.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kisisel_bilgiler_small.dart';
+import 'package:vtys_kalite/screens/Forms/PermissionRequestForm/permission_request_form.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class AddNewEmployee extends StatelessWidget {
@@ -102,7 +103,7 @@ class AddNewEmployee extends StatelessWidget {
                     user: newUser,
                     userHelper: userHelper,
                   ),
-                  const Center(child: CustomText(text: "4")),
+                  PermissionRequestFormPage(),
                   const Center(child: CustomText(text: "5")),
                   const Center(child: CustomText(text: "6")),
                   const Center(child: CustomText(text: "7")),
