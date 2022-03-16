@@ -570,6 +570,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
           ),
           CustomDateTimePicker(
             labelText: 'Başlangıç Tarihi',
+            borderless: true,
             onChanged: (val) {
               if (val != null) {
                 try {
@@ -582,6 +583,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
           ),
           CustomDateTimePicker(
             labelText: 'Bitiş Tarihi',
+            borderless: true,
             onChanged: (val) {
               if (val != null) {
                 try {

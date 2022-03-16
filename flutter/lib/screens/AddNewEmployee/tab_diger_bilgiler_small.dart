@@ -63,14 +63,14 @@ class _TabAnotherInformationSmallState
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.symmetric(vertical: 8.0),
                 child: CustomText(
                   text: "Banka Bilgileri",
                   size: 26,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: isVisibleBank
                     ? const Icon(Icons.keyboard_arrow_down, size: 20)
                     : const Icon(Icons.keyboard_arrow_up, size: 20),
@@ -83,34 +83,40 @@ class _TabAnotherInformationSmallState
             child: ListView(
               shrinkWrap: true,
               children: [
-                CustomDropDownMenu(
-                  isExpandedYes: true,
-                  iconSize: 20,
-                  icon: const Icon(Icons.arrow_drop_down),
-                  valueChoose: widget.userHelper.userDetail!.bankNames.getName,
-                  text: "Banka Adı",
-                  list: BankNamesEnumExtension.getList(),
-                  onChanged: (val) {
-                    setState(() {
-                      widget.userHelper.userDetail!.bankNames =
-                          BankNamesEnumExtension.getEnumFromName(val);
-                    });
-                  },
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: CustomDropDownMenu(
+                    isExpandedYes: true,
+                    iconSize: 20,
+                    icon: const Icon(Icons.arrow_drop_down),
+                    valueChoose: widget.userHelper.userDetail!.bankNames.getName,
+                    text: "Banka Adı",
+                    list: BankNamesEnumExtension.getList(),
+                    onChanged: (val) {
+                      setState(() {
+                        widget.userHelper.userDetail!.bankNames =
+                            BankNamesEnumExtension.getEnumFromName(val);
+                      });
+                    },
+                  ),
                 ),
-                CustomDropDownMenu(
-                  isExpandedYes: true,
-                  iconSize: 20,
-                  icon: const Icon(Icons.arrow_drop_down),
-                  text: "Hesap Tipi",
-                  valueChoose:
-                      widget.userHelper.userDetail!.bankAccountType.getName,
-                  list: BankAccountTypeExtension.getList(),
-                  onChanged: (val) {
-                    setState(() {
-                      widget.userHelper.userDetail!.bankAccountType =
-                          BankNamesEnumExtension.getEnumFromName(val);
-                    });
-                  },
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: CustomDropDownMenu(
+                    isExpandedYes: true,
+                    iconSize: 20,
+                    icon: const Icon(Icons.arrow_drop_down),
+                    text: "Hesap Tipi",
+                    valueChoose:
+                        widget.userHelper.userDetail!.bankAccountType.getName,
+                    list: BankAccountTypeExtension.getList(),
+                    onChanged: (val) {
+                      setState(() {
+                        widget.userHelper.userDetail!.bankAccountType =
+                            BankNamesEnumExtension.getEnumFromName(val);
+                      });
+                    },
+                  ),
                 ),
                 NameController(
                   controller:
@@ -140,14 +146,14 @@ class _TabAnotherInformationSmallState
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.symmetric(vertical: 8.0),
                 child: CustomText(
                   text: "Adres Bilgileri",
                   size: 26,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: isVisibleAdress
                     ? const Icon(Icons.keyboard_arrow_down, size: 20)
                     : const Icon(Icons.keyboard_arrow_up, size: 20),

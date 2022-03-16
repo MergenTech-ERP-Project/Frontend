@@ -66,50 +66,59 @@ class _TabGenelSecondCardSmallState extends State<TabGenelSecondCardSmall> {
           label: "Telefon (Kişisel)",
           widget: const SizedBox(),
         ),
-        CustomDateTimePicker(
-          suffixWidget: const Icon(Icons.calendar_today_outlined),
-          labelText: "İşe Başlangıç Tarihi",
-          borderless: true,
-          onChanged: (val) {
-            if (val != null) {
-              try {
-                widget.userHelper.userDetail!.startDateWork = val;
-              } catch (e) {
-                print(e.toString());
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: CustomDateTimePicker(
+            suffixWidget: const Icon(Icons.calendar_today_outlined),
+            labelText: "İşe Başlangıç Tarihi",
+            borderless: true,
+            onChanged: (val) {
+              if (val != null) {
+                try {
+                  widget.userHelper.userDetail!.startDateWork = val;
+                } catch (e) {
+                  print(e.toString());
+                }
               }
-            }
-          },
-        ),
-        CustomDateTimePicker(
-          suffixWidget: const Icon(Icons.calendar_today_outlined),
-          labelText: "Sözleşme Bitiş Tarihi",
-          borderless: true,
-          onChanged: (val) {
-            if (val != null) {
-              try {
-                widget.userHelper.userDetail!.contractEndDate = val;
-              } catch (e) {
-                print(e.toString());
-              }
-            }
-          },
-        ),
-        CustomDateTimePicker(
-          suffixWidget: const Icon(Icons.calendar_today_outlined),
-          labelText: "Sözleşme Bitiş Tarihi",
-          borderless: true,
-          onChanged: (val) {
-            if (val != null) {
-              try {
-                widget.userHelper.userDetail!.startDateWork = val;
-              } catch (e) {
-                print(e.toString());
-              }
-            }
-          },
+            },
+          ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: CustomDateTimePicker(
+            suffixWidget: const Icon(Icons.calendar_today_outlined),
+            labelText: "Sözleşme Bitiş Tarihi",
+            borderless: true,
+            onChanged: (val) {
+              if (val != null) {
+                try {
+                  widget.userHelper.userDetail!.contractEndDate = val;
+                } catch (e) {
+                  print(e.toString());
+                }
+              }
+            },
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: CustomDateTimePicker(
+            suffixWidget: const Icon(Icons.calendar_today_outlined),
+            labelText: "Sözleşme Bitiş Tarihi",
+            borderless: true,
+            onChanged: (val) {
+              if (val != null) {
+                try {
+                  widget.userHelper.userDetail!.startDateWork = val;
+                } catch (e) {
+                  print(e.toString());
+                }
+              }
+            },
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: CustomDropDownMenu(
             isExpandedYes: true,
             iconSize: 20,
@@ -126,7 +135,7 @@ class _TabGenelSecondCardSmallState extends State<TabGenelSecondCardSmall> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: CustomDropDownMenu(
             text: "Çalışma Şekli",
             valueChoose: widget.userHelper.userDetail!.employmentType.getName,
