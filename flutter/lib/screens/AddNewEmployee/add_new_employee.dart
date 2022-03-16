@@ -73,181 +73,125 @@ class AddNewEmployee extends StatelessWidget {
             ],
           ),
         ),
-
-        body: Stack(
-          children: [
-            Padding(
-              padding: ResponsiveWidget.isLargeScreen(context)
-                  ? const EdgeInsets.all(20)
-                  : const EdgeInsets.all(5),
-              child: TabBarView(
-                children: [
-                  TabGenel(
-                    user: newUser,
-                    userHelper: userHelper,
-                  ),
-                  ResponsiveWidget(
-                    largeScreen: TabKariyer(
-                      userHelper: userHelper,
+        body: FutureBuilder(
+          future: userHelper.init(),
+          builder: (context, snap) {
+            return snap.connectionState == ConnectionState.waiting
+                ? const Center(
+                    child: SizedBox(
+                      height: 70,
+                      width: 70,
+                      child: CircularProgressIndicator(),
                     ),
-                    smallScreen: TabKariyerSmall(userHelper: userHelper),
-                  ),
-                  ResponsiveWidget(
-                    largeScreen: TabPersonalInformation(
-                      userHelper: userHelper,
-                    ),
-                    smallScreen: TabPersonalInformationSmall(
-                      userHelper: userHelper,
-                    ),
-                  ),
-                  ResponsiveWidget(
-                    largeScreen: TabAnotherInformation(
-                        user: newUser, userHelper: userHelper),
-                    smallScreen:
-                        TabAnotherInformationSmall(userHelper: userHelper),
-                  ),
-                  PermissionRequestFormPage(),
-                  const Center(child: CustomText(text: "5")),
-                  const Center(child: CustomText(text: "6")),
-                  const Center(child: CustomText(text: "7")),
-                  const Center(child: CustomText(text: "8")),
-                ],
-              ),
-            ),
-            Positioned(
-              right: 0,
-              left: 0,
-              bottom: 0,
-              height: 50,
-              child: Container(
-                color: lightColor,
-                child: Row(
-                  children: [
-                    Visibility(
-                      visible: ResponsiveWidget.isSmallScreen(context)
-                          ? false
-                          : true,
-                      child: const Expanded(
-                        flex: 3,
-                        child: Text(""),
-
-                       /*
-                        body: Stack(
-          children: [
-            Padding( kısmından itibaren conflicte girmiş Yahya
-                       */
-        /*body: FutureBuilder(
-            future: userHelper.init(),
-            builder: (context, snap) {
-              return snap.connectionState == ConnectionState.waiting
-                  ? const Center(
-                      child: SizedBox(
-                        height: 70,
-                        width: 70,
-                        child: CircularProgressIndicator(),*/
-
-                      ),
-                    )
-                  : snap.hasError
-                      ? Center(
-                          child: CustomText(
-                            text: snap.error.toString(),
-                          ),
-                        )
-                      : Stack(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: TabBarView(
-                                children: [
-                                  TabGenel(
-                                    user: newUser,
+                  )
+                : snap.hasError
+                    ? Center(
+                        child: CustomText(
+                          text: snap.error.toString(),
+                        ),
+                      )
+                    : Stack(
+                        children: [
+                          Padding(
+                            padding: ResponsiveWidget.isLargeScreen(context)
+                                ? const EdgeInsets.all(20)
+                                : const EdgeInsets.all(5),
+                            child: TabBarView(
+                              children: [
+                                TabGenel(
+                                  user: newUser,
+                                  userHelper: userHelper,
+                                ),
+                                ResponsiveWidget(
+                                  largeScreen: TabKariyer(
                                     userHelper: userHelper,
                                   ),
-                                  ResponsiveWidget(
-                                    largeScreen: TabKariyer(
-                                      userHelper: userHelper,
-                                    ),
-                                    smallScreen: TabKariyerSmall(),
-                                  ),
-                                  ResponsiveWidget(
-                                    largeScreen: TabPersonalInformation(
-                                      userHelper: userHelper,
-                                    ),
-                                    smallScreen: TabPersonalInformationSmall(),
-                                  ),
-                                  TabAnotherInformation(
-                                    user: newUser,
+                                  smallScreen:
+                                      TabKariyerSmall(userHelper: userHelper),
+                                ),
+                                ResponsiveWidget(
+                                  largeScreen: TabPersonalInformation(
                                     userHelper: userHelper,
                                   ),
-                                  PermissionRequestFormPage(),
-                                  const Center(child: CustomText(text: "5")),
-                                  const Center(child: CustomText(text: "6")),
-                                  const Center(child: CustomText(text: "7")),
-                                  const Center(child: CustomText(text: "8")),
-                                ],
-                              ),
+                                  smallScreen: TabPersonalInformationSmall(
+                                    userHelper: userHelper,
+                                  ),
+                                ),
+                                ResponsiveWidget(
+                                  largeScreen: TabAnotherInformation(
+                                      user: newUser, userHelper: userHelper),
+                                  smallScreen: TabAnotherInformationSmall(
+                                      userHelper: userHelper),
+                                ),
+                                PermissionRequestFormPage(),
+                                const Center(child: CustomText(text: "5")),
+                                const Center(child: CustomText(text: "6")),
+                                const Center(child: CustomText(text: "7")),
+                                const Center(child: CustomText(text: "8")),
+                              ],
                             ),
-                            Positioned(
-                              right: 0,
-                              left: 0,
-                              bottom: 0,
-                              height: 50,
-                              child: Container(
-                                color: lightColor,
-                                child: Row(
-                                  children: [
-                                    Visibility(
-                                      visible: ResponsiveWidget.isSmallScreen(
-                                              context)
-                                          ? false
-                                          : true,
-                                      child: const Expanded(
-                                        flex: 3,
-                                        child: Text(""),
-                                      ),
+                          ),
+                          Positioned(
+                            right: 0,
+                            left: 0,
+                            bottom: 0,
+                            height: 50,
+                            child: Container(
+                              color: lightColor,
+                              child: Row(
+                                children: [
+                                  Visibility(
+                                    visible:
+                                        ResponsiveWidget.isSmallScreen(context)
+                                            ? false
+                                            : true,
+                                    child: const Expanded(
+                                      flex: 3,
+                                      child: Text(""),
                                     ),
-                                    Expanded(
-                                      child: Obx(
-                                        () => Visibility(
-                                          visible: isSaved.value,
-                                          child: Row(
-                                            children: const [
-                                              Icon(Icons.done),
-                                              Text(' Kaydedildi!'),
-                                            ],
-                                          ),
+                                  ),
+                                  Expanded(
+                                    child: Obx(
+                                      () => Visibility(
+                                        visible: isSaved.value,
+                                        child: Row(
+                                          children: const [
+                                            Icon(Icons.done),
+                                            Text(' Kaydedildi!'),
+                                          ],
                                         ),
                                       ),
                                     ),
-                                    Expanded(
-                                      child: CustomButton(
-                                        title: 'Kaydet',
-                                        pressAction: () async {
-                                          showDialogWaitingMessage(context);
-                                          await userHelper.userDetailSave(
-                                              context, newUser);
-                                          Navigator.of(context).pop(true);
-                                          isSaved.value = true;
-                                        },
-                                      ),
+                                  ),
+                                  Expanded(
+                                    child: CustomButton(
+                                      title: 'Kaydet',
+                                      pressAction: () async {
+                                        showDialogWaitingMessage(context);
+                                        await userHelper.userDetailSave(
+                                            context, newUser);
+                                        Navigator.of(context).pop(true);
+                                        isSaved.value = true;
+                                      },
                                     ),
-                                    Expanded(
-                                      child: CustomButton(
-                                        title: 'İptal',
-                                        foregroundColor: Colors.black,
-                                        backgroundColor: Colors.white,
-                                        pressAction: () =>
-                                            Get.offAllNamed(rootRoute),
-                                      ),
+                                  ),
+                                  Expanded(
+                                    child: CustomButton(
+                                      title: 'İptal',
+                                      foregroundColor: Colors.black,
+                                      backgroundColor: Colors.white,
+                                      pressAction: () =>
+                                          Get.offAllNamed(rootRoute),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        );
-            }),
+                          ),
+                        ],
+                      );
+          },
+        ),
       ),
     );
   }
