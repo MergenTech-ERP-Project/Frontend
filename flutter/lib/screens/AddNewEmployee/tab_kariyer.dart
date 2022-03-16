@@ -276,7 +276,7 @@ class _TabKariyerState extends State<TabKariyer> {
 
     positionChildren1 = [
       widget.userHelper.userDetail!.startDateWork,
-      widget.userHelper.userDetail!.contractEndDate,
+      widget.userHelper.userDetail!.quitWorkDate,
       EmploymentTypeEnumExtension.getList()[
               widget.userHelper.userDetail!.employmentType.index]
           .toString(),
@@ -395,11 +395,17 @@ class MaasEkleHeader extends StatelessWidget {
   }
 }
 
-class _PozisyonEklemeBody extends StatelessWidget {
+class _PozisyonEklemeBody extends StatefulWidget {
   final UserHelperController userHelper;
 
   const _PozisyonEklemeBody({Key? key, required this.userHelper})
       : super(key: key);
+
+  @override
+  State<_PozisyonEklemeBody> createState() => _PozisyonEklemeBodyState();
+}
+
+class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -424,137 +430,61 @@ class _PozisyonEklemeBody extends StatelessWidget {
           ),
           Row(
             children: [
-              Obx(
-                () {
-                  List<String> companyNames = [];
-                  for (Company c in companyController.companyList) {
-                    companyNames.add(c.companyName);
-                  }
-                  return CustomDropDownMenu(
-                    icon: const Icon(Icons.arrow_drop_down),
-                    isExpandedYes: true,
-                    iconSize: 20,
-                    text: "Şirket",
-                    valueChoose: companyNames[
-                        tabKariyerController.unitCompanyIndex.value],
-                    list: companyNames,
-                    onChanged: (val) {
-                      if (companyNames.isNotEmpty) {
-                        tabKariyerController.unitCompanyIndex.value =
-                            companyNames.indexOf(val!);
-                        userHelper.userDetailCareer!.unitCompany = companyNames[
-                            tabKariyerController.unitCompanyIndex.value];
-                      }
-                    },
-                  );
-                },
-              ),
-              Obx(
-                () {
-                  List<String> branchNames = [];
-                  for (Branch b in branchController.branchList) {
-                    branchNames.add(b.branchName);
-                  }
-                  return CustomDropDownMenu(
-                    icon: const Icon(Icons.arrow_drop_down),
-                    isExpandedYes: true,
-                    iconSize: 20,
-                    text: "Şube",
-                    valueChoose: branchNames.isEmpty
-                        ? ""
-                        : branchNames[
-                            tabKariyerController.unitBranchIndex.value],
-                    list: branchNames,
-                    onChanged: (val) {
-                      if (branchNames.isNotEmpty) {
-                        tabKariyerController.unitBranchIndex.value =
-                            branchNames.indexOf(val!);
-                        userHelper.userDetailCareer!.unitBranch = branchNames[
-                            tabKariyerController.unitBranchIndex.value];
-                      }
-                    },
-                  );
-                },
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Obx(
-                () {
-                  List<String> departmantNames = [];
-                  for (Department d in departmentController.departmentList) {
-                    departmantNames.add(d.departmentName);
-                  }
-                  return CustomDropDownMenu(
-                    icon: const Icon(Icons.arrow_drop_down),
-                    isExpandedYes: true,
-                    iconSize: 20,
-                    text: "Departman",
-                    valueChoose: departmantNames.isEmpty
-                        ? ""
-                        : departmantNames[
-                            tabKariyerController.unitDepartmantIndex.value],
-                    list: departmantNames,
-                    onChanged: (val) {
-                      if (departmantNames.isNotEmpty) {
-                        tabKariyerController.unitDepartmantIndex.value =
-                            departmantNames.indexOf(val!);
-                        userHelper.userDetailCareer!.unitDepartment =
-                            departmantNames[
-                                tabKariyerController.unitDepartmantIndex.value];
-                      }
-                    },
-                  );
-                },
-              ),
-              Obx(
-                () {
-                  List<String> titleNames = [];
-                  for (Titlee t in titleController.titleList) {
-                    titleNames.add(t.titleName);
-                  }
-                  return CustomDropDownMenu(
-                    icon: const Icon(Icons.arrow_drop_down),
-                    isExpandedYes: true,
-                    iconSize: 20,
-                    text: "Ünvan",
-                    valueChoose: titleNames.isEmpty
-                        ? ""
-                        : titleNames[tabKariyerController.unitTitleIndex.value],
-                    list: titleNames,
-                    onChanged: (val) {
-                      if (titleNames.isNotEmpty) {
-                        tabKariyerController.unitTitleIndex.value =
-                            titleNames.indexOf(val!);
-                        userHelper.userDetailCareer!.unitTitle = titleNames[
-                            tabKariyerController.unitDepartmantIndex.value];
-                      }
-                    },
-                  );
-                },
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              NameController(
-                controller: tabKariyerController.positionYoneticisi,
-                label: "Yönetici",
-                widget: IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () {
-                    tabKariyerController.positionYoneticisi.text = "";
+              Expanded(
+                child: Obx(
+                  () {
+                    List<String> companyNames = [];
+                    for (Company c in companyController.companyList) {
+                      companyNames.add(c.companyName);
+                    }
+                    return CustomDropDownMenu(
+                      icon: const Icon(Icons.arrow_drop_down),
+                      isExpandedYes: true,
+                      iconSize: 20,
+                      text: "Şirket",
+                      valueChoose: companyNames[
+                          tabKariyerController.unitCompanyIndex.value],
+                      list: companyNames,
+                      onChanged: (val) {
+                        if (companyNames.isNotEmpty) {
+                          tabKariyerController.unitCompanyIndex.value =
+                              companyNames.indexOf(val!);
+                          widget.userHelper.userDetailCareer!.unitCompany =
+                              companyNames[
+                                  tabKariyerController.unitCompanyIndex.value];
+                        }
+                      },
+                    );
                   },
                 ),
               ),
-              NameController(
-                controller: tabKariyerController.positionCalismaSekli,
-                label: "Çalışma Şekli",
-                widget: IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () {
-                    tabKariyerController.positionCalismaSekli.text = "";
+              Expanded(
+                child: Obx(
+                  () {
+                    List<String> branchNames = [];
+                    for (Branch b in branchController.branchList) {
+                      branchNames.add(b.branchName);
+                    }
+                    return CustomDropDownMenu(
+                      icon: const Icon(Icons.arrow_drop_down),
+                      isExpandedYes: true,
+                      iconSize: 20,
+                      text: "Şube",
+                      valueChoose: branchNames.isEmpty
+                          ? ""
+                          : branchNames[
+                              tabKariyerController.unitBranchIndex.value],
+                      list: branchNames,
+                      onChanged: (val) {
+                        if (branchNames.isNotEmpty) {
+                          tabKariyerController.unitBranchIndex.value =
+                              branchNames.indexOf(val!);
+                          widget.userHelper.userDetailCareer!.unitBranch =
+                              branchNames[
+                                  tabKariyerController.unitBranchIndex.value];
+                        }
+                      },
+                    );
                   },
                 ),
               ),
@@ -562,29 +492,132 @@ class _PozisyonEklemeBody extends StatelessWidget {
           ),
           Row(
             children: [
-              CustomDateTimePicker(
-                labelText: 'Başlangıç Tarihi',
-                onChanged: (val) {
-                  if (val != null) {
-                    try {
-                      userHelper.userDetail!.startDateWork = val;
-                    } catch (e) {
-                      print(e.toString());
+              Expanded(
+                child: Obx(
+                  () {
+                    List<String> departmantNames = [];
+                    for (Department d in departmentController.departmentList) {
+                      departmantNames.add(d.departmentName);
                     }
-                  }
-                },
+                    return CustomDropDownMenu(
+                      icon: const Icon(Icons.arrow_drop_down),
+                      isExpandedYes: true,
+                      iconSize: 20,
+                      text: "Departman",
+                      valueChoose: departmantNames.isEmpty
+                          ? ""
+                          : departmantNames[
+                              tabKariyerController.unitDepartmantIndex.value],
+                      list: departmantNames,
+                      onChanged: (val) {
+                        if (departmantNames.isNotEmpty) {
+                          tabKariyerController.unitDepartmantIndex.value =
+                              departmantNames.indexOf(val!);
+                          widget.userHelper.userDetailCareer!.unitDepartment =
+                              departmantNames[
+                                  tabKariyerController.unitDepartmantIndex.value];
+                        }
+                      },
+                    );
+                  },
+                ),
               ),
-              CustomDateTimePicker(
-                labelText: 'Bitiş Tarihi',
-                onChanged: (val) {
-                  if (val != null) {
-                    try {
-                      userHelper.userDetail!.quitWorkDate = val;
-                    } catch (e) {
-                      print(e.toString());
+              Expanded(
+                child: Obx(
+                  () {
+                    List<String> titleNames = [];
+                    for (Titlee t in titleController.titleList) {
+                      titleNames.add(t.titleName);
                     }
-                  }
-                },
+                    return CustomDropDownMenu(
+                      icon: const Icon(Icons.arrow_drop_down),
+                      isExpandedYes: true,
+                      iconSize: 20,
+                      text: "Ünvan",
+                      valueChoose: titleNames.isEmpty
+                          ? ""
+                          : titleNames[tabKariyerController.unitTitleIndex.value],
+                      list: titleNames,
+                      onChanged: (val) {
+                        if (titleNames.isNotEmpty) {
+                          tabKariyerController.unitTitleIndex.value =
+                              titleNames.indexOf(val!);
+                          widget.userHelper.userDetailCareer!.unitTitle =
+                              titleNames[
+                                  tabKariyerController.unitDepartmantIndex.value];
+                        }
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: NameController(
+                  controller: tabKariyerController.positionYoneticisi,
+                  label: "Yönetici",
+                  widget: IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () {
+                      tabKariyerController.positionYoneticisi.text = "";
+                    },
+                  ),
+                ),
+              ),
+              Expanded(
+                child: NameController(
+                  controller: tabKariyerController.positionCalismaSekli,
+                  label: "Çalışma Şekli",
+                  widget: IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () {
+                      tabKariyerController.positionCalismaSekli.text = "";
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CustomDateTimePicker(
+                    borderless: true,
+                    labelText: 'Başlangıç Tarihi',
+                    onChanged: (val) {
+                      if (val != null) {
+                        try {
+                          widget.userHelper.userDetail!.startDateWork = val;
+                        } catch (e) {
+                          print(e.toString());
+                        }
+                      }
+                    },
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CustomDateTimePicker(
+                    borderless: true,
+                    labelText: 'Bitiş Tarihi',
+                    onChanged: (val) {
+                      if (val != null) {
+                        try {
+                          widget.userHelper.userDetail!.quitWorkDate = val;
+                        } catch (e) {
+                          print(e.toString());
+                        }
+                      }
+                    },
+                  ),
+                ),
               ),
             ],
           ),
