@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Branch/add_new_branch.dart';
 import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Branch/branch_list.dart';
@@ -132,26 +131,27 @@ class _OptionalCompanyDescriptionsState
             ),
           ),
           Positioned(
-              bottom: 10,
-              right: 20,
-              child: Visibility(
-                visible: offset > 0,
-                child: Container(
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    color: activeColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: InkWell(
-                    onTap: scrollToTop,
-                    child: Icon(
-                      Icons.keyboard_arrow_up,
-                      color: whiteColor,
-                    ),
+            bottom: 10,
+            right: 20,
+            child: Visibility(
+              visible: offset > 0,
+              child: Container(
+                width: 30,
+                height: 30,
+                decoration: BoxDecoration(
+                  color: activeColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: InkWell(
+                  onTap: scrollToTop,
+                  child: Icon(
+                    Icons.keyboard_arrow_up,
+                    color: whiteColor,
                   ),
                 ),
-              )),
+              ),
+            ),
+          ),
         ],
       ),
     );

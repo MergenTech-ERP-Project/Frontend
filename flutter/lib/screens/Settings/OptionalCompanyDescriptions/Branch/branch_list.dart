@@ -41,7 +41,15 @@ class _BranchListState extends State<BranchList> {
                   itemCount: widget.branchList.length + 1,
                   itemBuilder: (_, index) {
                     return InkWell(
-                      onTap: index == 0 ? null : widget.onSelected,
+                      onTap: index == 0
+                          ? null
+                          : () {
+                              optionalCompanyController.branchId.value =
+                                  widget.branchList[index].id;
+                              departmentController.fetchDepartmentesById(
+                                  widget.branchList[index].id);
+                              widget.onSelected;
+                            },
                       child: SizedBox(
                         height: 60,
                         child: Row(

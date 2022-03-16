@@ -51,9 +51,10 @@ class _CompanyListState extends State<CompanyList> {
                       onTap: index == 0
                           ? null
                           : () {
-                              ///TODO: backend update waiting
-                              /* branchController.fetchBranchesByCompanyId(
-                                  widget.companyList[index].id); */
+                              // optionalCompanyController.companyId.value =
+                              //     widget.companyList[index].id;
+                              branchController.fetchBranchesByCompanyId(
+                                  widget.companyList[index].id);
                               widget.onSelected();
                             },
                       child: SizedBox(
