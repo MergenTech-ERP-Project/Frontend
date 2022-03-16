@@ -1,6 +1,8 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
+import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/blood_type.dart';
 import 'package:vtys_kalite/enums/disabled_degree.dart';
@@ -9,8 +11,6 @@ import 'package:vtys_kalite/enums/gender.dart';
 import 'package:vtys_kalite/enums/highest_education_level_completed.dart';
 import 'package:vtys_kalite/enums/marial_status.dart';
 import 'package:vtys_kalite/enums/military_status.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdatetimepicker.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdropdownmenu.dart';
 
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -38,8 +38,8 @@ class _TabPersonalInformationSmallState
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ExpandedCustomDateTimePicker(
-              label: "Doğum Tarihi",
+            CustomDateTimePicker(
+              labelText: "Doğum Tarihi",
               onChanged: (val) {
                 if (val != null) {
                   try {
@@ -50,15 +50,18 @@ class _TabPersonalInformationSmallState
                 }
               },
             ),
-            ExpandedNameController(
+            NameController(
               controller: tabKisiselBilgilerController.controllerTcNo,
               label: "Kimlik Numarası",
               widget: const SizedBox(),
             ),
-            ExpandedCustomDropDownMenu(
-              label: "Medeni Hal",
-              value: widget.userHelper.userDetail!.maritalStatus.getName,
-              listExtension: MaritalStatusExtension.getList(),
+            CustomDropDownMenu(
+              icon: const Icon(Icons.arrow_drop_down),
+              isExpandedYes: true,
+              iconSize: 20,
+              text: "Medeni Hal",
+              valueChoose: widget.userHelper.userDetail!.maritalStatus.getName,
+              list: MaritalStatusExtension.getList(),
               onChanged: (val) {
                 setState(() {
                   widget.userHelper.userDetail!.employmentType =
@@ -66,10 +69,13 @@ class _TabPersonalInformationSmallState
                 });
               },
             ),
-            ExpandedCustomDropDownMenu(
-              label: "Cinsiyet",
-              value: widget.userHelper.userDetail!.gender.getName,
-              listExtension: GenderExtension.getList(),
+            CustomDropDownMenu(
+              icon: const Icon(Icons.arrow_drop_down),
+              isExpandedYes: true,
+              iconSize: 20,
+              text: "Cinsiyet",
+              valueChoose: widget.userHelper.userDetail!.gender.getName,
+              list: GenderExtension.getList(),
               onChanged: (val) {
                 setState(() {
                   widget.userHelper.userDetail!.gender =
@@ -77,10 +83,13 @@ class _TabPersonalInformationSmallState
                 });
               },
             ),
-            ExpandedCustomDropDownMenu(
-              label: "Engel Derecesi",
-              value: widget.userHelper.userDetail!.disabledDegree.getName,
-              listExtension: DisabledDegreeExtension.getList(),
+            CustomDropDownMenu(
+              icon: const Icon(Icons.arrow_drop_down),
+              isExpandedYes: true,
+              iconSize: 20,
+              text: "Engel Derecesi",
+              valueChoose: widget.userHelper.userDetail!.disabledDegree.getName,
+              list: DisabledDegreeExtension.getList(),
               onChanged: (val) {
                 setState(() {
                   widget.userHelper.userDetail!.disabledDegree =
@@ -88,20 +97,23 @@ class _TabPersonalInformationSmallState
                 });
               },
             ),
-            ExpandedNameController(
+            NameController(
               controller: tabKisiselBilgilerController.controllerNationality,
               label: "Uyruğu",
               widget: const SizedBox(),
             ),
-            ExpandedNameController(
+            NameController(
               controller: tabKisiselBilgilerController.controllerNumberOfKids,
               label: "Çocuk Sayısı",
               widget: const SizedBox(),
             ),
-            ExpandedCustomDropDownMenu(
-              label: "Askerlik Durumu",
-              value: widget.userHelper.userDetail!.militaryStatus.getName,
-              listExtension: MilitaryStatusEnumExtension.getList(),
+            CustomDropDownMenu(
+              icon: const Icon(Icons.arrow_drop_down),
+              isExpandedYes: true,
+              iconSize: 20,
+              text: "Askerlik Durumu",
+              valueChoose: widget.userHelper.userDetail!.militaryStatus.getName,
+              list: MilitaryStatusEnumExtension.getList(),
               onChanged: (val) {
                 setState(() {
                   widget.userHelper.userDetail!.militaryStatus =
@@ -109,10 +121,13 @@ class _TabPersonalInformationSmallState
                 });
               },
             ),
-            ExpandedCustomDropDownMenu(
-              label: "Kan Grubu",
-              value: widget.userHelper.userDetail!.bloodType.getName,
-              listExtension: BloodTypeEnumExtension.getList(),
+            CustomDropDownMenu(
+              icon: const Icon(Icons.arrow_drop_down),
+              isExpandedYes: true,
+              iconSize: 20,
+              text: "Kan Grubu",
+              valueChoose: widget.userHelper.userDetail!.bloodType.getName,
+              list: BloodTypeEnumExtension.getList(),
               onChanged: (val) {
                 setState(() {
                   widget.userHelper.userDetail!.bloodType =
@@ -120,10 +135,14 @@ class _TabPersonalInformationSmallState
                 });
               },
             ),
-            ExpandedCustomDropDownMenu(
-              label: "Eğitim Durumu",
-              value: widget.userHelper.userDetail!.educationalStatus.getName,
-              listExtension: EducationalStatusExtension.getList(),
+            CustomDropDownMenu(
+              icon: const Icon(Icons.arrow_drop_down),
+              isExpandedYes: true,
+              iconSize: 20,
+              text: "Eğitim Durumu",
+              valueChoose:
+                  widget.userHelper.userDetail!.educationalStatus.getName,
+              list: EducationalStatusExtension.getList(),
               onChanged: (val) {
                 setState(() {
                   widget.userHelper.userDetail!.educationalStatus =
@@ -131,10 +150,14 @@ class _TabPersonalInformationSmallState
                 });
               },
             ),
-            ExpandedCustomDropDownMenu(
-              label: "Tamamlanan En Yüksek Eğitim Seviyesi",
-              value:widget.userHelper.userDetail!.highestEducationLevelCompleted.getName,
-              listExtension: HighestEducationLevelCompletedExtension.getList(),
+            CustomDropDownMenu(
+              icon: const Icon(Icons.arrow_drop_down),
+              isExpandedYes: true,
+              iconSize: 20,
+              text: "Tamamlanan En Yüksek Eğitim Seviyesi",
+              valueChoose: widget.userHelper.userDetail!
+                  .highestEducationLevelCompleted.getName,
+              list: HighestEducationLevelCompletedExtension.getList(),
               onChanged: (val) {
                 setState(() {
                   widget.userHelper.userDetail!.highestEducationLevelCompleted =
@@ -143,7 +166,7 @@ class _TabPersonalInformationSmallState
                 });
               },
             ),
-            ExpandedNameController(
+            NameController(
               controller: tabKisiselBilgilerController
                   .controllerLastCompletedEducationStatus,
               label: "Son Tamamlanan Eğitim Kurumu",
