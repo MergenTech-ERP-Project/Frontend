@@ -48,7 +48,12 @@ class _TitleListState extends State<TitleList> {
                   itemCount: widget.titleList.length + 1,
                   itemBuilder: (_, index) {
                     return InkWell(
-                      onTap: index == 0 ? null : widget.onSelected,
+                      onTap: index == 0 ? null : () {
+                        optionalCompanyController.titleId.value =
+                                  widget.titleList[index].id;
+                              branchController.fetchBranchesByCompanyId(
+                                  widget.titleList[index].id);
+                      },
                       child: SizedBox(
                         height: 60,
                         child: Row(

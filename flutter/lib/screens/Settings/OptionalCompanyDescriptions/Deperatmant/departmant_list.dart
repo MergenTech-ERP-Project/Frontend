@@ -48,7 +48,15 @@ class _DepartmantListState extends State<DepartmantList> {
                   itemCount: widget.departmentList.length + 1,
                   itemBuilder: (_, index) {
                     return InkWell(
-                      onTap: index == 0 ? null : widget.onSelected,
+                      onTap: index == 0
+                          ? null
+                          : () {
+                              optionalCompanyController.departmentId.value =
+                                  widget.departmentList[index].id;
+                              branchController.fetchBranchesByCompanyId(
+                                  widget.departmentList[index].id);
+                              widget.onSelected;
+                            },
                       child: SizedBox(
                         height: 60,
                         child: Row(
