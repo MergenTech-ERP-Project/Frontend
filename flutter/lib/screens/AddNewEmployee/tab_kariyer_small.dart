@@ -5,6 +5,8 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/state_manager.dart';
 import 'package:vtys_kalite/componenets/custom_alert_dialog.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
+import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
+import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_switch.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
@@ -16,8 +18,6 @@ import 'package:vtys_kalite/models/settings/department.dart';
 import 'package:vtys_kalite/models/settings/title.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/models/odeme.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/custombuttonwidget.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdatetimepicker.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdropdownmenu.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
@@ -240,12 +240,12 @@ class _MaasEklemeBodyState extends State<_MaasEklemeBody> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          ExpandedNameController(
+          NameController(
             controller: tabKariyerController.controllerSalary,
             label: "Maaş",
             widget: const SizedBox(),
           ),
-          ExpandedNameController(
+          NameController(
             controller: tabKariyerController.controllerUnit,
             label: "Birim",
             widget: Row(
@@ -448,11 +448,14 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
               for (Company c in companyController.companyList) {
                 companyNames.add(c.companyName);
               }
-              return ExpandedCustomDropDownMenu(
-                label: "Şirket",
-                value:
+              return CustomDropDownMenu(
+                icon: const Icon(Icons.arrow_drop_down),
+                isExpandedYes: true,
+                iconSize: 20,
+                text: "Şirket",
+                valueChoose:
                     companyNames[tabKariyerController.unitCompanyIndex.value],
-                listExtension: companyNames,
+                list: companyNames,
                 onChanged: (val) {
                   if (companyNames.isNotEmpty) {
                     tabKariyerController.unitCompanyIndex.value =
@@ -471,12 +474,15 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
               for (Branch b in branchController.branchList) {
                 branchNames.add(b.branchName);
               }
-              return ExpandedCustomDropDownMenu(
-                label: "Şube",
-                value: branchNames.isEmpty
+              return CustomDropDownMenu(
+                icon: const Icon(Icons.arrow_drop_down),
+                isExpandedYes: true,
+                iconSize: 20,
+                text: "Şube",
+                valueChoose: branchNames.isEmpty
                     ? ""
                     : branchNames[tabKariyerController.unitBranchIndex.value],
-                listExtension: branchNames,
+                list: branchNames,
                 onChanged: (val) {
                   if (branchNames.isNotEmpty) {
                     tabKariyerController.unitBranchIndex.value =
@@ -494,13 +500,16 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
               for (Department d in departmentController.departmentList) {
                 departmantNames.add(d.departmentName);
               }
-              return ExpandedCustomDropDownMenu(
-                label: "Departman",
-                value: departmantNames.isEmpty
+              return CustomDropDownMenu(
+                icon: const Icon(Icons.arrow_drop_down),
+                isExpandedYes: true,
+                iconSize: 20,
+                text: "Departman",
+                valueChoose: departmantNames.isEmpty
                     ? ""
                     : departmantNames[
                         tabKariyerController.unitDepartmantIndex.value],
-                listExtension: departmantNames,
+                list: departmantNames,
                 onChanged: (val) {
                   if (departmantNames.isNotEmpty) {
                     tabKariyerController.unitDepartmantIndex.value =
@@ -519,12 +528,15 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
               for (Titlee t in titleController.titleList) {
                 titleNames.add(t.titleName);
               }
-              return ExpandedCustomDropDownMenu(
-                label: "Ünvan",
-                value: titleNames.isEmpty
+              return CustomDropDownMenu(
+                icon: const Icon(Icons.arrow_drop_down),
+                isExpandedYes: true,
+                iconSize: 20,
+                text: "Ünvan",
+                valueChoose: titleNames.isEmpty
                     ? ""
                     : titleNames[tabKariyerController.unitTitleIndex.value],
-                listExtension: titleNames,
+                list: titleNames,
                 onChanged: (val) {
                   if (titleNames.isNotEmpty) {
                     tabKariyerController.unitTitleIndex.value =
@@ -536,7 +548,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
               );
             },
           ),
-          ExpandedNameController(
+          NameController(
             controller: tabKariyerController.positionYoneticisi,
             label: "Yönetici",
             widget: IconButton(
@@ -546,7 +558,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
               },
             ),
           ),
-          ExpandedNameController(
+          NameController(
             controller: tabKariyerController.positionCalismaSekli,
             label: "Çalışma Şekli",
             widget: IconButton(
@@ -556,8 +568,8 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
               },
             ),
           ),
-          ExpandedCustomDateTimePicker(
-            label: 'Başlangıç Tarihi',
+          CustomDateTimePicker(
+            labelText: 'Başlangıç Tarihi',
             onChanged: (val) {
               if (val != null) {
                 try {
@@ -568,8 +580,8 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
               }
             },
           ),
-          ExpandedCustomDateTimePicker(
-            label: 'Bitiş Tarihi',
+          CustomDateTimePicker(
+            labelText: 'Bitiş Tarihi',
             onChanged: (val) {
               if (val != null) {
                 try {

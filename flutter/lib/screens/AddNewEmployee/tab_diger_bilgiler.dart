@@ -1,12 +1,12 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/bank_account_type.dart';
 import 'package:vtys_kalite/enums/bank_names.dart';
 import 'package:vtys_kalite/models/user.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_customdropdownmenu.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
@@ -84,43 +84,64 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
               children: [
                 Row(
                   children: [
-                    ExpandedCustomDropDownMenu(
-                      value: widget.userHelper.userDetail!.bankNames.getName,
-                      label: "Banka Adı",
-                      listExtension: BankNamesEnumExtension.getList(),
-                      onChanged: (val) {
-                        setState(() {
-                          widget.userHelper.userDetail!.bankNames =
-                              BankNamesEnumExtension.getEnumFromName(val);
-                        });
-                      },
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CustomDropDownMenu(
+                          isExpandedYes: true,
+                          iconSize: 20,
+                          icon: const Icon(Icons.arrow_drop_down),
+                          valueChoose:
+                              widget.userHelper.userDetail!.bankNames.getName,
+                          text: "Banka Adı",
+                          list: BankNamesEnumExtension.getList(),
+                          onChanged: (val) {
+                            setState(() {
+                              widget.userHelper.userDetail!.bankNames =
+                                  BankNamesEnumExtension.getEnumFromName(val);
+                            });
+                          },
+                        ),
+                      ),
                     ),
-                    ExpandedCustomDropDownMenu(
-                      label: "Hesap Tipi",
-                      value:
-                          widget.userHelper.userDetail!.bankAccountType.getName,
-                      listExtension: BankAccountTypeExtension.getList(),
-                      onChanged: (val) {
-                        setState(() {
-                          widget.userHelper.userDetail!.bankAccountType =
-                              BankNamesEnumExtension.getEnumFromName(val);
-                        });
-                      },
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CustomDropDownMenu(
+                          isExpandedYes: true,
+                          iconSize: 20,
+                          icon: const Icon(Icons.arrow_drop_down),
+                          text: "Hesap Tipi",
+                          valueChoose: widget
+                              .userHelper.userDetail!.bankAccountType.getName,
+                          list: BankAccountTypeExtension.getList(),
+                          onChanged: (val) {
+                            setState(() {
+                              widget.userHelper.userDetail!.bankAccountType =
+                                  BankNamesEnumExtension.getEnumFromName(val);
+                            });
+                          },
+                        ),
+                      ),
                     ),
                   ],
                 ),
                 Row(
                   children: [
-                    ExpandedNameController(
-                      controller:
-                          tabDigerBilgilerController.controllerAccountNumber,
-                      label: "Hesap No",
-                      widget: const SizedBox(),
+                    Expanded(
+                      child: NameController(
+                        controller:
+                            tabDigerBilgilerController.controllerAccountNumber,
+                        label: "Hesap No",
+                        widget: const SizedBox(),
+                      ),
                     ),
-                    ExpandedNameController(
-                      controller: tabDigerBilgilerController.controllerIBAN,
-                      label: "IBAN",
-                      widget: const SizedBox(),
+                    Expanded(
+                      child: NameController(
+                        controller: tabDigerBilgilerController.controllerIBAN,
+                        label: "IBAN",
+                        widget: const SizedBox(),
+                      ),
                     ),
                   ],
                 ),
@@ -161,42 +182,55 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
             child: ListView(
               shrinkWrap: true,
               children: [
-                ExpandedNameController(
+                NameController(
                   controller: tabDigerBilgilerController.controllerAdress,
                   label: "Adres Bilgileri",
                   widget: const SizedBox(),
                 ),
                 Row(
                   children: [
-                    ExpandedNameController(
-                      controller:
-                          tabDigerBilgilerController.controllerHomePhone,
-                      label: "Ev Telefonu",
-                      widget: const SizedBox(),
+                    Expanded(
+                      child: NameController(
+                        controller:
+                            tabDigerBilgilerController.controllerHomePhone,
+                        label: "Ev Telefonu",
+                        widget: const SizedBox(),
+                      ),
                     ),
-                    ExpandedNameController(
-                      controller: tabDigerBilgilerController.controllerZipCode,
-                      label: "Posta Kodu",
-                      widget: const SizedBox(),
+                    Expanded(
+                      child: NameController(
+                        controller:
+                            tabDigerBilgilerController.controllerZipCode,
+                        label: "Posta Kodu",
+                        widget: const SizedBox(),
+                      ),
                     ),
                   ],
                 ),
                 Row(
                   children: [
-                    ExpandedNameController(
-                      controller: tabDigerBilgilerController.controllerCountry,
-                      label: "Ülke",
-                      widget: const SizedBox(),
+                    Expanded(
+                      child: NameController(
+                        controller:
+                            tabDigerBilgilerController.controllerCountry,
+                        label: "Ülke",
+                        widget: const SizedBox(),
+                      ),
                     ),
-                    ExpandedNameController(
-                      controller: tabDigerBilgilerController.controllerCity,
-                      label: "Şehir",
-                      widget: const SizedBox(),
+                    Expanded(
+                      child: NameController(
+                        controller: tabDigerBilgilerController.controllerCity,
+                        label: "Şehir",
+                        widget: const SizedBox(),
+                      ),
                     ),
-                    ExpandedNameController(
-                      controller: tabDigerBilgilerController.controllerDistrict,
-                      label: "İlçe",
-                      widget: const SizedBox(),
+                    Expanded(
+                      child: NameController(
+                        controller:
+                            tabDigerBilgilerController.controllerDistrict,
+                        label: "İlçe",
+                        widget: const SizedBox(),
+                      ),
                     ),
                   ],
                 )
