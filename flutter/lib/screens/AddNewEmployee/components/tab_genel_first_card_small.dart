@@ -36,27 +36,27 @@ class TabGenelFirstCardSmall extends StatelessWidget {
         children: [
           ProfileAboutColumn(
             textConstant: "İşe Başlama Tarihi",
-            textUser: userHelper.userDetail.startDateWork,
+            textUser: userHelper.userDetail!.startDateWork,
           ),
           const SizedBox(height: 20),
           ProfileAboutColumn(
             textConstant: "Şirket",
-            textUser: userHelper.userDetailCareer.unitCompany,
+            textUser: userHelper.userDetailCareer!.unitCompany,
           ),
           const SizedBox(height: 20),
           ProfileAboutColumn(
             textConstant: "Şube",
-            textUser: userHelper.userDetailCareer.unitBranch,
+            textUser: userHelper.userDetailCareer!.unitBranch,
           ),
           const SizedBox(height: 20),
           ProfileAboutColumn(
             textConstant: "Departman",
-            textUser: userHelper.userDetailCareer.unitDepartment,
+            textUser: userHelper.userDetailCareer!.unitDepartment,
           ),
           const SizedBox(height: 20),
           ProfileAboutColumn(
             textConstant: "Ünvan",
-            textUser: userHelper.userDetailCareer.unitTitle,
+            textUser: userHelper.userDetailCareer!.unitTitle,
           ),
           const SizedBox(height: 20),
           ProfileAboutColumn(

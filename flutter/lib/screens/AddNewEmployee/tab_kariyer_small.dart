@@ -126,15 +126,15 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
     ];
 
     positionChildren1 = [
-      widget.userHelper.userDetail.startDateWork,
-      widget.userHelper.userDetail.contractEndDate,
+      widget.userHelper.userDetail!.startDateWork,
+      widget.userHelper.userDetail!.contractEndDate,
       EmploymentTypeEnumExtension.getList()[
-              widget.userHelper.userDetail.employmentType.index]
+              widget.userHelper.userDetail!.employmentType.index]
           .toString(),
-      widget.userHelper.userDetailCareer.unitCompany,
-      widget.userHelper.userDetailCareer.unitBranch,
-      widget.userHelper.userDetailCareer.unitDepartment,
-      widget.userHelper.userDetailCareer.unitTitle,
+      widget.userHelper.userDetailCareer!.unitCompany,
+      widget.userHelper.userDetailCareer!.unitBranch,
+      widget.userHelper.userDetailCareer!.unitDepartment,
+      widget.userHelper.userDetailCareer!.unitTitle,
     ];
 
     salaryHeaders = [
@@ -146,7 +146,7 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
     salaryChildren1 = [
       tabKariyerController.controllerSalary.text.toString() +
           EmploymentTypeEnumExtension.getList()[
-                  widget.userHelper.userDetail.employmentType.index]
+                  widget.userHelper.userDetail!.employmentType.index]
               .toString(),
       tabKariyerController.controllerPaymentScreenInSalary.text.toString(),
       'Buraya Nasıl Ekleyeceğim Bakacağım Sonra',
@@ -457,7 +457,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
                   if (companyNames.isNotEmpty) {
                     tabKariyerController.unitCompanyIndex.value =
                         companyNames.indexOf(val!);
-                    widget.userHelper.userDetailCareer.unitCompany =
+                    widget.userHelper.userDetailCareer!.unitCompany =
                         companyNames[
                             tabKariyerController.unitCompanyIndex.value];
                   }
@@ -481,7 +481,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
                   if (branchNames.isNotEmpty) {
                     tabKariyerController.unitBranchIndex.value =
                         branchNames.indexOf(val!);
-                    widget.userHelper.userDetailCareer.unitBranch =
+                    widget.userHelper.userDetailCareer!.unitBranch =
                         branchNames[tabKariyerController.unitBranchIndex.value];
                   }
                 },
@@ -505,7 +505,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
                   if (departmantNames.isNotEmpty) {
                     tabKariyerController.unitDepartmantIndex.value =
                         departmantNames.indexOf(val!);
-                    widget.userHelper.userDetailCareer.unitDepartment =
+                    widget.userHelper.userDetailCareer!.unitDepartment =
                         departmantNames[
                             tabKariyerController.unitDepartmantIndex.value];
                   }
@@ -529,7 +529,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
                   if (titleNames.isNotEmpty) {
                     tabKariyerController.unitTitleIndex.value =
                         titleNames.indexOf(val!);
-                    widget.userHelper.userDetailCareer.unitTitle = titleNames[
+                    widget.userHelper.userDetailCareer!.unitTitle = titleNames[
                         tabKariyerController.unitDepartmantIndex.value];
                   }
                 },
@@ -561,7 +561,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
             onChanged: (val) {
               if (val != null) {
                 try {
-                  widget.userHelper.userDetail.startDateWork = val;
+                  widget.userHelper.userDetail!.startDateWork = val;
                 } catch (e) {
                   print(e.toString());
                 }
@@ -573,7 +573,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
             onChanged: (val) {
               if (val != null) {
                 try {
-                  widget.userHelper.userDetail.quitWorkDate = val;
+                  widget.userHelper.userDetail!.quitWorkDate = val;
                 } catch (e) {
                   print(e.toString());
                 }
