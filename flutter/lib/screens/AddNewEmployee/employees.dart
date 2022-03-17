@@ -57,7 +57,6 @@ class Employees extends StatelessWidget {
                                             context: context,
                                             builder: (context) => Dialog(
                                               child: AddNewEmployee(
-                                                newUser: null,
                                                 userHelper:
                                                     UserHelperController(-1),
                                               ),
