@@ -86,7 +86,7 @@ class UserController extends GetxController {
       isLoading(true);
       print("Update User ID: $id");
       var response = await UserRemoteServices.updateUser(
-          id, json.encode(user.toJson()).toString());
+          id, json.encode(user.toJsonWithId()).toString());
       await fetchUsers(); //userList.add(newUser);
       print("put User: " + response);
       return response;

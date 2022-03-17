@@ -28,6 +28,7 @@ class UserHelperController {
   UserDetailPayment? userDetailPayment;
 
   Future<void> init() async {
+    print("UserHelperController init : $userId");
     userDetail = await userDetailController.fetchUserDetailByUserId(userId);
     userDetail ??= UserDetail(
       userId: userId,
@@ -51,7 +52,6 @@ class UserHelperController {
       paymentScheme: PaymentSchemeEnum.values.first,
       salaryType: SalaryTypeEnum.values.first,
     );
-
   }
 
   UserHelperController(this.userId);
@@ -143,18 +143,21 @@ class UserHelperController {
         print("User Updated!");
         userId = user.id;
         print("User ID: $userId");
-        responseUserDetail = userDetail!.id == -1
+        userDetail = await userDetailController.fetchUserDetailByUserId(userId);
+        print(
+            userDetail == null ? "UserDetail not found" : "UserDetail : found");
+/* ${userDetail!.id} */
+        responseUserDetail = userDetail == null
             ? await userDetailController.addNewUserDetail(getUserDetail())
             : await userDetailController.updateUserDetail(
                 userDetail!.id, getUserDetail());
-        print("UserDetail Updated!");
+        print("UserDetail Added/Updated!");
       }
 
-      userDetail =
-          (await userDetailController.fetchUserDetailByUserId(userId))!;
-      print("UserDetail : ${userDetail!.id}");
+      userDetail = await userDetailController.fetchUserDetailByUserId(userId);
+      print(userDetail == null ? "UserDetail not found" : "UserDetail : found");
 
-      UserDetailCareer? userDetailCareer = await userDetailCareerController
+      /* UserDetailCareer? userDetailCareer = await userDetailCareerController
           .fetchUserDetailCareerById(userDetail?.id);
 
       print("User Helper User UserDetailCareer " +
@@ -198,8 +201,10 @@ class UserHelperController {
           tcno: tabKisiselBilgilerController.controllerTcNo.text,
           salary: tabKariyerController.controllerSalary.text,
           currency: "TL", //TODO
-          salaryType: SalaryTypeEnum.values.elementAt(userDetailPayment!.salaryType.index),
-          paymentScheme: PaymentSchemeEnum.values.elementAt(userDetailPayment!.paymentScheme.index),
+          salaryType: SalaryTypeEnum.values
+              .elementAt(userDetailPayment!.salaryType.index),
+          paymentScheme: PaymentSchemeEnum.values
+              .elementAt(userDetailPayment!.paymentScheme.index),
           commuteSupportFee: "617", //TODO
           foodSupportFee: "6299", //TODO
         ),
@@ -210,7 +215,7 @@ class UserHelperController {
         responseUserDetailCareer!,
         responseUserDetailPayment!,
         context,
-      );
+      ); */
 
       print(
           "\n\n----------------------------USER HELPER END----------------------------\n\n");
