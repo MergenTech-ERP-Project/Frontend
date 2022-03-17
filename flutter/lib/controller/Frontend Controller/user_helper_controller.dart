@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/enums/bank_account_type.dart';
 import 'package:vtys_kalite/enums/bank_names.dart';
@@ -18,7 +20,6 @@ import 'package:vtys_kalite/models/User%20Detail/user_career.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_payment.dart';
 import 'package:vtys_kalite/models/user.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee_helpers.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class UserHelperController {
@@ -28,7 +29,10 @@ class UserHelperController {
   UserDetailPayment? userDetailPayment;
 
   Future<void> init() async {
-    userDetail = await userDetailController.fetchUserDetailByUserId(userId);
+    print("UserHelperController init : $userId");
+    if (userId != -1) {
+      userDetail = await userDetailController.fetchUserDetailByUserId(userId);
+    } /* else { */
     userDetail ??= UserDetail(
       userId: userId,
       maritalStatus: MaritalStatusEnum.values.first,
@@ -51,7 +55,7 @@ class UserHelperController {
       paymentScheme: PaymentSchemeEnum.values.first,
       salaryType: SalaryTypeEnum.values.first,
     );
-
+    /* } */
   }
 
   UserHelperController(this.userId);
@@ -116,6 +120,7 @@ class UserHelperController {
         print("User: null");
         await userController.addNewUser(
           tabGenelController.controllerName.text +
+              " " +
               tabGenelController.controllerSurname.text,
           tabGenelController.controllerEPostaPersonal.text,
           "qwe123",
@@ -130,7 +135,7 @@ class UserHelperController {
             await userDetailController.addNewUserDetail(getUserDetail());
         print("New UserDetail Added!");
       } else {
-        print("User: " + user!.toJsonWithId().toString());
+        print("User: " + json.encode(user!.toJsonWithId()).toString());
         user.name = tabGenelController.controllerName.text +
             " " +
             tabGenelController.controllerSurname.text;
@@ -143,18 +148,21 @@ class UserHelperController {
         print("User Updated!");
         userId = user.id;
         print("User ID: $userId");
-        responseUserDetail = userDetail!.id == -1
+        userDetail = await userDetailController.fetchUserDetailByUserId(userId);
+        print(
+            userDetail == null ? "UserDetail not found" : "UserDetail : found");
+/* ${userDetail!.id} */
+        responseUserDetail = userDetail == null
             ? await userDetailController.addNewUserDetail(getUserDetail())
             : await userDetailController.updateUserDetail(
                 userDetail!.id, getUserDetail());
-        print("UserDetail Updated!");
+        print("UserDetail Added/Updated!");
       }
 
-      userDetail =
-          (await userDetailController.fetchUserDetailByUserId(userId))!;
-      print("UserDetail : ${userDetail!.id}");
+      userDetail = await userDetailController.fetchUserDetailByUserId(userId);
+      print(userDetail == null ? "UserDetail not found" : "UserDetail : found");
 
-      UserDetailCareer? userDetailCareer = await userDetailCareerController
+      /* UserDetailCareer? userDetailCareer = await userDetailCareerController
           .fetchUserDetailCareerById(userDetail?.id);
 
       print("User Helper User UserDetailCareer " +
@@ -198,8 +206,10 @@ class UserHelperController {
           tcno: tabKisiselBilgilerController.controllerTcNo.text,
           salary: tabKariyerController.controllerSalary.text,
           currency: "TL", //TODO
-          salaryType: SalaryTypeEnum.values.elementAt(userDetailPayment!.salaryType.index),
-          paymentScheme: PaymentSchemeEnum.values.elementAt(userDetailPayment!.paymentScheme.index),
+          salaryType: SalaryTypeEnum.values
+              .elementAt(userDetailPayment!.salaryType.index),
+          paymentScheme: PaymentSchemeEnum.values
+              .elementAt(userDetailPayment!.paymentScheme.index),
           commuteSupportFee: "617", //TODO
           foodSupportFee: "6299", //TODO
         ),
@@ -210,7 +220,7 @@ class UserHelperController {
         responseUserDetailCareer!,
         responseUserDetailPayment!,
         context,
-      );
+      ); */
 
       print(
           "\n\n----------------------------USER HELPER END----------------------------\n\n");

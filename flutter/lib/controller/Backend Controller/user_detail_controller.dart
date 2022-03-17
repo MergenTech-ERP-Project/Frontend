@@ -25,12 +25,16 @@ class UserDetailController extends GetxController {
   }
 
   Future<int?> addNewUserDetail(UserDetail userDetail) async {
+    print("User Detail Add");
+    print("User Detail : " +
+        json.encode(userDetail.toJson()).toString() +
+        "\n\n");
     try {
       isLoading(true);
       var response = await UserDetailServices.addNewUserDetail(
           json.encode(userDetail.toJson()).toString());
 
-      print("post User Detail: " + response.toString());
+      print("post User Detail: " + response.toString() + "\n\n");
       fetchUserDetailByUserId(userDetail.userId);
       return response;
     } finally {
@@ -39,9 +43,10 @@ class UserDetailController extends GetxController {
   }
 
   Future<int?> updateUserDetail(int id, UserDetail userDetail) async {
+    print("User Detail Update");
+    print("User Detail $id : " + json.encode(userDetail.toJson()).toString());
     try {
       isLoading(true);
-      print("Update User Detail ID: $id");
       var response = await UserDetailServices.updateUserDetail(
           id, json.encode(userDetail.toJson()).toString());
       print("put User Detail: " + response.toString());
