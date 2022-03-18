@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:vtys_kalite/enums/vacation_request_status.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_vacation.dart';
 import 'package:vtys_kalite/services/user_detail_vacation_remote_service.dart';
 
@@ -27,8 +28,10 @@ class UserDetailVacationController extends GetxController {
       userDetailId, UserDetailVacation userDetailVacation) async {
     try {
       isLoading(true);
-      UserDetailVacation newUserDetailVacation =
-          UserDetailVacation(userDetailId: userDetailId);
+      UserDetailVacation newUserDetailVacation = UserDetailVacation(
+        userDetailId: userDetailId,
+        vacationRequestStatus: VacationRequestStatusEnum.values.first,
+      );
       var response = await UserDetailVacationServices.addNewUserDetailVacation(
           json.encode(newUserDetailVacation.toJson()).toString());
 
