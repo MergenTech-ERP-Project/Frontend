@@ -1,7 +1,5 @@
 // ignore_for_file: avoid_print
 
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/enums/bank_account_type.dart';
 import 'package:vtys_kalite/enums/bank_names.dart';
@@ -112,31 +110,22 @@ class UserHelperController {
   }
 
   userDetailSave(BuildContext context, User? user) async {
-    int? responseUserDetail;
-    print(
-        "\n\n----------------------------USER HELPER----------------------------\n\n");
     try {
       if (userId == -1) {
-        print("User: null");
-        await userController.addNewUser(
-          tabGenelController.controllerName.text +
-              " " +
-              tabGenelController.controllerSurname.text,
-          tabGenelController.controllerEPostaPersonal.text,
-          "qwe123",
-          "management",
-          tabGenelController.controllerTelephonePersonal.text,
+        userId = await userController.addNewUser(
+          User(
+            name: tabGenelController.controllerName.text +
+                " " +
+                tabGenelController.controllerSurname.text,
+            email: tabGenelController.controllerEPostaPersonal.text,
+            password: "qwe123",
+            title: "management",
+            cellphone: tabGenelController.controllerTelephonePersonal.text,
+          ),
+          getUserDetail(),
         );
-        print("New User Added!");
-        userId = await userController.fetchUserByEmailAndPassword(
-            tabGenelController.controllerEPostaPersonal.text, "qwe123");
-        print("User ID: $userId");
-        responseUserDetail =
-            await userDetailController.addNewUserDetail(getUserDetail());
-        print("New UserDetail Added!");
       } else {
-        print("User: " + json.encode(user!.toJsonWithId()).toString());
-        user.name = tabGenelController.controllerName.text +
+        user!.name = tabGenelController.controllerName.text +
             " " +
             tabGenelController.controllerSurname.text;
         user.email = tabGenelController.controllerEPostaPersonal.text;
@@ -144,19 +133,9 @@ class UserHelperController {
         userController.updateUser(
           user.id,
           user,
+          getUserDetail(),
         );
-        print("User Updated!");
         userId = user.id;
-        print("User ID: $userId");
-        userDetail = await userDetailController.fetchUserDetailByUserId(userId);
-        print(
-            userDetail == null ? "UserDetail not found" : "UserDetail : found");
-/* ${userDetail!.id} */
-        responseUserDetail = userDetail == null
-            ? await userDetailController.addNewUserDetail(getUserDetail())
-            : await userDetailController.updateUserDetail(
-                userDetail!.id, getUserDetail());
-        print("UserDetail Added/Updated!");
       }
 
       userDetail = await userDetailController.fetchUserDetailByUserId(userId);

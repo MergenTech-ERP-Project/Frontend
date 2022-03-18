@@ -18,15 +18,12 @@ class UserDetailServices {
         return null;
       }
       jsonString = "[" + jsonString + "]";
-      print("User Detail JSON : $jsonString");
       userDetail = parseUser(jsonString);
-      print("User Detail JSON 2 : ${userDetail!.toJson().toString()}");
     }
     return userDetail;
   }
 
   static Future<int> addNewUserDetail(String json) async {
-    print(json);
     var response = await http
         .post(
           Uri.parse(serviceHttp + '/userdetail/new'),
@@ -39,7 +36,12 @@ class UserDetailServices {
         )
         .timeout(
           const Duration(seconds: 10),
-        );
+        )
+        .onError(
+      (error, stackTrace) {
+        throw error.toString();
+      },
+    );
     return response.statusCode;
   }
 
@@ -55,7 +57,12 @@ class UserDetailServices {
             encoding: encoding)
         .timeout(
           const Duration(seconds: 10),
-        );
+        )
+        .onError(
+      (error, stackTrace) {
+        throw error.toString();
+      },
+    );
     return response.statusCode;
   }
 

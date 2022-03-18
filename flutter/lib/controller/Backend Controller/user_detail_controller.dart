@@ -44,11 +44,14 @@ class UserDetailController extends GetxController {
 
   Future<int?> updateUserDetail(int id, UserDetail userDetail) async {
     print("User Detail Update");
+    userDetail.id = id;
     print("User Detail $id : " + json.encode(userDetail.toJson()).toString());
     try {
       isLoading(true);
+      Map<String, dynamic> detailMap = userDetail.toJson();
+      detailMap.remove("tc_no");
       var response = await UserDetailServices.updateUserDetail(
-          id, json.encode(userDetail.toJson()).toString());
+          id, json.encode(detailMap).toString());
       print("put User Detail: " + response.toString());
       fetchUserDetailByUserId(userDetail.userId);
       return response;

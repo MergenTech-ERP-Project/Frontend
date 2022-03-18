@@ -24,8 +24,8 @@ String fetchUsers(List<UserDetail> data) =>
 /// The part written with // places written with json.
 
 class UserDetail {
-  final int id;
-  final int userId; //user_id
+  int id;
+  int userId; //user_id
   int numberofkids; //numberofkids
   String tcno; //tc_no
   String workPhone; //work_phone
@@ -117,9 +117,9 @@ class UserDetail {
 
   factory UserDetail.fromJson(Map<String, dynamic> json) {
     return UserDetail(
-      id: json['id'],
+      id: json['id'] ?? -1,
       userId: json['user_id'],
-      numberofkids: json['numberofkids'],
+      numberofkids: json['numberofkids'] ?? 0,
       tcno: json['tc_no'] ?? "",
       workPhone: json['work_phone'] ?? "",
       lastCompletedEducationStatus:
@@ -144,29 +144,61 @@ class UserDetail {
       reasonTypeForQuit: json['quit_reason_type'] ?? "",
       quitExplanation: json['quit_explanation'] ?? "",
       nationality: json["nationality"] ?? "",
-      gender: EnumToString.fromString(GenderEnum.values, json['gender'])!,
-      bloodType:
-          EnumToString.fromString(BloodTypeEnum.values, json['blood_type'])!,
-      bankNames:
-          EnumToString.fromString(BankNamesEnum.values, json['bankNames'])!,
+      gender: EnumToString.fromString(
+            GenderEnum.values,
+            json['gender'].toString(),
+          ) ??
+          GenderEnum.values.first,
+      bloodType: EnumToString.fromString(
+            BloodTypeEnum.values,
+            json['blood_type'].toString(),
+          ) ??
+          BloodTypeEnum.values.first,
+      bankNames: EnumToString.fromString(
+            BankNamesEnum.values,
+            json['bankNames'].toString(),
+          ) ??
+          BankNamesEnum.values.first,
       contractType: EnumToString.fromString(
-          ContractTypeEnum.values, json['contract_type'])!,
+            ContractTypeEnum.values,
+            json['contract_type'].toString(),
+          ) ??
+          ContractTypeEnum.values.first,
       maritalStatus: EnumToString.fromString(
-          MaritalStatusEnum.values, json['maritalstatus'])!,
+            MaritalStatusEnum.values,
+            json['maritalstatus'].toString(),
+          ) ??
+          MaritalStatusEnum.values.first,
       disabledDegree: EnumToString.fromString(
-          DisabledDegreeEnum.values, json['degree_of_disability'])!,
+            DisabledDegreeEnum.values,
+            json['degree_of_disability'].toString(),
+          ) ??
+          DisabledDegreeEnum.values.first,
       militaryStatus: EnumToString.fromString(
-          MilitaryStatusEnum.values, json['military_service_status'])!,
+            MilitaryStatusEnum.values,
+            json['military_service_status'].toString(),
+          ) ??
+          MilitaryStatusEnum.values.first,
       employmentType: EnumToString.fromString(
-          EmploymentTypeEnum.values, json['employment_type'])!,
+            EmploymentTypeEnum.values,
+            json['employment_type'].toString(),
+          ) ??
+          EmploymentTypeEnum.values.first,
       bankAccountType: EnumToString.fromString(
-          BankAccountTypeEnum.values, json['bank_account_type'])!,
+            BankAccountTypeEnum.values,
+            json['bank_account_type'].toString(),
+          ) ??
+          BankAccountTypeEnum.values.first,
       educationalStatus: EnumToString.fromString(
-          EducationalStatusEnum.values, json['education_status'])!,
+            EducationalStatusEnum.values,
+            json['education_status'].toString(),
+          ) ??
+          EducationalStatusEnum.values.first,
       highestEducationLevelCompleted: EnumToString.fromString(
-        HighestEducationLevelCompletedEnum.values,
-        json['highest_education_level_completed'],
-      )!,
+            HighestEducationLevelCompletedEnum.values,
+            json['highest_education_level_completed'].toString(),
+          ) ??
+          HighestEducationLevelCompletedEnum.values.first,
     );
   }
 
