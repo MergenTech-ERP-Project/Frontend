@@ -18,7 +18,7 @@ class UserDetailPaymentServices {
         return null;
       }
       jsonString = "[" + jsonString + "]";
-      userDetailPayment = parseUserDetailPayment(jsonString);
+      userDetailPayment = parseUserPayment(jsonString);
     }
     return userDetailPayment;
   }

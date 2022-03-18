@@ -4,12 +4,12 @@ import 'package:enum_to_string/enum_to_string.dart';
 import 'package:vtys_kalite/enums/payment_scheme.dart';
 import 'package:vtys_kalite/enums/salary_type.dart';
 
-List<UserDetailPayment> parseUsers(String str) => List<UserDetailPayment>.from(
+List<UserDetailPayment> parseUsersPayment(String str) => List<UserDetailPayment>.from(
     json.decode(str).map((x) => UserDetailPayment.fromJson(x)));
 
-UserDetailPayment parseUserDetailPayment(String str) => parseUsers(str)[0];
+UserDetailPayment parseUserPayment(String str) => parseUsersPayment(str)[0];
 
-String fetchUsers(List<UserDetailPayment> data) =>
+String fetchUsersPayment(List<UserDetailPayment> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 /// The part written with // places written with json.

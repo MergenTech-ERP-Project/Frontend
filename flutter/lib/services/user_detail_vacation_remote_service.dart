@@ -2,31 +2,32 @@
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
+import 'package:vtys_kalite/models/User%20Detail/user_vacation.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 
-class UserDetailServices {
+class UserDetailVacationServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
-
-  static Future<UserDetail?> fetchUserDetailByUserId(userId) async {
-    var response = await http
-        .get(Uri.parse(serviceHttp + '/userdetail/find/user:$userId'));
-    UserDetail? userDetail;
+  static Future<UserDetailVacation?> fetchUserDetailVacationByUserDetailId(
+      userDetailId) async {
+    var response =
+        await http.get(Uri.parse(serviceHttp + '/vacation/list/$userDetailId'));
+    UserDetailVacation? userDetailVacation;
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       if (jsonString == "null") {
         return null;
       }
       jsonString = "[" + jsonString + "]";
-      userDetail = parseUserDetail(jsonString);
+      userDetailVacation = parseUserDetailVacation(jsonString);
     }
-    return userDetail;
+    return userDetailVacation;
   }
 
-  static Future<int> addNewUserDetail(String json) async {
+  static Future<int> addNewUserDetailVacation(String json) async {
+    print(json);
     var response = await http
         .post(
-          Uri.parse(serviceHttp + '/userdetail/new'),
+          Uri.parse(serviceHttp + '/vacation/new'),
           headers: <String, String>{
             'Content-type': 'application/json',
             'Accept': 'application/json',
@@ -37,17 +38,14 @@ class UserDetailServices {
         .timeout(
           const Duration(seconds: 10),
         )
-        .onError(
-      (error, stackTrace) {
-        throw error.toString();
-      },
-    );
+        .onError((error, stackTrace) => throw error.toString());
     return response.statusCode;
   }
 
-  static Future<int> updateUserDetail(int id, String json) async {
+  static Future<int> updateUserDetailVacation(
+      int id, String json) async {
     var response = await http
-        .put(Uri.parse(serviceHttp + '/userdetail/update/$id'),
+        .put(Uri.parse(serviceHttp + '/vacation/update/$id'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
@@ -57,18 +55,13 @@ class UserDetailServices {
             encoding: encoding)
         .timeout(
           const Duration(seconds: 10),
-        )
-        .onError(
-      (error, stackTrace) {
-        throw error.toString();
-      },
-    );
+        ).onError((error, stackTrace) => throw error.toString());
     return response.statusCode;
   }
 
-  static Future<String> deleteUserDetail(int id) async {
+  static Future<String> deleteUserDetailVacation(int id) async {
     var response = await http
-        .delete(Uri.parse(serviceHttp + '/userdetail/remove/$id'),
+        .delete(Uri.parse(serviceHttp + '/vacation/delete/$id'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
@@ -77,9 +70,9 @@ class UserDetailServices {
             encoding: encoding)
         .timeout(
           const Duration(seconds: 10),
-        );
+        ).onError((error, stackTrace) => throw error.toString());
     return (response.statusCode >= 200 && response.statusCode < 300)
-        ? "Success: User"
-        : "Error: User ${response.statusCode}";
+        ? "Success: User Vacation"
+        : "Error: User Vacation${response.statusCode}";
   }
 }

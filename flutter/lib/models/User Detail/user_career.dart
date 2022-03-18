@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-List<UserDetailCareer> parseUsers(String str) => List<UserDetailCareer>.from(
+List<UserDetailCareer> parseUsersDetailCareer(String str) => List<UserDetailCareer>.from(
     json.decode(str).map((x) => UserDetailCareer.fromJson(x)));
 
-UserDetailCareer parseUserCareer(String str) => parseUsers(str)[0];
+UserDetailCareer parseUserCareer(String str) => parseUsersDetailCareer(str)[0];
 
 String fetchUsers(List<UserDetailCareer> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
