@@ -7,6 +7,7 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
+import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
@@ -157,14 +158,17 @@ class SignUpPage extends StatelessWidget {
     if (!(_formkey.currentState!.validate())) return;
 
     int? response = await userController.addNewUser(
-      _usernameController.text,
-      _emailController.text,
-      _passwordController.text,
-      "management",
-      _cellPhoneController.text,
+      User(
+        name: _usernameController.text,
+        email: _emailController.text,
+        password: _passwordController.text,
+        title: "management",
+        cellphone: _cellPhoneController.text,
+      ),
+      null,
     );
 
-    if (response! < 200 || response >= 300) {
+    if (response < 200 || response >= 300) {
       showDialog(
         context: context,
         builder: (_) => CustomAlertDialog(

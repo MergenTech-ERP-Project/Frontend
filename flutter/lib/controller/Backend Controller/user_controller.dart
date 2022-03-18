@@ -3,8 +3,21 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:vtys_kalite/enums/bank_account_type.dart';
+import 'package:vtys_kalite/enums/bank_names.dart';
+import 'package:vtys_kalite/enums/blood_type.dart';
+import 'package:vtys_kalite/enums/contract_type.dart';
+import 'package:vtys_kalite/enums/disabled_degree.dart';
+import 'package:vtys_kalite/enums/educational_status.dart';
+import 'package:vtys_kalite/enums/employment_type.dart';
+import 'package:vtys_kalite/enums/gender.dart';
+import 'package:vtys_kalite/enums/highest_education_level_completed.dart';
+import 'package:vtys_kalite/enums/marial_status.dart';
+import 'package:vtys_kalite/enums/military_status.dart';
+import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/services/user_remote_services.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 
 class UserController extends GetxController {
   var isLoading = false.obs;
@@ -60,35 +73,61 @@ class UserController extends GetxController {
     }
   }
 
-  Future<int?> addNewUser(String name, String email, String password,
-      String title, String cellPhoneNumber) async {
+  Future<int> addNewUser(User newUser, UserDetail? userDetail) async {
     try {
       isLoading(true);
-      User newUser = User(
-        name: name,
-        password: password,
-        title: title,
-        cellphone: cellPhoneNumber,
-        email: email,
-      );
       var response = await UserRemoteServices.addNewUser(
           json.encode(newUser.toJson()).toString());
+      print("addNewUser $response");
       await fetchUsers(); //userList.add(newUser);
-      print("post User: " + response.toString());
-      return response;
+      var userId = await userController.fetchUserByEmailAndPassword(
+          tabGenelController.controllerEPostaPersonal.text, "qwe123");
+      if (userDetail != null) {
+        userDetail.userId = userId;
+      }
+      response = await userDetailController.addNewUserDetail(
+            userDetail ??
+                UserDetail(
+                  userId: userId,
+                  maritalStatus: MaritalStatusEnum.values.first,
+                  disabledDegree: DisabledDegreeEnum.values.first,
+                  gender: GenderEnum.values.first,
+                  educationalStatus: EducationalStatusEnum.values.first,
+                  highestEducationLevelCompleted:
+                      HighestEducationLevelCompletedEnum.values.first,
+                  employmentType: EmploymentTypeEnum.values.first,
+                  militaryStatus: MilitaryStatusEnum.values.first,
+                  contractType: ContractTypeEnum.values.first,
+                  bankNames: BankNamesEnum.values.first,
+                  bankAccountType: BankAccountTypeEnum.values.first,
+                  bloodType: BloodTypeEnum.values.first,
+                ),
+          ) ??
+          -1;
+      print("addNewUserDetail $response");
+      return userId;
     } finally {
       isLoading(false);
     }
   }
 
-  Future<String?> updateUser(int id, User user) async {
+  Future<String?> updateUser(int id, User user, UserDetail? userDetail) async {
     try {
       isLoading(true);
       print("Update User ID: $id");
       var response = await UserRemoteServices.updateUser(
           id, json.encode(user.toJsonWithId()).toString());
-      await fetchUsers(); //userList.add(newUser);
       print("put User: " + response);
+      await fetchUsers(); //userList.add(newUser);
+      if (userDetail != null) {
+        UserDetail? findUserDetail =
+            await userDetailController.fetchUserDetailByUserId(user.id);
+        userDetail.userId = user.id;
+        findUserDetail == null
+            ? await userDetailController.addNewUserDetail(userDetail)
+            : await userDetailController.updateUserDetail(
+                findUserDetail.id, userDetail);
+      }
       return response;
     } finally {
       isLoading(false);
