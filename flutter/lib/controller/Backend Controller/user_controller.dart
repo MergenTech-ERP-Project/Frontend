@@ -81,7 +81,7 @@ class UserController extends GetxController {
       print("addNewUser $response");
       await fetchUsers(); //userList.add(newUser);
       var userId = await userController.fetchUserByEmailAndPassword(
-          tabGenelController.controllerEPostaPersonal.text, "qwe123");
+          newUser.email, newUser.password);
       if (userDetail != null) {
         userDetail.userId = userId;
       }

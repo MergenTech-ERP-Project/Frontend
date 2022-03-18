@@ -25,16 +25,14 @@ class UserDetailController extends GetxController {
   }
 
   Future<int?> addNewUserDetail(UserDetail userDetail) async {
-    print("User Detail Add");
-    print("User Detail : " +
-        json.encode(userDetail.toJson()).toString() +
-        "\n\n");
     try {
       isLoading(true);
+      Map detail = userDetail.toJson();
+      detail.remove("id");
       var response = await UserDetailServices.addNewUserDetail(
-          json.encode(userDetail.toJson()).toString());
+          json.encode(detail).toString());
 
-      print("post User Detail: " + response.toString() + "\n\n");
+      print("post User Detail: " + response.toString() + "\n");
       fetchUserDetailByUserId(userDetail.userId);
       return response;
     } finally {
