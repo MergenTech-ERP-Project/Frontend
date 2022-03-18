@@ -124,7 +124,6 @@ class LoginPage extends StatelessWidget {
 
   loginButton(context) async {
     if (!(_formkey.currentState!.validate())) return;
-    print("${_emailController.text} & ${_passwordController.text}");
     int id = await userController.fetchUserByEmailAndPassword(
         _emailController.text, _passwordController.text);
     if (id == -1) {

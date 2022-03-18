@@ -89,6 +89,7 @@ class UserController extends GetxController {
             userDetail ??
                 UserDetail(
                   userId: userId,
+                  tcno: userId.toString(),
                   maritalStatus: MaritalStatusEnum.values.first,
                   disabledDegree: DisabledDegreeEnum.values.first,
                   gender: GenderEnum.values.first,
@@ -105,7 +106,7 @@ class UserController extends GetxController {
           ) ??
           -1;
       print("addNewUserDetail $response");
-      return userId;
+      return response;
     } finally {
       isLoading(false);
     }
@@ -116,7 +117,7 @@ class UserController extends GetxController {
       isLoading(true);
       print("Update User ID: $id");
       var response = await UserRemoteServices.updateUser(
-          id, json.encode(user.toJsonWithId()).toString());
+          id, json.encode(user.toJson()).toString());
       print("put User: " + response);
       await fetchUsers(); //userList.add(newUser);
       if (userDetail != null) {

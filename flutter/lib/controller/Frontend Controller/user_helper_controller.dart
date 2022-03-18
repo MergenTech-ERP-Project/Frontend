@@ -112,7 +112,7 @@ class UserHelperController {
   userDetailSave(BuildContext context, User? user) async {
     try {
       if (userId == -1) {
-        userId = await userController.addNewUser(
+        await userController.addNewUser(
           User(
             name: tabGenelController.controllerName.text +
                 " " +
@@ -124,6 +124,8 @@ class UserHelperController {
           ),
           getUserDetail(),
         );
+        userId = await userController.fetchUserByEmailAndPassword(
+            tabGenelController.controllerEPostaPersonal.text, "qwe123");
       } else {
         user!.name = tabGenelController.controllerName.text +
             " " +

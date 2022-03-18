@@ -6,7 +6,7 @@ List<User>? parseUsers(String str) =>
 User? parseUser(String str) => parseUsers(str)?[0];
 
 String fetchUsers(List<User> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJsonWithId())));
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class User {
   final int id;
@@ -27,23 +27,16 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: json['id'],
-      name: json['name'],
-      password: json['password'],
-      title: json['title'],
-      cellphone: json['cellphone'],
-      email: json['email'],
+      id: json['id'] ?? -1,
+      name: json['name'] ?? "",
+      password: json['password'] ?? "",
+      title: json['title'] ?? "",
+      cellphone: json['cellphone'] ?? "",
+      email: json['email'] ?? "",
     );
   }
 
   Map<String, dynamic> toJson() => {
-        "name": name,
-        "password": password,
-        "title": title,
-        "cellphone": cellphone,
-        "email": email,
-      };
-  Map<String, dynamic> toJsonWithId() => {
         "id": id,
         "name": name,
         "password": password,
