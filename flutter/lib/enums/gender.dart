@@ -1,4 +1,5 @@
 enum GenderEnum {
+  none,
   male,
   female,
   unspecified,
@@ -15,6 +16,8 @@ extension GenderExtension on GenderEnum {
 
   String get getName {
     switch (this) {
+      case GenderEnum.none:
+        return "seçiniz...";
       case GenderEnum.male:
         return "Erkek";
       case GenderEnum.female:

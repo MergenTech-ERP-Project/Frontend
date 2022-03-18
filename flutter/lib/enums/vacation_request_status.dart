@@ -1,7 +1,7 @@
 enum VacationRequestStatusEnum {
+  pendingApproval,
   approved,
   unapproved,
-  pendingApproval,
 }
 
 extension VacationRequestStatusEnumExtension on VacationRequestStatusEnum {
