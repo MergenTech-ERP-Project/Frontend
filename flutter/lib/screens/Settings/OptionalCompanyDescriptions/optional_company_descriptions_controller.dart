@@ -10,4 +10,8 @@ class OptionalCompanyDescriptionsController extends GetxController {
   var branchId = (-1).obs;
   var departmentId = (-1).obs;
   var titleId = (-1).obs;
+
+  var companyName = "".obs;
+  var branchName = "".obs;
+  var departmanName = "".obs;
 }

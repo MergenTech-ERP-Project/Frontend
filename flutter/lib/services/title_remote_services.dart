@@ -21,13 +21,10 @@ class TitleRemoteServices {
     return null;
   }
 
-  static Future<List<Titlee>?>
-      fetchTitleWithCompanyIdAndBranchIdAndDepartmentId(
-          companyId, branchId, departmentId) async {
-    var response = await http.get(
-        Uri.parse(serviceHttp + '/title/$companyId/$branchId/$departmentId'));
+  static Future<List<Titlee>?> fetchTitleByDepartmentId(departmentId) async {
+    var response = await http
+        .get(Uri.parse(serviceHttp + '/title/find/department:$departmentId'));
 
-    ///TODO: request
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       List<Titlee> titles = titleFromJson(jsonString);

@@ -17,16 +17,15 @@ class DepartmentRemoteServices {
     }
   }
 
-  static Future<List<Department>?> fetchDepartmentsWithCompanyIdAndBranchId(
-      companyId, branchId) async {
+  static Future<List<Department>?> fetchDepartmentsByBranchId(branchId) async {
     var response = await http
-        .get(Uri.parse(serviceHttp + '/department/$companyId/$branchId')); ///TODO request
+        .get(Uri.parse(serviceHttp + '/department/find/branch:$branchId'));
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       List<Department> departments = departmentFromJson(jsonString);
       return departments;
     }
-    return null; 
+    return null;
   }
 
   static Future<String> newDepartment(String json) async {

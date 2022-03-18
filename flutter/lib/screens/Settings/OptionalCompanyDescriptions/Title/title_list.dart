@@ -48,12 +48,15 @@ class _TitleListState extends State<TitleList> {
                   itemCount: widget.titleList.length + 1,
                   itemBuilder: (_, index) {
                     return InkWell(
-                      onTap: index == 0 ? null : () {
-                        optionalCompanyController.titleId.value =
-                                  widget.titleList[index].id;
-                              branchController.fetchBranchesByCompanyId(
-                                  widget.titleList[index].id);
-                      },
+                      onTap: index == 0
+                          ? null
+                          : () async {
+                              optionalCompanyController.titleId.value =
+                                  widget.titleList[index - 1].id;
+                              await departmentController
+                                  .fetchDepartmentsByBranchId(
+                                      widget.titleList[index - 1].id);
+                            },
                       child: SizedBox(
                         height: 60,
                         child: Row(
@@ -92,8 +95,9 @@ class _TitleListState extends State<TitleList> {
                                           showDialogAreYouSureDelete(
                                             context,
                                             () async => await titleController
-                                                .removeTitle(widget
-                                                    .titleList[index - 1].id),
+                                                .removeTitle(
+                                              widget.titleList[index - 1].id,
+                                            ),
                                           );
                                         },
                                 ),

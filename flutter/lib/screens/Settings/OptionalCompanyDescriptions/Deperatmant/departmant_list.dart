@@ -52,9 +52,12 @@ class _DepartmantListState extends State<DepartmantList> {
                           ? null
                           : () {
                               optionalCompanyController.departmentId.value =
-                                  widget.departmentList[index].id;
-                              branchController.fetchBranchesByCompanyId(
-                                  widget.departmentList[index].id);
+                                  widget.departmentList[index - 1].id;
+                              optionalCompanyController.departmanName.value =
+                                  widget
+                                      .departmentList[index - 1].departmentName;
+                              titleController.fetchTitlesByDepartmentId(
+                                  widget.departmentList[index - 1].id);
                               widget.onSelected;
                             },
                       child: SizedBox(
@@ -94,11 +97,13 @@ class _DepartmantListState extends State<DepartmantList> {
                                       ? null
                                       : () async {
                                           showDialogAreYouSureDelete(
-                                              context,
-                                              () async => departmentController
-                                                  .removeDepartment(widget
-                                                      .departmentList[index - 1]
-                                                      .id));
+                                            context,
+                                            () async => departmentController
+                                                .removeDepartment(
+                                              widget
+                                                  .departmentList[index - 1].id,
+                                            ),
+                                          );
                                         },
                                 ),
                               ],

@@ -29,17 +29,6 @@ class CompanyController extends GetxController {
     }
   }
 
-  Future<int> fetchCompany(String companyName) async {
-    try {
-      isLoading(true);
-      var company = await CompanyRemoteServices.fetchCompany(companyName);
-      print("fetch Company: " + company.toString());
-      return company;
-    } finally {
-      isLoading(false);
-    }
-  }
-
   Future<String?> newAddCompany(Company newCompany) async {
     try {
       isLoading(true);
@@ -54,7 +43,7 @@ class CompanyController extends GetxController {
     }
   }
 
-  Future <String?> updateCompany(int id, Company company) async {
+  Future<String?> updateCompany(int id, Company company) async {
     try {
       isLoading(true);
       print(id);
@@ -70,7 +59,7 @@ class CompanyController extends GetxController {
     }
   }
 
-  Future <String?> removeCompany(int id) async {
+  Future<String?> removeCompany(int id) async {
     try {
       isLoading(true);
       print(id);

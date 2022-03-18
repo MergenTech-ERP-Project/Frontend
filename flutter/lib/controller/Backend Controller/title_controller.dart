@@ -28,17 +28,13 @@ class TitleController extends GetxController {
     }
   }
 
-  void fetchTitlesById(companyId, branchId, departmentId) async {
+  fetchTitlesByDepartmentId(int departmentId) async {
     try {
       isLoading(true);
-      var titles = await TitleRemoteServices
-          .fetchTitleWithCompanyIdAndBranchIdAndDepartmentId(
-        companyId,
-        branchId,
-        departmentId,
-      );
-
+      var titles =
+          await TitleRemoteServices.fetchTitleByDepartmentId(departmentId);
       if (titles != null) {
+        titleList.removeRange(0, titleList.length);
         titleList.assignAll(titles);
       }
     } finally {
@@ -46,12 +42,12 @@ class TitleController extends GetxController {
     }
   }
 
-  Future<String?> newTitle(Titlee newTitle) async {
+  Future<String?> newTitle(Titlee newTitle, int departmentId) async {
     try {
       isLoading(true);
       var response = await TitleRemoteServices.newTitle(
           json.encode(newTitle.toJson()).toString());
-      fetchTitles(); //companyList.add(newCompany);
+      fetchTitlesByDepartmentId(departmentId);
       print("New Title: " + response);
       return response;
     } finally {
@@ -59,13 +55,13 @@ class TitleController extends GetxController {
     }
   }
 
-  Future<String?> updateTitle(int id, Titlee title) async {
+  Future<String?> updateTitle(int id, Titlee title, int departmentId) async {
     try {
       isLoading(true);
       print(id);
       var response = await TitleRemoteServices.updateTitle(
           id, json.encode(title.toJson()).toString());
-      fetchTitles();
+      fetchTitlesByDepartmentId(departmentId);
       print("Update Title: " + response);
       return response;
     } finally {
@@ -78,7 +74,7 @@ class TitleController extends GetxController {
       isLoading(true);
       print(id);
       var response = await TitleRemoteServices.removeTitle(id);
-      fetchTitles();
+      fetchTitlesByDepartmentId(id);
       print("Remove Title: " + response);
       return response;
     } finally {

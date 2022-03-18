@@ -30,24 +30,6 @@ class BranchRemoteServices {
     }
   }
 
-  static Future<int> fetchBranch(int companyId, String branchName) async {
-    var response = await http
-        .get(Uri.parse(serviceHttp + '/branch/$companyId/$branchName'));
-    int branchId = -1;
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      var jsonString = utf8.decode(response.bodyBytes);
-      List<Branch> branches = branchFromJson(jsonString);
-      for (Branch branch in branches) {
-        if (branch.branchName == branchName) {
-          branchId = branches.indexOf(branch);
-          print(branchId);
-          break;
-        }
-      }
-    }
-    return branchId;
-  }
-
   static Future<String> newAddBranch(String json) async {
     print("Json: $json");
     var response = await http

@@ -43,12 +43,14 @@ class _BranchListState extends State<BranchList> {
                     return InkWell(
                       onTap: index == 0
                           ? null
-                          : () {
+                          : () async {
                               optionalCompanyController.branchId.value =
-                                  widget.branchList[index].id;
-                              departmentController.fetchDepartmentesById(
-                                  widget.branchList[index].id);
-                              widget.onSelected;
+                                  widget.branchList[index - 1].id;
+                              optionalCompanyController.branchName.value =
+                                  widget.branchList[index - 1].branchName;
+                             await  departmentController.fetchDepartmentsByBranchId(
+                                  widget.branchList[index - 1].id);
+                              widget.onSelected();
                             },
                       child: SizedBox(
                         height: 60,
@@ -90,8 +92,11 @@ class _BranchListState extends State<BranchList> {
                                           showDialogAreYouSureDelete(
                                             context,
                                             () async => await branchController
-                                                .removeBranch(widget
-                                                    .branchList[index - 1].id),
+                                                .removeBranch(
+                                              widget.branchList[index - 1].id,
+                                              optionalCompanyController
+                                                  .branchId.value,
+                                            ),
                                           );
                                         },
                                 ),

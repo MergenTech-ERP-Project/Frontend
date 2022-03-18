@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
@@ -6,13 +8,14 @@ import 'package:vtys_kalite/utilities/style.dart';
 
 class OptionalCompanyCard extends StatelessWidget {
   RxBool visible, cardVisible = true.obs;
-  final String title;
+  final String title, selectedTitle;
   final Widget addNewWidget, childWidget;
   OptionalCompanyCard({
     Key? key,
     required this.visible,
     required this.addNewWidget,
     required this.title,
+    this.selectedTitle = "",
     required this.childWidget,
   }) : super(key: key);
 
@@ -48,6 +51,11 @@ class OptionalCompanyCard extends StatelessWidget {
                             text: title,
                             weight: FontWeight.bold,
                             size: 22,
+                          ),
+                          const SizedBox(width: 20),
+                          CustomText(
+                            text: selectedTitle,
+                            size: 18,
                           ),
                           const Expanded(child: SizedBox()),
                           CustomButton(
