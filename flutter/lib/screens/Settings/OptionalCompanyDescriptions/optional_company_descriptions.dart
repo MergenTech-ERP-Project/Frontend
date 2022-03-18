@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Branch/add_new_branch.dart';
 import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Branch/branch_list.dart';
@@ -79,7 +80,7 @@ class _OptionalCompanyDescriptionsState
                   OptionalCompanyCard(
                     visible: optionalCompanyController.companyBool,
                     addNewWidget: AddNewCompany(),
-                    title: "Şirket",
+                    title: "Şirketler",
                     childWidget: CompanyList(
                       companyList: companyController.companyList,
                       onSelected: () {
@@ -90,40 +91,52 @@ class _OptionalCompanyDescriptionsState
                       },
                     ),
                   ),
-                  OptionalCompanyCard(
-                    visible: optionalCompanyController.branchBool,
-                    addNewWidget: AddNewBranch(),
-                    title: "Şube",
-                    childWidget: BranchList(
-                      branchList: branchController.branchList,
-                      onSelected: () {
-                        optionalCompanyController.departmantBool.value = true;
-                        optionalCompanyController.titleBool.value = false;
-                        scrollToBottom();
-                      },
+                  Obx(
+                    () => OptionalCompanyCard(
+                      visible: optionalCompanyController.branchBool,
+                      addNewWidget: AddNewBranch(),
+                      title: "Şubeler",
+                      selectedTitle:
+                          "(${optionalCompanyController.companyName})",
+                      childWidget: BranchList(
+                        branchList: branchController.branchList,
+                        onSelected: () {
+                          optionalCompanyController.departmantBool.value = true;
+                          optionalCompanyController.titleBool.value = false;
+                          scrollToBottom();
+                        },
+                      ),
                     ),
                   ),
-                  OptionalCompanyCard(
-                    visible: optionalCompanyController.departmantBool,
-                    addNewWidget: AddNewDepartmant(),
-                    title: "Departman",
-                    childWidget: DepartmantList(
-                      departmentList: departmentController.departmentList,
-                      onSelected: () {
-                        optionalCompanyController.titleBool.value = true;
-                        scrollToBottom();
-                      },
+                  Obx(
+                    () => OptionalCompanyCard(
+                      visible: optionalCompanyController.departmantBool,
+                      addNewWidget: AddNewDepartmant(),
+                      title: "Departmanlar",
+                      selectedTitle:
+                          "(${optionalCompanyController.branchName})",
+                      childWidget: DepartmantList(
+                        departmentList: departmentController.departmentList,
+                        onSelected: () {
+                          optionalCompanyController.titleBool.value = true;
+                          scrollToBottom();
+                        },
+                      ),
                     ),
                   ),
-                  OptionalCompanyCard(
-                    visible: optionalCompanyController.titleBool,
-                    addNewWidget: AddNewTitle(),
-                    title: "Ünvan",
-                    childWidget: TitleList(
-                      titleList: titleController.titleList,
-                      onSelected: () {
-                        scrollToBottom();
-                      },
+                  Obx(
+                    () => OptionalCompanyCard(
+                      visible: optionalCompanyController.titleBool,
+                      addNewWidget: AddNewTitle(),
+                      title: "Ünvanlar",
+                      selectedTitle:
+                          "(${optionalCompanyController.departmanName})",
+                      childWidget: TitleList(
+                        titleList: titleController.titleList,
+                        onSelected: () {
+                          scrollToBottom();
+                        },
+                      ),
                     ),
                   ),
                 ],

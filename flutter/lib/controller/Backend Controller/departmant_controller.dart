@@ -21,7 +21,6 @@ class DepartmentController extends GetxController {
       isLoading(true);
       var departments = await DepartmentRemoteServices.fetchDepartments();
       if (departments != null) {
-        
         departmentList.assignAll(departments);
       }
     } finally {
@@ -29,25 +28,26 @@ class DepartmentController extends GetxController {
     }
   }
 
-  void fetchDepartmentesById(int companyId, int branchId) async {
+  fetchDepartmentsByBranchId(int branchId) async {
     try {
       isLoading(true);
-      var departments = await DepartmentRemoteServices
-          .fetchDepartmentsWithCompanyIdAndBranchId(companyId, branchId);
-      if (departments != null) {
-        departmentList.assignAll(departments);
+      var departmants =
+          await DepartmentRemoteServices.fetchDepartmentsByBranchId(branchId);
+      if (departmants != null) {
+        departmentList.removeRange(0, departmentList.length);
+        departmentList.assignAll(departmants);
       }
     } finally {
       isLoading(false);
     }
   }
 
-  Future<String?> newDepartment(Department newDepartment) async {
+  Future<String?> newDepartment(Department newDepartment, int branchId) async {
     try {
       isLoading(true);
       var response = await DepartmentRemoteServices.newDepartment(
           json.encode(newDepartment.toJson()).toString());
-      fetchDepartments(); //companyList.add(newCompany);
+      fetchDepartmentsByBranchId(branchId);
       print("New Department: " + response);
       return response;
     } finally {
@@ -55,13 +55,14 @@ class DepartmentController extends GetxController {
     }
   }
 
-  Future<String?> updateDepartment(int id, Department department) async {
+  Future<String?> updateDepartment(
+      int id, Department department, int branchId) async {
     try {
       isLoading(true);
       print(id);
       var response = await DepartmentRemoteServices.updateDepartment(
           id, json.encode(department.toJson()).toString());
-      fetchDepartments();
+      fetchDepartmentsByBranchId(branchId);
       print("Update Department: " + response);
       return response;
     } finally {
@@ -74,7 +75,7 @@ class DepartmentController extends GetxController {
       isLoading(true);
       print(id);
       var response = await DepartmentRemoteServices.removeDepartment(id);
-      fetchDepartments();
+      fetchDepartmentsByBranchId(id);
       print("Remove Department: " + response);
       return response;
     } finally {

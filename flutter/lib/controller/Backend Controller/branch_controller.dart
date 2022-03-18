@@ -13,6 +13,7 @@ class BranchController extends GetxController {
   @override
   void onInit() {
     fetchBranches();
+
     super.onInit();
   }
 
@@ -29,7 +30,7 @@ class BranchController extends GetxController {
     }
   }
 
-  void fetchBranchesByCompanyId(int companyId) async {
+  fetchBranchesByCompanyId(int companyId) async {
     try {
       isLoading(true);
       var branches =
@@ -43,25 +44,13 @@ class BranchController extends GetxController {
     }
   }
 
-  Future<int> fetchBranchByCompanyAndBranchName(
-      int companyId, String _branchName) async {
-    try {
-      isLoading(true);
-      var branch =
-          await BranchRemoteServices.fetchBranch(companyId, _branchName);
-      print("fetch Branch: " + branch.toString());
-      return branch;
-    } finally {
-      isLoading(false);
-    }
-  }
-
-  Future<String?> addNewBranch(Branch newBranch) async {
+  Future<String?> addNewBranch(Branch newBranch, int companyId) async {
     try {
       isLoading(true);
       var response = await BranchRemoteServices.newAddBranch(
           json.encode(newBranch.toJson()).toString());
-      fetchBranches(); //companyList.add(newCompany);
+      //fetchBranches(); //companyList.add(newCompany);
+      fetchBranchesByCompanyId(companyId);
       print("post Branch: " + response);
       return response;
     } finally {
@@ -69,13 +58,13 @@ class BranchController extends GetxController {
     }
   }
 
-  Future<String?> updateBranch(int id, Branch branch) async {
+  Future<String?> updateBranch(int id, Branch branch, int companyId) async {
     try {
       isLoading(true);
       print(id);
       var response = await BranchRemoteServices.updateBranch(
           id, json.encode(branch.toJson()).toString());
-      fetchBranches();
+      fetchBranchesByCompanyId(companyId);
       print("update Branch: " + response);
       return response;
     } finally {
@@ -83,12 +72,12 @@ class BranchController extends GetxController {
     }
   }
 
-  Future<String?> removeBranch(int id) async {
+  Future<String?> removeBranch(int id, int companyId) async {
     try {
       isLoading(true);
       print(id);
       var response = await BranchRemoteServices.removeBranch(id);
-      fetchBranches();
+      fetchBranchesByCompanyId(companyId);
       print("delete Branch: " + response);
       return response;
     } finally {

@@ -110,6 +110,8 @@ class _AddNewBranchState extends State<AddNewBranch> {
                       pressAction: () async {
                         if (_newBranchKey.currentState!.validate()) {
                           showDialogWaitingMessage(context);
+
+                          ///TODO
                           for (Branch branch in branchController.branchList) {
                             if (branch.branchName ==
                                 widget.controllerBranchName.text) {
@@ -151,7 +153,8 @@ class _AddNewBranchState extends State<AddNewBranch> {
                                       MediaQuery.of(context).size.width / 3,
                                 ),
                               ).then((value) async {
-                                await Future.delayed(const Duration(seconds: 1));
+                                await Future.delayed(
+                                    const Duration(seconds: 1));
                                 return Navigator.pop(context);
                               });
                               return;
@@ -171,6 +174,7 @@ class _AddNewBranchState extends State<AddNewBranch> {
                                     vacationDates:
                                         widget.vacationDates.toString(),
                                   ),
+                                  optionalCompanyController.companyId.value,
                                 )
                               : await branchController.updateBranch(
                                   widget.branch!.id,
@@ -186,6 +190,7 @@ class _AddNewBranchState extends State<AddNewBranch> {
                                     vacationDates:
                                         widget.vacationDates.toString(),
                                   ),
+                                  optionalCompanyController.companyId.value,
                                 );
                           Navigator.pop(context);
                           Get.snackbar(

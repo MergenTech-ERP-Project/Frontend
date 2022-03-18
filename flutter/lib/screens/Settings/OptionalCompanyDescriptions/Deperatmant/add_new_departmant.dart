@@ -79,7 +79,7 @@ class _AddNewDepartmantState extends State<AddNewDepartmant> {
                         if (_newDepartmantKey.currentState!.validate()) {
                           showDialogWaitingMessage(context);
 
-                          ///company name'e göre sorgu yapılması lazım.
+                          ///TODO
                           for (Department department
                               in departmentController.departmentList) {
                             if (department.departmentName ==
@@ -139,6 +139,7 @@ class _AddNewDepartmantState extends State<AddNewDepartmant> {
                                     departmentName:
                                         widget.controllerDepartmantName.text,
                                   ),
+                                  optionalCompanyController.branchId.value,
                                 )
                               : await departmentController.updateDepartment(
                                   widget.department!.id,
@@ -149,6 +150,7 @@ class _AddNewDepartmantState extends State<AddNewDepartmant> {
                                     departmentName:
                                         widget.controllerDepartmantName.text,
                                   ),
+                                  optionalCompanyController.branchId.value,
                                 );
                           Navigator.pop(context);
                           Get.snackbar(

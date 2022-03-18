@@ -50,11 +50,13 @@ class _CompanyListState extends State<CompanyList> {
                     return InkWell(
                       onTap: index == 0
                           ? null
-                          : () {
-                              // optionalCompanyController.companyId.value =
-                              //     widget.companyList[index].id;
-                              branchController.fetchBranchesByCompanyId(
-                                  widget.companyList[index].id);
+                          : () async  {
+                              optionalCompanyController.companyId.value =
+                                  widget.companyList[index - 1].id;
+                              optionalCompanyController.companyName.value =
+                                  widget.companyList[index - 1].companyName;
+                             await branchController.fetchBranchesByCompanyId(
+                                  widget.companyList[index - 1].id);
                               widget.onSelected();
                             },
                       child: SizedBox(

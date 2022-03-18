@@ -117,7 +117,8 @@ class _AddNewTitleState extends State<AddNewTitle> {
                                       MediaQuery.of(context).size.width / 3,
                                 ),
                               ).then((value) async {
-                                await Future.delayed(const Duration(seconds: 1));
+                                await Future.delayed(
+                                    const Duration(seconds: 1));
                                 return Navigator.pop(context);
                               });
 
@@ -127,10 +128,11 @@ class _AddNewTitleState extends State<AddNewTitle> {
                           widget.titlee == null
                               ? await titleController.newTitle(
                                   Titlee(
-                                      titleName:
-                                          widget.controllerTitleName.text,
                                       departmentId: optionalCompanyController
-                                          .departmentId.value),
+                                          .departmentId.value,
+                                      titleName:
+                                          widget.controllerTitleName.text),
+                                  optionalCompanyController.departmentId.value,
                                 )
                               : await titleController.updateTitle(
                                   widget.titlee!.id,
@@ -140,6 +142,7 @@ class _AddNewTitleState extends State<AddNewTitle> {
                                           widget.controllerTitleName.text,
                                       departmentId: optionalCompanyController
                                           .departmentId.value),
+                                  optionalCompanyController.departmentId.value,
                                 );
                           Navigator.of(context).pop(true);
                           Get.snackbar(

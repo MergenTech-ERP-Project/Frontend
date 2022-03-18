@@ -17,23 +17,6 @@ class CompanyRemoteServices {
     }
   }
 
-  static Future<int> fetchCompany(String companyName) async {
-    var response =
-        await http.get(Uri.parse(serviceHttp + '/company/list/$companyName'));
-    int companyId = -1;
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      var jsonString = utf8.decode(response.bodyBytes);
-      List<Company> companies = companyFromJson(jsonString);
-      for (Company company in companies) {
-        if (company.companyName == companyName) {
-          companyId = companies.indexOf(company);
-          break;
-        }
-      }
-    }
-    return companyId;
-  }
-
   static Future<String> newAddCompany(String json) async {
     var response = await http
         .post(
