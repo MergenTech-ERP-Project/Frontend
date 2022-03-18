@@ -1,4 +1,5 @@
 enum BankNamesEnum {
+  none,
   halkBank,
   vakifBank,
   ziraatBank,
@@ -23,14 +24,16 @@ enum BankNamesEnum {
 extension BankNamesEnumExtension on BankNamesEnum {
   static List<String> getList() {
     List<String> bankNamesList = [];
-    for (var item in BankNamesEnum.values) {
-      bankNamesList.add(item.getName);
+    for (int i = 0; i < BankNamesEnum.values.length; i++) {
+      bankNamesList.add(BankNamesEnum.values[i].getName);
     }
     return bankNamesList;
   }
 
   String get getName {
     switch (this) {
+      case BankNamesEnum.none:
+        return "seçiniz...";
       case BankNamesEnum.halkBank:
         return "Halk Bankası";
       case BankNamesEnum.vakifBank:

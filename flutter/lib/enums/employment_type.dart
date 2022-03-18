@@ -1,4 +1,5 @@
 enum EmploymentTypeEnum {
+  none,
   fullTime,
   partTime,
   temporary,
@@ -11,14 +12,16 @@ enum EmploymentTypeEnum {
 extension EmploymentTypeEnumExtension on EmploymentTypeEnum {
   static List<String> getList() {
     List<String> typeOfWorkingList = [];
-    for (var item in EmploymentTypeEnum.values) {
-      typeOfWorkingList.add(item.getName);
+    for (int i = 0; i < EmploymentTypeEnum.values.length; i++) {
+      typeOfWorkingList.add(EmploymentTypeEnum.values[i].getName);
     }
     return typeOfWorkingList;
   }
 
   String get getName {
     switch (this) {
+      case EmploymentTypeEnum.none:
+        return "seçiniz...";
       case EmploymentTypeEnum.fullTime:
         return "Tam Zamanlı";
       case EmploymentTypeEnum.partTime:

@@ -1,5 +1,5 @@
-
 enum ContractTypeEnum {
+  none,
   timely,
   indenfinite,
 }
@@ -7,14 +7,16 @@ enum ContractTypeEnum {
 extension ContractTypeExtension on ContractTypeEnum {
   static List<String> getList() {
     List<String> contractTypeList = [];
-    for (var item in ContractTypeEnum.values) {
-      contractTypeList.add(item.getName);
+    for (int i = 0; i < ContractTypeEnum.values.length; i++) {
+      contractTypeList.add(ContractTypeEnum.values[i].getName);
     }
     return contractTypeList;
   }
 
   String get getName {
     switch (this) {
+      case ContractTypeEnum.none:
+        return "seçiniz...";
       case ContractTypeEnum.timely:
         return "Süreli";
       case ContractTypeEnum.indenfinite:

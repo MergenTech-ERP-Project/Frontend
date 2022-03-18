@@ -1,4 +1,5 @@
 enum PaymentSchemeEnum {
+  none,
   yearly,
   monthly,
   weekly,
@@ -9,14 +10,16 @@ enum PaymentSchemeEnum {
 extension PaymentSchemeExtension on PaymentSchemeEnum {
   static List<String> getList() {
     List<String> paymentSchemeList = [];
-    for (var item in PaymentSchemeEnum.values) {
-      paymentSchemeList.add(item.getName);
+    for (int i = 0; i < PaymentSchemeEnum.values.length; i++) {
+      paymentSchemeList.add(PaymentSchemeEnum.values[i].getName);
     }
     return paymentSchemeList;
   }
 
   String get getName {
     switch (this) {
+      case PaymentSchemeEnum.none:
+        return "seçiniz...";
       case PaymentSchemeEnum.yearly:
         return "Yıllık";
       case PaymentSchemeEnum.monthly:

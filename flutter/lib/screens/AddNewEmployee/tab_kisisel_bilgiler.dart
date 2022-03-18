@@ -117,7 +117,7 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
                   onChanged: (val) {
                     setState(() {
                       widget.userHelper.userDetail!.disabledDegree =
-                          GenderExtension.getEnumFromName(val);
+                          DisabledDegreeExtension.getEnumFromName(val);
                     });
                   },
                 ),

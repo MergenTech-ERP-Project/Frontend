@@ -89,6 +89,7 @@ class UserController extends GetxController {
             userDetail ??
                 UserDetail(
                   userId: userId,
+                  tcno: userId.toString(),
                   maritalStatus: MaritalStatusEnum.values.first,
                   disabledDegree: DisabledDegreeEnum.values.first,
                   gender: GenderEnum.values.first,

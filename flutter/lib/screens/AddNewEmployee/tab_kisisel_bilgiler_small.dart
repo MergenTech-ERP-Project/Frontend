@@ -110,7 +110,7 @@ class _TabPersonalInformationSmallState
                 onChanged: (val) {
                   setState(() {
                     widget.userHelper.userDetail!.disabledDegree =
-                        GenderExtension.getEnumFromName(val);
+                        DisabledDegreeExtension.getEnumFromName(val);
                   });
                 },
               ),

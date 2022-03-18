@@ -118,7 +118,7 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
                           onChanged: (val) {
                             setState(() {
                               widget.userHelper.userDetail!.bankAccountType =
-                                  BankNamesEnumExtension.getEnumFromName(val);
+                                  BankAccountTypeExtension.getEnumFromName(val);
                             });
                           },
                         ),
