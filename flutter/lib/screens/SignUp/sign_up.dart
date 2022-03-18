@@ -135,7 +135,7 @@ class SignUpPage extends StatelessWidget {
                   foregroundColor: Colors.white,
                   pressAction: () => signUpPage(context),
                 ),
-                CustomTextDivider(
+                const CustomTextDivider(
                   text: "ya da",
                 ),
                 CustomButton(
