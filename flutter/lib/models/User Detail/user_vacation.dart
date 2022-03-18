@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:enum_to_string/enum_to_string.dart';
+import 'package:vtys_kalite/enums/vacation_request_status.dart';
+
 List<UserDetailVacation> parseUsersDetailVacation(String str) =>
     List<UserDetailVacation>.from(
         json.decode(str).map((x) => UserDetailVacation.fromJson(x)));
@@ -17,7 +20,7 @@ class UserDetailVacation {
   final int workingDayNumber; //working_day_number
   final String sicilNo; //sicil_no
   final String workStartDate; //work_start_date
-  final String vacationRequestStatus; //vacation_request_status
+  VacationRequestStatusEnum vacationRequestStatus; //vacation_request_status
   final String vacationType; //vacation_type
   final String recognizant; //recognizant;
 
@@ -28,9 +31,9 @@ class UserDetailVacation {
     this.workingDayNumber = 0,
     this.sicilNo = "",
     this.workStartDate = "",
-    this.vacationRequestStatus = "",
     this.vacationType = "",
     this.recognizant = "",
+    required this.vacationRequestStatus,
   });
 
   factory UserDetailVacation.fromJson(Map<String, dynamic> json) {
@@ -41,9 +44,13 @@ class UserDetailVacation {
       workingDayNumber: json["working_day_number"] ?? "",
       sicilNo: json["sicil_no"] ?? "",
       workStartDate: json["work_start_date"] ?? "",
-      vacationRequestStatus: json["vacation_request_status"] ?? "",
       vacationType: json["vacation_type"] ?? "",
       recognizant: json["recognizant"] ?? "",
+      vacationRequestStatus: EnumToString.fromString(
+            VacationRequestStatusEnum.values,
+            json['vacation_request_status'].toString(),
+          ) ??
+          VacationRequestStatusEnum.values.first,
     );
   }
 
@@ -54,8 +61,9 @@ class UserDetailVacation {
         "working_day_number": workingDayNumber,
         "sicil_no": sicilNo,
         "work_start_date": workStartDate,
-        "vacation_request_status": vacationRequestStatus,
         "vacation_type": vacationType,
         "recognizant": recognizant,
+        "vacation_request_status":
+            EnumToString.convertToString(vacationRequestStatus),
       };
 }

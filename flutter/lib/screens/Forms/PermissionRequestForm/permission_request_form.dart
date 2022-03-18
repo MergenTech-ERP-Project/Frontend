@@ -9,21 +9,6 @@ import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/screens/Forms/components/text_widget.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
-/*
-  Sicil Numara
-  İzin türü
-  Başlangıç Tarihi
-  Göreve Başlangıç Tarihi
-  Gün
-  Enum İzin Talep Durumu
-  Admin Kullanıcılar
-  İzin Kayıt ID
-
-  İzin Türü Class
-  id
-  Adi
- */
-
 
 class PermissionRequestFormPage extends StatefulWidget {
   final TextEditingController usernameController = TextEditingController();
