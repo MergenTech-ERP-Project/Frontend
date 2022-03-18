@@ -1,4 +1,5 @@
 enum SalaryTypeEnum {
+  none,
   net,
   gross,
 }
@@ -6,14 +7,16 @@ enum SalaryTypeEnum {
 extension SalaryTypeExtension on SalaryTypeEnum {
   static List<String> getList() {
     List<String> salaryTypeList = [];
-    for (var item in SalaryTypeEnum.values) {
-      salaryTypeList.add(item.getName);
+    for (int i = 0; i < SalaryTypeEnum.values.length; i++) {
+      salaryTypeList.add(SalaryTypeEnum.values[i].getName);
     }
     return salaryTypeList;
   }
 
   String get getName {
     switch (this) {
+      case SalaryTypeEnum.none:
+        return "seçiniz...";
       case SalaryTypeEnum.net:
         return "Net";
       case SalaryTypeEnum.gross:

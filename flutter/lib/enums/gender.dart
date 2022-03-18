@@ -8,8 +8,8 @@ enum GenderEnum {
 extension GenderExtension on GenderEnum {
   static List<String> getList() {
     List<String> genderList = [];
-    for (var item in GenderEnum.values) {
-      genderList.add(item.getName);
+    for (int i = 0; i < GenderEnum.values.length; i++) {
+      genderList.add(GenderEnum.values[i].getName);
     }
     return genderList;
   }

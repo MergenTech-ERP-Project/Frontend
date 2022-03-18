@@ -1,5 +1,5 @@
-
 enum EducationalStatusEnum {
+  none,
   student,
   graduate,
 }
@@ -7,14 +7,16 @@ enum EducationalStatusEnum {
 extension EducationalStatusExtension on EducationalStatusEnum {
   static List<String> getList() {
     List<String> educationalStatusList = [];
-    for (var item in EducationalStatusEnum.values) {
-      educationalStatusList.add(item.getName);
+    for (int i = 0; i < EducationalStatusEnum.values.length; i++) {
+      educationalStatusList.add(EducationalStatusEnum.values[i].getName);
     }
     return educationalStatusList;
   }
 
   String get getName {
     switch (this) {
+      case EducationalStatusEnum.none:
+        return "seçiniz...";
       case EducationalStatusEnum.student:
         return "Öğrenci";
       case EducationalStatusEnum.graduate:
@@ -25,7 +27,7 @@ extension EducationalStatusExtension on EducationalStatusEnum {
     }
   }
 
-   static getEnumFromName(name) {
+  static getEnumFromName(name) {
     return EducationalStatusEnum
         .values[EducationalStatusExtension.getList().indexOf(name)];
   }

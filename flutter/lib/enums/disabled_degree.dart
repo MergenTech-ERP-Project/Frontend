@@ -1,5 +1,6 @@
 enum DisabledDegreeEnum {
   none,
+  noneDisability,
   firstDegreeDisabled,
   secondDegreeDisabled,
   thirdDegreeDisabled
@@ -8,8 +9,8 @@ enum DisabledDegreeEnum {
 extension DisabledDegreeExtension on DisabledDegreeEnum {
   static List<String> getList() {
     List<String> disabledDegreeList = [];
-    for (var item in DisabledDegreeEnum.values) {
-      disabledDegreeList.add(item.getName);
+    for (int i = 0; i < DisabledDegreeEnum.values.length; i++) {
+      disabledDegreeList.add(DisabledDegreeEnum.values[i].getName);
     }
     return disabledDegreeList;
   }
@@ -17,6 +18,8 @@ extension DisabledDegreeExtension on DisabledDegreeEnum {
   String get getName {
     switch (this) {
       case DisabledDegreeEnum.none:
+        return "seçiniz...";
+      case DisabledDegreeEnum.noneDisability:
         return "Engeli Yok";
       case DisabledDegreeEnum.firstDegreeDisabled:
         return "1. Dereceden Engelli";

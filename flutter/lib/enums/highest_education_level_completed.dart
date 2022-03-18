@@ -1,4 +1,5 @@
 enum HighestEducationLevelCompletedEnum {
+  none,
   primarySchool,
   middleSchool,
   highSchool,
@@ -6,21 +7,24 @@ enum HighestEducationLevelCompletedEnum {
   bachelorsDegree,
   mastersDegree,
   doctoratePhd,
-  none,
+  noneEducation,
 }
 
 extension HighestEducationLevelCompletedExtension
     on HighestEducationLevelCompletedEnum {
   static List<String> getList() {
     List<String> highestEducationLevelCompletedList = [];
-    for (var item in HighestEducationLevelCompletedEnum.values) {
-      highestEducationLevelCompletedList.add(item.getName);
+    for (int i = 0; i < HighestEducationLevelCompletedEnum.values.length; i++) {
+      highestEducationLevelCompletedList
+          .add(HighestEducationLevelCompletedEnum.values[i].getName);
     }
     return highestEducationLevelCompletedList;
   }
 
   String get getName {
     switch (this) {
+      case HighestEducationLevelCompletedEnum.none:
+        return "seçiniz...";
       case HighestEducationLevelCompletedEnum.primarySchool:
         return "İlkokul";
       case HighestEducationLevelCompletedEnum.middleSchool:
@@ -35,7 +39,7 @@ extension HighestEducationLevelCompletedExtension
         return "Yüksek Lisans";
       case HighestEducationLevelCompletedEnum.doctoratePhd:
         return "Doktora";
-      case HighestEducationLevelCompletedEnum.none:
+      case HighestEducationLevelCompletedEnum.noneEducation:
         return "Yok";
       default:
         return "";

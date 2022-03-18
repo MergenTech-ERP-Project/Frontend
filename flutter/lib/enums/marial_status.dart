@@ -1,4 +1,5 @@
 enum MaritalStatusEnum {
+  none,
   married,
   single,
   unspecified,
@@ -7,14 +8,16 @@ enum MaritalStatusEnum {
 extension MaritalStatusExtension on MaritalStatusEnum {
   static List<String> getList() {
     List<String> maritalStatusList = [];
-    for (var item in MaritalStatusEnum.values) {
-      maritalStatusList.add(item.getName);
+    for (int i = 0; i < MaritalStatusEnum.values.length; i++) {
+      maritalStatusList.add(MaritalStatusEnum.values[i].getName);
     }
     return maritalStatusList;
   }
 
   String get getName {
     switch (this) {
+      case MaritalStatusEnum.none:
+        return "seçiniz...";
       case MaritalStatusEnum.married:
         return "Evli";
       case MaritalStatusEnum.single:

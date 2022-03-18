@@ -1,4 +1,5 @@
 enum BloodTypeEnum {
+  none,
   zeroPlus,
   zeroMinus,
   aPlus,
@@ -12,14 +13,16 @@ enum BloodTypeEnum {
 extension BloodTypeEnumExtension on BloodTypeEnum {
   static List<String> getList() {
     List<String> bloodTypeList = [];
-    for (var item in BloodTypeEnum.values) {
-      bloodTypeList.add(item.getName);
+    for (int i = 0; i < BloodTypeEnum.values.length; i++) {
+      bloodTypeList.add(BloodTypeEnum.values[i].getName);
     }
     return bloodTypeList;
   }
 
   String get getName {
     switch (this) {
+      case BloodTypeEnum.none:
+        return "seçiniz...";
       case BloodTypeEnum.zeroPlus:
         return "0+";
       case BloodTypeEnum.zeroMinus:
@@ -42,7 +45,6 @@ extension BloodTypeEnumExtension on BloodTypeEnum {
   }
 
   static getEnumFromName(name) {
-    return BloodTypeEnum
-        .values[BloodTypeEnumExtension.getList().indexOf(name)];
+    return BloodTypeEnum.values[BloodTypeEnumExtension.getList().indexOf(name)];
   }
 }

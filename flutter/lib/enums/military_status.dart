@@ -1,4 +1,5 @@
 enum MilitaryStatusEnum {
+  none,
   done,
   notDone,
   exempt,
@@ -8,14 +9,16 @@ enum MilitaryStatusEnum {
 extension MilitaryStatusEnumExtension on MilitaryStatusEnum {
   static List<String> getList() {
     List<String> militaryStatusList = [];
-    for (var item in MilitaryStatusEnum.values) {
-      militaryStatusList.add(item.getName);
+    for (int i = 0; i < MilitaryStatusEnum.values.length; i++) {
+      militaryStatusList.add(MilitaryStatusEnum.values[i].getName);
     }
     return militaryStatusList;
   }
 
   String get getName {
     switch (this) {
+      case MilitaryStatusEnum.none:
+        return "seçiniz...";
       case MilitaryStatusEnum.done:
         return "Yapıldı";
       case MilitaryStatusEnum.notDone:

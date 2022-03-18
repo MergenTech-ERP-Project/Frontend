@@ -113,7 +113,7 @@ class _TabAnotherInformationSmallState
                     onChanged: (val) {
                       setState(() {
                         widget.userHelper.userDetail!.bankAccountType =
-                            BankNamesEnumExtension.getEnumFromName(val);
+                            BankAccountTypeExtension.getEnumFromName(val);
                       });
                     },
                   ),
