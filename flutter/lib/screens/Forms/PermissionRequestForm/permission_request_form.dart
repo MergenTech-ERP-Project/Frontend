@@ -1,19 +1,29 @@
 // ignore_for_file: avoid_print
 
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_radiolisttile.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
-import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/screens/Forms/components/text_widget.dart';
-import 'package:vtys_kalite/screens/Forms/forms.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
-import 'package:vtys_kalite/utilities/style.dart';
+
+/*
+  Sicil Numara
+  İzin türü
+  Başlangıç Tarihi
+  Göreve Başlangıç Tarihi
+  Gün
+  Enum İzin Talep Durumu
+  Admin Kullanıcılar
+  İzin Kayıt ID
+
+  İzin Türü Class
+  id
+  Adi
+ */
+
 
 class PermissionRequestFormPage extends StatefulWidget {
   final TextEditingController usernameController = TextEditingController();

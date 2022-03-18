@@ -26,7 +26,7 @@ class UserDetailPayment {
   PaymentSchemeEnum paymentScheme; //payment_scheme
 
   UserDetailPayment({
-    this.id = 0,
+    this.id = -1,
     required this.userDetailId,
     this.tcno = "",
     this.salary = "",
@@ -39,15 +39,17 @@ class UserDetailPayment {
 
   factory UserDetailPayment.fromJson(Map<String, dynamic> json) {
     return UserDetailPayment(
-      id: json['id'],
+      id: json['id'] ?? -1,
       userDetailId: json["user_detail_id"],
-      tcno: json['tcno'],
-      salary: json['salary'],
-      currency: json['currency'],
-      salaryType:
-          EnumToString.fromString(SalaryTypeEnum.values, json['salary_type'])!,
+      tcno: json['tcno'] ?? "",
+      salary: json['salary'] ?? "",
+      currency: json['currency'] ?? "",
+      salaryType: EnumToString.fromString(
+              SalaryTypeEnum.values, json['salary_type'].toString()) ??
+          SalaryTypeEnum.values.first,
       paymentScheme: EnumToString.fromString(
-          PaymentSchemeEnum.values, json['payment_scheme'])!,
+              PaymentSchemeEnum.values, json['payment_scheme'].toString()) ??
+          PaymentSchemeEnum.values.first,
       commuteSupportFee: json['commute_support_fee'],
       foodSupportFee: json['food_support_fee'],
     );
