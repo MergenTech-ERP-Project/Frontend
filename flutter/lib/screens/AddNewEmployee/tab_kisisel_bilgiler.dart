@@ -73,7 +73,7 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
                   list: MaritalStatusExtension.getList(),
                   onChanged: (val) {
                     setState(() {
-                      widget.userHelper.userDetail!.employmentType =
+                      widget.userHelper.userDetail!.maritalStatus =
                           MaritalStatusExtension.getEnumFromName(val);
                     });
                   },

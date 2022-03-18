@@ -13,12 +13,12 @@ import 'package:vtys_kalite/enums/marial_status.dart';
 import 'package:vtys_kalite/enums/military_status.dart';
 import 'package:vtys_kalite/enums/employment_type.dart';
 
-List<UserDetail>? parseUsers(String str) =>
+List<UserDetail>? parseUsersDetail(String str) =>
     List<UserDetail>.from(json.decode(str).map((x) => UserDetail.fromJson(x)));
 
-UserDetail? parseUser(String str) => parseUsers(str)?[0];
+UserDetail? parseUserDetail(String str) => parseUsersDetail(str)?[0];
 
-String fetchUsers(List<UserDetail> data) =>
+String fetchUsersDetail(List<UserDetail> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 /// The part written with // places written with json.
