@@ -21,7 +21,7 @@ class UserDetailCareer {
   String unitTitle; //unit_title
 
   UserDetailCareer({
-    this.id = 0,
+    this.id = -1,
     required this.userDetailId,
     this.managerName = "",
     this.managerTcno = "",
@@ -33,14 +33,14 @@ class UserDetailCareer {
 
   factory UserDetailCareer.fromJson(Map<String, dynamic> json) {
     return UserDetailCareer(
-      id: json['id'],
+      id: json['id'] ?? -1,
       userDetailId: json["user_detail_id"],
-      managerName: json['manager_name'],
-      managerTcno: json['manager_tcno'],
-      unitCompany: json['unit_company'],
-      unitBranch: json['unit_branch'],
-      unitDepartment: json['unit_department'],
-      unitTitle: json['unit_title'],
+      managerName: json['manager_name'] ?? "",
+      managerTcno: json['manager_tcno'] ?? "",
+      unitCompany: json['unit_company'] ?? "",
+      unitBranch: json['unit_branch'] ?? "",
+      unitDepartment: json['unit_department'] ?? "",
+      unitTitle: json['unit_title'] ?? "",
     );
   }
 

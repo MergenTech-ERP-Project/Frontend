@@ -8,7 +8,6 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/contract_type.dart';
 import 'package:vtys_kalite/enums/employment_type.dart';
-import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/models/user.dart';
 
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';

@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,6 +22,8 @@ class LoginPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   bool isCheckboxTrue = true;
   final _formkey = GlobalKey<FormState>();
+
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +103,7 @@ class LoginPage extends StatelessWidget {
                   foregroundColor: Colors.white,
                   pressAction: () => loginButton(context),
                 ),
-                CustomTextDivider(
+                const CustomTextDivider(
                   text: "ya da",
                 ),
                 CustomButton(
