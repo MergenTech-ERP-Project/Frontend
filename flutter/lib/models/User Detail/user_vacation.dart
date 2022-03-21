@@ -17,10 +17,10 @@ class UserDetailVacation {
   final int id; //id
   final int userDetailId; //user_detail_id
   final int permissonSaveId; //permisson_save_id
+  VacationRequestStatusEnum vacationRequestStatus; //vacation_request_status
   final int workingDayNumber; //working_day_number
   final String sicilNo; //sicil_no
   final String workStartDate; //work_start_date
-  VacationRequestStatusEnum vacationRequestStatus; //vacation_request_status
   final String vacationType; //vacation_type
   final String recognizant; //recognizant;
 
