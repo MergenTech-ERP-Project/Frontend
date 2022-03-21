@@ -10,7 +10,7 @@ class CustomDropDownMenu extends StatefulWidget {
   final bool isExpandedYes;
   final Function(String?)? onChanged;
   final String valueChoose;
-  
+
   const CustomDropDownMenu({
     Key? key,
     required this.list,
@@ -27,7 +27,6 @@ class CustomDropDownMenu extends StatefulWidget {
 }
 
 class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
-  
   @override
   Widget build(BuildContext context) {
     return Container(

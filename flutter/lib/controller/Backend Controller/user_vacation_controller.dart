@@ -25,15 +25,11 @@ class UserDetailVacationController extends GetxController {
   }
 
   Future<int?> addNewUserDetailVacation(
-      userDetailId, UserDetailVacation userDetailVacation) async {
+      UserDetailVacation userDetailVacation) async {
     try {
       isLoading(true);
-      UserDetailVacation newUserDetailVacation = UserDetailVacation(
-        userDetailId: userDetailId,
-        vacationRequestStatus: VacationRequestStatusEnum.values.first,
-      );
       var response = await UserDetailVacationServices.addNewUserDetailVacation(
-          json.encode(newUserDetailVacation.toJson()).toString());
+          json.encode(userDetailVacation.toJson()).toString());
 
       print("post User Detail Vacation: " + response.toString());
       fetchUserDetailVacationByUserDetailId(userDetailVacation.id);

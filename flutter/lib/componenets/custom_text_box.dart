@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class CustomTextBox extends StatefulWidget {
@@ -14,27 +15,29 @@ class CustomTextBox extends StatefulWidget {
   final Color? fillcolor, textColor;
   final int? maxLines, minLines, maxLength;
   final TextInputType? keyboardType;
+  final bool digitsOnly;
 
-  const CustomTextBox(
-      {Key? key,
-      this.label,
-      this.hint,
-      this.decorationIcon,
-      this.obscureBool = false,
-      this.readOnly = false,
-      this.validator,
-      this.onTextChanged,
-      this.controller,
-      this.borderless = false,
-      this.customFontSize = 16,
-      this.textColor,
-      this.fillcolor,
-      this.suffixWidget = const SizedBox(),
-      this.maxLines,
-      this.minLines,
-      this.keyboardType,
-      this.maxLength})
-      : super(key: key);
+  const CustomTextBox({
+    Key? key,
+    this.label,
+    this.hint,
+    this.decorationIcon,
+    this.obscureBool = false,
+    this.readOnly = false,
+    this.validator,
+    this.onTextChanged,
+    this.controller,
+    this.borderless = false,
+    this.customFontSize = 16,
+    this.textColor,
+    this.fillcolor,
+    this.suffixWidget = const SizedBox(),
+    this.maxLines,
+    this.minLines,
+    this.keyboardType,
+    this.maxLength,
+    this.digitsOnly = false,
+  }) : super(key: key);
 
   @override
   State<CustomTextBox> createState() => _CustomTextBoxState();
@@ -55,6 +58,9 @@ class _CustomTextBoxState extends State<CustomTextBox> {
       maxLength: widget.maxLength,
       //autofocus: true,
       //focusNode: FocusNode(),
+      inputFormatters: widget.digitsOnly
+          ? <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly]
+          : null,
       keyboardType: widget.keyboardType ?? TextInputType.multiline,
       maxLines: widget.maxLines ?? 1,
       minLines: widget.minLines,
