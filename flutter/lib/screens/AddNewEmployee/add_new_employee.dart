@@ -5,13 +5,16 @@ import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
+import 'package:vtys_kalite/enums/vacation_request_status.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
+import 'package:vtys_kalite/models/User%20Detail/user_vacation.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_diger_bilgiler.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_diger_bilgiler_small.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_genel.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/tab_izin.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer_small.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kisisel_bilgiler.dart';
@@ -121,7 +124,13 @@ class AddNewEmployee extends StatelessWidget {
                             smallScreen: TabAnotherInformationSmall(
                                 userHelper: userHelper),
                           ),
-                          PermissionRequestFormPage(),
+                          TabIzin(
+                            vacation: UserDetailVacation(
+                              userDetailId: userHelper.userDetail?.id ?? 0,
+                              vacationRequestStatus:
+                                  VacationRequestStatusEnum.pendingApproval,
+                            ),
+                          ),
                           const Center(child: CustomText(text: "5")),
                           const Center(child: CustomText(text: "6")),
                           const Center(child: CustomText(text: "7")),
