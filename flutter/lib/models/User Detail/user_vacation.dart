@@ -16,22 +16,22 @@ String fetchUsersDetailVacation(List<UserDetailVacation> data) =>
 class UserDetailVacation {
   final int id; //id
   final int userDetailId; //user_detail_id
-  final int permissonSaveId; //permisson_save_id
+  int permissonSaveId; //permisson_save_id
+  int vacationType; //vacation_type
   VacationRequestStatusEnum vacationRequestStatus; //vacation_request_status
-  final int workingDayNumber; //working_day_number
-  final String sicilNo; //sicil_no
-  final String workStartDate; //work_start_date
-  final String vacationType; //vacation_type
-  final String recognizant; //recognizant;
+  int workingDayNumber; //working_day_number
+  String sicilNo; //sicil_no
+  String workStartDate; //work_start_date
+  String recognizant; //recognizant;
 
   UserDetailVacation({
     this.id = -1,
     required this.userDetailId,
     this.permissonSaveId = -1,
     this.workingDayNumber = 0,
+    this.vacationType = 0,
     this.sicilNo = "",
     this.workStartDate = "",
-    this.vacationType = "",
     this.recognizant = "",
     required this.vacationRequestStatus,
   });
@@ -44,7 +44,7 @@ class UserDetailVacation {
       workingDayNumber: json["working_day_number"] ?? "",
       sicilNo: json["sicil_no"] ?? "",
       workStartDate: json["work_start_date"] ?? "",
-      vacationType: json["vacation_type"] ?? "",
+      vacationType: json["vacation_type"] ?? 0,
       recognizant: json["recognizant"] ?? "",
       vacationRequestStatus: EnumToString.fromString(
             VacationRequestStatusEnum.values,
@@ -61,7 +61,7 @@ class UserDetailVacation {
         "working_day_number": workingDayNumber,
         "sicil_no": sicilNo,
         "work_start_date": workStartDate,
-        "vacation_type": vacationType,
+        "vacation_type": vacationType.toString(),
         "recognizant": recognizant,
         "vacation_request_status":
             EnumToString.convertToString(vacationRequestStatus),
