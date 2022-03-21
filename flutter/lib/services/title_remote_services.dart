@@ -27,8 +27,7 @@ class TitleRemoteServices {
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
-      List<Titlee> titles = titleFromJson(jsonString);
-      return titles;
+      return titleFromJson(jsonString);
     }
     return null;
   }

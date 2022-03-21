@@ -44,12 +44,13 @@ class _BranchListState extends State<BranchList> {
                       onTap: index == 0
                           ? null
                           : () async {
-                              optionalCompanyController.branchId.value =
-                                  widget.branchList[index - 1].id;
                               optionalCompanyController.branchName.value =
                                   widget.branchList[index - 1].branchName;
-                             await  departmentController.fetchDepartmentsByBranchId(
-                                  widget.branchList[index - 1].id);
+                              optionalCompanyController.branchId.value =
+                                  widget.branchList[index - 1].id;
+                              await departmentController
+                                  .fetchDepartmentsByBranchId(
+                                      widget.branchList[index - 1].id);
                               widget.onSelected();
                             },
                       child: SizedBox(

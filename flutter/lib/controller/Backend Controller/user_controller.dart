@@ -14,6 +14,7 @@ import 'package:vtys_kalite/enums/gender.dart';
 import 'package:vtys_kalite/enums/highest_education_level_completed.dart';
 import 'package:vtys_kalite/enums/marial_status.dart';
 import 'package:vtys_kalite/enums/military_status.dart';
+import 'package:vtys_kalite/models/User%20Detail/user_career.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/services/user_remote_services.dart';
@@ -82,29 +83,31 @@ class UserController extends GetxController {
       await fetchUsers(); //userList.add(newUser);
       var userId = await userController.fetchUserByEmailAndPassword(
           newUser.email, newUser.password);
-      if (userDetail != null) {
-        userDetail.userId = userId;
+      if (userId == -1) {
+        if (userDetail != null) {
+          userDetail.userId = userId;
+        }
+        response = await userDetailController.addNewUserDetail(
+              userDetail ??
+                  UserDetail(
+                    userId: userId,
+                    tcno: userId.toString(),
+                    maritalStatus: MaritalStatusEnum.values.first,
+                    disabledDegree: DisabledDegreeEnum.values.first,
+                    gender: GenderEnum.values.first,
+                    educationalStatus: EducationalStatusEnum.values.first,
+                    highestEducationLevelCompleted:
+                        HighestEducationLevelCompletedEnum.values.first,
+                    employmentType: EmploymentTypeEnum.values.first,
+                    militaryStatus: MilitaryStatusEnum.values.first,
+                    contractType: ContractTypeEnum.values.first,
+                    bankNames: BankNamesEnum.values.first,
+                    bankAccountType: BankAccountTypeEnum.values.first,
+                    bloodType: BloodTypeEnum.values.first,
+                  ),
+            ) ??
+            -1;
       }
-      response = await userDetailController.addNewUserDetail(
-            userDetail ??
-                UserDetail(
-                  userId: userId,
-                  tcno: userId.toString(),
-                  maritalStatus: MaritalStatusEnum.values.first,
-                  disabledDegree: DisabledDegreeEnum.values.first,
-                  gender: GenderEnum.values.first,
-                  educationalStatus: EducationalStatusEnum.values.first,
-                  highestEducationLevelCompleted:
-                      HighestEducationLevelCompletedEnum.values.first,
-                  employmentType: EmploymentTypeEnum.values.first,
-                  militaryStatus: MilitaryStatusEnum.values.first,
-                  contractType: ContractTypeEnum.values.first,
-                  bankNames: BankNamesEnum.values.first,
-                  bankAccountType: BankAccountTypeEnum.values.first,
-                  bloodType: BloodTypeEnum.values.first,
-                ),
-          ) ??
-          -1;
       print("addNewUserDetail $response");
       return response;
     } finally {

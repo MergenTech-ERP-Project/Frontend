@@ -53,9 +53,7 @@ class _TitleListState extends State<TitleList> {
                           : () async {
                               optionalCompanyController.titleId.value =
                                   widget.titleList[index - 1].id;
-                              await departmentController
-                                  .fetchDepartmentsByBranchId(
-                                      widget.titleList[index - 1].id);
+                              widget.onSelected;
                             },
                       child: SizedBox(
                         height: 60,

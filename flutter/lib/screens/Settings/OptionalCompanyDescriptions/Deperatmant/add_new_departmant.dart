@@ -79,7 +79,6 @@ class _AddNewDepartmantState extends State<AddNewDepartmant> {
                         if (_newDepartmantKey.currentState!.validate()) {
                           showDialogWaitingMessage(context);
 
-                          ///TODO
                           for (Department department
                               in departmentController.departmentList) {
                             if (department.departmentName ==
