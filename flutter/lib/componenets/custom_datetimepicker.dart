@@ -32,7 +32,7 @@ class CustomDateTimePicker extends StatelessWidget {
         type: DateTimePickerType.dateTime,
         initialValue: dateTimeFormat.format(initialDate!),
         initialDate: initialDate,
-        firstDate: initialDate,
+        firstDate: DateTime(1970),
         lastDate: initialDate!.add(const Duration(days: 1000)),
         decoration: InputDecoration(
           suffixIcon: suffixWidget,

@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class MultipleChoiceRadioListTile extends StatelessWidget {
@@ -8,6 +9,7 @@ class MultipleChoiceRadioListTile extends StatelessWidget {
   final Color? textColor;
   final Function(int?)? onChanged;
   int? groupValue;
+  double height;
 
   MultipleChoiceRadioListTile({
     Key? key,
@@ -15,6 +17,7 @@ class MultipleChoiceRadioListTile extends StatelessWidget {
     required this.groupValue,
     this.textColor,
     this.onChanged,
+    this.height = 50,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -24,15 +27,14 @@ class MultipleChoiceRadioListTile extends StatelessWidget {
       itemCount: list.length,
       itemBuilder: (context, index) {
         return SizedBox(
-          height: 50,
+          height: height,
           child: RadioListTile(
             value: index,
             groupValue: groupValue,
-            title: Text(list[index].toString(),
-                style: Theme.of(context)
-                    .textTheme
-                    .subtitle1!
-                    .copyWith(color: textColor ?? blackColor)),
+            title: CustomText(
+              text: list[index].toString(),
+              color: textColor,
+            ),
             onChanged: onChanged,
             activeColor: activeColor,
           ),

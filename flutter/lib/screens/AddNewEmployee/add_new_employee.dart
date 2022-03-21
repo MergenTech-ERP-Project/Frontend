@@ -127,6 +127,8 @@ class AddNewEmployee extends StatelessWidget {
                           TabIzin(
                             vacation: UserDetailVacation(
                               userDetailId: userHelper.userDetail?.id ?? 0,
+                              sicilNo:
+                                  (userHelper.userDetail?.id ?? 0).toString(),
                               vacationRequestStatus:
                                   VacationRequestStatusEnum.pendingApproval,
                             ),
