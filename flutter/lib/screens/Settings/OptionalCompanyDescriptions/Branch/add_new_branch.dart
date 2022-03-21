@@ -111,7 +111,7 @@ class _AddNewBranchState extends State<AddNewBranch> {
                         if (_newBranchKey.currentState!.validate()) {
                           showDialogWaitingMessage(context);
 
-                          ///TODO
+                          
                           for (Branch branch in branchController.branchList) {
                             if (branch.branchName ==
                                 widget.controllerBranchName.text) {

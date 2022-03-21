@@ -50,13 +50,13 @@ class _DepartmantListState extends State<DepartmantList> {
                     return InkWell(
                       onTap: index == 0
                           ? null
-                          : () {
+                          : () async {
                               optionalCompanyController.departmentId.value =
                                   widget.departmentList[index - 1].id;
                               optionalCompanyController.departmanName.value =
                                   widget
                                       .departmentList[index - 1].departmentName;
-                              titleController.fetchTitlesByDepartmentId(
+                              await titleController.fetchTitlesByDepartmentId(
                                   widget.departmentList[index - 1].id);
                               widget.onSelected;
                             },

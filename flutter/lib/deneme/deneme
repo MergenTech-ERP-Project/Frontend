@@ -1,0 +1,406 @@
+import 'dart:async';
+
+import 'package:flutter/cupertino.dart';
+import 'package:advance_text_field/advance_text_field.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_device_type/flutter_device_type.dart';
+import 'package:flutter_hbys/Fayda/EditTextData.dart';
+import 'package:flutter_hbys/Fayda/EkranFayda.dart';
+import 'package:flutter_hbys/Fayda/Fayda.dart';
+import 'package:flutter_hbys/Fayda/AppColors.dart';
+import 'package:flutter_hbys/model/hastaListesiModel/hstAltbirim.dart';
+import 'package:flutter_hbys/model/hastaListesiModel/hstBasvuru.dart';
+import 'package:flutter_hbys/model/hastaListesiModel/hstHastaKarti.dart';
+import 'package:flutter_hbys/model/poliklinik/epikriz/hstEpikriz.dart';
+import 'package:flutter_hbys/model/poliklinik/epikriz/hstEpikrizMas.dart';
+import 'package:flutter_hbys/model/poliklinik/hstPersonelKarti.dart';
+import 'package:direct_select_flutter/direct_select_container.dart';
+import 'package:direct_select_flutter/direct_select_item.dart';
+import 'package:direct_select_flutter/direct_select_list.dart';
+import 'package:flutter_hbys/viewmodel/poliklinikVM/epikrizVM.dart';
+import 'package:flutter_hbys/viewmodel/poliklinikVM/poliklinikVM.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../../app_localizations.dart';
+
+class EpikrizAnaSayfasi extends StatefulWidget {
+  const EpikrizAnaSayfasi({Key key, this.hastaKarti}) : super(key: key);
+
+  final HstHastaKarti hastaKarti;
+
+  @override
+  _EpikrizAnaSayfasiState createState() => _EpikrizAnaSayfasiState();
+}
+
+class _EpikrizAnaSayfasiState extends State<EpikrizAnaSayfasi> {
+  var secilenGrup;
+  var secilenBolum;
+  var secilenUzmanDoktor;
+  var secilenSorumluDoktor;
+  var secilenAsistanDoktor;
+
+  void seciliSifirla() {
+    secilenGrup = null;
+    secilenBolum = null;
+    secilenUzmanDoktor = null;
+    secilenSorumluDoktor = null;
+    secilenAsistanDoktor = null;
+  }
+
+  Color editColor = AppColors.hbysBlue;
+  Color checkColor = AppColors.hbysGreen;
+  TextEditingController controller;
+  HstEpikriz hstEpikriz = new HstEpikriz();
+  static List<TextEditingController> textController = new List();
+  void _printLatestValue() {
+    for (var i = 22; i < Fayda.epikrizMetinler.length; i++);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    for (var i = 0; i < Fayda.epikrizMetinler.length; i++)
+      EpikrizVM.textController[i].addListener(_printLatestValue);
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the widget tree.
+    // This also removes the _printLatestValue listener.
+    for (var i = 0; i < Fayda.epikrizMetinler.length; i++)
+      EpikrizVM.textController[i].dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.hbysWhite,
+      appBar: AppBar(
+        title: Text("Epikriz Ekranı"),
+        backgroundColor: AppColors.hbysBlue,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(bottom: 5, top: 10),
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  decoration: BoxDecoration(
+                    color: AppColors.hbysBlueLight,
+                    border: Border.all(width: 1.0, color: AppColors.red),
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<HstAltbirim>(
+                      value: secilenBolum,
+                      //elevation: 5,
+                      style: TextStyle(color: Colors.black),
+                      isExpanded: true,
+                      items: EpikrizVM.altBirimEpikriz
+                          .map<DropdownMenuItem<HstAltbirim>>((HstAltbirim e) {
+                        return DropdownMenuItem<HstAltbirim>(
+                          value: e,
+                          child: Text(
+                            EditTextData.hastaDetayDuzenleme(e.taltbirimadi),
+                            style: const TextStyle(color: AppColors.blueHarder),
+                          ),
+                        );
+                      }).toList(),
+                      hint: Center(
+                        child: Text(
+                          "Bölüm Seçiniz",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                      onChanged: (value) async {
+                        seciliSifirla();
+                        EkranFayda.progressGoster(context);
+                        Fayda.epikrizMetinler.clear();
+                        secilenBolum = value;
+
+                        await PoliklinikVM.doktorGetir(
+                            secilenBolum.tanabirimkodu);
+                        await PoliklinikVM.asitandoktorGetir(
+                            secilenBolum.tanabirimkodu);
+                        await EpikrizVM.epikrizAlanlariListele(
+                            Fayda.basvuruNO,
+                            secilenBolum.id,
+                            Fayda.epikrizMasListesiFayda[0].id);
+                        await EpikrizVM.epikrizleriGetir(secilenBolum.id);
+
+                        for (var i = 0;
+                            i < Fayda.epikrizCompositeFayda.length;
+                            i++) {
+                          await EpikrizVM.epikrizListele(
+                              Fayda.epikrizCompositeFayda[i].hstEpikrizDet.id,
+                              secilenBolum.id);
+                        }
+                        setState(() {
+                          //  secilenGrup.clean();
+                          EkranFayda.progressKapat(context);
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 5, top: 10),
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  decoration: BoxDecoration(
+                    color: AppColors.hbysBlueLight,
+                    border: Border.all(width: 1.0, color: AppColors.white),
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<HstEpikrizMas>(
+                      value: secilenGrup,
+                      //elevation: 5,
+                      style: TextStyle(color: Colors.black),
+                      isExpanded: true,
+
+                      items: Fayda.epikrizMasListesiFayda
+                          .map<DropdownMenuItem<HstEpikrizMas>>(
+                              (HstEpikrizMas e) {
+                        return DropdownMenuItem<HstEpikrizMas>(
+                          value: e,
+                          child: Text(
+                            EditTextData.hastaDetayDuzenleme(e.tad),
+                            style: const TextStyle(color: AppColors.blueHarder),
+                          ),
+                        );
+                      }).toList(),
+                      hint: Center(
+                        child: Text(
+                          "Grup Seçiniz",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                      onChanged: (value) async {
+                        setState(() {
+                          secilenGrup = value;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 5, top: 10),
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  decoration: BoxDecoration(
+                    color: AppColors.hbysBlueLight,
+                    border: Border.all(width: 1.0, color: AppColors.white),
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<HstPersonelKarti>(
+                      value: secilenUzmanDoktor,
+                      //elevation: 5,
+                      style: TextStyle(color: Colors.black),
+                      isExpanded: true,
+                      items: Fayda.doktorlar
+                          .map<DropdownMenuItem<HstPersonelKarti>>(
+                              (HstPersonelKarti e) {
+                        return DropdownMenuItem<HstPersonelKarti>(
+                          value: e,
+                          child: Text(
+                            EditTextData.hastaDetayDuzenleme(e.adiSoyadi),
+                            style: const TextStyle(color: AppColors.blueHarder),
+                          ),
+                        );
+                      }).toList(),
+                      hint: Center(
+                        child: Text(
+                          "Uzman Doktor Seçiniz",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                      onChanged: (val) {
+                        setState(() {
+                          secilenUzmanDoktor = val;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SingleChildScrollView(
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.75,
+                width: MediaQuery.of(context).size.width,
+                child: ListView.builder(
+                  itemCount: Fayda.epikrizCompositeFayda.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(top: 5.0, bottom: 10.0),
+                          decoration: BoxDecoration(
+                            color: AppColors.hbysBlueDark,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(32.0),
+                                topRight: Radius.circular(32.0)),
+                          ),
+                          child: Column(
+                            children: [
+                              Center(
+                                child: Text(
+                                  Fayda.epikrizCompositeFayda[index]
+                                      .hstEpikrizDet.tad,
+                                  style: TextStyle(
+                                      color: AppColors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
+                          ),
+                          width: MediaQuery.of(context).size.width * 0.95,
+                        ),
+                        Container(
+                          child: TextField(
+                            onChanged: (text) {
+                              hstEpikriz.tmetin =
+                                  EpikrizVM.textController[index].text;
+                              hstEpikriz.taltbirim = secilenBolum.id;
+
+                              print(index);
+                              EpikrizVM.epikrizKaydet(hstEpikriz, index);
+                            },
+                            controller: EpikrizVM.textController[index],
+                            textInputAction: TextInputAction.newline,
+                            keyboardType: TextInputType.multiline,
+                            textAlign: TextAlign.center,
+                            maxLines: null,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
+                                width: 1.0, color: AppColors.hbysBlueDark),
+                          ),
+                          width: MediaQuery.of(context).size.width * 0.95,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+          height: MediaQuery.of(context).size.height * 0.06,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                margin: EdgeInsets.only(bottom: 5),
+                width: MediaQuery.of(context).size.width * 0.3,
+                decoration: BoxDecoration(
+                  color: AppColors.hbysBlueLight,
+                  border: Border.all(width: 1.0, color: AppColors.white),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<HstPersonelKarti>(
+                    value: secilenSorumluDoktor,
+                    //elevation: 5,
+                    style: TextStyle(color: Colors.black),
+                    isExpanded: true,
+                    items: Fayda.doktorlar
+                        .map<DropdownMenuItem<HstPersonelKarti>>(
+                            (HstPersonelKarti e) {
+                      return DropdownMenuItem<HstPersonelKarti>(
+                        value: e,
+                        child: Text(
+                          EditTextData.hastaDetayDuzenleme(e.adiSoyadi),
+                          style: const TextStyle(color: AppColors.blueHarder),
+                        ),
+                      );
+                    }).toList(),
+                    hint: Center(
+                      child: Text(
+                        "Sorumlu Doktor Seçiniz",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        secilenSorumluDoktor = value;
+                      });
+                    },
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 5),
+                width: MediaQuery.of(context).size.width * 0.3,
+                decoration: BoxDecoration(
+                  color: AppColors.hbysBlueLight,
+                  border: Border.all(width: 1.0, color: AppColors.white),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<HstPersonelKarti>(
+                    value: secilenAsistanDoktor,
+                    //elevation: 5,
+                    style: TextStyle(color: Colors.black),
+                    isExpanded: true,
+                    items: Fayda.asistanDoktor
+                        .map<DropdownMenuItem<HstPersonelKarti>>(
+                            (HstPersonelKarti e) {
+                      return DropdownMenuItem<HstPersonelKarti>(
+                        value: e,
+                        child: Text(
+                          EditTextData.hastaDetayDuzenleme(e.adiSoyadi),
+                          style: const TextStyle(color: AppColors.blueHarder),
+                        ),
+                      );
+                    }).toList(),
+                    hint: Center(
+                      child: Text(
+                        "Asistan Doktor Seçiniz",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        secilenAsistanDoktor = value;
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ],
+          )),
+    );
+  }
+}

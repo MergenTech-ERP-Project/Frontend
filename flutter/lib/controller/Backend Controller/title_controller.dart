@@ -34,7 +34,6 @@ class TitleController extends GetxController {
       var titles =
           await TitleRemoteServices.fetchTitleByDepartmentId(departmentId);
       if (titles != null) {
-        titleList.removeRange(0, titleList.length);
         titleList.assignAll(titles);
       }
     } finally {

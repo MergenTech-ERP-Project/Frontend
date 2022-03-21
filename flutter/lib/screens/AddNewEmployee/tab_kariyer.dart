@@ -490,7 +490,8 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
               ),
             ],
           ),
-          Row(
+
+          /* Row(
             children: [
               Expanded(
                 child: Obx(
@@ -552,7 +553,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
                 ),
               ),
             ],
-          ),
+          ),*/
           Row(
             children: [
               Expanded(
