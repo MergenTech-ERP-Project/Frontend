@@ -14,4 +14,5 @@ class OptionalCompanyDescriptionsController extends GetxController {
   var companyName = "".obs;
   var branchName = "".obs;
   var departmanName = "".obs;
+  var titleName = "".obs;
 }
