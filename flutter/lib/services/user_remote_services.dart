@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unnecessary_brace_in_string_interps
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -41,15 +41,15 @@ class UserRemoteServices {
       }
       jsonString = "[" + jsonString + "]";
       User? _user = parseUser(jsonString);
-      userID = _user == null ?  -1 : _user.id;
+      userID = _user == null ? -1 : _user.id;
     }
     return userID;
   }
 
   static Future<int> fetchUserByNameAndPassword(
       String name, String password) async {
-    var response =
-        await http.get(Uri.parse(serviceHttp + '/user/$name/$password'));
+    var response = await http.get(Uri.parse(serviceHttp +
+        '/user/$name/$password' /* '/user/check/name:${name}&pass:${password}' */));
     int userID = -1;
     if (response.statusCode >= 200 && response.statusCode < 300) {
       String jsonString = utf8.decode(response.bodyBytes);
@@ -58,15 +58,15 @@ class UserRemoteServices {
       }
       jsonString = "[" + jsonString + "]";
       User? _user = parseUser(jsonString);
-      userID = _user == null ?  -1 : _user.id;
+      userID = _user == null ? -1 : _user.id;
     }
     return userID;
   }
 
   static Future<int> fetchUserByEmailAndPassword(
       String email, String password) async {
-    var response =
-        await http.get(Uri.parse(serviceHttp + '/user/check/$email/$password'));
+    var response = await http.get(Uri.parse(serviceHttp +
+        '/user/check/$email/$password' /* '/user/check/email:${email}&pass:${password}' */));
     int userID = -1;
     if (response.statusCode >= 200 && response.statusCode < 300) {
       String jsonString = utf8.decode(response.bodyBytes);
@@ -75,7 +75,7 @@ class UserRemoteServices {
       }
       jsonString = "[" + jsonString + "]";
       User? _user = parseUser(jsonString);
-      userID = _user == null ?  -1 : _user.id;
+      userID = _user == null ? -1 : _user.id;
     }
     return userID;
   }

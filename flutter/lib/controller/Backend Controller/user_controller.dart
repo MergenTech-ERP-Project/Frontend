@@ -77,37 +77,34 @@ class UserController extends GetxController {
   Future<int> addNewUser(User newUser, UserDetail? userDetail) async {
     try {
       isLoading(true);
-      var response = await UserRemoteServices.addNewUser(
+      int response = await UserRemoteServices.addNewUser(
           json.encode(newUser.toJson()).toString());
       print("addNewUser $response");
       await fetchUsers(); //userList.add(newUser);
       var userId = await userController.fetchUserByEmailAndPassword(
           newUser.email, newUser.password);
-      if (userId == -1) {
-        if (userDetail != null) {
-          userDetail.userId = userId;
-        }
-        response = await userDetailController.addNewUserDetail(
-              userDetail ??
-                  UserDetail(
-                    userId: userId,
-                    tcno: userId.toString(),
-                    maritalStatus: MaritalStatusEnum.values.first,
-                    disabledDegree: DisabledDegreeEnum.values.first,
-                    gender: GenderEnum.values.first,
-                    educationalStatus: EducationalStatusEnum.values.first,
-                    highestEducationLevelCompleted:
-                        HighestEducationLevelCompletedEnum.values.first,
-                    employmentType: EmploymentTypeEnum.values.first,
-                    militaryStatus: MilitaryStatusEnum.values.first,
-                    contractType: ContractTypeEnum.values.first,
-                    bankNames: BankNamesEnum.values.first,
-                    bankAccountType: BankAccountTypeEnum.values.first,
-                    bloodType: BloodTypeEnum.values.first,
-                  ),
-            ) ??
-            -1;
+      if (userDetail != null) {
+        userDetail.userId = userId;
       }
+      response = await userDetailController.addNewUserDetail(
+        userDetail ??
+            UserDetail(
+              userId: userId,
+              tcno: userId.toString(),
+              maritalStatus: MaritalStatusEnum.values.first,
+              disabledDegree: DisabledDegreeEnum.values.first,
+              gender: GenderEnum.values.first,
+              educationalStatus: EducationalStatusEnum.values.first,
+              highestEducationLevelCompleted:
+                  HighestEducationLevelCompletedEnum.values.first,
+              employmentType: EmploymentTypeEnum.values.first,
+              militaryStatus: MilitaryStatusEnum.values.first,
+              contractType: ContractTypeEnum.values.first,
+              bankNames: BankNamesEnum.values.first,
+              bankAccountType: BankAccountTypeEnum.values.first,
+              bloodType: BloodTypeEnum.values.first,
+            ),
+      );
       print("addNewUserDetail $response");
       return response;
     } finally {
@@ -126,6 +123,10 @@ class UserController extends GetxController {
       if (userDetail != null) {
         UserDetail? findUserDetail =
             await userDetailController.fetchUserDetailByUserId(user.id);
+        print("findUserDetail : " +
+            (findUserDetail != null
+                ? findUserDetail.toJson().toString()
+                : "null"));
         userDetail.userId = user.id;
         findUserDetail == null
             ? await userDetailController.addNewUserDetail(userDetail)
