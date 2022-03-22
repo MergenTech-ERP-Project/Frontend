@@ -73,7 +73,7 @@ class _GenericDropDownListState<T> extends State<GenericDropDownList> {
                     key: Key(index.toString()), //attention
                     initiallyExpanded: index == selected,
                     title: SizedBox(
-                      height: 60,
+                      height: 40,
                       child: Center(
                         child: CustomText(
                           text: getText(index),
