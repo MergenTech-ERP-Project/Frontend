@@ -18,10 +18,13 @@ import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/models/settings/department.dart';
 import 'package:vtys_kalite/models/settings/title.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/components/generic_dropdown_list.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/models/odeme.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/custombuttonwidget.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
+import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Company/company_list.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
+import 'package:vtys_kalite/utilities/style.dart';
 
 class TabKariyer extends StatefulWidget {
   List<YeniOdeme> odemelerList = <YeniOdeme>[].obs;
@@ -65,10 +68,10 @@ class _TabKariyerState extends State<TabKariyer> {
             showDialog(
               context: context,
               builder: (_) => CustomAlertDialog(
+                backgroundColor: lightColor,
                 titleWidget: const _PozisyonEkleHeader(),
-                bodyWidgetWidth: screenSize.width - 20,
+                bodyWidgetWidth: screenSize.width/2,
                 bodyWidget: SizedBox(
-                  width: screenSize.width - 20 / 1.2,
                   child: _PozisyonEklemeBody(
                     userHelper: widget.userHelper,
                   ),
@@ -406,6 +409,10 @@ class _PozisyonEklemeBody extends StatefulWidget {
 }
 
 class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
+  var companyVisible = false.obs;
+  var branchVisible = false.obs;
+  var departmentVisible = false.obs;
+  var titleVisible = false.obs;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -428,200 +435,108 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
               ],
             ),
           ),
-          Row(
-            children: [
-              Expanded(
-                child: Obx(
-                  () {
-                    List<String> companyNames = [];
-                    for (Company c in companyController.companyList) {
-                      companyNames.add(c.companyName);
-                    }
-                    return CustomDropDownMenu(
-                      icon: const Icon(Icons.arrow_drop_down),
-                      isExpandedYes: true,
-                      iconSize: 20,
-                      text: "Şirket",
-                      valueChoose: companyNames[
-                          tabKariyerController.unitCompanyIndex.value],
-                      list: companyNames,
-                      onChanged: (val) {
-                        if (companyNames.isNotEmpty) {
-                          tabKariyerController.unitCompanyIndex.value =
-                              companyNames.indexOf(val!);
-                          widget.userHelper.userDetailCareer!.unitCompany =
-                              companyNames[
-                                  tabKariyerController.unitCompanyIndex.value];
-                        }
-                      },
-                    );
-                  },
-                ),
+          const SizedBox(height: 20),
+          NameController(
+            controller: tabKariyerController.positionYoneticisi,
+            label: "Yönetici",
+            widget: IconButton(
+              icon: const Icon(Icons.close),
+              onPressed: () {
+                tabKariyerController.positionYoneticisi.text = "";
+              },
+            ),
+          ),
+          const SizedBox(height: 10),
+          NameController(
+            controller: tabKariyerController.positionCalismaSekli,
+            label: "Çalışma Şekli",
+            widget: IconButton(
+              icon: const Icon(Icons.close),
+              onPressed: () {
+                tabKariyerController.positionCalismaSekli.text = "";
+              },
+            ),
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomDateTimePicker(
+              borderless: true,
+              labelText: 'Başlangıç Tarihi',
+              onChanged: (val) {
+                if (val != null) {
+                  try {
+                    widget.userHelper.userDetail!.startDateWork = val;
+                  } catch (e) {
+                    print(e.toString());
+                  }
+                }
+              },
+            ),
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomDateTimePicker(
+              borderless: true,
+              labelText: 'Bitiş Tarihi',
+              onChanged: (val) {
+                if (val != null) {
+                  try {
+                    widget.userHelper.userDetail!.quitWorkDate = val;
+                  } catch (e) {
+                    print(e.toString());
+                  }
+                }
+              },
+            ),
+          ),
+          const SizedBox(height: 10),
+          GenericDropDownList<Company>(
+            isLoading: companyController.isLoading.value,
+            childVisible: companyVisible.value,
+            genericList: companyController.companyList,
+            onSelected: (val) async {
+              companyVisible(!companyVisible.value);
+              branchVisible.value = true;
+              optionalCompanyController.companyId.value = val.id;
+              optionalCompanyController.companyName.value = val.companyName;
+              await branchController.fetchBranchesByCompanyId(val.id);
+            },
+            childGenericList: GenericDropDownList<Branch>(
+              isLoading: branchController.isLoading.value,
+              childVisible: branchVisible.value,
+              genericList: branchController.branchList,
+              onSelected: (val) async {
+                optionalCompanyController.branchId.value = val.id;
+                optionalCompanyController.branchName.value = val.branchName;
+                await departmentController.fetchDepartmentsByBranchId(val.id);
+              },
+              childGenericList: GenericDropDownList<Department>(
+                isLoading: departmentController.isLoading.value,
+                childVisible: departmentVisible.value,
+                genericList: departmentController.departmentList,
+                onSelected: (val) async {
+                  optionalCompanyController.departmentId.value = val.id;
+                  optionalCompanyController.departmanName.value =
+                      val.departmentName;
+                  await titleController.fetchTitlesByDepartmentId(val.id);
+                },
+                childGenericList: SizedBox(),
               ),
-              Expanded(
-                child: Obx(
-                  () {
-                    List<String> branchNames = [];
-                    for (Branch b in branchController.branchList) {
-                      branchNames.add(b.branchName);
-                    }
-                    return CustomDropDownMenu(
-                      icon: const Icon(Icons.arrow_drop_down),
-                      isExpandedYes: true,
-                      iconSize: 20,
-                      text: "Şube",
-                      valueChoose: branchNames.isEmpty
-                          ? ""
-                          : branchNames[
-                              tabKariyerController.unitBranchIndex.value],
-                      list: branchNames,
-                      onChanged: (val) {
-                        if (branchNames.isNotEmpty) {
-                          tabKariyerController.unitBranchIndex.value =
-                              branchNames.indexOf(val!);
-                          widget.userHelper.userDetailCareer!.unitBranch =
-                              branchNames[
-                                  tabKariyerController.unitBranchIndex.value];
-                        }
-                      },
-                    );
-                  },
-                ),
-              ),
-            ],
+            ),
           ),
 
-          /* Row(
-            children: [
-              Expanded(
-                child: Obx(
-                  () {
-                    List<String> departmantNames = [];
-                    for (Department d in departmentController.departmentList) {
-                      departmantNames.add(d.departmentName);
-                    }
-                    return CustomDropDownMenu(
-                      icon: const Icon(Icons.arrow_drop_down),
-                      isExpandedYes: true,
-                      iconSize: 20,
-                      text: "Departman",
-                      valueChoose: departmantNames.isEmpty
-                          ? ""
-                          : departmantNames[
-                              tabKariyerController.unitDepartmantIndex.value],
-                      list: departmantNames,
-                      onChanged: (val) {
-                        if (departmantNames.isNotEmpty) {
-                          tabKariyerController.unitDepartmantIndex.value =
-                              departmantNames.indexOf(val!);
-                          widget.userHelper.userDetailCareer!.unitDepartment =
-                              departmantNames[
-                                  tabKariyerController.unitDepartmantIndex.value];
-                        }
-                      },
-                    );
-                  },
-                ),
-              ),
-              Expanded(
-                child: Obx(
-                  () {
-                    List<String> titleNames = [];
-                    for (Titlee t in titleController.titleList) {
-                      titleNames.add(t.titleName);
-                    }
-                    return CustomDropDownMenu(
-                      icon: const Icon(Icons.arrow_drop_down),
-                      isExpandedYes: true,
-                      iconSize: 20,
-                      text: "Ünvan",
-                      valueChoose: titleNames.isEmpty
-                          ? ""
-                          : titleNames[tabKariyerController.unitTitleIndex.value],
-                      list: titleNames,
-                      onChanged: (val) {
-                        if (titleNames.isNotEmpty) {
-                          tabKariyerController.unitTitleIndex.value =
-                              titleNames.indexOf(val!);
-                          widget.userHelper.userDetailCareer!.unitTitle =
-                              titleNames[
-                                  tabKariyerController.unitDepartmantIndex.value];
-                        }
-                      },
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),*/
-          Row(
-            children: [
-              Expanded(
-                child: NameController(
-                  controller: tabKariyerController.positionYoneticisi,
-                  label: "Yönetici",
-                  widget: IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () {
-                      tabKariyerController.positionYoneticisi.text = "";
+          /**GenericDropDownList<Titlee>(
+                    backgroundColor: Colors.white38,
+                    isLoading: titleController.isLoading.value,
+                    childVisible: titleVisible.value,
+                    genericList: titleController.titleList,
+                    onSelected: (val) async {
+                      optionalCompanyController.titleId.value = val.id;
                     },
                   ),
-                ),
-              ),
-              Expanded(
-                child: NameController(
-                  controller: tabKariyerController.positionCalismaSekli,
-                  label: "Çalışma Şekli",
-                  widget: IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () {
-                      tabKariyerController.positionCalismaSekli.text = "";
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CustomDateTimePicker(
-                    borderless: true,
-                    labelText: 'Başlangıç Tarihi',
-                    onChanged: (val) {
-                      if (val != null) {
-                        try {
-                          widget.userHelper.userDetail!.startDateWork = val;
-                        } catch (e) {
-                          print(e.toString());
-                        }
-                      }
-                    },
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CustomDateTimePicker(
-                    borderless: true,
-                    labelText: 'Bitiş Tarihi',
-                    onChanged: (val) {
-                      if (val != null) {
-                        try {
-                          widget.userHelper.userDetail!.quitWorkDate = val;
-                        } catch (e) {
-                          print(e.toString());
-                        }
-                      }
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
+                ), */
         ],
       ),
     );
