@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:vtys_kalite/models/User%20Detail/user_career.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/services/user_detail_remote_services.dart';
 
@@ -24,7 +25,12 @@ class UserDetailController extends GetxController {
     }
   }
 
+
   Future<int> addNewUserDetail(UserDetail userDetail) async {
+    UserDetail userDetail,
+    UserDetailCareer? userDetailCareer,
+  ) async {
+
     try {
       isLoading(true);
       Map detail = userDetail.toJson();
