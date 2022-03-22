@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/routing/routes.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
@@ -76,7 +78,15 @@ AppBar topNavigationBar(context, key) => AppBar(
               Icons.settings,
               color: darkColor.withOpacity(.7),
             ),
-            onPressed: () {},
+            onPressed: () => showDialog(
+              context: context,
+              builder: (context) => Dialog(
+                child: AddNewEmployee(
+                  newUser: user,
+                  userHelper: UserHelperController(user.id),
+                ),
+              ),
+            ),
           ),
           Container(width: 1, height: 22, color: lightGreyColor),
           Visibility(
