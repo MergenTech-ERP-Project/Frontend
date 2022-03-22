@@ -213,9 +213,9 @@ class _AdminDialog extends StatelessWidget {
                       // var title =
                       //     DepartmentsEnum.values.elementAt(userTitleIndex);
                       // user.title = title;
-                      await userController.updateUser(user.id, user, null);
+                      //await userController.updateUser(user.id, user, null);
                       Navigator.of(context).pop(true);
-                      showDialogDoneMessage(context);
+                      //showDialogDoneMessage(context);
                     },
                   ),
                 ),
