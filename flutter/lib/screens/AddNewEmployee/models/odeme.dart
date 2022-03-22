@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_switch.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
@@ -21,6 +22,9 @@ class YeniOdeme extends StatefulWidget {
 
   UserHelperController userHelperController;
 
+  final List odemeListesi;
+  final int index;
+
   YeniOdeme({
     Key? key,
     this.id = 0,
@@ -32,6 +36,8 @@ class YeniOdeme extends StatefulWidget {
     this.grossPrice = false,
     this.includePayroll = false,
     required this.userHelperController,
+    required this.odemeListesi,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -50,68 +56,73 @@ class _YeniOdemeState extends State<YeniOdeme> {
                 IconButton(
                   icon: const Icon(Icons.close),
                   color: redColor,
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      widget.odemeListesi.removeAt(widget.index);
+                    });
+                  },
                 ),
                 CustomText(text: widget.name),
               ],
             ),
-            Row(
-              children: [
-                const Expanded(
-                  flex: 1,
-                  child: CustomText(
-                    text: "Ücret:",
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                children: [
+                  const Expanded(
+                    flex: 1,
+                    child: CustomText(
+                      text: "Ücret:",
+                    ),
                   ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: CustomTextBox(
-                    borderless: true,
-                    label: widget.salary,
+                  Expanded(
+                    flex: 3,
+                    child: CustomTextBox(
+                      borderless: true,
+                      label: widget.salary + "TL",
+                    ),
                   ),
-                ),
-                const Expanded(
-                  flex: 1,
-                  child: CustomText(
-                    text: "TL",
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-            Row(
-              children: [
-                const Expanded(
-                  flex: 1,
-                  child: CustomText(
-                    text: "Açıklama:",
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                children: [
+                  const Expanded(
+                    flex: 1,
+                    child: CustomText(
+                      text: "Açıklama:",
+                    ),
                   ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: CustomTextBox(
-                    borderless: true,
-                    label: widget.description,
+                  Expanded(
+                    flex: 3,
+                    child: CustomTextBox(
+                      borderless: true,
+                      label: widget.description,
+                    ),
                   ),
-                ),
-
-                ///TODO TODO TODO TODO TODO
-                // CustomDropDownMenu(
-                //   text: "Periyot",
-                //   list: PaymentSchemeExtension.getList(),
-                //   valueChoose: widget.userHelperController.userDetailPayment
-                //       .paymentScheme.getName,
-                //   icon: const Icon(Icons.arrow_drop_down),
-                //   iconSize: 20,
-                //   isExpandedYes: true,
-                //   onChanged: (val) {
-                //     setState(() {
-                //       widget.userHelperController.userDetailPayment
-                //               .paymentScheme =
-                //           PaymentSchemeExtension.getEnumFromName(val);
-                //     });
-                //   },
-                // ),
-              ],
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: CustomDropDownMenu(
+                text: "Periyot",
+                list: PaymentSchemeExtension.getList(),
+                valueChoose: widget.userHelperController.userDetailPayment!
+                    .paymentScheme.getName,
+                icon: const Icon(Icons.arrow_drop_down),
+                iconSize: 20,
+                isExpandedYes: true,
+                onChanged: (val) {
+                  setState(() {
+                    widget.userHelperController.userDetailPayment!
+                            .paymentScheme =
+                        PaymentSchemeExtension.getEnumFromName(val);
+                  });
+                },
+              ),
             ),
             Row(
               children: [

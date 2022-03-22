@@ -13,6 +13,7 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/employment_type.dart';
+import 'package:vtys_kalite/enums/salary_type.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
@@ -22,7 +23,6 @@ import 'package:vtys_kalite/screens/AddNewEmployee/components/generic_dropdown_l
 import 'package:vtys_kalite/screens/AddNewEmployee/models/odeme.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/custombuttonwidget.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
-import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/Company/company_list.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
@@ -103,57 +103,72 @@ class _TabKariyerState extends State<TabKariyer> {
                       children: [
                         Row(
                           children: [
-                            NameController(
-                              controller: tabKariyerController.controllerSalary,
-                              label: "Maaş",
-                              widget: const SizedBox(),
-                            ),
-                            NameController(
-                              controller: tabKariyerController.controllerUnit,
-                              label: "Birim",
-                              widget: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.min,
-                                children: const [
-                                  Icon(Icons.close),
-                                  Icon(Icons.keyboard_arrow_down),
-                                ],
+                            Expanded(
+                              child: NameController(
+                                controller:
+                                    tabKariyerController.controllerSalary,
+                                label: "Maaş",
+                                widget: const SizedBox(),
                               ),
                             ),
-                            Obx(
-                              () => CustomSwitch(
-                                switchValue: widget.asgariUcretSwitch.value,
-                                text: "Asgari Ücret",
-                                onChanged: (bool value) {
-                                  widget.asgariUcretSwitch.value = value;
-                                },
+                            Expanded(
+                              child: NameController(
+                                controller: tabKariyerController.controllerUnit,
+                                label: "Birim",
+                                widget: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: const [
+                                    Icon(Icons.close),
+                                    Icon(Icons.keyboard_arrow_down),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Obx(
+                                () => CustomSwitch(
+                                  switchValue: widget.asgariUcretSwitch.value,
+                                  text: "Asgari Ücret",
+                                  onChanged: (bool value) {
+                                    widget.asgariUcretSwitch.value = value;
+                                  },
+                                ),
                               ),
                             )
                           ],
                         ),
                         Row(
                           children: [
-                            // ExpandedCustomDropDownMenu(
-                            //   value: widget.userHelper.userDetailPayment
-                            //       .salaryType!.getName,
-                            //   label: "Maaş Tipi",
-                            //   listExtension: SalaryTypeExtension.getList(),
-                            //   onChanged: (val) {
-                            //     setState(() {
-                            //       widget.userHelper.userDetailPayment.salaryType =
-                            //           SalaryTypeExtension.getEnumFromName(val);
-                            //     });
-                            //   },
-                            // ),
-
-                            Obx(
-                              () => CustomSwitch(
-                                switchValue: widget.netSwitch.value,
-                                text: "Net",
-                                onChanged: (bool value) {
-                                  widget.netSwitch.value = value;
+                            Expanded(
+                              child: CustomDropDownMenu(
+                                icon: const Icon(Icons.arrow_drop_down),
+                                isExpandedYes: true,
+                                iconSize: 20,
+                                valueChoose: widget.userHelper
+                                    .userDetailPayment!.salaryType.getName,
+                                text: "Maaş Tipi",
+                                list: SalaryTypeExtension.getList(),
+                                onChanged: (val) {
+                                  setState(() {
+                                    widget.userHelper.userDetailPayment!
+                                            .salaryType =
+                                        SalaryTypeExtension.getEnumFromName(
+                                            val);
+                                  });
                                 },
+                              ),
+                            ),
+                            Expanded(
+                              child: Obx(
+                                () => CustomSwitch(
+                                  switchValue: widget.netSwitch.value,
+                                  text: "Net",
+                                  onChanged: (bool value) {
+                                    widget.netSwitch.value = value;
+                                  },
+                                ),
                               ),
                             )
                           ],
@@ -217,7 +232,10 @@ class _TabKariyerState extends State<TabKariyer> {
                                               );
                                             } else {
                                               widget.odemelerList.add(
-                                                YeniOdeme(
+                                                YeniOdeme( ///TODO index manual 0 geliyor. index atamayı çözemedim
+                                                  index: 0,
+                                                  odemeListesi:
+                                                      widget.odemelerList,
                                                   userHelperController:
                                                       widget.userHelper,
                                                   name: tabKariyerController

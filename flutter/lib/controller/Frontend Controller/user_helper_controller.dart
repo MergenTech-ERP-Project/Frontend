@@ -18,6 +18,7 @@ import 'package:vtys_kalite/models/User%20Detail/user_career.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_payment.dart';
 import 'package:vtys_kalite/models/user.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee_helpers.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class UserHelperController {
@@ -143,7 +144,7 @@ class UserHelperController {
       userDetail = await userDetailController.fetchUserDetailByUserId(userId);
       print(userDetail == null ? "UserDetail not found" : "UserDetail : found");
 
-      /* UserDetailCareer? userDetailCareer = await userDetailCareerController
+      UserDetailCareer? userDetailCareer = await userDetailCareerController
           .fetchUserDetailCareerById(userDetail?.id);
 
       print("User Helper User UserDetailCareer " +
@@ -160,16 +161,10 @@ class UserHelperController {
             userDetailId: userDetail!.id,
             managerName: tabKariyerController.positionYoneticisi.text,
             managerTcno: "12345678910", //TODO
-            unitCompany: companyController
-                .companyList[tabKariyerController.unitCompanyIndex.value]
-                .companyName,
-            unitBranch: branchController
-                .branchList[tabKariyerController.unitBranchIndex.value]
-                .branchName,
-            unitDepartment: departmentController
-                .departmentList[tabKariyerController.unitDepartmantIndex.value]
-                .departmentName,
-            unitTitle: "Fakir Parası", //TODO
+            unitCompany: optionalCompanyController.companyName.value,
+            unitBranch: optionalCompanyController.branchName.value,
+            unitDepartment: optionalCompanyController.departmanName.value,
+            unitTitle: optionalCompanyController.titleName.value,
           ),
         );
       } else {
@@ -177,7 +172,7 @@ class UserHelperController {
             .updateUserDetailCareer(userDetail!.id, userDetailCareer);
       }
 
-      int? responseUserDetailPayment =
+      /*int? responseUserDetailPayment =
 
           ///TODO: update kaldı
           await userDetailPaymentController.addNewUserDetailPayment(

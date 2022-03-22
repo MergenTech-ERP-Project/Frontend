@@ -342,6 +342,8 @@ class _MaasEklemeBodyState extends State<_MaasEklemeBody> {
                               } else {
                                 widget.odemelerList.add(
                                   YeniOdeme(
+                                    index: 0,
+                                    odemeListesi: widget.odemelerList,
                                     userHelperController: widget.userHelper,
                                     name: tabKariyerController
                                         .controllerPaymentScreenInSalary.text,
