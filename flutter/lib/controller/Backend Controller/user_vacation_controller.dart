@@ -28,8 +28,10 @@ class UserDetailVacationController extends GetxController {
       UserDetailVacation userDetailVacation) async {
     try {
       isLoading(true);
+      Map detailVacation = userDetailVacation.toJson();
+      detailVacation.remove('id');
       var response = await UserDetailVacationServices.addNewUserDetailVacation(
-          json.encode(userDetailVacation.toJson()).toString());
+          json.encode(detailVacation).toString());
 
       print("post User Detail Vacation: " + response.toString());
       fetchUserDetailVacationByUserDetailId(userDetailVacation.id);

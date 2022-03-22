@@ -33,6 +33,17 @@ class _EmployeeCardState extends State<EmployeeCard> {
               child: CircularProgressIndicator(),
             )
           : InkWell(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => Dialog(
+                    child: AddNewEmployee(
+                      newUser: widget.user,
+                      userHelper: UserHelperController(widget.user.id),
+                    ),
+                  ),
+                );
+              },
               child: Container(
                 height: widget.height,
                 decoration: BoxDecoration(
@@ -105,17 +116,6 @@ class _EmployeeCardState extends State<EmployeeCard> {
                   ],
                 ),
               ),
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => Dialog(
-                    child: AddNewEmployee(
-                      newUser: widget.user,
-                      userHelper: UserHelperController(widget.user.id),
-                    ),
-                  ),
-                );
-              },
             ),
     );
   }

@@ -1,5 +1,4 @@
-String serviceHttp =
-//"https://exxxp.herokuapp.com";
+String serviceHttp = //"https://exxxp.herokuapp.com";
     "https://kalite-takip-yonetim-sistemi.herokuapp.com";
 // "https://mergen-kalite-takip-sistemi.herokuapp.com";
 //"http://91.151.89.195:8090";
@@ -26,10 +25,11 @@ const loginPageRoute = "/login";
 const signUpPageDisplayName = "Kayıt Ol";
 const signUpPageRoute = "/signUp";
 
-///Admin ve Ayarlar Sayfaları
-
 const newActivityPageDisplayName = "Yeni Aktivite";
 const newActivityPageRoute = "/newActivity";
+
+const vacationRequestPageDisplayName = "İzin Talepleri";
+const vacationRequestPageRoute = "/vacationRequests";
 
 const activityEvaluationPageDisplayName = "Aktivite Değerlendirme";
 const activityEvaluationPageRoute = "/activityEvaluation";
@@ -53,6 +53,16 @@ List<MenuItem> sideMenuItems = [
     0xFFFF0000.toInt(),
   ),
   MenuItem(
+    vacationRequestPageDisplayName,
+    vacationRequestPageRoute,
+    0xDDDDDD00.toInt(),
+  ),
+  MenuItem(
+    settingsPageDisplayName,
+    settingsPageRoute,
+    0xFFF000F0.toInt(),
+  ),
+  MenuItem(
     myActivitiesPageDisplayName,
     myActivitiesPageRoute,
     0xFF0000FF.toInt(),
@@ -61,10 +71,5 @@ List<MenuItem> sideMenuItems = [
     formsPageDisplayName,
     formsPageRoute,
     0xFF00FF00.toInt(),
-  ),
-  MenuItem(
-    settingsPageDisplayName,
-    settingsPageRoute,
-    0xFFF000F0.toInt(),
   ),
 ];

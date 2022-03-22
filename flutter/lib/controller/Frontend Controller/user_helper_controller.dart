@@ -59,7 +59,7 @@ class UserHelperController {
 
   UserHelperController(this.userId);
 
-  getUserDetail() {
+  UserDetail getUserDetail() {
     return UserDetail(
       userId: userId,
       numberofkids:
@@ -116,8 +116,9 @@ class UserHelperController {
         await userController.addNewUser(
           User(
             name: tabGenelController.controllerName.text +
-                " " +
-                tabGenelController.controllerSurname.text,
+                (tabGenelController.controllerSurname.text == ""
+                    ? (" " + tabGenelController.controllerSurname.text)
+                    : ""),
             email: tabGenelController.controllerEPostaPersonal.text,
             password: "qwe123",
             title: "management",
@@ -125,26 +126,32 @@ class UserHelperController {
           ),
           getUserDetail(),
         );
-        userId = await userController.fetchUserByEmailAndPassword(
-            tabGenelController.controllerEPostaPersonal.text, "qwe123");
+        /* userId = await userController.fetchUserByEmailAndPassword(
+            tabGenelController.controllerEPostaPersonal.text, "qwe123"); */
       } else {
-        user!.name = tabGenelController.controllerName.text +
-            " " +
-            tabGenelController.controllerSurname.text;
-        user.email = tabGenelController.controllerEPostaPersonal.text;
-        user.cellphone = tabGenelController.controllerTelephonePersonal.text;
         userController.updateUser(
-          user.id,
-          user,
+          user!.id,
+          User(
+            name: tabGenelController.controllerName.text +
+                (tabGenelController.controllerSurname.text == ""
+                    ? (" " + tabGenelController.controllerSurname.text)
+                    : ""),
+            email: tabGenelController.controllerEPostaPersonal.text,
+            password: user.password,
+            title: user.title,
+            cellphone: tabGenelController.controllerTelephonePersonal.text,
+          ),
           getUserDetail(),
         );
-        userId = user.id;
+        /* userId = user.id; */
       }
+
 
       userDetail = await userDetailController.fetchUserDetailByUserId(userId);
       print(userDetail == null ? "UserDetail not found" : "UserDetail : found");
 
       UserDetailCareer? userDetailCareer = await userDetailCareerController
+
           .fetchUserDetailCareerById(userDetail?.id);
 
       print("User Helper User UserDetailCareer " +
@@ -198,8 +205,6 @@ class UserHelperController {
         context,
       ); */
 
-      print(
-          "\n\n----------------------------USER HELPER END----------------------------\n\n");
     } catch (e) {
       print(e.toString());
     }
