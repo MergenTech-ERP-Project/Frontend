@@ -10,7 +10,7 @@ class UserDetailServices {
 
   static Future<UserDetail?> fetchUserDetailByUserId(userId) async {
     var response = await http
-        .get(Uri.parse(serviceHttp + '/userdetail/find/user:$userId'));
+        .get(Uri.parse(serviceHttp + '/userdetail/find/userid:$userId'));
     UserDetail? userDetail;
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);

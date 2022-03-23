@@ -88,40 +88,18 @@ class UserDetail {
     this.reasonTypeForQuit = "",
     this.quitExplanation = "none",
     this.nationality = "",
-    this.maritalStatus = MaritalStatusEnum.married,
-
-    ///TODO : NONE
-    this.disabledDegree = DisabledDegreeEnum.firstDegreeDisabled,
-
-    ///TODO : NONE
-    this.gender = GenderEnum.male,
-
-    ///TODO : NONE
-    this.educationalStatus = EducationalStatusEnum.graduate,
-
-    ///TODO : NONE
+    this.maritalStatus = MaritalStatusEnum.none,
+    this.disabledDegree = DisabledDegreeEnum.none,
+    this.gender = GenderEnum.none,
+    this.educationalStatus = EducationalStatusEnum.none,
     this.highestEducationLevelCompleted =
-        HighestEducationLevelCompletedEnum.bachelorsDegree,
-
-    ///TODO : NONE
-    this.employmentType = EmploymentTypeEnum.freelancer,
-
-    ///TODO : NONE
-    this.militaryStatus = MilitaryStatusEnum.exempt,
-
-    ///TODO : NONE
-    this.contractType = ContractTypeEnum.indenfinite,
-
-    ///TODO : NONE
-    this.bankNames = BankNamesEnum.akBank,
-
-    ///TODO : NONE
-    this.bankAccountType = BankAccountTypeEnum.drawingAccount,
-
-    ///TODO : NONE
-    this.bloodType = BloodTypeEnum.aPlus,
-
-    ///TODO : NONE
+        HighestEducationLevelCompletedEnum.none,
+    this.employmentType = EmploymentTypeEnum.none,
+    this.militaryStatus = MilitaryStatusEnum.none,
+    this.contractType = ContractTypeEnum.none,
+    this.bankNames = BankNamesEnum.none,
+    this.bankAccountType = BankAccountTypeEnum.none,
+    this.bloodType = BloodTypeEnum.none,
   });
 
   String? getGender() => EnumToString.convertToString(gender);

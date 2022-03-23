@@ -48,8 +48,8 @@ class UserRemoteServices {
 
   static Future<int> fetchUserByNameAndPassword(
       String name, String password) async {
-    var response = await http.get(Uri.parse(serviceHttp +
-        '/user/$name/$password' /* '/user/check/name:${name}&pass:${password}' */));
+    var response = await http.get(
+        Uri.parse(serviceHttp + '/user/check/name:${name}&pass:${password}'));
     int userID = -1;
     if (response.statusCode >= 200 && response.statusCode < 300) {
       String jsonString = utf8.decode(response.bodyBytes);
@@ -65,8 +65,8 @@ class UserRemoteServices {
 
   static Future<int> fetchUserByEmailAndPassword(
       String email, String password) async {
-    var response = await http.get(Uri.parse(serviceHttp +
-        '/user/check/$email/$password' /* '/user/check/email:${email}&pass:${password}' */));
+    var response = await http.get(
+        Uri.parse(serviceHttp + '/user/check/email:${email}&pass:${password}'));
     int userID = -1;
     if (response.statusCode >= 200 && response.statusCode < 300) {
       String jsonString = utf8.decode(response.bodyBytes);

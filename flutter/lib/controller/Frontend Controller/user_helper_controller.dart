@@ -210,8 +210,8 @@ class UserHelperController {
     tabGenelController.controllerTelephonePersonal.text = "";
     tabGenelController.controllerAccessType.text = "";
     tabGenelController.controllerContractEndDate.text = "";
-    userDetail!.contractType = ContractTypeEnum.values.first;
-    userDetail!.employmentType = EmploymentTypeEnum.values.first;
+    userDetail!.contractType = ContractTypeEnum.none;
+    userDetail!.employmentType = EmploymentTypeEnum.none;
     userDetail!.startDateWork = dateTimeFormat.format(DateTime.now());
     userDetail!.contractEndDate = dateTimeFormat.format(DateTime.now());
 
@@ -223,8 +223,8 @@ class UserHelperController {
     tabDigerBilgilerController.controllerDistrict.text = "";
     tabDigerBilgilerController.controllerAccountNumber.text = "";
     tabDigerBilgilerController.controllerIBAN.text = "";
-    userDetail!.bankNames = BankNamesEnum.values.first;
-    userDetail!.bankAccountType = BankAccountTypeEnum.values.first;
+    userDetail!.bankNames = BankNamesEnum.none;
+    userDetail!.bankAccountType = BankAccountTypeEnum.none;
 
     userDetailCareer!.unitCompany = "";
     userDetailCareer!.unitBranch = "";
@@ -243,13 +243,13 @@ class UserHelperController {
     tabKisiselBilgilerController.controllerLastCompletedEducationStatus.text =
         "";
     userDetail!.nationality = "";
-    userDetail!.maritalStatus = MaritalStatusEnum.values.first;
-    userDetail!.gender = GenderEnum.values.first;
-    userDetail!.disabledDegree = DisabledDegreeEnum.values.first;
-    userDetail!.bloodType = BloodTypeEnum.values.first;
-    userDetail!.educationalStatus = EducationalStatusEnum.values.first;
+    userDetail!.maritalStatus = MaritalStatusEnum.none;
+    userDetail!.gender = GenderEnum.none;
+    userDetail!.disabledDegree = DisabledDegreeEnum.none;
+    userDetail!.bloodType = BloodTypeEnum.none;
+    userDetail!.educationalStatus = EducationalStatusEnum.none;
     userDetail!.highestEducationLevelCompleted =
-        HighestEducationLevelCompletedEnum.values.first;
-    userDetail!.militaryStatus = MilitaryStatusEnum.values.first;
+        HighestEducationLevelCompletedEnum.none;
+    userDetail!.militaryStatus = MilitaryStatusEnum.none;
   }
 }
