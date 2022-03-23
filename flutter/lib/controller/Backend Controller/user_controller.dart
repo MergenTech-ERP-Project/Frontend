@@ -3,18 +3,6 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:vtys_kalite/enums/bank_account_type.dart';
-import 'package:vtys_kalite/enums/bank_names.dart';
-import 'package:vtys_kalite/enums/blood_type.dart';
-import 'package:vtys_kalite/enums/contract_type.dart';
-import 'package:vtys_kalite/enums/disabled_degree.dart';
-import 'package:vtys_kalite/enums/educational_status.dart';
-import 'package:vtys_kalite/enums/employment_type.dart';
-import 'package:vtys_kalite/enums/gender.dart';
-import 'package:vtys_kalite/enums/highest_education_level_completed.dart';
-import 'package:vtys_kalite/enums/marial_status.dart';
-import 'package:vtys_kalite/enums/military_status.dart';
-import 'package:vtys_kalite/models/User%20Detail/user_career.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/services/user_remote_services.dart';
@@ -74,7 +62,11 @@ class UserController extends GetxController {
     }
   }
 
-  Future<int> addNewUser(User newUser, UserDetail? userDetail) async {
+  Future<int> addNewUser({
+    required User newUser,
+    required String tcNo,
+    UserDetail? userDetail,
+  }) async {
     try {
       isLoading(true);
       int response = await UserRemoteServices.addNewUser(
@@ -87,23 +79,7 @@ class UserController extends GetxController {
         userDetail.userId = userId;
       }
       response = await userDetailController.addNewUserDetail(
-        userDetail ??
-            UserDetail(
-              userId: userId,
-              tcno: userId.toString(),
-              maritalStatus: MaritalStatusEnum.values.first,
-              disabledDegree: DisabledDegreeEnum.values.first,
-              gender: GenderEnum.values.first,
-              educationalStatus: EducationalStatusEnum.values.first,
-              highestEducationLevelCompleted:
-                  HighestEducationLevelCompletedEnum.values.first,
-              employmentType: EmploymentTypeEnum.values.first,
-              militaryStatus: MilitaryStatusEnum.values.first,
-              contractType: ContractTypeEnum.values.first,
-              bankNames: BankNamesEnum.values.first,
-              bankAccountType: BankAccountTypeEnum.values.first,
-              bloodType: BloodTypeEnum.values.first,
-            ),
+        userDetail ?? UserDetail(userId: userId, tcno: tcNo),
       );
       print("addNewUserDetail $response");
       return response;
@@ -112,7 +88,11 @@ class UserController extends GetxController {
     }
   }
 
-  Future<String?> updateUser(int id, User user, UserDetail? userDetail) async {
+  Future<String?> updateUser({
+    required int id,
+    required User user,
+    UserDetail? userDetail,
+  }) async {
     try {
       isLoading(true);
       print("Update User ID: $id");

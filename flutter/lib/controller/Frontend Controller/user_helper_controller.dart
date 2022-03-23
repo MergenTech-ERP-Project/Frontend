@@ -18,7 +18,6 @@ import 'package:vtys_kalite/models/User%20Detail/user_career.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_payment.dart';
 import 'package:vtys_kalite/models/user.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee_helpers.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class UserHelperController {
@@ -34,18 +33,11 @@ class UserHelperController {
     } /* else { */
     userDetail ??= UserDetail(
       userId: userId,
-      maritalStatus: MaritalStatusEnum.values.first,
-      disabledDegree: DisabledDegreeEnum.values.first,
-      gender: GenderEnum.values.first,
-      educationalStatus: EducationalStatusEnum.values.first,
-      highestEducationLevelCompleted:
-          HighestEducationLevelCompletedEnum.values.first,
-      employmentType: EmploymentTypeEnum.values.first,
-      militaryStatus: MilitaryStatusEnum.values.first,
-      contractType: ContractTypeEnum.values.first,
-      bankNames: BankNamesEnum.values.first,
-      bankAccountType: BankAccountTypeEnum.values.first,
-      bloodType: BloodTypeEnum.values.first,
+      tcno: (int.tryParse(userDetailController.userDetailList.isNotEmpty
+                  ? userDetailController.userDetailList.last.tcno
+                  : "0") ??
+              0 + 1)
+          .toString(),
     );
 
     userDetailCareer = UserDetailCareer(userDetailId: userDetail!.id);
@@ -114,7 +106,7 @@ class UserHelperController {
     try {
       if (userId == -1) {
         await userController.addNewUser(
-          User(
+          newUser: User(
             name: tabGenelController.controllerName.text +
                 (tabGenelController.controllerSurname.text == ""
                     ? (" " + tabGenelController.controllerSurname.text)
@@ -124,14 +116,15 @@ class UserHelperController {
             title: "management",
             cellphone: tabGenelController.controllerTelephonePersonal.text,
           ),
-          getUserDetail(),
+          tcNo: tabKisiselBilgilerController.controllerTcNo.text,
+          userDetail: getUserDetail(),
         );
         /* userId = await userController.fetchUserByEmailAndPassword(
             tabGenelController.controllerEPostaPersonal.text, "qwe123"); */
       } else {
         userController.updateUser(
-          user!.id,
-          User(
+          id: user!.id,
+          user: User(
             name: tabGenelController.controllerName.text +
                 (tabGenelController.controllerSurname.text == ""
                     ? (" " + tabGenelController.controllerSurname.text)
@@ -141,17 +134,15 @@ class UserHelperController {
             title: user.title,
             cellphone: tabGenelController.controllerTelephonePersonal.text,
           ),
-          getUserDetail(),
+          userDetail: getUserDetail(),
         );
         /* userId = user.id; */
       }
-
 
       userDetail = await userDetailController.fetchUserDetailByUserId(userId);
       print(userDetail == null ? "UserDetail not found" : "UserDetail : found");
 
       UserDetailCareer? userDetailCareer = await userDetailCareerController
-
           .fetchUserDetailCareerById(userDetail?.id);
 
       print("User Helper User UserDetailCareer " +
