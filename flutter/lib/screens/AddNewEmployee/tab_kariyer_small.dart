@@ -12,21 +12,23 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/employment_type.dart';
-import 'package:vtys_kalite/models/User%20Detail/ForCareer/new_payment.dart';
+import 'package:vtys_kalite/enums/salary_type.dart';
+import 'package:vtys_kalite/models/User%20Detail/ForCareer/payment.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/models/settings/department.dart';
 import 'package:vtys_kalite/models/settings/title.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/components/new_payment_list.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/components/payment_card.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/custombuttonwidget.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class TabKariyerSmall extends StatefulWidget {
+  List<Payment> paymentList = <Payment>[].obs;
   final UserHelperController userHelper;
 
-  const TabKariyerSmall({Key? key, required this.userHelper}) : super(key: key);
+  TabKariyerSmall({Key? key, required this.userHelper}) : super(key: key);
 
   @override
   State<TabKariyerSmall> createState() => _TabKariyerSmallState();
@@ -229,7 +231,7 @@ class _MaasEklemeBody extends StatefulWidget {
 
   _MaasEklemeBody({Key? key, required this.userHelper}) : super(key: key);
 
-  List<NewPaymentList> odemelerList = <NewPaymentList>[].obs;
+  List<Payment> odemelerList = <Payment>[].obs;
 
   @override
   State<_MaasEklemeBody> createState() => _MaasEklemeBodyState();
@@ -269,19 +271,23 @@ class _MaasEklemeBodyState extends State<_MaasEklemeBody> {
           ),
           Row(
             children: [
-              //////TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-
-              // ExpandedCustomDropDownMenu(
-              //   value: widget.userHelper.userDetailPayment.salaryType!.getName,
-              //   label: "Maaş Tipi",
-              //   listExtension: SalaryTypeExtension.getList(),
-              //   onChanged: (val) {
-              //     setState(() {
-              //       widget.userHelper.userDetailPayment.salaryType =
-              //           SalaryTypeExtension.getEnumFromName(val);
-              //     });
-              //   },
-              // ),
+              Expanded(
+                child: CustomDropDownMenu(
+                  icon: const Icon(Icons.arrow_drop_down),
+                  isExpandedYes: true,
+                  iconSize: 20,
+                  valueChoose:
+                      widget.userHelper.userDetailPayment!.salaryType.getName,
+                  text: "Maaş Tipi",
+                  list: SalaryTypeExtension.getList(),
+                  onChanged: (val) {
+                    setState(() {
+                      widget.userHelper.userDetailPayment!.salaryType =
+                          SalaryTypeExtension.getEnumFromName(val);
+                    });
+                  },
+                ),
+              ),
               Obx(
                 () => CustomSwitch(
                   switchValue: widget.netSwitch.value,
@@ -328,27 +334,25 @@ class _MaasEklemeBodyState extends State<_MaasEklemeBody> {
                           title: "Kaydet",
                           pressAction: () {
                             setState(() {
-                              print("ömer");
-                              if (tabKariyerController
-                                      .controllerPaymentName.text
-                                      .trim() ==
-                                  "") {
-                                Get.snackbar(
-                                  "Ödeme Ekranı Boş Bırakılamaz",
-                                  "",
-                                  colorText: whiteColor,
-                                  backgroundColor: redColor,
-                                );
-                              } else {
-                                widget.odemelerList.add(
-                                  NewPaymentList(
-                                    newPayment: NewPayment(
-                                        name: tabKariyerController
-                                            .controllerPaymentName.text),
-                                    userHelperController: widget.userHelper,
-                                  ),
-                                );
-                              }
+                              // print("ömer");
+                              // if (tabKariyerController
+                              //         .controllerPaymentName.text
+                              //         .trim() ==
+                              //     "") {
+                              //   Get.snackbar(
+                              //     "Ödeme Ekranı Boş Bırakılamaz",
+                              //     "",
+                              //     colorText: whiteColor,
+                              //     backgroundColor: redColor,
+                              //   );
+                              // } else {
+                              //   widget.paymentList.add(
+                              //     Payment(
+                              //       name: tabKariyerController
+                              //           .controllerPaymentName.text,
+                              //     ),
+                              //   );
+                              // }
                               Get.back();
                             });
                           },
@@ -361,14 +365,25 @@ class _MaasEklemeBodyState extends State<_MaasEklemeBody> {
               );
             },
           ),
-          SizedBox(
-            child: Obx(
-              () => ListView(
-                children: widget.odemelerList,
-                shrinkWrap: true,
-              ),
-            ),
-          ),
+          // SizedBox(
+          //   child: Obx(
+          //     () => ListView.builder(
+          //       shrinkWrap: true,
+          //       itemBuilder: (context, index) {
+          //         return PaymentCard(
+          //           onPressed: () {
+          //             setState(() {
+          //               // widget.paymentList.removeAt(index);
+          //             });
+          //           },
+          //           userHelperController: widget.userHelper,
+          //           // newPayment: widget.paymentList[index],
+          //         );
+          //       },
+          //       itemCount: widget.paymentList.length,
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

@@ -31,8 +31,8 @@ class UserDetailPayment {
     this.tcno = "",
     this.salary = "",
     this.currency = "",
-    required this.salaryType,
-    required this.paymentScheme,
+    this.salaryType = SalaryTypeEnum.none,
+    this.paymentScheme = PaymentSchemeEnum.none,
     this.commuteSupportFee = "",
     this.foodSupportFee = "",
   });

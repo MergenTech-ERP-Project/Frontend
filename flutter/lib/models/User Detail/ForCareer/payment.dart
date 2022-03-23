@@ -1,4 +1,4 @@
-class NewPayment {
+class Payment {
   int id;
   String name;
   String salary;
@@ -8,7 +8,7 @@ class NewPayment {
   bool grossPrice;
   bool includePayroll;
 
-  NewPayment({
+  Payment({
     this.id = 0,
     required this.name,
     this.salary = "",

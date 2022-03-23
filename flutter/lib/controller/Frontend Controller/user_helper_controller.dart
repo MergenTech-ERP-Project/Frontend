@@ -41,11 +41,7 @@ class UserHelperController {
     );
 
     userDetailCareer = UserDetailCareer(userDetailId: userDetail!.id);
-    userDetailPayment = UserDetailPayment(
-      userDetailId: userDetail!.id,
-      paymentScheme: PaymentSchemeEnum.values.first,
-      salaryType: SalaryTypeEnum.values.first,
-    );
+    userDetailPayment = UserDetailPayment(userDetailId: userDetail!.id);
     /* } */
   }
 
@@ -170,7 +166,7 @@ class UserHelperController {
             .updateUserDetailCareer(userDetail!.id, userDetailCareer);
       }
 
-      /*int? responseUserDetailPayment =
+      int? responseUserDetailPayment =
 
           ///TODO: update kaldı
           await userDetailPaymentController.addNewUserDetailPayment(
@@ -178,7 +174,7 @@ class UserHelperController {
         UserDetailPayment(
           userDetailId: userDetail!.id,
           tcno: tabKisiselBilgilerController.controllerTcNo.text,
-          salary: tabKariyerController.controllerSalary.text,
+          salary: tabKariyerController.controllerPaymentSalary.text,
           currency: "TL", //TODO
           salaryType: SalaryTypeEnum.values
               .elementAt(userDetailPayment!.salaryType.index),
@@ -189,6 +185,7 @@ class UserHelperController {
         ),
       );
 
+/*
       showDialogResponseCheck(
         responseUserDetail!,
         responseUserDetailCareer!,
