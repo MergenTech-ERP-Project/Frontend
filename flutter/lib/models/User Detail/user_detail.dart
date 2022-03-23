@@ -13,10 +13,13 @@ import 'package:vtys_kalite/enums/marial_status.dart';
 import 'package:vtys_kalite/enums/military_status.dart';
 import 'package:vtys_kalite/enums/employment_type.dart';
 
-List<UserDetail>? parseUsersDetail(String str) =>
+List<UserDetail> parseUsersDetail(String str) =>
     List<UserDetail>.from(json.decode(str).map((x) => UserDetail.fromJson(x)));
 
-UserDetail? parseUserDetail(String str) => parseUsersDetail(str)?[0];
+UserDetail? parseUserDetail(String str) {
+  List<UserDetail> details = parseUsersDetail(str);
+  return details.isNotEmpty ? details[0] : null;
+}
 
 String fetchUsersDetail(List<UserDetail> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -149,57 +152,57 @@ class UserDetail {
             GenderEnum.values,
             json['gender'].toString(),
           ) ??
-          GenderEnum.values.first,
+          GenderEnum.none,
       bloodType: EnumToString.fromString(
             BloodTypeEnum.values,
             json['blood_type'].toString(),
           ) ??
-          BloodTypeEnum.values.first,
+          BloodTypeEnum.none,
       bankNames: EnumToString.fromString(
             BankNamesEnum.values,
             json['bank_name'].toString(),
           ) ??
-          BankNamesEnum.values.first,
+          BankNamesEnum.none,
       contractType: EnumToString.fromString(
             ContractTypeEnum.values,
             json['contract_type'].toString(),
           ) ??
-          ContractTypeEnum.values.first,
+          ContractTypeEnum.none,
       maritalStatus: EnumToString.fromString(
             MaritalStatusEnum.values,
             json['maritalstatus'].toString(),
           ) ??
-          MaritalStatusEnum.values.first,
+          MaritalStatusEnum.none,
       disabledDegree: EnumToString.fromString(
             DisabledDegreeEnum.values,
             json['degree_of_disability'].toString(),
           ) ??
-          DisabledDegreeEnum.values.first,
+          DisabledDegreeEnum.none,
       militaryStatus: EnumToString.fromString(
             MilitaryStatusEnum.values,
             json['military_service_status'].toString(),
           ) ??
-          MilitaryStatusEnum.values.first,
+          MilitaryStatusEnum.none,
       employmentType: EnumToString.fromString(
             EmploymentTypeEnum.values,
             json['employment_type'].toString(),
           ) ??
-          EmploymentTypeEnum.values.first,
+          EmploymentTypeEnum.none,
       bankAccountType: EnumToString.fromString(
             BankAccountTypeEnum.values,
             json['bank_account_type'].toString(),
           ) ??
-          BankAccountTypeEnum.values.first,
+          BankAccountTypeEnum.none,
       educationalStatus: EnumToString.fromString(
             EducationalStatusEnum.values,
             json['education_status'].toString(),
           ) ??
-          EducationalStatusEnum.values.first,
+          EducationalStatusEnum.none,
       highestEducationLevelCompleted: EnumToString.fromString(
             HighestEducationLevelCompletedEnum.values,
             json['highest_education_level_completed'].toString(),
           ) ??
-          HighestEducationLevelCompletedEnum.values.first,
+          HighestEducationLevelCompletedEnum.none,
     );
   }
 

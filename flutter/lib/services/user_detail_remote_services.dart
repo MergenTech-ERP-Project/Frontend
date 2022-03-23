@@ -5,8 +5,17 @@ import 'package:http/http.dart' as http;
 import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 
-class UserDetailServices {
+class UserDetailRemoteServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
+
+  static Future<List<UserDetail>?> fetchUserDetails() async {
+    var response = await http.get(Uri.parse(serviceHttp + '/user/list'));
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      return parseUsersDetail(utf8.decode(response.bodyBytes));
+    } else {
+      return null;
+    }
+  }
 
   static Future<UserDetail?> fetchUserDetailByUserId(userId) async {
     var response = await http

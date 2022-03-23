@@ -115,8 +115,6 @@ class UserHelperController {
           tcNo: tabKisiselBilgilerController.controllerTcNo.text,
           userDetail: getUserDetail(),
         );
-        /* userId = await userController.fetchUserByEmailAndPassword(
-            tabGenelController.controllerEPostaPersonal.text, "qwe123"); */
       } else {
         userController.updateUser(
           id: user!.id,
@@ -132,23 +130,12 @@ class UserHelperController {
           ),
           userDetail: getUserDetail(),
         );
-        /* userId = user.id; */
       }
 
-      userDetail = await userDetailController.fetchUserDetailByUserId(userId);
-      print(userDetail == null ? "UserDetail not found" : "UserDetail : found");
+      /* UserDetailCareer? userDetailCareer = await userDetailCareerController
+          .fetchUserDetailCareerById(userDetail.id);
 
-      UserDetailCareer? userDetailCareer = await userDetailCareerController
-          .fetchUserDetailCareerById(userDetail?.id);
-
-      print("User Helper User UserDetailCareer " +
-          (userDetailCareer == null
-              ? "not found"
-              : "found ID: ${userDetailCareer.id}"));
-
-      int? responseUserDetailCareer;
-      if ((userDetailCareer == null)) {
-        responseUserDetailCareer =
+      if (userDetailCareer == null) {
             await userDetailCareerController.addNewUserDetailCareer(
           userDetail!.id,
           UserDetailCareer(
@@ -162,9 +149,9 @@ class UserHelperController {
           ),
         );
       } else {
-        responseUserDetailCareer = await userDetailCareerController
+        await userDetailCareerController
             .updateUserDetailCareer(userDetail!.id, userDetailCareer);
-      }
+      } */
 
       int? responseUserDetailPayment =
 
