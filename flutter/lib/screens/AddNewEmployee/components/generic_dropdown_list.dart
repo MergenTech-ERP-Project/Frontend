@@ -64,7 +64,7 @@ class _GenericDropDownListState<T> extends State<GenericDropDownList> {
                 return Container(
                   margin: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
-                    color: Color(0x11000000),
+                    color: const Color(0x11000000),
                     border: Border.all(color: activeColor),
                     borderRadius: BorderRadius.circular(30),
                   ),

@@ -12,11 +12,12 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/employment_type.dart';
+import 'package:vtys_kalite/models/User%20Detail/ForCareer/new_payment.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/models/settings/department.dart';
 import 'package:vtys_kalite/models/settings/title.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/models/odeme.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/components/new_payment_list.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/custombuttonwidget.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -144,11 +145,11 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
     ];
 
     salaryChildren1 = [
-      tabKariyerController.controllerSalary.text.toString() +
+      tabKariyerController.controllerPaymentSalary.text.toString() +
           EmploymentTypeEnumExtension.getList()[
                   widget.userHelper.userDetail!.employmentType.index]
               .toString(),
-      tabKariyerController.controllerPaymentScreenInSalary.text.toString(),
+      tabKariyerController.controllerPaymentName.text.toString(),
       'Buraya Nasıl Ekleyeceğim Bakacağım Sonra',
     ];
   }
@@ -228,7 +229,7 @@ class _MaasEklemeBody extends StatefulWidget {
 
   _MaasEklemeBody({Key? key, required this.userHelper}) : super(key: key);
 
-  List<YeniOdeme> odemelerList = <YeniOdeme>[].obs;
+  List<NewPaymentList> odemelerList = <NewPaymentList>[].obs;
 
   @override
   State<_MaasEklemeBody> createState() => _MaasEklemeBodyState();
@@ -241,12 +242,12 @@ class _MaasEklemeBodyState extends State<_MaasEklemeBody> {
       child: Column(
         children: [
           NameController(
-            controller: tabKariyerController.controllerSalary,
+            controller: tabKariyerController.controllerPaymentSalary,
             label: "Maaş",
             widget: const SizedBox(),
           ),
           NameController(
-            controller: tabKariyerController.controllerUnit,
+            controller: tabKariyerController.controllerPaymentUnit,
             label: "Birim",
             widget: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -318,8 +319,7 @@ class _MaasEklemeBodyState extends State<_MaasEklemeBody> {
                     children: [
                       CustomTextBox(
                         label: "Ödeme nedir?",
-                        controller: tabKariyerController
-                            .controllerPaymentScreenInSalary,
+                        controller: tabKariyerController.controllerPaymentName,
                         borderless: true,
                       ),
                       Padding(
@@ -330,7 +330,7 @@ class _MaasEklemeBodyState extends State<_MaasEklemeBody> {
                             setState(() {
                               print("ömer");
                               if (tabKariyerController
-                                      .controllerPaymentScreenInSalary.text
+                                      .controllerPaymentName.text
                                       .trim() ==
                                   "") {
                                 Get.snackbar(
@@ -341,12 +341,11 @@ class _MaasEklemeBodyState extends State<_MaasEklemeBody> {
                                 );
                               } else {
                                 widget.odemelerList.add(
-                                  YeniOdeme(
-                                    index: 0,
-                                    odemeListesi: widget.odemelerList,
+                                  NewPaymentList(
+                                    newPayment: NewPayment(
+                                        name: tabKariyerController
+                                            .controllerPaymentName.text),
                                     userHelperController: widget.userHelper,
-                                    name: tabKariyerController
-                                        .controllerPaymentScreenInSalary.text,
                                   ),
                                 );
                               }

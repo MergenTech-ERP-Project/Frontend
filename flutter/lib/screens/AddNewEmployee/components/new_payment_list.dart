@@ -1,50 +1,28 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_switch.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/payment_scheme.dart';
+import 'package:vtys_kalite/models/User%20Detail/ForCareer/new_payment.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
-class YeniOdeme extends StatefulWidget {
-  int id;
-  String name;
-  String salary;
-  String unit;
-  String description;
-  String periot;
-  bool grossPrice;
-  bool includePayroll;
+class NewPaymentList extends StatefulWidget {
+  final NewPayment newPayment;
+  final UserHelperController userHelperController;
 
-  UserHelperController userHelperController;
-
-  final List odemeListesi;
-  final int index;
-
-  YeniOdeme({
+  const NewPaymentList({
     Key? key,
-    this.id = 0,
-    this.name = "",
-    this.salary = "",
-    this.unit = "",
-    this.description = "",
-    this.periot = "",
-    this.grossPrice = false,
-    this.includePayroll = false,
+    required this.newPayment,
     required this.userHelperController,
-    required this.odemeListesi,
-    required this.index,
   }) : super(key: key);
 
   @override
-  _YeniOdemeState createState() => _YeniOdemeState();
+  _NewPaymentListState createState() => _NewPaymentListState();
 }
 
-class _YeniOdemeState extends State<YeniOdeme> {
+class _NewPaymentListState extends State<NewPaymentList> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -58,11 +36,11 @@ class _YeniOdemeState extends State<YeniOdeme> {
                   color: redColor,
                   onPressed: () {
                     setState(() {
-                      widget.odemeListesi.removeAt(widget.index);
+                      //widget.odemeListesi.remove(this);
                     });
                   },
                 ),
-                CustomText(text: widget.name),
+                CustomText(text: widget.newPayment.name),
               ],
             ),
             Padding(
@@ -79,7 +57,7 @@ class _YeniOdemeState extends State<YeniOdeme> {
                     flex: 3,
                     child: CustomTextBox(
                       borderless: true,
-                      label: widget.salary + "TL",
+                      label: widget.newPayment.salary + "TL",
                     ),
                   ),
                 ],
@@ -99,7 +77,7 @@ class _YeniOdemeState extends State<YeniOdeme> {
                     flex: 3,
                     child: CustomTextBox(
                       borderless: true,
-                      label: widget.description,
+                      label: widget.newPayment.description,
                     ),
                   ),
                 ],
@@ -127,22 +105,22 @@ class _YeniOdemeState extends State<YeniOdeme> {
             Row(
               children: [
                 CustomSwitch(
-                  switchValue: widget.grossPrice,
-                  text: widget.grossPrice ? "Brüt" : "Net ",
+                  switchValue: widget.newPayment.grossPrice,
+                  text: widget.newPayment.grossPrice ? "Brüt" : "Net ",
                   onChanged: (bool value) {
                     setState(() {
-                      widget.grossPrice = value;
+                      widget.newPayment.grossPrice = value;
                     });
                   },
                 ),
                 CustomSwitch(
-                  switchValue: widget.includePayroll,
-                  text: widget.includePayroll
+                  switchValue: widget.newPayment.includePayroll,
+                  text: widget.newPayment.includePayroll
                       ? "Bodroya Dahil Et  "
                       : "Bodroya Dahil Etme ",
                   onChanged: (bool value) {
                     setState(() {
-                      widget.includePayroll = value;
+                      widget.newPayment.includePayroll = value;
                     });
                   },
                 ),

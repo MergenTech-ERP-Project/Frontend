@@ -15,19 +15,20 @@ import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_control
 import 'package:vtys_kalite/enums/employment_type.dart';
 import 'package:vtys_kalite/enums/salary_type.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
+import 'package:vtys_kalite/models/User%20Detail/ForCareer/new_payment.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/models/settings/department.dart';
 import 'package:vtys_kalite/models/settings/title.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/generic_dropdown_list.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/models/odeme.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/components/new_payment_list.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/custombuttonwidget.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class TabKariyer extends StatefulWidget {
-  List<YeniOdeme> odemelerList = <YeniOdeme>[].obs;
+  List<NewPaymentList> newPaymentList = <NewPaymentList>[].obs;
 
   var asgariUcretSwitch = false.obs;
   var netSwitch = false.obs;
@@ -105,15 +106,16 @@ class _TabKariyerState extends State<TabKariyer> {
                           children: [
                             Expanded(
                               child: NameController(
-                                controller:
-                                    tabKariyerController.controllerSalary,
+                                controller: tabKariyerController
+                                    .controllerPaymentSalary,
                                 label: "Maaş",
                                 widget: const SizedBox(),
                               ),
                             ),
                             Expanded(
                               child: NameController(
-                                controller: tabKariyerController.controllerUnit,
+                                controller:
+                                    tabKariyerController.controllerPaymentUnit,
                                 label: "Birim",
                                 widget: Row(
                                   mainAxisAlignment:
@@ -202,7 +204,7 @@ class _TabKariyerState extends State<TabKariyer> {
                                       child: CustomTextBox(
                                         label: "Yapmak istediğiniz ödeme",
                                         controller: tabKariyerController
-                                            .controllerPaymentScreenInSalary,
+                                            .controllerPaymentName,
                                         borderless: true,
                                       ),
                                     ),
@@ -213,8 +215,7 @@ class _TabKariyerState extends State<TabKariyer> {
                                         pressAction: () {
                                           setState(() {
                                             if (tabKariyerController
-                                                    .controllerPaymentScreenInSalary
-                                                    .text
+                                                    .controllerPaymentName.text
                                                     .trim() ==
                                                 "") {
                                               showDialog(
@@ -231,16 +232,18 @@ class _TabKariyerState extends State<TabKariyer> {
                                                 ),
                                               );
                                             } else {
-                                              widget.odemelerList.add(
-                                                YeniOdeme( ///TODO index manual 0 geliyor. index atamayı çözemedim
-                                                  index: 0,
-                                                  odemeListesi:
-                                                      widget.odemelerList,
+                                              widget.newPaymentList.add(
+                                                NewPaymentList(
                                                   userHelperController:
                                                       widget.userHelper,
-                                                  name: tabKariyerController
-                                                      .controllerPaymentScreenInSalary
-                                                      .text,
+                                                  newPayment: NewPayment(
+                                                    name: tabKariyerController
+                                                        .controllerPaymentName
+                                                        .text,
+                                                    salary: tabKariyerController
+                                                        .controllerPaymentSalary
+                                                        .text,
+                                                  ),
                                                 ),
                                               );
                                             }
@@ -258,9 +261,12 @@ class _TabKariyerState extends State<TabKariyer> {
                         ),
                         SizedBox(
                           child: Obx(
-                            () => ListView(
-                              children: widget.odemelerList,
+                            () => ListView.builder(
                               shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return widget.newPaymentList[index];
+                              },
+                              itemCount: widget.newPaymentList.length,
                             ),
                           ),
                         ),
@@ -314,11 +320,11 @@ class _TabKariyerState extends State<TabKariyer> {
     ];
 
     salaryChildren1 = [
-      tabKariyerController.controllerSalary.text.toString() +
+      tabKariyerController.controllerPaymentSalary.text.toString() +
           EmploymentTypeEnumExtension.getList()[
                   widget.userHelper.userDetail!.employmentType.index]
               .toString(),
-      tabKariyerController.controllerPaymentScreenInSalary.text.toString(),
+      tabKariyerController.controllerPaymentName.toString(),
       'Buraya Nasıl Ekleyeceğim Bakacağım Sonra',
     ];
   }
