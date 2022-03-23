@@ -78,10 +78,10 @@ showInformationWhenOnClick(User? user, UserHelperController userHelper) {
   tabKariyerController.positionYoneticisi.text =
       userHelper.userDetailCareer!.managerName;
 
-  tabKariyerController.controllerSalary.text =
+  tabKariyerController.controllerPaymentSalary.text =
       userHelper.userDetailPayment!.salary;
 
-  tabKariyerController.controllerUnit.text =
+  tabKariyerController.controllerPaymentUnit.text =
       userHelper.userDetailPayment!.currency;
 
   tabDigerBilgilerController.controllerAdress.text =

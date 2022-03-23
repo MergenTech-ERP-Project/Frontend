@@ -232,9 +232,9 @@ class UserHelperController {
     userDetailCareer!.unitTitle = "";
     tabKariyerController.positionUnvan.text = "";
     tabKariyerController.positionYoneticisi.text = "";
-    tabKariyerController.controllerSalary.text = "";
-    tabKariyerController.controllerUnit.text = "";
-    tabKariyerController.controllerPaymentScreenInSalary.text = "";
+    tabKariyerController.controllerPaymentSalary.text = "";
+    tabKariyerController.controllerPaymentUnit.text = "";
+    tabKariyerController.controllerPaymentName.text = "";
 
     userDetail!.dateofbirth = dateTimeFormat.format(DateTime.now());
     tabKisiselBilgilerController.controllerTcNo.text = "";
