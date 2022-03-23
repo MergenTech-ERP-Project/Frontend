@@ -5,24 +5,26 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/payment_scheme.dart';
-import 'package:vtys_kalite/models/User%20Detail/ForCareer/new_payment.dart';
+import 'package:vtys_kalite/models/User%20Detail/ForCareer/payment.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
-class NewPaymentList extends StatefulWidget {
-  final NewPayment newPayment;
+class PaymentCard extends StatefulWidget {
+  final Payment newPayment;
   final UserHelperController userHelperController;
+  final Function() onPressed;
 
-  const NewPaymentList({
+  const PaymentCard({
     Key? key,
     required this.newPayment,
     required this.userHelperController,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
-  _NewPaymentListState createState() => _NewPaymentListState();
+  _PaymentCardState createState() => _PaymentCardState();
 }
 
-class _NewPaymentListState extends State<NewPaymentList> {
+class _PaymentCardState extends State<PaymentCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -34,11 +36,7 @@ class _NewPaymentListState extends State<NewPaymentList> {
                 IconButton(
                   icon: const Icon(Icons.close),
                   color: redColor,
-                  onPressed: () {
-                    setState(() {
-                      //widget.odemeListesi.remove(this);
-                    });
-                  },
+                  onPressed: widget.onPressed,
                 ),
                 CustomText(text: widget.newPayment.name),
               ],

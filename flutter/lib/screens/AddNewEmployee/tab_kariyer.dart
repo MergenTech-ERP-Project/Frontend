@@ -15,28 +15,22 @@ import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_control
 import 'package:vtys_kalite/enums/employment_type.dart';
 import 'package:vtys_kalite/enums/salary_type.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
-import 'package:vtys_kalite/models/User%20Detail/ForCareer/new_payment.dart';
+import 'package:vtys_kalite/models/User%20Detail/ForCareer/payment.dart';
 import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/models/settings/department.dart';
 import 'package:vtys_kalite/models/settings/title.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/generic_dropdown_list.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/components/new_payment_list.dart';
+import 'package:vtys_kalite/screens/AddNewEmployee/components/payment_card.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/custombuttonwidget.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class TabKariyer extends StatefulWidget {
-  List<NewPaymentList> newPaymentList = <NewPaymentList>[].obs;
-
-  var asgariUcretSwitch = false.obs;
-  var netSwitch = false.obs;
-  var agiDahilSwitch = false.obs;
-
   final UserHelperController userHelper;
 
-  TabKariyer({Key? key, required this.userHelper}) : super(key: key);
+  const TabKariyer({Key? key, required this.userHelper}) : super(key: key);
 
   @override
   State<TabKariyer> createState() => _TabKariyerState();
@@ -100,178 +94,8 @@ class _TabKariyerState extends State<TabKariyer> {
                 bodyWidget: SizedBox(
                   width: screenSize.width - 20,
                   child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: NameController(
-                                controller: tabKariyerController
-                                    .controllerPaymentSalary,
-                                label: "Maaş",
-                                widget: const SizedBox(),
-                              ),
-                            ),
-                            Expanded(
-                              child: NameController(
-                                controller:
-                                    tabKariyerController.controllerPaymentUnit,
-                                label: "Birim",
-                                widget: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: const [
-                                    Icon(Icons.close),
-                                    Icon(Icons.keyboard_arrow_down),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Obx(
-                                () => CustomSwitch(
-                                  switchValue: widget.asgariUcretSwitch.value,
-                                  text: "Asgari Ücret",
-                                  onChanged: (bool value) {
-                                    widget.asgariUcretSwitch.value = value;
-                                  },
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: CustomDropDownMenu(
-                                icon: const Icon(Icons.arrow_drop_down),
-                                isExpandedYes: true,
-                                iconSize: 20,
-                                valueChoose: widget.userHelper
-                                    .userDetailPayment!.salaryType.getName,
-                                text: "Maaş Tipi",
-                                list: SalaryTypeExtension.getList(),
-                                onChanged: (val) {
-                                  setState(() {
-                                    widget.userHelper.userDetailPayment!
-                                            .salaryType =
-                                        SalaryTypeExtension.getEnumFromName(
-                                            val);
-                                  });
-                                },
-                              ),
-                            ),
-                            Expanded(
-                              child: Obx(
-                                () => CustomSwitch(
-                                  switchValue: widget.netSwitch.value,
-                                  text: "Net",
-                                  onChanged: (bool value) {
-                                    widget.netSwitch.value = value;
-                                  },
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        Obx(
-                          () => CustomSwitch(
-                            switchValue: widget.agiDahilSwitch.value,
-                            text: "AGİ dahil",
-                            onChanged: (bool value) {
-                              widget.agiDahilSwitch.value = value;
-                            },
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        CustomButton(
-                          width: 360,
-                          title: "Ödeme Ekle",
-                          rightIcon: Icons.keyboard_arrow_down,
-                          pressAction: () {
-                            showDialog(
-                              context: context,
-                              builder: (_) => CustomAlertDialog(
-                                titleWidget: const CustomText(
-                                  text: "Ödeme Ekleme Ekranı",
-                                ),
-                                bodyWidget: Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 4,
-                                      child: CustomTextBox(
-                                        label: "Yapmak istediğiniz ödeme",
-                                        controller: tabKariyerController
-                                            .controllerPaymentName,
-                                        borderless: true,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: CustomButton(
-                                        title: "Kaydet",
-                                        pressAction: () {
-                                          setState(() {
-                                            if (tabKariyerController
-                                                    .controllerPaymentName.text
-                                                    .trim() ==
-                                                "") {
-                                              showDialog(
-                                                context: context,
-                                                builder: (_) =>
-                                                    CustomAlertDialog(
-                                                  titleWidget: const CustomText(
-                                                    text:
-                                                        "Ödeme Ekranı Boş Bırakılamaz",
-                                                  ),
-                                                  bodyWidget: const SizedBox(),
-                                                  bodyWidgetWidth:
-                                                      screenSize.width,
-                                                ),
-                                              );
-                                            } else {
-                                              widget.newPaymentList.add(
-                                                NewPaymentList(
-                                                  userHelperController:
-                                                      widget.userHelper,
-                                                  newPayment: NewPayment(
-                                                    name: tabKariyerController
-                                                        .controllerPaymentName
-                                                        .text,
-                                                    salary: tabKariyerController
-                                                        .controllerPaymentSalary
-                                                        .text,
-                                                  ),
-                                                ),
-                                              );
-                                            }
-                                            Get.back();
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                bodyWidgetWidth: screenSize.width / 2,
-                              ),
-                            );
-                          },
-                        ),
-                        SizedBox(
-                          child: Obx(
-                            () => ListView.builder(
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return widget.newPaymentList[index];
-                              },
-                              itemCount: widget.newPaymentList.length,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    child: MaasEkleBody(
+                        userHelper: widget.userHelper, screenSize: screenSize),
                   ),
                 ),
                 bodyWidgetWidth: screenSize.width / 1.5,
@@ -383,6 +207,192 @@ class _TabKariyerState extends State<TabKariyer> {
           )
         ],
       ),
+    );
+  }
+}
+
+class MaasEkleBody extends StatefulWidget {
+  var asgariUcretSwitch = false.obs;
+  var netSwitch = false.obs;
+  var agiDahilSwitch = false.obs;
+  final UserHelperController userHelper;
+  Size screenSize;
+  List<Payment> paymentList = <Payment>[].obs;
+
+  MaasEkleBody({
+    Key? key,
+    required this.userHelper,
+    required this.screenSize,
+  }) : super(key: key);
+
+  @override
+  State<MaasEkleBody> createState() => _MaasEkleBodyState();
+}
+
+class _MaasEkleBodyState extends State<MaasEkleBody> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: NameController(
+                controller: tabKariyerController.controllerPaymentSalary,
+                label: "Maaş",
+                widget: const SizedBox(),
+              ),
+            ),
+            Expanded(
+              child: NameController(
+                controller: tabKariyerController.controllerPaymentUnit,
+                label: "Birim",
+                widget: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Icon(Icons.close),
+                    Icon(Icons.keyboard_arrow_down),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: Obx(
+                () => CustomSwitch(
+                  switchValue: widget.asgariUcretSwitch.value,
+                  text: "Asgari Ücret",
+                  onChanged: (bool value) {
+                    widget.asgariUcretSwitch.value = value;
+                  },
+                ),
+              ),
+            )
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: CustomDropDownMenu(
+                icon: const Icon(Icons.arrow_drop_down),
+                isExpandedYes: true,
+                iconSize: 20,
+                valueChoose:
+                    widget.userHelper.userDetailPayment!.salaryType.getName,
+                text: "Maaş Tipi",
+                list: SalaryTypeExtension.getList(),
+                onChanged: (val) {
+                  setState(() {
+                    widget.userHelper.userDetailPayment!.salaryType =
+                        SalaryTypeExtension.getEnumFromName(val);
+                  });
+                },
+              ),
+            ),
+            Expanded(
+              child: Obx(
+                () => CustomSwitch(
+                  switchValue: widget.netSwitch.value,
+                  text: "Net",
+                  onChanged: (bool value) {
+                    widget.netSwitch.value = value;
+                  },
+                ),
+              ),
+            )
+          ],
+        ),
+        const SizedBox(height: 10),
+        Obx(
+          () => CustomSwitch(
+            switchValue: widget.agiDahilSwitch.value,
+            text: "AGİ dahil",
+            onChanged: (bool value) {
+              widget.agiDahilSwitch.value = value;
+            },
+          ),
+        ),
+        const SizedBox(height: 20),
+        CustomButton(
+          width: 360,
+          title: "Ödeme Ekle",
+          rightIcon: Icons.keyboard_arrow_down,
+          pressAction: () {
+            showDialog(
+              context: context,
+              builder: (_) => CustomAlertDialog(
+                titleWidget: const CustomText(
+                  text: "Ödeme Ekleme Ekranı",
+                ),
+                bodyWidget: Row(
+                  children: [
+                    Expanded(
+                      flex: 4,
+                      child: CustomTextBox(
+                        label: "Yapmak istediğiniz ödeme",
+                        controller: tabKariyerController.controllerPaymentName,
+                        borderless: true,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: CustomButton(
+                        title: "Kaydet",
+                        pressAction: () {
+                          setState(() {
+                            if (tabKariyerController.controllerPaymentName.text
+                                    .trim() ==
+                                "") {
+                              showDialog(
+                                context: context,
+                                builder: (_) => CustomAlertDialog(
+                                  titleWidget: const CustomText(
+                                    text: "Ödeme Ekranı Boş Bırakılamaz",
+                                  ),
+                                  bodyWidget: const SizedBox(),
+                                  bodyWidgetWidth: widget.screenSize.width,
+                                ),
+                              );
+                            } else {
+                              widget.paymentList.add(
+                                Payment(
+                                  name: tabKariyerController
+                                      .controllerPaymentName.text,
+                                ),
+                              );
+                            }
+                            Get.back();
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                bodyWidgetWidth: widget.screenSize.width / 2,
+              ),
+            );
+          },
+        ),
+        SizedBox(
+          child: Obx(
+            () => ListView.builder(
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return PaymentCard(
+                  onPressed: () {
+                    setState(() {
+                      widget.paymentList.removeAt(index);
+                    });
+                  },
+                  userHelperController: widget.userHelper,
+                  newPayment: widget.paymentList[index],
+                );
+              },
+              itemCount: widget.paymentList.length,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

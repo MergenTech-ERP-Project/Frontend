@@ -11,11 +11,11 @@ enum EmploymentTypeEnum {
 
 extension EmploymentTypeEnumExtension on EmploymentTypeEnum {
   static List<String> getList() {
-    List<String> typeOfWorkingList = [];
+    List<String> employmentTypeList = [];
     for (int i = 0; i < EmploymentTypeEnum.values.length; i++) {
-      typeOfWorkingList.add(EmploymentTypeEnum.values[i].getName);
+      employmentTypeList.add(EmploymentTypeEnum.values[i].getName);
     }
-    return typeOfWorkingList;
+    return employmentTypeList;
   }
 
   String get getName {

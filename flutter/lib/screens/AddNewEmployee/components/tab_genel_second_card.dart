@@ -165,13 +165,13 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CustomDropDownMenu(
-                  isExpandedYes: true,
                   iconSize: 20,
                   text: "Çalışma Şekli",
                   valueChoose:
                       widget.userHelper.userDetail!.employmentType.getName,
                   list: EmploymentTypeEnumExtension.getList(),
                   icon: const Icon(Icons.arrow_drop_down),
+                  isExpandedYes: true,
                   onChanged: (val) {
                     setState(() {
                       widget.userHelper.userDetail!.employmentType =
