@@ -69,8 +69,10 @@ class UserController extends GetxController {
   }) async {
     try {
       isLoading(true);
-      int response = await UserRemoteServices.addNewUser(
-          json.encode(newUser.toJson()).toString());
+      Map user = newUser.toJson();
+      user.remove('id');
+      int response =
+          await UserRemoteServices.addNewUser(json.encode(user).toString());
       print("addNewUser $response");
       await fetchUsers(); //userList.add(newUser);
       var userId = await userController.fetchUserByEmailAndPassword(
