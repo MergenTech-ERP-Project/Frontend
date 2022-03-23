@@ -158,7 +158,7 @@ class SignUpPage extends StatelessWidget {
 
   signUpPage(context) async {
     if (!(_formkey.currentState!.validate())) return;
-
+    await userDetailController.fetchUserDetails();
     int? response = await userController.addNewUser(
       newUser: User(
         name: _usernameController.text,

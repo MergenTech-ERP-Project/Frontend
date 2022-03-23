@@ -11,11 +11,28 @@ class UserDetailController extends GetxController {
   var isLoading = false.obs;
   List<UserDetail> userDetailList = <UserDetail>[].obs; //List<UserDetail>
 
+  @override
+  void onInit() {
+    fetchUserDetails();
+    super.onInit();
+  }
+
+  Future<void> fetchUserDetails() async {
+    try {
+      isLoading(true);
+      List<UserDetail>? users =
+          await UserDetailRemoteServices.fetchUserDetails();
+      userDetailList.assignAll(users ?? []);
+    } finally {
+      isLoading(false);
+    }
+  }
+
   Future<UserDetail?> fetchUserDetailByUserId(userId) async {
     try {
       isLoading(true);
       UserDetail? detail =
-          await UserDetailServices.fetchUserDetailByUserId(userId);
+          await UserDetailRemoteServices.fetchUserDetailByUserId(userId);
       if (detail != null) {
         ("fetch User Detail: user.id: " + detail.userId.toString());
       }
@@ -32,7 +49,7 @@ class UserDetailController extends GetxController {
       Map detail = userDetail.toJson();
       detail.remove("id");
       print(json.encode(detail).toString());
-      var response = await UserDetailServices.addNewUserDetail(
+      var response = await UserDetailRemoteServices.addNewUserDetail(
           json.encode(detail).toString());
 
       print("post User Detail: " + response.toString() + "\n");
@@ -53,7 +70,7 @@ class UserDetailController extends GetxController {
       Map<String, dynamic> detailMap = userDetail.toJson();
       detailMap.remove("tc_no");
       print(json.encode(detailMap).toString());
-      var response = await UserDetailServices.updateUserDetail(
+      var response = await UserDetailRemoteServices.updateUserDetail(
           id, json.encode(detailMap).toString());
       print("put User Detail: " + response.toString());
       fetchUserDetailByUserId(userDetail.userId);
@@ -67,7 +84,7 @@ class UserDetailController extends GetxController {
     try {
       isLoading(true);
       print("Delete User Detail ID: $id");
-      var response = await UserDetailServices.deleteUserDetail(id);
+      var response = await UserDetailRemoteServices.deleteUserDetail(id);
       print("delete User Detail: " + response);
       fetchUserDetailByUserId(userId);
       return response;
