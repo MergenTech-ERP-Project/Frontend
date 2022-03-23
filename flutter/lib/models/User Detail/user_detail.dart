@@ -65,8 +65,8 @@ class UserDetail {
   UserDetail({
     this.id = -1,
     required this.userId,
+    required this.tcno,
     this.numberofkids = 0,
-    this.tcno = "",
     this.workPhone = "",
     this.lastCompletedEducationStatus = "",
     this.dateofbirth = "",
@@ -88,17 +88,40 @@ class UserDetail {
     this.reasonTypeForQuit = "",
     this.quitExplanation = "none",
     this.nationality = "",
-    required this.maritalStatus,
-    required this.disabledDegree,
-    required this.gender,
-    required this.educationalStatus,
-    required this.highestEducationLevelCompleted,
-    required this.employmentType,
-    required this.militaryStatus,
-    required this.contractType,
-    required this.bankNames,
-    required this.bankAccountType,
-    required this.bloodType,
+    this.maritalStatus = MaritalStatusEnum.married,
+
+    ///TODO : NONE
+    this.disabledDegree = DisabledDegreeEnum.firstDegreeDisabled,
+
+    ///TODO : NONE
+    this.gender = GenderEnum.male,
+
+    ///TODO : NONE
+    this.educationalStatus = EducationalStatusEnum.graduate,
+
+    ///TODO : NONE
+    this.highestEducationLevelCompleted =
+        HighestEducationLevelCompletedEnum.bachelorsDegree,
+
+    ///TODO : NONE
+    this.employmentType = EmploymentTypeEnum.freelancer,
+
+    ///TODO : NONE
+    this.militaryStatus = MilitaryStatusEnum.exempt,
+
+    ///TODO : NONE
+    this.contractType = ContractTypeEnum.indenfinite,
+
+    ///TODO : NONE
+    this.bankNames = BankNamesEnum.akBank,
+
+    ///TODO : NONE
+    this.bankAccountType = BankAccountTypeEnum.drawingAccount,
+
+    ///TODO : NONE
+    this.bloodType = BloodTypeEnum.aPlus,
+
+    ///TODO : NONE
   });
 
   String? getGender() => EnumToString.convertToString(gender);
@@ -156,7 +179,7 @@ class UserDetail {
           BloodTypeEnum.values.first,
       bankNames: EnumToString.fromString(
             BankNamesEnum.values,
-            json['bankNames'].toString(),
+            json['bank_name'].toString(),
           ) ??
           BankNamesEnum.values.first,
       contractType: EnumToString.fromString(

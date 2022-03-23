@@ -25,16 +25,12 @@ class UserDetailController extends GetxController {
     }
   }
 
-
-  Future<int> addNewUserDetail(UserDetail userDetail) async {
-    UserDetail userDetail,
-    UserDetailCareer? userDetailCareer,
-  ) async {
-
+  Future<int> addNewUserDetail(UserDetail userDetail,
+      {UserDetailCareer? career}) async {
     try {
       isLoading(true);
       Map detail = userDetail.toJson();
-      //detail.remove("id");
+      detail.remove("id");
       print(json.encode(detail).toString());
       var response = await UserDetailServices.addNewUserDetail(
           json.encode(detail).toString());
@@ -47,14 +43,15 @@ class UserDetailController extends GetxController {
     }
   }
 
-  Future<int> updateUserDetail(int id, UserDetail userDetail) async {
+  Future<int> updateUserDetail(int id, UserDetail userDetail,
+      {UserDetailCareer? career}) async {
     print("User Detail Update");
     userDetail.id = id;
     print("User Detail $id : " + json.encode(userDetail.toJson()).toString());
     try {
       isLoading(true);
       Map<String, dynamic> detailMap = userDetail.toJson();
-      //detailMap.remove("tc_no");
+      detailMap.remove("tc_no");
       print(json.encode(detailMap).toString());
       var response = await UserDetailServices.updateUserDetail(
           id, json.encode(detailMap).toString());
