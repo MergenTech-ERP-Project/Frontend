@@ -15,4 +15,20 @@ class OptionalCompanyDescriptionsController extends GetxController {
   var branchName = "".obs;
   var departmanName = "".obs;
   var titleName = "".obs;
+
+  var visibleList = false.obs;
+
+  optionalCompanyShowInformation() {
+    return (!visibleList.value)
+        ? "Şirketleri Göster"
+        : (companyName.value.isNotEmpty
+                ? ("Şirket: " + companyName.value)
+                : "") +
+            (branchName.value.isNotEmpty
+                ? (" Şube: " + branchName.value)
+                : "") +
+            (departmanName.value.isNotEmpty
+                ? (" Departman: " + departmanName.value)
+                : "");
+  }
 }

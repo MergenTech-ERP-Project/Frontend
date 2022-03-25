@@ -39,7 +39,7 @@ class UserHelperController {
               0 + 1)
           .toString(),
     );
-
+    setUserDetail();
     userDetailCareer = UserDetailCareer(userDetailId: userDetail!.id);
     userDetailPayment = UserDetailPayment(userDetailId: userDetail!.id);
     /* } */
@@ -96,6 +96,37 @@ class UserHelperController {
       highestEducationLevelCompleted: HighestEducationLevelCompletedEnum.values
           .elementAt(userDetail!.highestEducationLevelCompleted.index),
     );
+  }
+
+  setUserDetail() {
+    if (userDetail == null) return;
+    tabKisiselBilgilerController.controllerNumberOfKids.text =
+        userDetail!.numberofkids.toString();
+    tabKisiselBilgilerController.controllerTcNo.text = userDetail!.tcno;
+    tabGenelController.controllerWorkPhone.text = userDetail!.workPhone;
+    tabKisiselBilgilerController.controllerLastCompletedEducationStatus.text =
+        userDetail!.lastCompletedEducationStatus;
+    tabGenelController.controllerEPostaWork.text = userDetail!.workEmail;
+    tabDigerBilgilerController.controllerAdress.text = userDetail!.address;
+
+    tabDigerBilgilerController.controllerCountry.text =
+        userDetail!.addressCountry;
+    tabDigerBilgilerController.controllerDistrict.text =
+        userDetail!.addressDistrict;
+    tabDigerBilgilerController.controllerCity.text = userDetail!.addressCity;
+
+    tabDigerBilgilerController.controllerZipCode.text =
+        userDetail!.addressZipCode;
+
+    tabDigerBilgilerController.controllerHomePhone.text = userDetail!.homePhone;
+
+    tabDigerBilgilerController.controllerAccountNumber.text =
+        userDetail!.bankAccountNumber;
+
+    tabDigerBilgilerController.controllerIBAN.text = userDetail!.iban;
+
+    tabKisiselBilgilerController.controllerNationality.text =
+        userDetail!.nationality;
   }
 
   userDetailSave(BuildContext context, User? user) async {
