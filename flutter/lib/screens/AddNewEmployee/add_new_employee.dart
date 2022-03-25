@@ -1,15 +1,11 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
-import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
-import 'package:vtys_kalite/enums/vacation_request_status.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
-import 'package:vtys_kalite/models/User%20Detail/user_vacation.dart';
-import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_diger_bilgiler.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_diger_bilgiler_small.dart';
@@ -19,185 +15,200 @@ import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer_small.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kisisel_bilgiler.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/tab_kisisel_bilgiler_small.dart';
-import 'package:vtys_kalite/screens/Forms/PermissionRequestForm/permission_request_form.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class AddNewEmployee extends StatelessWidget {
-  var isSaved = false.obs;
-  var isLoading = false.obs;
-  User? newUser;
-  UserHelperController userHelper;
-
-  initialize() async {
-    isLoading(true);
-    await userHelper.init();
-    isLoading(false);
-  }
+  final int userId;
 
   AddNewEmployee({
     Key? key,
-    this.newUser,
-    required this.userHelper,
-  }) : super(key: key) {
-    initialize();
-  }
+    required this.userId,
+  }) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: userHelper.init(id: userId),
+      builder: (context, snap) {
+        if (snap.connectionState == ConnectionState.waiting) {
+          return Container(
+            color: lightColor,
+            child: const Center(
+              child: SizedBox(
+                height: 50,
+                width: 50,
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          );
+        } else {
+          if (snap.hasError) {
+            return Container(
+              color: redColor,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(50),
+                  child: CustomText(
+                    text: snap.error.toString(),
+                    size: 24,
+                    color: yellowColor,
+                  ),
+                ),
+              ),
+            );
+          } else {
+            return _Body();
+          }
+        }
+      },
+    );
+  }
+}
+
+class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 9,
       child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 0,
-          elevation: 0,
-          backgroundColor: activeColor,
-          foregroundColor: Colors.white,
-          automaticallyImplyLeading: true,
-          centerTitle: true,
-          title: const CustomText(text: "Personel"),
-          leading: IconButton(
-            icon: const Icon(Icons.keyboard_arrow_left),
-            onPressed: () => Get.offAllNamed(rootRoute),
+        appBar: _appBar(),
+        body: _TabBody(),
+      ),
+    );
+  }
+}
+
+_appBar() => AppBar(
+      toolbarHeight: 0,
+      elevation: 0,
+      backgroundColor: activeColor,
+      foregroundColor: Colors.white,
+      automaticallyImplyLeading: true,
+      centerTitle: true,
+      title: const CustomText(text: "Personel"),
+      leading: IconButton(
+        icon: const Icon(Icons.keyboard_arrow_left),
+        onPressed: () => Get.offAllNamed(rootRoute),
+      ),
+      bottom: TabBar(
+        isScrollable: true,
+        indicatorColor: Colors.blue,
+        tabs: [
+          Tab(child: CustomText(text: 'Genel', color: lightColor)),
+          Tab(child: CustomText(text: 'Kariyer', color: lightColor)),
+          Tab(child: CustomText(text: 'Kişisel Bilgiler', color: lightColor)),
+          Tab(child: CustomText(text: 'Diğer Bilgiler', color: lightColor)),
+          Tab(child: CustomText(text: 'İzin', color: lightColor)),
+          Tab(child: CustomText(text: 'Ödemeler', color: lightColor)),
+          Tab(child: CustomText(text: 'Mesai', color: lightColor)),
+          Tab(child: CustomText(text: 'Bodro', color: lightColor)),
+          Tab(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomText(text: "Diğer", color: lightColor),
+                const Icon(Icons.keyboard_arrow_down),
+              ],
+            ),
           ),
-          bottom: TabBar(
-            isScrollable: true,
-            indicatorColor: Colors.blue,
-            tabs: [
-              Tab(child: CustomText(text: 'Genel', color: lightColor)),
-              Tab(child: CustomText(text: 'Kariyer', color: lightColor)),
-              Tab(
-                  child:
-                      CustomText(text: 'Kişisel Bilgiler', color: lightColor)),
-              Tab(child: CustomText(text: 'Diğer Bilgiler', color: lightColor)),
-              Tab(child: CustomText(text: 'İzin', color: lightColor)),
-              Tab(child: CustomText(text: 'Ödemeler', color: lightColor)),
-              Tab(child: CustomText(text: 'Mesai', color: lightColor)),
-              Tab(child: CustomText(text: 'Bodro', color: lightColor)),
-              Tab(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomText(text: "Diğer", color: lightColor),
-                    const Icon(Icons.keyboard_arrow_down),
-                  ],
-                ),
+        ],
+      ),
+    );
+
+class _TabBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Padding(
+          padding: ResponsiveWidget.isLargeScreen(context)
+              ? const EdgeInsets.all(20)
+              : const EdgeInsets.all(5),
+          child: TabBarView(
+            children: [
+              TabGenel(),
+              ResponsiveWidget(
+                largeScreen: TabKariyer(),
+                smallScreen: TabKariyerSmall(),
               ),
+              ResponsiveWidget(
+                largeScreen: TabPersonalInformation(),
+                smallScreen: TabPersonalInformationSmall(),
+              ),
+              ResponsiveWidget(
+                largeScreen: TabAnotherInformation(),
+                smallScreen: TabAnotherInformationSmall(),
+              ),
+              TabIzin(),
+              const Center(child: CustomText(text: "5")),
+              const Center(child: CustomText(text: "6")),
+              const Center(child: CustomText(text: "7")),
+              const Center(child: CustomText(text: "8")),
             ],
           ),
         ),
-        body: Stack(
-          children: [
-            Padding(
-              padding: ResponsiveWidget.isLargeScreen(context)
-                  ? const EdgeInsets.all(20)
-                  : const EdgeInsets.all(5),
-              child: Obx(
-                () => isLoading.isTrue
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : TabBarView(
-                        children: [
-                          TabGenel(
-                            user: newUser,
-                            userHelper: userHelper,
-                          ),
-                          ResponsiveWidget(
-                            largeScreen: TabKariyer(
-                              userHelper: userHelper,
-                            ),
-                            smallScreen: TabKariyerSmall(
-                              userHelper: userHelper,
-                            ),
-                          ),
-                          ResponsiveWidget(
-                            largeScreen: TabPersonalInformation(
-                              userHelper: userHelper,
-                            ),
-                            smallScreen: TabPersonalInformationSmall(
-                              userHelper: userHelper,
-                            ),
-                          ),
-                          ResponsiveWidget(
-                            largeScreen: TabAnotherInformation(
-                                user: newUser, userHelper: userHelper),
-                            smallScreen: TabAnotherInformationSmall(
-                                userHelper: userHelper),
-                          ),
-                          TabIzin(
-                            vacation: UserDetailVacation(
-                              userDetailId: userHelper.userDetail?.id ?? 0,
-                              sicilNo:
-                                  (userHelper.userDetail?.id ?? 0).toString(),
-                              vacationRequestStatus:
-                                  VacationRequestStatusEnum.pendingApproval,
-                            ),
-                          ),
-                          const Center(child: CustomText(text: "5")),
-                          const Center(child: CustomText(text: "6")),
-                          const Center(child: CustomText(text: "7")),
-                          const Center(child: CustomText(text: "8")),
-                        ],
-                      ),
-              ),
+        Positioned(
+          right: 0,
+          left: 0,
+          bottom: 0,
+          height: 50,
+          child: _BottomBar(),
+        ),
+      ],
+    );
+  }
+}
+
+class _BottomBar extends StatelessWidget {
+  var isSaved = false.obs;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: lightColor,
+      child: Row(
+        children: [
+          Visibility(
+            visible: ResponsiveWidget.isSmallScreen(context) ? false : true,
+            child: const Expanded(
+              flex: 3,
+              child: Text(""),
             ),
-            Positioned(
-              right: 0,
-              left: 0,
-              bottom: 0,
-              height: 50,
-              child: Container(
-                color: lightColor,
+          ),
+          Expanded(
+            child: Obx(
+              () => Visibility(
+                visible: isSaved.value,
                 child: Row(
-                  children: [
-                    Visibility(
-                      visible: ResponsiveWidget.isSmallScreen(context)
-                          ? false
-                          : true,
-                      child: const Expanded(
-                        flex: 3,
-                        child: Text(""),
-                      ),
-                    ),
-                    Expanded(
-                      child: Obx(
-                        () => Visibility(
-                          visible: isSaved.value,
-                          child: Row(
-                            children: const [
-                              Icon(Icons.done),
-                              Text(' Kaydedildi!'),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: CustomButton(
-                        title: 'Kaydet',
-                        pressAction: () async {
-                          showDialogWaitingMessage(context);
-                          await userHelper.userDetailSave(context, newUser);
-                          Navigator.of(context).pop(true);
-                          isSaved.value = true;
-                          Navigator.of(context).pop(true);
-                        },
-                      ),
-                    ),
-                    Expanded(
-                      child: CustomButton(
-                        title: 'İptal',
-                        foregroundColor: Colors.black,
-                        backgroundColor: Colors.white,
-                        pressAction: () => Get.offAllNamed(rootRoute),
-                      ),
-                    ),
+                  children: const [
+                    Icon(Icons.done),
+                    Text(' Kaydedildi!'),
                   ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+          Expanded(
+            child: CustomButton(
+              title: 'Kaydet',
+              pressAction: () async {
+                showDialogWaitingMessage(context);
+                await userHelper.userDetailSave();
+                Navigator.of(context).pop(true);
+                isSaved.value = true;
+                Navigator.of(context).pop(true);
+              },
+            ),
+          ),
+          Expanded(
+            child: CustomButton(
+              title: 'İptal',
+              foregroundColor: Colors.black,
+              backgroundColor: Colors.white,
+              pressAction: () => Get.offAllNamed(rootRoute),
+            ),
+          ),
+        ],
       ),
     );
   }

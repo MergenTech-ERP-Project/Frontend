@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, must_be_immutable, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -53,7 +53,6 @@ class _TravelAssignmentNotificationFormPageState
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
     return Center(
       child: ListView(
         padding: const EdgeInsets.all(20),
@@ -70,16 +69,16 @@ class _TravelAssignmentNotificationFormPageState
             ),
           ),
           const SizedBox(height: 30),
-          textWidget(
+          TextWidget(
             label: "Kullanıcı Adı",
             textEditingController: widget.usernameController,
           ),
-          CustomTextDivider(
+          const CustomTextDivider(
             height: 40,
             thickness: 2,
             text: "Seyahat Gidiş Bilgileri",
           ),
-          textWidget(
+          TextWidget(
             label: "Gidilen Şehir",
             textEditingController: widget.destinationCityController,
           ),
@@ -108,7 +107,7 @@ class _TravelAssignmentNotificationFormPageState
               const Expanded(flex: 1, child: SizedBox()),
               Expanded(
                 flex: 4,
-                child: textWidget(
+                child: TextWidget(
                   label: "Gidiş Ulaşım Aracı",
                   textEditingController: widget.outbondTransportController,
                 ),
@@ -116,11 +115,11 @@ class _TravelAssignmentNotificationFormPageState
             ],
           ),
           const SizedBox(height: 15),
-          textWidget(
+          TextWidget(
             label: "Gidilen Firma / Kurum Adı",
             textEditingController: widget.companyInstitutionFormController,
           ),
-          textWidget(
+          TextWidget(
             label: "Şirket Aracı Alınacak İse Aracın Plakası",
             textEditingController: widget.companyVehiclePlakeController,
           ),
@@ -147,14 +146,14 @@ class _TravelAssignmentNotificationFormPageState
               const Expanded(flex: 1, child: SizedBox()),
               Expanded(
                 flex: 4,
-                child: textWidget(
+                child: TextWidget(
                   label: "Yaklaşık (Gün Olarak)",
                   textEditingController: widget.aboutDayControllers,
                 ),
               ),
             ],
           ),
-          CustomTextDivider(
+          const CustomTextDivider(
             height: 40,
             thickness: 2,
             text: "Gidiş Nedeni",
@@ -180,7 +179,7 @@ class _TravelAssignmentNotificationFormPageState
               }
             },
           ),
-          textWidget(
+          TextWidget(
             label: "Tutar ( TL )",
             textEditingController: widget.tutarTLController,
           ),
@@ -199,7 +198,7 @@ class _TravelAssignmentNotificationFormPageState
               }
             },
           ),
-          textWidget(
+          TextWidget(
             label: "Tutar ( TL )",
             textEditingController: widget.tutarTLController2,
           ),
@@ -214,20 +213,20 @@ class _TravelAssignmentNotificationFormPageState
             ),
           ),
           const SizedBox(height: 20),
-          CustomTextDivider(
+          const CustomTextDivider(
             height: 40,
             thickness: 2,
             text: "Seyahat Dönüş Bilgileri",
           ),
-          textWidget(
+          TextWidget(
             label: "Seyahat Dönüş Tarihi",
             textEditingController: widget.travelReturnDateController,
           ),
-          textWidget(
+          TextWidget(
             label: "Dönüş Ulacım Aracı",
             textEditingController: widget.returnTransportVehicleController,
           ),
-          textWidget(
+          TextWidget(
             label: "Kalış Süresi (gün)",
             textEditingController: widget.spentDayController,
           ),

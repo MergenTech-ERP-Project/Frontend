@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, must_be_immutable
+// ignore_for_file: avoid_print, must_be_immutable, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -10,7 +10,6 @@ import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_switch.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/employment_type.dart';
 import 'package:vtys_kalite/enums/salary_type.dart';
 import 'package:vtys_kalite/models/User%20Detail/ForCareer/payment.dart';
@@ -18,17 +17,12 @@ import 'package:vtys_kalite/models/settings/branch.dart';
 import 'package:vtys_kalite/models/settings/company.dart';
 import 'package:vtys_kalite/models/settings/department.dart';
 import 'package:vtys_kalite/models/settings/title.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/components/payment_card.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/custombuttonwidget.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
-import 'package:vtys_kalite/utilities/style.dart';
 
 class TabKariyerSmall extends StatefulWidget {
   List<Payment> paymentList = <Payment>[].obs;
-  final UserHelperController userHelper;
-
-  TabKariyerSmall({Key? key, required this.userHelper}) : super(key: key);
 
   @override
   State<TabKariyerSmall> createState() => _TabKariyerSmallState();
@@ -66,9 +60,7 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                         bodyWidgetWidth: MediaQuery.of(context).size.width - 20,
                         bodyWidget: SizedBox(
                           width: MediaQuery.of(context).size.width - 20 / 1.2,
-                          child: _PozisyonEklemeBody(
-                            userHelper: widget.userHelper,
-                          ),
+                          child: _PozisyonEklemeBody(),
                         ),
                       ),
                     );
@@ -96,9 +88,7 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
                         titleWidget: const MaasEkleHeader(),
                         bodyWidget: SizedBox(
                           width: MediaQuery.of(context).size.width - 20,
-                          child: _MaasEklemeBody(
-                            userHelper: widget.userHelper,
-                          ),
+                          child: _MaasEklemeBody(),
                         ),
                         bodyWidgetWidth:
                             MediaQuery.of(context).size.width / 1.5,
@@ -129,15 +119,15 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
     ];
 
     positionChildren1 = [
-      widget.userHelper.userDetail!.startDateWork,
-      widget.userHelper.userDetail!.contractEndDate,
+      userHelper.userDetail!.startDateWork,
+      userHelper.userDetail!.contractEndDate,
       EmploymentTypeEnumExtension.getList()[
-              widget.userHelper.userDetail!.employmentType.index]
+              userHelper.userDetail!.employmentType.index]
           .toString(),
-      widget.userHelper.userDetailCareer!.unitCompany,
-      widget.userHelper.userDetailCareer!.unitBranch,
-      widget.userHelper.userDetailCareer!.unitDepartment,
-      widget.userHelper.userDetailCareer!.unitTitle,
+      userHelper.userDetailCareer!.unitCompany,
+      userHelper.userDetailCareer!.unitBranch,
+      userHelper.userDetailCareer!.unitDepartment,
+      userHelper.userDetailCareer!.unitTitle,
     ];
 
     salaryHeaders = [
@@ -149,7 +139,7 @@ class _TabKariyerSmallState extends State<TabKariyerSmall> {
     salaryChildren1 = [
       tabKariyerController.controllerPaymentSalary.text.toString() +
           EmploymentTypeEnumExtension.getList()[
-                  widget.userHelper.userDetail!.employmentType.index]
+                  userHelper.userDetail!.employmentType.index]
               .toString(),
       tabKariyerController.controllerPaymentName.text.toString(),
       'Buraya Nasıl Ekleyeceğim Bakacağım Sonra',
@@ -227,10 +217,6 @@ class _MaasEklemeBody extends StatefulWidget {
   var netSwitch = false.obs;
   var agiDahilSwitch = false.obs;
 
-  final UserHelperController userHelper;
-
-  _MaasEklemeBody({Key? key, required this.userHelper}) : super(key: key);
-
   List<Payment> odemelerList = <Payment>[].obs;
 
   @override
@@ -276,13 +262,12 @@ class _MaasEklemeBodyState extends State<_MaasEklemeBody> {
                   icon: const Icon(Icons.arrow_drop_down),
                   isExpandedYes: true,
                   iconSize: 20,
-                  valueChoose:
-                      widget.userHelper.userDetailPayment!.salaryType.getName,
+                  valueChoose: userHelper.userDetailPayment!.salaryType.getName,
                   text: "Maaş Tipi",
                   list: SalaryTypeExtension.getList(),
                   onChanged: (val) {
                     setState(() {
-                      widget.userHelper.userDetailPayment!.salaryType =
+                      userHelper.userDetailPayment!.salaryType =
                           SalaryTypeExtension.getEnumFromName(val);
                     });
                   },
@@ -426,11 +411,6 @@ class MaasEkleHeader extends StatelessWidget {
 }
 
 class _PozisyonEklemeBody extends StatefulWidget {
-  final UserHelperController userHelper;
-
-  const _PozisyonEklemeBody({Key? key, required this.userHelper})
-      : super(key: key);
-
   @override
   State<_PozisyonEklemeBody> createState() => _PozisyonEklemeBodyState();
 }
@@ -476,9 +456,8 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
                   if (companyNames.isNotEmpty) {
                     tabKariyerController.unitCompanyIndex.value =
                         companyNames.indexOf(val!);
-                    widget.userHelper.userDetailCareer!.unitCompany =
-                        companyNames[
-                            tabKariyerController.unitCompanyIndex.value];
+                    userHelper.userDetailCareer!.unitCompany = companyNames[
+                        tabKariyerController.unitCompanyIndex.value];
                   }
                 },
               );
@@ -503,7 +482,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
                   if (branchNames.isNotEmpty) {
                     tabKariyerController.unitBranchIndex.value =
                         branchNames.indexOf(val!);
-                    widget.userHelper.userDetailCareer!.unitBranch =
+                    userHelper.userDetailCareer!.unitBranch =
                         branchNames[tabKariyerController.unitBranchIndex.value];
                   }
                 },
@@ -530,7 +509,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
                   if (departmantNames.isNotEmpty) {
                     tabKariyerController.unitDepartmantIndex.value =
                         departmantNames.indexOf(val!);
-                    widget.userHelper.userDetailCareer!.unitDepartment =
+                    userHelper.userDetailCareer!.unitDepartment =
                         departmantNames[
                             tabKariyerController.unitDepartmantIndex.value];
                   }
@@ -557,7 +536,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
                   if (titleNames.isNotEmpty) {
                     tabKariyerController.unitTitleIndex.value =
                         titleNames.indexOf(val!);
-                    widget.userHelper.userDetailCareer!.unitTitle = titleNames[
+                    userHelper.userDetailCareer!.unitTitle = titleNames[
                         tabKariyerController.unitDepartmantIndex.value];
                   }
                 },
@@ -590,7 +569,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
             onChanged: (val) {
               if (val != null) {
                 try {
-                  widget.userHelper.userDetail!.startDateWork = val;
+                  userHelper.userDetail!.startDateWork = val;
                 } catch (e) {
                   print(e.toString());
                 }
@@ -603,7 +582,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
             onChanged: (val) {
               if (val != null) {
                 try {
-                  widget.userHelper.userDetail!.quitWorkDate = val;
+                  userHelper.userDetail!.quitWorkDate = val;
                 } catch (e) {
                   print(e.toString());
                 }

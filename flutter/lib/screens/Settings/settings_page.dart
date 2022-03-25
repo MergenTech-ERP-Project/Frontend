@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'OptionalCompanyDescriptions/optional_company_descriptions.dart';
 
 class SettingsPage extends StatelessWidget {
-  SettingsPage({
+  const SettingsPage({
     Key? key,
   }) : super(key: key);
   @override

@@ -1,7 +1,8 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_key_in_widget_constructors, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vtys_kalite/enums/vacation_request_status.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_vacation.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/new_request_card.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/request_card.dart';
@@ -9,11 +10,11 @@ import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class TabIzin extends StatelessWidget {
-  UserDetailVacation vacation;
-  TabIzin({
-    Key? key,
-    required this.vacation,
-  }) : super(key: key);
+  UserDetailVacation vacation = UserDetailVacation(
+    userDetailId: userHelper.userDetail?.id ?? 0,
+    sicilNo: (userHelper.userDetail?.tcno ?? 0).toString(),
+    vacationRequestStatus: VacationRequestStatusEnum.pendingApproval,
+  );
 
   List<String> permissionType = [
     "İDARİ İZİN",

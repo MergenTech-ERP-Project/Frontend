@@ -13,7 +13,7 @@ import 'package:vtys_kalite/screens/VacationRequest/vacation_request.dart';
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case employeesPageRoute:
-      return _getPageRoute(const Employees());
+      return _getPageRoute(Employees());
     case vacationRequestPageRoute:
       return _getPageRoute(VacationRequest());
     case myActivitiesPageRoute:
@@ -26,10 +26,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         ),
       );
     case settingsPageRoute:
-      return _getPageRoute(SettingsPage());
+      return _getPageRoute(const SettingsPage());
     default:
       print("Check Address on Router.dart");
-      return _getPageRoute(const Employees());
+      return _getPageRoute(Employees());
   }
 }
 

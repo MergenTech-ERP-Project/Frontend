@@ -1,6 +1,5 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_key_in_widget_constructors
 
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
@@ -40,7 +39,6 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
 
   @override
   Widget build(BuildContext context) {
-  
     return Center(
       child: ListView(
         padding: const EdgeInsets.all(20),
@@ -57,7 +55,7 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
             ),
           ),
           const SizedBox(height: 30),
-          textWidget(
+          TextWidget(
             label: "Kullanıcı Adı",
             textEditingController: widget.usernameController,
           ),
@@ -87,7 +85,7 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
               }
             },
           ),
-          textWidget(
+          TextWidget(
             label: "MESAİ DIŞI ÇALIŞMA YERİ",
             textEditingController: widget.outofWorkPlace,
           ),
@@ -96,20 +94,20 @@ class _DailyInspectionFormPageState extends State<DailyInspectionFormPage> {
             list: outofHoursWorkPlace,
             groupValue: selectedOutofHoursWorkPlace,
           ),
-          textWidget(
+          TextWidget(
             label: "Mesai Dışı Faaliyet / Açıklama",
             textEditingController:
                 widget.outofHoursActivityDescriptionController,
           ),
-          textWidget(
+          TextWidget(
             label: "Çalışma Başlangıç Saati",
             textEditingController: widget.startWorkController,
           ),
-          textWidget(
+          TextWidget(
             label: "Çalışma Bitiş Saati",
             textEditingController: widget.endWorkController,
           ),
-          textWidget(
+          TextWidget(
             label: "Toplam Çalışma Süresi",
             textEditingController: widget.departmantController,
           ),

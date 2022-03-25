@@ -9,7 +9,6 @@ import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/screens/Forms/components/text_widget.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
-
 class PermissionRequestFormPage extends StatefulWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController departmantController = TextEditingController();
@@ -52,8 +51,6 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
-
     return Center(
       child: ListView(
         padding: const EdgeInsets.all(20),
@@ -70,7 +67,7 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
             ),
           ),
           const SizedBox(height: 30), */
-          textWidget(
+          TextWidget(
             label: "Kullanıcı Adı",
             textEditingController: widget.usernameController,
           ),
@@ -84,7 +81,7 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
           //   onChanged: (val) {},
           // ),
           const SizedBox(height: 15),
-          CustomTextDivider(height: 40, thickness: 2, text: "İZİN TÜRÜ"),
+          const CustomTextDivider(height: 40, thickness: 2, text: "İZİN TÜRÜ"),
           MultipleChoiceRadioListTile(
             list: permissionType,
             groupValue: selectedPermissionType,
@@ -96,7 +93,7 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
             customFontSize: 20,
           ),
           const SizedBox(height: 10),
-          CustomTextDivider(
+          const CustomTextDivider(
             height: 40,
             thickness: 2,
             text: "Yıllık izin ise, Hakediş Tarihi",
@@ -106,7 +103,7 @@ class _PermissionRequestFormPageState extends State<PermissionRequestFormPage> {
             groupValue: selectedVestingDate,
           ),
           const SizedBox(height: 50),
-          CustomTextDivider(
+          const CustomTextDivider(
             height: 40,
             thickness: 2,
             text: "Mevcut İzin Gün Sayısı",

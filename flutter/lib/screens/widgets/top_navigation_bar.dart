@@ -1,7 +1,8 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
-import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/main.dart';
@@ -81,10 +82,7 @@ AppBar topNavigationBar(context, key) => AppBar(
             onPressed: () => showDialog(
               context: context,
               builder: (context) => Dialog(
-                child: AddNewEmployee(
-                  newUser: user,
-                  userHelper: UserHelperController(user.id),
-                ),
+                child: AddNewEmployee(userId: user.id),
               ),
             ),
           ),

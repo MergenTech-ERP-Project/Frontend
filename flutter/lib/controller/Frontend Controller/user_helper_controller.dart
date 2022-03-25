@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 
-import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:vtys_kalite/enums/bank_account_type.dart';
 import 'package:vtys_kalite/enums/bank_names.dart';
 import 'package:vtys_kalite/enums/blood_type.dart';
@@ -12,25 +12,30 @@ import 'package:vtys_kalite/enums/gender.dart';
 import 'package:vtys_kalite/enums/highest_education_level_completed.dart';
 import 'package:vtys_kalite/enums/marial_status.dart';
 import 'package:vtys_kalite/enums/military_status.dart';
-import 'package:vtys_kalite/enums/payment_scheme.dart';
-import 'package:vtys_kalite/enums/salary_type.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_career.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_payment.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
-class UserHelperController {
-  int userId;
+class UserHelperController extends GetxController {
+  var isLoading = false.obs;
+  int userId = -1;
+  User? user;
   UserDetail? userDetail;
   UserDetailCareer? userDetailCareer;
   UserDetailPayment? userDetailPayment;
 
-  Future<void> init() async {
+  Future<void> init({id}) async {
+    isLoading(true);
+    userId = id;
     print("UserHelperController init : $userId");
     if (userId != -1) {
+      user = await userController.fetchUserById(userId);
+      print("userDetail search");
       userDetail = await userDetailController.fetchUserDetailByUserId(userId);
-    } /* else { */
+      print("userDetail found " + userDetail!.toJson().toString());
+    }
     userDetail ??= UserDetail(
       userId: userId,
       tcno: (int.tryParse(userDetailController.userDetailList.isNotEmpty
@@ -42,13 +47,12 @@ class UserHelperController {
 
     userDetailCareer = UserDetailCareer(userDetailId: userDetail!.id);
     userDetailPayment = UserDetailPayment(userDetailId: userDetail!.id);
-    /* } */
+    isLoading(false);
   }
-
-  UserHelperController(this.userId);
 
   UserDetail getUserDetail() {
     return UserDetail(
+      id: userDetail != null ? userDetail!.id : -1,
       userId: userId,
       numberofkids:
           int.parse(tabKisiselBilgilerController.controllerNumberOfKids.text),
@@ -98,7 +102,8 @@ class UserHelperController {
     );
   }
 
-  userDetailSave(BuildContext context, User? user) async {
+  userDetailSave() async {
+    isLoading(true);
     try {
       if (userId == -1) {
         await userController.addNewUser(
@@ -124,8 +129,8 @@ class UserHelperController {
                     ? (" " + tabGenelController.controllerSurname.text)
                     : ""),
             email: tabGenelController.controllerEPostaPersonal.text,
-            password: user.password,
-            title: user.title,
+            password: user!.password,
+            title: user!.title,
             cellphone: tabGenelController.controllerTelephonePersonal.text,
           ),
           userDetail: getUserDetail(),
@@ -153,7 +158,7 @@ class UserHelperController {
             .updateUserDetailCareer(userDetail!.id, userDetailCareer);
       } */
 
-      int? responseUserDetailPayment =
+      /* int? responseUserDetailPayment =
 
           ///TODO: update kaldı
           await userDetailPaymentController.addNewUserDetailPayment(
@@ -170,7 +175,7 @@ class UserHelperController {
           commuteSupportFee: "617", //TODO
           foodSupportFee: "6299", //TODO
         ),
-      );
+      ); */
 
 /*
       showDialogResponseCheck(
@@ -182,6 +187,8 @@ class UserHelperController {
 
     } catch (e) {
       print(e.toString());
+    } finally {
+      isLoading(false);
     }
   }
 

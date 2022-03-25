@@ -1,8 +1,7 @@
-// ignore_for_file: avoid_print, must_be_immutable
+// ignore_for_file: avoid_print, must_be_immutable, use_key_in_widget_constructors
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
-import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/blood_type.dart';
 import 'package:vtys_kalite/enums/disabled_degree.dart';
 import 'package:vtys_kalite/enums/educational_status.dart';
@@ -14,12 +13,6 @@ import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_control
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabPersonalInformation extends StatefulWidget {
-  UserHelperController userHelper;
-  TabPersonalInformation({
-    Key? key,
-    required this.userHelper,
-  }) : super(key: key);
-
   @override
   _TabPersonalInformationState createState() => _TabPersonalInformationState();
 }
@@ -40,7 +33,7 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
                   onChanged: (val) {
                     if (val != null) {
                       try {
-                        widget.userHelper.userDetail!.dateofbirth = val;
+                        userHelper.userDetail!.dateofbirth = val;
                       } catch (e) {
                         print(e.toString());
                       }
@@ -68,12 +61,11 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
                   isExpandedYes: true,
                   iconSize: 20,
                   text: "Medeni Hal",
-                  valueChoose:
-                      widget.userHelper.userDetail!.maritalStatus.getName,
+                  valueChoose: userHelper.userDetail!.maritalStatus.getName,
                   list: MaritalStatusExtension.getList(),
                   onChanged: (val) {
                     setState(() {
-                      widget.userHelper.userDetail!.maritalStatus =
+                      userHelper.userDetail!.maritalStatus =
                           MaritalStatusExtension.getEnumFromName(val);
                     });
                   },
@@ -88,11 +80,11 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
                   isExpandedYes: true,
                   iconSize: 20,
                   text: "Cinsiyet",
-                  valueChoose: widget.userHelper.userDetail!.gender.getName,
+                  valueChoose: userHelper.userDetail!.gender.getName,
                   list: GenderExtension.getList(),
                   onChanged: (val) {
                     setState(() {
-                      widget.userHelper.userDetail!.gender =
+                      userHelper.userDetail!.gender =
                           GenderExtension.getEnumFromName(val);
                     });
                   },
@@ -111,12 +103,11 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
                   isExpandedYes: true,
                   iconSize: 20,
                   text: "Engel Derecesi",
-                  valueChoose:
-                      widget.userHelper.userDetail!.disabledDegree.getName,
+                  valueChoose: userHelper.userDetail!.disabledDegree.getName,
                   list: DisabledDegreeExtension.getList(),
                   onChanged: (val) {
                     setState(() {
-                      widget.userHelper.userDetail!.disabledDegree =
+                      userHelper.userDetail!.disabledDegree =
                           DisabledDegreeExtension.getEnumFromName(val);
                     });
                   },
@@ -149,12 +140,11 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
                   isExpandedYes: true,
                   iconSize: 20,
                   text: "Askerlik Durumu",
-                  valueChoose:
-                      widget.userHelper.userDetail!.militaryStatus.getName,
+                  valueChoose: userHelper.userDetail!.militaryStatus.getName,
                   list: MilitaryStatusEnumExtension.getList(),
                   onChanged: (val) {
                     setState(() {
-                      widget.userHelper.userDetail!.militaryStatus =
+                      userHelper.userDetail!.militaryStatus =
                           MilitaryStatusEnumExtension.getEnumFromName(val);
                     });
                   },
@@ -173,11 +163,11 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
                   isExpandedYes: true,
                   iconSize: 20,
                   text: "Kan Grubu",
-                  valueChoose: widget.userHelper.userDetail!.bloodType.getName,
+                  valueChoose: userHelper.userDetail!.bloodType.getName,
                   list: BloodTypeEnumExtension.getList(),
                   onChanged: (val) {
                     setState(() {
-                      widget.userHelper.userDetail!.bloodType =
+                      userHelper.userDetail!.bloodType =
                           BloodTypeEnumExtension.getEnumFromName(val);
                     });
                   },
@@ -192,12 +182,11 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
                   isExpandedYes: true,
                   iconSize: 20,
                   text: "Eğitim Durumu",
-                  valueChoose:
-                      widget.userHelper.userDetail!.educationalStatus.getName,
+                  valueChoose: userHelper.userDetail!.educationalStatus.getName,
                   list: EducationalStatusExtension.getList(),
                   onChanged: (val) {
                     setState(() {
-                      widget.userHelper.userDetail!.educationalStatus =
+                      userHelper.userDetail!.educationalStatus =
                           EducationalStatusExtension.getEnumFromName(val);
                     });
                   },
@@ -216,13 +205,12 @@ class _TabPersonalInformationState extends State<TabPersonalInformation> {
                   isExpandedYes: true,
                   iconSize: 20,
                   text: "Tamamlanan En Yüksek Eğitim Seviyesi",
-                  valueChoose: widget.userHelper.userDetail!
-                      .highestEducationLevelCompleted.getName,
+                  valueChoose: userHelper
+                      .userDetail!.highestEducationLevelCompleted.getName,
                   list: HighestEducationLevelCompletedExtension.getList(),
                   onChanged: (val) {
                     setState(() {
-                      widget.userHelper.userDetail!
-                              .highestEducationLevelCompleted =
+                      userHelper.userDetail!.highestEducationLevelCompleted =
                           HighestEducationLevelCompletedExtension
                               .getEnumFromName(val);
                     });

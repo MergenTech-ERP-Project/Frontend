@@ -1,22 +1,14 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
-import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/bank_account_type.dart';
 import 'package:vtys_kalite/enums/bank_names.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/widgets/expanded_name_controller.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabAnotherInformationSmall extends StatefulWidget {
-  final UserHelperController userHelper;
-
-  const TabAnotherInformationSmall({
-    Key? key,
-    required this.userHelper,
-  }) : super(key: key);
-
   @override
   _TabAnotherInformationSmallState createState() =>
       _TabAnotherInformationSmallState();
@@ -89,12 +81,12 @@ class _TabAnotherInformationSmallState
                     isExpandedYes: true,
                     iconSize: 20,
                     icon: const Icon(Icons.arrow_drop_down),
-                    valueChoose: widget.userHelper.userDetail!.bankNames.getName,
+                    valueChoose: userHelper.userDetail!.bankNames.getName,
                     text: "Banka Adı",
                     list: BankNamesEnumExtension.getList(),
                     onChanged: (val) {
                       setState(() {
-                        widget.userHelper.userDetail!.bankNames =
+                        userHelper.userDetail!.bankNames =
                             BankNamesEnumExtension.getEnumFromName(val);
                       });
                     },
@@ -107,12 +99,11 @@ class _TabAnotherInformationSmallState
                     iconSize: 20,
                     icon: const Icon(Icons.arrow_drop_down),
                     text: "Hesap Tipi",
-                    valueChoose:
-                        widget.userHelper.userDetail!.bankAccountType.getName,
+                    valueChoose: userHelper.userDetail!.bankAccountType.getName,
                     list: BankAccountTypeExtension.getList(),
                     onChanged: (val) {
                       setState(() {
-                        widget.userHelper.userDetail!.bankAccountType =
+                        userHelper.userDetail!.bankAccountType =
                             BankAccountTypeExtension.getEnumFromName(val);
                       });
                     },
