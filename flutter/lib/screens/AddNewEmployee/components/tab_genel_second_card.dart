@@ -1,11 +1,11 @@
 // ignore_for_file: avoid_print, must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 
-import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/contract_type.dart';
 import 'package:vtys_kalite/enums/employment_type.dart';
 import 'package:vtys_kalite/models/user.dart';
@@ -15,12 +15,10 @@ import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabGenelSecondCard extends StatefulWidget {
   User? user;
-  UserHelperController userHelper;
 
   TabGenelSecondCard({
     Key? key,
     this.user,
-    required this.userHelper,
   }) : super(key: key);
 
   @override
@@ -110,7 +108,7 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
                   onChanged: (val) {
                     if (val != null) {
                       try {
-                        widget.userHelper.userDetail!.startDateWork = val;
+                        userHelper.userDetail!.startDateWork = val;
                       } catch (e) {
                         print(e.toString());
                       }
@@ -129,7 +127,7 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
                   onChanged: (val) {
                     if (val != null) {
                       try {
-                        widget.userHelper.userDetail!.contractEndDate = val;
+                        userHelper.userDetail!.contractEndDate = val;
                       } catch (e) {
                         print(e.toString());
                       }
@@ -145,39 +143,37 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CustomDropDownMenu(
-                    text: "Sözleşme Türü",
-                    list: ContractTypeExtension.getList(),
-                    valueChoose:
-                        widget.userHelper.userDetail!.contractType.getName,
-                    icon: const Icon(Icons.arrow_drop_down),
-                    iconSize: 20,
-                    isExpandedYes: true,
-                    onChanged: (val) {
-                      setState(() {
-                        widget.userHelper.userDetail!.contractType =
+                child: Obx(
+                  () => CustomDropDownMenu(
+                      text: "Sözleşme Türü",
+                      list: ContractTypeExtension.getList(),
+                      valueChoose: userHelper.userDetail!.contractType.getName,
+                      icon: const Icon(Icons.arrow_drop_down),
+                      iconSize: 20,
+                      isExpandedYes: true,
+                      onChanged: (val) {
+                        userHelper.userDetail!.contractType =
                             ContractTypeExtension.getEnumFromName(val);
-                      });
-                    }),
+                      }),
+                ),
               ),
             ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CustomDropDownMenu(
-                  iconSize: 20,
-                  text: "Çalışma Şekli",
-                  valueChoose:
-                      widget.userHelper.userDetail!.employmentType.getName,
-                  list: EmploymentTypeEnumExtension.getList(),
-                  icon: const Icon(Icons.arrow_drop_down),
-                  isExpandedYes: true,
-                  onChanged: (val) {
-                    setState(() {
-                      widget.userHelper.userDetail!.employmentType =
+                child: Obx(
+                  () => CustomDropDownMenu(
+                    iconSize: 20,
+                    text: "Çalışma Şekli",
+                    valueChoose: userHelper.userDetail!.employmentType.getName,
+                    list: EmploymentTypeEnumExtension.getList(),
+                    icon: const Icon(Icons.arrow_drop_down),
+                    isExpandedYes: true,
+                    onChanged: (val) {
+                      userHelper.userDetail!.employmentType =
                           EmploymentTypeEnumExtension.getEnumFromName(val);
-                    });
-                  },
+                    },
+                  ),
                 ),
               ),
             ),

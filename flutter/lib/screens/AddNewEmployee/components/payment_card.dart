@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_switch.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/payment_scheme.dart';
 import 'package:vtys_kalite/models/User%20Detail/ForCareer/payment.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class PaymentCard extends StatefulWidget {
   final Payment newPayment;
-  final UserHelperController userHelperController;
   final Function() onPressed;
 
   const PaymentCard({
     Key? key,
     required this.newPayment,
-    required this.userHelperController,
     required this.onPressed,
   }) : super(key: key);
 
@@ -83,21 +82,20 @@ class _PaymentCardState extends State<PaymentCard> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: CustomDropDownMenu(
-                text: "Periyot",
-                list: PaymentSchemeExtension.getList(),
-                valueChoose: widget.userHelperController.userDetailPayment!
-                    .paymentScheme.getName,
-                icon: const Icon(Icons.arrow_drop_down),
-                iconSize: 20,
-                isExpandedYes: true,
-                onChanged: (val) {
-                  setState(() {
-                    widget.userHelperController.userDetailPayment!
-                            .paymentScheme =
+              child: Obx(
+                () => CustomDropDownMenu(
+                  text: "Periyot",
+                  list: PaymentSchemeExtension.getList(),
+                  valueChoose:
+                      userHelper.userDetailPayment!.paymentScheme.getName,
+                  icon: const Icon(Icons.arrow_drop_down),
+                  iconSize: 20,
+                  isExpandedYes: true,
+                  onChanged: (val) {
+                    userHelper.userDetailPayment!.paymentScheme =
                         PaymentSchemeExtension.getEnumFromName(val);
-                  });
-                },
+                  },
+                ),
               ),
             ),
             Row(

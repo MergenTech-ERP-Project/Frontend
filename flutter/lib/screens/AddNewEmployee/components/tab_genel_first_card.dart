@@ -2,19 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
-import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_genel_first_card_image.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabGenelFirstCard extends StatelessWidget {
   final User user;
-  UserHelperController userHelper;
 
-  TabGenelFirstCard({
+  const TabGenelFirstCard({
     Key? key,
     required this.user,
-    required this.userHelper,
   }) : super(key: key);
 
   @override
@@ -39,7 +36,6 @@ class TabGenelFirstCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-
             ProfileAboutRow(
               textConstant: "İşe Başlama Tarihi",
               textUser: userHelper.userDetail!.startDateWork,
@@ -63,7 +59,6 @@ class TabGenelFirstCard extends StatelessWidget {
             ProfileAboutRow(
               textConstant: "Ünvan",
               textUser: userHelper.userDetailCareer!.unitTitle,
-
             ),
             const SizedBox(height: 20),
             ProfileAboutRow(

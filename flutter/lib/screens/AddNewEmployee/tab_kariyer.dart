@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, must_be_immutable
+// ignore_for_file: avoid_print, must_be_immutable, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -11,7 +11,6 @@ import 'package:vtys_kalite/componenets/custom_scrollable_column.dart';
 import 'package:vtys_kalite/componenets/custom_switch.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
-import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/enums/employment_type.dart';
 import 'package:vtys_kalite/enums/salary_type.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
@@ -28,10 +27,6 @@ import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class TabKariyer extends StatefulWidget {
-  final UserHelperController userHelper;
-
-  const TabKariyer({Key? key, required this.userHelper}) : super(key: key);
-
   @override
   State<TabKariyer> createState() => _TabKariyerState();
 }
@@ -67,9 +62,7 @@ class _TabKariyerState extends State<TabKariyer> {
                 titleWidget: const _PozisyonEkleHeader(),
                 bodyWidgetWidth: screenSize.width / 2,
                 bodyWidget: SizedBox(
-                  child: _PozisyonEklemeBody(
-                    userHelper: widget.userHelper,
-                  ),
+                  child: _PozisyonEklemeBody(),
                 ),
               ),
             );
@@ -94,8 +87,7 @@ class _TabKariyerState extends State<TabKariyer> {
                 bodyWidget: SizedBox(
                   width: screenSize.width - 20,
                   child: SingleChildScrollView(
-                    child: MaasEkleBody(
-                        userHelper: widget.userHelper, screenSize: screenSize),
+                    child: MaasEkleBody(screenSize: screenSize),
                   ),
                 ),
                 bodyWidgetWidth: screenSize.width / 1.5,
@@ -126,15 +118,15 @@ class _TabKariyerState extends State<TabKariyer> {
     ];
 
     positionChildren1 = [
-      widget.userHelper.userDetail!.startDateWork,
-      widget.userHelper.userDetail!.quitWorkDate,
+      userHelper.userDetail!.startDateWork,
+      userHelper.userDetail!.quitWorkDate,
       EmploymentTypeEnumExtension.getList()[
-              widget.userHelper.userDetail!.employmentType.index]
+              userHelper.userDetail!.employmentType.index]
           .toString(),
-      widget.userHelper.userDetailCareer!.unitCompany,
-      widget.userHelper.userDetailCareer!.unitBranch,
-      widget.userHelper.userDetailCareer!.unitDepartment,
-      widget.userHelper.userDetailCareer!.unitTitle,
+      userHelper.userDetailCareer!.unitCompany,
+      userHelper.userDetailCareer!.unitBranch,
+      userHelper.userDetailCareer!.unitDepartment,
+      userHelper.userDetailCareer!.unitTitle,
     ];
 
     salaryHeaders = [
@@ -146,7 +138,7 @@ class _TabKariyerState extends State<TabKariyer> {
     salaryChildren1 = [
       tabKariyerController.controllerPaymentSalary.text.toString() +
           EmploymentTypeEnumExtension.getList()[
-                  widget.userHelper.userDetail!.employmentType.index]
+                  userHelper.userDetail!.employmentType.index]
               .toString(),
       tabKariyerController.controllerPaymentName.toString(),
       'Buraya Nasıl Ekleyeceğim Bakacağım Sonra',
@@ -215,13 +207,11 @@ class MaasEkleBody extends StatefulWidget {
   var asgariUcretSwitch = false.obs;
   var netSwitch = false.obs;
   var agiDahilSwitch = false.obs;
-  final UserHelperController userHelper;
   Size screenSize;
   List<Payment> paymentList = <Payment>[].obs;
 
   MaasEkleBody({
     Key? key,
-    required this.userHelper,
     required this.screenSize,
   }) : super(key: key);
 
@@ -277,13 +267,12 @@ class _MaasEkleBodyState extends State<MaasEkleBody> {
                 icon: const Icon(Icons.arrow_drop_down),
                 isExpandedYes: true,
                 iconSize: 20,
-                valueChoose:
-                    widget.userHelper.userDetailPayment!.salaryType.getName,
+                valueChoose: userHelper.userDetailPayment!.salaryType.getName,
                 text: "Maaş Tipi",
                 list: SalaryTypeExtension.getList(),
                 onChanged: (val) {
                   setState(() {
-                    widget.userHelper.userDetailPayment!.salaryType =
+                    userHelper.userDetailPayment!.salaryType =
                         SalaryTypeExtension.getEnumFromName(val);
                   });
                 },
@@ -384,7 +373,6 @@ class _MaasEkleBodyState extends State<MaasEkleBody> {
                       widget.paymentList.removeAt(index);
                     });
                   },
-                  userHelperController: widget.userHelper,
                   newPayment: widget.paymentList[index],
                 );
               },
@@ -433,11 +421,6 @@ class MaasEkleHeader extends StatelessWidget {
 }
 
 class _PozisyonEklemeBody extends StatefulWidget {
-  final UserHelperController userHelper;
-
-  const _PozisyonEklemeBody({Key? key, required this.userHelper})
-      : super(key: key);
-
   @override
   State<_PozisyonEklemeBody> createState() => _PozisyonEklemeBodyState();
 }
@@ -501,7 +484,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
               onChanged: (val) {
                 if (val != null) {
                   try {
-                    widget.userHelper.userDetail!.startDateWork = val;
+                    userHelper.userDetail!.startDateWork = val;
                   } catch (e) {
                     print(e.toString());
                   }
@@ -518,7 +501,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
               onChanged: (val) {
                 if (val != null) {
                   try {
-                    widget.userHelper.userDetail!.quitWorkDate = val;
+                    userHelper.userDetail!.quitWorkDate = val;
                   } catch (e) {
                     print(e.toString());
                   }
@@ -620,6 +603,56 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
                     !optionalCompanyController.visibleList.value;
               });
             },
+          ),
+          ///TODO: SingleChildScrollView
+          Visibility(
+            visible: visibleList.value,
+            child: GenericDropDownList<Company>(
+              isLoading: companyController.isLoading.value,
+              childVisible: companyVisible.value,
+              genericList: companyController.companyList,
+              onSelected: (val) async {
+                companyVisible(!companyVisible.value);
+                branchVisible.value = true;
+                optionalCompanyController.companyId.value = val.id;
+                optionalCompanyController.companyName.value = val.companyName;
+                optionalCompanyController.branchName.value =
+                    optionalCompanyController.departmanName.value = "";
+                await branchController.fetchBranchesByCompanyId(val.id);
+              },
+              childGenericList: GenericDropDownList<Branch>(
+                isLoading: branchController.isLoading.value,
+                childVisible: branchVisible.value,
+                genericList: branchController.branchList,
+                onSelected: (val) async {
+                  optionalCompanyController.branchId.value = val.id;
+                  optionalCompanyController.branchName.value = val.branchName;
+                  await departmentController.fetchDepartmentsByBranchId(val.id);
+
+                  optionalCompanyController.departmanName.value = "";
+                },
+                childGenericList: GenericDropDownList<Department>(
+                  isLoading: departmentController.isLoading.value,
+                  childVisible: departmentVisible.value,
+                  genericList: departmentController.departmentList,
+                  onSelected: (val) async {
+                    optionalCompanyController.departmentId.value = val.id;
+                    optionalCompanyController.departmanName.value =
+                        val.departmentName;
+                    await titleController.fetchTitlesByDepartmentId(val.id);
+                  },
+                  childGenericList: GenericDropDownList<Titlee>(
+                    isLoading: titleController.isLoading.value,
+                    childVisible: titleVisible.value,
+                    childGenericList: const SizedBox(),
+                    genericList: titleController.titleList,
+                    onSelected: (val) async {
+                      optionalCompanyController.titleId.value = val.id;
+                    },
+                  ),
+                ),
+              ),
+            ),
           ),
         ],
       ),

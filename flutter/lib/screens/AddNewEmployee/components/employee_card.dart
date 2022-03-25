@@ -1,9 +1,8 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
-import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
@@ -19,6 +18,7 @@ class EmployeeCard extends StatefulWidget {
     this.height = 60,
     required this.user,
   }) : super(key: key);
+
   @override
   _EmployeeCardState createState() => _EmployeeCardState();
 }
@@ -33,17 +33,12 @@ class _EmployeeCardState extends State<EmployeeCard> {
               child: CircularProgressIndicator(),
             )
           : InkWell(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => Dialog(
-                    child: AddNewEmployee(
-                      newUser: widget.user,
-                      userHelper: UserHelperController(widget.user.id),
-                    ),
-                  ),
-                );
-              },
+              onTap: () => showDialog(
+                context: context,
+                builder: (context) => Dialog(
+                  child: AddNewEmployee(userId: widget.user.id),
+                ),
+              ),
               child: Container(
                 height: widget.height,
                 decoration: BoxDecoration(

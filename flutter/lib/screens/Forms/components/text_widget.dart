@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 
-class textWidget extends StatelessWidget {
+class TextWidget extends StatelessWidget {
   final String label;
   final TextEditingController textEditingController;
-  const textWidget({
+  const TextWidget({
     Key? key,
     required this.label,
     required this.textEditingController,
