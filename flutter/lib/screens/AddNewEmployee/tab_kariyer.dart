@@ -426,8 +426,6 @@ class _PozisyonEklemeBody extends StatefulWidget {
 }
 
 class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
-  var visibleList = false.obs;
-
   var companyVisible = false.obs;
   var branchVisible = false.obs;
   var departmentVisible = false.obs;
@@ -513,56 +511,99 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
           ),
           const SizedBox(height: 10),
           InkWell(
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Obx(
-                      () => CustomText(
-                        text: !visibleList.value
-                            ? "Şirketleri Göster"
-                            : (optionalCompanyController
-                                        .companyName.value.isNotEmpty
-                                    ? ("Şirket: " +
-                                        optionalCompanyController
-                                            .companyName.value)
-                                    : "") +
-                                (optionalCompanyController
-                                        .branchName.value.isNotEmpty
-                                    ? (" Şube: " +
-                                        optionalCompanyController
-                                            .branchName.value)
-                                    : "") +
-                                (optionalCompanyController
-                                        .departmanName.value.isNotEmpty
-                                    ? (" Departman: " +
-                                        optionalCompanyController
-                                            .departmanName.value)
-                                    : ""),
+            child: Column(
+              children: [
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Obx(
+                            () => CustomText(
+                              textAlign: TextAlign.center,
+                              text: optionalCompanyController
+                                  .optionalCompanyShowInformation(),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: optionalCompanyController.visibleList.value
+                            ? const Icon(Icons.keyboard_arrow_down, size: 20)
+                            : const Icon(Icons.keyboard_arrow_up, size: 20),
+                      )
+                    ],
+                  ),
+                ),
+                Visibility(
+                  visible: optionalCompanyController.visibleList.value,
+                  child: GenericDropDownList<Company>(
+                    isLoading: companyController.isLoading.value,
+                    childVisible: companyVisible.value,
+                    genericList: companyController.companyList,
+                    onSelected: (val) async {
+                      companyVisible(!companyVisible.value);
+                      branchVisible.value = true;
+                      optionalCompanyController.companyId.value = val.id;
+                      optionalCompanyController.companyName.value =
+                          val.companyName;
+                      optionalCompanyController.branchName.value =
+                          optionalCompanyController.departmanName.value = "";
+                      await branchController.fetchBranchesByCompanyId(val.id);
+                    },
+                    childGenericList: GenericDropDownList<Branch>(
+                      isLoading: branchController.isLoading.value,
+                      childVisible: branchVisible.value,
+                      genericList: branchController.branchList,
+                      onSelected: (val) async {
+                        optionalCompanyController.branchId.value = val.id;
+                        optionalCompanyController.branchName.value =
+                            val.branchName;
+                        await departmentController
+                            .fetchDepartmentsByBranchId(val.id);
+
+                        optionalCompanyController.departmanName.value = "";
+                      },
+                      childGenericList: GenericDropDownList<Department>(
+                        isLoading: departmentController.isLoading.value,
+                        childVisible: departmentVisible.value,
+                        genericList: departmentController.departmentList,
+                        onSelected: (val) async {
+                          optionalCompanyController.departmentId.value = val.id;
+                          optionalCompanyController.departmanName.value =
+                              val.departmentName;
+                          await titleController
+                              .fetchTitlesByDepartmentId(val.id);
+                        },
+                        childGenericList: GenericDropDownList<Titlee>(
+                          isLoading: titleController.isLoading.value,
+                          childVisible: titleVisible.value,
+                          childGenericList: const SizedBox(),
+                          genericList: titleController.titleList,
+                          onSelected: (val) async {
+                            optionalCompanyController.titleId.value = val.id;
+                          },
+                        ),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: visibleList.value
-                        ? const Icon(Icons.keyboard_arrow_down, size: 20)
-                        : const Icon(Icons.keyboard_arrow_up, size: 20),
-                  )
-                ],
-              ),
+                ),
+              ],
             ),
             onTap: () {
               setState(() {
-                visibleList.value = !visibleList.value;
+                optionalCompanyController.visibleList.value =
+                    !optionalCompanyController.visibleList.value;
               });
             },
           ),
-
           ///TODO: SingleChildScrollView
           Visibility(
             visible: visibleList.value,
