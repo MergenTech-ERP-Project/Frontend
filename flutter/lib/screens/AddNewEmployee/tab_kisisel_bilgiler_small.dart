@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/enums/blood_type.dart';
@@ -57,53 +56,53 @@ class _TabPersonalInformationSmallState
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Obx(
-                () => CustomDropDownMenu(
-                  icon: const Icon(Icons.arrow_drop_down),
-                  isExpandedYes: true,
-                  iconSize: 20,
-                  text: "Medeni Hal",
-                  valueChoose: userHelper.userDetail!.maritalStatus.getName,
-                  list: MaritalStatusExtension.getList(),
-                  onChanged: (val) {
+              child: CustomDropDownMenu(
+                icon: const Icon(Icons.arrow_drop_down),
+                isExpandedYes: true,
+                iconSize: 20,
+                text: "Medeni Hal",
+                valueChoose: userHelper.userDetail!.maritalStatus.getName,
+                list: MaritalStatusExtension.getList(),
+                onChanged: (val) {
+                  setState(() {
                     userHelper.userDetail!.employmentType =
                         MaritalStatusExtension.getEnumFromName(val);
-                  },
-                ),
+                  });
+                },
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Obx(
-                (() => CustomDropDownMenu(
-                      icon: const Icon(Icons.arrow_drop_down),
-                      isExpandedYes: true,
-                      iconSize: 20,
-                      text: "Cinsiyet",
-                      valueChoose: userHelper.userDetail!.gender.getName,
-                      list: GenderExtension.getList(),
-                      onChanged: (val) {
-                        userHelper.userDetail!.gender =
-                            GenderExtension.getEnumFromName(val);
-                      },
-                    )),
+              child: CustomDropDownMenu(
+                icon: const Icon(Icons.arrow_drop_down),
+                isExpandedYes: true,
+                iconSize: 20,
+                text: "Cinsiyet",
+                valueChoose: userHelper.userDetail!.gender.getName,
+                list: GenderExtension.getList(),
+                onChanged: (val) {
+                  setState(() {
+                    userHelper.userDetail!.gender =
+                        GenderExtension.getEnumFromName(val);
+                  });
+                },
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Obx(
-                () => CustomDropDownMenu(
-                  icon: const Icon(Icons.arrow_drop_down),
-                  isExpandedYes: true,
-                  iconSize: 20,
-                  text: "Engel Derecesi",
-                  valueChoose: userHelper.userDetail!.disabledDegree.getName,
-                  list: DisabledDegreeExtension.getList(),
-                  onChanged: (val) {
+              child: CustomDropDownMenu(
+                icon: const Icon(Icons.arrow_drop_down),
+                isExpandedYes: true,
+                iconSize: 20,
+                text: "Engel Derecesi",
+                valueChoose: userHelper.userDetail!.disabledDegree.getName,
+                list: DisabledDegreeExtension.getList(),
+                onChanged: (val) {
+                  setState(() {
                     userHelper.userDetail!.disabledDegree =
                         DisabledDegreeExtension.getEnumFromName(val);
-                  },
-                ),
+                  });
+                },
               ),
             ),
             NameController(
@@ -118,72 +117,72 @@ class _TabPersonalInformationSmallState
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Obx(
-                () => CustomDropDownMenu(
-                  icon: const Icon(Icons.arrow_drop_down),
-                  isExpandedYes: true,
-                  iconSize: 20,
-                  text: "Askerlik Durumu",
-                  valueChoose: userHelper.userDetail!.militaryStatus.getName,
-                  list: MilitaryStatusEnumExtension.getList(),
-                  onChanged: (val) {
+              child: CustomDropDownMenu(
+                icon: const Icon(Icons.arrow_drop_down),
+                isExpandedYes: true,
+                iconSize: 20,
+                text: "Askerlik Durumu",
+                valueChoose: userHelper.userDetail!.militaryStatus.getName,
+                list: MilitaryStatusEnumExtension.getList(),
+                onChanged: (val) {
+                  setState(() {
                     userHelper.userDetail!.militaryStatus =
                         MilitaryStatusEnumExtension.getEnumFromName(val);
-                  },
-                ),
+                  });
+                },
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Obx(
-                () => CustomDropDownMenu(
-                  icon: const Icon(Icons.arrow_drop_down),
-                  isExpandedYes: true,
-                  iconSize: 20,
-                  text: "Kan Grubu",
-                  valueChoose: userHelper.userDetail!.bloodType.getName,
-                  list: BloodTypeEnumExtension.getList(),
-                  onChanged: (val) {
+              child: CustomDropDownMenu(
+                icon: const Icon(Icons.arrow_drop_down),
+                isExpandedYes: true,
+                iconSize: 20,
+                text: "Kan Grubu",
+                valueChoose: userHelper.userDetail!.bloodType.getName,
+                list: BloodTypeEnumExtension.getList(),
+                onChanged: (val) {
+                  setState(() {
                     userHelper.userDetail!.bloodType =
                         BloodTypeEnumExtension.getEnumFromName(val);
-                  },
-                ),
+                  });
+                },
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Obx(
-                () => CustomDropDownMenu(
-                  icon: const Icon(Icons.arrow_drop_down),
-                  isExpandedYes: true,
-                  iconSize: 20,
-                  text: "Eğitim Durumu",
-                  valueChoose: userHelper.userDetail!.educationalStatus.getName,
-                  list: EducationalStatusExtension.getList(),
-                  onChanged: (val) {
+              child: CustomDropDownMenu(
+                icon: const Icon(Icons.arrow_drop_down),
+                isExpandedYes: true,
+                iconSize: 20,
+                text: "Eğitim Durumu",
+                valueChoose: userHelper.userDetail!.educationalStatus.getName,
+                list: EducationalStatusExtension.getList(),
+                onChanged: (val) {
+                  setState(() {
                     userHelper.userDetail!.educationalStatus =
                         EducationalStatusExtension.getEnumFromName(val);
-                  },
-                ),
+                  });
+                },
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Obx(
-                () => CustomDropDownMenu(
-                  icon: const Icon(Icons.arrow_drop_down),
-                  isExpandedYes: true,
-                  iconSize: 20,
-                  text: "Tamamlanan En Yüksek Eğitim Seviyesi",
-                  valueChoose: userHelper
-                      .userDetail!.highestEducationLevelCompleted.getName,
-                  list: HighestEducationLevelCompletedExtension.getList(),
-                  onChanged: (val) {
+              child: CustomDropDownMenu(
+                icon: const Icon(Icons.arrow_drop_down),
+                isExpandedYes: true,
+                iconSize: 20,
+                text: "Tamamlanan En Yüksek Eğitim Seviyesi",
+                valueChoose: userHelper
+                    .userDetail!.highestEducationLevelCompleted.getName,
+                list: HighestEducationLevelCompletedExtension.getList(),
+                onChanged: (val) {
+                  setState(() {
                     userHelper.userDetail!.highestEducationLevelCompleted =
                         HighestEducationLevelCompletedExtension.getEnumFromName(
                             val);
-                  },
-                ),
+                  });
+                },
               ),
             ),
             NameController(

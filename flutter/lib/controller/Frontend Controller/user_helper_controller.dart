@@ -19,22 +19,19 @@ import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class UserHelperController extends GetxController {
-  var isLoading = false.obs;
   int userId = -1;
   User? user;
   UserDetail? userDetail;
   UserDetailCareer? userDetailCareer;
   UserDetailPayment? userDetailPayment;
 
-  Future<void> init({id}) async {
-    isLoading(true);
+  Future<int> init({id}) async {
     userId = id;
     print("UserHelperController init : $userId");
     if (userId != -1) {
+      await Future.delayed(const Duration(microseconds: 1));
       user = await userController.fetchUserById(userId);
-      print("userDetail search");
       userDetail = await userDetailController.fetchUserDetailByUserId(userId);
-      print("userDetail found " + userDetail!.toJson().toString());
     }
     userDetail ??= UserDetail(
       userId: userId,
@@ -47,7 +44,7 @@ class UserHelperController extends GetxController {
     setUserDetail();
     userDetailCareer = UserDetailCareer(userDetailId: userDetail!.id);
     userDetailPayment = UserDetailPayment(userDetailId: userDetail!.id);
-    isLoading(false);
+    return userId;
   }
 
   UserDetail getUserDetail() {
@@ -134,7 +131,6 @@ class UserHelperController extends GetxController {
   }
 
   userDetailSave() async {
-    isLoading(true);
     try {
       if (userId == -1) {
         await userController.addNewUser(
@@ -218,8 +214,6 @@ class UserHelperController extends GetxController {
 
     } catch (e) {
       print(e.toString());
-    } finally {
-      isLoading(false);
     }
   }
 

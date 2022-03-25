@@ -28,52 +28,48 @@ class AddNewEmployee extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: userHelper.init(id: userId),
-      builder: (context, snap) {
-        if (snap.connectionState == ConnectionState.waiting) {
-          return Container(
-            color: lightColor,
-            child: const Center(
-              child: SizedBox(
-                height: 50,
-                width: 50,
-                child: CircularProgressIndicator(),
-              ),
-            ),
-          );
-        } else {
-          if (snap.hasError) {
-            return Container(
-              color: redColor,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(50),
-                  child: CustomText(
-                    text: snap.error.toString(),
-                    size: 24,
-                    color: yellowColor,
-                  ),
-                ),
-              ),
-            );
-          } else {
-            return _Body();
-          }
-        }
-      },
-    );
-  }
-}
-
-class _Body extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
     return DefaultTabController(
       length: 9,
       child: Scaffold(
         appBar: _appBar(),
-        body: _TabBody(),
+        body: FutureBuilder(
+          future: userHelper.init(id: userId),
+          builder: (context, snap) {
+            if (snap.connectionState != ConnectionState.done) {
+              return Container(
+                color: lightColor,
+                child: const Center(
+                  child: SizedBox(
+                    height: 50,
+                    width: 50,
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+              );
+            } else {
+              if (snap.hasError) {
+                return Container(
+                  color: redColor,
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(50),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: CustomText(
+                          text: snap.error.toString(),
+                          size: 24,
+                          color: yellowColor,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              } else {
+                return _TabBody();
+              }
+            }
+          },
+        ),
       ),
     );
   }
@@ -196,7 +192,7 @@ class _BottomBar extends StatelessWidget {
                 await userHelper.userDetailSave();
                 Navigator.of(context).pop(true);
                 isSaved.value = true;
-                Navigator.of(context).pop(true);
+                Get.back();
               },
             ),
           ),

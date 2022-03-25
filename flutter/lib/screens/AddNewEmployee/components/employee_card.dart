@@ -9,7 +9,7 @@ import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
-class EmployeeCard extends StatefulWidget {
+class EmployeeCard extends StatelessWidget {
   final double? height;
   User user;
 
@@ -19,11 +19,6 @@ class EmployeeCard extends StatefulWidget {
     required this.user,
   }) : super(key: key);
 
-  @override
-  _EmployeeCardState createState() => _EmployeeCardState();
-}
-
-class _EmployeeCardState extends State<EmployeeCard> {
   @override
   Widget build(BuildContext context) {
     int color = randomColor();
@@ -36,11 +31,11 @@ class _EmployeeCardState extends State<EmployeeCard> {
               onTap: () => showDialog(
                 context: context,
                 builder: (context) => Dialog(
-                  child: AddNewEmployee(userId: widget.user.id),
+                  child: AddNewEmployee(userId: user.id),
                 ),
               ),
               child: Container(
-                height: widget.height,
+                height: height,
                 decoration: BoxDecoration(
                   color: whiteColor,
                   borderRadius: BorderRadius.circular(10),
@@ -68,7 +63,7 @@ class _EmployeeCardState extends State<EmployeeCard> {
                         ),
                         child: Center(
                           child: CustomText(
-                            text: nameLetters(widget.user.name),
+                            text: nameLetters(user.name),
                             size: 16,
                             weight: FontWeight.w100,
                             color: whiteColor,
@@ -86,7 +81,7 @@ class _EmployeeCardState extends State<EmployeeCard> {
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: CustomText(
-                                  text: widget.user.name,
+                                  text: user.name,
                                   size: 22,
                                   weight: FontWeight.w400,
                                 ),
@@ -98,7 +93,7 @@ class _EmployeeCardState extends State<EmployeeCard> {
                                 child: CustomText(
                                   text: "",
 
-                                  ///TODO widget.user.title.getName,
+                                  ///TODOuser.title.getName,
                                   size: 20,
                                   weight: FontWeight.w400,
                                 ),

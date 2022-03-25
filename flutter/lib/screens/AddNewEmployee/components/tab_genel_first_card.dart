@@ -36,37 +36,37 @@ class TabGenelFirstCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ProfileAboutRow(
+            _ProfileAboutRow(
               textConstant: "İşe Başlama Tarihi",
               textUser: userHelper.userDetail!.startDateWork,
             ),
             const SizedBox(height: 20),
-            ProfileAboutRow(
+            _ProfileAboutRow(
               textConstant: "Şirket",
               textUser: userHelper.userDetailCareer!.unitCompany,
             ),
             const SizedBox(height: 20),
-            ProfileAboutRow(
+            _ProfileAboutRow(
               textConstant: "Şube",
               textUser: userHelper.userDetailCareer!.unitBranch,
             ),
             const SizedBox(height: 20),
-            ProfileAboutRow(
+            _ProfileAboutRow(
               textConstant: "Departman",
               textUser: userHelper.userDetailCareer!.unitDepartment,
             ),
             const SizedBox(height: 20),
-            ProfileAboutRow(
+            _ProfileAboutRow(
               textConstant: "Ünvan",
               textUser: userHelper.userDetailCareer!.unitTitle,
             ),
             const SizedBox(height: 20),
-            ProfileAboutRow(
+            _ProfileAboutRow(
               textConstant: "E-posta (iş)",
               textUser: tabGenelController.controllerEPostaWork.value.text,
             ),
             const SizedBox(height: 20),
-            ProfileAboutRow(
+            _ProfileAboutRow(
               textConstant: "İş Telefonu",
               textUser: tabGenelController.controllerWorkPhone.value.text,
             ),
@@ -77,8 +77,8 @@ class TabGenelFirstCard extends StatelessWidget {
   }
 }
 
-class ProfileAboutRow extends StatelessWidget {
-  const ProfileAboutRow({
+class _ProfileAboutRow extends StatelessWidget {
+  const _ProfileAboutRow({
     Key? key,
     required this.textConstant,
     required this.textUser,

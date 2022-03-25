@@ -263,19 +263,19 @@ class _MaasEkleBodyState extends State<MaasEkleBody> {
         Row(
           children: [
             Expanded(
-              child: Obx(
-                () => CustomDropDownMenu(
-                  icon: const Icon(Icons.arrow_drop_down),
-                  isExpandedYes: true,
-                  iconSize: 20,
-                  valueChoose: userHelper.userDetailPayment!.salaryType.getName,
-                  text: "Maaş Tipi",
-                  list: SalaryTypeExtension.getList(),
-                  onChanged: (val) {
-                   userHelper.userDetailPayment!.salaryType =
-                          SalaryTypeExtension.getEnumFromName(val);
-                  },
-                ),
+              child: CustomDropDownMenu(
+                icon: const Icon(Icons.arrow_drop_down),
+                isExpandedYes: true,
+                iconSize: 20,
+                valueChoose: userHelper.userDetailPayment!.salaryType.getName,
+                text: "Maaş Tipi",
+                list: SalaryTypeExtension.getList(),
+                onChanged: (val) {
+                  setState(() {
+                    userHelper.userDetailPayment!.salaryType =
+                        SalaryTypeExtension.getEnumFromName(val);
+                  });
+                },
               ),
             ),
             Expanded(
@@ -604,6 +604,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
               });
             },
           ),
+
           ///TODO: SingleChildScrollView
           Visibility(
             visible: optionalCompanyController.visibleList.value,

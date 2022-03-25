@@ -43,9 +43,9 @@ class UserController extends GetxController {
   Future<User?> fetchUserById(id) async {
     try {
       isLoading(true);
-      User? user = await UserRemoteServices.fetchUserById(id);
-      if (user != null) print("fetch User: " + user.id.toString());
-      return user;
+      /* User? user = 
+      if (user != null) print("fetch User: " + user.id.toString()); */
+      return await UserRemoteServices.fetchUserById(id);
     } finally {
       isLoading(false);
     }

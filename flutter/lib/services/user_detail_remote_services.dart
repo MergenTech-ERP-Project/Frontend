@@ -11,6 +11,7 @@ class UserDetailRemoteServices {
   static Future<List<UserDetail>?> fetchUserDetails() async {
     var response = await http.get(Uri.parse(serviceHttp + '/user/list'));
     if (response.statusCode >= 200 && response.statusCode < 300) {
+      print("fetchUserDetails " + response.body);
       return parseUsersDetail(utf8.decode(response.bodyBytes));
     } else {
       return null;
