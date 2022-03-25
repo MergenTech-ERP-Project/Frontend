@@ -606,7 +606,7 @@ class _PozisyonEklemeBodyState extends State<_PozisyonEklemeBody> {
           ),
           ///TODO: SingleChildScrollView
           Visibility(
-            visible: visibleList.value,
+            visible: optionalCompanyController.visibleList.value,
             child: GenericDropDownList<Company>(
               isLoading: companyController.isLoading.value,
               childVisible: companyVisible.value,
