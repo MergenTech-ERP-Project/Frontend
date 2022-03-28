@@ -11,9 +11,8 @@ import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 AppBar topNavigationBar(context, key, leadingIcon) => AppBar(
-      leading: ResponsiveWidget.isLargeScreen(context)
-          ? leadingIcon
-          : IconButton(
+      leading: ResponsiveWidget.isSmallScreen(context)
+          ? IconButton(
               icon: Icon(
                 Icons.menu,
                 color: darkColor,
@@ -22,10 +21,14 @@ AppBar topNavigationBar(context, key, leadingIcon) => AppBar(
               onPressed: () {
                 key.currentState!.openDrawer();
               },
-            ),
+            )
+          : leadingIcon,
       elevation: 0,
       title: Row(
         children: [
+          ResponsiveWidget.isSmallScreen(context)
+              ? leadingIcon
+              : const SizedBox(),
           Visibility(
             visible: ResponsiveWidget.isLargeScreen(context),
             child: CustomText(

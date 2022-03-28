@@ -48,10 +48,13 @@ class SplashView extends StatelessWidget {
                 initialRoute: employeesPageRoute,
                 generateRoute: rootGenerateRoute,
               ),
-              appBarLeadingIcon: Icon(
-                Icons.home_outlined,
-                color: darkColor,
-                size: 24,
+              appBarLeadingIcon: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Icon(
+                  Icons.home_outlined,
+                  color: darkColor,
+                  size: 26,
+                ),
               ),
             );
           }
