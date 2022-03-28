@@ -7,19 +7,14 @@ import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/routing/routes.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
-AppBar topNavigationBar(context, key) => AppBar(
+AppBar topNavigationBar(context, key, leadingIcon) => AppBar(
       leading: !ResponsiveWidget.isSmallScreen(context)
           ? Container(
               padding: const EdgeInsets.only(left: 14),
-              child: Icon(
-                Icons.home_outlined,
-                color: darkColor,
-                size: 24,
-              ),
+              child: leadingIcon,
             )
           : IconButton(
               icon: Icon(
@@ -77,12 +72,11 @@ AppBar topNavigationBar(context, key) => AppBar(
               Icons.settings,
               color: darkColor.withOpacity(.7),
             ),
-            onPressed: () => showDialog(
-              context: context,
-              builder: (context) => Dialog(
-                child: AddNewEmployee(userId: user.id),
-              ),
-            ),
+            onPressed: () {
+              Get.offAllNamed(
+                employeeRoute + "/" + user.id.toString(),
+              );
+            },
           ),
           Container(width: 1, height: 22, color: lightGreyColor),
           Visibility(

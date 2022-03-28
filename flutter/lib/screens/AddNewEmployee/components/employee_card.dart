@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/models/user.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
+import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
@@ -28,12 +28,11 @@ class EmployeeCard extends StatelessWidget {
               child: CircularProgressIndicator(),
             )
           : InkWell(
-              onTap: () => showDialog(
-                context: context,
-                builder: (context) => Dialog(
-                  child: AddNewEmployee(userId: user.id),
-                ),
-              ),
+              onTap: () {
+                Get.offAllNamed(
+                  employeeRoute + "/" + user.id.toString(),
+                );
+              },
               child: Container(
                 height: height,
                 decoration: BoxDecoration(
