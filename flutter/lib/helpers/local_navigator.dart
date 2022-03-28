@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:vtys_kalite/routing/router.dart';
-import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
-Navigator localNavigator() => Navigator(
+class LocalNavigator extends StatelessWidget {
+  final String? initialRoute;
+  final Route<dynamic>? Function(RouteSettings)? generateRoute;
+  const LocalNavigator({
+    Key? key,
+    required this.initialRoute,
+    required this.generateRoute,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Navigator(
       key: navigatorController.navigationKey,
-      initialRoute: employeesPageRoute,
+      initialRoute: initialRoute,
       onGenerateRoute: generateRoute,
     );
+  }
+}

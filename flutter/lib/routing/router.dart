@@ -9,12 +9,13 @@ import 'package:vtys_kalite/screens/Forms/forms_page.dart';
 import 'package:vtys_kalite/screens/Forms/forms_page_small.dart';
 import 'package:vtys_kalite/screens/Settings/settings_page.dart';
 import 'package:vtys_kalite/screens/VacationRequest/vacation_request.dart';
+import 'package:vtys_kalite/utilities/style.dart';
 
-Route<dynamic> generateRoute(RouteSettings settings) {
+Route<dynamic> rootGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
     case employeesPageRoute:
       return _getPageRoute(Employees());
-    case vacationRequestPageRoute:
+    case vacationsPageRoute:
       return _getPageRoute(VacationRequest());
     case myActivitiesPageRoute:
       return _getPageRoute(MyActivities());
@@ -30,6 +31,23 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     default:
       print("Check Address on Router.dart");
       return _getPageRoute(Employees());
+  }
+}
+
+Route<dynamic> employeeGenerateRoute(RouteSettings settings) {
+  switch (settings.name) {
+    case employeePageRoute:
+      return _getPageRoute(Container(color: redColor));
+    case careerPageDisplayName:
+      return _getPageRoute(Container(color: greenColor));
+    case vacationRequestPageDisplayName:
+      return _getPageRoute(Container(color: yellowColor));
+    case otherPageDisplayName:
+      return _getPageRoute(Container(color: activeDarkColor));
+
+    default:
+      print("Check Address on Router.dart");
+      return _getPageRoute(Container(color: redColor));
   }
 }
 

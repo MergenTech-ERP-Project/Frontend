@@ -2,8 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/helpers/local_navigator.dart';
+import 'package:vtys_kalite/routing/router.dart';
+import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/site_layout.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
+import 'package:vtys_kalite/utilities/style.dart';
 
 class SplashView extends StatelessWidget {
   Future<void> initializeSettings() async {
@@ -38,7 +42,18 @@ class SplashView extends StatelessWidget {
               ),
             );
           } else {
-            return SiteLayout();
+            return SiteLayout(
+              items: rootSideMenuItems,
+              navigator: const LocalNavigator(
+                initialRoute: employeesPageRoute,
+                generateRoute: rootGenerateRoute,
+              ),
+              appBarLeadingIcon: Icon(
+                Icons.home_outlined,
+                color: darkColor,
+                size: 24,
+              ),
+            );
           }
         }
       },

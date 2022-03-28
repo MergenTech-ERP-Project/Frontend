@@ -2,209 +2,69 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
-import 'package:vtys_kalite/helpers/helpers.dart';
-import 'package:vtys_kalite/helpers/responsiveness.dart';
+import 'package:vtys_kalite/helpers/local_navigator.dart';
+import 'package:vtys_kalite/routing/router.dart';
 import 'package:vtys_kalite/routing/routes.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/tab_diger_bilgiler.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/tab_diger_bilgiler_small.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/tab_genel.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/tab_izin.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/tab_kariyer_small.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/tab_kisisel_bilgiler.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/tab_kisisel_bilgiler_small.dart';
+import 'package:vtys_kalite/site_layout.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class AddNewEmployee extends StatelessWidget {
-  final int userId;
-
-  AddNewEmployee({
-    Key? key,
-    required this.userId,
-  }) : super(key: key);
+  final int userId = int.parse(Get.parameters['userId'].toString());
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 9,
-      child: Scaffold(
-        appBar: _appBar(),
-        body: FutureBuilder(
-          future: userHelper.init(id: userId),
-          builder: (context, snap) {
-            if (snap.connectionState != ConnectionState.done) {
+    return SiteLayout(
+      appBarLeadingIcon: InkWell(
+        onTap: () => Get.offAllNamed(rootRoute),
+        child: Icon(
+          Icons.keyboard_arrow_left,
+          color: darkColor,
+          size: 24,
+        ),
+      ),
+      items: employeeSideMenuItems,
+      navigator: FutureBuilder(
+        future: userHelper.init(id: userId),
+        builder: (context, snap) {
+          if (snap.connectionState != ConnectionState.done) {
+            return Container(
+              color: lightColor,
+              child: const Center(
+                child: SizedBox(
+                  height: 50,
+                  width: 50,
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+            );
+          } else {
+            if (snap.hasError) {
               return Container(
-                color: lightColor,
-                child: const Center(
-                  child: SizedBox(
-                    height: 50,
-                    width: 50,
-                    child: CircularProgressIndicator(),
+                color: redColor,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(50),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: CustomText(
+                        text: snap.error.toString(),
+                        size: 24,
+                        color: yellowColor,
+                      ),
+                    ),
                   ),
                 ),
               );
             } else {
-              if (snap.hasError) {
-                return Container(
-                  color: redColor,
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(50),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: CustomText(
-                          text: snap.error.toString(),
-                          size: 24,
-                          color: yellowColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              } else {
-                return _TabBody();
-              }
+              return const LocalNavigator(
+                initialRoute: employeesPageRoute,
+                generateRoute: employeeGenerateRoute,
+              );
             }
-          },
-        ),
-      ),
-    );
-  }
-}
-
-_appBar() => AppBar(
-      toolbarHeight: 0,
-      elevation: 0,
-      backgroundColor: activeColor,
-      foregroundColor: Colors.white,
-      automaticallyImplyLeading: true,
-      centerTitle: true,
-      title: const CustomText(text: "Personel"),
-      leading: IconButton(
-        icon: const Icon(Icons.keyboard_arrow_left),
-        onPressed: () => Get.offAllNamed(rootRoute),
-      ),
-      bottom: TabBar(
-        isScrollable: true,
-        indicatorColor: Colors.blue,
-        tabs: [
-          Tab(child: CustomText(text: 'Genel', color: lightColor)),
-          Tab(child: CustomText(text: 'Kariyer', color: lightColor)),
-          Tab(child: CustomText(text: 'Kişisel Bilgiler', color: lightColor)),
-          Tab(child: CustomText(text: 'Diğer Bilgiler', color: lightColor)),
-          Tab(child: CustomText(text: 'İzin', color: lightColor)),
-          Tab(child: CustomText(text: 'Ödemeler', color: lightColor)),
-          Tab(child: CustomText(text: 'Mesai', color: lightColor)),
-          Tab(child: CustomText(text: 'Bodro', color: lightColor)),
-          Tab(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomText(text: "Diğer", color: lightColor),
-                const Icon(Icons.keyboard_arrow_down),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-
-class _TabBody extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Padding(
-          padding: ResponsiveWidget.isLargeScreen(context)
-              ? const EdgeInsets.all(20)
-              : const EdgeInsets.all(5),
-          child: TabBarView(
-            children: [
-              TabGenel(),
-              ResponsiveWidget(
-                largeScreen: TabKariyer(),
-                smallScreen: TabKariyerSmall(),
-              ),
-              ResponsiveWidget(
-                largeScreen: TabPersonalInformation(),
-                smallScreen: TabPersonalInformationSmall(),
-              ),
-              ResponsiveWidget(
-                largeScreen: TabAnotherInformation(),
-                smallScreen: TabAnotherInformationSmall(),
-              ),
-              TabIzin(),
-              const Center(child: CustomText(text: "5")),
-              const Center(child: CustomText(text: "6")),
-              const Center(child: CustomText(text: "7")),
-              const Center(child: CustomText(text: "8")),
-            ],
-          ),
-        ),
-        Positioned(
-          right: 0,
-          left: 0,
-          bottom: 0,
-          height: 50,
-          child: _BottomBar(),
-        ),
-      ],
-    );
-  }
-}
-
-class _BottomBar extends StatelessWidget {
-  var isSaved = false.obs;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: lightColor,
-      child: Row(
-        children: [
-          Visibility(
-            visible: ResponsiveWidget.isSmallScreen(context) ? false : true,
-            child: const Expanded(
-              flex: 3,
-              child: Text(""),
-            ),
-          ),
-          Expanded(
-            child: Obx(
-              () => Visibility(
-                visible: isSaved.value,
-                child: Row(
-                  children: const [
-                    Icon(Icons.done),
-                    Text(' Kaydedildi!'),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: CustomButton(
-              title: 'Kaydet',
-              pressAction: () async {
-                showDialogWaitingMessage(context);
-                await userHelper.userDetailSave();
-                Navigator.of(context).pop(true);
-                isSaved.value = true;
-                Get.back();
-              },
-            ),
-          ),
-          Expanded(
-            child: CustomButton(
-              title: 'İptal',
-              foregroundColor: Colors.black,
-              backgroundColor: Colors.white,
-              pressAction: () => Get.offAllNamed(rootRoute),
-            ),
-          ),
-        ],
+          }
+        },
       ),
     );
   }
