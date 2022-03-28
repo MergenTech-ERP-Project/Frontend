@@ -4,7 +4,6 @@ import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 class MenuController extends GetxController {
-  static MenuController instance = Get.find();
   var activeItem = employeesPageDisplayName.obs;
   var hoverItem = "".obs;
 
@@ -28,11 +27,26 @@ class MenuController extends GetxController {
       case myActivitiesPageDisplayName:
         iconData = Icons.event;
         break;
+      case vacationsPageDisplayName:
+        iconData = Icons.event_note;
+        break;
       case formsPageDisplayName:
         iconData = Icons.event_note;
         break;
       case settingsPageDisplayName:
         iconData = Icons.settings;
+        break;
+      case employeePageDisplayName:
+        iconData = Icons.person;
+        break;
+      case careerPageDisplayName:
+        iconData = Icons.wallet_membership;
+        break;
+      case vacationRequestPageDisplayName:
+        iconData = Icons.event_note;
+        break;
+      case otherPageDisplayName:
+        iconData = Icons.ac_unit;
         break;
       default:
         iconData = Icons.exit_to_app;

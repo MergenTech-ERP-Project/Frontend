@@ -11,11 +11,8 @@ import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 AppBar topNavigationBar(context, key, leadingIcon) => AppBar(
-      leading: !ResponsiveWidget.isSmallScreen(context)
-          ? Container(
-              padding: const EdgeInsets.only(left: 14),
-              child: leadingIcon,
-            )
+      leading: ResponsiveWidget.isLargeScreen(context)
+          ? leadingIcon
           : IconButton(
               icon: Icon(
                 Icons.menu,
@@ -30,7 +27,7 @@ AppBar topNavigationBar(context, key, leadingIcon) => AppBar(
       title: Row(
         children: [
           Visibility(
-            visible: !ResponsiveWidget.isSmallScreen(context),
+            visible: ResponsiveWidget.isLargeScreen(context),
             child: CustomText(
               text: "Mergen Tech",
               color: darkColor,

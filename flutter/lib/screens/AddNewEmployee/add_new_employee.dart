@@ -59,7 +59,7 @@ class AddNewEmployee extends StatelessWidget {
               );
             } else {
               return const LocalNavigator(
-                initialRoute: employeesPageRoute,
+                initialRoute: employeePageRoute,
                 generateRoute: employeeGenerateRoute,
               );
             }
