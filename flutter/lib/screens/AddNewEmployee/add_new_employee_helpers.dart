@@ -77,7 +77,7 @@ showInformationWhenOnClick() {
   tabKariyerController.positionUnvan.text =
       userHelper.userDetailCareer!.unitTitle;
   tabKariyerController.positionYoneticisi.text =
-      userHelper.userDetailCareer!.managerName;
+      userHelper.userDetailCareer!.adminName;
 
   tabKariyerController.controllerPaymentSalary.text =
       userHelper.userDetailPayment!.salary;

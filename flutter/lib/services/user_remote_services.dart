@@ -95,7 +95,7 @@ class UserRemoteServices {
     return response.statusCode;
   }
 
-  static Future<String> updateUser(int id, String json) async {
+  static Future<int> updateUser(int id, String json) async {
     var response = await http
         .put(Uri.parse(serviceHttp + '/user/update/$id'),
             headers: <String, String>{
@@ -108,12 +108,10 @@ class UserRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return (response.statusCode >= 200 && response.statusCode < 300)
-        ? "Success: User"
-        : "Error: User ${response.statusCode}";
+    return response.statusCode;
   }
 
-  static Future<String> deleteUser(int id) async {
+  static Future<int> deleteUser(int id) async {
     var response = await http
         .delete(Uri.parse(serviceHttp + '/user/remove/$id'),
             headers: <String, String>{
@@ -125,8 +123,6 @@ class UserRemoteServices {
         .timeout(
           const Duration(seconds: 10),
         );
-    return (response.statusCode >= 200 && response.statusCode < 300)
-        ? "Success: User"
-        : "Error: User ${response.statusCode}";
+    return response.statusCode;
   }
 }

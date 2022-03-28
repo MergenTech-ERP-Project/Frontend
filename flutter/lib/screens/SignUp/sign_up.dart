@@ -160,18 +160,13 @@ class SignUpPage extends StatelessWidget {
     if (!(_formkey.currentState!.validate())) return;
     await userDetailController.fetchUserDetails();
     int? response = await userController.addNewUser(
-      newUser: User(
+      user: User(
         name: _usernameController.text,
         email: _emailController.text,
         password: _passwordController.text,
         title: "management",
         cellphone: _cellPhoneController.text,
       ),
-      tcNo: (int.tryParse(userDetailController.userDetailList.isNotEmpty
-                  ? userDetailController.userDetailList.last.tcno
-                  : "0") ??
-              0 + 1)
-          .toString(),
     );
 
     if (response < 200 || response >= 300) {

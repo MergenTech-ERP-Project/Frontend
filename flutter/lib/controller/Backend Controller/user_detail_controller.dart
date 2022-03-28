@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_career.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/services/user_detail_remote_services.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 
 class UserDetailController extends GetxController {
   var isLoading = false.obs;
@@ -42,38 +43,38 @@ class UserDetailController extends GetxController {
     }
   }
 
-  Future<int> addNewUserDetail(UserDetail userDetail,
-      {UserDetailCareer? career}) async {
+  Future<int> addNewUserDetail({
+    required UserDetail detail,
+  }) async {
     try {
       isLoading(true);
-      Map detail = userDetail.toJson();
-      detail.remove("id");
+      Map detailMap = detail.toJson();
+      detailMap.remove("id");
       print(json.encode(detail).toString());
       var response = await UserDetailRemoteServices.addNewUserDetail(
-          json.encode(detail).toString());
-
-      print("post User Detail: " + response.toString() + "\n");
-      fetchUserDetailByUserId(userDetail.userId);
+          json.encode(detailMap).toString());
+      print("Add New User Detail: " + response.toString() + "\n");
+      //await fetchUserDetailByUserId(detail.userId);
       return response;
     } finally {
       isLoading(false);
     }
   }
 
-  Future<int> updateUserDetail(int id, UserDetail userDetail,
-      {UserDetailCareer? career}) async {
-    print("User Detail Update");
-    userDetail.id = id;
-    print("User Detail $id : " + json.encode(userDetail.toJson()).toString());
+  Future<int> updateUserDetail({
+    required int id,
+    required UserDetail userDetail,
+  }) async {
     try {
       isLoading(true);
+      print("Update User Detail ID: $id");
       Map<String, dynamic> detailMap = userDetail.toJson();
       detailMap.remove("tc_no");
       print(json.encode(detailMap).toString());
       var response = await UserDetailRemoteServices.updateUserDetail(
           id, json.encode(detailMap).toString());
       print("put User Detail: " + response.toString());
-      fetchUserDetailByUserId(userDetail.userId);
+      //await fetchUserDetailByUserId(userDetail.userId);
       return response;
     } finally {
       isLoading(false);

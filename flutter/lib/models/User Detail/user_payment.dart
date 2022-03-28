@@ -4,8 +4,9 @@ import 'package:enum_to_string/enum_to_string.dart';
 import 'package:vtys_kalite/enums/payment_scheme.dart';
 import 'package:vtys_kalite/enums/salary_type.dart';
 
-List<UserDetailPayment> parseUsersPayment(String str) => List<UserDetailPayment>.from(
-    json.decode(str).map((x) => UserDetailPayment.fromJson(x)));
+List<UserDetailPayment> parseUsersPayment(String str) =>
+    List<UserDetailPayment>.from(
+        json.decode(str).map((x) => UserDetailPayment.fromJson(x)));
 
 UserDetailPayment parseUserPayment(String str) => parseUsersPayment(str)[0];
 
@@ -15,20 +16,18 @@ String fetchUsersPayment(List<UserDetailPayment> data) =>
 /// The part written with // places written with json.
 
 class UserDetailPayment {
-  final int id;
-  final int userDetailId; //user_detail_id
-  String tcno; //tcno
+  int id;
+  int userDetailId; //user_detail_id
   String salary; //salary
   String currency; //currency
-  String commuteSupportFee; //commute_support_fee
-  String foodSupportFee; //food_support_fee
   SalaryTypeEnum salaryType; //salary_type
   PaymentSchemeEnum paymentScheme; //payment_scheme
+  String foodSupportFee; //food_support_fee
+  String commuteSupportFee; //commute_support_fee
 
   UserDetailPayment({
     this.id = -1,
     required this.userDetailId,
-    this.tcno = "",
     this.salary = "",
     this.currency = "",
     this.salaryType = SalaryTypeEnum.none,
@@ -40,8 +39,7 @@ class UserDetailPayment {
   factory UserDetailPayment.fromJson(Map<String, dynamic> json) {
     return UserDetailPayment(
       id: json['id'] ?? -1,
-      userDetailId: json["user_detail_id"],
-      tcno: json['tcno'] ?? "",
+      userDetailId: json["user_detail_id"] ?? -1,
       salary: json['salary'] ?? "",
       currency: json['currency'] ?? "",
       salaryType: EnumToString.fromString(
@@ -58,7 +56,6 @@ class UserDetailPayment {
   Map<String, dynamic> toJson() => {
         "id": id,
         "user_detail_id": userDetailId,
-        "tcno": tcno,
         "salary": salary,
         "currency": currency,
         "salary_type": EnumToString.convertToString(salaryType),

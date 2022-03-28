@@ -31,7 +31,7 @@ class UserController extends GetxController {
   Future<int> fetchUserByEmailAndPassword(String email, String password) async {
     try {
       isLoading(true);
-      var userId =
+      int userId =
           await UserRemoteServices.fetchUserByEmailAndPassword(email, password);
       print("fetch User: " + userId.toString());
       return userId;
@@ -43,8 +43,6 @@ class UserController extends GetxController {
   Future<User?> fetchUserById(id) async {
     try {
       isLoading(true);
-      /* User? user = 
-      if (user != null) print("fetch User: " + user.id.toString()); */
       return await UserRemoteServices.fetchUserById(id);
     } finally {
       isLoading(false);
@@ -63,71 +61,46 @@ class UserController extends GetxController {
   }
 
   Future<int> addNewUser({
-    required User newUser,
-    required String tcNo,
-    UserDetail? userDetail,
+    required User user,
   }) async {
     try {
       isLoading(true);
-      Map user = newUser.toJson();
-      user.remove('id');
+      Map userMap = user.toJson();
+      userMap.remove('id');
       int response =
-          await UserRemoteServices.addNewUser(json.encode(user).toString());
-      print("addNewUser $response");
-      await fetchUsers(); //userList.add(newUser);
-      var userId = await userController.fetchUserByEmailAndPassword(
-          newUser.email, newUser.password);
-      if (userDetail != null) {
-        userDetail.userId = userId;
-      }
-      response = await userDetailController.addNewUserDetail(
-        userDetail ?? UserDetail(userId: userId, tcno: tcNo),
-      );
-      print("addNewUserDetail $response");
+          await UserRemoteServices.addNewUser(json.encode(userMap).toString());
+      print("Add New User $response");
+      await fetchUsers();
       return response;
     } finally {
       isLoading(false);
     }
   }
 
-  Future<String?> updateUser({
+  Future<int> updateUser({
     required int id,
     required User user,
-    UserDetail? userDetail,
   }) async {
     try {
       isLoading(true);
       print("Update User ID: $id");
-      var response = await UserRemoteServices.updateUser(
+      int response = await UserRemoteServices.updateUser(
           id, json.encode(user.toJson()).toString());
-      print("put User: " + response);
-      await fetchUsers(); //userList.add(newUser);
-      if (userDetail != null) {
-        UserDetail? findUserDetail =
-            await userDetailController.fetchUserDetailByUserId(user.id);
-        print("findUserDetail : " +
-            (findUserDetail != null
-                ? findUserDetail.toJson().toString()
-                : "null"));
-        userDetail.userId = user.id;
-        findUserDetail == null
-            ? await userDetailController.addNewUserDetail(userDetail)
-            : await userDetailController.updateUserDetail(
-                findUserDetail.id, userDetail);
-      }
+      print("put User: $response");
+      await fetchUsers();
       return response;
     } finally {
       isLoading(false);
     }
   }
 
-  Future<String?> deleteUser(int id) async {
+  Future<int> deleteUser(int id) async {
     try {
       isLoading(true);
       print("Delete User ID: $id");
       var response = await UserRemoteServices.deleteUser(id);
       await fetchUsers(); //userList.add(newUser);
-      print("delete User: " + response);
+      print("delete User: $response");
       return response;
     } finally {
       isLoading(false);
