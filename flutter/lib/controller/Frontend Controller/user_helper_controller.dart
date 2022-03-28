@@ -18,7 +18,7 @@ import 'package:vtys_kalite/models/User%20Detail/user_payment.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
-class UserHelperController extends GetxController {
+class UserHelperController {
   int userId = -1;
   User? user;
   UserDetail? userDetail;
@@ -57,9 +57,22 @@ class UserHelperController extends GetxController {
     return Future.value(1);
   }
 
+  User getUser() {
+    return User(
+      name: tabGenelController.controllerName.text +
+          (tabGenelController.controllerSurname.text == ""
+              ? (" " + tabGenelController.controllerSurname.text)
+              : ""),
+      email: tabGenelController.controllerEPostaPersonal.text,
+      password: user?.password ?? "qwe123",
+      title: user?.title ?? "management",
+      cellphone: tabGenelController.controllerTelephonePersonal.text,
+    );
+  }
+
   UserDetail getUserDetail() {
     return UserDetail(
-      id: userDetail != null ? userDetail!.id : -1,
+      id: userDetail?.id ?? -1,
       userId: userId,
       numberofkids:
           int.parse(tabKisiselBilgilerController.controllerNumberOfKids.text),
@@ -67,10 +80,14 @@ class UserHelperController extends GetxController {
       workPhone: tabGenelController.controllerWorkPhone.text,
       lastCompletedEducationStatus: tabKisiselBilgilerController
           .controllerLastCompletedEducationStatus.text,
-      dateofbirth: userDetail!.dateofbirth,
-      startDateWork: userDetail!.startDateWork,
-      contractEndDate: userDetail!.contractEndDate,
-      quitWorkDate: userDetail!.contractEndDate,
+      dateofbirth:
+          userDetail?.dateofbirth ?? dateTimeFormat.format(DateTime(1970)),
+      startDateWork:
+          userDetail?.startDateWork ?? dateTimeFormat.format(DateTime(1970)),
+      contractEndDate:
+          userDetail?.contractEndDate ?? dateTimeFormat.format(DateTime(1970)),
+      quitWorkDate:
+          userDetail?.contractEndDate ?? dateTimeFormat.format(DateTime(1970)),
       workEmail: tabGenelController.controllerEPostaWork.value.text,
       address: tabDigerBilgilerController.controllerAdress.text,
       addressCountry: tabDigerBilgilerController.controllerCountry.text,
@@ -87,25 +104,39 @@ class UserHelperController extends GetxController {
       reasonTypeForQuit: "",
       quitExplanation: "",
       nationality: tabKisiselBilgilerController.controllerNationality.text,
-      gender: GenderEnum.values.elementAt(userDetail!.gender.index),
-      bloodType: BloodTypeEnum.values.elementAt(userDetail!.bloodType.index),
-      bankNames: BankNamesEnum.values.elementAt(userDetail!.bankNames.index),
-      contractType:
-          ContractTypeEnum.values.elementAt(userDetail!.contractType.index),
-      maritalStatus:
-          MaritalStatusEnum.values.elementAt(userDetail!.maritalStatus.index),
-      disabledDegree:
-          DisabledDegreeEnum.values.elementAt(userDetail!.disabledDegree.index),
-      militaryStatus:
-          MilitaryStatusEnum.values.elementAt(userDetail!.employmentType.index),
-      employmentType:
-          EmploymentTypeEnum.values.elementAt(userDetail!.employmentType.index),
+      gender: GenderEnum.values.elementAt(userDetail?.gender.index ?? 0),
+      bloodType:
+          BloodTypeEnum.values.elementAt(userDetail?.bloodType.index ?? 0),
+      bankNames:
+          BankNamesEnum.values.elementAt(userDetail?.bankNames.index ?? 0),
+      contractType: ContractTypeEnum.values
+          .elementAt(userDetail?.contractType.index ?? 0),
+      maritalStatus: MaritalStatusEnum.values
+          .elementAt(userDetail?.maritalStatus.index ?? 0),
+      disabledDegree: DisabledDegreeEnum.values
+          .elementAt(userDetail?.disabledDegree.index ?? 0),
+      militaryStatus: MilitaryStatusEnum.values
+          .elementAt(userDetail?.employmentType.index ?? 0),
+      employmentType: EmploymentTypeEnum.values
+          .elementAt(userDetail?.employmentType.index ?? 0),
       bankAccountType: BankAccountTypeEnum.values
-          .elementAt(userDetail!.bankAccountType.index),
+          .elementAt(userDetail?.bankAccountType.index ?? 0),
       educationalStatus: EducationalStatusEnum.values
-          .elementAt(userDetail!.educationalStatus.index),
+          .elementAt(userDetail?.educationalStatus.index ?? 0),
       highestEducationLevelCompleted: HighestEducationLevelCompletedEnum.values
-          .elementAt(userDetail!.highestEducationLevelCompleted.index),
+          .elementAt(userDetail?.highestEducationLevelCompleted.index ?? 0),
+    );
+  }
+
+  UserDetailCareer getUserDetailCareer() {
+    return UserDetailCareer(
+      userDetailId: userDetail?.id ?? -1,
+    );
+  }
+
+  UserDetailPayment getUserDetailPayment() {
+    return UserDetailPayment(
+      userDetailId: userDetail!.id,
     );
   }
 
@@ -144,37 +175,44 @@ class UserHelperController extends GetxController {
     try {
       if (userId == -1) {
         await userController.addNewUser(
-          user: User(
-            name: tabGenelController.controllerName.text +
-                (tabGenelController.controllerSurname.text == ""
-                    ? (" " + tabGenelController.controllerSurname.text)
-                    : ""),
-            email: tabGenelController.controllerEPostaPersonal.text,
-            password: "qwe123",
-            title: "management",
-            cellphone: tabGenelController.controllerTelephonePersonal.text,
-          ),
+          user: getUser(),
         );
       } else {
         await userController.updateUser(
           id: user!.id,
-          user: User(
-            name: tabGenelController.controllerName.text +
-                (tabGenelController.controllerSurname.text == ""
-                    ? (" " + tabGenelController.controllerSurname.text)
-                    : ""),
-            email: tabGenelController.controllerEPostaPersonal.text,
-            password: user!.password,
-            title: user!.title,
-            cellphone: tabGenelController.controllerTelephonePersonal.text,
-          ),
+          user: getUser(),
         );
       }
-
-      /*! detail vs için herbir request i ayır
-      * add new employee sayfasını yeni route a çek dialogdan yani çıkart
-      * herbir request i kendi sayfasında yap
-      !*/
+      if (userId == -1) {
+        await userDetailController.addNewUserDetail(
+          detail: getUserDetail(),
+        );
+      } else {
+        await userDetailController.updateUserDetail(
+          id: userDetail!.id,
+          userDetail: getUserDetail(),
+        );
+      }
+      if (userId == -1) {
+        await userDetailCareerController.addNewUserDetailCareer(
+          career: getUserDetailCareer(),
+        );
+      } else {
+        await userDetailCareerController.updateUserDetailCareer(
+          id: userDetailCareer!.id,
+          career: getUserDetailCareer(),
+        );
+      }
+      if (userId == -1) {
+        await userDetailPaymentController.addNewUserDetailPayment(
+          payment: getUserDetailPayment(),
+        );
+      } else {
+        await userDetailPaymentController.updateUserDetailPayment(
+          id: userDetailCareer!.id,
+          payment: getUserDetailPayment(),
+        );
+      }
     } catch (e) {
       print(e.toString());
     }

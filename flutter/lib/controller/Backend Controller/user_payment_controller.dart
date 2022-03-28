@@ -3,8 +3,6 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:vtys_kalite/enums/payment_scheme.dart';
-import 'package:vtys_kalite/enums/salary_type.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_payment.dart';
 import 'package:vtys_kalite/services/user_payment_remote_services.dart';
 
@@ -22,24 +20,27 @@ class UserDetailPaymentController extends GetxController {
     }
   }
 
-  Future<int?> addNewUserDetailPayment(
-      userDetailId, UserDetailPayment userDetailPayment) async {
+  Future<int?> addNewUserDetailPayment({
+    required UserDetailPayment payment,
+  }) async {
     try {
       isLoading(true);
       return await UserDetailPaymentServices.addNewUserDetailPayment(
-          json.encode(userDetailPayment.toJson()).toString());
+          json.encode(payment.toJson()).toString());
     } finally {
       isLoading(false);
     }
   }
 
-  Future<String?> updateUserDetailPayment(
-      int id, UserDetailPayment userDetailPayment) async {
+  Future<String?> updateUserDetailPayment({
+    required int id,
+    required UserDetailPayment payment,
+  }) async {
     try {
       isLoading(true);
       print("Update User Detail Payment ID: $id");
       var response = await UserDetailPaymentServices.updateUserDetailPayment(
-          id, json.encode(userDetailPayment.toJson()).toString());
+          id, json.encode(payment.toJson()).toString());
       print("put User Detail Payment: " + response);
       fetchUserDetailPaymentById(id);
       return response;

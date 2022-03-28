@@ -41,10 +41,9 @@ class UserDetailCareerServices {
     return response.statusCode;
   }
 
-  static Future<int> updateUserDetailCareer(
-      int userDetailId, String json) async {
+  static Future<int> updateUserDetailCareer(int id, String json) async {
     var response = await http
-        .put(Uri.parse(serviceHttp + '/career/update/$userDetailId'),
+        .put(Uri.parse(serviceHttp + '/career/update/$id'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
