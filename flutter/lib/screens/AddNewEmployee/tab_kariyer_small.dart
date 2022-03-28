@@ -258,19 +258,19 @@ class _MaasEklemeBodyState extends State<_MaasEklemeBody> {
           Row(
             children: [
               Expanded(
-                child: Obx(
-                  () => CustomDropDownMenu(
-                    icon: const Icon(Icons.arrow_drop_down),
-                    isExpandedYes: true,
-                    iconSize: 20,
-                    valueChoose: userHelper.userDetailPayment!.salaryType.getName,
-                    text: "Maaş Tipi",
-                    list: SalaryTypeExtension.getList(),
-                    onChanged: (val) {
-                       userHelper.userDetailPayment!.salaryType =
-                            SalaryTypeExtension.getEnumFromName(val);
-                    },
-                  ),
+                child: CustomDropDownMenu(
+                  icon: const Icon(Icons.arrow_drop_down),
+                  isExpandedYes: true,
+                  iconSize: 20,
+                  valueChoose: userHelper.userDetailPayment!.salaryType.getName,
+                  text: "Maaş Tipi",
+                  list: SalaryTypeExtension.getList(),
+                  onChanged: (val) {
+                    setState(() {
+                      userHelper.userDetailPayment!.salaryType =
+                          SalaryTypeExtension.getEnumFromName(val);
+                    });
+                  },
                 ),
               ),
               Obx(

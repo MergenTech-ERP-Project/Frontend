@@ -122,7 +122,7 @@ class UserDetail {
   factory UserDetail.fromJson(Map<String, dynamic> json) {
     return UserDetail(
       id: json['id'] ?? -1,
-      userId: json['user_id'],
+      userId: json['user_id'] ?? -1,
       numberofkids: json['numberofkids'] ?? 0,
       tcno: json['tc_no'] ?? "",
       workPhone: json['work_phone'] ?? "",

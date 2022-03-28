@@ -8,25 +8,26 @@ import 'package:vtys_kalite/routing/routes.dart';
 class UserDetailCareerServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
-  static Future<UserDetailCareer?> fetchUserDetailCareerById(userDetailId) async {
-    var response = await http.get(Uri.parse(serviceHttp + '/career/list/$userDetailId'));
-    UserDetailCareer? userDetailCareer;
+  static Future<UserDetailCareer?> fetchUserDetailCareerById(
+      userDetailId) async {
+    var response =
+        await http.get(Uri.parse(serviceHttp + '/career/list/$userDetailId'));
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       if (jsonString == "null") {
         return null;
       }
       jsonString = "[" + jsonString + "]";
-      userDetailCareer = parseUserCareer(jsonString);
+      return parseUserCareer(jsonString);
     }
-    return userDetailCareer;
+    return null;
   }
 
   static Future<int> addNewUserDetailCareer(String json) async {
     print(json);
     var response = await http
         .post(
-          Uri.parse(serviceHttp + '/career/post'),
+          Uri.parse(serviceHttp + '/career/new'),
           headers: <String, String>{
             'Content-type': 'application/json',
             'Accept': 'application/json',
@@ -40,9 +41,10 @@ class UserDetailCareerServices {
     return response.statusCode;
   }
 
-  static Future<int> updateUserDetailCareer(int userDetailId, String json) async {
+  static Future<int> updateUserDetailCareer(
+      int userDetailId, String json) async {
     var response = await http
-        .put(Uri.parse(serviceHttp + '/career/put/$userDetailId'),
+        .put(Uri.parse(serviceHttp + '/career/update/$userDetailId'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
@@ -58,7 +60,7 @@ class UserDetailCareerServices {
 
   static Future<String> deleteUserDetailCareers(int id) async {
     var response = await http
-        .delete(Uri.parse(serviceHttp + '/career/delete/$id'),
+        .delete(Uri.parse(serviceHttp + '/career/remove/$id'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',

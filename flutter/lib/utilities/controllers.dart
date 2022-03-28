@@ -57,4 +57,4 @@ TabKisiselBilgilerController tabKisiselBilgilerController =
 OptionalCompanyDescriptionsController optionalCompanyController =
     Get.find<OptionalCompanyDescriptionsController>();
 
-UserHelperController userHelper = Get.put(UserHelperController());
+UserHelperController userHelper = Get.find<UserHelperController>();

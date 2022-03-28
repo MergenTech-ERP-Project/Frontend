@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print, must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
@@ -143,37 +142,37 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Obx(
-                  () => CustomDropDownMenu(
-                      text: "Sözleşme Türü",
-                      list: ContractTypeExtension.getList(),
-                      valueChoose: userHelper.userDetail!.contractType.getName,
-                      icon: const Icon(Icons.arrow_drop_down),
-                      iconSize: 20,
-                      isExpandedYes: true,
-                      onChanged: (val) {
+                child: CustomDropDownMenu(
+                    text: "Sözleşme Türü",
+                    list: ContractTypeExtension.getList(),
+                    valueChoose: userHelper.userDetail!.contractType.getName,
+                    icon: const Icon(Icons.arrow_drop_down),
+                    iconSize: 20,
+                    isExpandedYes: true,
+                    onChanged: (val) {
+                      setState(() {
                         userHelper.userDetail!.contractType =
                             ContractTypeExtension.getEnumFromName(val);
-                      }),
-                ),
+                      });
+                    }),
               ),
             ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Obx(
-                  () => CustomDropDownMenu(
-                    iconSize: 20,
-                    text: "Çalışma Şekli",
-                    valueChoose: userHelper.userDetail!.employmentType.getName,
-                    list: EmploymentTypeEnumExtension.getList(),
-                    icon: const Icon(Icons.arrow_drop_down),
-                    isExpandedYes: true,
-                    onChanged: (val) {
+                child: CustomDropDownMenu(
+                  iconSize: 20,
+                  text: "Çalışma Şekli",
+                  valueChoose: userHelper.userDetail!.employmentType.getName,
+                  list: EmploymentTypeEnumExtension.getList(),
+                  icon: const Icon(Icons.arrow_drop_down),
+                  isExpandedYes: true,
+                  onChanged: (val) {
+                    setState(() {
                       userHelper.userDetail!.employmentType =
                           EmploymentTypeEnumExtension.getEnumFromName(val);
-                    },
-                  ),
+                    });
+                  },
                 ),
               ),
             ),

@@ -43,9 +43,7 @@ AppBar topNavigationBar(context, key) => AppBar(
               weight: FontWeight.bold,
             ),
           ),
-          Expanded(
-            child: Container(),
-          ),
+          Expanded(child: Container()),
           Stack(
             children: [
               IconButton(

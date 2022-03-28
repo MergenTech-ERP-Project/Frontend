@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
@@ -11,14 +11,9 @@ import 'package:vtys_kalite/screens/AddNewEmployee/components/tab_genel_second_c
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class TabGenel extends StatelessWidget {
-  TabGenel({
-    Key? key,
-  }) : super(key: key) {
-    showInformationWhenOnClick();
-  }
-
   @override
   Widget build(BuildContext context) {
+    showInformationWhenOnClick();
     return ResponsiveWidget(
       largeScreen: userHelper.user != null
           ? Row(

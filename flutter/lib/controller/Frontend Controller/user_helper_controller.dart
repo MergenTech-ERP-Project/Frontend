@@ -19,35 +19,42 @@ import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
 class UserHelperController extends GetxController {
-  var isLoading = false.obs;
   int userId = -1;
   User? user;
   UserDetail? userDetail;
   UserDetailCareer? userDetailCareer;
   UserDetailPayment? userDetailPayment;
 
-  Future<void> init({id}) async {
-    isLoading(true);
+  Future<int> init({id}) async {
     userId = id;
+    await Future.delayed(const Duration(microseconds: 10));
     print("UserHelperController init : $userId");
+    await userController.fetchUsers();
+    print("users fetched");
+    await Future.delayed(const Duration(microseconds: 10));
+    print("User : $userId");
     if (userId != -1) {
       user = await userController.fetchUserById(userId);
-      print("userDetail search");
+      print("User : $userId");
       userDetail = await userDetailController.fetchUserDetailByUserId(userId);
-      print("userDetail found " + userDetail!.toJson().toString());
+      print("userDetail : $userId");
+      print("userDetailCareer : $userId");
+      userDetailCareer = await userDetailCareerController
+          .fetchUserDetailCareerById(userDetail!.id);
+      print("userDetailPayment : $userId");
+      userDetailPayment = await userDetailPaymentController
+          .fetchUserDetailPaymentById(userDetail!.id);
+    } else {
+      userId = userController.userList.isEmpty
+          ? 0
+          : userController.userList.last.id + 1;
+      user = User(id: userId);
+      userDetail = UserDetail(userId: user!.id, tcno: user!.id.toString());
     }
-    userDetail ??= UserDetail(
-      userId: userId,
-      tcno: (int.tryParse(userDetailController.userDetailList.isNotEmpty
-                  ? userDetailController.userDetailList.last.tcno
-                  : "0") ??
-              0 + 1)
-          .toString(),
-    );
-    setUserDetail();
-    userDetailCareer = UserDetailCareer(userDetailId: userDetail!.id);
-    userDetailPayment = UserDetailPayment(userDetailId: userDetail!.id);
-    isLoading(false);
+    userDetailCareer ??= UserDetailCareer(userDetailId: userDetail!.id);
+    userDetailPayment ??= UserDetailPayment(userDetailId: userDetail!.id);
+    print("UserHelperController initialized");
+    return Future.value(1);
   }
 
   UserDetail getUserDetail() {
@@ -134,11 +141,10 @@ class UserHelperController extends GetxController {
   }
 
   userDetailSave() async {
-    isLoading(true);
     try {
       if (userId == -1) {
         await userController.addNewUser(
-          newUser: User(
+          user: User(
             name: tabGenelController.controllerName.text +
                 (tabGenelController.controllerSurname.text == ""
                     ? (" " + tabGenelController.controllerSurname.text)
@@ -148,11 +154,9 @@ class UserHelperController extends GetxController {
             title: "management",
             cellphone: tabGenelController.controllerTelephonePersonal.text,
           ),
-          tcNo: tabKisiselBilgilerController.controllerTcNo.text,
-          userDetail: getUserDetail(),
         );
       } else {
-        userController.updateUser(
+        await userController.updateUser(
           id: user!.id,
           user: User(
             name: tabGenelController.controllerName.text +
@@ -164,62 +168,15 @@ class UserHelperController extends GetxController {
             title: user!.title,
             cellphone: tabGenelController.controllerTelephonePersonal.text,
           ),
-          userDetail: getUserDetail(),
         );
       }
 
-      /* UserDetailCareer? userDetailCareer = await userDetailCareerController
-          .fetchUserDetailCareerById(userDetail.id);
-
-      if (userDetailCareer == null) {
-            await userDetailCareerController.addNewUserDetailCareer(
-          userDetail!.id,
-          UserDetailCareer(
-            userDetailId: userDetail!.id,
-            managerName: tabKariyerController.positionYoneticisi.text,
-            managerTcno: "12345678910", //TODO
-            unitCompany: optionalCompanyController.companyName.value,
-            unitBranch: optionalCompanyController.branchName.value,
-            unitDepartment: optionalCompanyController.departmanName.value,
-            unitTitle: optionalCompanyController.titleName.value,
-          ),
-        );
-      } else {
-        await userDetailCareerController
-            .updateUserDetailCareer(userDetail!.id, userDetailCareer);
-      } */
-
-      /* int? responseUserDetailPayment =
-
-          ///TODO: update kaldı
-          await userDetailPaymentController.addNewUserDetailPayment(
-        userDetail!.id,
-        UserDetailPayment(
-          userDetailId: userDetail!.id,
-          tcno: tabKisiselBilgilerController.controllerTcNo.text,
-          salary: tabKariyerController.controllerPaymentSalary.text,
-          currency: "TL", //TODO
-          salaryType: SalaryTypeEnum.values
-              .elementAt(userDetailPayment!.salaryType.index),
-          paymentScheme: PaymentSchemeEnum.values
-              .elementAt(userDetailPayment!.paymentScheme.index),
-          commuteSupportFee: "617", //TODO
-          foodSupportFee: "6299", //TODO
-        ),
-      ); */
-
-/*
-      showDialogResponseCheck(
-        responseUserDetail!,
-        responseUserDetailCareer!,
-        responseUserDetailPayment!,
-        context,
-      ); */
-
+      /*! detail vs için herbir request i ayır
+      * add new employee sayfasını yeni route a çek dialogdan yani çıkart
+      * herbir request i kendi sayfasında yap
+      !*/
     } catch (e) {
       print(e.toString());
-    } finally {
-      isLoading(false);
     }
   }
 
@@ -232,10 +189,6 @@ class UserHelperController extends GetxController {
     tabGenelController.controllerTelephonePersonal.text = "";
     tabGenelController.controllerAccessType.text = "";
     tabGenelController.controllerContractEndDate.text = "";
-    userDetail!.contractType = ContractTypeEnum.none;
-    userDetail!.employmentType = EmploymentTypeEnum.none;
-    userDetail!.startDateWork = dateTimeFormat.format(DateTime.now());
-    userDetail!.contractEndDate = dateTimeFormat.format(DateTime.now());
 
     tabDigerBilgilerController.controllerAdress.text = "";
     tabDigerBilgilerController.controllerHomePhone.text = "";
@@ -245,33 +198,21 @@ class UserHelperController extends GetxController {
     tabDigerBilgilerController.controllerDistrict.text = "";
     tabDigerBilgilerController.controllerAccountNumber.text = "";
     tabDigerBilgilerController.controllerIBAN.text = "";
-    userDetail!.bankNames = BankNamesEnum.none;
-    userDetail!.bankAccountType = BankAccountTypeEnum.none;
 
-    userDetailCareer!.unitCompany = "";
-    userDetailCareer!.unitBranch = "";
-    userDetailCareer!.unitDepartment = "";
-    userDetailCareer!.unitTitle = "";
     tabKariyerController.positionUnvan.text = "";
     tabKariyerController.positionYoneticisi.text = "";
     tabKariyerController.controllerPaymentSalary.text = "";
     tabKariyerController.controllerPaymentUnit.text = "";
     tabKariyerController.controllerPaymentName.text = "";
 
-    userDetail!.dateofbirth = dateTimeFormat.format(DateTime.now());
     tabKisiselBilgilerController.controllerTcNo.text = "";
     tabKisiselBilgilerController.controllerNationality.text = "";
     tabKisiselBilgilerController.controllerNumberOfKids.text = "";
     tabKisiselBilgilerController.controllerLastCompletedEducationStatus.text =
         "";
-    userDetail!.nationality = "";
-    userDetail!.maritalStatus = MaritalStatusEnum.none;
-    userDetail!.gender = GenderEnum.none;
-    userDetail!.disabledDegree = DisabledDegreeEnum.none;
-    userDetail!.bloodType = BloodTypeEnum.none;
-    userDetail!.educationalStatus = EducationalStatusEnum.none;
-    userDetail!.highestEducationLevelCompleted =
-        HighestEducationLevelCompletedEnum.none;
-    userDetail!.militaryStatus = MilitaryStatusEnum.none;
+
+    userDetail = UserDetail(userId: userId, tcno: userId.toString());
+    userDetailCareer = UserDetailCareer(userDetailId: userDetail!.id);
+    userDetailPayment = UserDetailPayment(userDetailId: userDetail!.id);
   }
 }

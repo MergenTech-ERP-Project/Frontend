@@ -13,43 +13,41 @@ class UserDetailCareerController extends GetxController {
   Future<UserDetailCareer?> fetchUserDetailCareerById(userDetailId) async {
     try {
       isLoading(true);
-      UserDetailCareer? detailCareer =
-          await UserDetailCareerServices.fetchUserDetailCareerById(
-              userDetailId);
-      print(
-          "fetch User Detail Career: " + detailCareer!.userDetailId.toString());
-      return detailCareer;
+      return await UserDetailCareerServices.fetchUserDetailCareerById(
+        userDetailId,
+      );
     } finally {
       isLoading(false);
     }
   }
 
-  Future<int?> addNewUserDetailCareer(
-      userDetailId, UserDetailCareer userDetailCareer) async {
+  Future<int?> addNewUserDetailCareer({
+    required UserDetailCareer career,
+  }) async {
     try {
       isLoading(true);
-      UserDetailCareer newUserDetailCareer =
-          UserDetailCareer(userDetailId: userDetailId);
       var response = await UserDetailCareerServices.addNewUserDetailCareer(
-          json.encode(newUserDetailCareer.toJson()).toString());
+          json.encode(career.toJson()).toString());
 
       print("post User Detail Career: " + response.toString());
-      fetchUserDetailCareerById(userDetailCareer.id);
+      //await fetchUserDetailCareerById(career.id);
       return response;
     } finally {
       isLoading(false);
     }
   }
 
-  Future<int?> updateUserDetailCareer(
-      int id, UserDetailCareer userDetailCareer) async {
+  Future<int?> updateUserDetailCareer({
+    required int id,
+    required UserDetailCareer career,
+  }) async {
     try {
       isLoading(true);
       print("put User Detail Career ID: $id");
       var response = await UserDetailCareerServices.updateUserDetailCareer(
-          id, json.encode(userDetailCareer.toJson()).toString());
+          id, json.encode(career.toJson()).toString());
       print("put User Detail Career: " + response.toString());
-      fetchUserDetailCareerById(id);
+      //await fetchUserDetailCareerById(id);
       return response;
     } finally {
       isLoading(false);
@@ -62,7 +60,7 @@ class UserDetailCareerController extends GetxController {
       print("Delete User Detail Career ID: $id");
       var response = await UserDetailCareerServices.deleteUserDetailCareers(id);
       print("delete User Detail Career: " + response);
-      fetchUserDetailCareerById(id);
+      await fetchUserDetailCareerById(id);
       return response;
     } finally {
       isLoading(false);

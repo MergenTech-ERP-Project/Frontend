@@ -14,27 +14,21 @@ class UserDetailVacationController extends GetxController {
       userDetailId) async {
     try {
       isLoading(true);
-      UserDetailVacation? vacation = await UserDetailVacationServices
+      return await UserDetailVacationServices
           .fetchUserDetailVacationByUserDetailId(userDetailId);
-      print("fetch User Detail Vacation: " + vacation!.userDetailId.toString());
-      return vacation;
     } finally {
       isLoading(false);
     }
   }
 
-  Future<int?> addNewUserDetailVacation(
+  Future<int> addNewUserDetailVacation(
       UserDetailVacation userDetailVacation) async {
     try {
       isLoading(true);
       Map detailVacation = userDetailVacation.toJson();
       detailVacation.remove('id');
-      var response = await UserDetailVacationServices.addNewUserDetailVacation(
+      return await UserDetailVacationServices.addNewUserDetailVacation(
           json.encode(detailVacation).toString());
-
-      print("post User Detail Vacation: " + response.toString());
-      fetchUserDetailVacationByUserDetailId(userDetailVacation.id);
-      return response;
     } finally {
       isLoading(false);
     }
@@ -44,12 +38,8 @@ class UserDetailVacationController extends GetxController {
       int id, UserDetailVacation userDetailVacation) async {
     try {
       isLoading(true);
-      print("put User Detail Vacation ID: $id");
-      var response = await UserDetailVacationServices.updateUserDetailVacation(
+      return await UserDetailVacationServices.updateUserDetailVacation(
           id, json.encode(userDetailVacation.toJson()).toString());
-      print("put User Detail Vacation: " + response.toString());
-      fetchUserDetailVacationByUserDetailId(id);
-      return response;
     } finally {
       isLoading(false);
     }

@@ -20,7 +20,7 @@ class User {
   String email;
 
   User({
-    this.id = 0,
+    this.id = -1,
     this.name = "",
     this.password = "",
     this.title = "",

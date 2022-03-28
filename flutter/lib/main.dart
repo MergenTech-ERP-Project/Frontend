@@ -17,6 +17,7 @@ import 'package:vtys_kalite/controller/Backend%20Controller/user_vacation_contro
 import 'package:vtys_kalite/controller/Frontend%20Controller/authentication_controller.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/menu_controller.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/navigator_controller.dart';
+import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_diger_bilgiler_controller.dart';
@@ -99,4 +100,6 @@ controllerMethod() {
   Get.put(TabKisiselBilgilerController());
 
   Get.put(OptionalCompanyDescriptionsController());
+
+  Get.put(UserHelperController());
 }
