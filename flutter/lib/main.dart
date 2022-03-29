@@ -8,6 +8,7 @@ import 'package:vtys_kalite/controller/Backend%20Controller/activity_evaluation_
 import 'package:vtys_kalite/controller/Backend%20Controller/branch_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/company_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/departmant_controller.dart';
+import 'package:vtys_kalite/controller/Backend%20Controller/security_user_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/title_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/user_career_controller.dart';
 import 'package:vtys_kalite/controller/Backend%20Controller/user_controller.dart';
@@ -18,6 +19,7 @@ import 'package:vtys_kalite/controller/Frontend%20Controller/authentication_cont
 import 'package:vtys_kalite/controller/Frontend%20Controller/menu_controller.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/navigator_controller.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
+import 'package:vtys_kalite/models/security_user.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/controller/tab_diger_bilgiler_controller.dart';
@@ -32,6 +34,7 @@ import 'package:vtys_kalite/utilities/custom_scroll_behaviour.dart';
 import 'package:vtys_kalite/utilities/style.dart';
 
 User user = User();
+SecurityUser securityUser = SecurityUser();
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   controllerMethod();
@@ -102,4 +105,6 @@ controllerMethod() {
   Get.put(OptionalCompanyDescriptionsController());
 
   Get.put(UserHelperController());
+
+  Get.put(SecurityUserController());
 }

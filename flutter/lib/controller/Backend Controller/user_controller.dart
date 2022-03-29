@@ -3,10 +3,8 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/services/user_remote_services.dart';
-import 'package:vtys_kalite/utilities/controllers.dart';
 
 class UserController extends GetxController {
   var isLoading = false.obs;
@@ -28,6 +26,15 @@ class UserController extends GetxController {
     }
   }
 
+  Future<User?> fetchUserById(id) async {
+    try {
+      isLoading(true);
+      return await UserRemoteServices.fetchUserById(id);
+    } finally {
+      isLoading(false);
+    }
+  }
+/* 
   Future<int> fetchUserByEmailAndPassword(String email, String password) async {
     try {
       isLoading(true);
@@ -35,15 +42,6 @@ class UserController extends GetxController {
           await UserRemoteServices.fetchUserByEmailAndPassword(email, password);
       print("fetch User: " + userId.toString());
       return userId;
-    } finally {
-      isLoading(false);
-    }
-  }
-
-  Future<User?> fetchUserById(id) async {
-    try {
-      isLoading(true);
-      return await UserRemoteServices.fetchUserById(id);
     } finally {
       isLoading(false);
     }
@@ -58,7 +56,7 @@ class UserController extends GetxController {
     } finally {
       isLoading(false);
     }
-  }
+  } */
 
   Future<int> addNewUser({
     required User user,
@@ -68,7 +66,8 @@ class UserController extends GetxController {
       Map userMap = user.toJson();
       userMap.remove('id');
       int response =
-          await UserRemoteServices.addNewUser(json.encode(userMap).toString());
+          await UserRemoteServices.
+          addNewUser(json.encode(userMap).toString());
       print("Add New User $response");
       await fetchUsers();
       return response;
