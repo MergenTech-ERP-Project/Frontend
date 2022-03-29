@@ -34,29 +34,7 @@ class UserController extends GetxController {
       isLoading(false);
     }
   }
-/* 
-  Future<int> fetchUserByEmailAndPassword(String email, String password) async {
-    try {
-      isLoading(true);
-      int userId =
-          await UserRemoteServices.fetchUserByEmailAndPassword(email, password);
-      print("fetch User: " + userId.toString());
-      return userId;
-    } finally {
-      isLoading(false);
-    }
-  }
 
-  Future<int> fetchUserByName(String name) async {
-    try {
-      isLoading(true);
-      var userId = await UserRemoteServices.fetchUserByName(name);
-      print("fetch User: " + userId.toString());
-      return userId;
-    } finally {
-      isLoading(false);
-    }
-  } */
 
   Future<int> addNewUser({
     required User user,

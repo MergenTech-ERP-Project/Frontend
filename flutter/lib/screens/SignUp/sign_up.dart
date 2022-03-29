@@ -9,6 +9,7 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
+import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -112,8 +113,8 @@ class SignUpPage extends StatelessWidget {
                             return null;
                           },
                         ),
-                        const SizedBox(height: 15),
-                        CustomTextBox(
+                        /* const SizedBox(height: 15),
+                         CustomTextBox(
                           maxLength: 11,
                           controller: _cellPhoneController,
                           label: "Telefon Numarası",
@@ -124,7 +125,7 @@ class SignUpPage extends StatelessWidget {
                             }
                             return null;
                           },
-                        ),
+                        ), */
                       ],
                     ),
                   ),
@@ -158,17 +159,25 @@ class SignUpPage extends StatelessWidget {
 
   signUpPage(context) async {
     if (!(_formkey.currentState!.validate())) return;
-    await userDetailController.fetchUserDetails();
-    int? response = await userController.addNewUser(
-      user: User(
-        name: _usernameController.text,
-        email: _emailController.text,
-        password: _passwordController.text,
-        title: "management",
-        cellphone: _cellPhoneController.text,
-      ),
-    );
 
+    //await userDetailController.fetchUserDetails();
+
+    await securityUserController.signUp(User(
+      email: _emailController.text,
+      name: _usernameController.text,
+      password: _passwordController.text,
+    ));
+
+    // int? response = await userController.addNewUser(
+    //   user: User(
+    //     name: _usernameController.text,
+    //     email: _emailController.text,
+    //     password: _passwordController.text,
+    //     title: "management",
+    //     cellphone: _cellPhoneController.text,
+    //   ),
+    // );
+/* 
     if (response < 200 || response >= 300) {
       showDialog(
         context: context,
@@ -208,6 +217,7 @@ class SignUpPage extends StatelessWidget {
       );
       return;
     }
+     */
     Get.offAllNamed(loginPageRoute);
   }
 }
