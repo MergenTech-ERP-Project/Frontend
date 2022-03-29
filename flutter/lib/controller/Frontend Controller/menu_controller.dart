@@ -7,7 +7,7 @@ class MenuController extends GetxController {
   var activeItem = employeesPageDisplayName.obs;
   var hoverItem = "".obs;
 
-  changeActiveItem(String itemName) {
+  setActiveItem(String itemName) {
     activeItem.value = itemName;
   }
 

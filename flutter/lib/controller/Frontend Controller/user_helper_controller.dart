@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print
 
-import 'package:get/get.dart';
 import 'package:vtys_kalite/enums/bank_account_type.dart';
 import 'package:vtys_kalite/enums/bank_names.dart';
 import 'package:vtys_kalite/enums/blood_type.dart';
@@ -27,32 +26,33 @@ class UserHelperController {
 
   Future<int> init({id}) async {
     userId = id;
+    _zeroToAllController();
     await Future.delayed(const Duration(microseconds: 10));
-    print("UserHelperController init : $userId");
+    print("UserHelperController init : $userId , $id");
     await userController.fetchUsers();
     print("users fetched");
-    await Future.delayed(const Duration(microseconds: 10));
-    print("User : $userId");
-    if (userId != -1) {
+    if (userId >= 0) {
       user = await userController.fetchUserById(userId);
       print("User : $userId");
       userDetail = await userDetailController.fetchUserDetailByUserId(userId);
       print("userDetail : $userId");
-      print("userDetailCareer : $userId");
       userDetailCareer = await userDetailCareerController
           .fetchUserDetailCareerById(userDetail!.id);
-      print("userDetailPayment : $userId");
+      print("userDetailCareer : $userId");
       userDetailPayment = await userDetailPaymentController
           .fetchUserDetailPaymentById(userDetail!.id);
-    } else {
+      print("userDetailPayment : $userId");
+    } /*  else {
       userId = userController.userList.isEmpty
           ? 0
           : userController.userList.last.id + 1;
-      user = User(id: userId);
-      userDetail = UserDetail(userId: user!.id, tcno: user!.id.toString());
-    }
+      print("null User : $userId");
+    } */
+    user ??= User(id: userId);
+    userDetail ??= UserDetail(userId: user!.id, tcno: user!.id.toString());
     userDetailCareer ??= UserDetailCareer(userDetailId: userDetail!.id);
     userDetailPayment ??= UserDetailPayment(userDetailId: userDetail!.id);
+    await Future.delayed(const Duration(milliseconds: 50));
     print("UserHelperController initialized");
     return Future.value(1);
   }
@@ -129,15 +129,13 @@ class UserHelperController {
   }
 
   UserDetailCareer getUserDetailCareer() {
-    return UserDetailCareer(
-      userDetailId: userDetail?.id ?? -1,
-    );
+    userDetailCareer!.userDetailId = userDetail?.id ?? -1;
+    return userDetailCareer!;
   }
 
   UserDetailPayment getUserDetailPayment() {
-    return UserDetailPayment(
-      userDetailId: userDetail!.id,
-    );
+    userDetailPayment!.userDetailId = userDetail?.id ?? -1;
+    return userDetailPayment!;
   }
 
   setUserDetail() {
@@ -173,7 +171,7 @@ class UserHelperController {
 
   userDetailSave() async {
     try {
-      if (userId == -1) {
+      if (user!.id == -1) {
         await userController.addNewUser(
           user: getUser(),
         );
@@ -183,7 +181,7 @@ class UserHelperController {
           user: getUser(),
         );
       }
-      if (userId == -1) {
+      if (userDetail!.id == -1) {
         await userDetailController.addNewUserDetail(
           detail: getUserDetail(),
         );
@@ -193,7 +191,7 @@ class UserHelperController {
           userDetail: getUserDetail(),
         );
       }
-      if (userId == -1) {
+      if (userDetailCareer!.id == -1) {
         await userDetailCareerController.addNewUserDetailCareer(
           career: getUserDetailCareer(),
         );
@@ -203,7 +201,7 @@ class UserHelperController {
           career: getUserDetailCareer(),
         );
       }
-      if (userId == -1) {
+      if (userDetailPayment!.id == -1) {
         await userDetailPaymentController.addNewUserDetailPayment(
           payment: getUserDetailPayment(),
         );
@@ -218,7 +216,7 @@ class UserHelperController {
     }
   }
 
-  zeroToAllController() {
+  _zeroToAllController() {
     tabGenelController.controllerName.text = "";
     tabGenelController.controllerSurname.text = "";
     tabGenelController.controllerEPostaWork.text = "";
@@ -249,7 +247,8 @@ class UserHelperController {
     tabKisiselBilgilerController.controllerLastCompletedEducationStatus.text =
         "";
 
-    userDetail = UserDetail(userId: userId, tcno: userId.toString());
+    user = User(id: userId);
+    userDetail = UserDetail(userId: user!.id, tcno: user!.id.toString());
     userDetailCareer = UserDetailCareer(userDetailId: userDetail!.id);
     userDetailPayment = UserDetailPayment(userDetailId: userDetail!.id);
   }

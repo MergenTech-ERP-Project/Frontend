@@ -3,10 +3,8 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/services/user_remote_services.dart';
-import 'package:vtys_kalite/utilities/controllers.dart';
 
 class UserController extends GetxController {
   var isLoading = false.obs;

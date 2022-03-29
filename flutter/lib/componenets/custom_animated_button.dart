@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 
 class CustomHoverAnimatedButton extends StatefulWidget {
-  final Curve curve = Curves.ease;
+  final Curve curve = Curves.easeInCirc;
   final Duration duration = const Duration(milliseconds: 300);
   final Color primaryColor, secondaryColor;
   final String? text;

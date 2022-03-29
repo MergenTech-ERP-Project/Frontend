@@ -50,7 +50,7 @@ class SideMenu extends StatelessWidget {
                       color: item.color,
                       onTap: () {
                         if (!menuController.isActive(item.name)) {
-                          menuController.changeActiveItem(item.name);
+                          menuController.setActiveItem(item.name);
                           if (ResponsiveWidget.isSmallScreen(context)) {
                             Get.back();
                           }
