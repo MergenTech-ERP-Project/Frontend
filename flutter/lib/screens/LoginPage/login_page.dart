@@ -12,6 +12,7 @@ import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/main.dart';
+import 'package:vtys_kalite/models/security_user.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -124,9 +125,12 @@ class LoginPage extends StatelessWidget {
 
   loginButton(context) async {
     if (!(_formkey.currentState!.validate())) return;
-    int id = await userController.fetchUserByEmailAndPassword(
-        _emailController.text, _passwordController.text);
-    if (id == -1) {
+    /*  int id = await userController.fetchUserByEmailAndPassword(
+        _emailController.text, _passwordController.text); */
+    securityUser = (await securityUserController.signIn(user))!;
+
+
+    if (securityUser.id == -1) {
       showDialog(
         barrierDismissible: false,
         context: context,
@@ -165,7 +169,7 @@ class LoginPage extends StatelessWidget {
       );
       return;
     }
-    User? _user = await userController.fetchUserById(id);
+    User? _user = await userController.fetchUserById(securityUser.id);
     if (_user == null) return;
     if (isCheckboxTrue) {
       authenticationController.login(_user);

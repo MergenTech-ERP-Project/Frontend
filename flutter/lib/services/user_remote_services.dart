@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 
@@ -30,7 +31,7 @@ class UserRemoteServices {
     return null;
   }
 
-  static Future<int> fetchUserByName(String name) async {
+  /* static Future<int> fetchUserByName(String name) async {
     var response = await http.get(Uri.parse(serviceHttp + '/user/$name'));
     int userID = -1;
     if (response.statusCode >= 200 && response.statusCode < 300) {
@@ -77,7 +78,7 @@ class UserRemoteServices {
       userID = _user == null ? -1 : _user.id;
     }
     return userID;
-  }
+  } */
 
   static Future<int> addNewUser(String json) async {
     print(json);
@@ -86,6 +87,8 @@ class UserRemoteServices {
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',
+              'Authorization':
+                  '${securityUser.tokenType} ${securityUser.accessToken}',
             },
             body: json,
             encoding: encoding)
