@@ -17,7 +17,6 @@ import 'package:vtys_kalite/controller/Backend%20Controller/user_payment_control
 import 'package:vtys_kalite/controller/Backend%20Controller/user_vacation_controller.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/authentication_controller.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/menu_controller.dart';
-import 'package:vtys_kalite/controller/Frontend%20Controller/navigator_controller.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/user_helper_controller.dart';
 import 'package:vtys_kalite/models/security_user.dart';
 import 'package:vtys_kalite/models/user.dart';
@@ -90,7 +89,6 @@ controllerMethod() {
   Get.put(TitleController());
 
   Get.put(MenuController());
-  Get.put(NavigatorController());
 
   Get.put(UserDetailController());
   Get.put(UserDetailCareerController());

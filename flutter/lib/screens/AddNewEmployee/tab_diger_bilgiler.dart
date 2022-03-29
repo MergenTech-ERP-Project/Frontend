@@ -1,7 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/enums/bank_account_type.dart';
@@ -77,40 +76,35 @@ class _TabAnotherInformationState extends State<TabAnotherInformation> {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Obx(
-                          () => CustomDropDownMenu(
-                            isExpandedYes: true,
-                            iconSize: 20,
-                            icon: const Icon(Icons.arrow_drop_down),
-                            valueChoose:
-                                userHelper.userDetail!.bankNames.getName,
-                            text: "Banka Adı",
-                            list: BankNamesEnumExtension.getList(),
-                            onChanged: (val) {
-                              userHelper.userDetail!.bankNames =
-                                  BankNamesEnumExtension.getEnumFromName(val);
-                            },
-                          ),
+                        child: CustomDropDownMenu(
+                          isExpandedYes: true,
+                          iconSize: 20,
+                          icon: const Icon(Icons.arrow_drop_down),
+                          valueChoose: userHelper.userDetail!.bankNames.getName,
+                          text: "Banka Adı",
+                          list: BankNamesEnumExtension.getList(),
+                          onChanged: (val) {
+                            userHelper.userDetail!.bankNames =
+                                BankNamesEnumExtension.getEnumFromName(val);
+                          },
                         ),
                       ),
                     ),
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Obx(
-                          () => CustomDropDownMenu(
-                            isExpandedYes: true,
-                            iconSize: 20,
-                            icon: const Icon(Icons.arrow_drop_down),
-                            text: "Hesap Tipi",
-                            valueChoose:
-                                userHelper.userDetail!.bankAccountType.getName,
-                            list: BankAccountTypeExtension.getList(),
-                            onChanged: (val) {
-                              userHelper.userDetail!.bankAccountType =
-                                  BankAccountTypeExtension.getEnumFromName(val);
-                            },
-                          ),
+                        child: CustomDropDownMenu(
+                          isExpandedYes: true,
+                          iconSize: 20,
+                          icon: const Icon(Icons.arrow_drop_down),
+                          text: "Hesap Tipi",
+                          valueChoose:
+                              userHelper.userDetail!.bankAccountType.getName,
+                          list: BankAccountTypeExtension.getList(),
+                          onChanged: (val) {
+                            userHelper.userDetail!.bankAccountType =
+                                BankAccountTypeExtension.getEnumFromName(val);
+                          },
                         ),
                       ),
                     ),

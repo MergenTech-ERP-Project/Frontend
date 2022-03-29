@@ -25,6 +25,9 @@ class NameController extends StatelessWidget {
         controller: controller,
         label: label,
         suffixWidget: widget,
+        validator: (val) {
+          return (val?.length ?? -1) > 0 ? null : "* Gerekli";
+        },
       ),
     );
   }

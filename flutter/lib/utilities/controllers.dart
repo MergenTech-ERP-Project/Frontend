@@ -39,7 +39,7 @@ DepartmentController departmentController = Get.find<DepartmentController>();
 TitleController titleController = Get.find<TitleController>();
 
 MenuController menuController = Get.find<MenuController>();
-NavigatorController navigatorController = Get.find<NavigatorController>();
+NavigatorController navigatorController = Get.put(NavigatorController());
 
 UserDetailController userDetailController = Get.find<UserDetailController>();
 UserDetailCareerController userDetailCareerController =
