@@ -6,6 +6,7 @@ class CustomHoverAnimatedButton extends StatefulWidget {
   final Duration duration = const Duration(milliseconds: 300);
   final Color primaryColor, secondaryColor;
   final String? text;
+  final IconData? icon;
   final Function()? onTap;
   final double? height, width;
 
@@ -14,6 +15,7 @@ class CustomHoverAnimatedButton extends StatefulWidget {
     required this.primaryColor,
     required this.secondaryColor,
     this.text,
+    this.icon,
     this.onTap,
     this.height = 50,
     this.width,
@@ -46,10 +48,28 @@ class CustomHoverAnimatedButtonState extends State<CustomHoverAnimatedButton> {
               border: Border.all(
                   color: hover ? widget.secondaryColor : widget.primaryColor)),
           child: Center(
-            child: CustomText(
-              text: widget.text,
-              color: hover ? widget.secondaryColor : widget.primaryColor,
-              size: 18,
+            child: Builder(
+              builder: (context) {
+                Icon _icon = Icon(
+                  widget.icon,
+                  size: 20,
+                  color: hover ? widget.secondaryColor : widget.primaryColor,
+                );
+                CustomText _text = CustomText(
+                  text: widget.text,
+                  color: hover ? widget.secondaryColor : widget.primaryColor,
+                  size: 18,
+                );
+                if (widget.text == null && widget.icon == null) {
+                  return const SizedBox();
+                } else if (widget.text == null && widget.icon != null) {
+                  return _icon;
+                } else if (widget.text != null && widget.icon == null) {
+                  return _text;
+                } else {
+                  return Row(children: [_icon, Expanded(child: _text)]);
+                }
+              },
             ),
           ),
         ),
