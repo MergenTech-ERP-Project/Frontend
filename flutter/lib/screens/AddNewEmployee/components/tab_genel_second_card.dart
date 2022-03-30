@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:vtys_kalite/componenets/custom_datetimepicker.dart';
 import 'package:vtys_kalite/componenets/custom_dropdownitems.dart';
-import 'package:vtys_kalite/componenets/custom_text.dart';
 
 import 'package:vtys_kalite/enums/contract_type.dart';
 import 'package:vtys_kalite/enums/employment_type.dart';
@@ -32,15 +31,7 @@ class _TabGenelSecondCardState extends State<TabGenelSecondCard> {
 
   Widget aboutPersonal() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
-          child: CustomText(
-            text: "Genel Bilgiler",
-            size: 32,
-          ),
-        ),
         Row(
           children: [
             Expanded(

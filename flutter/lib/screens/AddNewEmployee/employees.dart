@@ -53,7 +53,7 @@ class Employees extends StatelessWidget {
                                         leftIcon: Icons.person_add,
                                         pressAction: () {
                                           Get.offAllNamed(
-                                            employeeRoute + "/${-1}",
+                                            employeeRoute + "/new",
                                           );
                                         },
                                       ),

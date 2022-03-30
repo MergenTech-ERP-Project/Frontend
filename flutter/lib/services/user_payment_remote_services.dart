@@ -12,10 +12,12 @@ class UserDetailPaymentServices {
 
   static Future<UserDetailPayment?> fetchUserDetailPaymentById(
       userDetailId) async {
+
     var response = await http
         .get(Uri.parse(serviceHttp + '/payments/list/$userDetailId'), headers: {
       'Authorization': '${securityUser.tokenType} ${securityUser.accessToken}',
     });
+
     UserDetailPayment? userDetailPayment;
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);

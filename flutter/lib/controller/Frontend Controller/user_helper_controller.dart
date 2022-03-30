@@ -26,32 +26,33 @@ class UserHelperController {
 
   Future<int> init({id}) async {
     userId = id;
+    _zeroToAllController();
     await Future.delayed(const Duration(microseconds: 10));
-    print("UserHelperController init : $userId");
+    print("UserHelperController init : $userId , $id");
     await userController.fetchUsers();
     print("users fetched");
-    await Future.delayed(const Duration(microseconds: 10));
-    print("User : $userId");
-    if (userId != -1) {
+    if (userId >= 0) {
       user = await userController.fetchUserById(userId);
       print("User : $userId");
       userDetail = await userDetailController.fetchUserDetailByUserId(userId);
       print("userDetail : $userId");
-      print("userDetailCareer : $userId");
       userDetailCareer = await userDetailCareerController
           .fetchUserDetailCareerById(userDetail!.id);
-      print("userDetailPayment : $userId");
+      print("userDetailCareer : $userId");
       userDetailPayment = await userDetailPaymentController
           .fetchUserDetailPaymentById(userDetail!.id);
-    } else {
+      print("userDetailPayment : $userId");
+    } /*  else {
       userId = userController.userList.isEmpty
           ? 0
           : userController.userList.last.id + 1;
-      user = User(id: userId);
-      userDetail = UserDetail(userId: user!.id, tcno: user!.id.toString());
-    }
+      print("null User : $userId");
+    } */
+    user ??= User(id: userId);
+    userDetail ??= UserDetail(userId: user!.id, tcno: user!.id.toString());
     userDetailCareer ??= UserDetailCareer(userDetailId: userDetail!.id);
     userDetailPayment ??= UserDetailPayment(userDetailId: userDetail!.id);
+    await Future.delayed(const Duration(milliseconds: 50));
     print("UserHelperController initialized");
     return Future.value(1);
   }
@@ -128,15 +129,13 @@ class UserHelperController {
   }
 
   UserDetailCareer getUserDetailCareer() {
-    return UserDetailCareer(
-      userDetailId: userDetail?.id ?? -1,
-    );
+    userDetailCareer!.userDetailId = userDetail?.id ?? -1;
+    return userDetailCareer!;
   }
 
   UserDetailPayment getUserDetailPayment() {
-    return UserDetailPayment(
-      userDetailId: userDetail!.id,
-    );
+    userDetailPayment!.userDetailId = userDetail?.id ?? -1;
+    return userDetailPayment!;
   }
 
   setUserDetail() {
@@ -170,54 +169,57 @@ class UserHelperController {
         userDetail!.nationality;
   }
 
-  userDetailSave() async {
+  userDetailSave({required int index}) async {
     try {
-      if (userId == -1) {
-        await userController.addNewUser(
-          user: getUser(),
-        );
-      } else {
-        await userController.updateUser(
-          id: user!.id,
-          user: getUser(),
-        );
-      }
-      if (userId == -1) {
-        await userDetailController.addNewUserDetail(
-          detail: getUserDetail(),
-        );
-      } else {
-        await userDetailController.updateUserDetail(
-          id: userDetail!.id,
-          userDetail: getUserDetail(),
-        );
-      }
-      if (userId == -1) {
-        await userDetailCareerController.addNewUserDetailCareer(
-          career: getUserDetailCareer(),
-        );
-      } else {
-        await userDetailCareerController.updateUserDetailCareer(
-          id: userDetailCareer!.id,
-          career: getUserDetailCareer(),
-        );
-      }
-      if (userId == -1) {
-        await userDetailPaymentController.addNewUserDetailPayment(
-          payment: getUserDetailPayment(),
-        );
-      } else {
-        await userDetailPaymentController.updateUserDetailPayment(
-          id: userDetailCareer!.id,
-          payment: getUserDetailPayment(),
-        );
+      if (index == 0) {
+        if (user!.id == -1) {
+          await userController.addNewUser(
+            user: getUser(),
+          );
+        } else {
+          await userController.updateUser(
+            id: user!.id,
+            user: getUser(),
+          );
+        }
+        if (userDetail!.id == -1) {
+          await userDetailController.addNewUserDetail(
+            detail: getUserDetail(),
+          );
+        } else {
+          await userDetailController.updateUserDetail(
+            id: userDetail!.id,
+            userDetail: getUserDetail(),
+          );
+        }
+      } else if (index == 1) {
+        if (userDetailCareer!.id == -1) {
+          await userDetailCareerController.addNewUserDetailCareer(
+            career: getUserDetailCareer(),
+          );
+        } else {
+          await userDetailCareerController.updateUserDetailCareer(
+            id: userDetailCareer!.id,
+            career: getUserDetailCareer(),
+          );
+        }
+        if (userDetailPayment!.id == -1) {
+          await userDetailPaymentController.addNewUserDetailPayment(
+            payment: getUserDetailPayment(),
+          );
+        } else {
+          await userDetailPaymentController.updateUserDetailPayment(
+            id: userDetailCareer!.id,
+            payment: getUserDetailPayment(),
+          );
+        }
       }
     } catch (e) {
       print(e.toString());
     }
   }
 
-  zeroToAllController() {
+  _zeroToAllController() {
     tabGenelController.controllerName.text = "";
     tabGenelController.controllerSurname.text = "";
     tabGenelController.controllerEPostaWork.text = "";
@@ -248,7 +250,8 @@ class UserHelperController {
     tabKisiselBilgilerController.controllerLastCompletedEducationStatus.text =
         "";
 
-    userDetail = UserDetail(userId: userId, tcno: userId.toString());
+    user = User(id: userId);
+    userDetail = UserDetail(userId: user!.id, tcno: user!.id.toString());
     userDetailCareer = UserDetailCareer(userDetailId: userDetail!.id);
     userDetailPayment = UserDetailPayment(userDetailId: userDetail!.id);
   }

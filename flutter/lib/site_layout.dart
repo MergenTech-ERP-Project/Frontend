@@ -12,13 +12,14 @@ class SiteLayout extends StatelessWidget {
 
   final List items;
   final Widget navigator;
-  final Widget appBarLeadingIcon;
+
+  final Widget trailingWidget;
 
   SiteLayout({
     Key? key,
     required this.items,
     required this.navigator,
-    required this.appBarLeadingIcon,
+    required this.trailingWidget,
   }) : super(key: key);
 
   @override
@@ -26,7 +27,7 @@ class SiteLayout extends StatelessWidget {
     return Scaffold(
       key: _scaffoldKey,
       extendBodyBehindAppBar: false,
-      appBar: topNavigationBar(context, _scaffoldKey, appBarLeadingIcon),
+      appBar: topNavigationBar(context, _scaffoldKey, trailingWidget),
       drawer: ResponsiveWidget.isSmallScreen(context)
           ? Drawer(
               child: SideMenu(

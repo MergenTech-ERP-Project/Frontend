@@ -17,61 +17,49 @@ class TabGenelFirstCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FirstCardImage(user: user),
-            firstCardProfileAbout(),
-          ],
-        ),
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.start,
+        children: [
+          FirstCardImage(user: user),
+          firstCardProfileAbout(),
+        ],
       ),
     );
   }
 
   Widget firstCardProfileAbout() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _ProfileAboutRow(
-              textConstant: "İşe Başlama Tarihi",
-              textUser: userHelper.userDetail!.startDateWork,
-            ),
-            const SizedBox(height: 20),
-            _ProfileAboutRow(
-              textConstant: "Şirket",
-              textUser: userHelper.userDetailCareer!.unitCompany,
-            ),
-            const SizedBox(height: 20),
-            _ProfileAboutRow(
-              textConstant: "Şube",
-              textUser: userHelper.userDetailCareer!.unitBranch,
-            ),
-            const SizedBox(height: 20),
-            _ProfileAboutRow(
-              textConstant: "Departman",
-              textUser: userHelper.userDetailCareer!.unitDepartment,
-            ),
-            const SizedBox(height: 20),
-            _ProfileAboutRow(
-              textConstant: "Ünvan",
-              textUser: userHelper.userDetailCareer!.unitTitle,
-            ),
-            const SizedBox(height: 20),
-            _ProfileAboutRow(
-              textConstant: "E-posta (iş)",
-              textUser: tabGenelController.controllerEPostaWork.value.text,
-            ),
-            const SizedBox(height: 20),
-            _ProfileAboutRow(
-              textConstant: "İş Telefonu",
-              textUser: tabGenelController.controllerWorkPhone.value.text,
-            ),
-          ],
-        ),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _ProfileAboutRow(
+            textConstant: "İşe Başlama Tarihi",
+            textUser: userHelper.userDetail!.startDateWork,
+          ),
+          _ProfileAboutRow(
+            textConstant: "Şirket",
+            textUser: userHelper.userDetailCareer!.unitCompany,
+          ),
+          _ProfileAboutRow(
+            textConstant: "Şube",
+            textUser: userHelper.userDetailCareer!.unitBranch,
+          ),
+          _ProfileAboutRow(
+            textConstant: "Departman",
+            textUser: userHelper.userDetailCareer!.unitDepartment,
+          ),
+          _ProfileAboutRow(
+            textConstant: "Ünvan",
+            textUser: userHelper.userDetailCareer!.unitTitle,
+          ),
+          _ProfileAboutRow(
+            textConstant: "E-posta (iş)",
+            textUser: tabGenelController.controllerEPostaWork.value.text,
+          ),
+          _ProfileAboutRow(
+            textConstant: "İş Telefonu",
+            textUser: tabGenelController.controllerWorkPhone.value.text,
+          ),
+        ],
       ),
     );
   }
@@ -89,11 +77,15 @@ class _ProfileAboutRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        CustomText(text: textConstant, weight: FontWeight.w500),
-        SingleChildScrollView(child: CustomText(text: textUser)),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          CustomText(text: textConstant, weight: FontWeight.w500),
+          SingleChildScrollView(child: CustomText(text: textUser)),
+        ],
+      ),
     );
   }
 }
