@@ -14,6 +14,8 @@ class UserRemoteServices {
     var response = await http.get(
       Uri.parse(serviceHttp + '/user/list'),
       headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
         'Authorization':
             '${securityUser.tokenType} ${securityUser.accessToken}',
       },
@@ -22,14 +24,17 @@ class UserRemoteServices {
       return parseUsers(utf8.decode(response.bodyBytes));
     } else if (response.statusCode == 401) {
       securityUserController.refreshToken(securityUser);
+      return fetchUsers();
     } else {
       return null;
     }
-    return null;
   }
 
   static Future<User?> fetchUserById(id) async {
-    var response = await http.get(Uri.parse(serviceHttp + '/user/list/$id'));
+    var response =
+        await http.get(Uri.parse(serviceHttp + '/user/list/$id'), headers: {
+      'Authorization': '${securityUser.tokenType} ${securityUser.accessToken}',
+    });
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       if (jsonString == "null") {
@@ -37,8 +42,12 @@ class UserRemoteServices {
       }
       jsonString = "[" + jsonString + "]";
       return parseUser(jsonString);
+    } else if (response.statusCode == 401) {
+      securityUserController.refreshToken(securityUser);
+      return fetchUserById(id);
+    } else {
+      return null;
     }
-    return null;
   }
 
   static Future<int> addNewUser(String json) async {
@@ -59,7 +68,7 @@ class UserRemoteServices {
     if (response.statusCode == 401) {
       await securityUserController.refreshToken(securityUser);
       print("refresh Token: ${securityUser.refreshToken}");
-      addNewUser(json);
+      return addNewUser(json);
     }
     return response.statusCode;
   }
@@ -81,12 +90,12 @@ class UserRemoteServices {
     if (response.statusCode == 401) {
       await securityUserController.refreshToken(securityUser);
       print("refresh Token: ${securityUser.refreshToken}");
-      updateUser(id, json);
+      return updateUser(id, json);
     }
     return response.statusCode;
   }
 
-  static Future<int> deleteUser(int id) async {
+  static Future<int> removeUser(int id) async {
     var response = await http
         .delete(Uri.parse(serviceHttp + '/user/remove/$id'),
             headers: <String, String>{
@@ -102,7 +111,7 @@ class UserRemoteServices {
     if (response.statusCode == 401) {
       await securityUserController.refreshToken(securityUser);
       print("refresh Token: ${securityUser.refreshToken}");
-      deleteUser(id);
+      return removeUser(id);
     }
     return response.statusCode;
   }

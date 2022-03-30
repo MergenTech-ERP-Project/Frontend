@@ -44,7 +44,7 @@ class TitleController extends GetxController {
   Future<String?> newTitle(Titlee newTitle, int departmentId) async {
     try {
       isLoading(true);
-      var response = await TitleRemoteServices.newTitle(
+      var response = await TitleRemoteServices.addNewTitle(
           json.encode(newTitle.toJson()).toString());
       fetchTitlesByDepartmentId(departmentId);
       print("New Title: " + response);

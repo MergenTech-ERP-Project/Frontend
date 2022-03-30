@@ -54,7 +54,7 @@ class UserDetailPaymentController extends GetxController {
       isLoading(true);
       print(id);
       var response =
-          await UserDetailPaymentServices.deleteUserDetailPayment(id);
+          await UserDetailPaymentServices.removeUserDetailPayment(id);
       print("delete User Detail Payment: " + response);
       fetchUserDetailPaymentById(id);
       return response;

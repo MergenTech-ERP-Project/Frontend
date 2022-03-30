@@ -83,7 +83,7 @@ class UserDetailController extends GetxController {
     try {
       isLoading(true);
       print("Delete User Detail ID: $id");
-      var response = await UserDetailRemoteServices.deleteUserDetail(id);
+      var response = await UserDetailRemoteServices.removeUserDetail(id);
       print("delete User Detail: " + response);
       fetchUserDetailByUserId(userId);
       return response;

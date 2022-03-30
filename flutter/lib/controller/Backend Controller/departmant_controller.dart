@@ -45,7 +45,7 @@ class DepartmentController extends GetxController {
   Future<String?> newDepartment(Department newDepartment, int branchId) async {
     try {
       isLoading(true);
-      var response = await DepartmentRemoteServices.newDepartment(
+      var response = await DepartmentRemoteServices.addNewDepartment(
           json.encode(newDepartment.toJson()).toString());
       fetchDepartmentsByBranchId(branchId);
       print("New Department: " + response);
