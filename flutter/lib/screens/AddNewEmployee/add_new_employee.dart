@@ -19,7 +19,7 @@ class AddNewEmployee extends StatelessWidget {
   Widget build(BuildContext context) {
     print(id);
     return FutureBuilder(
-      future: Future.delayed(const Duration(milliseconds: 500)),
+      future: Future.delayed(const Duration(milliseconds: 10)),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Container(
@@ -67,7 +67,8 @@ class _UpdatePage extends StatelessWidget {
               text: "Kaydet",
               onTap: () async {
                 showDialogWaitingMessage(context);
-                await userHelper.userDetailSave();
+                await userHelper.userDetailSave(index: 0);
+                await userHelper.userDetailSave(index: 1);
                 Navigator.of(context).pop(true);
               },
             ),
@@ -111,14 +112,15 @@ class _CreatePage extends StatelessWidget {
               height: 50,
               width: pageIndex == 1 ? 120 : 150,
               text: pageIndex == 1 ? "Kaydet" : "Sonraki",
-              onTap: () {
+              icon: pageIndex == 1 ? Icons.keyboard_arrow_right : null,
+              onTap: () async {
                 if (_formKey.currentState!.validate()) {
+                  await userHelper.userDetailSave(index: pageIndex);
                   pageIndex++;
                   menuController.setActiveItem(
                     employeeSideMenuItems[pageIndex].name,
                   );
-                  userHelper.userDetailSave();
-                  navigatorController.navigateTo(
+                  await navigatorController.navigateTo(
                     employeeSideMenuItems[pageIndex].route,
                   );
                 }

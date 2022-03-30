@@ -169,47 +169,50 @@ class UserHelperController {
         userDetail!.nationality;
   }
 
-  userDetailSave() async {
+  userDetailSave({required int index}) async {
     try {
-      if (user!.id == -1) {
-        await userController.addNewUser(
-          user: getUser(),
-        );
-      } else {
-        await userController.updateUser(
-          id: user!.id,
-          user: getUser(),
-        );
-      }
-      if (userDetail!.id == -1) {
-        await userDetailController.addNewUserDetail(
-          detail: getUserDetail(),
-        );
-      } else {
-        await userDetailController.updateUserDetail(
-          id: userDetail!.id,
-          userDetail: getUserDetail(),
-        );
-      }
-      if (userDetailCareer!.id == -1) {
-        await userDetailCareerController.addNewUserDetailCareer(
-          career: getUserDetailCareer(),
-        );
-      } else {
-        await userDetailCareerController.updateUserDetailCareer(
-          id: userDetailCareer!.id,
-          career: getUserDetailCareer(),
-        );
-      }
-      if (userDetailPayment!.id == -1) {
-        await userDetailPaymentController.addNewUserDetailPayment(
-          payment: getUserDetailPayment(),
-        );
-      } else {
-        await userDetailPaymentController.updateUserDetailPayment(
-          id: userDetailCareer!.id,
-          payment: getUserDetailPayment(),
-        );
+      if (index == 0) {
+        if (user!.id == -1) {
+          await userController.addNewUser(
+            user: getUser(),
+          );
+        } else {
+          await userController.updateUser(
+            id: user!.id,
+            user: getUser(),
+          );
+        }
+        if (userDetail!.id == -1) {
+          await userDetailController.addNewUserDetail(
+            detail: getUserDetail(),
+          );
+        } else {
+          await userDetailController.updateUserDetail(
+            id: userDetail!.id,
+            userDetail: getUserDetail(),
+          );
+        }
+      } else if (index == 1) {
+        if (userDetailCareer!.id == -1) {
+          await userDetailCareerController.addNewUserDetailCareer(
+            career: getUserDetailCareer(),
+          );
+        } else {
+          await userDetailCareerController.updateUserDetailCareer(
+            id: userDetailCareer!.id,
+            career: getUserDetailCareer(),
+          );
+        }
+        if (userDetailPayment!.id == -1) {
+          await userDetailPaymentController.addNewUserDetailPayment(
+            payment: getUserDetailPayment(),
+          );
+        } else {
+          await userDetailPaymentController.updateUserDetailPayment(
+            id: userDetailCareer!.id,
+            payment: getUserDetailPayment(),
+          );
+        }
       }
     } catch (e) {
       print(e.toString());
