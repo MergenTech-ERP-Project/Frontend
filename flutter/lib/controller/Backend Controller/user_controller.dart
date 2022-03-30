@@ -75,7 +75,7 @@ class UserController extends GetxController {
     try {
       isLoading(true);
       print("Delete User ID: $id");
-      var response = await UserRemoteServices.deleteUser(id);
+      var response = await UserRemoteServices.removeUser(id);
       await fetchUsers(); //userList.add(newUser);
       print("delete User: $response");
       return response;

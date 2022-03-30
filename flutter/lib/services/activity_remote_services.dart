@@ -3,8 +3,10 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:vtys_kalite/main.dart';
 import 'package:vtys_kalite/models/activity.dart';
 import 'package:vtys_kalite/routing/routes.dart';
+import 'package:vtys_kalite/utilities/controllers.dart';
 
 class ActivityRemoteServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
@@ -15,7 +17,8 @@ class ActivityRemoteServices {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
-        //'Authorization': '<Your token>'
+       'Authorization':
+            '${securityUser.tokenType} ${securityUser.accessToken}',
       },
     );
     print("fetchActivities response ${response.statusCode}");
@@ -23,6 +26,9 @@ class ActivityRemoteServices {
       var jsonString = utf8.decode(response.bodyBytes);
       print("JSON : $jsonString");
       return activityFromJson(jsonString);
+    } else if (response.statusCode == 401) {
+      securityUserController.refreshToken(securityUser);
+      return fetchActivities();
     } else {
       return null;
     }
@@ -34,7 +40,8 @@ class ActivityRemoteServices {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
-        //'Authorization': '<Your token>'
+       'Authorization':
+            '${securityUser.tokenType} ${securityUser.accessToken}',
       },
     );
     print(
@@ -43,6 +50,9 @@ class ActivityRemoteServices {
       var jsonString = utf8.decode(response.bodyBytes);
       print("JSON : $jsonString");
       return activityFromJson(jsonString);
+    } else if (response.statusCode == 401) {
+      securityUserController.refreshToken(securityUser);
+      return fetchActivitiesByUser(userId);
     } else {
       return null;
     }
@@ -54,67 +64,90 @@ class ActivityRemoteServices {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
-        //'Authorization': '<Your token>'
+        'Authorization':
+            '${securityUser.tokenType} ${securityUser.accessToken}',
       },
     );
     print("fetchActivity response ${response.statusCode}");
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var jsonString = utf8.decode(response.bodyBytes);
       return activityFromJson(jsonString)[0];
+    } else if (response.statusCode == 401) {
+      securityUserController.refreshToken(securityUser);
+      return fetchActivitybyId(id);
+    } else {
+      return null;
     }
-    return null;
   }
 
-  static Future<String> postActivity(String json) async {
+  static Future<String> addActivity(String json) async {
     print("Json: $json");
     var response = await http
         .post(Uri.parse(serviceHttp + '/activity/new'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
               'Accept': 'application/json',
-              //'Authorization': '<Your token>'
+              'Authorization':
+            '${securityUser.tokenType} ${securityUser.accessToken}',
             },
             body: json,
             encoding: encoding)
         .timeout(
           const Duration(seconds: 10),
         );
+    if (response.statusCode == 401) {
+      await securityUserController.refreshToken(securityUser);
+      print("refresh Token: ${securityUser.refreshToken}");
+      return addActivity(json);
+    }
     return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Activity"
         : "Error: Activity ${response.statusCode}";
   }
 
-  static Future<String> putActivity(int id, String json) async {
+  static Future<String> updateActivity(int id, String json) async {
     print("Put Activity $id Json: $json");
     var response = await http
         .put(Uri.parse(serviceHttp + '/activity/update/$id'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
               'Accept': 'application/json',
-              //'Authorization': '<Your token>'
+              'Authorization':
+            '${securityUser.tokenType} ${securityUser.accessToken}',
             },
             body: json,
             encoding: encoding)
         .timeout(
           const Duration(seconds: 10),
         );
+    if (response.statusCode == 401) {
+      await securityUserController.refreshToken(securityUser);
+      print("refresh Token: ${securityUser.refreshToken}");
+      return updateActivity(id, json);
+    }
     return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Activity"
         : "Error: Activity ${response.statusCode}";
   }
 
-  static Future<String> deleteActivity(int id) async {
+  static Future<String> removeActivity(int id) async {
     var response = await http
         .delete(Uri.parse(serviceHttp + '/activity/remove/$id'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
               'Accept': 'application/json',
-              //'Authorization': '<Your token>'
+              'Authorization':
+            '${securityUser.tokenType} ${securityUser.accessToken}',
             },
             encoding: encoding)
         .timeout(
           const Duration(seconds: 10),
         );
+    if (response.statusCode == 401) {
+      await securityUserController.refreshToken(securityUser);
+      print("refresh Token: ${securityUser.refreshToken}");
+      return removeActivity(id);
+    }
     return response.statusCode >= 200 && response.statusCode < 300
         ? "Success: Activity"
         : "Error: Activity ${response.statusCode}";

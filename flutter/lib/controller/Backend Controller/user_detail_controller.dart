@@ -3,10 +3,8 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:vtys_kalite/models/User%20Detail/user_career.dart';
 import 'package:vtys_kalite/models/User%20Detail/user_detail.dart';
 import 'package:vtys_kalite/services/user_detail_remote_services.dart';
-import 'package:vtys_kalite/utilities/controllers.dart';
 
 class UserDetailController extends GetxController {
   var isLoading = false.obs;
@@ -85,7 +83,7 @@ class UserDetailController extends GetxController {
     try {
       isLoading(true);
       print("Delete User Detail ID: $id");
-      var response = await UserDetailRemoteServices.deleteUserDetail(id);
+      var response = await UserDetailRemoteServices.removeUserDetail(id);
       print("delete User Detail: " + response);
       fetchUserDetailByUserId(userId);
       return response;

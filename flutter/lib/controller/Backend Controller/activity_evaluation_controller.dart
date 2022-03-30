@@ -61,7 +61,7 @@ class ActivityEvaluationController extends GetxController {
     try {
       isLoading(true);
       var response =
-          await ActivityEvaluationRemoteServices.postActivityEvaluation(json
+          await ActivityEvaluationRemoteServices.addActivityEvaluation(json
               .encode(ActivityEvaluation(
                 id: 0,
                 activityId: activityId,

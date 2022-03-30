@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_button.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/routing/routes.dart';
-import 'package:vtys_kalite/screens/AddNewEmployee/add_new_employee.dart';
 import 'package:vtys_kalite/screens/AddNewEmployee/components/employee_card.dart';
 import 'package:vtys_kalite/screens/AdminPanel/admin_panel.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';

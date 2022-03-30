@@ -9,10 +9,10 @@ import 'package:vtys_kalite/componenets/custom_checkbox.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
+import 'package:vtys_kalite/controller/Backend%20Controller/user_controller.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
 import 'package:vtys_kalite/main.dart';
-import 'package:vtys_kalite/models/security_user.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
@@ -125,9 +125,12 @@ class LoginPage extends StatelessWidget {
 
   loginButton(context) async {
     if (!(_formkey.currentState!.validate())) return;
-    /*  int id = await userController.fetchUserByEmailAndPassword(
-        _emailController.text, _passwordController.text); */
-    securityUser = (await securityUserController.signIn(user))!;
+
+    securityUser = await securityUserController.signIn(User(
+          email: _emailController.text,
+          password: _passwordController.text,
+        )) ??
+        securityUser;
 
     if (securityUser.id == -1) {
       showDialog(
@@ -168,6 +171,8 @@ class LoginPage extends StatelessWidget {
       );
       return;
     }
+
+    Get.put(UserController());
     User? _user = await userController.fetchUserById(securityUser.id);
 
     if (_user == null) return;

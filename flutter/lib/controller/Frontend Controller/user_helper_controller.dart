@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print
 
-import 'package:get/get.dart';
 import 'package:vtys_kalite/enums/bank_account_type.dart';
 import 'package:vtys_kalite/enums/bank_names.dart';
 import 'package:vtys_kalite/enums/blood_type.dart';

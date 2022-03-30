@@ -56,7 +56,7 @@ class ActivityController extends GetxController {
   Future<String?> postActivity(Activity activity) async {
     try {
       isLoading(true);
-      var response = await ActivityRemoteServices.postActivity(
+      var response = await ActivityRemoteServices.addActivity(
           json.encode(activity.toJson()).toString());
       fetchActivities();
       return response;
@@ -68,7 +68,7 @@ class ActivityController extends GetxController {
   Future<String?> putActivity(Activity activity) async {
     try {
       isLoading(true);
-      var response = await ActivityRemoteServices.putActivity(
+      var response = await ActivityRemoteServices.updateActivity(
         activity.id,
         json.encode(activity.toJson()).toString(),
       );
@@ -81,7 +81,7 @@ class ActivityController extends GetxController {
 
   Future<String?> postActiveToUser(ActiveToUser activeToUser) async {
     try {
-      var response = await ActiveToUserRemoteServices.postActiveToUser(
+      var response = await ActiveToUserRemoteServices.addActiveToUser(
           json.encode(activeToUser.toJson()).toString());
       fetchActivities();
       return response;
@@ -94,7 +94,7 @@ class ActivityController extends GetxController {
   Future<String?> deleteActivity(id) async {
     try {
       isLoading(true);
-      var response = await ActivityRemoteServices.deleteActivity(id);
+      var response = await ActivityRemoteServices.removeActivity(id);
       fetchActivities();
       return response;
     } finally {

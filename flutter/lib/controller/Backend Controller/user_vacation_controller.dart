@@ -50,7 +50,7 @@ class UserDetailVacationController extends GetxController {
       isLoading(true);
       print("Delete User Detail Vacation ID: $id");
       var response =
-          await UserDetailVacationServices.deleteUserDetailVacation(id);
+          await UserDetailVacationServices.removeUserDetailVacation(id);
       print("delete User Detail Vacation: " + response);
       fetchUserDetailVacationByUserDetailId(id);
       return response;
