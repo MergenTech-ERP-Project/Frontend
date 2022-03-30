@@ -30,11 +30,12 @@ class SecurityUserController extends GetxController {
     }
   }
 
-  Future<int> refreshToken(SecurityUser securityUser, String refToken) async {
+  Future<int> refreshToken(SecurityUser securityUser) async {
     try {
       isLoading(true);
       return await SecurityUserRemoteServices.refreshTokenSecurity(
-          json.encode(securityUser.toJson()).toString(), refToken);
+        json.encode({'refreshToken': securityUser.refreshToken}).toString(),
+      );
     } finally {
       isLoading(false);
     }

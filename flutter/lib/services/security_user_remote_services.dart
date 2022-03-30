@@ -9,10 +9,10 @@ import 'package:vtys_kalite/routing/routes.dart';
 class SecurityUserRemoteServices {
   static Encoding? encoding = Encoding.getByName('utf-8');
 
-  static Future<int> refreshTokenSecurity(String json, String refreshToken) async {
+  static Future<int> refreshTokenSecurity(String json) async {
     print(json);
     var response = await http
-        .post(Uri.parse(serviceHttp + '/api/auth/$refreshToken'),
+        .post(Uri.parse(serviceHttp + '/api/auth/refreshToken'),
             headers: <String, String>{
               'Content-type': 'application/json',
               'Accept': 'application/json',

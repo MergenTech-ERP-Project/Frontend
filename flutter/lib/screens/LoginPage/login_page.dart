@@ -129,7 +129,6 @@ class LoginPage extends StatelessWidget {
         _emailController.text, _passwordController.text); */
     securityUser = (await securityUserController.signIn(user))!;
 
-
     if (securityUser.id == -1) {
       showDialog(
         barrierDismissible: false,
@@ -170,6 +169,7 @@ class LoginPage extends StatelessWidget {
       return;
     }
     User? _user = await userController.fetchUserById(securityUser.id);
+
     if (_user == null) return;
     if (isCheckboxTrue) {
       authenticationController.login(_user);

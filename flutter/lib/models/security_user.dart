@@ -44,7 +44,7 @@ class SecurityUser {
               json['roles'].toString(),
             ) ??
             RolesEnum.user,
-        tokenType: json['tokenType'],
+        tokenType: json['tokenType'] ?? "Bearer",
         accessToken: json['accessToken']);
   }
 

@@ -14,6 +14,7 @@ class AuthenticationController extends GetxController with CacheManager {
     user = User();
     removeUserId();
     removeAccessToken();
+    removeRefreshToken();
   }
 
   void login(User user) async {
@@ -28,7 +29,7 @@ class AuthenticationController extends GetxController with CacheManager {
     final userId = await getUserId();
     if (userId != null) {
       user = (await userController.fetchUserById(userId))!;
-  
+
       isLogged.value = true;
       print("Remembered for login${user.name}");
     }
