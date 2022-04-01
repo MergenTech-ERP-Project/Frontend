@@ -9,7 +9,6 @@ import 'package:vtys_kalite/componenets/custom_text.dart';
 import 'package:vtys_kalite/componenets/custom_text_box.dart';
 import 'package:vtys_kalite/componenets/custom_text_divider.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
-import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/routing/routes.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 import 'package:vtys_kalite/utilities/style.dart';
@@ -158,11 +157,11 @@ class SignUpPage extends StatelessWidget {
   signUpPage(context) async {
     if (!(_formkey.currentState!.validate())) return;
 
-    int? response = await securityUserController.signUp(User(
+    int? response = await securityUserController.signUp(
       email: _emailController.text,
-      name: _usernameController.text,
+      username: _usernameController.text,
       password: _passwordController.text,
-    ));
+    );
 
     if (response! < 200 || response >= 300) {
       showDialog(

@@ -25,7 +25,7 @@ class SecurityUserRemoteServices {
     return response.statusCode;
   }
 
-  static Future<SecurityUser?> signInSecurity(String json) async {
+  static Future<SecurityUser?> signIn(String json) async {
     print(json);
     var response = await http
         .post(Uri.parse(serviceHttp + '/api/auth/signin'),
@@ -49,7 +49,7 @@ class SecurityUserRemoteServices {
     return null;
   }
 
-  static Future<int> signUpSecurity(String json) async {
+  static Future<int> signUp(String json) async {
     print(json);
     var response = await http
         .post(Uri.parse(serviceHttp + '/api/auth/signup'),

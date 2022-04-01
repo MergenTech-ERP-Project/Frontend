@@ -3,6 +3,7 @@
 import 'package:get/get.dart';
 import 'package:vtys_kalite/controller/Frontend%20Controller/cache_manager.dart';
 import 'package:vtys_kalite/main.dart';
+import 'package:vtys_kalite/models/security_user.dart';
 import 'package:vtys_kalite/models/user.dart';
 import 'package:vtys_kalite/utilities/controllers.dart';
 
@@ -17,7 +18,10 @@ class AuthenticationController extends GetxController with CacheManager {
     removeRefreshToken();
   }
 
-  void login(User user) async {
+  void login({
+    required User user,
+    required SecurityUser securityUser,
+  }) async {
     isLogged.value = true;
     await saveToken(
       user.id,

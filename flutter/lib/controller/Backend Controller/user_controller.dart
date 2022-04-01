@@ -35,6 +35,14 @@ class UserController extends GetxController {
     }
   }
 
+  Future<User?> fetchUserByName(name) async {
+    try {
+      isLoading(true);
+      return await UserRemoteServices.fetchUserByName(name);
+    } finally {
+      isLoading(false);
+    }
+  }
 
   Future<int> addNewUser({
     required User user,
@@ -44,8 +52,7 @@ class UserController extends GetxController {
       Map userMap = user.toJson();
       userMap.remove('id');
       int response =
-          await UserRemoteServices.
-          addNewUser(json.encode(userMap).toString());
+          await UserRemoteServices.addNewUser(json.encode(userMap).toString());
       print("Add New User $response");
       await fetchUsers();
       return response;

@@ -33,9 +33,9 @@ class AddNewEmployee extends StatelessWidget {
             ),
           );
         } else {
-          return id != "new"
-              ? _UpdatePage(userId: int.parse(id))
-              : _CreatePage();
+          return id == "new"
+              ? _CreatePage()
+              : _UpdatePage(userId: int.parse(id));
         }
       },
     );

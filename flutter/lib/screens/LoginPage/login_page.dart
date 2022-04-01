@@ -126,11 +126,12 @@ class LoginPage extends StatelessWidget {
   loginButton(context) async {
     if (!(_formkey.currentState!.validate())) return;
 
-    securityUser = await securityUserController.signIn(User(
-          email: _emailController.text,
-          password: _passwordController.text,
-        )) ??
-        securityUser;
+    securityUser = (await securityUserController.signIn(
+      email: _emailController.text,
+      password: _passwordController.text,
+    ))!;
+
+    print("Security User : " + securityUser.toJson().toString());
 
     if (securityUser.id == -1) {
       showDialog(
@@ -173,11 +174,11 @@ class LoginPage extends StatelessWidget {
     }
 
     Get.put(UserController());
-    User? _user = await userController.fetchUserById(securityUser.id);
-
+    User? _user = await userController.fetchUserByName(securityUser.username);
+    print("User : " + (_user?.toJson().toString() ?? "Null"));
     if (_user == null) return;
     if (isCheckboxTrue) {
-      authenticationController.login(_user);
+      authenticationController.login(user: _user, securityUser: securityUser);
     } else {
       user = _user;
     }
