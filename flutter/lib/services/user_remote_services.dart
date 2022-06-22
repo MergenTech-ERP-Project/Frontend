@@ -55,7 +55,7 @@ class UserRemoteServices {
 
   static Future<User?> fetchUserByName(name) async {
     var response =
-        await http.get(Uri.parse(serviceHttp + '/user_m/list/$name'), headers: {
+        await http.get(Uri.parse(serviceHttp + '/user_m/$name'), headers: {
       'Authorization': '${securityUser.tokenType} ${securityUser.accessToken}',
     });
     print(response.statusCode);
@@ -68,7 +68,7 @@ class UserRemoteServices {
       return parseUser(jsonString);
     } else if (response.statusCode == 401) {
       securityUserController.refreshToken(securityUser);
-      return fetchUserById(name);
+      return fetchUserByName(name);
     } else {
       return null;
     }

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vtys_kalite/componenets/custom_text.dart';
+import 'package:vtys_kalite/controller/Backend%20Controller/user_controller.dart';
 import 'package:vtys_kalite/helpers/helpers.dart';
 import 'package:vtys_kalite/helpers/local_navigator.dart';
 import 'package:vtys_kalite/helpers/responsiveness.dart';
@@ -34,10 +35,9 @@ import 'package:vtys_kalite/screens/Settings/OptionalCompanyDescriptions/optiona
 class SplashView extends StatelessWidget {
   Future<void> initializeSettings() async {
     await authenticationController.checkLoginStatus();
+    await controllerMethod();
     await activityController
         .fetchActivities(); //fetchActivityByUserId(user.id);
-
-    controllerMethod();
 
     menuController.setActiveItem(employeesPageDisplayName);
 
@@ -83,8 +83,7 @@ class SplashView extends StatelessWidget {
     );
   }
 
-  controllerMethod() {
-
+  controllerMethod() async {
     Get.put(ActivityController());
     Get.put(ActivityEvaluationController());
 
@@ -96,10 +95,13 @@ class SplashView extends StatelessWidget {
     Get.put(MenuController());
     Get.put(NavigatorController());
 
+    Get.put(UserController());
+
     Get.put(UserDetailController());
     Get.put(UserDetailCareerController());
     Get.put(UserDetailPaymentController());
     Get.put(UserDetailVacationController());
+    Get.put(UserHelperController());
 
     Get.put(TabGenelController());
     Get.put(TabKariyerController());
@@ -107,9 +109,7 @@ class SplashView extends StatelessWidget {
     Get.put(TabKisiselBilgilerController());
 
     Get.put(OptionalCompanyDescriptionsController());
-
-    Get.put(UserHelperController());
-
+    await Future.delayed(const Duration(seconds: 1));
   }
 }
 

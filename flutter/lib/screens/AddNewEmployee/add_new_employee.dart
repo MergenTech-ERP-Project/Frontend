@@ -18,26 +18,28 @@ class AddNewEmployee extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print(id);
-    return FutureBuilder(
-      future: Future.delayed(const Duration(milliseconds: 10)),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Container(
-            color: lightColor,
-            child: const Center(
-              child: SizedBox(
-                height: 50,
-                width: 50,
-                child: SingleChildScrollView(),
+    return Scaffold(
+      body: FutureBuilder(
+        future: Future.delayed(const Duration(milliseconds: 10)),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Container(
+              color: lightColor,
+              child: const Center(
+                child: SizedBox(
+                  height: 50,
+                  width: 50,
+                  child: SingleChildScrollView(),
+                ),
               ),
-            ),
-          );
-        } else {
-          return id == "new"
-              ? _CreatePage()
-              : _UpdatePage(userId: int.parse(id));
-        }
-      },
+            );
+          } else {
+            return id == "new"
+                ? _CreatePage()
+                : _UpdatePage(userId: int.parse(id));
+          }
+        },
+      ),
     );
   }
 }
