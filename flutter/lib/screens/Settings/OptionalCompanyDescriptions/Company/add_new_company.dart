@@ -152,14 +152,16 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                                         MediaQuery.of(context).size.width / 3,
                                   ),
                                 ).then((value) async {
-                                await Future.delayed(const Duration(seconds: 1));
-                                return Navigator.pop(context);
-                              });
+                                  await Future.delayed(
+                                      const Duration(seconds: 1));
+                                  return Navigator.pop(context);
+                                });
                                 return;
                               }
                             }
                             widget.company == null
                                 ? await companyController.newAddCompany(Company(
+                                    id: 1,
                                     companyName:
                                         widget.controllerCompanyName.text,
                                     companyPhone:
@@ -171,7 +173,7 @@ class _AddNewCompanyState extends State<AddNewCompany> {
                                         widget.controllerSGKCompanyNo.text,
                                   ))
                                 : await companyController.updateCompany(
-                                    widget.company!.id,
+                                    widget.company?.id ?? 1,
                                     Company(
                                       id: widget.company!.id,
                                       companyName:

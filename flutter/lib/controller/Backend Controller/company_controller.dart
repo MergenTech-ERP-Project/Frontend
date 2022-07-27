@@ -33,7 +33,7 @@ class CompanyController extends GetxController {
     try {
       isLoading(true);
       var response = await CompanyRemoteServices.newAddCompany(
-        json.encode(newCompany.toJson()).toString(),
+        json.encode(newCompany.toJsonWithId()).toString(),
       );
       fetchCompanies(); //companyList.add(newCompany);
       print("post Company: " + response);
